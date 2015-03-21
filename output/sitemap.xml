@@ -4,70 +4,70 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>/</loc>
-<lastmod>2015-03-20T22:34:23-00:00</lastmod>
+<loc>http://kdheepak.com/</loc>
+<lastmod>2015-03-20T23:13:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/archives.html</loc>
-<lastmod>2015-03-20T22:34:23-00:00</lastmod>
+<loc>http://kdheepak.com/archives.html</loc>
+<lastmod>2015-03-20T23:13:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tags.html</loc>
-<lastmod>2015-03-20T22:34:23-00:00</lastmod>
+<loc>http://kdheepak.com/tags.html</loc>
+<lastmod>2015-03-20T23:13:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/categories.html</loc>
-<lastmod>2015-03-20T22:34:23-00:00</lastmod>
+<loc>http://kdheepak.com/categories.html</loc>
+<lastmod>2015-03-20T23:13:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/ames-market-test-bed</loc>
+<loc>http://kdheepak.com/ames-market-test-bed</loc>
 <lastmod>2014-12-13T10:00:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/android</loc>
+<loc>http://kdheepak.com/android</loc>
 <lastmod>2014-12-13T10:00:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/mac-osx</loc>
+<loc>http://kdheepak.com/mac-osx</loc>
 <lastmod>2014-12-13T10:00:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/robotics</loc>
+<loc>http://kdheepak.com/robotics</loc>
 <lastmod>2014-12-13T10:00:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/home-monitoring-system</loc>
+<loc>http://kdheepak.com/home-monitoring-system</loc>
 <lastmod>2014-12-13T09:00:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/category/projects.html</loc>
+<loc>http://kdheepak.com/category/projects.html</loc>
 <lastmod>2014-12-13T10:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>

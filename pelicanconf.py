@@ -75,14 +75,14 @@ TRANSLATION_FEED_ATOM = None
 
 # Social
 SOCIAL = (
-        ('Twitter', 'http://twitter.com/talham_'),
-        ('Github', 'http://github.com/talha131'),
-        ('GitTip', 'http://gittip.com/talha131'),
-        ('Email', 'mailto:talha131@gmail.com'),
+        ('Twitter', 'http://twitter.com/kdheepak89'),
+        ('Github', 'http://github.com/kdheepak89'),
+        ('GitTip', 'http://github.com/kdheepak89'),
+        ('Email', 'mailto:me@kdheepak.com'),
           )
 
 # Elegant theme
-STATIC_PATHS = ['theme/images', 'images']
+STATIC_PATHS = ['theme/images', 'images', 'extra/CNAME']
 DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search', '404'))
 TAG_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
@@ -96,20 +96,20 @@ SHARE_POST_INTRO = 'Like this post? Share on:'
 COMMENTS_INTRO = u'So what do you think? Did I miss something? Is any part unclear? Leave your comments below.'
 
 # Mailchimp
-EMAIL_SUBSCRIPTION_LABEL = u'Get Monthly Updates'
-EMAIL_FIELD_PLACEHOLDER = u'Enter your email...'
-SUBSCRIBE_BUTTON_TITLE = u'Send me Free updates'
-MAILCHIMP_FORM_ACTION = u'empty'
+EMAIL_SUBSCRIPTION_LABEL = None
+EMAIL_FIELD_PLACEHOLDER = None
+SUBSCRIBE_BUTTON_TITLE = None 
+MAILCHIMP_FORM_ACTION = None 
 
 # SMO
-TWITTER_USERNAME = u'talham_'
+TWITTER_USERNAME = u'kdheepak89'
 FEATURED_IMAGE = SITEURL + '/theme/images/apple-touch-icon-152x152.png'
 
 # Legal
 SITE_LICENSE = u'<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"> onCrash="Reboot();"</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://oncrashreboot.com" property="cc:attributionName" rel="cc:attributionURL">Talha Mansoor</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.'
 
-# SEO
-SITE_DESCRIPTION = u'My name is Talha Mansoor \u2015 a software engineer who gets things done. I am talha131 at Github and @talham_ at twitter. I design and build software products for iOS and OSX. I work on Jump Desktop which is a remote desktop application for iOS, OSX and Android. This is my personal blog.'
+# SO
+SITE_DESCRIPTION = u'My name is Dheepak Krishnamurthy. This is my personal blog.'
 
 # Landing Page
 PROJECTS = [
@@ -121,7 +121,7 @@ PROJECTS = [
         {
             'name': 'Ames Market Test Bed',
             'url':
-            'https://kdheepak.com/ames-market-test-bed',
+            'http://kdheepak.com/ames-market-test-bed',
             'description': 'The AMES Market Package is an open source software' 
 	' implementation of the AMES Wholesale Power Market Test Bed in Java.'}
             ]
