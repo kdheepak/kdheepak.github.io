@@ -90,7 +90,7 @@ src="https://www.youtube.com/embed/eoN-HOUOjBk"&gt;
 
 &lt;iframe width="420" height="345"
 src="https://www.youtube.com/embed/c4IKvbGKpBk"&gt;
-&lt;/iframe&gt;</summary></entry><entry><title>Home monitoring system</title><link href="http://kdheepak.com/home-monitoring-system" rel="alternate"></link><updated>2014-12-13T09:00:00+01:00</updated><author><name>Dheepak Krishnamurthy</name></author><id>tag:kdheepak.com,2014-12-13:home-monitoring-system</id><summary type="html">&lt;h1&gt;Example&lt;/h1&gt;
+&lt;/iframe&gt;</summary></entry><entry><title>Home monitoring system</title><link href="http://kdheepak.com/home-monitoring-system" rel="alternate"></link><updated>2014-12-13T09:00:00+01:00</updated><author><name>Dheepak Krishnamurthy</name></author><id>tag:kdheepak.com,2014-12-13:home-monitoring-system</id><summary type="html">&lt;h1 id="example"&gt;Example&lt;a class="headerlink" href="#example" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Monitoring temperature using Raspberry&amp;nbsp;Pi&lt;/p&gt;
 &lt;div id="containerTextF"&gt;
 The current ambient room temperature is: 75.76 °F
