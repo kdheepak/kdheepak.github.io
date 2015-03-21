@@ -1,5 +1,5 @@
 Title:AMES Market Test Bed
-Category:Projects
+Category:projects
 Date:2014-12-13 10:00
 
 

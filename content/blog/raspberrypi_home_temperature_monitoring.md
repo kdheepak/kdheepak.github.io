@@ -1,5 +1,5 @@
 Title:Home monitoring system
-Category:Projects
+Category:blog
 Date:2014-12-13 9:00
 
 # Example

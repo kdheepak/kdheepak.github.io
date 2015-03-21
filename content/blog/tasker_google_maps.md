@@ -1,5 +1,5 @@
-Title:Android
-Category:Projects
+Title: Tasker and Google Maps
+Category:blog
 Date:2014-12-13 10:00
 
 

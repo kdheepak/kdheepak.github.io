@@ -1,5 +1,5 @@
 Title:Mac OSX
-Category:Projects
+Category:blog
 Date:2014-12-13 10:00
 
 <p>This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop.</p>

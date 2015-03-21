@@ -60,15 +60,18 @@ SITEMAP = {
 }
 
 # Appearance
-TYPOGRIFY = True
+TYPOGRIFY = False 
 DEFAULT_PAGINATION = False
 
 # Defaults
 DEFAULT_CATEGORY = 'Miscellaneous'
-USE_FOLDER_AS_CATEGORY = False
-ARTICLE_URL = u'{slug}'
-PAGE_URL = u'{slug}'
-PAGE_SAVE_AS = u'{slug}.html'
+USE_FOLDER_AS_CATEGORY = False 
+
+ARTICLE_URL = '{category}/{slug}/'
+ARTICLE_SAVE_AS = '{category}/{slug}/index.html'
+
+PAGE_URL = '{category}/{slug}/'
+PAGE_SAVE_AS = '{category}/{slug}/index.html'
 
 # Feeds
 FEED_ALL_ATOM = None
@@ -95,7 +98,7 @@ USE_SHORTCUT_ICONS = True
 SOCIAL_PROFILE_LABEL = u'Stay in Touch'
 RELATED_POSTS_LABEL = 'Keep Reading'
 SHARE_POST_INTRO = 'Like this post? Share on:'
-COMMENTS_INTRO = u'So what do you think? Did I miss something? Is any part unclear? Leave your comments below.'
+COMMENTS_INTRO = u'So what do you think? Leave your comments below.'
 
 # Mailchimp
 EMAIL_SUBSCRIPTION_LABEL = None
@@ -108,7 +111,7 @@ TWITTER_USERNAME = u'kdheepak89'
 FEATURED_IMAGE = SITEURL + '/theme/images/apple-touch-icon-152x152.png'
 
 # Legal
-SITE_LICENSE = u'<div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://kdheepak.com/"><span property="dct:title"> onCrash="Reboot();"</span> (<a rel="cc:attributionURL" property="cc:attributionName" href="http://oncrashreboot.com">Talha Mansoor</a>) / <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></div>'
+SITE_LICENSE = u'<div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://kdheepak.com/"> <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></div>'
 
 # SO
 SITE_DESCRIPTION = u'My name is Dheepak Krishnamurthy. This is my personal blog.'
@@ -123,7 +126,7 @@ PROJECTS = [
         {
             'name': 'Ames Market Test Bed',
             'url':
-            'http://kdheepak.com/ames-market-test-bed',
+            'http://kdheepak.com/projects/ames-market-test-bed',
             'description': 'The AMES Market Package is an open source software' 
 	' implementation of the AMES Wholesale Power Market Test Bed in Java.'}
             ]
