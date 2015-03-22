@@ -1,4 +1,4 @@
-Title:My Mac OSX Tweaks
+Title:Mac OSX Tweaks
 Category:blog
 Date:2015-03-21 19:00
 
