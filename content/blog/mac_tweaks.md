@@ -14,6 +14,9 @@ Date:2015-03-21 19:00
     # en_US_POSIX corresponds to the "United States (Computer)" setting that was shown in System Preferences in 10.8 and earlier
     defaults write -g AppleTextBreakLocale en_US_POSIX
 
+    # Disable the sound effects on boot
+    sudo nvram SystemAudioVolume=" "
+
 # Disks                                                                        
 
     # Disks: disable Time Machine prompts
