@@ -2,6 +2,11 @@ Title:My Mac OSX Tweaks
 Category:blog
 Date:2015-03-21 19:00
 
+# Update
+
+I've decided to update a forked repo [here](https://github.com/kdheepak89/dotfiles/blob/master/.osx) instead. 
+
+
 # UI General                                                                   
 
     # Show Dashboard as a space
