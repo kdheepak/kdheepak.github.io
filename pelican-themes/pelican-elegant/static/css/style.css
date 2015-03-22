@@ -130,6 +130,12 @@ ul.articles-in-tag li {
 
 /* Article */
 
+/* Custom article */
+
+a.blog-index-title {
+    font-size: 2.5em;
+}
+
 article p a, article ol a, article div.article-content ul:not(.articles_timeline) a {
     color:black;
     border-bottom:thin dashed darkgray;
