@@ -9,8 +9,11 @@ I've decided to update a forked repo [here](https://github.com/kdheepak89/dotfil
 
 # UI General                                                                   
 
-    # Show Dashboard as a space
-    /usr/bin/defaults write com.apple.dock 'dashboard-in-overlay' -bool true
+    # Disable Dashboard
+    defaults write com.apple.dashboard mcx-disabled -bool true
+
+    # Don’t show Dashboard as a Space
+    defaults write com.apple.dock dashboard-in-overlay -bool true
     
     # disable automatic spell checking
     defaults write -g NSAllowContinuousSpellChecking -bool false

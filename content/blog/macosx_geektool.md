@@ -1,10 +1,10 @@
-Title:Mac OSX
+Title:Geektool and Desktop Widgets in OSX
 Category:blog
 Date:2014-12-13 10:00
 
 <p>This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop.</p>
 <p title=""><a href="https://plus.google.com/photos/+DheepakKrishnamurthy/albums/5969008662076135425" title=""><img alt="" src="https://lh4.googleusercontent.com/TZkEbkEUgfXVhtL3XNgQ8tYNuaO_WF_WhgtuN0nYGJEx=s0" width="100%/" title="" style=""></a></p>
-<p><a href="https://plus.google.com/photos/+DheepakKrishnamurthy/albums/5969008662076135425"><img alt="" src="https://raw.githubusercontent.com/kdheepak89/GeekToolBash/master/Screenshots/1.png" width="49%" ></a> <a href="https://plus.google.com/photos/+DheepakKrishnamurthy/albums/5969008662076135425"><img alt="" src="https://raw.githubusercontent.com/kdheepak89/GeekToolBash/master/Screenshots/2.jpg" width="49%" ></a></p>
+<p><a href="https://plus.google.com/photos/+DheepakKrishnamurthy/albums/5969008662076135425"><img alt="" src="https://raw.githubusercontent.com/kdheepak89/GeekToolBash/master/Screenshots/1.png" width="45%" ></a> <a href="https://plus.google.com/photos/+DheepakKrishnamurthy/albums/5969008662076135425"><img alt="" src="https://raw.githubusercontent.com/kdheepak89/GeekToolBash/master/Screenshots/2.jpg" width="45%" ></a></p>
 <p>All you need to do is download the following script from <a href="https://github.com/kdheepak89/GeekToolBash/blob/master/bashScript">here</a> and place it in any folder. Then add a Geektool script and link it to the bash script you’ve downloaded.</p>
 <p><img alt="" src="https://raw.githubusercontent.com/kdheepak89/GeekToolBash/master/Screenshots/3.png" width="100%"></p>
 <p style="text-align: center;"><img class="aligncenter" alt="" src="https://raw.githubusercontent.com/kdheepak89/GeekToolBash/master/Screenshots/4.png" width="50%/"></p>
