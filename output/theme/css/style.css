@@ -90,7 +90,6 @@ td.code {
 .list-of-tags {
     list-style:none;
     margin:0;
-    padding:5px 0 ;
     overflow:hidden;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -131,12 +130,12 @@ ul.articles-in-tag li {
 
 /* Article */
 
-article p a, article ol a {
+article p a, article ol a, article div.article-content ul:not(.articles_timeline) a {
     color:black;
-    border-bottom:0.5px dashed darkblue;
+    border-bottom:thin dashed darkgray;
 }
 
-article p a:hover, article ol a:hover {
+article p a:hover, article ol a:hover, article div.article-content ul:not(.articles_timeline) a:hover {
     text-shadow:none;
     text-decoration:none;
     border-bottom:none;
@@ -146,12 +145,13 @@ article p a:hover, article ol a:hover {
     text-align:justify;
     max-width:50em;
     font-family: "PT Serif", Georgia, Times, "Times New Roman", serif;
+    font-size: 1.2em;
 }
 
 .article-content p{
     font-variant: normal;
     text-transform: none;
-    font-size: 1.1em;
+    font-size: inherit;
     line-height: 1.6em;
     margin:20px 0px 20px 0px;
 }
@@ -159,47 +159,61 @@ article p a:hover, article ol a:hover {
 .article-content blockquote {
     padding: 0px 0px 0px 20px;
     margin: 20px 0px 20px 0px;
-    border-left: 5px solid rgb(100,100,100);
+    margin-left: 2em;
+    border-left:0px;
 }
+
+.article-content blockquote:before {
+    content: "\f10d";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    font-size: 18px;
+    color: rgb(100,100,100);
+    margin-left: -2em;
+ }
 
 .article-content blockquote p {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-variant: normal;
     text-transform: none;
-    font-size: 1.2em;
+    font-size: inherit;
     line-height: 1.7em;
+    margin-top:-20px;
 }
 
 .article-content ul {
     list-style-type: circle;
-    font-size:1em;
-    list-style-position: inside;
+    font-size: inherit;
 }
 
 .article-content ol {
     list-style-type: decimal;
-    font-size: 1em;
-    list-style-position: inside;
+    font-size: inherit;
 }
 
 .article-content li {
     margin:1px 0px 1px 20px;
+    list-style-position: outside;
+    line-height: 1.7em;
 }
 
 .article-content dl {
     list-style-type: decimal;
-    font-size: 1em;
-    list-style-position: inside;
+    font-size: inherit;
+    list-style-position: outside;
     margin:20px 0px 20px 20px;
 }
 
 .article-content dd {
     margin:1px 0px 1px 20px;
     padding:3px 0px 3px 0px;
+    line-height: 1.7em;
 }
 
 .article-content dt {
-    font-size:1.3em;
+    font-size: inherit;
 }
 
 .page_header h1 {
@@ -336,10 +350,23 @@ ul.top-menu li a {
 
 #mc_embed_signup input.email {
     width:100%;
+    font-size: 0.9em;
 }
 
 #mc_embed_signup .button {
-    font-size: 1.1em;
+    font-size: 1em;
+    font-weight: normal;
+    color: black;
+    background-color: #EEEEEE;
+    border: 1px solid lightgray;
+}
+
+#mc_embed_signup .button:hover {
+    background-color: #DFDFDF;
+}
+
+#mc_embed_signup input[type="email"] {
+    height: 100%;
 }
 
 /* front page */
@@ -361,20 +388,43 @@ ul.top-menu li a {
     font-style:italic;
 }    
 
-img {
-    border: 1px solid #EEEEEE;
+.article-content img {
+    padding:5px;
+    border: 2px solid #EEEEEE;
 }
 
 .table-of-content .toc {
     font-size: 0.7em;
 }
-.last_updated a {
-     color: black;
-     border-bottom: 0.5px dashed darkblue;
+.last-updated a {
+    color:rgb(51,51,51);
 }
-.last_updated a:hover {
-     text-shadow: none;
-     text-decoration: none;
-     border-bottom: medium none;
-     color: rgb(0, 85, 128);
+.last-updated a:hover {
+    text-decoration:none;
+}
+
+a.headerlink {
+    visibility:hidden;
+    padding-left:0.5em;
+    color:grey;
+}
+
+h1:hover > a.headerlink,
+h2:hover > a.headerlink,
+h3:hover > a.headerlink,
+h4:hover > a.headerlink,
+h5:hover > a.headerlink,
+h6:hover > a.headerlink,
+dt:hover > a.headerlink {
+    visibility: visible;
+    text-decoration:none;
+}
+.sidebar-social-links {
+    font-size: 1.2em;
+    color: rgb(100,100,100);
+    text-decoration: none;
+    padding-right: 3px;
+}
+.sidebar-social-links i:hover {
+    color: black;
 }

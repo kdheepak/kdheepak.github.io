@@ -1,5 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Dheepak Krishnamurthy</title><link href="http://kdheepak.com/" rel="alternate"></link><link href="http://kdheepak.com/feeds/blog.atom.xml" rel="self"></link><id>http://kdheepak.com/</id><updated>2014-12-13T10:00:00+01:00</updated><entry><title>Mac OSX</title><link href="http://kdheepak.com/blog/mac-osx/" rel="alternate"></link><updated>2014-12-13T10:00:00+01:00</updated><author><name>Dheepak Krishnamurthy</name></author><id>tag:kdheepak.com,2014-12-13:blog/mac-osx/</id><summary type="html">&lt;p&gt;This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dheepak Krishnamurthy</title><link href="http://kdheepak.com/" rel="alternate"></link><link href="http://kdheepak.com/feeds/blog.atom.xml" rel="self"></link><id>http://kdheepak.com/</id><updated>2015-03-21T19:00:00+01:00</updated><entry><title>My Mac OSX Tweaks</title><link href="http://kdheepak.com/blog/my-mac-osx-tweaks/" rel="alternate"></link><updated>2015-03-21T19:00:00+01:00</updated><author><name>Dheepak Krishnamurthy</name></author><id>tag:kdheepak.com,2015-03-21:blog/my-mac-osx-tweaks/</id><summary type="html">&lt;h1 id="ui-general"&gt;UI General&lt;a class="headerlink" href="#ui-general" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Show Dashboard as a space&lt;/span&gt;
+&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dock&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;dashboard&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;in&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;overlay&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# disable automatic spell checking&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;NSAllowContinuousSpellChecking&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+
+&lt;span class="cp"&gt;# don&amp;#39;t treat period or colon as part of words&lt;/span&gt;
+&lt;span class="cp"&gt;# en_US_POSIX corresponds to the &amp;quot;United States (Computer)&amp;quot; setting that was shown in System Preferences in 10.8 and earlier&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;AppleTextBreakLocale&lt;/span&gt; &lt;span class="n"&gt;en_US_POSIX&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="disks"&gt;Disks&lt;a class="headerlink" href="#disks" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Disks: disable Time Machine prompts&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TimeMachine&lt;/span&gt; &lt;span class="n"&gt;DoNotOfferNewDisksForBackup&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Disks: disable local Time Machine backups&lt;/span&gt;
+&lt;span class="n"&gt;hash&lt;/span&gt; &lt;span class="n"&gt;tmutil&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;tmutil&lt;/span&gt; &lt;span class="n"&gt;disablelocal&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Disks: disable disk image verification&lt;/span&gt;
+&lt;span class="cp"&gt;# defaults write com.apple.frameworks.diskimages skip-verify -bool true&lt;/span&gt;
+&lt;span class="cp"&gt;# defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true&lt;/span&gt;
+&lt;span class="cp"&gt;# defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# don&amp;#39;t save .DS_Store files on network volumes&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;desktopservices&lt;/span&gt; &lt;span class="n"&gt;DSDontWriteNetworkStores&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Expand save panel by default&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;NSNavPanelExpandedStateForSaveMode&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Don’t automatically rearrange Spaces based on most recent use&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dock&lt;/span&gt; &lt;span class="n"&gt;mru&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;spaces&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="keyboard"&gt;Keyboard&lt;a class="headerlink" href="#keyboard" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Set a blazingly fast keyboard repeat rate&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;KeyRepeat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="finder"&gt;Finder&lt;a class="headerlink" href="#finder" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Disable automatic termination of inactive apps&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;NSDisableAutomaticTermination&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Finder: disable window animations and Get Info animations&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;finder&lt;/span&gt; &lt;span class="n"&gt;DisableAllAnimations&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Finder: show all filename extensions&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;AppleShowAllExtensions&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Disable the warning when changing a file extension&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;finder&lt;/span&gt; &lt;span class="n"&gt;FXEnableExtensionChangeWarning&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Save to disk (not to iCloud) by default&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;NSDocumentSaveNewDocumentsToCloud&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Finder: disable window and Get Info animations&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;finder&lt;/span&gt; &lt;span class="n"&gt;DisableAllAnimations&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Finder: show the ~/Library folder (in OS X Lion)&lt;/span&gt;
+&lt;span class="n"&gt;chflags&lt;/span&gt; &lt;span class="n"&gt;nohidden&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;Library&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Finder: empty Trash securely by default&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;finder&lt;/span&gt; &lt;span class="n"&gt;EmptyTrashSecurely&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="dock-hot-corners"&gt;Dock &amp;amp; hot corners&lt;a class="headerlink" href="#dock-hot-corners" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Autohide the Dock&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dock&lt;/span&gt; &lt;span class="n"&gt;autohide&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Magnify Dock icons on hover&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dock&lt;/span&gt; &lt;span class="n"&gt;magnification&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="panels"&gt;Panels&lt;a class="headerlink" href="#panels" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Panels: expand save panel by default&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;NSNavPanelExpandedStateForSaveMode&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Panels: expand print panel by default&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;PMPrintingExpandedStateForPrint&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Panels: disable the “Are you sure you want to open this application?” dialog&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LaunchServices&lt;/span&gt; &lt;span class="n"&gt;LSQuarantine&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Panels: enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;AppleKeyboardUIMode&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="screen"&gt;Screen&lt;a class="headerlink" href="#screen" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Screen: save screenshots to the desktop&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;screencapture&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;$HOME/Desktop&amp;quot;&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Screen: disable shadow in screenshots&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;screencapture&lt;/span&gt; &lt;span class="n"&gt;disable&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;shadow&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="misc"&gt;Misc&lt;a class="headerlink" href="#misc" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Misc: only use UTF-8 in Terminal.app&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;terminal&lt;/span&gt; &lt;span class="n"&gt;StringEncodings&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Misc: disable Dictionary results&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apple&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;spotlight&lt;/span&gt; &lt;span class="n"&gt;DictionaryLookupEnabled&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Misc: disable auto-correct&lt;/span&gt;
+&lt;span class="n"&gt;defaults&lt;/span&gt; &lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;NSGlobalDomain&lt;/span&gt; &lt;span class="n"&gt;NSAutomaticSpellingCorrectionEnabled&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;!---
+{% comment %} 
+for app in "Dashboard" "Dock" "Finder" "SystemUIServer" "Terminal" "iTunes"; do
+    killall "$app" &gt; /dev/null 2&gt;&amp;1
+done
+{% uncomment %} 
+--&gt;</summary></entry><entry><title>Mac OSX</title><link href="http://kdheepak.com/blog/mac-osx/" rel="alternate"></link><updated>2014-12-13T10:00:00+01:00</updated><author><name>Dheepak Krishnamurthy</name></author><id>tag:kdheepak.com,2014-12-13:blog/mac-osx/</id><summary type="html">&lt;p&gt;This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop.&lt;/p&gt;
 
 &lt;p title=""&gt;&lt;a href="https://plus.google.com/photos/+DheepakKrishnamurthy/albums/5969008662076135425" title=""&gt;&lt;img alt="" src="https://lh4.googleusercontent.com/TZkEbkEUgfXVhtL3XNgQ8tYNuaO_WF_WhgtuN0nYGJEx=s0" width="100%/" title="" style=""&gt;&lt;/a&gt;&lt;/p&gt;
 
