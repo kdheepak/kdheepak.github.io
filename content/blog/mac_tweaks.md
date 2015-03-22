@@ -7,7 +7,7 @@ Date:2015-03-21 19:00
 I've decided to update a forked repo [here](https://github.com/kdheepak89/dotfiles/blob/master/.osx) instead. 
 
 
-# UI General                                                                   
+# General UI
 
     # Disable Dashboard
     defaults write com.apple.dashboard mcx-disabled -bool true
