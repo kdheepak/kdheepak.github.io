@@ -26,6 +26,8 @@ Date:
 
 ## 4. Geektool
 
+[http://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/](http://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/)
+
 ![](https://lh4.googleusercontent.com/TZkEbkEUgfXVhtL3XNgQ8tYNuaO_WF_WhgtuN0nYGJEx=s0)
 
 [http://projects.tynsoe.org/en/geektool/](http://projects.tynsoe.org/en/geektool/)
