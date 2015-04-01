@@ -68,5 +68,19 @@ Date:
 
 [http://www.clipmenu.com/](http://www.clipmenu.com/)
 
+## 11. XtraFinder
 
+![](https://www.trankynam.com/xtrafinder/screenshots/XtraFinderScreenshot7.png)
 
+[https://www.trankynam.com/xtrafinder/](https://www.trankynam.com/xtrafinder/)
+
+## 12. Disk Inventory X
+
+![](http://www.derlien.com/assets/main.jpg)
+
+[http://www.derlien.com/](http://www.derlien.com/)
+
+## 13. Homebrew
+
+    :::bash
+    $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install) 
