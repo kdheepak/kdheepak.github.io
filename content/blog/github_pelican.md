@@ -69,7 +69,7 @@ The rest of this blog assumes you want to create a User page.
 
 # Create a directory for your website
 
-Assuming $GHUSERNAME is your github username, run the following commands. You can rename the 'website' folder to anything you want. 
+Assuming `$GHUSERNAME` is your github username, run the following commands. You can rename the 'website' folder to anything you want. 
 
     git clone https://github.com/$GHUSERNAME/$GHUSERNAME.github.io/ website
     cd website
