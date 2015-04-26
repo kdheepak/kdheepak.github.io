@@ -38,6 +38,10 @@ DEFAULT_PAGINATION = 10
 
 THEME = 'pelican-themes/pelican-elegant/'
 
+# Disqus
+
+DISQUS_SITENAME = "kdheepak89"
+
 # Plugins and extensions
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid',
                 'toc(permalink=true)']
