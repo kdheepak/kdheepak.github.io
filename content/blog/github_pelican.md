@@ -2,11 +2,13 @@ Title:How to set up a Pelican blog with Github pages
 Category:blog
 Date:2015-04-24 19:00
 
+[TOC]
+
 I've been quite vocal about the benefits of blogging using Markdown, and using a static page generator instead of the conventional CMS. 
 But a lot of people I've spoken to have expressed their doubts about the simplicity of the process. 
 I figured if I could fit it in one blog post it should be simple enough, right?
 
-# Markdown
+# Markdown #
 
 Advantages
 
@@ -29,7 +31,7 @@ This is what this post looks like in Markdown.
 
 It really is that simple.
 
-# Static pages
+# Static pages #
 
 Advantages 
 
@@ -42,14 +44,14 @@ Disadvantages
 * Typically required web development experience to make changes to website
 * Complicated and a lot of work for a lot of pages e.g. a personal blog
 
-# Enter Github pages and Pelican
+# Enter Github pages and Pelican #
 
 Github pages takes away from all the disadvantages of static pages, and adds a few pros as well. 
 Version control was a big plus for me. 
 And static site generators like Jekyll and Pelican make it extremely easy to create web content without any actual web development.
 I choose Pelican because it was Python based, and it seemed to have a good selection of themes.
 
-# Install required packages
+# Install required packages #
 
     pip install pelican
     pip install markdown
@@ -61,20 +63,20 @@ These are optional packages to install that may come in handy later
     
     pip install Pillow beautifulsoup4 cssmin cssprefixer cssutils pretty six smartypants typogrify webassets
 
-# Create a Github account and a User or Project page
+# Create a Github account and a User or Project page #
 
 [Github pages](http://pages.github.com/) has instructions on how to create a User or Project page, and will in fact walk you through the process. 
 If you create a User page, your website will be live at `$GHUSERNAME`.github.io and a Project page will go up at `$GHUSERNAME`.github.io/`$PROJECTNAME`. 
 The rest of this blog assumes you want to create a User page.
 
-# Create a directory for your website
+# Create a directory for your website #
 
 Assuming `$GHUSERNAME` is your github username, run the following commands. You can rename the 'website' folder to anything you want. 
 
     git clone https://github.com/$GHUSERNAME/$GHUSERNAME.github.io/ website
     cd website
 
-# Run Pelican quickstart
+# Run Pelican quickstart #
 
     pelican-quickstart
 
@@ -111,7 +113,7 @@ This is what you might get. Answer all the questions
     
     ➜  website  
 
-# Content of your blog
+# Content of your blog #
 
 Create an sample post.
 
@@ -135,7 +137,7 @@ You can also type the following to serve a local version of your site to view th
 
 This will be visible at localhost:8000 by default.
 
-# Push your content to Github
+# Push your content to Github #
 
 If you installed everything correctly, you can type the following to push your website to your Github repository.
 You need to have ghp-import installed for this to work.
