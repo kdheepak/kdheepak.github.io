@@ -4,8 +4,9 @@ Date:2015-03-21 19:00
 
 # Update
 
-I've decided to a repo [here](https://github.com/kdheepak89/dotfiles/blob/master/.osx) instead. 
+I've decided to maintain a repo [here](https://github.com/kdheepak89/dotfiles/blob/master/.osx) instead. 
 
+___
 
 # General UI
 
