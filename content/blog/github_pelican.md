@@ -6,7 +6,7 @@ Date:2015-04-24 19:00
 
 I've been quite vocal about the benefits of blogging using Markdown, and using a static page generator instead of the conventional CMS. 
 But a lot of people I've spoken to have expressed their doubts about the simplicity of the process. 
-I figured if I could fit it in one blog post it should be simple enough, right?
+I figured if I could fit it in one blog post I could claim it were simple, right?
 
 # Markdown #
 
@@ -36,13 +36,13 @@ It really is that simple.
 Advantages 
 
 * Fast - It loads extremely quickly.
-* Portable - You can easily move from a server space and deployed elsewhere
+* Portable - You can easily move from a server space and deploy it elsewhere
 * Cheaper - It is cost effective for a small website / personal blogs
 
 Disadvantages 
 
 * Typically required web development experience to make changes to website
-* Complicated and a lot of work for a lot of pages e.g. a personal blog
+* Complicated and a lot of work when you have a lot of pages e.g. a personal blog
 
 # Enter Github pages and Pelican #
 
