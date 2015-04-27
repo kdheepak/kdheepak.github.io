@@ -43,7 +43,7 @@ THEME = 'pelican-themes/pelican-elegant/'
 DISQUS_SITENAME = "kdheepak89"
 
 # Plugins and extensions
-MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid',
+MD_EXTENSIONS = ['codehilite(css_class=highlight, linenums=True)', 'extra', 'headerid',
                 'toc(permalink=true)']
 PLUGIN_PATH = ['pelican-plugins'] 
 PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img',
