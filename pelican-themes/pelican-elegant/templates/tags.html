@@ -1,17 +1,39 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
 All Tags · {{ super() }}
 {% endblock title %}
 
 {% block head_description %}
-All tags used in the {{ SITENAME|striptags }} blog.
+All tags used in the {{ SITENAME|striptags|e }} blog.
 {% endblock head_description %}
+
+{% block meta_tags_in_head %}
+{{ super() }}
+<meta property="og:title" content="All Tags · {{ SITENAME|striptags|e }}"/>
+<meta name="twitter:title" content="All Tags · {{ SITENAME|striptags|e }}">
+<meta property="og:url" content="{{ SITEURL }}/tags.html" />
+<meta property="og:description" content="All tags used in the {{ SITENAME|striptags|e }} blog" />
+<meta name="twitter:description" content="All tags used in the {{ SITENAME|striptags|e }} blog">
+<meta property="og:site_name" content="{{ SITENAME|striptags|e }}" />
+<meta property="og:article:author" content="{{ AUTHOR }}" />
+{% from '_includes/_defaults.html' import FEATURED_IMAGE with context %}
+{% if FEATURED_IMAGE %}
+<meta property="og:image" content="{{FEATURED_IMAGE}}" />
+<meta name="twitter:image" content="{{FEATURED_IMAGE}}" >
+{% endif %}
+{% endblock meta_tags_in_head %}
+
+{% block feed_links %}
+{{ super() }}
+{% include '_includes/feeds_tags.html' %}
+{% endblock feed_links %}
+
 {% block content %}
 
 <div class="row-fluid">
-    <header class="page_header span10 offset2">
-    <h1><a href="/tags.html">All Tags</a></h1>
+    <header class="page-header span10 offset2">
+    <h1><a href="{{ SITEURL }}/tags.html">All Tags</a></h1>
     </header>
 </div>
 <div class="row-fluid">
@@ -23,7 +45,7 @@ All tags used in the {{ SITENAME|striptags }} blog.
             {% for tag, articles in tags|sort %}
             <li>
             {% set num = articles|count %}
-            <a href="/tags.html#{{ tag|replace(' ', '-')|e }}-ref">{{ tag }}<span>{{ num }}</span></a>
+            <a href="#{{ tag.slug }}-ref">{{ tag }}<span>{{ num }}</span></a>
             </li>
             {% endfor %}
         </ul>
@@ -33,10 +55,10 @@ All tags used in the {{ SITENAME|striptags }} blog.
 <div class="row-fluid">
     <div class="span8 offset2">
         {% for tag, articles in tags|sort %}
-        <h2 id="{{ tag|replace(' ', '-')|e }}-ref" class="tag-title">{{ tag }}</h2>
-        <ul class="articles-in-tag">
-            {% for article in articles %} 
-            <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a></li>
+        <h2 id="{{ tag.slug }}-ref" class="tag-title">{{ tag }}</h2>
+        <ul class="articles-in-tag list-articles-category">
+            {% for article in articles|sort(reverse = true, attribute = 'date') %}
+            <li><time pubdate="pubdate" datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a></li>
             {% endfor %}
         </ul>
 

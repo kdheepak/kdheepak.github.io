@@ -1,7 +1,13 @@
-{% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+{% macro comments(article) %}
+    {% if DISQUS_SITENAME and SITEURL and article.status != 'draft' %}
 <section>
-{% if COMMENTS_INTRO %}
+{% if article.comments_intro %}
+<p id="comment-message">{{ article.comments_intro }} </p>
+{% else %}
+    {% from '_includes/_defaults.html' import COMMENTS_INTRO with context %}
+    {%if COMMENTS_INTRO %}
 <p id="comment-message">{{ COMMENTS_INTRO }} </p>
+    {% endif %}
 {% endif %}
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
@@ -17,11 +23,21 @@
         <div id="disqus_thread" class="accordion-body collapse">
             <div class="accordion-inner">
                 <div class="comments">
-                    {% include 'disqus_script_comment.html' %}
+                    {% from '_includes/disqus_scripts.html' import disqus_comments_script with context %}
+                    {{ disqus_comments_script(article) }}
                 </div>
             </div>
         </div>
     </div>
 </div>
 </section>
-{% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro comments_script(article) %}
+    {% if DISQUS_SITENAME and SITEURL and article.status != 'draft' %}
+        {% from '_includes/disqus_scripts.html' import disqus_misc_scripts with context %}
+        {{ disqus_misc_scripts() }}
+    {% endif %}
+{% endmacro %}
+

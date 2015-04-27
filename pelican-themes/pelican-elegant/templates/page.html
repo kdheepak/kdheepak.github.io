@@ -1,28 +1,29 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
-{{ page.title }} {%if page.subtitle %} - {{ page.subtitle }} {% endif %} · {{ super() }}
+{{ page.title|striptags|e }} {%if page.subtitle %} - {{ page.subtitle|striptags|e }} {% endif %} · {{ super() }}
 {% endblock title %}
 
 {% block head_description %}
 {% if page.summary %}
-{{ page.summary|striptags }}
+{{ page.summary|striptags|e }}
 {% endif %}
 {% endblock head_description %}
 
 {% block meta_tags_in_head %}
+{{ super() }}
 {% if page.keywords %}
 <meta name="keywords" content="{{ page.keywords }}" />
 {% endif %}
+
+{% from '_includes/smo_metadata.html' import smo_metadata with context %}
+{{ smo_metadata(page) }}
 {% endblock meta_tags_in_head %}
 
 {% block content %}
 <article>
-{% if page.title == 'Blog' %}
-    {% include 'blogindex.html' %}
-{% else %}
 <div class="row-fluid">
-    <header class="page_header span10 offset2">
+    <header class="page-header span10 offset2">
     <h1><a href="{{ SITEURL }}/{{ page.url }}"> {{ page.title }} {%if page.subtitle %} <small> {{ page.subtitle }} </small> {% endif %} </a></h1>
     </header>
 </div>
@@ -41,49 +42,21 @@
             {% endif %}
 
             {{ page.content }}
+            {% from '_includes/comments.html' import comments with context %}
+            {{ comments(page) }}
         </div>
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
-            {% if page.date %} 
-            <h4>Published</h4>
-            {% set day = page.date.strftime('%d')|int %}
-            <time pubdate="pubdate" datetime="{{ page.date.isoformat() }}">{{ page.date.strftime('%b') }} {{ day }} {{- page.date.strftime(', %Y') }}</time>
-            {% endif %}
-            {% if page.modified %} 
-            <h4>Last Updated</h4>
-            <div class="last_updated">{{ page.modified }}</div>
-            {% endif %}
-      
-            {% if MAILCHIMP_FORM_ACTION %}
-            {% if not EMAIL_SUBSCRIPTION_LABEL %}
-            {% set EMAIL_SUBSCRIPTION_LABEL='Email Newsletter' %}
-            {% endif %}
-            {% if not SUBSCRIBE_BUTTON_TITLE %}
-            {% set SUBSCRIBE_BUTTON_TITLE='Subscribe' %}
-            {% endif %}
-            {% if not EMAIL_PLACEHOLDER %}
-            {% set EMAIL_PLACEHOLDER ='email address' %}
-            {% endif %}
-            <!-- Begin MailChimp Signup Form -->
-            <div id="mc_embed_signup">
-                <form action="{{ MAILCHIMP_FORM_ACTION }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <h4>{{ EMAIL_SUBSCRIPTION_LABEL }}</h4>
-                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="{{ EMAIL_FIELD_PLACEHOLDER }}" required>
-                    <div class="clear"><input type="submit" value="{{ SUBSCRIBE_BUTTON_TITLE }}" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                </form>
-            </div>
-
-            <!--End mc_embed_signup-->
-            {% endif %}
+            {% include '_includes/social_links.html' %}
+            {% include '_includes/mailchimp.html' %}
         </div>
         </section>
     </div>
-{% endif %}
-</article>
-{% endblock content %}
+    </article>
+    {% endblock content %}
 
     {% block script %}
     {{ super() }}
+    {% from '_includes/comments.html' import comments_script with context %}
+    {{ comments_script(page) }}
     {% endblock script %}
-
-

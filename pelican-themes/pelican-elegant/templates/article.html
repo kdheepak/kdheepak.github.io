@@ -1,25 +1,29 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
-{{ article.title }} {%if article.subtitle %} - {{ article.subtitle }} {% endif %} · {{ super() }}
+{{ article.title|striptags|e }} {%if article.subtitle %} - {{ article.subtitle|striptags|e }} {% endif %} · {{ super() }}
 {% endblock title %}
 
 {% block head_description %}
 {% if article.summary %}
-{{ article.summary|striptags }}
+{{ article.summary|striptags|e }}
 {% endif %}
 {% endblock head_description %}
 
 {% block meta_tags_in_head %}
+{{ super() }}
 {% if article.tags or article.category or article.keywords %}
 <meta name="keywords" content="{{ [article.tags|join(', '), article.category, article.keywords]|join(', ') }}" />
 {% endif %}
+
+{% from '_includes/smo_metadata.html' import smo_metadata with context %}
+{{ smo_metadata(article) }}
 {% endblock meta_tags_in_head %}
 
 {% block content %}
 <article>
 <div class="row-fluid">
-    <header class="page_header span10 offset2">
+    <header class="page-header span10 offset2">
     <h1><a href="{{ SITEURL }}/{{ article.url }}"> {{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a></h1>
     </header>
 </div>
@@ -33,97 +37,72 @@
         </nav>
     </div>
     <div class="span8 article-content">
-        {% else %}
+       {% else %}
         <div class="span8 offset2 article-content">
             {% endif %}
 
+            {% import '_includes/translations.html' as translations with context %}
+            {{ translations.translations_for(article) }}
             {{ article.content }}
-            {% include 'comments.html' %}
-            <aside>
+            {% from '_includes/share_links.html' import share_links with context %}
+            {{ share_links(article) }}
+            {% from '_includes/comments.html' import comments with context %}
+            {{ comments(article) }}
             <hr/>
-            {% for an_article in dates %}
-            {% if an_article.url == article.url %}
-            {% set index = loop.index0 %}
-            {% if not loop.first %}
-            {% set next_article = dates[index-1] %}
-            {% endif %}
-            {% if not loop.last %}
-            {% set previous_article = dates[index+1] %}
-            {% endif %}
+            {% include '_includes/related_posts.html' with context %}
+            {% if article.prev_article or article.next_article %}
+            <aside>
             <nav>
-            <ul class="articles_timeline">
-                {% if previous_article %}
-                {% set ptitle = previous_article.title %}
-                {% set pv_title = ptitle %}
-                    {%if previous_article.subtitle %} 
-                        {% set pv_title = ptitle + " " +  "<small>" + previous_article.subtitle + "</small>" %}
-                        {% set ptitle = ptitle + " - " + previous_article.subtitle %}
-                    {% endif %} 
-                <li class="previous_article">« <a href="{{ SITEURL }}/{{ previous_article.url }}" title="Previous: {{ ptitle }}">{{ pv_title }}</a></li>
+            <ul class="articles-timeline">
+                {% if article.prev_article %}
+                    {% set ptitle = article.prev_article.title|striptags|e %}
+                    {% set pv_title = article.prev_article.title|striptags %}
+                    {%if article.prev_article.subtitle %}
+                        {% set pv_title = pv_title + ' ' +  '<small>' + article.prev_article.subtitle|striptags + '</small>' %}
+                        {% set ptitle = ptitle + ' - ' + article.prev_article.subtitle|e %}
+                    {% endif %}
+                <li class="previous-article">« <a href="{{ SITEURL }}/{{ article.prev_article.url }}" title="Previous: {{ ptitle }}">{{ pv_title }}</a></li>
                 {% endif %}
-                {% if next_article %}
-                {% set ntitle = next_article.title %}
-                {% set nv_title = ntitle %}
-                    {%if next_article.subtitle %} 
-                        {% set nv_title = ntitle + " " +  "<small>" + next_article.subtitle + "</small>" %}
-                        {% set ntitle = ntitle + " - " + next_article.subtitle %}
-                    {% endif %} 
-                <li class="next_article"><a href="{{ SITEURL }}/{{ next_article.url }}" title="Next: {{ ntitle }}">{{ nv_title }}</a> »</li>
+                {% if article.next_article %}
+                    {% set ntitle = article.next_article.title|striptags|e %}
+                    {% set nv_title = article.next_article.title|striptags %}
+                    {%if article.next_article.subtitle %}
+                        {% set nv_title = nv_title + ' ' +  '<small>' + article.next_article.subtitle|striptags + '</small>' %}
+                        {% set ntitle = ntitle + ' - ' + article.next_article.subtitle|e %}
+                    {% endif %}
+                <li class="next-article"><a href="{{ SITEURL }}/{{ article.next_article.url }}" title="Next: {{ ntitle }}">{{ nv_title }}</a> »</li>
                 {% endif %}
             </ul>
             </nav>
-            {% endif %}
-            {% endfor %}
             </aside>
+            {% endif %}
         </div>
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
-            {% if article.date %} 
+            {% if article.date %}
             <h4>Published</h4>
             {% set day = article.date.strftime('%d')|int %}
             <time pubdate="pubdate" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b') }} {{ day }} {{- article.date.strftime(', %Y') }}</time>
             {% endif %}
-            {% if article.modified %} 
-            <h4>Last Updated</h4>
-            <div class="last_updated">{{ article.modified }}</div>
-            {% endif %}
-            {% if article.category %}
+            {% include '_includes/last_updated.html' %}
+            {% include '_includes/multi_parts.html' %}
+            {% if article.category|trim|count > 0 %}
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#{{ category|replace(' ', '-')|e }}-ref">{{ article.category }}</a> 
+            <a class="category-link" href="{{ SITEURL }}/categories.html#{{ category.slug }}-ref">{{ article.category }}</a>
             {% endif %}
-            {% if article.tags %}
+            {% if article.tags and article.tags[0]|trim|count > 0 %}
             <h4>Tags</h4>
-            <ul class="list-of-tags tags-in-article"> 
+            <ul class="list-of-tags tags-in-article">
                 {% for tag in article.tags|sort %}
-                <li><a href="/tags.html#{{ tag|replace(' ', '-')|e }}-ref">{{ tag }}
+                <li><a href="{{ SITEURL }}/tags.html#{{ tag.slug }}-ref">{{ tag }}
                     {% for aTag, tagged_articles in tags if aTag == tag %}
                     <span>{{ tagged_articles|count }}</span>
                     {% endfor %}</a></li>
                 {% endfor %}
             </ul>
             {% endif %}
-
-            {% if MAILCHIMP_FORM_ACTION %}
-            {% if not EMAIL_SUBSCRIPTION_LABEL %}
-            {% set EMAIL_SUBSCRIPTION_LABEL='Email Newsletter' %}
-            {% endif %}
-            {% if not SUBSCRIBE_BUTTON_TITLE %}
-            {% set SUBSCRIBE_BUTTON_TITLE='Subscribe' %}
-            {% endif %}
-            {% if not EMAIL_PLACEHOLDER %}
-            {% set EMAIL_PLACEHOLDER ='email address' %}
-            {% endif %}
-            <!-- Begin MailChimp Signup Form -->
-            <div id="mc_embed_signup">
-                <form action="{{ MAILCHIMP_FORM_ACTION }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <h4>{{ EMAIL_SUBSCRIPTION_LABEL }}</h4>
-                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="{{ EMAIL_FIELD_PLACEHOLDER }}" required>
-                    <div class="clear"><input type="submit" value="{{ SUBSCRIBE_BUTTON_TITLE }}" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                </form>
-            </div>
-
-            <!--End mc_embed_signup-->
-            {% endif %}
+            {% include '_includes/social_links.html' %}
+            {% include '_includes/mailchimp.html' %}
         </div>
         </section>
 </div>
@@ -132,23 +111,6 @@
 
 {% block script %}
     {{ super() }}
-    {% include 'disqus_script_count.html' %}
-    {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
-        <script  language="javascript" type="text/javascript">
-            function uncollapse() {
-                var hash_str = window.location.hash;
-                if (window.location.hash.match(/^#comment-\d+$/))
-                {
-                    var hash_str = '#disqus_thread';
-                }
-                $(hash_str).collapse({
-                    toggle: true
-                    })
-            }
-        </script>
-
-        <script type="text/javascript" language="JavaScript">
-            uncollapse(); 
-        </script>
-    {% endif %}
+    {% from '_includes/comments.html' import comments_script with context %}
+    {{ comments_script(article) }}
 {% endblock script %}
