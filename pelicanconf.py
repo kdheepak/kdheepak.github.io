@@ -113,7 +113,7 @@ CATEGORY_SAVE_AS = ''
 USE_SHORTCUT_ICONS = True
 
 # Elegant Labels
-SOCIAL_PROFILE_LABEL = u'Stay in Touch'
+SOCIAL_PROFILE_LABEL = u'Contact Me'
 RELATED_POSTS_LABEL = 'Keep Reading'
 SHARE_POST_INTRO = 'Like this post? Share on:'
 COMMENTS_INTRO = u'So what do you think? Leave your comments below.'
