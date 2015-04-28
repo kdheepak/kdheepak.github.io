@@ -1,6 +1,6 @@
 Title:Mac OSX Productivity Apps
 Category:blog
-Date:
+Date:2015-04-01 19:00
 
 ## 1. Alfred
 

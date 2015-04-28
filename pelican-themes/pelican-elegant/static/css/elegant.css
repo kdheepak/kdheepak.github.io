@@ -371,6 +371,21 @@ a.headerlink {
     padding-left: .5em;
     visibility: hidden;
 }
+h1:hover > a.anchor-link,
+h2:hover > a.anchor-link,
+h3:hover > a.anchor-link,
+h4:hover > a.anchor-link,
+h5:hover > a.anchor-link,
+h6:hover > a.anchor-link,
+dt:hover > a.anchor-link {
+    text-decoration: none;
+    visibility: visible;
+}
+a.anchor-link {
+    color: grey;
+    padding-left: .5em;
+    visibility: hidden;
+}
 /* Categories */
 .list-of-categories span {
     font-size: .7em;
