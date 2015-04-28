@@ -1,6 +1,7 @@
 Title:How to set up a Pelican blog with Github pages
 Category:blog
 Date:2015-04-24 19:00
+Tags:Pelican
 
 [TOC]
 

@@ -1,6 +1,7 @@
 Title:Robotics
 Category:blog
 Date:2014-12-13 10:00
+Tags:Robotics
 
 <h3>Robotics and Microcontroller Projects</h3>
 

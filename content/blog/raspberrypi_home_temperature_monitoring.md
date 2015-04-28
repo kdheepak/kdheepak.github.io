@@ -1,6 +1,7 @@
 Title:Home monitoring system
 Category:blog
 Date:2014-12-13 9:00
+Tags:Raspberry Pi
 
 # Example
 
