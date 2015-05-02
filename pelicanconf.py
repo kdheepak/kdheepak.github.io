@@ -51,8 +51,9 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid',
 PLUGIN_PATH = ['pelican-plugins'] 
 PLUGINS = [ 'sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 
             'liquid_tags.notebook',
-            'render_math', 'neighbors', 'latex', 'related_posts', 'assets', 'share_post', 'liquid_tags.video', 'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code', 
-            'multi_part']
+            'render_math', 'neighbors', 'latex', 'related_posts', 'assets', 'liquid_tags.video',
+            'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code', 
+            'share_post']
 SITEMAP = {
     'format': 'xml',
     'priorities': {
@@ -115,7 +116,7 @@ USE_SHORTCUT_ICONS = True
 # Elegant Labels
 SOCIAL_PROFILE_LABEL = u'Contact Me'
 RELATED_POSTS_LABEL = 'Keep Reading'
-SHARE_POST_INTRO = 'Like this post? Share on:'
+# SHARE_POST_INTRO = 'Like this post? Share on:'
 COMMENTS_INTRO = u'So what do you think? Leave your comments below.'
 
 # Mailchimp
