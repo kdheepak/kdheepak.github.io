@@ -1,0 +1,30 @@
+{% block content %}
+
+<div class="row-fluid">
+    <header class="page_header span10 offset2">
+    <h1><a href="/blog/">All Posts</a></h1>
+    </header>
+</div>
+<div class="row-fluid">
+    <div class="span8 offset2">
+        <ul class="list-all-articles">
+            {% for article in dates %}
+            <li><a class="blog-index-title"  href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a>
+            <time pubdate="pubdate" datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+            </li>
+            {% if index %}
+              <div class="entry-content">{{ article.summary }}</div>
+              {% if article.summary != article.content %}
+              <footer>
+                <a rel="full-article" href="{{ SITEURL }}/{{ article.url }}">Read On &crarr;</a>
+              </footer>
+              {% endif %}
+            {% else %}
+              <div class="entry-content">{{ article.content }}</div>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock content %}

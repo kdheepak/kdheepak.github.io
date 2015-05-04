@@ -136,6 +136,12 @@ td.code {
 div.codehilite {
     margin-bottom: 20px;
 }
+/* Custom article */
+
+a.blog-index-title {
+    font-size: 2.0em;
+}
+
 /* Tags */
 .list-of-tags {
     font-family: 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
@@ -568,7 +574,7 @@ div.recent-posts-time {
 #allposts {
     color: #999;
     float: right;
-    font-size: 75%;
+    font-size: 50%;
     font-weight: normal;
 }
 a#allposts:hover {
