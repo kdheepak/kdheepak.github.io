@@ -101,7 +101,6 @@ TRANSLATION_FEED_ATOM = None
 SOCIAL = (
         ('Twitter', 'http://twitter.com/kdheepak89'),
         ('Github', 'http://github.com/kdheepak89'),
-        ('GitTip', 'http://github.com/kdheepak89'),
         ('Email', 'mailto:me@kdheepak.com'),
           )
 
