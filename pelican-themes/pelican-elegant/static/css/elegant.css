@@ -82,9 +82,11 @@ ul.footer-content li {
 #post-share-links:not(a) {
     color: #6F6F6F;
     text-shadow: 1px 1px 3px rgba(50, 50, 50, 0.15);
+    display: none;
 }
 #post-share-links a{
     text-shadow: 0 0;
+    display: none;
 }
 .disqus-comment-count {
     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Sans-Serif;
