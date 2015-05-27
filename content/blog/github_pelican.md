@@ -1,6 +1,7 @@
 Title:How to set up a Pelican blog with Github pages
 Category:blog
 Date:2015-04-24 19:00
+Modified:2015-05-26 18:15
 Tags:Pelican
 Keywords:How to set up a Pelican blog with Github pages
 
@@ -14,10 +15,10 @@ I figured if I could fit it in one blog post I could claim it were simple, right
 
 Advantages
 
-* Easy to learn - It has almost no syntax. You can learn how to format like in a pro in half an hour
+* Easy to learn - It has almost no syntax. You can learn how to format like a pro in half an hour.
 * Fast - You don't have to deal with HTML tags or WYSIWYG editors. 
 * Platform independent - You can edit your blog posts from anywhere, be it on your PC, tablet or mobile device. 
-You can even use your favourite text editor, which is obviously VIM, right?
+You can even use your favourite text editor. (which is obviously VIM, right?)
 * Markdown handles all of the following beautifully:
     * lists
     * links
@@ -38,13 +39,13 @@ It really is that simple.
 Advantages 
 
 * Fast - It loads extremely quickly.
-* Portable - You can easily move from a server space and deploy it elsewhere
-* Cheaper - It is cost effective for a small website / personal blogs
+* Portable - You can easily move from a server space and deploy it elsewhere.
+* Cheaper - It is cost effective for a small website / personal blogs.
 
 Disadvantages 
 
-* Typically required web development experience to make changes to website
-* Complicated and a lot of work when you have a lot of pages e.g. a personal blog
+* Typically required web development experience to make changes to website.
+* Complicated and a lot of work when you have a lot of pages e.g. a personal blog.
 
 # Enter Github pages and Pelican #
 
