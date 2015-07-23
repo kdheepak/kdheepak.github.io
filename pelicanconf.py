@@ -23,6 +23,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 GOOGLE_ANALYTICS = 'UA-47173621-1'
+ANALYTICS = True 
 
 # Blogroll
 LINKS = (('Email', 'mailto:me@kdheepak.com'),)
