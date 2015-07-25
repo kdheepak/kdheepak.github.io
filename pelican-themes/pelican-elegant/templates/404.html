@@ -12,7 +12,7 @@ Page does not exist at {{ SITENAME|striptags|e }} blog.
 {% block analytics %}
 {{ super() }}
 <script>
-    mixpanel.track("Page", {"Name": "{{AUTHOR}}", "page": "404" });
+    mixpanel.track("Page", {"Name": "404" });
 </script>
 {% endblock analytics %}
 
