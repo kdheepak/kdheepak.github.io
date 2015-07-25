@@ -52,10 +52,8 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid',
                 'toc(permalink=true)']
 PLUGIN_PATH = ['pelican-plugins'] 
 PLUGINS = [ 'sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 
-            'liquid_tags.notebook',
-            'render_math', 'neighbors', 'latex', 'related_posts', 'assets', 'liquid_tags.video',
-            'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code', 
-            'share_post']
+            'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video',
+            'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code']
 SITEMAP = {
     'format': 'xml',
     'priorities': {
