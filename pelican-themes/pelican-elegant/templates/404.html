@@ -8,6 +8,14 @@ Page not found · {{ super() }}
 Page does not exist at {{ SITENAME|striptags|e }} blog.
 {% endblock head_description %}
 {% block content %}
+
+{% block analytics %}
+{{ super() }}
+<script>
+    mixpanel.track("Page", {"Name": "{{AUTHOR}}", "page": "404" });
+</script>
+{% endblock analytics %}
+
 <div class="row-fluid">
     <header class="page-header span10 offset2">
     <h1>That page doesn't exist!</h1>

@@ -29,6 +29,13 @@
 {% endif %}
 {% endblock meta_tags_in_head %}
 
+{% block analytics %}
+{{ super() }}
+<script>
+    mixpanel.track("Page", {"Name": "{{AUTHOR}}", "page": "Home Page" }) ;   
+</script>
+{% endblock analytics %}
+
 {% block content %}
 {% from '_includes/_defaults.html' import LANDING_PAGE_ABOUT with context %}
 {% from '_includes/_defaults.html' import PROJECTS with context %}

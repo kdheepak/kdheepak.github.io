@@ -20,6 +20,13 @@
 {{ smo_metadata(article) }}
 {% endblock meta_tags_in_head %}
 
+{% block analytics %}
+{{ super() }}
+<script>
+    mixpanel.track("Page", {"Name": "{{AUTHOR}}", "page": "{{ article.title  }}" }) ;   
+</script>
+{% endblock analytics %}
+
 {% block content %}
 <article>
 <div class="row-fluid">
@@ -114,3 +121,8 @@
     {% from '_includes/comments.html' import comments_script with context %}
     {{ comments_script(article) }}
 {% endblock script %}
+
+{% block footer %}
+{{ super() }}
+mixpanel.track("{{article.name}}", {"Name": "Dheepak Krishnamurthy" });
+{% endblock footer %}

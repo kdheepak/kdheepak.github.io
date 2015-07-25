@@ -24,6 +24,13 @@ Search results for {{ SITENAME|striptags|e }} blog.
 {% endif %}
 {% endblock meta_tags_in_head %}
 
+{% block analytics %}
+{{ super() }}
+<script>
+    mixpanel.track("Page", {"Name": "{{AUTHOR}}", "page": "Search" }) ;   
+</script>
+{% endblock analytics %}
+
 {% block script %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     {% if 'assets' in PLUGINS %}

@@ -24,6 +24,13 @@ All categories of the {{ SITENAME|striptags|e }} blog.
 {% endif %}
 {% endblock meta_tags_in_head %}
 
+{% block analytics %}
+{{ super() }}
+<script>
+    mixpanel.track("Page", {"Name": "{{AUTHOR}}", "page": "Categories" }) ;   
+</script>
+{% endblock analytics %}
+
 {% block feed_links %}
 {{ super() }}
 {% include '_includes/feeds_categories.html' %}
