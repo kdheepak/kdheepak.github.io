@@ -8,7 +8,7 @@ SITEURL = ''
 
 PATH = 'content'
 
-TIMEZONE = 'Europe/Paris'
+TIMEZONE = 'America/Denver'
 
 DEFAULT_LANG = u'en'
 
@@ -40,7 +40,7 @@ DEFAULT_PAGINATION = 10
 
 LOAD_CONTENT_CACHE = False
 CACHE_CONTENT = False
-THEME = 'pelican-themes/pelican-elegant/'
+THEME = 'pelican-themes/pelican-smoothie/'
 
 # Disqus
 
@@ -48,9 +48,9 @@ DISQUS_SITENAME = "kdheepak89"
 
 # Plugins and extensions
 NOTEBOOK_DIR = 'notebooks'
-MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid',
+MD_EXTENSIONS = ['fenced_code', 'codehilite(css_class=highlight)', 'extra', 'headerid',
                 'toc(permalink=true)']
-PLUGIN_PATH = ['pelican-plugins'] 
+PLUGIN_PATHS = ['pelican-plugins'] 
 PLUGINS = [ 'sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 
             'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video',
             'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code']
@@ -86,27 +86,57 @@ DEFAULT_PAGINATION = False
 DEFAULT_CATEGORY = 'Miscellaneous'
 USE_FOLDER_AS_CATEGORY = False 
 
-ARTICLE_URL = '{category}/{slug}/'
-ARTICLE_SAVE_AS = '{category}/{slug}/index.html'
+# put articles (posts) in blog/
+ARTICLE_URL = 'blog/{slug}.html'
+ARTICLE_SAVE_AS = 'blog/{slug}.html'
 
-PAGE_URL = '{category}/{slug}/'
-PAGE_SAVE_AS = '{category}/{slug}/index.html'
+PAGE_URL = '{category}/{slug}.html'
+PAGE_SAVE_AS = '{category}/{slug}.html'
 
+# ARTICLE_URL = 'blog/{slug}.html'
+# # we need to change the main index page now though...
+# INDEX_SAVE_AS = 'blog/index.html'
+# INDEX_URL = 'blog/'
+# #now move all the category and tag stuff to that blog/ dir as well
+# CATEGORY_URL = 'blog/category/{slug}.html'
+# CATEGORY_SAVE_AS = 'blog/category/{slug}.html'
+# CATEGORIES_URL = 'blog/category/'
+# CATEGORIES_SAVE_AS = 'blog/category/index.html'
+# TAG_URL = 'blog/tag/{slug}.html'    
+# TAG_SAVE_AS = 'blog/tag/{slug}.html'    
+# TAGS_URL = 'blog/tag/'  
+# TAGS_SAVE_AS = 'blog/tag/index.html'
+# ARCHIVES_SAVE_AS = 'blog/archives/archives.html'
+# ARCHIVES_URL = 'blog/archives/archives.html'
+# AUTHOR_SAVE_AS = 'blog/{slug}.html'
+# AUTHORS_SAVE_AS = 'blog/authors.html'
+# # put pages in the root directory
+# PAGE_SAVE_AS = '{slug}.html'
+# PAGE_URL = '{slug}.html'
+ 
 # Feeds
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 # Social
-SOCIAL = (
-        ('Twitter', 'http://twitter.com/kdheepak89'),
-        ('Github', 'http://github.com/kdheepak89'),
-        ('Email', 'mailto:me@kdheepak.com'),
-          )
+SOCIAL = { 'Twitter': 'http://twitter.com/kdheepak89', 
+        'Github': 'http://github.com/kdheepak89',
+        'Email': 'mailto:me@kdheepak.com',
+        'GooglePlus': 'https://plus.google.com/+DheepakKrishnamurthy/posts'}
+
+# Water theme
+# COVER_IMG = "images/covers/2200cc.png"
+# COVER_IMG = "path.jpg"
+SITE_TITLE_LABEL = "Dheepak Krishnamurthy"
+SITE_SUBTITLE_LABEL = "Engineer & Tinkerer."
+SUMMARY_MAX_LENGTH = 5 
+
 
 # Elegant theme
 STATIC_PATHS = ['theme/images', 'images', 'extra/CNAME']
-DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search', '404'))
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives',# 'search', '404'
+    ))
 TAG_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 CATEGORY_SAVE_AS = ''
@@ -155,7 +185,7 @@ LANDING_PAGE_ABOUT = {'title': 'I’m an engineer.',
 </p><p>
 I love reading up on the history of places. My dream is that one day I’d have travelled to every country in the world (Four down, 192 to go!). I love watching movies and having discussions with friends about them. I’ve been on the seemingly never ending quest of completing IMDb’s top 250 movies of all time (An embarrassingly small 91 down, 159 to go). I love reading books and comic books. I love technology an extraordinarily unusual amount and even occasionally contribute to a technology news and media network. Check them out <a href="https://unleashthephones.com/" title="UnleashThePhones.com" itemprop="url">here</a>, they are really cool!
 </p><p>
-On this website, I intend to share interesting projects I’m currently working on or have worked on in the past, also as a way of establishing an archive. If you find anything interesting, feel absolutely free to email me, or contact me on Facebook, Twitter or Google Plus.
+On this website, I intend to share interesting projects I’m currently working on or have worked on in the past, partly also as a way of establishing an archive. If you find anything interesting, feel absolutely free to get in touch with me.
 </p></div>"""}
 
 
