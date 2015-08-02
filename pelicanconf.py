@@ -135,3 +135,5 @@ SOCIAL = { 'Twitter': 'http://twitter.com/kdheepak89',
 GOOGLE_ANALYTICS = 'UA-47173621-1'
 MIXPANEL_ANALYTICS = "e36b00b2053ec1228c81cca16622581f"
 
+# Comments introduction
+COMMENTS_INTRO = "Let me know what you think below."
