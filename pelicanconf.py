@@ -22,38 +22,23 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-GOOGLE_ANALYTICS = 'UA-47173621-1'
-CLICKY_ANALYTICS = True 
-MIXPANEL_ANALYTICS = True 
-
-# Blogroll
-LINKS = (('Email', 'mailto:me@kdheepak.com'),)
-
-# Social widget
-#SOCIAL = (('You can add links in your config file', '#'),
-#          ('Another social link', '#'),)
-
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+# RELATIVE_URLS = True
 
 LOAD_CONTENT_CACHE = False
 CACHE_CONTENT = False
-THEME = 'pelican-themes/pelican-smoothie/'
-
-# Disqus
-
-DISQUS_SITENAME = "kdheepak89"
 
 # Plugins and extensions
 NOTEBOOK_DIR = 'notebooks'
 MD_EXTENSIONS = ['fenced_code', 'codehilite(css_class=highlight)', 'extra', 'headerid',
                 'toc(permalink=true)']
-PLUGIN_PATHS = ['pelican-plugins'] 
-PLUGINS = [ 'sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 
+PLUGIN_PATHS = ['pelican-plugins']
+PLUGINS = [ 'sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img',
             'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video',
             'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code']
+
 SITEMAP = {
     'format': 'xml',
     'priorities': {
@@ -79,12 +64,12 @@ else:
     EXTRA_HEADER = open('_nb_header.html').read().decode('utf-8')
 
 # Appearance
-TYPOGRIFY = False 
+TYPOGRIFY = False
 DEFAULT_PAGINATION = False
 
 # Defaults
 DEFAULT_CATEGORY = 'Miscellaneous'
-USE_FOLDER_AS_CATEGORY = False 
+USE_FOLDER_AS_CATEGORY = False
 
 # put articles (posts) in blog/
 ARTICLE_URL = 'blog/{slug}.html'
@@ -93,94 +78,45 @@ ARTICLE_SAVE_AS = 'blog/{slug}.html'
 PAGE_URL = '{category}/{slug}.html'
 PAGE_SAVE_AS = '{category}/{slug}.html'
 
-# ARTICLE_URL = 'blog/{slug}.html'
-# # we need to change the main index page now though...
-# INDEX_SAVE_AS = 'blog/index.html'
-# INDEX_URL = 'blog/'
-# #now move all the category and tag stuff to that blog/ dir as well
-# CATEGORY_URL = 'blog/category/{slug}.html'
-# CATEGORY_SAVE_AS = 'blog/category/{slug}.html'
-# CATEGORIES_URL = 'blog/category/'
-# CATEGORIES_SAVE_AS = 'blog/category/index.html'
-# TAG_URL = 'blog/tag/{slug}.html'    
-# TAG_SAVE_AS = 'blog/tag/{slug}.html'    
-# TAGS_URL = 'blog/tag/'  
-# TAGS_SAVE_AS = 'blog/tag/index.html'
-# ARCHIVES_SAVE_AS = 'blog/archives/archives.html'
-# ARCHIVES_URL = 'blog/archives/archives.html'
-# AUTHOR_SAVE_AS = 'blog/{slug}.html'
-# AUTHORS_SAVE_AS = 'blog/authors.html'
-# # put pages in the root directory
-# PAGE_SAVE_AS = '{slug}.html'
-# PAGE_URL = '{slug}.html'
- 
 # Feeds
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
-# Social
-SOCIAL = { 'Twitter': 'http://twitter.com/kdheepak89', 
-        'Github': 'http://github.com/kdheepak89',
-        'Email': 'mailto:me@kdheepak.com',
-        'GooglePlus': 'https://plus.google.com/+DheepakKrishnamurthy/posts'}
+############################################################################
 
-# Water theme
-# COVER_IMG = "images/covers/2200cc.png"
-# COVER_IMG = "path.jpg"
+# Pelican-Smoothie customization
+
+THEME = 'pelican-themes/pelican-smoothie/'
+
+# Disqus
+
+DISQUS_SITENAME = "kdheepak89"
+
+# COVER_IMG = "images/covers/red.png"
 SITE_TITLE_LABEL = "Dheepak Krishnamurthy"
 SITE_SUBTITLE_LABEL = "Engineer & Tinkerer."
-SUMMARY_MAX_LENGTH = 5 
+SUMMARY_MAX_LENGTH = 5
 
-
-# Elegant theme
 STATIC_PATHS = ['theme/images', 'images', 'extra/CNAME']
-DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives',# 'search', '404'
+DIRECT_TEMPLATES = (('index', 'archives',# 'search', '404'
     ))
 TAG_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 CATEGORY_SAVE_AS = ''
-USE_SHORTCUT_ICONS = True
-
-# Elegant Labels
-SOCIAL_PROFILE_LABEL = u'Contact Me'
-RELATED_POSTS_LABEL = 'Keep Reading'
-# SHARE_POST_INTRO = 'Like this post? Share on:'
-COMMENTS_INTRO = u'So what do you think? Leave your comments below.'
-
-# Mailchimp
-EMAIL_SUBSCRIPTION_LABEL = None
-EMAIL_FIELD_PLACEHOLDER = None
-SUBSCRIBE_BUTTON_TITLE = None 
-MAILCHIMP_FORM_ACTION = None 
 
 # SMO
 TWITTER_USERNAME = u'kdheepak89'
-FEATURED_IMAGE = SITEURL + '/theme/images/apple-touch-icon-152x152.png'
 
 # Legal
 SITE_LICENSE = u'<div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://kdheepak.com/"> All content by Dheepak Krishnamurthy on this page is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</div>'
 
-# SO
+# SEO
 SITE_DESCRIPTION = u'My name is Dheepak Krishnamurthy. This is my personal blog.'
 
-# Landing Page
-PROJECTS = [
-        {
-            'name': 'Github',
-            'url':
-            'https://github.com/kdheepak89',
-            'description': 'My Github page'},
-        {
-            'name': 'Ames Market Test Bed',
-            'url':
-            'http://kdheepak.com/projects/ames-market-test-bed',
-            'description': 'The AMES Market Package is an open source software' 
-	' implementation of the AMES Wholesale Power Market Test Bed in Java.'}
-            ]
 LANDING_PAGE_ABOUT = {'title': 'I’m an engineer.',
 'details': """<div itemscope itemtype="http://schema.org/Person"><p>My name is <span itemprop="name">Dheepak Krishnamurthy</span>. I’ve dabbled with mobile application and web development, home automation and photography. I’m currently working towards a Master’s degree in Electrical Engineering.
-</p><p> 
+</p><p>
 <img src="images/coverPicture.jpg" alt="Alt text! And a picture of me!" style="width:100%">
 </p><p>
 I love reading up on the history of places. My dream is that one day I’d have travelled to every country in the world (Four down, 192 to go!). I love watching movies and having discussions with friends about them. I’ve been on the seemingly never ending quest of completing IMDb’s top 250 movies of all time (An embarrassingly small 91 down, 159 to go). I love reading books and comic books. I love technology an extraordinarily unusual amount and even occasionally contribute to a technology news and media network. Check them out <a href="https://unleashthephones.com/" title="UnleashThePhones.com" itemprop="url">here</a>, they are really cool!
@@ -188,4 +124,14 @@ I love reading up on the history of places. My dream is that one day I’d have 
 On this website, I intend to share interesting projects I’m currently working on or have worked on in the past, partly also as a way of establishing an archive. If you find anything interesting, feel absolutely free to get in touch with me.
 </p></div>"""}
 
+# Social
+SOCIAL = { 'Twitter': 'http://twitter.com/kdheepak89',
+        'Github': 'http://github.com/kdheepak89',
+        'Email': 'mailto:me@kdheepak.com',
+        'GooglePlus': 'https://plus.google.com/+DheepakKrishnamurthy/posts'}
+
+# Google and Mixpanel Analytics
+
+GOOGLE_ANALYTICS = 'UA-47173621-1'
+MIXPANEL_ANALYTICS = "e36b00b2053ec1228c81cca16622581f"
 
