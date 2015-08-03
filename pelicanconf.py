@@ -94,6 +94,7 @@ THEME = 'pelican-themes/pelican-smoothie/'
 DISQUS_SITENAME = "kdheepak89"
 
 # COVER_IMG = "images/covers/red.png"
+AVATAR_IMG = "images/avatarPicture.jpg"
 SITE_TITLE_LABEL = "Dheepak Krishnamurthy"
 SITE_SUBTITLE_LABEL = "Engineer & Tinkerer."
 SUMMARY_MAX_LENGTH = 5
@@ -119,7 +120,7 @@ LANDING_PAGE_ABOUT = {'title': 'I’m an engineer.',
 </p><p>
 <img src="images/coverPicture.jpg" alt="Alt text! And a picture of me!" style="width:100%">
 </p><p>
-I love reading up on the history of places. My dream is that one day I’d have travelled to every country in the world (Four down, 192 to go!). I love watching movies and having discussions with friends about them. I’ve been on the seemingly never ending quest of completing IMDb’s top 250 movies of all time (An embarrassingly small 91 down, 159 to go). I love reading books and comic books. I love technology an extraordinarily unusual amount and even occasionally contribute to a technology news and media network. Check them out <a href="https://unleashthephones.com/" title="UnleashThePhones.com" itemprop="url">here</a>, they are really cool!
+I love reading up on the history of places. My dream is that one day I’d have travelled to every country in the world (Four down, 192 to go!). I love watching movies and having discussions with friends about them. I’ve been on the seemingly never ending quest of completing IMDb’s top 250 movies of all time (An embarrassingly small 91 down, 159 to go). I love reading books and comic books.
 </p><p>
 On this website, I intend to share interesting projects I’m currently working on or have worked on in the past, partly also as a way of establishing an archive. If you find anything interesting, feel absolutely free to get in touch with me.
 </p></div>"""}
