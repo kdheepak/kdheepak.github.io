@@ -1,10 +1,10 @@
 Title:How to set up a Pelican blog with Github pages
 Category:blog
 Date:2015-04-24 19:00
-Modified:2015-05-26 18:15
+Modified:2015-08-02 17:00
 Tags:Pelican
 Keywords:How to set up a Pelican blog with GitHub Pages
-Summary:Here, I will show how to set up a working static blog on github pages using Pelican. Pelican is a static site generator, written in Python.
+Summary:Here, I will show how to set up a working static blog on github pages using Pelican. Pelican is a static site generator, written in Python ... 
 
 [TOC]
 

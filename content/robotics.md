@@ -2,7 +2,7 @@ Title:Robotics
 Category:blog
 Date:2014-12-13 10:00
 Tags:Robotics
-Summary:Videos from projects during my undergraduate degree
+Summary:Here are some videos from projects I worked on during my undergraduate degree ...
 
 <h3>Robotics and Microcontroller Projects</h3>
 
