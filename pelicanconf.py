@@ -100,8 +100,12 @@ SITE_SUBTITLE_LABEL = "Engineer & Tinkerer."
 SUMMARY_MAX_LENGTH = 5
 
 STATIC_PATHS = ['theme/images', 'images', 'extra/CNAME']
-DIRECT_TEMPLATES = (('index', 'archives',# 'search', '404'
+DIRECT_TEMPLATES = (('index', 'archives', 'blog',# 'search', '404'
     ))
+
+BLOG_URL = 'blog/index.html'
+BLOG_SAVE_AS = 'blog/index.html'
+
 TAG_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 CATEGORY_SAVE_AS = ''
