@@ -35,7 +35,7 @@ NOTEBOOK_DIR = 'notebooks'
 MD_EXTENSIONS = ['fenced_code', 'codehilite(css_class=highlight)', 'extra', 'headerid',
                 'toc(permalink=true)']
 PLUGIN_PATHS = ['pelican-plugins']
-PLUGINS = [ 'sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img',
+PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img',
             'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video',
             'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code']
 
@@ -100,7 +100,7 @@ SITE_SUBTITLE_LABEL = "Engineer & Tinkerer."
 SUMMARY_MAX_LENGTH = 5
 
 STATIC_PATHS = ['theme/images', 'images', 'extra/CNAME']
-DIRECT_TEMPLATES = (('index', 'archives', 'blog',# 'search', '404'
+DIRECT_TEMPLATES = (('index', 'archives', 'blog', 'search',# '404'
     ))
 
 BLOG_URL = 'blog/index.html'
