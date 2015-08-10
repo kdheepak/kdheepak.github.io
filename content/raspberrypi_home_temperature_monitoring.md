@@ -1,6 +1,6 @@
 Title:Home monitoring system
 Category:blog
-Date:2014-12-13 9:00
+Date:2014-12-11 9:00
 Tags:Raspberry Pi
 Summary:I made some plots using HighCharts from my temperature monitoring system based on a Raspberry Pi ...
 
