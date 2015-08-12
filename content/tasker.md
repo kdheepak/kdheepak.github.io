@@ -13,7 +13,7 @@ Summary:A collection of Tasker projects I've worked on ...
 
 # Tell me a Joke
 
-[This profile](https://github.com/kdheepak89/Tasker_Jokes) reads a random joke from [here](reddit.com/r/jokes/top)
+[This profile](https://github.com/kdheepak89/Tasker_Jokes) reads a random joke from [here](https://reddit.com/r/jokes/top)
 
 <a href="https://github.com/kdheepak89/Tasker_Jokes"><img src="https://raw.githubusercontent.com/kdheepak89/Tasker_Jokes/master/Tasker_Demo.gif" align="middle" height="400"></a>
 
