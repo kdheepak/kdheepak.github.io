@@ -37,7 +37,7 @@ MD_EXTENSIONS = ['fenced_code', 'codehilite(css_class=highlight, linenums=False)
 PLUGIN_PATHS = ['pelican-plugins']
 PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 'render_math',
             'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video',
-            'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code', 'pelican-gist', 'better_codeblock_line_numbering']
+            'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code', 'better_codeblock_line_numbering']
 
 SITEMAP = {
     'format': 'xml',
