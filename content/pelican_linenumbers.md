@@ -3,7 +3,7 @@ Category:blog
 Date: Aug 18 02:00:00 MDT 2015
 Tags:pelican
 Keywords:How to add line numbers for code blocks in Pelican
-Summary:Brief tutorial on adding the right css for getting line numbering for code blocks in pelican
+Summary:Brief tutorial on adding the right css for getting line numbering for code blocks in pelican ...
 
 I've found that line numbering with word wrap could only be achieved in Pelican by a
 certain set of steps. I've listed the CSS and the Plugin I've used to get that
