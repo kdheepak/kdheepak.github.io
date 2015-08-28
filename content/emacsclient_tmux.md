@@ -4,6 +4,7 @@ Date: Jul 18 10:00:00 MDT 2015
 Tags:emacs, osx
 Keywords:emacsclient, terminal, workflow, tmux
 Summary:Emacs and tmux workflow ...
+Status:draft
 
 
 I think [Michael Wall](http://mjwall.com/blog/2013/10/04/how-i-use-emacs/) nailed it when it comes to having a emacs workflow with the terminal. I've only added [small modifications]() to this in order to get it the way I like. 

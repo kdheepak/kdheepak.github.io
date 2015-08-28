@@ -4,6 +4,7 @@ Category:blog
 Tags:emacs, applescript, osx
 Keywords:how to install homebrew on osx, how to remove homebrew on osx
 Summary:Everything related to Homebrew on OSX
+Status:draft
 
 https://gist.github.com/mxcl/1173223
 
