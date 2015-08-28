@@ -9,3 +9,5 @@ Status:draft
     
 
 Certificate issue can be resolved by the following steps
+
+    sudo security add-trust -d -r trustRoot -p basic -p codeSign -k /Library/Keychains/System.keychain ~/Desktop/gdb-cert.cer   
