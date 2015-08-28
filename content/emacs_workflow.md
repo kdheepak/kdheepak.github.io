@@ -14,7 +14,7 @@ Status:draft
 
 /usr/local/bin/ec
 
-    #!/bin/bash
+    #!/bin/zsh
     
     # This script starts emacs daemon if it is not running, opens whatever file
     # you pass in and changes the focus to emacs.  Without any arguments, it just
@@ -87,11 +87,11 @@ Status:draft
     # -t starts in terminal, since I won't be using the gui
     # can also pass in -n if you want to have the shell return right away
     
-    exec emacsclient -a "emacsserver" -t "$@"
+    exec emacsclient -a "" -t "$@"
 
 /usr/local/bin/es
 
-    #!/bin/bash
+    #!/bin/zsh
     
     # simple script to shutdown the running Emacs daemon
     
