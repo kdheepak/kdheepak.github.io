@@ -8,4 +8,8 @@ Summary:
 Status:draft
 
 
-  pip install pandoc-fignos
+    pip install pandoc-fignos
+    pip install pandoc-eqnos
+    pip install pandoc-tablenos
+    
+    
