@@ -1,16 +1,16 @@
 Title:Uninstalling and Re-Installing Homebrew on OSX
-Date:Thu Aug 27 10:52:17 MDT 2015
+Date:Thu Aug 27 22:52:17 MDT 2015
 Category:blog 
-Tags:emacs, applescript, osx
+Tags:osx
 Keywords:how to install homebrew on osx, how to remove homebrew on osx
-Summary:Everything related to Homebrew on OSX
-Status:draft
 
-https://gist.github.com/mxcl/1173223
+[Gist](https://gist.github.com/mxcl/1173223)
 
     #!/bin/sh
     # Just copy and paste the lines below (all at once, it won't work line by line!)
     # MAKE SURE YOU ARE HAPPY WITH WHAT IT DOES FIRST! THERE IS NO WARRANTY!
+
+    brew list > ~/brew_list.txt
     
     function abort {
       echo "$1"

@@ -1,6 +1,6 @@
-Title:Emacs workflow
+Title:Emacs workflow - Using Emacs in the terminal
 Category:blog
-Date:July 22 22:00:50 MDT 2015
+Date:July 25 22:00:50 MDT 2015
 Tags:emacs, tmux
 Keywords:emacs, workflow, emacs daemon, terminal, tmux
 Summary:A description of my emacs workflow
