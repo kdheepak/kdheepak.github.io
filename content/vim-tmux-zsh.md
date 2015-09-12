@@ -5,7 +5,9 @@ Date:May 08 22:58:18 MDT 2015
 Tags:vim, tmux, zsh
 Keywords:vim, tmux, zsh
 
-I'v not found a greater combination of tools than vim, tmux and zsh. I've briefly detailed some of the shortcuts to get it working the way I want it to below.
+I'v not found a greater combination of tools than vim, tmux and zsh. I've detailed below some of the configuration to get it working the way I want it to.
+
+![vim-tmux-zsh](/images/vim-tmux-zsh.png)
 
 ## tmux
 
@@ -108,27 +110,37 @@ I'v not found a greater combination of tools than vim, tmux and zsh. I've briefl
     bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
     bind-key s command-prompt -p "send pane to:"  "join-pane -t '%%'"
 
-    # Bad Wolf by Steve Losh
-    # =====================
-    set -g status-fg white
-    set -g status-bg colour234
-    # set -g status-bg default #set for transparent background
-    set -g window-status-activity-attr bold
-    set -g pane-border-fg colour245
-    set -g pane-active-border-fg colour39
-    set -g message-fg colour16
-    set -g message-bg colour221
-    set -g message-attr bold
-    # Custom status bar
-    # Powerline
-    set -g status-left-length 32
-    set -g status-right-length 150
-    set -g status-interval 5
-    # Lets add the current weather to our status bar—why? Well Why the french-toast not?
-    set -g status-left '#[fg=colour16,bg=colour254,bold] #S #[fg=colour254,bg=colour238,nobold]#[fg=colour15,bg=colour238,bold] #(weathermajig boulder --short) #[fg=colour238,bg=colour234,nobold]'
-    set -g status-right '#[fg=colour245]❬ %R ❬ %d %b #[fg=colour254,bg=colour234,nobold]#(rdio-current-track-tmux)#[fg=colour16,bg=colour254,bold] #h '
-    set -g window-status-format "#[fg=white,bg=colour234] #I #W "
-    set -g window-status-current-format "#[fg=colour234,bg=colour39]#[fg=colour16,bg=colour39,noreverse,bold] #I �� #W #[fg=colour39,bg=colour234,nobold]"
 
+## zsh
+
+    # Path to your oh-my-zsh installation.
+    export ZSH=/Users/dheepakkrishnamurthy/.oh-my-zsh
+
+    ZSH_THEME="rawsyntax"
+
+    alias vim='mvim -v'
+
+    export TERM=xterm-256color
+     
+    source $ZSH/oh-my-zsh.sh
+
+
+## vim 
+
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'bling/vim-airline'
+    Plugin 'christoomey/vim-tmux-navigator'
+    Plugin 'fholgado/minibufexpl.vim'
+    Plugin 'honza/vim-snippets'
+    Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+    Plugin 'morhetz/gruvbox'
+    Plugin 'plasticboy/vim-markdown'
+    Plugin 'scrooloose/nerdcommenter'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'searchcomplete'
+    Plugin 'sjl/gundo.vim'
+    Plugin 'tomasr/molokai'
+    Plugin 'tpope/vim-repeat'
+    Plugin 'tpope/vim-surround'
 
 
