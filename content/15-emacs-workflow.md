@@ -4,6 +4,7 @@ Date:July 25 22:00:50 MDT 2015
 Tags:emacs, tmux
 Keywords:emacs, workflow, emacs daemon, terminal, tmux
 Summary:A description of my emacs workflow
+Alias:/blog/emacs-workflow-using-emacs-in-the-terminal/
 
 I use the command line a lot, frequently editing files locally or remotely. Up until now, I've been using [vim with tmux and zsh](vim-tmux-zsh.html). I've recently been experimenting with emacs and have been trying to get it to work well inplace of vim. I personally think the author of [this post](http://mjwall.com/blog/2013/10/04/how-i-use-emacs/) nailed it regarding emacs workflow. I've only made minor modifications to get it to suit my requirements.
 

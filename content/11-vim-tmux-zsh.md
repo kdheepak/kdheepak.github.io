@@ -5,6 +5,7 @@ Date:May 08 22:58:18 MDT 2015
 Tags:vim, tmux, zsh
 Keywords:vim, tmux, zsh
 Summary:I've not found a greater combination of tools than vim, tmux and zsh. I've detailed below some of the configuration ...
+Alias:/blog/vim-tmux-zsh/
 
 I've not found a greater combination of tools than vim, tmux and zsh. I've detailed below some of the configuration to get it working the way I want it to.
 

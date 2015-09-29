@@ -3,6 +3,7 @@ Category:blog
 Date:2015-04-01 19:00
 Tags:OSX
 Summary:A number of Mac application can improve productivity. Here I've complied my favourite useful Mac applications ...
+Alias:/blog/mac-osx-productivity-apps/
 
 
 ## 1. Alfred

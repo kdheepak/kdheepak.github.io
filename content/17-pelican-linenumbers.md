@@ -5,6 +5,7 @@ Modified: Sun Sep 20 10:01:48 MDT 2015
 Tags:pelican
 Keywords:How to add line numbers for code blocks in Pelican
 Summary:Brief tutorial on adding the right css for getting line numbering for code blocks in pelican ...
+Alias:/blog/how-to-add-line-numbers-for-code-blocks-in-pelican/
 
 Update : I've removed line numbers because it is selected along with the code if someone wants to copy. I'll post here if I find a better solution.
 

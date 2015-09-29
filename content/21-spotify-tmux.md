@@ -3,6 +3,7 @@ Category:blog
 Date:Sun Sep 20 09:26:15 MDT 2015
 Tags:tmux
 Keywords:tmux, spotify, powerline
+Alias:/blog/spotify-and-tmux/
 
 Place the following in a directory that in your `$PATH`
 

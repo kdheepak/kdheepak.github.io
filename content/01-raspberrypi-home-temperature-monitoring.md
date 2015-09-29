@@ -3,6 +3,7 @@ Category:blog
 Date:2014-12-11 9:00
 Tags:Raspberry Pi
 Summary:I made some plots using HighCharts from my temperature monitoring system based on a Raspberry Pi ...
+Alias:/blog/home-monitoring-system/
 
 # Example
 
