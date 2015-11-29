@@ -36,10 +36,10 @@ NOTEBOOK_DIR = 'notebooks'
 MD_EXTENSIONS = ['codehilite(css_class=highlight, linenums=False)', 'extra', 'headerid',
                 'toc(permalink=true)']
 PLUGIN_PATHS = ['pelican-plugins']
-PLUGINS = ['sitemap', 'extract_toc', 'pelican_alias', 'tipue_search', 'liquid_tags.img', 'render_math',
-            'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video',
-            'liquid_tags.youtube', 'liquid_tags.vimeo','liquid_tags.include_code',]
 
+PLUGINS = ['sitemap', 'pelican_alias', 'tipue_search', 'liquid_tags.img', 'render_math', 
+            'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video', # 'extract_toc',
+            'liquid_tags.youtube', 'liquid_tags.include_code',]
 SITEMAP = {
     'format': 'xml',
     'priorities': {
