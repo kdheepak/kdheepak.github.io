@@ -135,6 +135,12 @@ SOCIAL = { 'Twitter': 'http://twitter.com/kdheepak89',
         'Email': 'mailto:me@kdheepak.com',
         'GooglePlus': 'https://plus.google.com/+DheepakKrishnamurthy/posts'}
 
+# Projects
+PROJECTS = [{ 'link': 'http://kdheepak.com/psst', 'name' : 'PSST' },
+            { 'link': 'http://kdheepak.com/think-git', 'name' : 'think-git' },
+            { 'link': 'http://github.com/kdheepak89/c3.py', 'name' : 'c3.py' },]
+
+
 # Google and Mixpanel Analytics
 
 GOOGLE_ANALYTICS = 'UA-47173621-1'
