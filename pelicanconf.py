@@ -37,7 +37,7 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight, linenums=False)', 'extra', 'he
                 'toc(permalink=true)']
 PLUGIN_PATHS = ['pelican-plugins']
 
-PLUGINS = ['sitemap', 'pelican_alias', 'tipue_search', 'liquid_tags.img', 'render_math', 
+PLUGINS = ['sitemap', 'pelican_alias', 'tipue_search', 'liquid_tags.img', 'render_math', 'pandoc_reader',
             'liquid_tags.notebook', 'neighbors', 'related_posts', 'assets', 'liquid_tags.video', # 'extract_toc',
             'liquid_tags.youtube', 'liquid_tags.include_code',]
 SITEMAP = {
@@ -148,3 +148,21 @@ MIXPANEL_ANALYTICS = "e36b00b2053ec1228c81cca16622581f"
 
 # Comments introduction
 COMMENTS_INTRO = "Let me know what you think below."
+
+PUBLICATIONS_SRC = 'content/research.bib'
+
+PANDOC_FILES = ['txt', 'md']
+PANDOC_ARGS = [
+  '--mathjax',
+  '--smart',
+  '--toc',
+  '--toc-depth=2',
+  #'--number-sections',
+  '--bibliography=content/blog.bib',
+  '--csl=ieee.csl',
+]
+
+PANDOC_EXTENSIONS = [
+  #'+hard_line_breaks',
+  '+citations'
+]
