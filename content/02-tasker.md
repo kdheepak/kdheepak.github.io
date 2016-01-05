@@ -22,4 +22,4 @@ Alias:/blog/tasker-projects/
 
 [This profile](https://github.com/kdheepak89/Tasker_WhatsPush) interacts with WhatsApp and allows you to send messages using your desktop
 
-{% youtube plTJ5NGCchM [] [400] %} 
+[![Tasker](http://img.youtube.com/vi/plTJ5NGCchM/0.jpg)](http://www.youtube.com/watch?v=plTJ5NGCchM "Tasker")

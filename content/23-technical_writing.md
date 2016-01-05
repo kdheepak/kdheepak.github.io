@@ -6,6 +6,7 @@ keywords:markdown, vim, writing, academic, scholarly, scientific, papers
 slug:writing-papers-with-markdown
 category:blog 
 alias:/blog/writing-papers-with-markdown
+status:draft
 
 Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
 Hopefully this discussion will get people interested in this workflow, and show them how to get started using the same or a similar workflow.
