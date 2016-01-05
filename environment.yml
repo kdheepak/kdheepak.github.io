@@ -54,6 +54,7 @@ dependencies:
   - blinker==1.4
   - docutils==0.12
   - feedgenerator==1.7
+  - ghp-import==0.4.1
   - gnureadline==6.3.3
   - ipython==4.0.1
   - ipython-genutils==0.1.0
