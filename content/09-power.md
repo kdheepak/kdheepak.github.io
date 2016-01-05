@@ -7,7 +7,7 @@ Keywords:what is active power, what is reactive power, what is real power, what 
 Summary: This post covers the basics of the types of Power in power systems, specifically what is active power, reactive power and apparent power. This post was generated from an iPython Notebook ...
 Alias:/blog/active-reactive-and-apparent-power/
 
-**Edit** - I haven't figured out how to get ipynb working with a Pandoc reader yet, this post will be updated soon.
+**Edit** - I'm no longer using the liquidtags.notebook plugin, since I moved to pandoc. The blog post will now closely resemble a jupyter notebook.
 
 This post covers the basics of the types of Power in power systems. This post was generated from an iPython Notebook
 
