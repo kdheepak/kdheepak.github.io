@@ -159,6 +159,7 @@ PANDOC_ARGS = [
   '--toc-depth=2',
   #'--number-sections',
   '--bibliography=content/blog.bib',
+  '--filter=./convert-ipynb.py',
   '--csl=ieee.csl',
 ]
 
