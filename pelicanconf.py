@@ -161,6 +161,8 @@ PANDOC_ARGS = [
   '--bibliography=content/blog.bib',
   '--filter=./convert-ipynb.py',
   '--csl=ieee.csl',
+  '--metadata',
+  'link-citations=true',
 ]
 
 PANDOC_EXTENSIONS = [

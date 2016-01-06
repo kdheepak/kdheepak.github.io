@@ -15,7 +15,7 @@ The following quote is from Conda's github page [@_condaconda]
 
 The main advantage of using conda to manage your packages and environment is that it will work across platforms
 
-![[@_conda]](/images/condacrossplatform.jpg)
+![Slide deck [@_conda] comparing package managers in different platforms](/images/condacrossplatform.jpg)
 
 conda also uses hard linking, so it is inexpensive to create multiple copies of the same package
 

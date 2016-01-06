@@ -9,8 +9,7 @@ alias:/blog/writing-papers-with-markdown
 status:draft
 
 Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
-Hopefully this discussion will get people interested in this workflow, and show them how to get started using the same or a similar workflow.
-There's an excellent write up about this at [@_plain_2015].
+There's an excellent write up about this at [@_plain].
 
 # Why Markdown
 
