@@ -23,6 +23,9 @@ There's a lot to manage over the length of time spanning this entire process.
 
 # Tools required
 
+First off, you will need pandoc. You can get the latest version on their GitHub page [@_jgmpandoc].
+You will also need $\LaTeX$.
+
 The following python packages are useful.
 
 - pandoc-attributes
@@ -31,8 +34,7 @@ The following python packages are useful.
 - pandoc-tablenos
 - pandocfilters
 
-You can `pip install <package-name>`. 
-Alternatively you can create a virtual environment using `conda` with  environment file [@_kdheepak89pandocpaper]
+You can run `pip install <package-name>`. 
+Alternatively you can create a virtual environment using `conda` with a suitable environment file [@_kdheepak89pandocpaper], which is the approach I recommend [@_using].
 
-    
 # References
