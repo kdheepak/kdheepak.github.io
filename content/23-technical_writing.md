@@ -6,6 +6,7 @@ keywords:markdown, vim, writing, academic, scholarly, scientific, papers
 slug:writing-papers-with-markdown
 category:blog 
 alias:/blog/writing-papers-with-markdown
+link-citations:true
 status:draft
 
 Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
@@ -22,8 +23,16 @@ There's a lot to manage over the length of time spanning this entire process.
 
 # Tools required
 
-    pip install pandoc-fignos
-    pip install pandoc-eqnos
-    pip install pandoc-tablenos
+The following python packages are useful.
+
+- pandoc-attributes
+- pandoc-eqnos
+- pandoc-fignos
+- pandoc-tablenos
+- pandocfilters
+
+You can `pip install <package-name>`. 
+Alternatively you can create a virtual environment using `conda` with  environment file [@_kdheepak89pandocpaper]
+
     
 # References
