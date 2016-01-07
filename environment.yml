@@ -2,6 +2,7 @@ name: pelican-env
 dependencies:
 - appnope=0.1.0=py27_0
 - backports_abc=0.4=py27_0
+- cycler=0.9.0=py27_0
 - decorator=4.0.6=py27_0
 - freetype=2.5.5=0
 - ipykernel=4.1.1=py27_0
@@ -14,10 +15,12 @@ dependencies:
 - jupyter_core=4.0.6=py27_0
 - libpng=1.6.17=0
 - markupsafe=0.23=py27_0
+- matplotlib=1.5.0=np110py27_0
 - mistune=0.7.1=py27_0
 - nbconvert=4.1.0=py27_0
 - nbformat=4.0.1=py27_0
 - notebook=4.0.6=py27_0
+- numpy=1.10.2=py27_0
 - openssl=1.0.2d=0
 - path.py=8.1.2=py27_1
 - pexpect=3.3=py27_0
@@ -25,9 +28,12 @@ dependencies:
 - pip=7.1.2=py27_0
 - ptyprocess=0.5=py27_0
 - pygments=2.0.2=py27_0
+- pyparsing=2.0.3=py27_0
 - pyqt=4.11.4=py27_1
 - python=2.7.11=0
+- python-dateutil=2.4.2=py27_0
 - python.app=1.2=py27_4
+- pytz=2015.7=py27_0
 - pyzmq=15.1.0=py27_0
 - qt=4.8.7=1
 - qtconsole=4.1.1=py27_0
@@ -54,10 +60,8 @@ dependencies:
   - blinker==1.4
   - docutils==0.12
   - feedgenerator==1.7
-  - functools32==3.2.3.post2
   - ghp-import==0.4.1
   - gnureadline==6.3.3
-  - greenlet==0.4.9
   - ipython==4.0.1
   - ipython-genutils==0.1.0
   - jupyter==1.0.0
@@ -68,7 +72,5 @@ dependencies:
   - pandocfilters==1.2.4
   - pelican==3.6.3
   - pelican-alias==1.1
-  - python-dateutil==2.4.2
-  - pytz==2015.7
   - unidecode==0.4.18
 
