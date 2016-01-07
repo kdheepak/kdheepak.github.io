@@ -84,6 +84,9 @@ But most importantly, I have the confidence that my code and documents can survi
 However, $\LaTeX$ does come with a penalty.
 There is a barrier to entry which one must overcome in order to begin using $\LaTeX$.
 
+## Markdown
+
+![My very scientific learning curve plot](/images/learningcurve.png)
 
 # Tools required
 
