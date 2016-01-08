@@ -8,10 +8,19 @@ slug: writing-papers-with-markdown
 category: blog
 alias: /blog/writing-papers-with-markdown
 bibliography: blog.bib
+abstract: Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. I figured I'd use this post to write about my workflow and my resources on this topic.
 ---
+
+\begin{IEEEkeywords}
+Pandoc, LaTeX, Markdown 
+\end{IEEEkeywords}
+
+<!-- BEGIN COMMENT -->
 
 Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
 I figured I'd use this post to write about my workflow and my resources on this topic.
+
+<!-- END COMMENT -->
 
 # Why Markdown
 
@@ -72,13 +81,12 @@ Even if you agree with all those things, I still feel there is a case to be made
 * The equation editor painful to use.
 * Word does not work in the workflow for ***scientific research papers or reports***.
 
-The last point is the reason I dropped using Word entirely.
-Assuming scientific research papers consist of only 3 steps (if only!) - notetaking, analysis and presentation - Word fails at performing well in any of these steps.
+Assuming scientific research papers consist of only 3 steps (if only!) - notetaking, analysis and presentation - Word fails at delivering in any of these steps.
 
-Word doesn't quite work for notetaking, with Org mode, Evernote or Onenote being most people's preferred solution.
-I personally don't know anyone that decides to keep their notes in Word.
+Word doesn't quite work for notetaking.
+Org mode, Evernote or Onenote are most people's preferred solution.
 Word doesn't fit data analysis requirements as well, with Python, R or Excel being the go-to tools.
-I use Emacs / Vim for notetaking and store them in a git repository and all of my data analysis is done in a Jupyter Notebook.
+I personally use Emacs / Vim for notetaking and store them in a git repository and all of my data analysis is done in Jupyter Notebooks.
 After collecting the required data from an experiment and post processing it, I can save plots into an image or the data into a table in a particular format programmatically using scripts.
 Word however, does not allow me to import these images or tables programmatically.
 Word just does not fit into typical analysis or research workflows.
@@ -103,11 +111,12 @@ It is infamous for displaying equations in a manner that looks great.
   \nabla \cdot \vec{\mathbf{B}} & = 0
 \end{align}
 
-Math is beautiful, and it deserves to be presented beautifully
+Math is beautiful, and it deserves to be presented beautifully.
 
 \LaTeX is essentially a markup language. 
 Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.
-And since the source document that contains the content is a plain text file, I can use `git` to version control the paper.
+And the source document that contains the content is a plain text file
+This means I can use `git` to version control the paper.
 This allows me to track changes and collaborate with others without any additional effort.
 This also lets me work with any editor I want - Vim, Emacs, TeXShop, Lyx.
 But most importantly, I have the confidence that my code and documents can survive possibly forever in its current format. \LaTeX is free. Free as in beer and free as in freedom. 
@@ -117,13 +126,13 @@ There are hundreds of packages that improve upon the functionality that \LaTeX p
 There are packages like *TikZ* that allow you to create high resolution print quality detailed diagrams.
 
 However, \LaTeX does come with a penalty.
-There is a barrier to entry which one must overcome in order to begin using \LaTeX
+There is a barrier to entry which one must overcome in order to begin using \LaTeX.
 Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them.
 
 Personally, I found learning how to use \LaTeX extremely useful, and I didn't think it was difficult. 
 Solutions to my initial problems were only a quick Google search away.
-Tables were frustrating at first, but you get the hang of them.
-Equations are a joy to type in \LaTeX
+Tables were frustrating at first, but you get the hang of them over time.
+Equations are a joy to type in \LaTeX.
 And the final product looks great!
 
 That said, the markup language is a bit too heavy for notetaking, and not particularly readable.
@@ -151,6 +160,7 @@ With practice and experience one can figure out ways to work with \LaTeX but beg
 
 Once you invest the time to learn \LaTeX I can't think of any reason why one would go back to Word. 
 However, if you cannot afford to experiment with \LaTeX are you resigned to Word?
+Markdown to the rescue!
     
 ## Markdown
 
@@ -389,6 +399,24 @@ when I don't know what I'm doing.
     Tab space 
     for code block
 
+### ***Tables***
+
+      Right     Left     Center     Default
+    -------     ------ ----------   -------
+         12     12        12            12
+        123     123       123          123
+          1     1          1             1
+
+    Table:  Demonstration of simple table syntax.
+
+  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1
+
+Table:  Demonstration of simple table syntax.
+
 ### ***Footnotes***
 
     Example of a footnote [^3]
@@ -430,7 +458,8 @@ $$
 
 Once you have typed all the content, you can use `pandoc` to convert the document into the format you want.
 Pandoc uses the output filename extension to figure out what the output file format should be.
-You can also manually specify the output format.
+Btw, Pandoc is a command line tool only. 
+So you will have to use the command line for any conversion.
 
     pandoc document.md -o document.pdf
 
@@ -441,9 +470,25 @@ With pdf files, you can specify the following
 
 * `--latex-engine=pdflatex` : latex engine
 * `--latex-template=latex.template` : latex template file
+
+With html files, you can specify the following
+
+* `--template=html.template` : html template file
+* `--css=cssfile.css` : css file
+
+With docx files unfortunately, you cannot specify a template (at the time of writing this post).
+You can however, specify a reference-docx, which might do the job
+
+* `--reference-docx=reference.docx` : docx for reference styles
+
+These are additional arguments that allow you to use citations when writing academic papers.
+
 * `--filter pandoc-citeproc` : filter to parse citations
 * `--csl=CSLFILE` : define a citation style sheet e.g. ieee.csl
 * `--bibliography=BIBFILE` : look for citations from a bibliography
+
+`pandoc` will find the appropriate citation from a .bib file and add it to your Bibliography according to the style sheet you specify. 
+It works great and I've had no issues with it so far.
 
 Also, I've found the following filters useful.
 
@@ -451,39 +496,62 @@ Also, I've found the following filters useful.
 * `--filter pandoc-fignos` : figure numbers
 * `--filter pandoc-tablenos` : table numbers
 
-With html and docx files, equations are a bit tricky.
-pandoc allows you to define \LaTeX blocks in the markdown file, which are passed straight through to \LaTeX without any change. 
-\LaTeX then processes it to render it correctly.
-However, to HTML and docx, pandoc will remove \LaTeX blocks.
+As you can see, there are a lot of arguments that can be passed to Pandoc.
+I've found using Makefiles for recording your past commands and documenting these instructions extremely useful.
+
+# Cons to using Markdown?
+
+pandoc allows you to define \LaTeX blocks in a markdown file, which are passed straight through to \LaTeX without any change. 
+\LaTeX then processes it and renders it correctly.
+Which means if you want to generate a pdf, you are in luck!
+You have the entire arsenal of \LaTeX commands at your disposal.
+
+When converting to html or docx files however, pandoc will just choose to remove \LaTeX blocks.
+There is a workaround for equations.
 With HTML, you can specify `--mathjax` which will attempt to render \LaTeX as mathjax, which works most of the time. 
 This webpage for example was generated entirely from a markdown file, rendered to html using pandoc.
 I have found a few cases where mathjax did not work correctly for me though. 
 So there may be some experimenting involved.
-With docx, pandoc will (currently) convert to mathjax for only a certain set of the markdown equation syntax.
+With docx, pandoc will (currently) convert to mathjax as well, and this seems to work only a certain set of the markdown equation syntax that pandoc supports.
+With tables it is Markdown or bust.
+You have to format it in the Markdown table format that pandoc supports.
 
 The good news is that anything you do in \LaTeX, you can do in Markdown and render as a pdf.
-The bad news is you are still writing \LaTeX (although less of it), and you have lost complete html and docx conversion capability.
+This includes equations, tables, citations, images, lists, tikz diagrams etc.
+The bad news is that if you do decide to use \LaTeX syntax, you are still writing \LaTeX (although a lot less of it), and you have lost complete html and docx conversion capability.
 Also, Markdown / Pandoc currently does not support spliting the source document across multiple files.
+This was not as much a deal breaker for me as I thought.
 I've not found this a concern since the markup is pretty light.
-However, for large reports this may be a issue and the workarounds for this that I found were not clean.
+However, for large reports spanning hundreds of pages this may be a issue.
+There are workarounds for this, however they are not perfectly clean.
 
-There are some ways to solve these problems.
+# Bending Markdown
+
+Fortunately, the problems I mentioned in the previous section can be solved using an excellent feature of pandoc.
 Remember the filter argument for pandoc?
 You can use it to parse certain blocks in a custom fashion.
 For most people this is not necessary, but if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.
 There is even a python package called pandocfilters that allows you to walk the AST and parse specific formats or keys. 
 It is very powerful, and can offer unique ways to expand on pandoc's functionality.
 I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this blog.
-You can even write a Haskell filter instead of using Python, but then you will be writing Haskell ;)
+
+In theory, you can write a filter that finds a \LaTeX table block in Markdown, converts it to an image and renders that in Word.
+Or you can write a filter that inputs other files during run time, allowing you to split your source document.
+
+My understanding is that the Python pandocfilters package is limited in scope. 
+You can yield Pandoc's complete power by writing a Haskell filter instead of using Python, but then you will be writing Haskell ;)
 I would tag custom filters that as an advanced feature.
-And as far as I can tell, you can write a complete paper in Markdown and render it in pdf without any custom filters
+Know that they are there when you need them.
 
 # TLDR
 
+You can write a complete paper in Markdown and render it in pdf without any issues.
+I recommend it over \LaTeX and Word.
+
 ![My very scientific comparison of Word, \LaTeX and Markdown](images/learningcurve.png)
 
-If you have gotten this far, congratulations and good luck! 
-Let me know in the comments below if you have any questions.
+If you have gotten this far in the post, congratulations and good luck! 
+Let me know if you have any questions in the comments below.
 
 # References
 
