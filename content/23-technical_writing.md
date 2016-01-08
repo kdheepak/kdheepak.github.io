@@ -9,11 +9,11 @@ alias:/blog/writing-papers-with-markdown
 status:draft
 
 Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
-I figured I'd use this post to dump my workflow and my resources on this topic.
+I figured I'd use this post to write about my workflow and my resources on this topic.
 
 # Why Markdown
 
-Academic writing involves writing down ideas as they come along (notetaking), experimenting with these ideas (data analysis), and finally presenting ideas (scientific paper).
+Academic writing involves writing down ideas as they come along (notetaking), experimenting with these ideas (data analysis), and finally presenting them effectively (scientific paper).
 There's a lot to manage over the length of time this entire process spans.
 Academics require a set of tools that aid in making this process i.e. the effective communication of ideas, as seamless as possible.
 There are currently two popular options for academics seeking to write technical papers - Microsoft Word or $\LaTeX$.
@@ -28,13 +28,15 @@ This is useful since it makes it immediately accessible, thereby decreasing the 
 However, I've found a few fundamental problems with Microsoft Word. 
 
 Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so [@stallman_emacs]).
-However, products like Word, and Word specifically, fail miserably at separating content from formatting.
-These products impose on the writer their own concept of how a document should be formatted, which I've often found greatly hinders the writing process.
+However, products like Word fail miserably at separating content from formatting.
+These products impose on the writer their own concept of how a document should be formatted, which I've found greatly hinders the writing process.
 Have you ever experienced a sudden jump in spacing? 
 Or mismatched formatting after a copy and paste from one part of the document to another? 
-Word will often apply formatting changes seemingly at random and cause indents and bullet points to behave haphazardly.
-These are all typesetting and formatting processes, and these processes distract from the task at hand [^1] - writing!
-These processes should be applied **after** the text is completed.
+Or have indents and bullet points misbehave haphazardly?
+Word seemingly applies formatting changes seemingly at random!
+These are all typesetting and formatting processes and these should be applied **after** the text is completed.
+These processes should not distract from the task at hand [^1] - writing!
+
 
 There are other issues as well.
 Microsoft's ecosystem comes at a price, literally.
@@ -42,61 +44,66 @@ Word is proprietary, and Word's format is a proprietary data format.
 When you use Word, by storing your work in this proprietary software's proprietary data format, you tie yourself down to this particular licensed software for the forseeable future.
 When you use Word, you make the implicit assumption that everyone you work with has the same software on their computer. 
 Word also does not play well with its counterparts on OSX. 
-And by that I mean that with the same content, the document is presented differently depending on which machine you open it on.
+With the same content, the document is presented differently depending on which machine you open it on.
 As far as I know there isn't even a version for Linux machines.
 Heck, Microsoft Word does not even play well with previous versions of Microsoft Word.
-I understand why this issue occurs considering complexity in operating systems and software, but why is this so widely accepted?
-Backward incompatible software or cross incompatiblity are probably inevitable. 
-But as an user this is one more thing that I have to be concerned about.
+I understand why this issue occurs, considering complexity in operating systems and software, but why is this so widely accepted?
+Backward incompatible software or cross incompatibility are probably inevitable. 
+But as an user, I shouldn't have to be concerned about this.
 I shouldn't have to think about what software or what version my reviewers are using when I'm sending them a document.
 And speaking of sharing documents, did you know you can end up transferring malware through a Word document?
 Just think about that for a second. 
-Opening what should be a text file is a security threat for your machine.
+Opening what is essentially a text file could be a security threat for your machine.
 And some of these viruses (as of the time of this writing) do not even have patches yet [@beaumont_bypass_2015].
-People have already talked about this and similar issues at length [@steingold_proprietary, @cottrell_word], and have probably done more justice to this topic that I possibly could.
+Loads of people have already talked about this and similar issues at some length [@steingold_proprietary, @cottrell_word], and have probably done more justice to this topic that I possibly could.
 
-But I hear what you are saying, you have already invested in Microsoft Word and have prescient knowledge to work around this tool's mysterious formatting randomness.
-You use a Windows machine, and everyone around you who you wish to share this document with uses one as well.
-You don't really care if the software you use is proprietary, as long as you can get the job done and you are pretty careful about what links you click. 
-Even if you think all those things, I still feel there is a case to be made about why you should consider dropping Word for your next paper.
+But I hear what you are saying.
+You have already invested in Microsoft Word and have prescient knowledge to work around this tool's mysterious formatting randomness.
+You use a Windows machine, and everyone around you who you wish to share this document with uses a Windows machine as well.
+You don't really care if the software you use is proprietary, as long as you can get the job done.
+And you are pretty careful about what links you click. 
+Even if you agree with all those things, I still feel there is a case to be made about why you should consider dropping Word for your next paper.
 
 * Word is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.
-* There is no good way to permanently save comments or notes in Word, that persist in the final version without affecting the final document.
+* There is no good clean way to permanently save comments or notes in Word, that persist in the final version without affecting how final document looks.
 * Collaborating with other people when using Word requires foresight and planning. 
 * The equation editor painful to use.
-* Word does not work in the workflow for **scientific research papers or reports**
+* Word does not work in the workflow for ***scientific research papers or reports***.
 
 The last point is the reason I dropped using Word entirely.
-Everything that is required for scientific research papers or reports is a mess with Word.
-Word doesn't quite work for notetaking, with principally Orgmode, Evernote or Onenote being most people's preferred solution.
-I personally don't know anyone that decides to keep there notes in Word.
-Word doesn't fit data analysis requirements as well, with tools like Python, R or Excel around.
-I use Emacs / Vim for notetaking and store them in a git repository.
-All of my data analysis is done in a Jupyter Notebook.
+Assuming scientific research papers consist of only 3 steps (if only!) - notetaking, analysis and presentation - Word fails at performing well in any of these steps.
+
+Word doesn't quite work for notetaking, with Org mode, Evernote or Onenote being most people's preferred solution.
+I personally don't know anyone that decides to keep their notes in Word.
+Word doesn't fit data analysis requirements as well, with Python, R or Excel being the go-to tools.
+I use Emacs / Vim for notetaking and store them in a git repository and all of my data analysis is done in a Jupyter Notebook.
 After collecting the required data from an experiment and post processing it, I can save plots into an image or the data into a table in a particular format programmatically using scripts.
 Word however, does not allow me to import these images or tables programmatically.
 Word just does not fit into typical analysis or research workflows.
-To quote Raymond Hettinger, there must be a better way.
+To quote Raymond Hettinger :
+
+![](/images/raymondhettinger.jpg)
 
 
-## $\LaTeX$ - Math is beautiful, and it deserves to be presented beautifully
+## $\LaTeX$ - lah-tekh, lah-tek or lay-tek
 
 Enter $\LaTeX$.
 
-> LaTeX is to a book what a set of blueprints is to a building. [@stackoverflow]
+> LaTeX is to a book what a set of blueprints is to a building. [@_stackoverflow]
 
 $\LaTeX$ is a typesetting system that uses the TeX program and is frequently used in scientific, technical and mathematical papers.
 It is infamous for displaying equations in a manner that looks great.
 
 $$
 \begin{align}
-& \hskip5em & ∇ × \mathcal H & = \frac{\partial{\mathcal D}}{\partial{t}} & \hskip5em \\
-& & -∇ × \mathcal E & = \frac{\partial{\mathcal B}}{\partial{t}} & \\
-& & ∇ · \mathcal B & =0 & & \\
-& & ∇ · \mathcal D & =0 & &
+  \hskip6em \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \hskip6em \\
+  \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+  \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
+  \nabla \cdot \vec{\mathbf{B}} & = 0
 \end{align}
 $$
 
+Math is beautiful, and it deserves to be presented beautifully
 
 $\LaTeX$ is essentially a markup language. 
 Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.
@@ -107,7 +114,7 @@ But most importantly, I have the confidence that my code and documents can survi
 
 The $\LaTeX$ community is great and are very helpful towards beginners.
 There are hundreds of packages that improve upon the functionality that $\LaTeX$ provides.
-There are packages like *TikZ* [@tikz] that allow you to create high resolution print quality detailed diagrams.
+There are packages like *TikZ* that allow you to create high resolution print quality detailed diagrams.
 
 However, $\LaTeX$ does come with a penalty.
 There is a barrier to entry which one must overcome in order to begin using $\LaTeX$.
@@ -142,10 +149,8 @@ Most of the time they are near useless, and sometimes they are even borderline c
 Since it has a heavy markup, I like to compile while writing and read from the compiled version to get a sense of context.
 With practice and experience one can figure out ways to work with $\LaTeX$, but beginners will still have a hard time.
 
-![My very scientific learning curve comparison between Word and LaTeX](/images/learningcurve1.png)
-
 Once you invest the time to learn $\LaTeX$, I can't think of any reason why one would go back to Word. 
-However, if you cannot afford to experiment with this new markup language, is there a better way?
+However, if you cannot afford to experiment with $\LaTeX$, are you resigned to Word?
     
 ## Markdown
 
@@ -167,7 +172,7 @@ The same example as before looks like this in Markdown.
     * The third etc ...
 
 Much better! It's a lot easier to read and a lot easier to write.
-Markdown [@daringfireball] was principally written for the web, to avoid the heavy markup of HTML.
+Markdown, developed by John Gruber, was principally written for the web, to avoid the heavy markup of HTML.
 Tools have been developed to convert Markdown to HTML, PDF and even docx.
 
 The main advantages of Markdown:
@@ -208,7 +213,7 @@ This is what the same table looks like in $\LaTeX$
 However, Markdown does not allow for the level of detailed customization that you can achieve using $\LaTeX$.
 Even a moderately complex table such as the one below currently is not supported by any converter for Markdown.
 
-![Tabular LaTeX example [@wiki_tables]](https://upload.wikimedia.org/wikipedia/commons/e/e1/Latex_example_tabular_cline.svg)
+![Tabular LaTeX example [@_wikibooks]](https://upload.wikimedia.org/wikipedia/commons/e/e1/Latex_example_tabular_cline.svg)
 
 Fortunately there is a solution for this, but before that we need to take a look at how to convert Markdown to the various document formats.
 
@@ -286,7 +291,7 @@ The point here is that because of this pandoc is great at converting from and to
 Pandoc is also constantly under development which is a great thing.
 
 We can use Pandoc to convert a markdown file with content, to a pdf, html or docx file for a technical paper.
-(The docx converter doesn't work great though, blame Microsoft's lack of documentation [@googlegroups_discussion])
+(The docx converter doesn't work great though, blame Microsoft's lack of documentation [@_googlegroups])
 
 First off, you will need `pandoc`. You can get the latest version on their GitHub page [@_github]. 
 You may need `pandoc-citeproc` as well [^2].
@@ -312,27 +317,39 @@ That way you might be able to see an implementation that works better than your 
 
 ## Syntax
 
-Headings
+***Headings***
 
     # Section
     ## Sub Section
     ### Sub Sub Section
 
-Text
+# Section
+## Sub Section
+### Sub Sub Section
+
+***Text***
 
     *italic*
     **bold**
     ***bold-italic***
 
-Link
+*italic*
+**bold**
+***bold-italic***
+
+***Link***
     
     [Text](http://google.com)
 
-Images
-    
-    [Caption](./images/example.png)
+[Text](http://google.com)
 
-Lists
+***Images***
+    
+    [Caption](./images/markdown.png)
+
+![Caption](../images/markdown.png)
+
+***Lists***
 
     * item
     * item
@@ -344,43 +361,78 @@ Lists
         1. item
     1. item
 
-Quotes
+* item
+* item
+    * item
+* item
 
-    > Quotes
+1. item
+1. item
+    1. item
+1. item
 
-Code
+***Quotes***
+
+    > Research is what I'm doing when I don't know what I'm doing. - Wernher von Braun
+
+> Research is what I'm doing when I don't know what I'm doing. - Wernher von Braun
+
+***Code***
     
     `inline code`
 
         Tab space 
         for code block
 
-Footnotes
+`inline code`
+
+    Tab space 
+    for code block
+
+***Footnotes***
 
     Example of a footnote [^3]
 
-Citations
+Example of a footnote [^3]
 
-    This is a very important fact [@example_citation]
+***Citations***
 
-Strikethrough
+    This is a very important fact [@citation_example]
+
+This is a very important fact [@citation_example]
+
+
+***Strikethrough***
 
     ~~Strikethrough text~~
 
+~~Strikethrough text~~
 
-Equations
+***Equations***
 
-    $ \pi $
+    Inline equations $\pi$
 
-    $$ \pi $$
+    Block equations 
 
-Once you have typed all the content, you can use pandoc to convert the document into the format you want.
+    $$
+    \pi
+    $$
+
+Inline equations $\pi$
+
+Block equations 
+
+$$
+\pi
+$$
+
+Once you have typed all the content, you can use `pandoc` to convert the document into the format you want.
 Pandoc uses the output filename extension to figure out what the output file format should be.
 You can also manually specify the output format.
 
     pandoc document.md -o document.pdf
 
-I highly recommend reading pandoc's README [@pandoc_readme]. 
+I highly recommend reading pandoc's README [@_pandoc]. 
 It has loads of examples and you might be able to find what you are looking for by straight up picking an example or by making a minor tweak to it.
 
 With pdf files, you can specify the following
@@ -402,26 +454,34 @@ pandoc allows you to define $\LaTeX$ blocks in the markdown file, which are pass
 LaTeX then processes it to render it correctly.
 However, to HTML and docx, pandoc will remove LaTeX blocks.
 With HTML, you can specify `--mathjax` which will attempt to render LaTeX as mathjax, which works most of the time. 
-This webpage for example is entirely a markdown file, rendered to html using pandoc.
-I have found a few cases where mathjax did not work for me though. 
-With docx, pandoc will (currently) convert to mathjax for only a certain set of markdown equation syntax.
+This webpage for example was generated entirely from a markdown file, rendered to html using pandoc.
+I have found a few cases where mathjax did not work correctly for me though. 
+So there may be some experimenting involved.
+With docx, pandoc will (currently) convert to mathjax for only a certain set of the markdown equation syntax.
 
-The good news is that anything you do in LaTeX, you can do in Markdown and render as a pdf perfectly fine.
+The good news is that anything you do in LaTeX, you can do in Markdown and render as a pdf.
 The bad news is you are still writing LaTeX (although less of it), and you have lost complete html and docx conversion capability.
+Also, Markdown / Pandoc currently does not support spliting the source document across multiple files.
+I've not found this a concern since the markup is pretty light.
+However, for large reports this may be a issue and the workarounds for this that I found were not clean.
 
-Therea are some ways to solve this problem.
-Remember that filter argument for pandoc, you can use it to parse certain blocks in a custom fashion.
+There are some ways to solve these problems.
+Remember the filter argument for pandoc?
+You can use it to parse certain blocks in a custom fashion.
 For most people this is not necessary, but if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.
 There is even a python package called pandocfilters that allows you to walk the AST and parse specific formats or keys. 
 It is very powerful, and can offer unique ways to expand on pandoc's functionality.
-I wrote a pandocfilter [@pandoc_ipynb] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this blog.
+I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this blog.
 You can even write a Haskell filter instead of using Python, but then you will be writing Haskell ;)
 I would tag custom filters that as an advanced feature.
 And as far as I can tell, you can write a complete paper in Markdown and render it in pdf without any custom filters
 
-![Now comparing Markdown](/images/learningcurve2.png)
+# TLDR
 
-If you have gotten this far, congratulations and good luck!
+![My very scientific comparison of Word, $\LaTeX$ and Markdown](/images/learningcurve.png)
+
+If you have gotten this far, congratulations and good luck! 
+Let me know in the comments below if you have any questions.
 
 # References
 
