@@ -15,7 +15,7 @@ I figured I'd use this post to write about my workflow and my resources on this 
 Academic writing involves writing down ideas as they come along (notetaking), experimenting with these ideas (data analysis), and finally presenting them effectively (scientific paper).
 There's a lot to manage over the length of time this entire process spans.
 Academics require a set of tools that aid in making this process i.e. the effective communication of ideas, as seamless as possible.
-There are currently two popular options for academics seeking to write technical papers - Microsoft Word or $\LaTeX$.
+There are currently two popular options for academics seeking to write technical papers - Microsoft Word or \LaTeX
 
 ## A word about Word 
 
@@ -81,16 +81,16 @@ Word however, does not allow me to import these images or tables programmaticall
 Word just does not fit into typical analysis or research workflows.
 To quote Raymond Hettinger :
 
-![](../images/raymondhettinger.jpg)
+![](images/raymondhettinger.jpg)
 
 
-## $\LaTeX$ - lah-tekh, lah-tek or lay-tek
+## \LaTeX - lah-tekh, lah-tek or lay-tek
 
-Enter $\LaTeX$.
+Enter \LaTeX
 
 > LaTeX is to a book what a set of blueprints is to a building. [@_stackoverflow]
 
-$\LaTeX$ is a typesetting system that uses the TeX program and is frequently used in scientific, technical and mathematical papers.
+\LaTeX is a typesetting system that uses the TeX program and is frequently used in scientific, technical and mathematical papers.
 It is infamous for displaying equations in a manner that looks great.
 
 $$
@@ -104,25 +104,25 @@ $$
 
 Math is beautiful, and it deserves to be presented beautifully
 
-$\LaTeX$ is essentially a markup language. 
+\LaTeX is essentially a markup language. 
 Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.
 And since the source document that contains the content is a plain text file, I can use `git` to version control the paper.
 This allows me to track changes and collaborate with others without any additional effort.
 This also lets me work with any editor I want - Vim, Emacs, TeXShop, Lyx.
-But most importantly, I have the confidence that my code and documents can survive possibly forever in its current format. $\LaTeX$ is free. Free as in beer and free as in freedom. 
+But most importantly, I have the confidence that my code and documents can survive possibly forever in its current format. \LaTeX is free. Free as in beer and free as in freedom. 
 
-The $\LaTeX$ community is great and are very helpful towards beginners.
-There are hundreds of packages that improve upon the functionality that $\LaTeX$ provides.
+The \LaTeX community is great and are very helpful towards beginners.
+There are hundreds of packages that improve upon the functionality that \LaTeX provides.
 There are packages like *TikZ* that allow you to create high resolution print quality detailed diagrams.
 
-However, $\LaTeX$ does come with a penalty.
-There is a barrier to entry which one must overcome in order to begin using $\LaTeX$.
+However, \LaTeX does come with a penalty.
+There is a barrier to entry which one must overcome in order to begin using \LaTeX
 Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them.
 
-Personally, I found learning how to use $\LaTeX$ extremely useful, and I didn't think it was difficult. 
+Personally, I found learning how to use \LaTeX extremely useful, and I didn't think it was difficult. 
 Solutions to my initial problems were only a quick Google search away.
 Tables were frustrating at first, but you get the hang of them.
-Equations are a joy to type in $\LaTeX$.
+Equations are a joy to type in \LaTeX
 And the final product looks great!
 
 That said, the markup language is a bit too heavy for notetaking, and not particularly readable.
@@ -142,14 +142,14 @@ Take for example the syntax for a list of items.
       \item The third etc \ldots
     \end{enumerate}
 
-With good IDE's for $\LaTeX$, this could be made acceptable since they may not hinder the writing process. 
-The biggest problem with $\LaTeX$ are probably the error messages.
+With good IDE's for \LaTeX this could be made acceptable since they may not hinder the writing process. 
+The biggest problem with \LaTeX are probably the error messages.
 Most of the time they are near useless, and sometimes they are even borderline cryptic.
 Since it has a heavy markup, I like to compile while writing and read from the compiled version to get a sense of context.
-With practice and experience one can figure out ways to work with $\LaTeX$, but beginners will still have a hard time.
+With practice and experience one can figure out ways to work with \LaTeX but beginners will still have a hard time.
 
-Once you invest the time to learn $\LaTeX$, I can't think of any reason why one would go back to Word. 
-However, if you cannot afford to experiment with $\LaTeX$, are you resigned to Word?
+Once you invest the time to learn \LaTeX I can't think of any reason why one would go back to Word. 
+However, if you cannot afford to experiment with \LaTeX are you resigned to Word?
     
 ## Markdown
 
@@ -181,7 +181,7 @@ The main advantages of Markdown:
 * Portable: documents are cross-platform by nature
 * Flexible: html, pdf, docx, tex are all supported output formats
 
-Markdown is awesome at a set of things, and a much better alternative than Word or $LaTeX$ for those specific set of things.
+Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX for those specific set of things.
 
       Right     Left     Center     Default
     -------     ------ ----------   -------
@@ -191,7 +191,7 @@ Markdown is awesome at a set of things, and a much better alternative than Word 
 
     Table:  Demonstration of simple table syntax.
 
-This is what the same table looks like in $\LaTeX$
+This is what the same table looks like in \LaTeX
 
     \begin{longtable}[c]{@{}rlcl@{}}
     \caption{Demonstration of simple table syntax.}\tabularnewline
@@ -209,7 +209,7 @@ This is what the same table looks like in $\LaTeX$
     \bottomrule
     \end{longtable}
 
-However, Markdown does not allow for the level of detailed customization that you can achieve using $\LaTeX$.
+However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX
 Even a moderately complex table such as the one below currently is not supported by any converter for Markdown.
 
 ![Tabular LaTeX example [@_wikibooks]](https://upload.wikimedia.org/wikipedia/commons/e/e1/Latex_example_tabular_cline.svg)
@@ -294,7 +294,7 @@ We can use Pandoc to convert a markdown file with content, to a pdf, html or doc
 
 First off, you will need `pandoc`. You can get the latest version on their GitHub page [@_github]. 
 You may need `pandoc-citeproc` as well [^2].
-You will also need $\LaTeX$.
+You will also need \LaTeX
 
 I've found that the following python packages are useful.
 
@@ -344,9 +344,9 @@ That way you might be able to see an implementation that works better than your 
 
 ***Images***
     
-    [Caption](../images/markdown.png)
+    [Caption](images/markdown.png)
 
-![Caption](../images/markdown.png)
+![Caption](images/markdown.png)
 
 ***Lists***
 
@@ -449,17 +449,17 @@ Also, I've found the following filters useful.
 * `--filter pandoc-citeproc` : citations
 
 With html and docx files, equations are a bit tricky.
-pandoc allows you to define $\LaTeX$ blocks in the markdown file, which are passed straight through to $\LaTeX$ without any change. 
-LaTeX then processes it to render it correctly.
-However, to HTML and docx, pandoc will remove LaTeX blocks.
-With HTML, you can specify `--mathjax` which will attempt to render LaTeX as mathjax, which works most of the time. 
+pandoc allows you to define \LaTeX blocks in the markdown file, which are passed straight through to \LaTeX without any change. 
+\LaTeX then processes it to render it correctly.
+However, to HTML and docx, pandoc will remove \LaTeX blocks.
+With HTML, you can specify `--mathjax` which will attempt to render \LaTeX as mathjax, which works most of the time. 
 This webpage for example was generated entirely from a markdown file, rendered to html using pandoc.
 I have found a few cases where mathjax did not work correctly for me though. 
 So there may be some experimenting involved.
 With docx, pandoc will (currently) convert to mathjax for only a certain set of the markdown equation syntax.
 
-The good news is that anything you do in LaTeX, you can do in Markdown and render as a pdf.
-The bad news is you are still writing LaTeX (although less of it), and you have lost complete html and docx conversion capability.
+The good news is that anything you do in \LaTeX, you can do in Markdown and render as a pdf.
+The bad news is you are still writing \LaTeX (although less of it), and you have lost complete html and docx conversion capability.
 Also, Markdown / Pandoc currently does not support spliting the source document across multiple files.
 I've not found this a concern since the markup is pretty light.
 However, for large reports this may be a issue and the workarounds for this that I found were not clean.
@@ -477,7 +477,7 @@ And as far as I can tell, you can write a complete paper in Markdown and render 
 
 # TLDR
 
-![My very scientific comparison of Word, $\LaTeX$ and Markdown](../images/learningcurve.png)
+![My very scientific comparison of Word, \LaTeX and Markdown](images/learningcurve.png)
 
 If you have gotten this far, congratulations and good luck! 
 Let me know in the comments below if you have any questions.
