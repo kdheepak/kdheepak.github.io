@@ -10,8 +10,6 @@ import json
 
 def fix_latex_symbol(key, value, format, meta):
 
-    print(key, value, format, meta, file=sys.stderr)
-
     if key == 'RawInline':
         if value[1] == '\\LaTeX':
             return Math({u'c': [], u't': u'InlineMath'}, u'\\LaTeX')
