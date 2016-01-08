@@ -1,12 +1,13 @@
 ---
 title: Writing Technical Papers with Markdown
-date: Sun Dec 20 17:37:56 MST 2015
+date: Sunday, Dec 20th
 tags: markdown, writing
 summary: Use Markdown for Academic writing
 keywords: markdown, vim, writing, academic, scholarly, scientific, papers
 slug: writing-papers-with-markdown
 category: blog
 alias: /blog/writing-papers-with-markdown
+bibliography: blog.bib
 ---
 
 Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
@@ -316,39 +317,35 @@ That way you might be able to see an implementation that works better than your 
 
 ## Syntax
 
-***Headings***
+### ***Headings***
 
     # Section
     ## Sub Section
     ### Sub Sub Section
 
-# Section
-## Sub Section
-### Sub Sub Section
+### ***Text***
 
-***Text***
+    This text is in *italic*. 
+    This text is in **bold**. 
+    And this text is in ***bold-italic***
 
-    *italic*
-    **bold**
-    ***bold-italic***
+This text is in *italic*. 
+This text is in **bold**. 
+And this text is in ***bold-italic***.
 
-*italic*
-**bold**
-***bold-italic***
-
-***Link***
+### ***Link***
     
     [Text](http://google.com)
 
 [Text](http://google.com)
 
-***Images***
+### ***Images***
     
     [Caption](images/markdown.png)
 
 ![Caption](images/markdown.png)
 
-***Lists***
+### ***Lists***
 
     * item
     * item
@@ -370,13 +367,17 @@ That way you might be able to see an implementation that works better than your 
     1. item
 1. item
 
-***Quotes***
+### ***Quotes***
 
-    > Research is what I'm doing when I don't know what I'm doing. - Wernher von Braun
+    > Research is what I'm doing 
+    when I don't know what I'm doing.
+    - Wernher von Braun
 
-> Research is what I'm doing when I don't know what I'm doing. - Wernher von Braun
+> Research is what I'm doing 
+when I don't know what I'm doing. 
+- Wernher von Braun
 
-***Code***
+### ***Code***
     
     `inline code`
 
@@ -388,26 +389,26 @@ That way you might be able to see an implementation that works better than your 
     Tab space 
     for code block
 
-***Footnotes***
+### ***Footnotes***
 
     Example of a footnote [^3]
 
 Example of a footnote [^3]
 
-***Citations***
+### ***Citations***
 
     This is a very important fact [@citation_example]
 
 This is a very important fact [@citation_example]
 
 
-***Strikethrough***
+### ***Strikethrough***
 
     ~~Strikethrough text~~
 
 ~~Strikethrough text~~
 
-***Equations***
+### ***Equations***
 
     Inline equations $\pi$
 
@@ -425,6 +426,8 @@ $$
 \pi
 $$
 
+## Pandoc conversion
+
 Once you have typed all the content, you can use `pandoc` to convert the document into the format you want.
 Pandoc uses the output filename extension to figure out what the output file format should be.
 You can also manually specify the output format.
@@ -438,15 +441,15 @@ With pdf files, you can specify the following
 
 * `--latex-engine=pdflatex` : latex engine
 * `--latex-template=latex.template` : latex template file
-* `--csl=CSLFILE` : citation style sheet
-* `--bibliography=BIBFILE` : bibliography
+* `--filter pandoc-citeproc` : filter to parse citations
+* `--csl=CSLFILE` : define a citation style sheet e.g. ieee.csl
+* `--bibliography=BIBFILE` : look for citations from a bibliography
 
 Also, I've found the following filters useful.
 
 * `--filter pandoc-eqnos` : equation numbers
 * `--filter pandoc-fignos` : figure numbers
 * `--filter pandoc-tablenos` : table numbers
-* `--filter pandoc-citeproc` : citations
 
 With html and docx files, equations are a bit tricky.
 pandoc allows you to define \LaTeX blocks in the markdown file, which are passed straight through to \LaTeX without any change. 
@@ -487,8 +490,6 @@ Let me know in the comments below if you have any questions.
 <div id="refs" class="references">
 </div>
 
-# Footnotes
-
 [^1]: I understand that there are *correct* ways to go about this, but I don't want to be thinking about that while I'm writing.
 [^2]: If you install Pandoc from a package, pandoc-citeproc should come preinstalled. However, if you use a package manager such as `brew` (`brew install pandoc`), you may need to install `pandoc-citeproc` as well. Just run `brew install pandoc-citeproc`.
-[^3]: Now you have to scroll back up. If only there way a way to hyperlink back!
+[^3]: Footnote! If you are viewing the web version, you can continue reading by clicking here ->
