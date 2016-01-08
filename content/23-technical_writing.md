@@ -1,11 +1,13 @@
-title:Writing Technical Papers with Markdown
-date:Sun Dec 20 17:37:56 MST 2015
-tags:markdown, writing
+---
+title: Writing Technical Papers with Markdown
+date: Sun Dec 20 17:37:56 MST 2015
+tags: markdown, writing
 summary: Use Markdown for Academic writing
-keywords:markdown, vim, writing, academic, scholarly, scientific, papers
-slug:writing-papers-with-markdown
-category:blog 
-alias:/blog/writing-papers-with-markdown
+keywords: markdown, vim, writing, academic, scholarly, scientific, papers
+slug: writing-papers-with-markdown
+category: blog
+alias: /blog/writing-papers-with-markdown
+---
 
 Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
 I figured I'd use this post to write about my workflow and my resources on this topic.
@@ -93,14 +95,12 @@ Enter \LaTeX
 \LaTeX is a typesetting system that uses the TeX program and is frequently used in scientific, technical and mathematical papers.
 It is infamous for displaying equations in a manner that looks great.
 
-$$
 \begin{align}
   \hskip6em \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \hskip6em \\
   \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
   \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
   \nabla \cdot \vec{\mathbf{B}} & = 0
 \end{align}
-$$
 
 Math is beautiful, and it deserves to be presented beautifully
 
@@ -212,7 +212,7 @@ This is what the same table looks like in \LaTeX
 However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX
 Even a moderately complex table such as the one below currently is not supported by any converter for Markdown.
 
-![Tabular LaTeX example [@_wikibooks]](https://upload.wikimedia.org/wikipedia/commons/e/e1/Latex_example_tabular_cline.svg)
+![Tabular LaTeX example [@_wikibooks]](images/table.png)
 
 Fortunately there is a solution for this, but before that we need to take a look at how to convert Markdown to the various document formats.
 
