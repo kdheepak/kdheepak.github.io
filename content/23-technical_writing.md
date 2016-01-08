@@ -82,7 +82,7 @@ Word however, does not allow me to import these images or tables programmaticall
 Word just does not fit into typical analysis or research workflows.
 To quote Raymond Hettinger :
 
-![](/images/raymondhettinger.jpg)
+![](../images/raymondhettinger.jpg)
 
 
 ## $\LaTeX$ - lah-tekh, lah-tek or lay-tek
@@ -345,7 +345,7 @@ That way you might be able to see an implementation that works better than your 
 
 ***Images***
     
-    [Caption](./images/markdown.png)
+    [Caption](../images/markdown.png)
 
 ![Caption](../images/markdown.png)
 
@@ -478,7 +478,7 @@ And as far as I can tell, you can write a complete paper in Markdown and render 
 
 # TLDR
 
-![My very scientific comparison of Word, $\LaTeX$ and Markdown](/images/learningcurve.png)
+![My very scientific comparison of Word, $\LaTeX$ and Markdown](../images/learningcurve.png)
 
 If you have gotten this far, congratulations and good luck! 
 Let me know in the comments below if you have any questions.
