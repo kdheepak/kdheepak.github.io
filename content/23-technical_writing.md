@@ -27,7 +27,7 @@ I figured I'd use this post to write about my workflow and my resources on this 
 Academic writing involves writing down ideas as they come along (notetaking), experimenting with these ideas (data analysis), and finally presenting them effectively (scientific paper).
 There's a lot to manage over the length of time this entire process spans.
 Academics require a set of tools that aid in making this process i.e. the effective communication of ideas, as seamless as possible.
-There are currently two popular options for academics seeking to write technical papers - Microsoft Word or \LaTeX
+There are currently two popular options for academics seeking to write technical papers - Microsoft Word or \LaTeX\ .
 
 ## A word about Word 
 
@@ -59,14 +59,13 @@ With the same content, the document is presented differently depending on which 
 As far as I know there isn't even a version for Linux machines.
 Heck, Microsoft Word does not even play well with previous versions of Microsoft Word.
 I understand why this issue occurs, considering complexity in operating systems and software, but why is this so widely accepted?
-Backward incompatible software or cross incompatibility are probably inevitable. 
-But as an user, I shouldn't have to be concerned about this.
-I shouldn't have to think about what software or what version my reviewers are using when I'm sending them a document.
+Backward incompatible software or cross incompatibility are probably inevitable, but as an user, I shouldn't have to be concerned about this.
+I shouldn't have to think about what software or what version of a software my reviewers are using when I'm sending them a document.
 And speaking of sharing documents, did you know you can end up transferring malware through a Word document?
 Just think about that for a second. 
 Opening what is essentially a text file could be a security threat for your machine.
 And some of these viruses (as of the time of this writing) do not even have patches yet [@beaumont_bypass_2015].
-Loads of people have already talked about this and similar issues at some length [@steingold_proprietary, @cottrell_word], and have probably done more justice to this topic that I possibly could.
+Loads of people have already talked about this and similar issues at some length [@steingold_proprietary;@cottrell_word], and have probably done more justice to this topic that I possibly could.
 
 But I hear what you are saying.
 You have already invested in Microsoft Word and have prescient knowledge to work around this tool's mysterious formatting randomness.
@@ -81,8 +80,8 @@ Even if you agree with all those things, I still feel there is a case to be made
 * The equation editor painful to use.
 * Word does not work in the workflow for ***scientific research papers or reports***.
 
-Assuming scientific research papers consist of only 3 steps (if only!) - notetaking, analysis and presentation - Word fails at delivering in any of these steps.
-
+Let us assume that scientific research papers consists of only 3 steps (if only!) - notetaking, analysis and presentation.
+Word fails at delivering at all these tasks.
 Word doesn't quite work for notetaking.
 Org mode, Evernote or Onenote are most people's preferred solution.
 Word doesn't fit data analysis requirements as well, with Python, R or Excel being the go-to tools.
@@ -95,14 +94,15 @@ To quote Raymond Hettinger :
 ![](images/raymondhettinger.jpg)
 
 
-## \LaTeX - lah-tekh, lah-tek or lay-tek
+## \LaTeX\ - lah-tekh, lah-tek or lay-tek
 
-Enter \LaTeX
+Enter \LaTeX\ .
 
-> LaTeX is to a book what a set of blueprints is to a building. [@_stackoverflow]
+> \LaTeX\ is to a book what a set of blueprints is to a building. [@_stackoverflow]
 
-\LaTeX is a typesetting system that uses the TeX program and is frequently used in scientific, technical and mathematical papers.
+\LaTeX\ is a typesetting system that uses the TeX program and is frequently used in scientific, technical and mathematical papers.
 It is infamous for displaying equations in a manner that looks great.
+Math is beautiful, and it deserves to be presented beautifully.
 
 \begin{align}
   \hskip6em \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \hskip6em \\
@@ -111,28 +111,30 @@ It is infamous for displaying equations in a manner that looks great.
   \nabla \cdot \vec{\mathbf{B}} & = 0
 \end{align}
 
-Math is beautiful, and it deserves to be presented beautifully.
-
-\LaTeX is essentially a markup language. 
+\LaTeX\ is essentially a markup language. 
 Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.
-And the source document that contains the content is a plain text file
+For example, the following commands will format the words inside these "functions" as **bold** and *italic* respectively.
+
+    \textbf{bold}
+    \textit{italic}
+
+The source document that contains the content is a plain text file.
 This means I can use `git` to version control the paper.
 This allows me to track changes and collaborate with others without any additional effort.
 This also lets me work with any editor I want - Vim, Emacs, TeXShop, Lyx.
-But most importantly, I have the confidence that my code and documents can survive possibly forever in its current format. \LaTeX is free. Free as in beer and free as in freedom. 
-
-The \LaTeX community is great and are very helpful towards beginners.
-There are hundreds of packages that improve upon the functionality that \LaTeX provides.
+But most importantly, I have the confidence that my code and documents can survive possibly forever in its current format. \LaTeX\ is free. Free as in beer and free as in freedom. 
+The \LaTeX\ community is great and are very helpful towards beginners.
+There are hundreds of packages that improve upon the functionality that \LaTeX\ provides.
 There are packages like *TikZ* that allow you to create high resolution print quality detailed diagrams.
 
-However, \LaTeX does come with a penalty.
-There is a barrier to entry which one must overcome in order to begin using \LaTeX.
+However, \LaTeX\ does come with a penalty.
+There is a barrier to entry which one must overcome in order to begin using \LaTeX\ .
 Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them.
 
-Personally, I found learning how to use \LaTeX extremely useful, and I didn't think it was difficult. 
+Personally, I found learning how to use \LaTeX\ extremely useful, and I didn't think it was difficult. 
 Solutions to my initial problems were only a quick Google search away.
 Tables were frustrating at first, but you get the hang of them over time.
-Equations are a joy to type in \LaTeX.
+Equations are a joy to type in \LaTeX\ .
 And the final product looks great!
 
 That said, the markup language is a bit too heavy for notetaking, and not particularly readable.
@@ -152,14 +154,14 @@ Take for example the syntax for a list of items.
       \item The third etc \ldots
     \end{enumerate}
 
-With good IDE's for \LaTeX this could be made acceptable since they may not hinder the writing process. 
-The biggest problem with \LaTeX are probably the error messages.
+With good IDE's for \LaTeX\ this could be made acceptable, although they still hinder a writer's flow. 
+The biggest problem with \LaTeX\ are probably the error messages.
 Most of the time they are near useless, and sometimes they are even borderline cryptic.
 Since it has a heavy markup, I like to compile while writing and read from the compiled version to get a sense of context.
-With practice and experience one can figure out ways to work with \LaTeX but beginners will still have a hard time.
+With practice and experience one can figure out ways to work with \LaTeX\ but beginners will still have a hard time.
 
-Once you invest the time to learn \LaTeX I can't think of any reason why one would go back to Word. 
-However, if you cannot afford to experiment with \LaTeX are you resigned to Word?
+Once you invest the time to learn \LaTeX\ I can't think of any reason why one would go back to Word. 
+However, if you cannot afford to experiment with \LaTeX\ are you resigned to Word?
 Markdown to the rescue!
     
 ## Markdown
@@ -192,7 +194,7 @@ The main advantages of Markdown:
 * Portable: documents are cross-platform by nature
 * Flexible: html, pdf, docx, tex are all supported output formats
 
-Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX for those specific set of things.
+Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX\ for those specific set of things.
 
       Right     Left     Center     Default
     -------     ------ ----------   -------
@@ -202,7 +204,7 @@ Markdown is awesome at a set of things, and a much better alternative than Word 
 
     Table:  Demonstration of simple table syntax.
 
-This is what the same table looks like in \LaTeX
+This is what the same table looks like in \LaTeX\ .
 
     \begin{longtable}[c]{@{}rlcl@{}}
     \caption{Demonstration of simple table syntax.}\tabularnewline
@@ -220,7 +222,7 @@ This is what the same table looks like in \LaTeX
     \bottomrule
     \end{longtable}
 
-However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX
+However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX\ .
 Even a moderately complex table such as the one below currently is not supported by any converter for Markdown.
 
 ![Tabular LaTeX example [@_wikibooks]](images/table.png)
@@ -305,7 +307,7 @@ We can use Pandoc to convert a markdown file with content, to a pdf, html or doc
 
 First off, you will need `pandoc`. You can get the latest version on their GitHub page [@_github]. 
 You may need `pandoc-citeproc` as well [^2].
-You will also need \LaTeX
+You will also need \LaTeX\ .
 
 I've found that the following python packages are useful.
 
@@ -501,14 +503,14 @@ I've found using Makefiles for recording your past commands and documenting thes
 
 # Cons to using Markdown?
 
-pandoc allows you to define \LaTeX blocks in a markdown file, which are passed straight through to \LaTeX without any change. 
-\LaTeX then processes it and renders it correctly.
+pandoc allows you to define \LaTeX\ blocks in a markdown file, which are passed straight through to \LaTeX\ without any change. 
+\LaTeX\ then processes it and renders it correctly.
 Which means if you want to generate a pdf, you are in luck!
-You have the entire arsenal of \LaTeX commands at your disposal.
+You have the entire arsenal of \LaTeX\ commands at your disposal.
 
-When converting to html or docx files however, pandoc will just choose to remove \LaTeX blocks.
+When converting to html or docx files however, pandoc will just choose to remove \LaTeX\ blocks.
 There is a workaround for equations.
-With HTML, you can specify `--mathjax` which will attempt to render \LaTeX as mathjax, which works most of the time. 
+With HTML, you can specify `--mathjax` which will attempt to render \LaTeX\ as mathjax, which works most of the time. 
 This webpage for example was generated entirely from a markdown file, rendered to html using pandoc.
 I have found a few cases where mathjax did not work correctly for me though. 
 So there may be some experimenting involved.
@@ -516,9 +518,9 @@ With docx, pandoc will (currently) convert to mathjax as well, and this seems to
 With tables it is Markdown or bust.
 You have to format it in the Markdown table format that pandoc supports.
 
-The good news is that anything you do in \LaTeX, you can do in Markdown and render as a pdf.
+The good news is that anything you do in \LaTeX\ , you can do in Markdown and render as a pdf.
 This includes equations, tables, citations, images, lists, tikz diagrams etc.
-The bad news is that if you do decide to use \LaTeX syntax, you are still writing \LaTeX (although a lot less of it), and you have lost complete html and docx conversion capability.
+The bad news is that if you do decide to use \LaTeX\ syntax, you are still writing \LaTeX\ (although a lot less of it), and you have lost complete html and docx conversion capability.
 Also, Markdown / Pandoc currently does not support spliting the source document across multiple files.
 This was not as much a deal breaker for me as I thought.
 I've not found this a concern since the markup is pretty light.
@@ -535,7 +537,7 @@ There is even a python package called pandocfilters that allows you to walk the 
 It is very powerful, and can offer unique ways to expand on pandoc's functionality.
 I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this blog.
 
-In theory, you can write a filter that finds a \LaTeX table block in Markdown, converts it to an image and renders that in Word.
+In theory, you can write a filter that finds a \LaTeX\ table block in Markdown, converts it to an image and renders that in Word.
 Or you can write a filter that inputs other files during run time, allowing you to split your source document.
 
 My understanding is that the Python pandocfilters package is limited in scope. 
@@ -546,9 +548,9 @@ Know that they are there when you need them.
 # TLDR
 
 You can write a complete paper in Markdown and render it in pdf without any issues.
-I recommend it over \LaTeX and Word.
+I recommend it over \LaTeX\ and Word.
 
-![My very scientific comparison of Word, \LaTeX and Markdown](images/learningcurve.png)
+![My very scientific comparison of Word, \LaTeX\ and Markdown](images/learningcurve.png)
 
 If you have gotten this far in the post, congratulations and good luck! 
 Let me know if you have any questions in the comments below.
