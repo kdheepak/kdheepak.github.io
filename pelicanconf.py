@@ -160,6 +160,7 @@ PANDOC_ARGS = [
   #'--number-sections',
   '--bibliography=content/blog.bib',
   '--filter=./convert-ipynb.py',
+  '--filter=./fix-latex-symbol.py',
   '--csl=ieee.csl',
   '--metadata',
   'link-citations=true',
