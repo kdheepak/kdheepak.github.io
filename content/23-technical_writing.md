@@ -354,10 +354,9 @@ With 21 input formats and 37 output formats, it doesn't take long to guess that 
 Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage to convert one format to another^[Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.].
 This is the reason Pandoc is great at converting from and to a wide variety of formats, and why it is potentially easy to support new formats as well.
 Pandoc is also constantly under development. We can use Pandoc to convert a markdown file, to a PDF, HTML or DOCX file for a technical paper.
-(The docx converter doesn't work great though, blame Microsoft's lack of documentation [@_googlegroups])
 
 First off, you will need `pandoc`. You can get the latest version from their GitHub page [@_github].
-You may want `pandoc-citeproc` as well [^2].
+You may want `pandoc-citeproc` as well.[^2] 
 You will also need \LaTeX.
 I've found that the following python packages are useful too.
 
@@ -372,7 +371,7 @@ Alternatively you can create a virtual environment using `conda` with a suitable
 
 There are several people that have shared their complete workflow along with all their resources [@healy_plain;@_writing;@_writing-1;@_academic].
 Mine is available on GitHub [@krishnamurthy_github] as well.
-While someone else's workflow will work for you, I encourage you to start from scratch and crafting your own Makefile.
+While someone else's workflow will work for you, I encourage you to start from scratch and craft your own Makefile.
 That way you will figure out why each item has been added into a workflow, and if that works for you.
 You will also know what to do if (when?) it breaks, and how to fix it.
 Feel free to go through other people's Makefiles to see what they have done, and how you can improve your own.
@@ -574,7 +573,7 @@ With html files, you can specify the following arguments:
 <!-- END SLIDES -->
 
 <!-- BEGIN SLIDES -->
-With docx files unfortunately, you cannot specify a template (at least not at the time of writing this post).
+With docx files unfortunately, you cannot specify a template (at least not at the time of writing this post) [@_googlegroups].
 You can however, specify a reference-docx :
 
 * `--reference-docx=reference.docx` : docx for reference styles
@@ -606,8 +605,23 @@ They allow you reference a figure, equation or table. For example, Equation {@eq
 
 <!-- END SLIDES -->
 
+A paper may be generated using a command as shown below :
+
+    pandoc -s -S --latex-engine=pdflatex \
+    --template=./templates/ieee-latex.template \
+    --filter pandoc-fignos \ 
+    --filter pandoc-eqnos \
+    --filter pandoc-tablenos \
+    --filter pandoc-citeproc \
+    --csl=./styles/ieee.csl \
+    --bibliography=./bib/research.bib \
+    -o ieee-paper.pdf paper.md
+
+
 As you can see, there are a lot of arguments that can be passed to Pandoc.
 I've found using Makefiles for recording your past commands and documenting these instructions extremely useful.
+I've barely scratched the surface with what you can do with Pandoc. 
+I'll update this post with those features if I think they are relevant to writing a paper using Markdown.
 
 <!-- BEGIN SLIDES -->
 
@@ -663,6 +677,7 @@ My understanding is that the Python `pandocfilters` package is limited in scope.
 Alternatively, if you choose to, you can yield Pandoc's complete power by writing a Haskell filter instead of using Python, but then you will be writing Haskell ;)
 
 I would tag the custom filters functionality I've described in this section as an advanced feature.
+I've not had to write my own filter for writing a technical paper (so far).
 Know that they are there when you need them.
 
 <!-- BEGIN SLIDES -->
@@ -670,7 +685,9 @@ Know that they are there when you need them.
 # TLDR
 
 You can write a complete paper in Markdown and render it in PDF without any issues.
-I recommend using Markdown and Pandoc for writing over \LaTeX\ and Word because of its ease of use and its flexibility and versatility {@fig:learningcurve}.
+I recommend using Markdown and Pandoc for writing over \LaTeX\ and Word because of its ease of use and its flexibility and versatility. 
+And if you think Markdown is not cutting it for you, you can always convert it to a Word document or a TEX file and continue using your usual workflow.
+Check out my scientific attempt at describing the space of complexity of document vs difficulty in implementation when using Word, \LaTeX\ and Markdown {@fig:learningcurve}.
 
 ![My very scientific comparison of Word, \LaTeX\ and Markdown](../images/learningcurve.png){#fig:learningcurve}
 
@@ -689,3 +706,4 @@ Let me know if you have any questions in the comments below.
 [^0]: Footnote! If you are viewing the web version, you can continue reading by clicking here ->
 [^1]: I understand that there are *correct* ways to go about it, I just don't want to be thinking about all that while I'm writing.
 [^2]: If you install Pandoc from a package, `pandoc-citeproc` should come pre-installed. However, if you want to use a package manager such as `brew`, you may need to install `pandoc-citeproc` separately as well. Just run `brew install pandoc pandoc-citeproc`.
+
