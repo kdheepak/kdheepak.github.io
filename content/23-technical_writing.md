@@ -17,28 +17,26 @@ Pandoc, LaTeX, Markdown
 
 <!-- BEGIN COMMENT -->
 
-Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. 
+I’ve had several people ask me about Markdown for academic writing recently.
 I figured I'd use this post to write about my workflow and my resources on this topic.
 
 <!-- END COMMENT -->
 
 # Why Markdown
 
-Academic writing involves writing down ideas as they come along (notetaking), experimenting with these ideas (data analysis), and finally presenting them effectively (scientific paper).
-There's a lot to manage over the length of time this entire process spans.
-Academics require a set of tools that aid in making this process i.e. the effective communication of ideas, as seamless as possible.
+Academic writing involves writing down ideas as they come along (notetaking), experimenting with these ideas (data analysis), and finally presenting them effectively (scientific paper), and there's a lot to manage over the length of time this entire process spans.
+
+Academics require a set of tools that aid in making this process, i.e. the effective communication of ideas, as seamless as possible.
 There are currently two popular options for academics seeking to write technical papers - Microsoft Word or \LaTeX\ .
 
 ## A word about Word 
 
 Microsoft Word is ubiquitous when it comes to writing reports. 
 The great thing about Word is that there is almost no barrier to *begin* writing.
-You can incrementally build your skill set after you start using Word.
-This is useful since it makes it immediately accessible, thereby decreasing the time spent on what tool you are using for writing and allowing you to concentrate on the writing itself.
+You can incrementally build your skill in using this tool as and when you are using it.
+This is useful since it makes it immediately accessible, thereby decreasing the time and effort spent on learning how to use a software for writing and allowing you to concentrate on the writing itself.
 
-However, I've found a few fundamental problems with Microsoft Word. 
-
-Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so [@stallman_emacs]).
+However, I've found a few fundamental problems with Microsoft Word. Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so [@stallman_emacs]).
 However, products like Word fail miserably at separating content from formatting.
 These products impose on the writer their own concept of how a document should be formatted, which I've found greatly hinders the writing process.
 Have you ever experienced a sudden jump in spacing? 
@@ -63,16 +61,11 @@ Backward incompatible software or cross incompatibility are probably inevitable,
 I shouldn't have to think about what software or what version of a software my reviewers are using when I'm sending them a document.
 And speaking of sharing documents, did you know you can end up transferring malware through a Word document?
 Just think about that for a second. 
-Opening what is essentially a text file could be a security threat for your machine.
+Opening what should be essentially a text file is a security risk for your machine.
 And some of these viruses (as of the time of this writing) do not even have patches yet [@beaumont_bypass_2015].
 Loads of people have already talked about this and similar issues at some length [@steingold_proprietary;@cottrell_word], and have probably done more justice to this topic that I possibly could.
 
-But I hear what you are saying.
-You have already invested in Microsoft Word and have prescient knowledge to work around this tool's mysterious formatting randomness.
-You use a Windows machine, and everyone around you who you wish to share this document with uses a Windows machine as well.
-You don't really care if the software you use is proprietary, as long as you can get the job done.
-And you are pretty careful about what links you click. 
-Even if you agree with all those things, I still feel there is a case to be made about why you should consider dropping Word for your next paper.
+There is a strong case to be made about why you should consider dropping Word for your next paper.
 
 * Word is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.
 * There is no good clean way to permanently save comments or notes in Word, that persist in the final version without affecting how final document looks.
@@ -88,7 +81,9 @@ Word doesn't fit data analysis requirements as well, with Python, R or Excel bei
 I personally use Emacs / Vim for notetaking and store them in a git repository and all of my data analysis is done in Jupyter Notebooks.
 After collecting the required data from an experiment and post processing it, I can save plots into an image or the data into a table in a particular format programmatically using scripts.
 Word however, does not allow me to import these images or tables programmatically.
-Word just does not fit into typical analysis or research workflows.
+If I did somehow manage to somehow contort my workflow, data and information into this tool, I have absolutely no way of retrieving it. 
+Your final presentation/report/paper will exist confined in this closed source proprietary software.
+Word just does not fit into an analysis or research workflow.
 To quote Raymond Hettinger :
 
 ![](images/raymondhettinger.jpg)
@@ -96,11 +91,11 @@ To quote Raymond Hettinger :
 
 ## \LaTeX\ - lah-tekh, lah-tek or lay-tek
 
-Enter \LaTeX\ .
+There is. Enter \LaTeX\ .
 
 > \LaTeX\ is to a book what a set of blueprints is to a building. [@_stackoverflow]
 
-\LaTeX\ is a typesetting system that uses the TeX program and is frequently used in scientific, technical and mathematical papers.
+\LaTeX\ is a typesetting system and is frequently used in scientific, technical and mathematical papers.
 It is infamous for displaying equations in a manner that looks great.
 Math is beautiful, and it deserves to be presented beautifully.
 
@@ -111,18 +106,25 @@ Math is beautiful, and it deserves to be presented beautifully.
   \nabla \cdot \vec{\mathbf{B}} & = 0
 \end{align}
 
-\LaTeX\ is essentially a markup language. 
+Essentially, \LaTeX\ is a markup language. 
 Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.
-For example, the following commands will format the words inside these "functions" as **bold** and *italic* respectively.
+For example, take a look at the following commands.
 
     \textbf{bold}
     \textit{italic}
 
+These markup will format the words passed into these "functions" as **bold** and *italic* respectively. 
+There are numerous similar functions for different aspects of formatting. 
+A writer can concentrate on writing, without worrying about the typesetting until later.
+
 The source document that contains the content is a plain text file.
-This means I can use `git` to version control the paper.
-This allows me to track changes and collaborate with others without any additional effort.
-This also lets me work with any editor I want - Vim, Emacs, TeXShop, Lyx.
-But most importantly, I have the confidence that my code and documents can survive possibly forever in its current format. \LaTeX\ is free. Free as in beer and free as in freedom. 
+This means you can use `git` to version control the paper.
+This allows one to track changes and collaborate with others without any additional effort.
+This also lets you work with your favourite text editor - Vim, Emacs, Atom. 
+There are even TeX specific ones, such as TeXShop and Lyx.
+
+\LaTeX\ is free. Free as in beer and free as in freedom. 
+This allows me to have the confidence that my code and documents can survive possibly forever in its current format. 
 The \LaTeX\ community is great and are very helpful towards beginners.
 There are hundreds of packages that improve upon the functionality that \LaTeX\ provides.
 There are packages like *TikZ* that allow you to create high resolution print quality detailed diagrams.
@@ -130,7 +132,6 @@ There are packages like *TikZ* that allow you to create high resolution print qu
 However, \LaTeX\ does come with a penalty.
 There is a barrier to entry which one must overcome in order to begin using \LaTeX\ .
 Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them.
-
 Personally, I found learning how to use \LaTeX\ extremely useful, and I didn't think it was difficult. 
 Solutions to my initial problems were only a quick Google search away.
 Tables were frustrating at first, but you get the hang of them over time.
@@ -155,13 +156,13 @@ Take for example the syntax for a list of items.
     \end{enumerate}
 
 With good IDE's for \LaTeX\ this could be made acceptable, although they still hinder a writer's flow. 
-The biggest problem with \LaTeX\ are probably the error messages.
+The biggest problem with \LaTeX\ however are probably the error messages.
 Most of the time they are near useless, and sometimes they are even borderline cryptic.
-Since it has a heavy markup, I like to compile while writing and read from the compiled version to get a sense of context.
 With practice and experience one can figure out ways to work with \LaTeX\ but beginners will still have a hard time.
 
 Once you invest the time to learn \LaTeX\ I can't think of any reason why one would go back to Word. 
-However, if you cannot afford to experiment with \LaTeX\ are you resigned to Word?
+However, if you cannot afford to experiment with \LaTeX\ , are you resigned to Word?
+I don't think so.
 Markdown to the rescue!
     
 ## Markdown
@@ -227,7 +228,10 @@ Even a moderately complex table such as the one below currently is not supported
 
 ![Tabular LaTeX example [@_wikibooks]](images/table.png)
 
-Fortunately there is a solution for this, but before that we need to take a look at how to convert Markdown to the various document formats.
+Markdown by itself may not be as powerful as LaTeX. 
+But its easy to write easy to read syntax and open standard format make it a ideal candidate for writing.
+You can write in Markdown once, and have documents generated in a multitude of formats later - pdf, docx, slides, html etc.
+Let us look at how to convert a Markdown file to other formats.
 
 # Pandoc - A swiss army knife
 
