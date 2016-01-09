@@ -100,7 +100,7 @@ SITE_TITLE_LABEL = "Dheepak Krishnamurthy"
 SITE_SUBTITLE_LABEL = "Engineer & Tinkerer."
 SUMMARY_MAX_LENGTH = 5
 
-STATIC_PATHS = ['theme/images', 'images', 'extra/CNAME']
+STATIC_PATHS = ['blog', 'theme/images', 'images', 'extra/CNAME']
 DIRECT_TEMPLATES = (('index', 'archives', 'blog', 'search', '404'
     ))
 
@@ -161,6 +161,7 @@ PANDOC_ARGS = [
   '--bibliography=content/blog.bib',
   '--filter=./convert-ipynb.py',
   '--filter=./fix-latex-symbol.py',
+  '--filter=./remove_ieeekeywords.py',
   '--csl=ieee.csl',
   '--metadata',
   'link-citations=true',
