@@ -34,6 +34,7 @@ dependencies:
 - python-dateutil=2.4.2=py27_0
 - python.app=1.2=py27_4
 - pytz=2015.7=py27_0
+- pyyaml=3.11=py27_1
 - pyzmq=15.1.0=py27_0
 - qt=4.8.7=1
 - qtconsole=4.1.1=py27_0
@@ -50,6 +51,7 @@ dependencies:
 - tornado=4.3=py27_0
 - traitlets=4.0.0=py27_0
 - wheel=0.26.0=py27_1
+- yaml=0.1.6=0
 - zeromq=4.1.3=0
 - zlib=1.2.8=0
 - pip:
