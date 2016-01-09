@@ -11,6 +11,10 @@ bibliography: blog.bib
 abstract: Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. I figured I'd use this post to write about my workflow and my resources on this topic.
 ---
 
+<!-- BEGIN SLIDESNOHEADER -->
+
+<!-- END SLIDES -->
+
 \begin{IEEEkeywords}
 Pandoc, LaTeX, Markdown
 \end{IEEEkeywords}
@@ -24,7 +28,7 @@ I figured I'd use this post to write about my workflow and my resources on this 
 
 # Why Markdown
 
-<!-- BEGIN SLIDES -->
+<!-- BEGIN SLIDESNOHEADER -->
 
 Academic writing involves : 
 
@@ -84,7 +88,9 @@ I think there is a strong case to be made about why you should consider dropping
 * there is no clean way to permanently save comments or notes, that persist in the final version without affecting how final document looks.
 * collaborating with other people requires foresight and planning.
 * the equation editor painful to use.
-<!-- BEGIN SLIDES -->
+
+<!-- BEGIN SLIDESNOHEADER -->
+
 * Word does not work in the workflow for **scientific research papers or reports**.
 
 <!-- END SLIDES -->
@@ -100,14 +106,19 @@ Word however, does not allow me to import these images or tables programmaticall
 If I did somehow manage to contort my workflow and store my data and information in this software, I have absolutely no way of retrieving it.
 The final presentation/report/paper, information and data will exist confined in this closed source proprietary software.
 Word just does not fit into an analysis or research workflow.
-<!-- BEGIN SLIDES -->
 To quote Raymond Hettinger :
 
-![](../images/raymondhettinger.jpg)
+<!-- BEGIN SLIDES -->
+
+![Raymond Hettinger](../images/raymondhettinger.jpg)
+
+<!-- END SLIDES -->
+
+<!-- BEGIN SLIDES -->
 
 ## \LaTeX\ - lah-tekh, lah-tek or lay-tek
 
-There is. Enter \LaTeX.
+Enter \LaTeX.
 
 > \LaTeX\ is to a book what a set of blueprints is to a building. [@_stackoverflow]
 
@@ -128,13 +139,20 @@ Math is beautiful, and it deserves to be presented beautifully.
 
 Essentially, \LaTeX\ is a markup language.
 Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.
+
+<!-- END SLIDES -->
+
+<!-- BEGIN SLIDES -->
+
 For example, take a look at the following commands.
 
     \textbf{bold}
     \textit{italic}
 
 This markup will format the words passed into these "functions" as **bold** and *italic* respectively.
+
 <!-- END SLIDES -->
+
 There are numerous similar functions for different aspects of formatting.
 This allows you to concentrate on writing, without worrying about the typesetting until later.
 
@@ -163,10 +181,10 @@ Tables were frustrating at first, but you get the hang of them over time.
 Equations are a joy to type in \LaTeX.
 And the final product looks great!
 
-<!-- BEGIN SLIDES -->
-
 That said, the markup language is a bit too heavy for notetaking, and not particularly readable.
 For example, take a look at the syntax for a creating a section, a subsection and list of items with some bold and italic elements.
+
+<!-- BEGIN SLIDES -->
 
     \section{Section Name}
     This is text in the section
@@ -227,9 +245,10 @@ The main advantages of Markdown:
 * Flexible: HTML, PDF, DOCX, TEX are all supported output formats
 
 Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX\ for those specific set of things.
-Take for example this table {@tbl:table}.
+Take for example this table {@tbl:table}. 
+
 <!-- BEGIN SLIDES -->
-This is the syntax for the table in Markdown.
+
 
       Right     Left     Center     Default
     -------     ------ ----------   -------
@@ -273,19 +292,25 @@ Even a moderately complex table such as the one below is not supported (currentl
 
 <!-- END SLIDES -->
 
+<!-- BEGIN SLIDES -->
+
 Markdown may not be as powerful as \LaTeX, but its easy to write easy to read syntax, open standard format and a strong backing from the community make it a ideal candidate for writing.
 It has the advantages of Word (ease of use) and \LaTeX\ (excellent typesetting) for output formats.
 Also there is the added advantage of only having to write in Markdown once, and have documents generated in a multitude of formats later - PDF, DOCX, slides, HTML etc.
 
+<!-- END SLIDES -->
+
 I hope that by now you are convinced that Markdown is a great tool for writing.
 In the following sections we will look at how to convert a Markdown file to other formats, and what are some potential limitations and how you might overcome them.
 
-<!-- BEGIN SLIDES -->
+<!-- BEGIN SLIDESNOHEADER -->
+
 # Pandoc - A "swiss army knife"
 
-Pandoc is a software tool written in Haskell that can convert a document from just about any format to just about any other format.
-<!-- END SLIDES -->
+Pandoc is a software tool written in Haskell that can convert a document from just about any format to just about any other format. 
 And works really well.
+
+<!-- END SLIDES -->
 
 Input formats :
 
@@ -543,7 +568,9 @@ Once you have typed all the content, you can use the `pandoc` command to convert
 Pandoc uses the output filename extension to figure out what the output file format should be.
 Btw, Pandoc is a command line tool only.
 You will have to use the command line for any conversion.
-<!-- BEGIN SLIDES -->
+
+<!-- BEGIN SLIDESNOHEADER -->
+
 To generate a PDF file :
 
     pandoc document.md -o document.pdf
@@ -558,6 +585,7 @@ Check out pandoc's README [@_pandoc].
 It has loads of examples and you might be able to find what you are looking for by straight up picking an example or by making a minor tweak to it.
 
 <!-- BEGIN SLIDES -->
+
 With PDF files, you can specify the following additional arguments :
 
 * `--latex-engine=pdflatex` : latex engine
@@ -566,7 +594,9 @@ With PDF files, you can specify the following additional arguments :
 <!-- END SLIDES -->
 
 This allows you to define a \LaTeX\ template to use. By default, `pandoc` uses a built in template.
+
 <!-- BEGIN SLIDES -->
+
 With html files, you can specify the following arguments:
 
 * `--template=html.template` : html template file
@@ -625,7 +655,7 @@ I've found using Makefiles for recording your past commands and documenting thes
 I've barely scratched the surface with what you can do with Pandoc. 
 I'll update this post with those features if I think they are relevant to writing a paper using Markdown.
 
-<!-- BEGIN SLIDES -->
+<!-- BEGIN SLIDESNOHEADER -->
 
 # Downside to using Markdown?
 
@@ -645,27 +675,33 @@ With DOCX, you can pass in the `--mathjax` flag, and Pandoc will convert it to W
 In the case of tables, it is Markdown or bust.
 You have to format it in the Markdown table format that pandoc supports if you want a HTML or DOCX output.
 
-<!-- BEGIN SLIDES -->
+<!-- BEGIN SLIDESNOHEADER -->
 
 The good news is that anything you do in \LaTeX, you can do in Markdown and render as a PDF.
 This includes equations, tables, citations, references, images, lists, tikz diagrams etc.
 The bad news is that if you do decide to use \LaTeX\ syntax, you are still writing \LaTeX\ (although a lot less of it), and you have lost complete HTML and DOCX conversion capability.
+
 <!-- END SLIDES -->
+
 Also, Markdown / Pandoc does not support splitting the source document across multiple files.
 This was not as much a deal breaker for me, since the markup is pretty light and having it all in a single file is fine for a technical paper.
 However, for large reports extending hundreds of pages this may be a issue.
 There are workarounds for this (see next section), however they may be a bit of a hassle.
 
-<!-- BEGIN SLIDES -->
+<!-- BEGIN SLIDESNOHEADER -->
 
 # Bending Markdown to your will
 
 Fortunately, some of the problems I mentioned in the previous section can be solved using an excellent feature of Pandoc - filters!
+
 <!-- END SLIDES -->
+
 You can write your own custom filter, and you can use it to parse certain blocks in a custom fashion.
 For most people this will not be necessary since Pandoc is feature complete, and when a specific need arises^[The features for references for figures, equations and tables are all python `pandocfilters` packages written by the one person [@duck_github]. There is a two year long standing discussion on cross references [@_pandoc-1] that the curious reader is referred to.] the community has often provided a custom filter that does the job.
 But if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.
+
 <!-- BEGIN SLIDES -->
+
 There is even a python package called `pandocfilters` that allows you to walk the AST and parse specific formats or keys.
 It is very powerful, and can offer unique ways to expand on pandoc's functionality.
 I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this [post](http://kdheepak.com/blog/active-reactive-and-apparent-power.html).
@@ -682,14 +718,18 @@ I would tag the custom filters functionality I've described in this section as a
 I've not had to write my own filter for writing a technical paper (so far).
 Know that they are there when you need them.
 
-<!-- BEGIN SLIDES -->
+<!-- BEGIN SLIDESNOHEADER -->
 
 # TLDR
+
+<!-- END SLIDES -->
 
 You can write a complete paper in Markdown and render it in PDF without any issues.
 I recommend using Markdown and Pandoc for writing over \LaTeX\ and Word because of its ease of use and its flexibility and versatility. 
 And if you think Markdown is not cutting it for you, you can always convert it to a Word document or a TEX file and continue using your usual workflow.
 Check out my attempt at describing the space of complexity of document vs difficulty in implementation when using Word, \LaTeX\ and Markdown in Fig. {@fig:learningcurve}.
+
+<!-- BEGIN SLIDESNOHEADER -->
 
 ![My very scientific comparison of Word, \LaTeX\ and Markdown](../images/learningcurve.png){#fig:learningcurve}
 
