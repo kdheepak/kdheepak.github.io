@@ -1,6 +1,6 @@
 ---
 title: Writing Technical Papers with Markdown
-date: Sunday, Dec 20th
+date: Sunday, Dec 20th 2015
 tags: markdown, writing
 summary: Use Markdown for Academic writing
 keywords: markdown, vim, writing, academic, scholarly, scientific, papers
@@ -12,7 +12,7 @@ abstract: Recently, I’ve had several people ask me about the Markdown workflow
 ---
 
 \begin{IEEEkeywords}
-Pandoc, LaTeX, Markdown 
+Pandoc, LaTeX, Markdown
 \end{IEEEkeywords}
 
 <!-- BEGIN COMMENT -->
@@ -29,9 +29,9 @@ Academic writing involves writing down ideas as they come along (notetaking), ex
 Academics require a set of tools that aid in making this process, i.e. the effective communication of ideas, as seamless as possible.
 There are currently two popular options for academics seeking to write technical papers - Microsoft Word or \LaTeX.
 
-## A word about Word 
+## A word about Word
 
-Microsoft Word is ubiquitous when it comes to writing reports. 
+Microsoft Word is ubiquitous when it comes to writing reports.
 The great thing about Word is that there is almost no barrier to *begin* writing.
 You can incrementally build your skill in using this tool as and when you are using it.
 This is useful since it makes it immediately accessible, thereby decreasing the time and effort spent on learning how to use a software for writing and allowing you to concentrate on the writing itself.
@@ -39,8 +39,8 @@ This is useful since it makes it immediately accessible, thereby decreasing the 
 However, I've found a few fundamental problems with Microsoft Word. Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so [@stallman_emacs]).
 However, products like Word fail miserably at separating content from formatting.
 These products impose on the writer their own concept of how a document should be formatted, which I've found greatly hinders the writing process.
-Have you ever experienced a sudden jump in spacing? 
-Or mismatched formatting after a copy and paste from one part of the document to another? 
+Have you ever experienced a sudden jump in spacing?
+Or mismatched formatting after a copy and paste from one part of the document to another?
 Or have indents and bullet points misbehave haphazardly?
 Word applies these formatting changes seemingly at random!
 These are all typesetting and formatting processes and these should be applied **after** the text is completed.
@@ -51,8 +51,8 @@ There are other issues as well.
 Microsoft's ecosystem comes at a price, literally.
 Word is proprietary, and Word's format is a proprietary data format.
 When you use Word, by storing your work in this proprietary software's proprietary data format, you tie yourself down to this particular licensed software for the forseeable future.
-You also make the implicit assumption that everyone you work with has the same software on their computer. 
-Word also does not play well with its counterparts on OSX. 
+You also make the implicit assumption that everyone you work with has the same software on their computer.
+Word also does not play well with its counterparts on OSX.
 With the same content, the document is presented differently depending on which machine you open it on.
 As far as I know there isn't even a version for Linux machines.
 Heck, Microsoft Word does not even play well with previous versions of Microsoft Word.
@@ -60,7 +60,7 @@ I understand why this issue occurs, considering the complexity in operating syst
 Backward incompatible software or cross incompatibility are probably inevitable, but as an user, I shouldn't have to be concerned about this.
 I shouldn't have to think about what software or what version of a software my reviewers are using when I'm sending them a document.
 And speaking of sharing documents, did you know you can end up transferring malware through a Word document?
-Just think about that for a second. 
+Just think about that for a second.
 Opening what should be essentially a text file is a security risk for your machine.
 And some of these viruses (as of the time of this writing) do not even have patches yet [@beaumont_bypass_2015].
 Loads of people have already talked about this and similar issues at some length [@steingold_proprietary;@cottrell_word], and have probably done more justice to this topic that I possibly could.
@@ -70,7 +70,7 @@ I think there is a strong case to be made about why you should consider dropping
 
 * it is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.
 * there is no clean way to permanently save comments or notes, that persist in the final version without affecting how final document looks.
-* collaborating with other people requires foresight and planning. 
+* collaborating with other people requires foresight and planning.
 * the equation editor painful to use.
 * Word does not work in the workflow for **scientific research papers or reports**.
 
@@ -82,7 +82,7 @@ Word doesn't fit data analysis requirements as well, with Python, R or Excel bei
 I personally use Emacs / Vim for notetaking and store them in a git repository and all of my data analysis is done in Jupyter Notebooks.
 After collecting the required data from an experiment and post-processing it, I can save plots into an image or the data into a table in a particular format programmatically using scripts.
 Word however, does not allow me to import these images or tables programmatically.
-If I did somehow manage to contort my workflow, data and information to using this tool, I have absolutely no way of retrieving it. 
+If I did somehow manage to contort my workflow, data and information to using this tool, I have absolutely no way of retrieving it.
 Your final presentation/report/paper, information and data will exist confined in this closed source proprietary software.
 Word just does not fit into an analysis or research workflow.
 To quote Raymond Hettinger :
@@ -107,25 +107,25 @@ Math is beautiful, and it deserves to be presented beautifully.
   \nabla \cdot \vec{\mathbf{B}} & = 0
 \end{align}
 
-Essentially, \LaTeX\ is a markup language. 
+Essentially, \LaTeX\ is a markup language.
 Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.
 For example, take a look at the following commands.
 
     \textbf{bold}
     \textit{italic}
 
-These markup will format the words passed into these "functions" as **bold** and *italic* respectively. 
-There are numerous similar functions for different aspects of formatting. 
+These markup will format the words passed into these "functions" as **bold** and *italic* respectively.
+There are numerous similar functions for different aspects of formatting.
 A writer can concentrate on writing, without worrying about the typesetting until later.
 
 The source document that contains the content is a plain text file.
 This means you can use `git` to version control the paper.
 This allows one to track changes and collaborate with others without any additional effort.
-This also lets you work with your favourite text editor - Vim, Emacs, Atom. 
+This also lets you work with your favourite text editor - Vim, Emacs, Atom.
 There are even TeX specific ones, such as TeXShop and Lyx.
 
-\LaTeX\ is free. Free as in beer and free as in freedom. 
-This allows me to have the confidence that my code and documents can survive possibly forever in its current format. 
+\LaTeX\ is free. Free as in beer and free as in freedom.
+This allows me to have the confidence that my code and documents can survive possibly forever in its current format.
 The \LaTeX\ community is great and are very helpful towards beginners.
 There are hundreds of packages that improve upon the functionality that \LaTeX\ provides.
 There are packages like *TikZ* that lets you to create high resolution print quality detailed diagrams.
@@ -133,7 +133,7 @@ There are packages like *TikZ* that lets you to create high resolution print qua
 However, \LaTeX\ does come with a penalty.
 There is a barrier to entry which one must overcome in order to begin using \LaTeX.
 Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them.
-Personally, I found learning how to use \LaTeX\ extremely useful, and I didn't think it was difficult. 
+Personally, I found learning how to use \LaTeX\ extremely useful, and I didn't think it was difficult.
 Solutions to my initial problems were only a quick Google search away.
 Tables were frustrating at first, but you get the hang of them over time.
 Equations are a joy to type in \LaTeX.
@@ -156,25 +156,25 @@ Take for example the syntax for a creating a section, a subsection and list of i
       \item The third etc \ldots
     \end{enumerate}
 
-With good IDE's for \LaTeX\ this could be made acceptable, although they still hinder a writer's flow. 
+With good IDE's for \LaTeX\ this could be made acceptable, although they still hinder a writer's flow.
 The biggest problem with \LaTeX\ however are probably the error messages.
 Most of the time they are near useless, and sometimes they are even borderline cryptic.
 With practice and experience one can figure out ways to work with \LaTeX\ but beginners will still have a hard time.
 
-Once you invest the time to learn \LaTeX\ I can't think of any reason why you would go back to Word. 
+Once you invest the time to learn \LaTeX\ I can't think of any reason why you would go back to Word.
 However, if you cannot afford to experiment with \LaTeX, are you resigned to Word?
 I don't think so.
 Markdown to the rescue!
-    
+
 ## Markdown
 
-Markdown is a very lightweight easy-to-read easy-to-write plain text markup language. 
+Markdown is a very lightweight easy-to-read easy-to-write plain text markup language.
 The same example as before looks like this in Markdown.
 
     # Section Name
-    
+
     This is text in the section
-    
+
     ## Sub Section Name
 
     The following is a list in this subsection
@@ -194,9 +194,11 @@ The main advantages of Markdown:
 * Easy: the syntax is simple
 * Fast: the simple formatting saves time and speeds up workflows of writers
 * Portable: documents are cross-platform by nature
-* Flexible: html, pdf, docx, tex are all supported output formats
+* Flexible: HTML, PDF, DOCX, TEX are all supported output formats
 
 Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX\ for those specific set of things.
+Take for example this table {@tbl:table}.
+This is the syntax for the table in Markdown.
 
       Right     Left     Center     Default
     -------     ------ ----------   -------
@@ -225,18 +227,23 @@ This is what the same table looks like in \LaTeX.
     \end{longtable}
 
 However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX.
-Even a moderately complex table such as the one below currently is not supported by any Markdown.
+Even a moderately complex table such as the one below is currently not supported by any Markdown.
 
 ![Tabular LaTeX example [@_wikibooks]](../images/table.png)
 
-Markdown by itself may not be as powerful as \LaTeX. 
+Markdown by itself may not be as powerful as \LaTeX.
 But its easy to write easy to read syntax, open standard format and a strong backing from the community make it a ideal candidate for writing.
-You can write in Markdown once, and have documents generated in a multitude of formats later - pdf, docx, slides, html etc.
-Let us look at how to convert a Markdown file to other formats.
+It has the advantages of Word (ease of use) and \LaTeX\ (excellent typesetting) for output formats.
+Also there is the added advantage of only having to write in Markdown once, and have documents generated in a multitude of formats later - PDF, DOCX, slides, HTML etc.
+
+I hope that by now you are convinced that Markdown is a great tool for writing.
+Let us now look at how to convert a Markdown file to other formats.
+If you were still hesitant, you won't be after you take a look at how easy it is to convert Markdown to any format you like.
 
 # Pandoc - A "swiss army knife"
 
-Pandoc is a software tool written in Haskell that can convert a document from just about any format to just about any other format, and works really well.
+Pandoc is a software tool written in Haskell that can convert a document from just about any format to just about any other format.
+And works really well.
 
 Input formats :
 
@@ -307,10 +314,10 @@ Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage t
 The point here is that because of this pandoc is great at converting from and to a wide variety of formats.
 Pandoc is also constantly under development which is a great thing.
 
-We can use Pandoc to convert a markdown file with content, to a pdf, html or docx file for a technical paper.
+We can use Pandoc to convert a markdown file with content, to a PDF, HTML or DOCX file for a technical paper.
 (The docx converter doesn't work great though, blame Microsoft's lack of documentation [@_googlegroups])
 
-First off, you will need `pandoc`. You can get the latest version on their GitHub page [@_github]. 
+First off, you will need `pandoc`. You can get the latest version from their GitHub page [@_github].
 You may need `pandoc-citeproc` as well [^2].
 You will also need \LaTeX.
 
@@ -322,13 +329,13 @@ I've found that the following python packages are useful.
 - `pandoc-tablenos`
 - `pandocfilters`
 
-You can run `pip install <package-name>`. 
+You can run `pip install <package-name>`.
 Alternatively you can create a virtual environment using `conda` with a suitable environment file [@krishnamurthy_github], which is the approach I recommend [@krishnamurthy_using].
 
-There are several people that have shared their complete workflow along with all their resources [@healy_plain;@_writing;@_writing-1;@_academic]. 
+There are several people that have shared their complete workflow along with all their resources [@healy_plain;@_writing;@_writing-1;@_academic].
 Mine is available on GitHub [@krishnamurthy_github] as well.
-While someone else's workflow will work for you, I highly recommend starting from scratch and crafting your own Makefile. 
-That way you will figure out why each item has been added into a workflow, and if that works for you. 
+While someone else's workflow will work for you, I highly recommend starting from scratch and crafting your own Makefile.
+That way you will figure out why each item has been added into a workflow, and if that works for you.
 You will also know what to do if (when?) it breaks, and how to fix it.
 I also highly recommend going through other people's Makefiles to see what they have done.
 That way you might be able to see an implementation that works better than your own.
@@ -347,18 +354,18 @@ I've not provided an example here to avoid messing with this document's headings
 
 ### ***Text***
 
-    This text is in *italic*. 
-    This text is in **bold**. 
+    This text is in *italic*.
+    This text is in **bold**.
     And this text is in ***bold-italic***
 
 **Example**
 
-This text is in *italic*. 
-This text is in **bold**. 
+This text is in *italic*.
+This text is in **bold**.
 And this text is in ***bold-italic***.
 
 ### ***Link***
-    
+
     [Text](http://google.com)
 
 **Example**
@@ -366,7 +373,7 @@ And this text is in ***bold-italic***.
 [Text](http://google.com)
 
 ### ***Images***
-    
+
     [Caption](../images/markdown.png)
 
 **Example**
@@ -399,28 +406,28 @@ And this text is in ***bold-italic***.
 
 ### ***Quotes***
 
-    > Research is what I'm doing 
+    > Research is what I'm doing
     when I don't know what I'm doing.
     - Wernher von Braun
 
 **Example**
 
-> Research is what I'm doing 
-when I don't know what I'm doing. 
+> Research is what I'm doing
+when I don't know what I'm doing.
 - Wernher von Braun
 
 ### ***Code***
-    
+
     `inline code`
 
-        Tab space 
+        Tab space
         for code block
 
 **Example**
 
 `inline code`
 
-    Tab space 
+    Tab space
     for code block
 
 ### ***Tables***
@@ -431,7 +438,7 @@ when I don't know what I'm doing.
         123     123       123          123
           1     1          1             1
 
-    Table:  Demonstration of simple table syntax.
+    Table:  Demonstration of simple table syntax. {#tbl:table}
 
 **Example**
 
@@ -441,7 +448,7 @@ when I don't know what I'm doing.
     123     123       123          123
       1     1          1             1
 
-Table:  Demonstration of simple table syntax.
+Table:  Demonstration of simple table syntax. {#tbl:table}
 
 ### ***Footnotes***
 
@@ -472,46 +479,46 @@ This is a very important fact [@citation_example]
 
     Inline equations $\pi$
 
-    Block equations 
+    Block equations
 
     $$
     \pi
-    $$
+    $$ {#eq:pi}
 
 **Example**
 
 Inline equations $\pi$
 
-Block equations 
+Block equations
 
 $$
 \pi
-$$
+$$ {#eq:pi}
 
 ## Pandoc conversion
 
 Once you have typed all the content, you can use the `pandoc` command to convert the document into the format you want.
 Pandoc uses the output filename extension to figure out what the output file format should be.
-Btw, Pandoc is a command line tool only. 
+Btw, Pandoc is a command line tool only.
 So you will have to use the command line for any conversion.
 
     pandoc document.md -o document.pdf
 
-I highly recommend reading pandoc's README [@_pandoc]. 
+I highly recommend reading pandoc's README [@_pandoc].
 It has loads of examples and you might be able to find what you are looking for by straight up picking an example or by making a minor tweak to it.
 
-With pdf files, you can specify the following
+With PDF files, you can specify the following :
 
 * `--latex-engine=pdflatex` : latex engine
 * `--latex-template=latex.template` : latex template file
 
-With html files, you can specify the following
+With html files, you can specify the following :
 
 * `--template=html.template` : html template file
 * `--css=cssfile.css` : css file
 
 With docx files unfortunately, you cannot specify a template (at the time of writing this post).
-You can however, specify a reference-docx, which might do the job
+You can however, specify a reference-docx :
 
 * `--reference-docx=reference.docx` : docx for reference styles
 
@@ -521,7 +528,7 @@ These are additional arguments that allow you to use citations when writing acad
 * `--csl=CSLFILE` : define a citation style sheet e.g. ieee.csl
 * `--bibliography=BIBFILE` : look for citations from a bibliography
 
-Pandoc will find the appropriate citation from a .bib file and add it to your Bibliography according to the style sheet you specify. 
+Pandoc will find the appropriate citation from a .bib file and add it to your Bibliography according to the style sheet you specify.
 It works great and I've had no issues with it so far.
 
 Also, I've found the following filters useful.
@@ -530,29 +537,30 @@ Also, I've found the following filters useful.
 * `--filter pandoc-fignos` : figure numbers
 * `--filter pandoc-tablenos` : table numbers
 
+They allow you reference a figure, equation or table. For example Equation {@eq:pi} is an example of a block equation in Markdown.
+
 As you can see, there are a lot of arguments that can be passed to Pandoc.
 I've found using Makefiles for recording your past commands and documenting these instructions extremely useful.
 
 # Downside to using Markdown?
 
-Pandoc allows you to define \LaTeX\ blocks in a markdown file, which are passed straight through to \LaTeX\ without any change. 
+Pandoc allows you to define \LaTeX\ blocks in a markdown file, which are passed straight through to \LaTeX\ without any change.
 \LaTeX\ then processes it and renders it correctly.
-Which means if you want to generate a pdf, you are in luck!
+Which means if you want to generate a PDF, you are in luck!
 You have the entire arsenal of \LaTeX\ commands at your disposal.
 
-However, when converting to html or docx files, pandoc will just choose to remove \LaTeX\ blocks.
+However, when converting to html or docx files, pandoc will choose to remove \LaTeX\ blocks.
 There is a workaround for equations.
-You can specify `--mathjax` which will attempt to render \LaTeX\ as mathjax, which works most of the time. 
+You can specify `--mathjax` and force Pandoc to attempt to render \LaTeX\ as mathjax, which works most of the time.
 This page for example was generated entirely from a markdown file, rendered to html using pandoc.
-I have found a few cases where mathjax did not work correctly for me.
-So there may be some experimenting involved.
-With DOCX, pandoc will (currently) convert to mathjax and then to Word's equation editor format, but this seems to work only with the certain set of the markdown equation syntax that pandoc supports.
+I have found a few cases where mathjax did not work correctly for me, so there may be some experimenting involved.
+With DOCX, you can pass in the `--mathjax` flag, and Pandoc will convert it to Word's equation editor format, but this seems to work only with the certain set of the markdown equation syntax that pandoc supports.
 In the case of tables, it is Markdown or bust.
 You have to format it in the Markdown table format that pandoc supports if you want a HTML or DOCX output.
 
-The good news is that anything you do in \LaTeX, you can do in Markdown and render as a pdf.
+The good news is that anything you do in \LaTeX, you can do in Markdown and render as a PDF.
 This includes equations, tables, citations, references, images, lists, tikz diagrams etc.
-The bad news is that if you do decide to use \LaTeX\ syntax, you are still writing \LaTeX\ (although a lot less of it), and you have lost complete html and docx conversion capability.
+The bad news is that if you do decide to use \LaTeX\ syntax, you are still writing \LaTeX\ (although a lot less of it), and you have lost complete HTML and DOCX conversion capability.
 Also, Markdown / Pandoc (currently) does not support splitting the source document across multiple files.
 This was not as much a deal breaker for me, since the markup is pretty light and having it all in a single file is fine for a technical paper.
 However, for large reports extending hundreds of pages this may be a issue.
@@ -565,14 +573,14 @@ Remember the filter argument for pandoc?
 You can write your own custom filter, and you can use it to parse certain blocks in a custom fashion.
 For most people this will not be necessary since Pandoc is feature compelete and constantly being developed
 But if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.
-There is even a python package called `pandocfilters` that allows you to walk the AST and parse specific formats or keys. 
+There is even a python package called `pandocfilters` that allows you to walk the AST and parse specific formats or keys.
 It is very powerful, and can offer unique ways to expand on pandoc's functionality.
-I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this blog.
+I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this [post](kdheepak.com/blog/active-reactive-and-apparent-power.html).
 
 In theory, you can write a filter that finds a \LaTeX\ table block in Markdown, converts it to an image and renders that in Word.
 Or you can write a filter that inputs other files during run time, allowing you to split your source document.
 
-My understanding is that the Python `pandocfilters` package is limited in scope. 
+My understanding is that the Python `pandocfilters` package is limited in scope.
 Alternatively, if you choose to, you can yield Pandoc's complete power by writing a Haskell filter instead of using Python, but then you will be writing Haskell ;)
 
 I would tag the custom filters functionality I've described in this section as an advanced feature.
@@ -580,12 +588,14 @@ Know that they are there when you need them.
 
 # TLDR
 
-You can write a complete paper in Markdown and render it in pdf without any issues.
-I recommend it over \LaTeX\ and Word.
+You can write a complete paper in Markdown and render it in PDF without any issues.
+I recommend using Markdown and Pandoc for writing over \LaTeX\ and Word because of its ease of use and its flexibility and versatility {@fig:learningcurve}.
 
-![My very scientific comparison of Word, \LaTeX\ and Markdown](../images/learningcurve.png)
+![My very scientific comparison of Word, \LaTeX\ and Markdown](../images/learningcurve.png){#fig:learningcurve}
 
-If you have gotten this far in the post, congratulations and good luck! 
+If you have gotten this far in the post, congratulations!
+This was a lot to take in, and I hope I shed some light on the potential for Markdown as an academic and technical writing tool.
+and good luck!
 Let me know if you have any questions in the comments below.
 
 # References
