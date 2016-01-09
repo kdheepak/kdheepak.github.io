@@ -41,11 +41,7 @@ Academic writing involves :
 There's a lot to manage over the length of time this entire process spans. Academics require a set of tools that aid in making this process, i.e. the effective communication of ideas, as seamless as possible.
 There are currently two popular options for academics seeking to write technical papers - Microsoft Word or \LaTeX.
 
-<!-- BEGIN SLIDES -->
-
 ## A word about Word
-
-<!-- END SLIDES -->
 
 Microsoft Word is ubiquitous when it comes to writing reports.
 The great thing about Word is that there is almost no barrier to *begin* writing.
@@ -84,13 +80,12 @@ With all these issues, it is hard to believe Word is so widely accepted as a sta
 
 I think there is a strong case to be made about why you should consider dropping Word for your next paper. In addition to what has been discussed above :
 
+<!-- BEGIN SLIDES -->
+
 * it is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.
 * there is no clean way to permanently save comments or notes, that persist in the final version without affecting how final document looks.
 * collaborating with other people requires foresight and planning.
 * the equation editor painful to use.
-
-<!-- BEGIN SLIDESNOHEADER -->
-
 * Word does not work in the workflow for **scientific research papers or reports**.
 
 <!-- END SLIDES -->
@@ -114,9 +109,10 @@ To quote Raymond Hettinger :
 
 <!-- END SLIDES -->
 
-<!-- BEGIN SLIDES -->
 
 ## \LaTeX\ - lah-tekh, lah-tek or lay-tek
+
+<!-- BEGIN SLIDES -->
 
 Enter \LaTeX.
 
@@ -210,9 +206,10 @@ So, if you cannot afford to experiment with \LaTeX, are you resigned to Word?
 I don't think so.
 Markdown to the rescue!
 
-<!-- BEGIN SLIDES -->
 
 ## Markdown
+
+<!-- BEGIN SLIDES -->
 
 Markdown is a very lightweight easy-to-read easy-to-write plain text markup language.
 The same example as before looks like this in Markdown.
@@ -239,10 +236,14 @@ Tools have been developed to convert Markdown to HTML, PDF and even DOCX.
 
 The main advantages of Markdown:
 
+<!-- BEGIN SLIDES -->
+
 * Easy: the syntax is simple
 * Fast: the simple formatting saves time and speeds up workflows of writers
 * Portable: documents are cross-platform by nature
 * Flexible: HTML, PDF, DOCX, TEX are all supported output formats
+
+<!-- END SLIDES -->
 
 Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX\ for those specific set of things.
 Take for example this table {@tbl:table}. 
@@ -286,7 +287,6 @@ This is what the same table looks like in \LaTeX.
 <!-- BEGIN SLIDES -->
 However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX.
 Even a moderately complex table such as the one below is not supported (currently) by any form of Markdown.
-
 
 ![Tabular LaTeX example [@_wikibooks]](../images/table.png)
 
@@ -558,28 +558,25 @@ $$
 \pi
 $$ {#eq:pi}
 
-<!-- BEGIN SLIDES -->
 
 ## Pandoc conversion
-
-<!-- END SLIDES -->
 
 Once you have typed all the content, you can use the `pandoc` command to convert the document into the format you want.
 Pandoc uses the output filename extension to figure out what the output file format should be.
 Btw, Pandoc is a command line tool only.
 You will have to use the command line for any conversion.
 
-<!-- BEGIN SLIDESNOHEADER -->
+<!-- BEGIN SLIDES -->
 
 To generate a PDF file :
 
     pandoc document.md -o document.pdf
 
-<!-- END SLIDES -->
-
 It is as simple as that! To generate a HTML file :
     
     pandoc document.md -o document.html
+
+<!-- END SLIDES -->
 
 Check out pandoc's README [@_pandoc].
 It has loads of examples and you might be able to find what you are looking for by straight up picking an example or by making a minor tweak to it.
@@ -702,7 +699,7 @@ But if you come across a case where pandoc does not do what you want it to do, y
 
 <!-- BEGIN SLIDES -->
 
-There is even a python package called `pandocfilters` that allows you to walk the AST and parse specific formats or keys.
+There is a python package called `pandocfilters` that allows you to walk the AST and parse specific formats or keys.
 It is very powerful, and can offer unique ways to expand on pandoc's functionality.
 I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this [post](http://kdheepak.com/blog/active-reactive-and-apparent-power.html).
 
