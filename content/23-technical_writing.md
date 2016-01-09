@@ -734,7 +734,24 @@ Check out my attempt at describing the space of complexity of document vs diffic
 
 If you have gotten this far in the post, congratulations!
 This was a lot to take in, and I hope I shed some light on the potential for Markdown as an academic and technical writing tool.
-Let me know if you have any questions in the comments below.
+Let me know if you have any questions in the comments below. You can view this post in the following forms, thanks to Pandoc!
+
+[IEEE-PDF](/resources/ieee-output.pdf)
+
+[IEEE-DOCX](/resources/ieee-output.docx)
+
+[IEEE-HTML](/resources/ieee-output.html)
+
+[PDF](/resources/output.pdf)
+
+[DOCX](/resources/output.docx)
+
+[HTML](/resources/output.html)
+
+[SLIDES-PDF](/resources/slide-output.pdf)
+
+<section class="footnotes">
+</section>
 
 # References
 
@@ -744,4 +761,3 @@ Let me know if you have any questions in the comments below.
 [^0]: Footnote! If you are viewing the web version, you can continue reading by clicking here ->
 [^1]: I understand that there are *correct* ways to go about it, I just don't want to be thinking about all that while I'm writing.
 [^2]: If you install Pandoc from a package, `pandoc-citeproc` should come pre-installed. However, if you want to use a package manager such as `brew`, you may need to install `pandoc-citeproc` separately as well. Just run `brew install pandoc pandoc-citeproc`.
-
