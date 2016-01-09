@@ -686,6 +686,6 @@ Let me know if you have any questions in the comments below.
 <div id="refs" class="references">
 </div>
 
-[^1]: I understand that there are *correct* ways to go about this, but I don't want to be thinking about that while I'm writing.
-[^2]: If you install Pandoc from a package, pandoc-citeproc should come preinstalled. However, if you use a package manager such as `brew` (`brew install pandoc`), you may need to install `pandoc-citeproc` as well. Just run `brew install pandoc-citeproc`.
+[^1]: I understand that there are *correct* ways to go about it, I just don't want to be thinking about all that while I'm writing.
+[^2]: If you install Pandoc from a package, `pandoc-citeproc` should come pre-installed. However, if you want to use a package manager such as `brew`, you may need to install `pandoc-citeproc` separately as well. Just run `brew install pandoc pandoc-citeproc`.
 [^3]: Footnote! If you are viewing the web version, you can continue reading by clicking here ->
