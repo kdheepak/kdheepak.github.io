@@ -246,7 +246,8 @@ This is the syntax for the table in Markdown.
 This is what the same table looks like in \LaTeX.
 
     \begin{longtable}[c]{@{}rlcl@{}}
-    \caption{Demonstration of simple table syntax.}\tabularnewline
+    \caption{Demonstration of simple table syntax.}
+    \tabularnewline
     \toprule
     Right & Left & Center & Default\tabularnewline
     \midrule
@@ -474,7 +475,8 @@ when I don't know what I'm doing.
         123     123       123          123
           1     1          1             1
 
-    Table:  Demonstration of simple table syntax. {#tbl:table}
+    Table:  Demonstration of simple table syntax.
+    {#tbl:table}
 
 **Example**
 
