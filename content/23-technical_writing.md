@@ -133,10 +133,10 @@ For example, take a look at the following commands.
     \textbf{bold}
     \textit{italic}
 
-These markup will format the words passed into these "functions" as **bold** and *italic* respectively.
+This markup will format the words passed into these "functions" as **bold** and *italic* respectively.
 <!-- END SLIDES -->
 There are numerous similar functions for different aspects of formatting.
-A writer can concentrate on writing, without worrying about the typesetting until later.
+This allows you to concentrate on writing, without worrying about the typesetting until later.
 
 The source document that contains the content is a plain text file.
 This means you can use `git` to version control the paper.
@@ -145,15 +145,19 @@ This also lets you work with your favourite text editor - Vim, Emacs, Atom.
 There are even TeX specific ones, such as TeXShop and Lyx.
 
 \LaTeX\ is free. Free as in beer and free as in freedom.
-This allows me to have the confidence that my code and documents can survive possibly forever in its current format.
+You can have the confidence that your code and documents can survive possibly forever in its current format.
 The \LaTeX\ community is great and are very helpful towards beginners.
 There are hundreds of packages that improve upon the functionality that \LaTeX\ provides.
-There are packages like *TikZ* that lets you to create high resolution print quality detailed diagrams.
+There are packages like *TikZ* that let you to create high resolution print quality detailed diagrams, which I've seen used even outside a \LaTeX environment.
 
-However, \LaTeX\ does come with a penalty.
-There is a barrier to entry which one must overcome in order to begin using \LaTeX.
+However, there is a barrier to entry which one must overcome in order to begin using \LaTeX.
 Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them.
-Personally, I found learning how to use \LaTeX\ extremely useful, and I didn't think it was difficult.
+The biggest problem with \LaTeX\ is probably the error messages.
+Most of the time they are near useless, and sometimes they are even borderline cryptic.
+
+Personally, I found learning how to work with \LaTeX\ extremely useful.
+It challenged me to think about the structure of a document, and how I could convey information effectively not just through the final document, but also in the source material^[Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.].
+I also didn't think it was difficult.
 Solutions to my initial problems were only a quick Google search away.
 Tables were frustrating at first, but you get the hang of them over time.
 Equations are a joy to type in \LaTeX.
@@ -162,7 +166,7 @@ And the final product looks great!
 <!-- BEGIN SLIDES -->
 
 That said, the markup language is a bit too heavy for notetaking, and not particularly readable.
-Take for example the syntax for a creating a section, a subsection and list of items with some bold and italic elements.
+For example, take a look at the syntax for a creating a section, a subsection and list of items with some bold and italic elements.
 
     \section{Section Name}
     This is text in the section
@@ -180,13 +184,11 @@ Take for example the syntax for a creating a section, a subsection and list of i
 
 <!-- END SLIDES -->
 
-With good IDE's for \LaTeX\ this could be made acceptable, although they still hinder a writer's flow.
-The biggest problem with \LaTeX\ however are probably the error messages.
-Most of the time they are near useless, and sometimes they are even borderline cryptic.
-With practice and experience one can figure out ways to work with \LaTeX\ but beginners will still have a hard time.
-
-Once you invest the time to learn \LaTeX\ I can't think of any reason why you would go back to Word.
-However, if you cannot afford to experiment with \LaTeX, are you resigned to Word?
+With good IDEs for \LaTeX\ this isn't as bad as it looks, although they still hinder the writer's flow.
+Over time and with experience, one can become proficient in \LaTeX.
+And once you invest the time to learn \LaTeX\ I can't think of any reason why you would go back to Word.
+But it is likely that beginners will have a hard time getting started.
+So, if you cannot afford to experiment with \LaTeX, are you resigned to Word?
 I don't think so.
 Markdown to the rescue!
 
@@ -263,21 +265,19 @@ This is what the same table looks like in \LaTeX.
 
 <!-- BEGIN SLIDES -->
 However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX.
-Even a moderately complex table such as the one below is currently not supported by any Markdown.
+Even a moderately complex table such as the one below is not supported (currently) by any form of Markdown.
 
 
 ![Tabular LaTeX example [@_wikibooks]](../images/table.png)
 
 <!-- END SLIDES -->
 
-Markdown by itself may not be as powerful as \LaTeX.
-But its easy to write easy to read syntax, open standard format and a strong backing from the community make it a ideal candidate for writing.
+Markdown may not be as powerful as \LaTeX, but its easy to write easy to read syntax, open standard format and a strong backing from the community make it a ideal candidate for writing.
 It has the advantages of Word (ease of use) and \LaTeX\ (excellent typesetting) for output formats.
 Also there is the added advantage of only having to write in Markdown once, and have documents generated in a multitude of formats later - PDF, DOCX, slides, HTML etc.
 
 I hope that by now you are convinced that Markdown is a great tool for writing.
-Let us now look at how to convert a Markdown file to other formats.
-If you were still hesitant, you won't be after you take a look at how easy it is to convert Markdown to any format you like.
+In the following sections we will look at how to convert a Markdown file to other formats, and what are some potential limitations and how you might overcome them.
 
 <!-- BEGIN SLIDES -->
 # Pandoc - A "swiss army knife"
@@ -351,18 +351,15 @@ Output formats :
 * s5 (S5 HTML and javascript slide show)
 
 With 21 input formats and 37 output formats, it doesn't take long to guess that there's no way they implemented a converter for each input to output format.
-Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage to convert from one format to another. (This will be important when we talk about filters.)
-The point here is that because of this pandoc is great at converting from and to a wide variety of formats.
-Pandoc is also constantly under development which is a great thing.
-
-We can use Pandoc to convert a markdown file with content, to a PDF, HTML or DOCX file for a technical paper.
+Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage to convert one format to another^[Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.].
+This is the reason Pandoc is great at converting from and to a wide variety of formats, and why it is potentially easy to support new formats as well.
+Pandoc is also constantly under development. We can use Pandoc to convert a markdown file, to a PDF, HTML or DOCX file for a technical paper.
 (The docx converter doesn't work great though, blame Microsoft's lack of documentation [@_googlegroups])
 
 First off, you will need `pandoc`. You can get the latest version from their GitHub page [@_github].
-You may need `pandoc-citeproc` as well [^2].
+You may want `pandoc-citeproc` as well [^2].
 You will also need \LaTeX.
-
-I've found that the following python packages are useful.
+I've found that the following python packages are useful too.
 
 - `pandoc-attributes`
 - `pandoc-eqnos`
@@ -375,11 +372,10 @@ Alternatively you can create a virtual environment using `conda` with a suitable
 
 There are several people that have shared their complete workflow along with all their resources [@healy_plain;@_writing;@_writing-1;@_academic].
 Mine is available on GitHub [@krishnamurthy_github] as well.
-While someone else's workflow will work for you, I highly recommend starting from scratch and crafting your own Makefile.
+While someone else's workflow will work for you, I encourage you to start from scratch and crafting your own Makefile.
 That way you will figure out why each item has been added into a workflow, and if that works for you.
 You will also know what to do if (when?) it breaks, and how to fix it.
-I also highly recommend going through other people's Makefiles to see what they have done.
-That way you might be able to see an implementation that works better than your own.
+Feel free to go through other people's Makefiles to see what they have done, and how you can improve your own.
 
 ## Syntax
 
@@ -493,11 +489,11 @@ Table:  Demonstration of simple table syntax. {#tbl:table}
 
 ### ***Footnotes***
 
-    Example of a footnote [^3]
+    Example of a footnote [^0]
 
 **Example**
 
-Example of a footnote [^3]
+Example of a footnote [^0]
 
 ### ***Citations***
 
@@ -545,27 +541,32 @@ $$ {#eq:pi}
 Once you have typed all the content, you can use the `pandoc` command to convert the document into the format you want.
 Pandoc uses the output filename extension to figure out what the output file format should be.
 Btw, Pandoc is a command line tool only.
-<!-- BEGIN SLIDES -->
 You will have to use the command line for any conversion.
+<!-- BEGIN SLIDES -->
+To generate a PDF file :
 
     pandoc document.md -o document.pdf
 
 <!-- END SLIDES -->
 
-I highly recommend reading pandoc's README [@_pandoc].
+It is as simple as that! To generate a HTML file :
+    
+    pandoc document.md -o document.html
+
+Check out pandoc's README [@_pandoc].
 It has loads of examples and you might be able to find what you are looking for by straight up picking an example or by making a minor tweak to it.
 
 <!-- BEGIN SLIDES -->
-With PDF files, you can specify the following :
+With PDF files, you can specify the following additional arguments :
 
 * `--latex-engine=pdflatex` : latex engine
 * `--latex-template=latex.template` : latex template file
 
 <!-- END SLIDES -->
 
-
+This allows you to define a \LaTeX\ template to use. By default, `pandoc` uses a built in template.
 <!-- BEGIN SLIDES -->
-With html files, you can specify the following :
+With html files, you can specify the following arguments:
 
 * `--template=html.template` : html template file
 * `--css=cssfile.css` : css file
@@ -573,7 +574,7 @@ With html files, you can specify the following :
 <!-- END SLIDES -->
 
 <!-- BEGIN SLIDES -->
-With docx files unfortunately, you cannot specify a template (at the time of writing this post).
+With docx files unfortunately, you cannot specify a template (at least not at the time of writing this post).
 You can however, specify a reference-docx :
 
 * `--reference-docx=reference.docx` : docx for reference styles
@@ -582,7 +583,7 @@ You can however, specify a reference-docx :
 
 <!-- BEGIN SLIDES -->
 
-These are arguments that allow you to use citations when writing academic papers.
+These following arguments allow you to use citations when writing academic papers.
 
 * `--filter pandoc-citeproc` : filter to parse citations
 * `--csl=CSLFILE` : define a citation style sheet e.g. ieee.csl
@@ -601,7 +602,7 @@ Also, I've found the following filters useful.
 * `--filter pandoc-fignos` : figure numbers
 * `--filter pandoc-tablenos` : table numbers
 
-They allow you reference a figure, equation or table. For example Equation {@eq:pi} is an example of a block equation in Markdown.
+They allow you reference a figure, equation or table. For example, Equation {@eq:pi} is an example of a block equation in Markdown.
 
 <!-- END SLIDES -->
 
@@ -634,25 +635,24 @@ The good news is that anything you do in \LaTeX, you can do in Markdown and rend
 This includes equations, tables, citations, references, images, lists, tikz diagrams etc.
 The bad news is that if you do decide to use \LaTeX\ syntax, you are still writing \LaTeX\ (although a lot less of it), and you have lost complete HTML and DOCX conversion capability.
 <!-- END SLIDES -->
-Also, Markdown / Pandoc (currently) does not support splitting the source document across multiple files.
+Also, Markdown / Pandoc does not support splitting the source document across multiple files.
 This was not as much a deal breaker for me, since the markup is pretty light and having it all in a single file is fine for a technical paper.
 However, for large reports extending hundreds of pages this may be a issue.
-There are workarounds for this, however they are not perfectly clean.
+There are workarounds for this (see next section), however they may be a bit of a hassle.
 
 <!-- BEGIN SLIDES -->
 
 # Bending Markdown to your will
 
-Fortunately, some of the problems I mentioned in the previous section can be solved using an excellent feature of pandoc.
+Fortunately, some of the problems I mentioned in the previous section can be solved using an excellent feature of Pandoc - filters!
 <!-- END SLIDES -->
-Remember the filter argument for pandoc?
 You can write your own custom filter, and you can use it to parse certain blocks in a custom fashion.
-For most people this will not be necessary since Pandoc is feature compelete and constantly being developed
+For most people this will not be necessary since Pandoc is feature complete, and when a specific need arises^[The features for references for figures, equations and tables are all python `pandocfilters` packages written by the one person [@duck_github]. There is a two year long standing discussion on cross references [@_pandoc-1] that the curious reader is referred to.] the community has often provided a custom filter that does the job.
 But if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.
 <!-- BEGIN SLIDES -->
 There is even a python package called `pandocfilters` that allows you to walk the AST and parse specific formats or keys.
 It is very powerful, and can offer unique ways to expand on pandoc's functionality.
-I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this [post](kdheepak.com/blog/active-reactive-and-apparent-power.html).
+I wrote a pandocfilter [@krishnamurthy_github-1] to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this [post](http://kdheepak.com/blog/active-reactive-and-apparent-power.html).
 
 <!-- END SLIDES -->
 
@@ -686,6 +686,6 @@ Let me know if you have any questions in the comments below.
 <div id="refs" class="references">
 </div>
 
+[^0]: Footnote! If you are viewing the web version, you can continue reading by clicking here ->
 [^1]: I understand that there are *correct* ways to go about it, I just don't want to be thinking about all that while I'm writing.
 [^2]: If you install Pandoc from a package, `pandoc-citeproc` should come pre-installed. However, if you want to use a package manager such as `brew`, you may need to install `pandoc-citeproc` separately as well. Just run `brew install pandoc pandoc-citeproc`.
-[^3]: Footnote! If you are viewing the web version, you can continue reading by clicking here ->
