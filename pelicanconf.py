@@ -14,7 +14,6 @@ TIMEZONE = 'America/Denver'
 DEFAULT_LANG = u'en'
 
 # STATIC_PATHS = ['images', 'resources', 'extra/CNAME']
-EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -100,7 +99,11 @@ SITE_TITLE_LABEL = "Dheepak Krishnamurthy"
 SITE_SUBTITLE_LABEL = "Engineer & Tinkerer."
 SUMMARY_MAX_LENGTH = 5
 
-STATIC_PATHS = ['blog', 'theme/images', 'images', 'downloads' 'extra/CNAME']
+STATIC_PATHS = ['blog', 'theme/images', 'images', 'downloads', 'extra/CNAME']
+EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
+
+ARTICLE_EXCLUDES = ['downloads']
+
 DIRECT_TEMPLATES = (('index', 'archives', 'blog', 'search', '404'
     ))
 
