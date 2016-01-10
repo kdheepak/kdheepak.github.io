@@ -29,7 +29,7 @@ MARKDOWNFOLDER = ./..
 
 OUTPUT = .
 
-all: ieeepdf ieeedocx ieeehtml pdf docx html
+all: ieeepdf ieeedocx ieeehtml pdf docx html slidespdf
 
 ieeepdf:
 	pandoc -r markdown+table_captions+yaml_metadata_block -s -S --latex-engine=pdflatex --template=$(PAPER)/templates/latex.template --filter pandoc-fignos --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib -o $(OUTPUT)/ieee-output.pdf $(MARKDOWN).md --filter $(SCRIPTS)/comments.py --meta link-citations=true
@@ -50,7 +50,7 @@ html:
 	pandoc --mathjax -r markdown+table_captions+yaml_metadata_block -w html -s -S --template=$(PAPER)/templates/html.template --filter pandoc-fignos --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib -o $(OUTPUT)/output.html $(MARKDOWN).md --filter $(SCRIPTS)/fix-latex-symbol.py --filter $(SCRIPTS)/comments.py --meta link-citations=true --filter $(SCRIPTS)/remove_ieeekeywords.py -c https://cdn.rawgit.com/claymcleod/pandoc-academic-publication/ce07fa7a20af53cab8c8a50c5bad5ad15d726bba/assets/css/academic-pub.css
 
 slidespdf:
-	pandoc -r markdown+table_captions+yaml_metadata_block -s -S --latex-engine=pdflatex --filter $(SCRIPTS)/remove_ieeekeywords.py --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib $< -t beamer -o $(OUTPUT)/slide-output.pdf $(MARKDOWN).md --filter $(SCRIPTS)/slides.py
+	pandoc -r markdown+table_captions+yaml_metadata_block -s -S --latex-engine=pdflatex --filter $(SCRIPTS)/slides.py --filter $(SCRIPTS)/remove_ieeekeywords.py --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib $< -t beamer -o $(OUTPUT)/slide-output.pdf $(MARKDOWN).md
 
 slideshtml:
 	pandoc -t html5 --template=default.revealjs \

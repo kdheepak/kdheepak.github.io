@@ -736,19 +736,19 @@ If you have gotten this far in the post, congratulations!
 This was a lot to take in, and I hope I shed some light on the potential for Markdown as an academic and technical writing tool.
 Let me know if you have any questions in the comments below. You can view this post in the following forms, thanks to Pandoc!
 
-[IEEE-PDF]({filename}/resources/ieee-output.pdf)
+[IEEE-PDF](http://kdheepak.com/downloads/ieee-output.pdf)
 
-[IEEE-DOCX]({filename}/resources/ieee-output.docx)
+[IEEE-DOCX](http://kdheepak.com/downloads/ieee-output.docx)
 
-[IEEE-HTML]({filename}/resources/ieee-output.html)
+[IEEE-HTML](http://kdheepak.com/downloads/ieee-output.html)
 
-[PDF]({filename}/resources/output.pdf)
+[PDF](http://kdheepak.com/downloads/output.pdf)
 
-[DOCX]({filename}/resources/output.docx)
+[DOCX](http://kdheepak.com/downloads/output.docx)
 
-[HTML]({filename}/resources/output.html)
+[HTML](http://kdheepak.com/downloads/output.html)
 
-[SLIDES-PDF]({filename}/resources/slide-output.pdf)
+[SLIDES-PDF](http://kdheepak.com/downloads/slide-output.pdf)
 
 <!-- BEGIN SLIDESNOHEADER -->
 
