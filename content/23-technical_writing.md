@@ -630,9 +630,9 @@ Also, I've found the following filters useful.
 * `--filter pandoc-fignos` : figure numbers
 * `--filter pandoc-tablenos` : table numbers
 
-They allow you reference a figure, equation or table. For example, Equation {@eq:pi} is an example of a block equation in Markdown.
-
 <!-- END SLIDES -->
+
+They allow you reference a figure, equation or table. For example, Equation {@eq:pi} is an example of a block equation in Markdown.
 
 A paper may be generated using a command as shown below :
 
