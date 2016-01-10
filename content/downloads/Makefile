@@ -27,7 +27,7 @@ MARKDOWN = ./../23-technical_writing
 
 MARKDOWNFOLDER = ./..
 
-OUTPUT = ../../../resources
+OUTPUT = .
 
 all: ieeepdf ieeedocx ieeehtml pdf docx html
 
