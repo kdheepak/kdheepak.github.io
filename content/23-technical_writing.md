@@ -736,19 +736,18 @@ If you have gotten this far in the post, congratulations!
 This was a lot to take in, and I hope I shed some light on the potential for Markdown as an academic and technical writing tool.
 Let me know if you have any questions in the comments below. You can view this post in the following forms, thanks to Pandoc!
 
-[IEEE-PDF](http://kdheepak.com/downloads/ieee-output.pdf)
+Format      Link
+-------     -------
+IEEE-PDF    [IEEE-PDF](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.pdf)
+IEEE-DOCX   [IEEE-DOCX](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.docx)
+IEEE-HTML   [IEEE-HTML](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.html)
+PDF         [PDF](http://kdheepak.com/downloads/writing-papers-with-markdown.pdf)
+DOCX        [DOCX](http://kdheepak.com/downloads/writing-papers-with-markdown.docx)
+HTML        [HTML](http://kdheepak.com/downloads/writing-papers-with-markdown.html)
+SLIDES-PDF  [SLIDES-PDF](http://kdheepak.com/downloads/writing-papers-with-markdown.slides.pdf)
 
-[IEEE-DOCX](http://kdheepak.com/downloads/ieee-output.docx)
+Table:  Links to multiple formats
 
-[IEEE-HTML](http://kdheepak.com/downloads/ieee-output.html)
-
-[PDF](http://kdheepak.com/downloads/output.pdf)
-
-[DOCX](http://kdheepak.com/downloads/output.docx)
-
-[HTML](http://kdheepak.com/downloads/output.html)
-
-[SLIDES-PDF](http://kdheepak.com/downloads/slide-output.pdf)
 
 <!-- BEGIN SLIDESNOHEADER -->
 
