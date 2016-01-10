@@ -154,7 +154,7 @@ This allows you to concentrate on writing, without worrying about the typesettin
 
 The source document that contains the content is a plain text file.
 This means you can use `git` to version control the paper.
-This allows one to track changes and collaborate with others without any additional effort.
+This allows you to track changes and collaborate with others without any additional effort.
 This also lets you work with your favourite text editor - Vim, Emacs, Atom.
 There are even TeX specific ones, such as TeXShop and Lyx.
 
@@ -307,7 +307,7 @@ In the following sections we will look at how to convert a Markdown file to othe
 
 # Pandoc - A "swiss army knife"
 
-Pandoc is a software tool written in Haskell that can convert a document from just about any format to just about any other format. 
+Pandoc is a software tool by [John Macfarlane](http://johnmacfarlane.net/) written in Haskell that can convert a document from just about any format to just about any other format. 
 And works really well.
 
 <!-- END SLIDES -->
@@ -397,7 +397,7 @@ Alternatively you can create a virtual environment using `conda` with a suitable
 
 There are several people that have shared their complete workflow along with all their resources [@healy_plain;@_writing;@_writing-1;@_academic].
 Mine is available on GitHub [@krishnamurthy_github] as well.
-While someone else's workflow will work for you, I encourage you to start from scratch and craft your own Makefile.
+While someone else's workflow will work for you, I encourage you to start from scratch and craft your own.
 That way you will figure out why each item has been added into a workflow, and if that works for you.
 You will also know what to do if (when?) it breaks, and how to fix it.
 Feel free to go through other people's Makefiles to see what they have done, and how you can improve your own.
@@ -650,7 +650,7 @@ A paper may be generated using a command as shown below :
 As you can see, there are a lot of arguments that can be passed to Pandoc.
 I've found using Makefiles for recording your past commands and documenting these instructions extremely useful.
 I've barely scratched the surface with what you can do with Pandoc. 
-I'll update this post with those features if I think they are relevant to writing a paper using Markdown.
+I'll update this post with more features if I think they are relevant to writing a paper using Markdown.
 
 <!-- BEGIN SLIDESNOHEADER -->
 
