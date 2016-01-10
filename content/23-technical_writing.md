@@ -82,7 +82,7 @@ I think there is a strong case to be made about why you should consider dropping
 
 <!-- BEGIN SLIDES -->
 
-* it is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.
+* Word is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.
 * there is no clean way to permanently save comments or notes, that persist in the final version without affecting how final document looks.
 * collaborating with other people requires foresight and planning.
 * the equation editor painful to use.
@@ -750,8 +750,7 @@ Let me know if you have any questions in the comments below. You can view this p
 
 [SLIDES-PDF](/resources/slide-output.pdf)
 
-<section class="footnotes">
-</section>
+<!-- BEGIN SLIDESNOHEADER -->
 
 # References
 
@@ -761,3 +760,5 @@ Let me know if you have any questions in the comments below. You can view this p
 [^0]: Footnote! If you are viewing the web version, you can continue reading by clicking here ->
 [^1]: I understand that there are *correct* ways to go about it, I just don't want to be thinking about all that while I'm writing.
 [^2]: If you install Pandoc from a package, `pandoc-citeproc` should come pre-installed. However, if you want to use a package manager such as `brew`, you may need to install `pandoc-citeproc` separately as well. Just run `brew install pandoc pandoc-citeproc`.
+
+<!-- END SLIDES -->
