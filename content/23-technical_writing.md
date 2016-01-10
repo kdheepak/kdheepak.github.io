@@ -85,7 +85,7 @@ I think there is a strong case to be made about why you should consider dropping
 * Word is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.
 * there is no clean way to permanently save comments or notes, that persist in the final version without affecting how final document looks.
 * collaborating with other people requires foresight and planning.
-* the equation editor painful to use.
+* the equation editor is painful to use.
 * Word does not work in the workflow for **scientific research papers or reports**.
 
 <!-- END SLIDES -->
