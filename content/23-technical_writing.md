@@ -8,6 +8,11 @@ slug: writing-papers-with-markdown
 category: blog
 alias: /blog/writing-papers-with-markdown
 bibliography: blog.bib
+author:
+- name: Dheepak Krishnamurthy
+  affiliation:
+  membership:
+  email: me@kdheepak.com
 abstract: Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. I figured I'd use this post to write about my workflow and my resources on this topic.
 ---
 
@@ -738,13 +743,13 @@ Let me know if you have any questions in the comments below. You can view this p
 
 Format      Link
 -------     -------
-IEEE-PDF    [IEEE-PDF](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.pdf)
-IEEE-DOCX   [IEEE-DOCX](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.docx)
-IEEE-HTML   [IEEE-HTML](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.html)
-PDF         [PDF](http://kdheepak.com/downloads/writing-papers-with-markdown.pdf)
-DOCX        [DOCX](http://kdheepak.com/downloads/writing-papers-with-markdown.docx)
-HTML        [HTML](http://kdheepak.com/downloads/writing-papers-with-markdown.html)
-SLIDES-PDF  [SLIDES-PDF](http://kdheepak.com/downloads/writing-papers-with-markdown.slides.pdf)
+IEEE-PDF    [LINK](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.pdf)
+IEEE-DOCX   [LINK](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.docx)
+IEEE-HTML   [LINK](http://kdheepak.com/downloads/writing-papers-with-markdown.ieee.html)
+PDF         [LINK](http://kdheepak.com/downloads/writing-papers-with-markdown.pdf)
+DOCX        [LINK](http://kdheepak.com/downloads/writing-papers-with-markdown.docx)
+HTML        [LINK](http://kdheepak.com/downloads/writing-papers-with-markdown.html)
+SLIDES-PDF  [LINK](http://kdheepak.com/downloads/writing-papers-with-markdown.slides.pdf)
 
 Table:  Links to multiple formats
 
