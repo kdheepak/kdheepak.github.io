@@ -30,7 +30,7 @@ I figured I'd use this post to write about my workflow and my resources on this 
 
 <!-- BEGIN SLIDESNOHEADER -->
 
-Academic writing involves : 
+Academic writing involves :
 
 * writing down ideas as they come along and documenting results (notetaking),
 * experimenting with these ideas (simulations and data analysis)
@@ -246,7 +246,7 @@ The main advantages of Markdown:
 <!-- END SLIDES -->
 
 Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX\ for those specific set of things.
-Take for example this table {@tbl:table}. 
+Take for example this table {@tbl:table}.
 
 <!-- BEGIN SLIDES -->
 
@@ -307,7 +307,7 @@ In the following sections we will look at how to convert a Markdown file to othe
 
 # Pandoc - A "swiss army knife"
 
-Pandoc is a software tool by [John Macfarlane](http://johnmacfarlane.net/) written in Haskell that can convert a document from just about any format to just about any other format. 
+Pandoc is a software tool by [John Macfarlane](http://johnmacfarlane.net/) written in Haskell that can convert a document from just about any format to just about any other format.
 And works really well.
 
 <!-- END SLIDES -->
@@ -382,7 +382,7 @@ This is the reason Pandoc is great at converting from and to a wide variety of f
 Pandoc is also constantly under development. We can use Pandoc to convert a markdown file, to a PDF, HTML or DOCX file for a technical paper.
 
 First off, you will need `pandoc`. You can get the latest version from their GitHub page [@_github].
-You may want `pandoc-citeproc` as well.[^2] 
+You may want `pandoc-citeproc` as well.[^2]
 You will also need \LaTeX.
 I've found that the following python packages are useful too.
 
@@ -573,7 +573,7 @@ To generate a PDF file :
     pandoc document.md -o document.pdf
 
 It is as simple as that! To generate a HTML file :
-    
+
     pandoc document.md -o document.html
 
 <!-- END SLIDES -->
@@ -638,7 +638,7 @@ A paper may be generated using a command as shown below :
 
     pandoc -s -S --latex-engine=pdflatex \
     --template=./templates/ieee-latex.template \
-    --filter pandoc-fignos \ 
+    --filter pandoc-fignos \
     --filter pandoc-eqnos \
     --filter pandoc-tablenos \
     --filter pandoc-citeproc \
@@ -649,7 +649,7 @@ A paper may be generated using a command as shown below :
 
 As you can see, there are a lot of arguments that can be passed to Pandoc.
 I've found using Makefiles for recording your past commands and documenting these instructions extremely useful.
-I've barely scratched the surface with what you can do with Pandoc. 
+I've barely scratched the surface with what you can do with Pandoc.
 I'll update this post with more features if I think they are relevant to writing a paper using Markdown.
 
 <!-- BEGIN SLIDESNOHEADER -->
@@ -722,7 +722,7 @@ Know that they are there when you need them.
 <!-- END SLIDES -->
 
 You can write a complete paper in Markdown and render it in PDF without any issues.
-I recommend using Markdown and Pandoc for writing over \LaTeX\ and Word because of its ease of use and its flexibility and versatility. 
+I recommend using Markdown and Pandoc for writing over \LaTeX\ and Word because of its ease of use and its flexibility and versatility.
 And if you think Markdown is not cutting it for you, you can always convert it to a Word document or a TEX file and continue using your usual workflow.
 Check out my attempt at describing the space of complexity of document vs difficulty in implementation when using Word, \LaTeX\ and Markdown in Fig. {@fig:learningcurve}.
 
