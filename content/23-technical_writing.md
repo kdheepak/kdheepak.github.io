@@ -8,11 +8,6 @@ slug: writing-papers-with-markdown
 category: blog
 alias: /blog/writing-papers-with-markdown
 bibliography: blog.bib
-author:
-- name: Dheepak Krishnamurthy
-  affiliation:
-  membership:
-  email: me@kdheepak.com
 abstract: Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. I figured I'd use this post to write about my workflow and my resources on this topic.
 ---
 
