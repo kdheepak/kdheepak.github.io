@@ -34,7 +34,11 @@ OUTPUTFILE = writing-papers-with-markdown
 all: ieeepdf ieeedocx ieeehtml pdf docx html slidespdf
 
 ieeepdf:
-	pandoc -r markdown+table_captions+yaml_metadata_block -s -S --latex-engine=pdflatex --template=$(PAPER)/templates/latex.template --filter pandoc-fignos --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib -o $(OUTPUT)/$(OUTPUTFILE).ieee.pdf $(MARKDOWN).md --filter $(SCRIPTS)/comments.py --meta link-citations=true
+	pandoc -r markdown+table_captions+yaml_metadata_block -s -S --latex-engine=pdflatex --template=$(PAPER)/templates/ieee.template --filter pandoc-fignos --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib -o $(OUTPUT)/$(OUTPUTFILE).ieee.pdf $(MARKDOWN).md --filter $(SCRIPTS)/comments.py --meta link-citations=true
+
+ieeetex:
+	pandoc -r markdown+table_captions+yaml_metadata_block -s -S --latex-engine=pdflatex --template=$(PAPER)/templates/ieee.template --filter pandoc-fignos --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib -o $(OUTPUT)/$(OUTPUTFILE).ieee.tex $(MARKDOWN).md --filter $(SCRIPTS)/comments.py --meta link-citations=true
+
 
 ieeedocx:
 	pandoc --mathjax -r markdown+table_captions+yaml_metadata_block -s -S --filter pandoc-fignos --filter pandoc-eqnos --filter pandoc-tablenos --filter pandoc-citeproc --csl=$(PAPER)/styles/ieee.csl --bibliography=$(MARKDOWNFOLDER)/blog.bib -o $(OUTPUT)/$(OUTPUTFILE).ieee.docx $(MARKDOWN).md --reference-docx=$(PAPER)/templates/trans_jour.docx --filter $(SCRIPTS)/fix-latex-symbol.py --filter $(SCRIPTS)/comments.py --meta link-citations=true
@@ -65,4 +69,4 @@ slideshtml:
 	--variable transition="linear" $(MARKDOWN).md -o $(OUTPUT)/$(OUTPUTFILE).slides.html
 
 clean:
-	rm -f *.html *.pdf *.tex *.aux *.log *.dvi *.docx
+	rm -f *.html *.pdf *.tex *.aux *.log *.dvi *.docx *.out
