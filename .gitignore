@@ -2,6 +2,7 @@ pelican-themes
 output/
 venv/
 .DS_Store
+build/*
 *.pyc
 *.pid
 *.swp
