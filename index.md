@@ -1,9 +1,8 @@
 About me
 --------
 
-Check out my blog [here](https://blog.kdheepak.com).
+Blog: <https://blog.kdheepak.com>
 
-Contact me
-----------
+GitHub: <https://github.com/kdheepak>
 
-You can contact me at <me@kdheepak.com>
+Contact: <me@kdheepak.com>
