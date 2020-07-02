@@ -26,7 +26,7 @@ body > footer > p {
     width: 55%;
 }
 
-.tocwrapper {
+.tocwrapper > p {
   display: grid;
   grid-template-columns: 44.4444% 22.2222%;
 }
@@ -45,8 +45,12 @@ body > footer > p {
     text-shadow: unset;
 }
 
+section > .kudo-container { width: 55%; }
+pre { width: 100%; }
 
 @media (max-width: 760px) {
+    section > .kudo-container { width: 100%; }
+
     .utterances {
         margin-left: 0 !important;
         width: 100%;
@@ -60,7 +64,7 @@ body > footer > p {
         width: unset;
     }
 
-    .tocwrapper {
+    .tocwrapper > p {
       display: grid;
       grid-template-columns: 66.6666% 33.3333%;
     }
