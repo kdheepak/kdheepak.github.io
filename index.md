@@ -10,21 +10,23 @@ Blog
 
 <https://blog.kdheepak.com>
 
-Presentations
--------------
+Talks and Tutorials
+-------------------
 
-<https://kdheepak.com/think-git/>
+[Why writing C interfaces in Julia is so easy](https://www.youtube.com/watch?v=ez-KVi0leOw)
 
-<https://kdheepak.com/interactive-data-visualizations-with-bokeh/>
-
-Tutorials
----------
+[Open Source Power System Production Cost Modeling in Julia](https://www.youtube.com/watch?v=1TipY6g9IzE)
 
 <https://github.com/kdheepak/Python-Tutorial>
 
 <https://github.com/GMLC-TDC/pesgm-2019-helics-tutorial>
 
 <https://github.com/kdheepak/openmod-2019-helics-tutorial>
+
+<https://kdheepak.com/think-git/>
+
+<https://kdheepak.com/interactive-data-visualizations-with-bokeh/>
+
 
 Projects
 --------
