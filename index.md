@@ -13,6 +13,10 @@ Blog
 Talks and Tutorials
 -------------------
 
+[Terminal User Interfaces in Julia](https://www.youtube.com/watch?v=-TASx67pphw)
+
+[Crash Course in Energy Systems Modeling & Analysis with Julia](https://www.youtube.com/watch?v=kQNOG4tGJdg)
+
 [Why writing C interfaces in Julia is so easy](https://www.youtube.com/watch?v=ez-KVi0leOw)
 
 [Open Source Power System Production Cost Modeling in Julia](https://www.youtube.com/watch?v=1TipY6g9IzE)
