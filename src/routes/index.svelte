@@ -68,3 +68,9 @@
     <p><a href="https://github.com/kdheepak/github-release">github-release</a></p>
   </section>
 </article>
+
+<style>
+  .flex {
+    display: flex;
+  }
+</style>
