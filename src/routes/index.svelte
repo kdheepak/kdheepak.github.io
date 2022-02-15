@@ -1,6 +1,6 @@
-<script>
+<script context="module">
   import DarkModeToggle from "$lib/components/DarkModeToggle.svelte"
-  export let humanDate = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' })
+  export const humanDate = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' })
 </script>
 
 <svelte:head>
