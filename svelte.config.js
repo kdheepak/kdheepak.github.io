@@ -35,6 +35,7 @@ const config = {
       base: pathsBase,
     },
     prerender: {
+      default: true,
       crawl: true,
       enabled: true,
     },
