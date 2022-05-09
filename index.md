@@ -1,17 +1,18 @@
-About me
---------
+## About me
 
-GitHub: <https://github.com/kdheepak>
+I'm a research engineer and software developer at the National Renewable Energy Laboratory (NREL, Golden, CO, USA).
+I have a lot of experience running power system models and simulations, such as transmission production cost models and power distribution system analyses, and have written and maintained bespoke models for energy system analysis.
+I'm highly proficient with Python, Julia, Rust, and Javascript, and am well versed in scientific data analysis and extract transform load workflows. I also enjoy working on open source projects and learning new technologies.
 
-Contact: <me@kdheepak.com>
+[GitHub](https://github.com/kdheepak)
 
-Blog
-----
+[Contact](mailto:me@kdheepak.com)
+
+## Blog
 
 <https://blog.kdheepak.com>
 
-Talks and Tutorials
--------------------
+## Talks and Tutorials
 
 [Terminal User Interfaces in Julia](https://www.youtube.com/watch?v=-TASx67pphw)
 
@@ -31,9 +32,7 @@ Talks and Tutorials
 
 <https://kdheepak.com/interactive-data-visualizations-with-bokeh/>
 
-
-Projects
---------
+## Projects
 
 [HELICS](https://github.com/GMLC-TDC/HELICS)
 
