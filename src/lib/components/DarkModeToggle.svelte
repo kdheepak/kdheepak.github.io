@@ -1,5 +1,7 @@
 <script lang="ts">
   let theme = "dark";
+
+  import { toast } from "@zerodevx/svelte-toast";
   import { fade } from "svelte/transition";
   import FaSun from "svelte-icons/fa/FaSun.svelte";
   import FaRegMoon from "svelte-icons/fa/FaMoon.svelte";
@@ -10,12 +12,9 @@
   const getStoredTheme = () => localStorage.getItem("theme");
 
   function setGiscusTheme(theme) {
-    function sendMessage(message) {
-      const iframe = document.querySelector("iframe.giscus-frame");
-      if (!iframe) return;
-      iframe.contentWindow.postMessage({ giscus: message }, "https://giscus.app");
-    }
-    sendMessage({ setConfig: { theme } });
+    const iframe = document.querySelector("iframe.giscus-frame");
+    if (!iframe) return;
+    iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } }}, "https://giscus.app");
   }
 
   const setLightTheme = () => {
@@ -23,11 +22,17 @@
     document.body.classList.toggle("dark", false);
     document.querySelectorAll("[data-theme='light']").forEach((item) => {
       item.style.display = "block";
-      item.closest("pre").classList.remove("hidden");
+      if (item.closest("pre")) {
+        item.closest("pre").classList.remove("hidden");
+        item.closest("pre").previousElementSibling.classList.remove("hidden");
+      };
     });
     document.querySelectorAll("[data-theme='dark']").forEach((item) => {
       item.style.display = "block";
-      item.closest("pre").classList.add("hidden");
+      if (item.closest("pre")) {
+        item.closest("pre").classList.add("hidden");
+        item.closest("pre").previousElementSibling.classList.add("hidden");
+      };
     });
     theme = "light";
     dispatch("message", {
@@ -41,11 +46,17 @@
     document.body.classList.toggle("dark", true);
     document.querySelectorAll("[data-theme='light']").forEach((item) => {
       item.style.display = "block";
-      item.closest("pre").classList.add("hidden");
+      if (item.closest("pre")) {
+        item.closest("pre").classList.add("hidden");
+        item.closest("pre").previousElementSibling.classList.add("hidden");
+      }
     });
     document.querySelectorAll("[data-theme='dark']").forEach((item) => {
       item.style.display = "block";
-      item.closest("pre").classList.remove("hidden");
+      if (item.closest("pre")) {
+        item.closest("pre").classList.remove("hidden");
+        item.closest("pre").previousElementSibling.classList.remove("hidden");
+      }
     });
     theme = "dark";
     dispatch("message", {
@@ -54,7 +65,7 @@
     setGiscusTheme("dark");
   };
 
-  const checkTheme = (_) => {
+  const checkTheme = () => {
     const storedTheme = getStoredTheme();
     if (storedTheme === "light") setLightTheme();
     else if (storedTheme === "dark") setDarkTheme();
@@ -74,10 +85,51 @@
     localStorage.setItem("theme", theme);
   };
 
+  const success = (m) =>
+    toast.push(m, {
+      theme: {
+        "--toastColor": theme == "light" ? "white" : "black",
+        "--toastBackground": theme == "light" ? "#2d2d2d" : "#f5f2f0",
+        "--toastBarBackground": theme == "light" ? "#a0a0a0" : "#303030",
+      },
+    });
+
+  function init() {
+    window.copyCode = (evt, elem) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      try {
+        selectText(elem.parentNode.querySelector("code"));
+        document.execCommand("copy");
+        window.getSelection();
+        success("Copied!");
+      } catch (e) {
+        console.error("Browser copy command not supported?", e);
+      }
+    };
+  }
+
+  function selectText(node) {
+    if (document.body.createTextRange) {
+      const range = document.body.createTextRange();
+      range.moveToElementText(node);
+      range.select();
+    } else if (window.getSelection) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    } else {
+      console.warn("Could not select text in node: Unsupported browser.");
+    }
+  }
+
   import { onMount } from "svelte";
 
   onMount(() => {
     checkTheme();
+    init();
   });
 </script>
 
@@ -95,11 +147,18 @@
 
 <style>
   button {
+    position: fixed;
     text-decoration: none;
+    width:60px;
+    height:60px;
+    bottom:40px;
+    right:40px;
     transition: 0.1s;
     padding: 0.75em 1.5em;
-    border-radius: 4px;
-    background: transparent;
+    background: var(--code-bkg-color);
+    border-radius: 50px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    text-align:center;
     font-weight: 600;
     border: none;
     cursor: pointer;

@@ -10,7 +10,15 @@
 
   import DiGithubBadge from "svelte-icons/di/DiGithubBadge.svelte";
   import FaRssSquare from "svelte-icons/fa/FaRssSquare.svelte";
+  import { SvelteToast, toast } from '@zerodevx/svelte-toast'
+
 </script>
+
+<script>
+  const options = {}
+</script>
+
+<SvelteToast {options} />
 
 <main class="line-numbers match-braces rainbow-braces Prose">
   <slot />
