@@ -1,0 +1,41 @@
+name: Build and Deploy
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install pdflatex
+        run: |
+          sudo apt-get update
+          sudo apt install texlive-latex-extra texlive-base texlive-fonts-extra pdf2svg imagemagick ghostscript
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          cargo install svgbob_cli
+          cargo install stork-search --locked
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+      - name: Install pipenv
+        run: pipx install pipenv
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - run: pipenv install
+      - uses: actions/setup-node@v2
+      - name: Build
+        run: |
+          wget https://github.com/jgm/pandoc/releases/download/2.17.1.1/pandoc-2.17.1.1-1-amd64.deb -O /tmp/pandoc.deb
+          sudo dpkg -i /tmp/pandoc.deb
+          pandoc --version
+          node --version
+          svgbob_cli --version
+          python --version
+          npm install
+          NODE_ENV=production pipenv run npm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: build
+          single-commit: true
