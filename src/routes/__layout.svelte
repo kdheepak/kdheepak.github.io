@@ -52,7 +52,7 @@
   <div>
     Made with <a target="_blank" href="https://kit.svelte.dev/docs">SvelteKit</a>,
     <a target="_blank" href="https://pandoc.org">Pandoc</a>
-    and <a target="_blank" href="https://edwardtufte.github.io/tufte-css/">TufteCSS</a>.
+    and <a target="_blank" href="https://edwardtufte.github.io/tufte-css/">Tufte CSS</a>.
   </div>
 
 </footer>
