@@ -37,7 +37,7 @@ function pandoc(input, ...args) {
     "-t",
     "html",
     "--email-obfuscation",
-    "javascript",
+    "references",
     "--shift-heading-level=0",
     "--no-highlight",
     "--section-divs",
