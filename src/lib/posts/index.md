@@ -5,7 +5,7 @@ nocite: '@*'
 # About me
 
 I'm a research engineer and software developer at the National Renewable Energy Laboratory (NREL, Golden, CO, USA).
-I have experience running power system models and simulations, such as transmission production cost models and power distribution system analyses, and have written and maintained bespoke models for energy system analysis.
+I have experience running power system models and simulations, such as transmission production cost models and power distribution system analyses, and have developed bespoke models for energy system analysis.
 I'm proficient with Python, Julia, Rust, and Javascript, and am well versed in scientific data analysis and extract transform load workflows. I also enjoy working on open source projects and learning new technologies.
 
 See my [GitHub](https://github.com/kdheepak), [Google Scholar](https://scholar.google.com/citations?user=nIXeaL0AAAAJ&hl=en) or [LinkedIn](https://www.linkedin.com/in/dheepak-krishnamurthy/) pages for more information.
