@@ -1,12 +1,14 @@
+---
+nocite: '@*'
+---
+
 # About me
 
 I'm a research engineer and software developer at the National Renewable Energy Laboratory (NREL, Golden, CO, USA).
 I have experience running power system models and simulations, such as transmission production cost models and power distribution system analyses, and have written and maintained bespoke models for energy system analysis.
 I'm highly proficient with Python, Julia, Rust, and Javascript, and am well versed in scientific data analysis and extract transform load workflows. I also enjoy working on open source projects and learning new technologies.
 
-[GitHub](https://github.com/kdheepak)
-
-[Contact](mailto:me@kdheepak.com)
+See my [GitHub](https://github.com/kdheepak), [Google Scholar](https://scholar.google.com/citations?user=nIXeaL0AAAAJ&hl=en) or [LinkedIn](https://www.linkedin.com/in/dheepak-krishnamurthy/) pages for more information.
 
 # Blog
 
@@ -46,11 +48,3 @@ Delphi/Pascal.
 [TerminalUserInterfaces.jl](https://github.com/kdheepak/TerminalUserInterfaces.jl): A terminal user interface library written in Julia.
 
 [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim): A Lua based neovim plugin for interfacing with lazygit.
-
-# Papers
-
-[Energy storage arbitrage under day-ahead and real-time price uncertainty](https://ieeexplore.ieee.org/abstract/document/7892020) - **D Krishnamurthy**, C Uckun, Z Zhou, PR Thimmapuram, A Botterud, IEEE Transactions on Power Systems 33 (1), 84-93
-
-[An 8-zone test system based on ISO New England data: Development and application](https://ieeexplore.ieee.org/abstract/document/7039273) - **D Krishnamurthy**, W Li, L Tesfatsion, IEEE Transactions on Power Systems 31 (1), 234-246
-
-[See Google Scholar for more](https://scholar.google.com/citations?user=nIXeaL0AAAAJ&hl=en)
