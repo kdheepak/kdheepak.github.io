@@ -1,4 +1,4 @@
-## About me
+# About me
 
 I'm a research engineer and software developer at the National Renewable Energy Laboratory (NREL, Golden, CO, USA).
 I have a lot of experience running power system models and simulations, such as transmission production cost models and power distribution system analyses, and have written and maintained bespoke models for energy system analysis.
@@ -8,11 +8,11 @@ I'm highly proficient with Python, Julia, Rust, and Javascript, and am well vers
 
 [Contact](mailto:me@kdheepak.com)
 
-## Blog
+# Blog
 
 <https://blog.kdheepak.com>
 
-## Talks and Tutorials
+# Talks and Tutorials
 
 [Terminal User Interfaces in Julia](https://www.youtube.com/watch?v=-TASx67pphw)
 
@@ -32,7 +32,7 @@ I'm highly proficient with Python, Julia, Rust, and Javascript, and am well vers
 
 <https://kdheepak.com/interactive-data-visualizations-with-bokeh/>
 
-## Projects
+# Projects
 
 [HELICS](https://github.com/GMLC-TDC/HELICS)
 
@@ -51,3 +51,11 @@ I'm highly proficient with Python, Julia, Rust, and Javascript, and am well vers
 [TerminalUserInterfaces.jl](https://github.com/kdheepak/TerminalUserInterfaces.jl)
 
 [github-release](https://github.com/kdheepak/github-release)
+
+# Papers
+
+[Energy storage arbitrage under day-ahead and real-time price uncertainty - **D Krishnamurthy**, C Uckun, Z Zhou, PR Thimmapuram, A Botterud, IEEE Transactions on Power Systems 33 (1), 84-93](https://ieeexplore.ieee.org/abstract/document/7892020)
+
+[An 8-zone test system based on ISO New England data: Development and application - **D Krishnamurthy**, W Li, L Tesfatsion, IEEE Transactions on Power Systems 31 (1), 234-246](https://ieeexplore.ieee.org/abstract/document/7039273)
+
+[Google Scholar](https://scholar.google.com/citations?user=nIXeaL0AAAAJ&hl=en)
