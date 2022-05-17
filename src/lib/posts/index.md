@@ -54,8 +54,8 @@ I'm highly proficient with Python, Julia, Rust, and Javascript, and am well vers
 
 # Papers
 
-[Energy storage arbitrage under day-ahead and real-time price uncertainty - **D Krishnamurthy**, C Uckun, Z Zhou, PR Thimmapuram, A Botterud, IEEE Transactions on Power Systems 33 (1), 84-93](https://ieeexplore.ieee.org/abstract/document/7892020)
+[Energy storage arbitrage under day-ahead and real-time price uncertainty](https://ieeexplore.ieee.org/abstract/document/7892020) - **D Krishnamurthy**, C Uckun, Z Zhou, PR Thimmapuram, A Botterud, IEEE Transactions on Power Systems 33 (1), 84-93
 
-[An 8-zone test system based on ISO New England data: Development and application - **D Krishnamurthy**, W Li, L Tesfatsion, IEEE Transactions on Power Systems 31 (1), 234-246](https://ieeexplore.ieee.org/abstract/document/7039273)
+[An 8-zone test system based on ISO New England data: Development and application](https://ieeexplore.ieee.org/abstract/document/7039273) - **D Krishnamurthy**, W Li, L Tesfatsion, IEEE Transactions on Power Systems 31 (1), 234-246
 
-[Google Scholar](https://scholar.google.com/citations?user=nIXeaL0AAAAJ&hl=en)
+[See Google Scholar for more](https://scholar.google.com/citations?user=nIXeaL0AAAAJ&hl=en)
