@@ -24,11 +24,15 @@ See my [GitHub](https://github.com/kdheepak), [Google Scholar](https://scholar.g
 
 [Open Source Power System Production Cost Modeling in Julia](https://www.youtube.com/watch?v=1TipY6g9IzE)
 
-<https://github.com/kdheepak/Python-Tutorial>
+[Scalable Power System Modeling and Analysis](https://www.youtube.com/watch?v=-ZoO3npjwYU)
 
-<https://github.com/GMLC-TDC/pesgm-2019-helics-tutorial>
+<https://github.com/NREL-SIIP/SIIP-Tutorial/>
 
-<https://github.com/kdheepak/openmod-2019-helics-tutorial>
+<https://github.com/kdheepak/Python-Tutorial/>
+
+<https://github.com/GMLC-TDC/pesgm-2019-helics-tutorial/>
+
+<https://github.com/kdheepak/openmod-2019-helics-tutorial/>
 
 <https://kdheepak.com/think-git/>
 
