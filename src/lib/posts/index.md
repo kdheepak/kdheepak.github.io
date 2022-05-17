@@ -34,23 +34,18 @@ I'm highly proficient with Python, Julia, Rust, and Javascript, and am well vers
 
 # Projects
 
-[HELICS](https://github.com/GMLC-TDC/HELICS)
+[taskwarror-tui](https://github.com/kdheepak/taskwarrior-tui): A terminal user interface for taskwarrior written in Rust.
 
-[HELICS.jl](https://github.com/GMLC-TDC/HELICS.jl)
+[HELICS](https://github.com/GMLC-TDC/HELICS): A co-simulation framework as a C/C++ library.
 
-[HELICS.nim](https://github.com/GMLC-TDC/helics.nim)
+[pyhelics](https://github.com/GMLC-TDC/pyhelics): A CFFI interface to HELICS written in Python, with a SvelteKit + Flask server based user interface for better UX.
 
-[helics-cli](https://github.com/GMLC-TDC/helics-cli)
+[OpenDSSDirect.py](https://github.com/dss-extensions/OpenDSSDirect.py): A CFFI interface to OpenDSS, a distribution system solver in
+Delphi/Pascal.
 
-[dss-extension](https://github.com/dss-extensions)
+[TerminalUserInterfaces.jl](https://github.com/kdheepak/TerminalUserInterfaces.jl): A terminal user interface library written in Julia.
 
-[OpenDSSDirect.py](https://github.com/dss-extensions/OpenDSSDirect.py)
-
-[OpenDSSDirect.jl](https://github.com/dss-extensions/OpenDSSDirect.jl)
-
-[TerminalUserInterfaces.jl](https://github.com/kdheepak/TerminalUserInterfaces.jl)
-
-[github-release](https://github.com/kdheepak/github-release)
+[lazygit.nvim](https://github.com/kdheepak/lazygit.nvim): A Lua based neovim plugin for interfacing with lazygit.
 
 # Papers
 
