@@ -10,12 +10,11 @@
 
   import DiGithubBadge from "svelte-icons/di/DiGithubBadge.svelte";
   import FaRssSquare from "svelte-icons/fa/FaRssSquare.svelte";
-  import { SvelteToast, toast } from '@zerodevx/svelte-toast'
-
+  import { SvelteToast, toast } from "@zerodevx/svelte-toast";
 </script>
 
 <script>
-  const options = {}
+  const options = {};
 </script>
 
 <SvelteToast {options} />
@@ -54,7 +53,6 @@
     <a target="_blank" href="https://pandoc.org">Pandoc</a>
     and <a target="_blank" href="https://edwardtufte.github.io/tufte-css/">Tufte CSS</a>.
   </div>
-
 </footer>
 
 <style>

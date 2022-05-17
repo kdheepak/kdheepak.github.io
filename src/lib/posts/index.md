@@ -1,5 +1,5 @@
 ---
-nocite: '@*'
+nocite: "@*"
 ---
 
 # About me

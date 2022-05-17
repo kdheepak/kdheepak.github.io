@@ -2,8 +2,6 @@
   import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
 
   import index from "$lib/posts/index.md";
-
-
 </script>
 
 <script>
@@ -47,11 +45,9 @@
     </div>
   </header>
 
-
   <section>
     <svelte:component this={index} />
   </section>
-
 </article>
 
 <style>
