@@ -51,6 +51,8 @@ function pandoc(input, ...args) {
     "--filter",
     "pandoc-tablenos",
     "--citeproc",
+    "--csl",
+    "./pandoc/csl.csl",
     "--metadata",
     "link-citations=true",
     "--bibliography=./pandoc/papers.bib",
