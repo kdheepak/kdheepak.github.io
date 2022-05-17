@@ -19,7 +19,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Install pdflatex
+      - name: Run apt update and install
         run: |
           sudo apt-get update
           sudo apt install texlive-latex-extra texlive-base texlive-fonts-extra pdf2svg imagemagick ghostscript
