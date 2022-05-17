@@ -40,7 +40,7 @@ See my [GitHub](https://github.com/kdheepak), [Google Scholar](https://scholar.g
 
 [HELICS](https://github.com/GMLC-TDC/HELICS): A co-simulation framework as a C/C++ library.
 
-[pyhelics](https://github.com/GMLC-TDC/pyhelics): A CFFI interface to HELICS written in Python, with a SvelteKit + Flask server based user interface for better UX.
+[pyhelics](https://github.com/GMLC-TDC/pyhelics): A CFFI interface to HELICS written in Python, with a CLI for process runner, and web client to python server based user interface for better UX.
 
 [OpenDSSDirect.py](https://github.com/dss-extensions/OpenDSSDirect.py): A CFFI interface to OpenDSS, a distribution system solver in
 Delphi/Pascal.
