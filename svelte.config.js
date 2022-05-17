@@ -57,6 +57,22 @@ function pandoc(input, ...args) {
     'notes-after-punctuation=false',
     '--metadata',
     'reference-section-title=References',
+    "--lua-filter",
+    "./pandoc/render.lua",
+    "--lua-filter",
+    "./pandoc/ref-section-level.lua",
+    "--lua-filter",
+    "./pandoc/links-target-blank.lua",
+    "--lua-filter",
+    "./pandoc/section-prefix.lua",
+    "--lua-filter",
+    "./pandoc/sidenote.lua",
+    "--lua-filter",
+    "./pandoc/standard-code.lua",
+    "--lua-filter",
+    "./pandoc/alert.lua",
+    "--lua-filter",
+    "./pandoc/fix-image-links.lua",
   ].concat(args)
   let pandoc
   input = Buffer.from(input)
