@@ -32,9 +32,11 @@
 
 <article>
   <header>
-    <h1 class="title">
-      <a href="https://kdheepak.com">~</a> /
-    </h1>
+    <div class="flex">
+      <h1 class="title">
+        <a href="https://kdheepak.com">~</a> /
+      </h1>
+    </div>
     <div class="flex space-between main-subtitle">
       <div class="subtitle sourceurl">
         <a target="_blank" href="https://github.com/kdheepak/kdheepak.github.io">
@@ -53,5 +55,12 @@
 <style>
   .flex {
     display: flex;
+    align-items: center;
   }
+
+  .subtitle {
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+
 </style>
