@@ -1,5 +1,6 @@
 <script context="module">
   import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
+  import FaRegCalendarAlt from "svelte-icons/fa/FaRegCalendarAlt.svelte";
 
   import index from "$lib/posts/index.md";
 </script>
@@ -37,14 +38,21 @@
         <a href="https://kdheepak.com">~</a> /
       </h1>
     </div>
-    <div class="flex space-between main-subtitle">
+    <div class="flex items-center main-subtitle">
       <div class="subtitle sourceurl">
+        <div class="tag">
+          <FaRegCalendarAlt />
+        </div>
         <a target="_blank" href="https://github.com/kdheepak/kdheepak.github.io">
           {humanDate}
         </a>
         <DarkModeToggle />
       </div>
+      <div class="flex items-center">
+        <p>&nbsp;</p>
+      </div>
     </div>
+
   </header>
 
   <section>
@@ -53,14 +61,24 @@
 </article>
 
 <style>
-  .flex {
-    display: flex;
-    align-items: center;
-  }
-
   .subtitle {
     margin-top: 1.4rem;
     margin-bottom: 1.4rem;
+    padding-right: 0;
+    vertical-align: baseline;
   }
 
+  .flex {
+    display: flex;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .tag {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: var(--text-color);
+  }
 </style>
