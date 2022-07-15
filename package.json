@@ -43,7 +43,7 @@
     "rehype-stringify": "^9.0.2",
     "sass": "^1.48.0",
     "shiki": "^0.10.0",
-    "svelte": "^3.46.4",
+    "svelte": "^3.49.0",
     "svelte-check": "^2.2.6",
     "svelte-cubed": "^0.2.1",
     "svelte-highlight": "^5.2.0",
