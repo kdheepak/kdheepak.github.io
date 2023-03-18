@@ -128,11 +128,11 @@ div.csl-indent {
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Raspberry Pi Powered LED Lamp">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/raspberrypilamp.gif">
+<meta property="og:image" content="https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/images/raspberrypilamp.gif">
 <meta property="og:site-name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - Raspberry Pi Powered LED Lamp">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/raspberrypilamp.gif">
+<meta name="twitter:image" content="https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/images/raspberrypilamp.gif">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -231,7 +231,7 @@ div.csl-indent {
 
 
 
-<div class="page-columns page-full"><p>With a Raspberry Pi, you can control a RGB addressable LED strip. The instructions are very simple <span class="citation" data-cites="led"><a href="#ref-led" role="doc-biblioref">[1]</a></span> and the results are pretty cool. I decided to make a desk lamp with a web interface. This post will go through the steps to build your own Pi powered desk lamp.</p><div class="no-row-height column-margin column-container"><span class=""><img src="raspberrypilamp.gif" class="quarto-discovered-preview-image img-fluid" alt="Raspberry Pi Powered LED Desk Lamp"></span></div></div>
+<div class="page-columns page-full"><p>With a Raspberry Pi, you can control a RGB addressable LED strip. The instructions are very simple <span class="citation" data-cites="led"><a href="#ref-led" role="doc-biblioref">[1]</a></span> and the results are pretty cool. I decided to make a desk lamp with a web interface. This post will go through the steps to build your own Pi powered desk lamp.</p><div class="no-row-height column-margin column-container"><span class=""><img src="images/raspberrypilamp.gif" class="quarto-discovered-preview-image img-fluid" alt="Raspberry Pi Powered LED Desk Lamp"></span></div></div>
 <section id="requirements" class="level2">
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <ul>
@@ -249,11 +249,13 @@ div.csl-indent {
 <section id="hardware" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="hardware">Hardware</h3>
 <p>To use SPI on the Raspberry Pi, you need to connect 4 pins. Adafruit has an excellent image in their tutorial that shows how you can do this, which I’ve also linked below.</p>
+<div class="column-screen page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="raspberry_pi_diagram.png" class="fullwidth img-fluid figure-img"></p>
+<p><img src="images/raspberry_pi_diagram.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption margin-caption">Wiring Diagram</figcaption><p></p>
 </figure>
+</div>
 </div>
 <p>I’ve used the same power source to the LED strip to power the Raspberry Pi as well.</p>
 <p>I found the lamp shades on <a href="https://www.amazon.com/s/field-keywords=puzzle+lamp">Amazon</a>. I purchased them in white, since the LEDs are RGB.</p>

@@ -129,13 +129,13 @@ div.csl-indent {
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Understanding Variables and Mutability in Julia">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/bookshelf-analogy.png">
+<meta property="og:image" content="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/images/bookshelf-analogy.png">
 <meta property="og:site-name" content="kdheepak">
 <meta property="og:image:height" content="3904">
 <meta property="og:image:width" content="6793">
 <meta name="twitter:title" content="kdheepak - Understanding Variables and Mutability in Julia">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/bookshelf-analogy.png">
+<meta name="twitter:image" content="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/images/bookshelf-analogy.png">
 <meta name="twitter:image-height" content="3904">
 <meta name="twitter:image-width" content="6793">
 <meta name="twitter:card" content="summary_large_image">
@@ -250,7 +250,7 @@ div.csl-indent {
 <div class="page-columns page-full"><p>I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective.</p><div class="no-row-height column-margin column-container"><span class="">While analogies can be useful because they allow us to understand complex concepts by comparing them to something more familiar or simpler, they can also be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand any subject, I recommend using multiple different analogies to bolster your confidence and then dive deeper into the subject matter to harden your intuition.</span></div></div>
 <p>Imagine you are at a library full of books on bookshelves, but they are all over the place and you can’t find what you want. Also, you can’t interact directly with the books or bookshelves.</p>
 <p>Instead, you have to ask a very smart and helpful librarian, who knows where all the books are and can help you find what you need, to retrieve or modify the books for you. But in order for them to help you, you are form a pact with the librarian to speak in a very specific language with certain rules and decrees.</p>
-<p><img src="bookshelf-analogy.png" class="quarto-discovered-preview-image img-fluid"></p>
+<p><img src="images/bookshelf-analogy.png" class="quarto-discovered-preview-image img-fluid"></p>
 <p>In this mental model, you can think of a program’s memory as a number of bookshelves in a library. The librarian represents the Julia program (i.e.&nbsp;command line interface, the language semantics, the LLVM compiler, etc), and the text in the <code>.jl</code> files is how you communicate using the Julia language.</p>
 <p>To interact with the bookshelf (i.e., the program’s memory), the Julia language, as part of its vocabulary, provides you with functions and variables among other things.</p>
 <p>Functions in Julia are like a set of instructions that you give to the librarian, telling them what actions you’d like to take with the books.</p>

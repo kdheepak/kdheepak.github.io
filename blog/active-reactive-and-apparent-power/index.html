@@ -111,13 +111,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Active, Reactive and Apparent Power">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/active-reactive-and-apparent-power/power_3_0.png">
+<meta property="og:image" content="https://kdheepak.com/blog/active-reactive-and-apparent-power/images/power_3_0.png">
 <meta property="og:site-name" content="kdheepak">
 <meta property="og:image:height" content="3000">
 <meta property="og:image:width" content="4800">
 <meta name="twitter:title" content="kdheepak - Active, Reactive and Apparent Power">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/active-reactive-and-apparent-power/power_3_0.png">
+<meta name="twitter:image" content="https://kdheepak.com/blog/active-reactive-and-apparent-power/images/power_3_0.png">
 <meta name="twitter:image-height" content="3000">
 <meta name="twitter:image-width" content="4800">
 <meta name="twitter:card" content="summary_large_image">
@@ -257,7 +257,7 @@ Code
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_3_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="power_3_0.png" class="quarto-discovered-preview-image img-fluid"></p>
+<p><img src="images/power_3_0.png" class="quarto-discovered-preview-image img-fluid"></p>
 <p>We can calculate the maximum, minimum and the RMS value as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rms(x):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(np.mean(x<span class="op">**</span><span class="dv">2</span>))</span>
@@ -334,7 +334,7 @@ Code
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_11_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="power_11_0.png" class="img-fluid"></p>
+<p><img src="images/power_11_0.png" class="img-fluid"></p>
 <p>We can decompose the instantaneous power following the steps below.</p>
 <p><span class="math inline">\(v_{an} = V_{max} \cos(\omega t + \theta)\)</span></p>
 <p><span class="math inline">\(i_{an} = I_{max} \cos\omega t\)</span></p>
@@ -412,7 +412,7 @@ Code
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"power_16_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="power_16_0.png" class="img-fluid"></p>
+<p><img src="images/power_16_0.png" class="img-fluid"></p>
 <p>The blue line (active power) is always positve and has an average value of <span class="math inline">\(\frac{V_{max}I_{max}}{2}\cos\theta\)</span>. If we use RMS values, we get</p>
 <p><span class="math inline">\(P = \frac{V_{max}}{\sqrt{2}} \frac{I_{max}}{\sqrt{2}} \cos\theta\)</span></p>
 <p><span class="math inline">\(P = |V||I|\cos\theta\)</span></p>
@@ -450,7 +450,7 @@ Code
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>d.draw(ax<span class="op">=</span>ax, show<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./schemdraw.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="schemdraw.png" class="img-fluid"></p>
+<p><img src="images/schemdraw.png" class="img-fluid"></p>
 <details>
 <summary>
 Code
@@ -475,7 +475,7 @@ Code
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_20_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="./power_20_0.png" class="img-fluid"></p>
+<p><img src="images/./power_20_0.png" class="img-fluid"></p>
 <p>We know that <span class="math inline">\(\theta\)</span> is the phase difference between the Voltage and Current.</p>
 <p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t) + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta\)</span></p>
 <p>The first term can be rewritten as</p>
@@ -549,7 +549,7 @@ Code
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_26_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="power_26_0.png" class="img-fluid"></p>
+<p><img src="images/power_26_0.png" class="img-fluid"></p>
 <p>The Instantaneous power in the phase is equal to the active power.</p>
 </section>
 <section id="case-2-theta-is-90" class="level3">
@@ -608,7 +608,7 @@ Code
 <span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_30_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="power_30_0.png" class="img-fluid"></p>
+<p><img src="images/power_30_0.png" class="img-fluid"></p>
 <p>The Instantaneous power in the phase is equal to the reactive power. The power oscillates between the source and the inductive circuit.</p>
 </section>
 <section id="case-3-theta-is--90" class="level3">
@@ -667,7 +667,7 @@ Code
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_34_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="power_34_0.png" class="img-fluid"></p>
+<p><img src="images/power_34_0.png" class="img-fluid"></p>
 <p>In a purely capacitive circuit, power oscillates between the source and electric field associated with the capacitor.</p>
 </section>
 </section>

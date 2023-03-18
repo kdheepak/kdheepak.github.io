@@ -110,11 +110,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Three built-in neovim features">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/three-builtin-neovim-features/nvim-live-substitution.mov.gif">
+<meta property="og:image" content="https://kdheepak.com/blog/three-builtin-neovim-features/images/nvim-live-substitution.mov.gif">
 <meta property="og:site-name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - Three built-in neovim features">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/three-builtin-neovim-features/nvim-live-substitution.mov.gif">
+<meta name="twitter:image" content="https://kdheepak.com/blog/three-builtin-neovim-features/images/nvim-live-substitution.mov.gif">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="live-substitution" class="level2">
 <h2 class="anchored" data-anchor-id="live-substitution">Live Substitution</h2>
 <p>By default, <code>vim</code>’s <code>:substitute</code> command only modifies the document when you execute the command by pressing <code>Enter</code> (<code>&lt;CR&gt;</code>). In <code>neovim</code>, you can update the document interactively. <code>neovim</code> also shows you a preview window of all the changes you are going to make in the document.</p>
-<p><img src="nvim-live-substitution.mov.gif" class="quarto-discovered-preview-image img-fluid"></p>
+<p><img src="images/nvim-live-substitution.mov.gif" class="quarto-discovered-preview-image img-fluid"></p>
 <p>Just add the following option to your <code>vimrc</code> file.</p>
 <pre class="vim"><code>set inccommand=split</code></pre>
 </section>
@@ -222,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="highlight-yanked-text">Highlight Yanked Text</h2>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you want to use this feature in <code>neovim</code> v0.4.x or in <code>vim</code> 8, you can do so with <a href="https://github.com/machakann/vim-highlightedyank">this</a> or <a href="https://github.com/statox/FYT.vim">this</a> plugin. Also, check out this well written <a href="https://www.statox.fr/posts/vim/vim_flash_yanked_text/">post</a> on how this works under the hood.</span></div></div>
 <p>With the latest version of neovim, you have the ability to highlight yanked text without using any plugins.</p>
-<p><img src="nvim-highlight-yank.mov.gif" class="img-fluid"></p>
+<p><img src="images/nvim-highlight-yank.mov.gif" class="img-fluid"></p>
 <p>At the time of writing, you’ll need a <code>v0.5.0</code> or the <code>nightly</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> release of <code>neovim</code> for this feature.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvim</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>NVIM v0.5.0-556-ge78658348</code></pre>
@@ -237,7 +237,7 @@ augroup END</code></pre>
 <p><code>neovim</code> has a built-in implementation of the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> client and <a href="https://github.com/neovim/nvim-lsp">default configurations for over 50 languages</a>.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="nvim-built-in-lsp.mov.gif" class="img-fluid figure-img"></p>
+<p><img src="images/nvim-built-in-lsp.mov.gif" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption margin-caption">Completion, diagnostics and jump to references in lua.</figcaption><p></p>
 </figure>
 </div>

@@ -131,11 +131,11 @@ div.csl-indent {
 <link rel="stylesheet" href="equation.css">
 <meta property="og:title" content="kdheepak - The egg tower puzzle">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/pascaltriangle.svg">
+<meta property="og:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/images/pascaltriangle.svg">
 <meta property="og:site-name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - The egg tower puzzle">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/pascaltriangle.svg">
+<meta name="twitter:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/images/pascaltriangle.svg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -241,10 +241,7 @@ div.csl-indent {
 </blockquote>
 <p><strong><em>Spoiler warning</em></strong>: If you have not seen this problem before I urge you to give it a go before continuing further. I’m going to post the solution to this below, so this is your spoiler warning.</p>
 <p>If you are interested in an easy to understand intuitive explanation to the <span class="math inline">\(2\)</span> egg <span class="math inline">\(100\)</span> storey tower problem, check out the following video:</p>
-<figure class="iframe-wrapper figure">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NGtt7GJ1uiM?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-</iframe>
-</figure>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/NGtt7GJ1uiM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>We will go through this problem for the <span class="math inline">\(2\)</span> eggs and <span class="math inline">\(3\)</span> eggs variant, and derive the solution mathematically. Then, we will generalize the problem with <span class="math inline">\(x\)</span> floors and <span class="math inline">\(N\)</span> eggs.</p>
 <section id="two-eggs" class="level2">
 <h2 class="anchored" data-anchor-id="two-eggs">Two eggs</h2>
@@ -333,7 +330,7 @@ div.csl-indent {
 <p>Eagle eye readers will notice a pattern.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="pascaltriangle.svg" class="quarto-discovered-preview-image img-fluid figure-img"></p>
+<p><img src="images/pascaltriangle.svg" class="quarto-discovered-preview-image img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption margin-caption">Binomial coefficients in Pascal’s triangle</figcaption><p></p>
 </figure>
 </div>
@@ -608,14 +605,14 @@ div.csl-indent {
 <p>You’ll notice that the upper right corner of the table stays the same if you increase the number of eggs you have at your disposal. You can see this even more clearly in this visualization.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="egg-puzzle.png" class="img-fluid figure-img"></p>
+<p><img src="images/egg-puzzle.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption margin-caption">The relationship between the number of floors that can be checked, the number of drops and number of eggs.</figcaption><p></p>
 </figure>
 </div>
 <p>There’s a minimal number of drops required to guarantee that you will find the breaking floor, even if you have unlimited eggs.</p>
 <p>If you want to check <span class="math inline">\(7\)</span> floors, as long as you have more than <span class="math inline">\(3\)</span> eggs, you can have to use a minimum of 3 drops to guarantee finding the breaking floor.</p>
 <p>For 100 floors, it is <span class="math inline">\(7\)</span> drops. If you had unlimited eggs, you would use the largest partition possible. That means dividing the total floors by <span class="math inline">\(2\)</span>.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 </div>

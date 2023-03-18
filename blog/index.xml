@@ -151,7 +151,7 @@
   <title>Using pre-commit hooks</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/using-precommit-hooks/index.html</link>
-  <description><![CDATA[ <img src="https://kdheepak.com/blog/using-precommit-hooks/pre-commit-hooks.png" class="fullwidth quarto-discovered-preview-image img-fluid figure-img"> ]]></description>
+  <description><![CDATA[ <img src="https://kdheepak.com/blog/using-precommit-hooks/images/pre-commit-hooks.png" class="quarto-discovered-preview-image img-fluid figure-img"> ]]></description>
   <category>git</category>
   <category>python</category>
   <guid>https://kdheepak.com/blog/using-precommit-hooks/index.html</guid>
@@ -272,7 +272,7 @@
   <title>Spotify and tmux</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/spotify-and-tmux/index.html</link>
-  <description><![CDATA[ <img src="https://kdheepak.com/blog/spotify-and-tmux/tmux-spotify.png" class="quarto-discovered-preview-image img-fluid"> ]]></description>
+  <description><![CDATA[ <img src="https://kdheepak.com/blog/spotify-and-tmux/images/tmux-spotify.png" class="quarto-discovered-preview-image img-fluid"> ]]></description>
   <category>tmux</category>
   <guid>https://kdheepak.com/blog/spotify-and-tmux/index.html</guid>
   <pubDate>Sun, 20 Sep 2015 15:26:15 GMT</pubDate>
@@ -328,7 +328,7 @@
   <title>Emacs workflow — Using Emacs in the terminal</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/emacs-workflow-using-emacs-in-the-terminal/index.html</link>
-  <description><![CDATA[ I use the command line a lot, frequently editing files locally or remotely. Up until now, I’ve been using <a href="../../blog/vim-tmux-zsh/index.html">vim with tmux and zsh</a>. I’ve recently been experimenting with emacs and have been trying to get it to work well inplace of vim. I personally think the author of <a href="https://mjwall.com/blog/2013/10/04/how-i-use-emacs/">this post</a> nailed it regarding emacs workflow. I’ve only made minor modifications to get it to suit my requirements. ]]></description>
+  <description><![CDATA[ I use the command line a lot, frequently editing files locally or remotely. Up until now, I’ve been using <a href="./../vim-tmux-zsh/">vim with tmux and zsh</a>. I’ve recently been experimenting with emacs and have been trying to get it to work well inplace of vim. I personally think the author of <a href="https://mjwall.com/blog/2013/10/04/how-i-use-emacs/">this post</a> nailed it regarding emacs workflow. I’ve only made minor modifications to get it to suit my requirements. ]]></description>
   <category>emacs</category>
   <category>tmux</category>
   <guid>https://kdheepak.com/blog/emacs-workflow-using-emacs-in-the-terminal/index.html</guid>

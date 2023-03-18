@@ -110,13 +110,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Advent of Code 2020 Retrospective">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/advent-of-code-2020-retrospective/advent-of-code-2020-stars.png">
+<meta property="og:image" content="https://kdheepak.com/blog/advent-of-code-2020-retrospective/images/advent-of-code-2020-stars.png">
 <meta property="og:site-name" content="kdheepak">
 <meta property="og:image:height" content="75">
 <meta property="og:image:width" content="610">
 <meta name="twitter:title" content="kdheepak - Advent of Code 2020 Retrospective">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/advent-of-code-2020-retrospective/advent-of-code-2020-stars.png">
+<meta name="twitter:image" content="https://kdheepak.com/blog/advent-of-code-2020-retrospective/images/advent-of-code-2020-stars.png">
 <meta name="twitter:image-height" content="75">
 <meta name="twitter:image-width" content="610">
 <meta name="twitter:card" content="summary_large_image">
@@ -242,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>It is Christmas night, and it is the first time this month that I haven’t had to plan my schedule for the evening around a programming puzzle contest. For the last 25 days this month, I participated in <a href="https://adventofcode.com/2020/">Advent of Code 2020</a>, and I managed to collect all 50 stars!</p>
-<p><img src="advent-of-code-2020-stars.png" class="quarto-discovered-preview-image img-fluid"></p>
+<p><img src="images/advent-of-code-2020-stars.png" class="quarto-discovered-preview-image img-fluid"></p>
 <p>I solved all the puzzles in the <a href="https://julialang.org/">Julia</a> programming language, and my solutions are available <a href="https://github.com/kdheepak/adventofcode/tree/master/2020/julia/src">here</a>.</p>
 <p>In this post, I wanted to share why I think you should do Advent of Code and idiomatic solutions to all 25 days in the Julia programming language.</p>
 <section id="why-advent-of-code" class="level2">
@@ -563,7 +563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(data <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">part2</span>(data[<span class="fl">1</span>], data[<span class="fl">2</span>])</span>
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(g, mapping) <span class="op">=</span> <span class="fu">total_bags</span>(g, mapping[<span class="st">"shiny gold bag"</span>]) <span class="op">-</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="adventofcode-day07-part1.png" class="img-fluid" style="width:45.0%" alt="part1"> <img src="adventofcode-day07-part2.png" class="img-fluid" style="width:45.0%" alt="part2"></p>
+<p><img src="images/adventofcode-day07-part1.png" class="img-fluid" style="width:45.0%" alt="part1"> <img src="images/adventofcode-day07-part2.png" class="img-fluid" style="width:45.0%" alt="part2"></p>
 <p>Julia allows for <a href="https://docs.julialang.org/en/v1/manual/methods/">multiple dispatch</a> based on the number of arguments and the type of each argument. This lets you define multiple methods of a function.</p>
 </section>
 <section id="day-8-handheld-halting" class="level3">
@@ -817,7 +817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Thanks to <a href="https://github.com/cmcaine/advent2020/blob/aae90d873af5a7ce870a1e0bb0355b598ee389fe/src/day12.jl">Colin Caine</a> for suggesting using <code>if ... elseif ... end</code> for minor performance improvements. Check out his other solutions for more optimized takes on the problems.</p>
 <p><a href="https://github.com/mkborregaard">Michael Krabbe Borregaard</a> had some neat visualizations for this day.</p>
-<p><img src="adventofcode-day12-part1.png" class="img-fluid" style="width:45.0%" alt="part1"> <img src="adventofcode-day12-part2.png" class="img-fluid" style="width:45.0%" alt="part2"></p>
+<p><img src="images/adventofcode-day12-part1.png" class="img-fluid" style="width:45.0%" alt="part1"> <img src="images/adventofcode-day12-part2.png" class="img-fluid" style="width:45.0%" alt="part2"></p>
 </section>
 <section id="day-13-shuttle-search" class="level3">
 <h3 class="anchored" data-anchor-id="day-13-shuttle-search"><a href="https://adventofcode.com/2020/day/13">Day 13: Shuttle Search</a></h3>
@@ -1466,7 +1466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb50-69"><a href="#cb50-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span>)</span>
 <span id="cb50-70"><a href="#cb50-70" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here are a couple of visualizations, the test data visualized as a graph is on the left and the maximum flow solution on the right.</p>
-<p><img src="adventofcode-day21-part1-1.png" class="img-fluid" style="width:45.0%" alt="Input data"> <img src="adventofcode-day21-part1-2.png" class="img-fluid" style="width:45.0%" alt="Maximum flow solution"></p>
+<p><img src="images/adventofcode-day21-part1-1.png" class="img-fluid" style="width:45.0%" alt="Input data"> <img src="images/adventofcode-day21-part1-2.png" class="img-fluid" style="width:45.0%" alt="Maximum flow solution"></p>
 </section>
 <section id="day-22-crab-combat" class="level3">
 <h3 class="anchored" data-anchor-id="day-22-crab-combat"><a href="https://adventofcode.com/2020/day/22">Day 22: Crab Combat</a></h3>
