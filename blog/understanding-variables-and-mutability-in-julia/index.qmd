@@ -284,7 +284,7 @@ In the analogy of the bookshelf, using `deepcopy()` would be like asking the lib
 The new object created is completely independent from the old, with its own unique address.
 Any changes made to the original object will not affect the copy and vice versa.
 
-::: tip
+::: callout-tip
 Assignments always create labels, and may replace the value in an existing label with a new one.
 :::
 
@@ -373,7 +373,7 @@ It's like erasing and re-writing some of the information on a page, without chan
 
 If a book is mutable, you can add or remove pages or modify existing pages, while if a book is not mutable, you cannot modify its contents and must create a new book with the desired changes.
 
-::: tip
+::: callout-tip
 Remember, mutations never create new labels in the current scope.
 They only modify values of existing variables.
 :::
