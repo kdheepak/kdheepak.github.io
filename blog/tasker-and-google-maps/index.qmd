@@ -7,13 +7,9 @@ summary: Tasker in combination with Python with SL4A can be used to calculate in
 
 # Android Projects
 
-I've shared this on
-[UnleashThePhones](https://unleashthephones.com/2013/06/03/tasker-tutorial-integrating-google-calendar-and-google-directions-using-transit/)
-a while back as well. This is a small tutorial on how to use Python with
-SL4A.
+This is a small tutorial on how to use Python with SL4A.
 
-![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/5.png){.aligncenter
-width="270" height="480"}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/5.png){width=300}
 
 When Google Now first came out, it would tell you which bus you could
 take at what time to get to your meeting or event on time based on the
@@ -36,8 +32,7 @@ necessary information. Using my current location, the directions to the
 location is fetched and parsed again for transit details. Tasker then
 displays this as a notification.
 
-![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/7.png){.aligncenter
-width="270" height="480"}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/7.png){width=300}
 
 This is very similar to a thread found on XDA-Dev. The idea is based on
 the thread, but in the thread brandall decided to do everything in
@@ -60,15 +55,13 @@ If you would like to setup something similar follow the steps below.
 
 3. Setup a tasker profile similar to what I have below.
 
-![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/1.png){.aligncenter
-width="270" height="480"}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/1.png){width=300}
 
 4. The Task that will be performed when this context is triggered is
    setup as below.
 
-![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/2.png){width="270"
-height="480"}[ ]{style="text-align: center; line-height: 1.5em;"}![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/3.png){width="270"
-height="480"}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/2.png){width=300}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/3.png){width=300}
 
 5. The above task turns on GPS, finds your current location using GPS
    and NET, stores the location data in a file and runs the python script.
@@ -78,17 +71,15 @@ height="480"}
 
 6. The show route is attached below.
 
-![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/4.png){.aligncenter
-width="270" height="480"}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/4.png){width=300}
 
 7. All you need to do now is create an event on your Calendar with
    location information and you are good to go!
 
 Here are some screenshots of what it looks like after you are done.
 
-![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/6.png){width="270"
-height="480"} ![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/7.png){width="270"
-height="480"}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/6.png){width=300}
+![](https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/7.png){width=300}
 
 I've attached the xml from Tasker
 [here](https://github.com/kdheepak/tasker_sl4a/blob/master/pyCode.py) so

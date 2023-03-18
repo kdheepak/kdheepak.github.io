@@ -7,7 +7,7 @@ summary: A collection of Tasker projects I've worked on ...
 
 # Google Calendar
 
-[This page](https://kdheepak.com/blog/tasker-and-google-maps.html) contains information about the [profile](https://github.com/kdheepak/tasker_sl4a) that uses Tasker to get contextual information from Google Calendar and react based on it.
+[This page](../tasker-and-google-maps) contains information about the [profile](https://github.com/kdheepak/tasker_sl4a) that uses Tasker to get contextual information from Google Calendar and react based on it.
 
 <a href="https://github.com/kdheepak/tasker_sl4a"><img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/7.png" align="middle" height="600"></a>
 
