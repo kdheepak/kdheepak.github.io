@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.275">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dheepak Krishnamurthy">
+<meta name="dcterms.date" content="2016-10-09">
+<meta name="keywords" content="python, pelican, pandoc, margin notes, side notes">
+
+<title>kdheepak - Pelican Margin Notes with Pandoc</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
+<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+
+<link rel="stylesheet" href="../../_quarto/styles.css">
+<meta property="og:title" content="kdheepak - Pelican Margin Notes with Pandoc">
+<meta property="og:description" content="">
+<meta property="og:site-name" content="kdheepak">
+<meta name="twitter:title" content="kdheepak - Pelican Margin Notes with Pandoc">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kdheepak" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Pelican Margin Notes with Pandoc</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">Pelican Margin Notes with Pandoc</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/pelican-margin-notes-with-pandoc/index.qmd"><i class="bi"></i> Code</button></div></div>
+                                    </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Dheepak Krishnamurthy </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 9, 2016</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#inspiration" id="toc-inspiration" class="nav-link" data-scroll-target="#inspiration">Inspiration</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/pelican-margin-notes-with-pandoc/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>I’ve shifted to using quarto. I’ll leave this blog post up for reference if someone is interested.</p>
+</div>
+</div>
+</div>
+<p>I’ve been inspired by a few other blogs to consider adding margin notes to this theme.</p>
+<section id="introduction" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>I’ve been inspired by a few other blogs to consider adding margin notes to this theme. This theme is called <a href="https://github.com/kdheepak/pelican-smoothie">pelican-smoothie</a> and is freely available on Github. As you may have guessed from the name, this is a theme for <a href="https://github.com/getpelican/pelican">Pelican</a>, a static site generator powered by Python. Pelican allows you to write posts in Markdown or RestructuredText, and convert them into structured and beautiful websites. There are a few advantages of using a static site generator instead of a Content Management System (CMS) like WordPress, and I have covered it briefly in <a href="https://blog.kdheepak.com/how-to-set-up-a-pelican-blog-with-github-pages">this post</a>. Since Pelican is an open source project, it is inherently pretty customization. I can almost guarantee if you think of a feature that you’d like, you’ll be able to search for a plugin that does exactly that. There is in fact a collection of <a href="https://github.com/getpelican/pelican-plugins">pelican-plugins</a>. Their maintainer <strong>@justinmayer</strong> is also very responsive to feature requests and pull requests.</p>
+<div class="page-columns page-full"><p> And, on the rare occasion that you can’t find a plugin that does exactly what you want it to, you’ll be able to (with a little bit of research) create a plugin to do exactly just that. Their documentation is pretty good too. If you are looking at a creating a blog I highly recommend checking out Pelican.</p><div class="no-row-height column-margin column-container"><span class="">Pelican is only one of the few static site generators in Python. There are others such as <a href="https://github.com/getnikola/nikola">Nikola</a>, <a href="https://github.com/lektor/lektor">Lektor</a>, <a href="https://github.com/eudicots/Cactus">Cactus</a>, <a href="https://github.com/hyde/hyde">Hyde</a> and <a href="https://www.fullstackpython.com/static-site-generator.html">many more</a>. The main reason I chose Pelican was because it had a wide selection of <a href="https://github.com/getpelican/pelican-themes">themes</a>. There are also many popular ones in other languages, but I haven’t researched them or used them enough or to have a strong opinion on them.</span></div></div>
+<p>That’s probably not why you are reading this post though. You are probably interested in getting margin notes working on your blog too. I’ll have to caveat the following post by saying that this is a proof of concept and by no means a final stable version that you can deploy on your site. This approach worked for me, and the reason I went down this path was because I was curious to see how far I could push my static site generation workflow.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Firstly, I’m not using Pelican’s built in reader for Markdown files, but instead am using Pandoc. I wrote a pretty long post on using <a href="https://blog.kdheepak.com/writing-papers-with-markdown">Pandoc for academic writing</a>; I think it’s safe to say that I’m a fan of Pandoc. Pelican has better built-in support for RestructuredText compared to Markdown, but plugins allow you to do pretty much everything you want with Markdown as your source file format. However the number of plugins required to get everything you want working quickly adds up.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’ve used Pandoc for other projects before and wanted to see if I could get it working in my blogging workflow. I’ve since incorporated Pandoc and it seems to be working quite well. Getting jupyter notebooks working with Pandoc was a bit of challenge though, but I was able to get past it by writing a filter for converting Jupyter notebooks with Pandoc.</p>
+<p>And as I mentioned earlier, one of the main purposes of this implementation was because I was curious to see how far I could push this static site generation workflow. So if you are not using Pandoc in Pelican, you will not be able to use this theme with margin notes straight away<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. So, the short version is that this implementation of margin notes employs Pandoc, filters with Pandoc using the <a href="https://github.com/jgm/pandocfilters"><code>pandocfilters</code> package</a> and this current specific theme.</p>
+</section>
+<section id="inspiration" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="inspiration">Inspiration</h2>
+<div class="page-columns page-full"><p>A list of blogs, posts, websites, web books have inspired this implementation. Most notably are the following articles – <a href="https://edwardtufte.github.io/tufte-css/">tuftle-css</a> and <a href="https://owenblacker.medium.com/marginal-notes-on-medium-268b3f727e6d">this article</a> published on Medium about Medium sidenotes. They both speak to some length on how margin notes can be used to improve the experience for a reader, especially on the web. <a href="https://practicaltypography.com/">Butterick’s Practical Typography</a> is also a great example of effective use of margin notes. There are a few other articles <span class="citation" data-cites="johnjameson jgruber"><a href="#ref-johnjameson" role="doc-biblioref">[1]</a>, <a href="#ref-jgruber" role="doc-biblioref">[2]</a></span> that talk about this. The CSS for this page originally and the CSS for the margin notes had been heavily inspired by <a href="https://gameprogrammingpatterns.com/">gameprogrammingpatterns.com</a>.</p><div class="no-row-height column-margin column-container"><span class="">I highly recommend reading Butterick’s web book. It is freely available at Practical Typography. It’s challenged me to think critically about every aspect of a presentation. I also encourage buying his book or his fonts to aid Butterick in maintaining this content and producing more like this.</span></div></div>
+</section>
+<section id="implementation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<p>At the time of writing this article, Pandoc does not support creating margin notes for HTML documents. Pandoc does however support <a href="https://pandoc.org/MANUAL.html#footnotes">footnotes</a> in the form of footnotes and inline notes. Inline notes are different for traditional footnotes in the source document. The following is an example of footnotes in Pandoc Markdown.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Here is a footnote reference,<span class="ot">[^1]</span> and another.<span class="ot">[^longnote]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>Here is the footnote.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ot">[^longnote]: </span>Here's one with multiple blocks.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in">    Subsequent paragraphs are indented to show that they</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">    belong to the previous footnote.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">        { some.code }</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">    The whole paragraph can be indented, or just the first</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">    line. In this way, multi-paragraph footnotes work like</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">    multi-paragraph list items.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>This paragraph won't be part of the note, because it</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>isn't indented.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The following is an example of inline footnotes in Pandoc Markdown.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Here is an inline note.^[Inlines notes are easier to write, since</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>you don't have to pick an identifier and move down to type the</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>note.]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As described in the example, inline notes are easier to write. Pandoc also conveniently also supports filters. They allow for additional functionality to be added by walking through the Abstract Syntax Tree, and parsing or modifying information. I chose the following syntax for implementing a <code>aside</code> tag when converting from a Markdown file to a HTML document.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This is the syntax^</span><span class="co">[</span><span class="ot">_aside_: And this is the margin note.</span><span class="co">]</span><span class="at"> in Markdown.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote page-columns page-full">
+<div class="page-columns page-full"><p>This is the syntax in Markdown.</p><div class="no-row-height column-margin column-container"><span class="">And this is the margin note.</span></div></div>
+</blockquote>
+<p>When run through the filter, the above will be rendered as the following html.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>This is an example for the syntax<span class="kw">&lt;span</span> <span class="er">id</span><span class="ot">=</span><span class="st">"aside-0"</span><span class="kw">&gt;&lt;/span&gt;</span> in Markdown.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"div-aside-0"</span><span class="kw">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;aside</span> <span class="er">id</span><span class="ot">=</span><span class="st">"aside-0"</span><span class="kw">&gt;</span>This is a note that will appear in a tag<span class="kw">&lt;/aside&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The location of the footnote is replaced with a <code>&lt;span&gt;</code> tag, and an <code>&lt;aside&gt;</code> tag wrapped in a <code>&lt;div&gt;</code> tag is added to the end of the paragraph. This filter will also assign <code>id</code> to the <code>&lt;span&gt;</code>, <code>&lt;aside&gt;</code> and <code>&lt;div&gt;</code> tags sequentially. Additional functionally can be added here, but for now this seems to work for my purposes.</p>
+<p>With the HTML generated with <code>&lt;aside&gt;</code> tags, it is now a question of assigning the right css. This turned out to be more tricky than I originally anticipated. The current theme uses bootstrap and the following layout to display content.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"row"</span><span class="kw">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"col-sm-8"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"col-sm-4"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Because of the way Pelican and Jinja work, and because of how Pandoc returns the content to Pelican, the entire article content is stored in the first <code>&lt;div&gt;</code> element of width 8 units. Ideally, each paragraph would be wrapped in <code>&lt;div&gt;</code> elements of one class, with <code>&lt;aside&gt;</code> elements wrapped in a neighboring div class. With the current structure of Pelican, the only way I could do that is by injecting <code>&lt;div&gt;</code> elements all over the place using something like <a href="https://www.crummy.com/software/BeautifulSoup/">beautifulsoup</a>. However I decided against it for now, and am using CSS to move the <code>&lt;aside&gt;</code> elements outside the element they are currently positioned in. Since the <code>&lt;aside&gt;</code> elements are located below the actual paragraph, I added javascript to move them up by their height. A better implementation could use the location of the <code>&lt;span&gt;</code> elements to fix the position of the notes.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>I’m sure there are definitely better ways to do the same thing, but this is what worked for now. There are a few limitations in the current implementation. One noticeable flaw is that I cannot have one margin note and one footnote in the same paragraph. And I’m positive there are more. Hopefully I’ll get a chance to work on this more to improve it in the near future. All the code is on <a href="https://github.com/kdheepak">GitHub</a> in case you were curious and wanted to take a look at it. If you have thoughts on how this could be done better or would like to ask questions in general feel free to reach out.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-johnjameson" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. Jameson, <span>“Responsive Footnotes.”</span> [Online]. Available: <a href="https://johndjameson.com/blog/responsive-footnotes">https://johndjameson.com/blog/responsive-footnotes</a>.</div>
+</div>
+<div id="ref-jgruber" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. Gruber, <span>“Notes on notes.”</span> [Online]. Available: <a href="https://daringfireball.net/2005/08/notes_on_notes">https://daringfireball.net/2005/08/notes_on_notes</a>.</div>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Not that’s a bad thing. I believe the way Pelican signals works will only activate a plugin if it has to, so it doesn’t slow down your deployment process.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>You will still be able to use this theme, either with Pandoc or Pelican’s default readers, however as you might see later in the post, I use <code>aside</code> tag elements for side notes or margin notes and I haven’t been able to find a plugin that does just that<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2016,
+  author = {Krishnamurthy, Dheepak},
+  title = {Pelican {Margin} {Notes} with {Pandoc}},
+  date = {2016-10-09},
+  url = {https://kdheepak.com/blog/pelican-margin-notes-with-pandoc},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2016" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">D.
+Krishnamurthy, <span>“Pelican Margin Notes with Pandoc,”</span> Oct. 09,
+2016. <a href="https://kdheepak.com/blog/pelican-margin-notes-with-pandoc">https://kdheepak.com/blog/pelican-margin-notes-with-pandoc</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="" data-category="Comments" data-category-id="" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ The views expressed on this website are solely those of the author and do not represent any other organization the author is affiliated with.
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

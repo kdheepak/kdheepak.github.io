@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.275">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dheepak Krishnamurthy">
+<meta name="dcterms.date" content="2023-02-25">
+<meta name="keywords" content="julia, analogy, pass by sharing">
+
+<title>kdheepak - Understanding Variables and Mutability in Julia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+q { quotes: "“" "”" "‘" "’"; }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
+<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+
+<link rel="stylesheet" href="../../_quarto/styles.css">
+<meta property="og:title" content="kdheepak - Understanding Variables and Mutability in Julia">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/bookshelf-analogy.png">
+<meta property="og:site-name" content="kdheepak">
+<meta property="og:image:height" content="3904">
+<meta property="og:image:width" content="6793">
+<meta name="twitter:title" content="kdheepak - Understanding Variables and Mutability in Julia">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/bookshelf-analogy.png">
+<meta name="twitter:image-height" content="3904">
+<meta name="twitter:image-width" content="6793">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kdheepak" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Understanding Variables and Mutability in Julia</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">Understanding Variables and Mutability in Julia</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/understanding-variables-and-mutability-in-julia/index.qmd"><i class="bi"></i> Code</button></div></div>
+                                    </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Dheepak Krishnamurthy </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 25, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#mutability" id="toc-mutability" class="nav-link" data-scroll-target="#mutability">Mutability</a></li>
+  <li><a href="#special-cases" id="toc-special-cases" class="nav-link" data-scroll-target="#special-cases">Special cases</a>
+  <ul class="collapse">
+  <li><a href="#tuple-unpacking" id="toc-tuple-unpacking" class="nav-link" data-scroll-target="#tuple-unpacking">Tuple unpacking</a></li>
+  <li><a href="#named-tuple-unpacking" id="toc-named-tuple-unpacking" class="nav-link" data-scroll-target="#named-tuple-unpacking">Named Tuple unpacking</a></li>
+  <li><a href="#shorthand-assignment" id="toc-shorthand-assignment" class="nav-link" data-scroll-target="#shorthand-assignment">Shorthand assignment</a></li>
+  <li><a href="#broadcasting" id="toc-broadcasting" class="nav-link" data-scroll-target="#broadcasting">Broadcasting</a></li>
+  <li><a href="#chained-operations" id="toc-chained-operations" class="nav-link" data-scroll-target="#chained-operations">Chained <code>=</code> operations</a></li>
+  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings">Strings</a></li>
+  </ul></li>
+  <li><a href="#pass-by-sharing" id="toc-pass-by-sharing" class="nav-link" data-scroll-target="#pass-by-sharing">Pass by sharing</a>
+  <ul class="collapse">
+  <li><a href="#default-keyword-arguments" id="toc-default-keyword-arguments" class="nav-link" data-scroll-target="#default-keyword-arguments">Default keyword arguments</a></li>
+  </ul></li>
+  <li><a href="#const-variables" id="toc-const-variables" class="nav-link" data-scroll-target="#const-variables"><code>const</code> variables</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/understanding-variables-and-mutability-in-julia/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<div class="page-columns page-full"><p>I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective.</p><div class="no-row-height column-margin column-container"><span class="">While analogies can be useful because they allow us to understand complex concepts by comparing them to something more familiar or simpler, they can also be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand any subject, I recommend using multiple different analogies to bolster your confidence and then dive deeper into the subject matter to harden your intuition.</span></div></div>
+<p>Imagine you are at a library full of books on bookshelves, but they are all over the place and you can’t find what you want. Also, you can’t interact directly with the books or bookshelves.</p>
+<p>Instead, you have to ask a very smart and helpful librarian, who knows where all the books are and can help you find what you need, to retrieve or modify the books for you. But in order for them to help you, you are form a pact with the librarian to speak in a very specific language with certain rules and decrees.</p>
+<p><img src="bookshelf-analogy.png" class="quarto-discovered-preview-image img-fluid"></p>
+<p>In this mental model, you can think of a program’s memory as a number of bookshelves in a library. The librarian represents the Julia program (i.e.&nbsp;command line interface, the language semantics, the LLVM compiler, etc), and the text in the <code>.jl</code> files is how you communicate using the Julia language.</p>
+<p>To interact with the bookshelf (i.e., the program’s memory), the Julia language, as part of its vocabulary, provides you with functions and variables among other things.</p>
+<p>Functions in Julia are like a set of instructions that you give to the librarian, telling them what actions you’d like to take with the books.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">foo</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">foo</span>()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here we have a simple function <code>foo()</code> that adds the numbers <code>1</code> and <code>2</code> together and returns the result.</p>
+<p>And variables in Julia are the labels the librarian gives you that are associated with specific books on the bookshelf, allowing you to refer to them later on.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> <span class="fl">1</span>;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y <span class="op">=</span> <span class="fl">2</span>;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">+</span> y</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here we assign the value <code>1</code> (also sometimes referred to as <q>bind the value</q>) to the label <code>x</code>, assign (or bind) the value <code>2</code> to label <code>y</code> and use the labels <code>x</code> and <code>y</code> to retrieve these values and add them together to get the result.</p>
+<p>By thinking of code in this way, you can better understand how your program interacts with memory and how the different elements of your code work together.</p>
+<section id="assignment" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
+<p>In Julia, the <code>=</code> operator can be used to create a new label.</p>
+<p>Let’s look at a code example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>];</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a new label <code>x</code> that is associated to an object in memory. You can retrieve a value that is bound to a label using the label itself.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 0. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┘  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                  │</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>           │             │</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>           │             │</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>           │      x      │</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>           │             │</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>           │             │</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can use existing labels in assignments in the Right Hand Side (RHS):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y <span class="op">=</span> x;</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you see a <code>=</code> symbol and to the left of the <code>=</code> there is a simple name of a variable, that is an assignment operation. When you ask to perform this action, <code>x = [0.0, 0.0, 0.0, 0.0]</code>, the <code>[0.0, 0.0, 0.0, 0.0]</code> object is created, and label called <code>x</code> that is bound to said created object.</p>
+<p>When you assign <code>y = x</code>, you are asking to create new label called <code>y</code> that is also bound to the same object as the <code>x</code> label.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 0. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┴──┼────┼─┐  │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                  │                  │</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So in our analogy, the <code>x</code> and <code>y</code> variables are two labels that you and the librarian agree point to the same <q>book</q> on the <q>bookshelf</q> (i.e.&nbsp;the same object in memory).</p>
+<div class="page-columns page-full"><p>In Julia, you can check the location by using the <code>pointer()</code> function:</p><div class="no-row-height column-margin column-container"><span class="">The <code>pointer</code> function only works for mutable objects</span></div></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(x)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x0000000161c60d60</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(y)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x0000000161c60d60</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When you call this <code>pointer</code> function, you are passing in a label called <code>x</code> and Julia returns the memory address of the object that was bound to that label. You can see that <code>x</code> and <code>y</code> point to an object that has the same memory address.</p>
+<p>Because <code>x</code> and <code>y</code> are bound to the same object, changes made to the object through <code>x</code> will also be visible through <code>y</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">2.0</span>;</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is like if the librarian changed a page in the book located at label <code>x</code>. If you came back later and asked for the book located at label <code>y</code>, you’d get the same book as you would have with label <code>y</code>, which would contain the same changes.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┴──┼────┼─┐  │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                  │                  │</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When you modify <code>x[1] = 2.0</code>, you are telling Julia to make a change to the object bound to the <code>x</code> label, which in this case changes the first element of the vector to <code>2.0</code>. And since <code>y</code> points to the same memory location as <code>x</code>, when you inspect the <code>y</code> variable, you will see that it also reflects the same changes made to the underlying memory location. Because both <code>x</code> and <code>y</code> are just different labels pointing to the same memory location, any changes made through one of the labels will be visible when you look at the contents through the other label.</p>
+<p>But what if you did want to create a entirely new object instead? You can do that using the <code>deepcopy()</code> function:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y <span class="op">=</span> <span class="fu">deepcopy</span>(x)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(x)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x0000000161c60d60</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(y)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x0000000107e4c880</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the analogy of the bookshelf, using <code>deepcopy()</code> would be like asking the librarian to make a photocopy of a book and place it at a new location on the shelf.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┘  │    │    │ │  │    │    │    │    │    │    │    │    │</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                  │                  ┌────┘</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The new object created is completely independent from the old, with its own unique address. Any changes made to the original object will not affect the copy and vice versa.</p>
+<div class="tip">
+<p>💡 Assignments always create labels, and may replace the value in an existing label with a new one.</p>
+</div>
+</section>
+<section id="mutability" class="level2">
+<h2 class="anchored" data-anchor-id="mutability">Mutability</h2>
+<p>We saw in the previous section that the <code>=</code> operator can be used to assign values to a label. But in Julia, it can also be used to mutate existing values that can be accessed through a label. The difference is what exists on the Left Hand Side (LHS) of the <code>=</code> operator.</p>
+<p>For example, this is an assignment:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>i.e.&nbsp;if the LHS of the equals operator is a variable without any <code>[]</code> or <code>.</code> or <code>@</code> symbols, it means an assignment has happened.</p>
+<p>However, if there’s a <code>[]</code> in the LHS, then it is not an assignment anymore, but a mutation instead.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">2.0</span>;</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, the equals operation changes the value at the specified index of the LHS, and in this case that is the first index of the object bound by the <code>x</code> label.</p>
+<p>There’s another case where the equals operation does a mutation, and that is when you use the object notation in the LHS, i.e.&nbsp;<code>object.field</code>.</p>
+<p>In Julia, you can create <code>struct</code> objects that have fields, and you can get the value of a field by using the <code>object.field</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">mutable struct</span> Book</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>         title<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         price<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book <span class="op">=</span> <span class="fu">Book</span>(<span class="st">"The Hitchhiker's Guide to the Galaxy"</span>, <span class="fl">9.99</span>);</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book.price</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fl">9.99</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also set the value of the <code>field</code> by using the <code>object.field = value</code> notation. In this case, the <code>field</code> is reassigned or rebound to a new object, but the <code>object</code> is said to be mutated.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer_from_objref</span>(book)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Nothing</span>} @<span class="bn">0x000000012b440f10</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book.price <span class="op">=</span> <span class="fl">4.99</span>;</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Book</span>(<span class="st">"The Hitchhiker's Guide to the Galaxy"</span>, <span class="fl">4.99</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer_from_objref</span>(book)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Nothing</span>} @<span class="bn">0x000000012b440f10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notice how the pointer value of the <code>book</code> object did not change.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(book.title)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">UInt8</span>} @<span class="bn">0x000000012b30ad98</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book.title <span class="op">=</span> <span class="st">"The Hitchhiker's Guide to the Galaxy - Douglas Adams"</span>;</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Book</span>(<span class="st">"The Hitchhiker's Guide to the Galaxy - Douglas Adams"</span>, <span class="fl">9.99</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer_from_objref</span>(book)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Nothing</span>} @<span class="bn">0x000000012b440f10</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(book.title)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">UInt8</span>} @<span class="bn">0x000000012b27d800</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Mutability is an important concept in Julia because it determines whether or not an object can be modified. In general, mutable objects can be modified, and other objects cannot be modified.</p>
+<p>In the analogy of the bookshelf, mutability would be like the ability to modify the contents of a book already on the bookshelf. It’s like erasing and re-writing some of the information on a page, without changing the location of the book on the shelf.</p>
+<p>If a book is mutable, you can add or remove pages or modify existing pages, while if a book is not mutable, you cannot modify its contents and must create a new book with the desired changes.</p>
+<div class="tip">
+<p>💡 Remember, mutations never create new labels in the current scope. They only modify values of existing variables.</p>
+</div>
+<p>There are a number of types that represent immutable objects. For example, <code>Int</code>s and <code>Float64</code>s are immutable.</p>
+<p>Interestingly, you can also have a <code>struct</code> that is <code>immutable</code> that contains an instance of a <code>mutable</code> type. You can create a <code>immutable</code> struct by dropping the <code>mutable</code> keyword from the struct definition.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">struct</span> ImmutableBook</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>         title<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         price<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         meta<span class="op">::</span><span class="dt">Dict{String, String}</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book <span class="op">=</span> <span class="fu">ImmutableBook</span>(<span class="st">"The Hitchhiker's Guide to the Galaxy"</span>, <span class="fl">9.99</span>, <span class="fu">Dict</span>());</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book.price <span class="op">=</span> <span class="fl">4.99</span>;</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> setfield!<span class="op">:</span> immutable <span class="kw">struct</span> of <span class="kw">type</span> ImmutableBook cannot be changed</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>] <span class="fu">setproperty!</span>(x<span class="op">::</span><span class="dt">ImmutableBook</span>, f<span class="op">::</span><span class="dt">Symbol</span>, v<span class="op">::</span><span class="dt">Float64</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">Base</span> <span class="op">./</span><span class="bu">Base</span>.jl<span class="op">:</span><span class="fl">39</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a> [<span class="fl">2</span>] top<span class="op">-</span>level scope</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">REPL</span>[<span class="fl">3</span>]<span class="op">:</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is like if a book which was sealed or laminated had a reference in one of its pages to another notebook, diary, journal or binder. The first book which is immutable cannot be changed to point to a new second book, and will always have the same reference to the second book. The second book’s contents on the other hand can be modified.</p>
+<p>In this code, we define a <code>Book</code> <code>struct</code> that has a <code>title</code> and <code>price</code> as before, and an additional <code>meta</code> dictionary. All three fields, <code>title</code>, <code>price</code> and <code>meta</code> point to their respective objects, and once assigned they cannot be reassigned to a new object. In Julia, for <code>immutable</code> <code>struct</code>s, if you want to update the data that corresponds to a immutable object, you’ll essentially have to create a new instance of the struct.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book <span class="op">=</span> <span class="fu">Book</span>(<span class="st">"The Hitchhiker's Guide to the Galaxy"</span>, <span class="fl">9.99</span>, <span class="fu">Dict</span>());</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book <span class="op">=</span> <span class="fu">Book</span>(book.title, <span class="fl">4.99</span>, book.meta);</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Book</span>(<span class="st">"The Hitchhiker's Guide to the Galaxy"</span>, <span class="fl">4.99</span>, <span class="fu">Dict</span><span class="dt">{String, String}</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>meta</code> dictionary, however, happens to be a mutable object. And that can be modified even though the <code>Book</code> instance itself is immutable.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book.meta[<span class="st">"id"</span>] <span class="op">=</span> <span class="st">"42"</span>;</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> book</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Book</span>(<span class="st">"The Hitchhiker's Guide to the Galaxy"</span>, <span class="fl">4.99</span>, <span class="fu">Dict</span>(<span class="st">"id"</span> <span class="op">=&gt;</span> <span class="st">"42"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To use our analogy, the <code>meta</code> field is like a page inside the book that contains the address of another book on the bookshelf. We cannot change the address on the page, but we can still modify the contents of the book at that address.</p>
+</section>
+<section id="special-cases" class="level2">
+<h2 class="anchored" data-anchor-id="special-cases">Special cases</h2>
+<p>As a sidebar, I want to touch on some special syntax that you will come across when using Julia.</p>
+<section id="tuple-unpacking" class="level3">
+<h3 class="anchored" data-anchor-id="tuple-unpacking">Tuple unpacking</h3>
+<p>Julia supports syntax that is called <q>unpacking</q> that can be used with <code>Tuple</code>s:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> obj <span class="op">=</span> (<span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> obj[<span class="fl">1</span>]</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> obj[<span class="fl">2</span>]</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> (a, b) <span class="op">=</span> obj</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>(<span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> a</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> b</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> (a, b, remaining<span class="op">...</span>) <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">10</span>]</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fl">10</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="fl">4</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="fl">5</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="fl">6</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="fl">7</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  <span class="fl">8</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  <span class="fl">9</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a> <span class="fl">10</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> a</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> b</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> remaining</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fl">8</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  <span class="fl">4</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>  <span class="fl">5</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="fl">6</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>  <span class="fl">7</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>  <span class="fl">8</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  <span class="fl">9</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a> <span class="fl">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="named-tuple-unpacking" class="level3">
+<h3 class="anchored" data-anchor-id="named-tuple-unpacking">Named Tuple unpacking</h3>
+<p>Julia also supports <code>NamedTuple</code> and unpacking, however you have to use a semicolon in the LHS in the unpacking syntax:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> obj <span class="op">=</span> (a <span class="op">=</span> <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>(a <span class="op">=</span> <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> obj.a</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> obj.b</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> (; a, b) <span class="op">=</span> (a <span class="op">=</span> <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>(a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> a</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> b</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Even though the above works fine, I like to be explicit and use <code>;</code> in the construction of named tuples, like so:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> (; a, b) <span class="op">=</span> (;a <span class="op">=</span> <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>(a <span class="op">=</span> <span class="fl">3</span>, b <span class="op">=</span> <span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="shorthand-assignment" class="level3">
+<h3 class="anchored" data-anchor-id="shorthand-assignment">Shorthand assignment</h3>
+<p>Sometimes you may see a character before the <code>=</code>, like <code>+=</code> or <code>-=</code>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">+=</span> <span class="fl">1</span>; <span class="co"># a = a + 1</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">-=</span> <span class="fl">2</span>; <span class="co"># b = b - 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These are called updating operations: <a href="https://docs.julialang.org/en/v1/manual/mathematical-operations/#Updating-operators" class="uri">https://docs.julialang.org/en/v1/manual/mathematical-operations/#Updating-operators</a></p>
+<p>Updating operations are just a short hand for the longer assignment form.</p>
+</section>
+<section id="broadcasting" class="level3">
+<h3 class="anchored" data-anchor-id="broadcasting">Broadcasting</h3>
+<p>In Julia there’s a special syntax that you can use (<code>.</code>) in front of normal operators (e.g.&nbsp;<code>.=</code>), which, instead of assignment, does a mutation operation. When you see <code>.=</code>, it is <q>broadcasting</q> the <code>=</code> operation on all elements of the LHS.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>];</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(x)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x000000012d1bd000</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">.=</span> <span class="fl">5.0</span>;</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(x)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x000000012d1bd000</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">5.0</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a> <span class="fl">5.0</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a> <span class="fl">5.0</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a> <span class="fl">5.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In Julia, the following:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">.=</span> <span class="fl">5.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>is equivalent to</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  x[i] <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This <code>.=</code> is called broadcasting and you can read more about it in the <a href="https://docs.julialang.org/en/v1/manual/arrays/#Broadcasting">Julia documentation</a>.</p>
+<p>Julia also supports broadcasting over a subset of elements in an array:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x[<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>] <span class="op">.=</span> <span class="fl">1.0</span>;</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">5.0</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a> <span class="fl">1.0</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a> <span class="fl">1.0</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a> <span class="fl">5.0</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x[begin<span class="op">:</span><span class="fl">2</span>] <span class="op">.=</span> <span class="fl">2.0</span>;</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x[<span class="fl">3</span><span class="op">:</span><span class="kw">end</span>] <span class="op">.=</span> <span class="fl">4.0</span>;</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a> <span class="fl">4.0</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">4.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Broadcasting is always a mutation operation and will never create a new label.</p>
+</section>
+<section id="chained-operations" class="level3">
+<h3 class="anchored" data-anchor-id="chained-operations">Chained <code>=</code> operations</h3>
+<p>Julia also supports chained <code>=</code> operations which may do an assignment or mutation depending on what is on the LHS of that operation:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>];</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c <span class="op">=</span> x[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">2.0</span>;</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fl">2.0</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="fl">2.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is because in Julia everything is an expression, even the <code>=</code> operation. This code:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> x[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">2.0</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>is equivalent to this:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> (x[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">2.0</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which effectively does this:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="op">=</span> x[<span class="fl">1</span>] <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> tmp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="strings" class="level3">
+<h3 class="anchored" data-anchor-id="strings">Strings</h3>
+<p><code>String</code>s cannot be modified using the array access.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> title <span class="op">=</span> <span class="st">"The Hitchhiker's Guide to the Galaxy"</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="st">"The Hitchhiker's Guide to the Galaxy"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(title)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="dt">String</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> title[<span class="fl">1</span>] <span class="op">=</span> <span class="ch">'t'</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> <span class="dt">MethodError</span><span class="op">:</span> no method matching <span class="fu">setindex!</span>(<span class="op">::</span><span class="dt">String</span>, <span class="op">::</span><span class="dt">Char</span>, <span class="op">::</span><span class="dt">Int64</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>] top<span class="op">-</span>level scope</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">REPL</span>[<span class="fl">138</span>]<span class="op">:</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is easiest to just create a new <code>String</code> that has the modification you want:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> title_author <span class="op">=</span> title <span class="op">*</span> <span class="st">" - Douglas Adams"</span> <span class="co"># you can concat strings together in Julia using `*`</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="st">"The Hitchhiker's Guide to the Galaxy - Douglas Adams"</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(title)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">UInt8</span>} @<span class="bn">0x0000000160f687f8</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(title_author)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">UInt8</span>} @<span class="bn">0x0000000107ea82a0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="pass-by-sharing" class="level2">
+<h2 class="anchored" data-anchor-id="pass-by-sharing">Pass by sharing</h2>
+<p>In Julia, arguments to functions are always <q><a href="https://en.wikipedia.org/wiki/Evaluation_strategy#Call_by_sharing">passed by sharing</a></q>. This means that when a function is called with an argument, the function receives a reference to the object that the argument refers to, rather than a copy of the object. The function can modify the object if it is mutable, but the modifications will also be visible to the caller.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">add_one</span>(V)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(V)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    V[i] <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">add_one</span>(arr);</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a> <span class="fl">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the analogy, passing an argument to a function is like reference’s a book’s location and handing that address over to the function. The function can read the content of the book using this location address and make changes to it, but it cannot change the location address itself that was given to it. If the book is mutable, any changes made by the function will also be visible to anyone else holding the same address.</p>
+<p>The function <code>add_one</code> is like someone taking a book from the shelf, incrementing every number in it by one, and putting it back in the same location. Any object that is holding a reference to the address of the book will be able to see the updated content.</p>
+<p>A function cannot modify the <q>address</q> that the label points to in the call site.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">incorrect_replace_with_zeros</span>(arr)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  arr <span class="op">=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">incorrect_replace_with_zeros</span>(arr);</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This may be more obvious if we add calls to the <code>pointer()</code> function:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">incorrect_replace_with_zeros</span>(arr)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"Before assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  arr <span class="op">=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"After assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">incorrect_replace_with_zeros</span>(arr);</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>Before assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>After assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x000000012de42b60</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The function <code>incorrect_replace_with_zeros</code> is like someone taking a book from the shelf, creating a new book, and putting the new book in a different location on the shelf and leaving the old book in the same location. Therefore, the caller still has the original book, and the original book was unaffected by this function. The function also doesn’t return any reference to the new book, and the new book is effectively lost forever.</p>
+<p>You can only modify the values of the object <q>shared</q> from the call site using the <code>[]</code>, <code>.=</code> or <code>.fieldname</code> syntax.</p>
+<p>If you wanted to write a version that correctly replaces the values of the arr with zeros, you can do the following:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">replace_with_zeros!</span>(arr)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">println</span>(<span class="st">"Before assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>          arr <span class="op">.=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>          <span class="fu">println</span>(<span class="st">"After assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>replace_with_zeros! (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">replace_with_zeros!</span>(arr);</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>Before assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>After assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The function <code>replace_with_zeros!</code> is like someone taking a book from the shelf, erasing its content, and putting it back in the same location. Since the location address is not changed, anyone else holding the same address will see the updated content.</p>
+<p>By convention, the <code>!</code> at the end of the function name is a convention in Julia to indicate that the function modifies its argument in place.</p>
+<section id="default-keyword-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="default-keyword-arguments">Default keyword arguments</h3>
+<p>Both Python and Julia support keyword arguments with default values for functions, but their behavior is subtly different.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>   ...:   arr.append(<span class="dv">1</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>   ...:   <span class="cf">return</span> arr</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>   ...:</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: append_to_arr()</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">2</span>]: [<span class="dv">1</span>]</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: append_to_arr()</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">3</span>]: [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">4</span>]: append_to_arr()</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: append_to_arr()</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: append_to_arr()</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">6</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> arr</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>append_to_arr (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In Python, a function like this:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  arr.append(<span class="dv">1</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>is equivalent to the following:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>GLOBAL_ARR <span class="op">=</span> []</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> arr <span class="kw">is</span> <span class="va">None</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> GLOBAL_ARR</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  arr.append(<span class="dv">1</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So every time you call <code>append_to_arr</code>, you are modifying the global array.</p>
+<p>But in Julia, a function like this:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>is equivalent to:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> <span class="cn">nothing</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="fu">isnothing</span>(arr)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> []</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So every time you call the function, the default value is recreated.</p>
+<p>Other than that, the pass by sharing semantics are the same in Python and Julia. If you passed an keyword argument into these functions in Python and Julia, you’ll get the same behavior.</p>
+<p>In Python:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>          arr.append(<span class="dv">1</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>          <span class="cf">return</span> arr</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: arr <span class="op">=</span> []</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">3</span>]: [<span class="dv">1</span>]</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">4</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: arr</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">6</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In Julia:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">return</span> arr</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>append_to_arr (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> []</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Any</span>[]</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> arr)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr)</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr)</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You may have noticed that we skipped the <code>= arr</code> in the latter two function calls.</p>
+<p>For keyword arguments written after a <code>;</code>, if the variable name is the same as the keyword argument name, Julia lets you use a shorthand syntax that lets you skip writing the same variable name twice.</p>
+<p>The following are identical:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> arr);</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If the variable name is different from the keyword argument name, you’ll have to use the explicit syntax.</p>
+</section>
+</section>
+<section id="const-variables" class="level2">
+<h2 class="anchored" data-anchor-id="const-variables"><code>const</code> variables</h2>
+<p>In Julia, you can use the <code>const</code> keyword before declaring a variable for the first time in the global scope.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> <span class="fu">Dict</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In our analogy, this is like if the librarian handed back a label that would always be bound to the same object for the life of the program.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┘  │    │    │ │  │    │Dict│    │    │    │    │    │    │</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴────┴─┼──┴────┴─▲──┴────┴────┴────┴────┴────┴────┘</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>                  │                  ┌────┘         ╚══════════╗</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐           ╔══════╩═══════╗</span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │           ║    CONFIG    ║</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘           ╚══════════════╝</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For the duration of the program, the <code>CONFIG</code> label will point to location <code>0x6009</code>.</p>
+<p>Trying to redefine a <code>const</code> variable to bind to a different value is an error:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> []</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> invalid redefinition of constant CONFIG</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>] top<span class="op">-</span>level scope</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">REPL</span>[<span class="fl">172</span>]<span class="op">:</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is important to remember that even though the variable is <code>const</code>, the object is still mutable.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> CONFIG[<span class="st">"debug"</span>] <span class="op">=</span> <span class="cn">false</span>;</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> CONFIG</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Dict</span>{<span class="dt">Any</span>, <span class="dt">Any</span>} with <span class="fl">1</span> entry<span class="op">:</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"debug"</span> <span class="op">=&gt;</span> <span class="cn">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>Thinking of programming memory as a bookshelf in a library can help you understand how your program interacts with memory and how mutation works in languages like Julia with shared references.</p>
+<p>The Julia official documentation is great at formally explaining these concepts and I highly recommend reading the manual to learn more.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-ndarray" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Multi-dimensional Arrays.”</span> [Online]. Available: <a href="https://docs.julialang.org/en/v1/manual/arrays/">https://docs.julialang.org/en/v1/manual/arrays/</a>.</div>
+</div>
+<div id="ref-functions" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“Functions.”</span> [Online]. Available: <a href="https://docs.julialang.org/en/v1/manual/functions/">https://docs.julialang.org/en/v1/manual/functions/</a>.</div>
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
+  author = {Krishnamurthy, Dheepak},
+  title = {Understanding {Variables} and {Mutability} in {Julia}},
+  date = {2023-02-25},
+  url = {https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">D.
+Krishnamurthy, <span>“Understanding Variables and Mutability in
+Julia,”</span> Feb. 25, 2023. <a href="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia">https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="" data-category="Comments" data-category-id="" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ The views expressed on this website are solely those of the author and do not represent any other organization the author is affiliated with.
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

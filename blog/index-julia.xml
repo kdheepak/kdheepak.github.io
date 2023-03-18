@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>kdheepak</title>
+<link>https://kdheepak.com/blog/index.html#category=julia</link>
+<atom:link href="https://kdheepak.com/blog/index-julia.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.3.275</generator>
+<lastBuildDate>Sun, 26 Feb 2023 02:14:15 GMT</lastBuildDate>
+<item>
+  <title>Understanding Variables and Mutability in Julia</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</link>
+  <description><![CDATA[ I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective. ]]></description>
+  <category>julia</category>
+  <guid>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</guid>
+  <pubDate>Sun, 26 Feb 2023 02:14:15 GMT</pubDate>
+</item>
+<item>
+  <title>Programmers’ preferences for package names</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/index.html</link>
+  <description><![CDATA[ Are there trends in choosing package names in various programming ecosystems? Do package authors choose names for their packages that are <a href="https://en.wikipedia.org/wiki/Alliteration">alliterated</a> with the name of the programming language? Let’s venture to find out. ]]></description>
+  <category>analysis</category>
+  <category>python</category>
+  <category>julia</category>
+  <category>rust</category>
+  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/index.html</guid>
+  <pubDate>Fri, 29 Jul 2022 07:47:12 GMT</pubDate>
+</item>
+<item>
+  <title>Advent of Code 2020 Retrospective</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/advent-of-code-2020-retrospective/index.html</link>
+  <description><![CDATA[ It is Christmas night, and it is the first time this month that I haven’t had to plan my schedule for the evening around a programming puzzle contest. For the last 25 days this month, I participated in <a href="https://adventofcode.com/2020/">Advent of Code 2020</a>, and I managed to collect all 50 stars! ]]></description>
+  <category>adventofcode</category>
+  <category>julia</category>
+  <guid>https://kdheepak.com/blog/advent-of-code-2020-retrospective/index.html</guid>
+  <pubDate>Fri, 25 Dec 2020 07:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>My Unicode cheat sheet</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/my-unicode-cheat-sheet/index.html</link>
+  <description><![CDATA[ I wanted to make a cheat sheet for myself containing a reference of things I use when it comes to Unicode and when using Unicode in Vim, Python, Julia and Rust. ]]></description>
+  <category>neovim</category>
+  <category>python</category>
+  <category>julia</category>
+  <category>rust</category>
+  <guid>https://kdheepak.com/blog/my-unicode-cheat-sheet/index.html</guid>
+  <pubDate>Sat, 19 Sep 2020 08:29:49 GMT</pubDate>
+</item>
+<item>
+  <title>The egg tower puzzle</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/the-egg-tower-puzzle/index.html</link>
+  <description><![CDATA[ Here is a fun puzzle: ]]></description>
+  <category>math</category>
+  <category>julia</category>
+  <guid>https://kdheepak.com/blog/the-egg-tower-puzzle/index.html</guid>
+  <pubDate>Sun, 07 Jun 2020 02:14:19 GMT</pubDate>
+</item>
+</channel>
+</rss>

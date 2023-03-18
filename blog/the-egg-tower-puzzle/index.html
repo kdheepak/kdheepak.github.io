@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.275">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dheepak Krishnamurthy">
+<meta name="dcterms.date" content="2020-06-06">
+<meta name="keywords" content="math, analytical, closed form, riddle, puzzle, problem, egg, tower, building, marble, light bulb, julia,">
+
+<title>kdheepak - The egg tower puzzle</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
+<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../_quarto/styles.css">
+<link rel="stylesheet" href="equation.css">
+<meta property="og:title" content="kdheepak - The egg tower puzzle">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/pascaltriangle.svg">
+<meta property="og:site-name" content="kdheepak">
+<meta name="twitter:title" content="kdheepak - The egg tower puzzle">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/pascaltriangle.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kdheepak" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The egg tower puzzle</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">The egg tower puzzle</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/the-egg-tower-puzzle/index.qmd"><i class="bi"></i> Code</button></div></div>
+                                    </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Dheepak Krishnamurthy </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 6, 2020</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#two-eggs" id="toc-two-eggs" class="nav-link active" data-scroll-target="#two-eggs">Two eggs</a></li>
+  <li><a href="#three-eggs" id="toc-three-eggs" class="nav-link" data-scroll-target="#three-eggs">Three eggs</a></li>
+  <li><a href="#n-eggs" id="toc-n-eggs" class="nav-link" data-scroll-target="#n-eggs"><span class="math inline">\(N\)</span> eggs</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/the-egg-tower-puzzle/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<p>Here is a fun puzzle:</p>
+<blockquote class="blockquote">
+<p>You are given two eggs, and access to a 100-storey tower. Both eggs are identical. The aim is to find out the highest floor from which an egg will not break when dropped out of a window from that floor. If an egg is dropped and does not break, it is undamaged and can be dropped again. However, once an egg is broken, that’s it for that egg.</p>
+<p>If an egg breaks when dropped from a floor, then it would also have broken from any floor above that. If an egg survives a fall, then it will survive any fall shorter than that.</p>
+<p>The question is: What strategy should you adopt to minimize the number egg drops it takes to find the solution? (And what is the worst case for the number of drops it will take?)</p>
+<p>Once you solved it for two eggs, can you solve it for three eggs? Can you find a generalized solution when you have a tower with <span class="math inline">\(x\)</span> floors and if you have <span class="math inline">\(N\)</span> eggs?</p>
+</blockquote>
+<p><strong><em>Spoiler warning</em></strong>: If you have not seen this problem before I urge you to give it a go before continuing further. I’m going to post the solution to this below, so this is your spoiler warning.</p>
+<p>If you are interested in an easy to understand intuitive explanation to the <span class="math inline">\(2\)</span> egg <span class="math inline">\(100\)</span> storey tower problem, check out the following video:</p>
+<figure class="iframe-wrapper figure">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NGtt7GJ1uiM?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</figure>
+<p>We will go through this problem for the <span class="math inline">\(2\)</span> eggs and <span class="math inline">\(3\)</span> eggs variant, and derive the solution mathematically. Then, we will generalize the problem with <span class="math inline">\(x\)</span> floors and <span class="math inline">\(N\)</span> eggs.</p>
+<section id="two-eggs" class="level2">
+<h2 class="anchored" data-anchor-id="two-eggs">Two eggs</h2>
+<p>We have <span class="math inline">\(2\)</span> eggs to start with and a <span class="math inline">\(100\)</span> storey tower to explore.</p>
+<p>Let’s consider what we would do if we had just one egg.</p>
+<p>With just one egg, we could drop the egg from floor <span class="math inline">\(1\)</span>. If it breaks, we stop and can definitively say that for any floor <span class="math inline">\(1\)</span> and above all eggs would break. If it doesn’t break, we can proceed to floor <span class="math inline">\(2\)</span> and repeat.</p>
+<p>This means that for a tower with <span class="math inline">\(100\)</span> floors we will need up to <span class="math inline">\(100\)</span> drops to definitively say at which floor the egg would break. The above strategy gives us the <em>minimum</em> number of drops to <em>guarantee</em> that we find at which floor the egg would break. Or in other words, we can search <span class="math inline">\(N\)</span> floors with <span class="math inline">\(N\)</span> drops. Let’s call the lowest floor in the tower at which a egg would break the <em>breaking floor</em>. Here, <span class="math inline">\(N\)</span> is the breaking floor and <span class="math inline">\(N-1\)</span> is the highest floor from which an egg will not break. Once we can find the breaking floor, we can find the solution to this puzzle. The aim of this puzzle is to minimize the worst case when trying to guarantee finding the breaking floor.</p>
+<p>What could we do differently with <span class="math inline">\(2\)</span> eggs?</p>
+<p>With <span class="math inline">\(2\)</span> eggs, in fact we can explore the search space more efficiently. We can use the first egg to partition the total number of floors, and once the first egg breaks we can use the second egg to search floors within the last partition.</p>
+<p>As an example, let’s say you decide to drop the first egg from every <span class="math inline">\(10^{th}\)</span> floor. If it doesn’t break at floor <span class="math inline">\(10\)</span>, <span class="math inline">\(20\)</span>, <span class="math inline">\(30\)</span>, <span class="math inline">\(40\)</span> or <span class="math inline">\(50\)</span> but breaks at floor <span class="math inline">\(60\)</span> you can use the second egg to explore floors <span class="math inline">\(51\)</span> - <span class="math inline">\(59\)</span>. If it finally breaks at floor <span class="math inline">\(59\)</span>, you would have used <span class="math inline">\(6\)</span> drops of the first egg and <span class="math inline">\(9\)</span> drops of the second egg to find the breaking floor.</p>
+<p>We can do even better though.</p>
+<p>Let’s assume that the minimum number of drops required to guarantee finding the breaking floor for a <span class="math inline">\(N\)</span> storey tower is <span class="math inline">\(x\)</span>. If when we drop the first egg and the egg breaks, we can use <span class="math inline">\(x - 1\)</span> drops of the second egg to find the breaking floor. We already know that we can search at most <span class="math inline">\(x - 1\)</span> floors with the <span class="math inline">\(1\)</span> egg using <span class="math inline">\(x - 1\)</span> drops. So if our first drop was from a floor greater than <span class="math inline">\(x\)</span>, we would not be able to guarantee finding the solution to this problem. This means that if we have <span class="math inline">\(2\)</span> eggs we would want to drop the first egg from floor <span class="math inline">\(x\)</span>, where <span class="math inline">\(x\)</span> is also the minimum number of drops that will guarantee finding the breaking floor in a <span class="math inline">\(N\)</span> storey tower.</p>
+<p>When we drop the first egg from floor <span class="math inline">\(x\)</span>, if the egg breaks, we can use the second egg to find which floor from <span class="math inline">\(1\)</span> to <span class="math inline">\(x - 1\)</span> is the solution. If the egg doesn’t break, now we have used <span class="math inline">\(1\)</span> drop. Let’s assume that the first egg breaks on the second drop. When this happens, we can use the remaining egg to explore <span class="math inline">\(x - 2\)</span> floors with <span class="math inline">\(x - 2\)</span> drops find the breaking floor. With <span class="math inline">\(x - 2\)</span> drops, we can search from floor <span class="math inline">\(x + 1\)</span> to floor <span class="math inline">\(x + (x - 2)\)</span>. This means that when we drop the first egg the second time, we should start from <span class="math inline">\(x + (x - 2) + 1\)</span>, i.e., <span class="math inline">\(x + (x - 1)\)</span>, to allow for finding the breaking floor.</p>
+<p>If the egg doesn’t break on the second drop, we have now used <span class="math inline">\(2\)</span> drops. If the egg is going to break on the third drop, we have to allow for searching <span class="math inline">\(x - 3\)</span> floors with the second egg. This means we should drop the first egg on our third attempt from floor number <span class="math inline">\(x + (x - 1) + (x - 3) + 1\)</span>, i.e., <span class="math inline">\(x + (x - 1) + (x - 2)\)</span>. We can also say that with <span class="math inline">\(3\)</span> drops and <span class="math inline">\(2\)</span> eggs we are guaranteed to find the floor if it is within the first <span class="math inline">\(3 + (3 - 1) + (3 - 2)\)</span> floors, i.e.&nbsp;<span class="math inline">\(6\)</span> floors.</p>
+<p>Seeing the pattern here?</p>
+<p>For a <span class="math inline">\(N\)</span> storey tower, we need to ensure that with <span class="math inline">\(x\)</span> drops we cover all the floors of the tower. That gives us this constraint.</p>
+<p><span class="math display">\[x + (x - 1) + (x - 2) + (x - 3) + \ldots + 1 &gt;= N\]</span></p>
+<p>Which can be rewritten as:</p>
+<p><span class="math display">\[\sum_{k=1}^{x} k &gt;= N\]</span></p>
+<p>Or, in closed form as:</p>
+<p><span class="math display">\[\frac{x \times (1 + x)}{2} &gt;= N\]</span></p>
+<p>We know <span class="math inline">\(N\)</span> is <span class="math inline">\(100\)</span> in this problem.</p>
+<p><span class="math display">\[\frac{x \times (1 + x)}{2} &gt;= 100\]</span></p>
+<p>This tells us that with <span class="math inline">\(14\)</span> drops we can guarantee finding the breaking floor in a tower with up to <span class="math inline">\(105\)</span> floors.</p>
+</section>
+<section id="three-eggs" class="level2">
+<h2 class="anchored" data-anchor-id="three-eggs">Three eggs</h2>
+<p>We have already previously established the best strategy for <span class="math inline">\(1\)</span> egg and <span class="math inline">\(2\)</span> eggs.</p>
+<p>Let’s define some terminology:</p>
+<p><span class="math display">\[f_1(x) = x\]</span> <span class="math display">\[f_2(x) = \frac{x \times (1 + x)}{2}\]</span></p>
+<p>where <span class="math inline">\(f_1(x)\)</span> and <span class="math inline">\(f_2(x)\)</span> are the number of floors that can be checked with <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span> eggs respectively with <span class="math inline">\(x\)</span> drops.</p>
+<p>And we know that <span class="math inline">\(f_2(x)\)</span> can be written as:</p>
+<p><span class="math display">\[f_2(x) = \sum_{k=1}^{x} k\]</span></p>
+<p>So if we have 3 eggs and if the first egg breaks on the first drop, we want to ensure that we can check <span class="math inline">\(f_2(x - 1)\)</span> floors with the remaining <span class="math inline">\(x - 1\)</span> drops. That means we should drop the first egg from floor:</p>
+<p><span class="math display">\[1 + f_2(x - 1)\]</span></p>
+<p>For the second drop, we can start from floor:</p>
+<p><span class="math display">\[1 + f_2(x - 1) + 1 + f_2(x - 2)\]</span></p>
+<p>For the third drop, we can start from floor:</p>
+<p><span class="math display">\[1 + f_2(x - 1) + 1 + f_2(x - 2) + 1 + f_2(x - 3)\]</span></p>
+<p>Seeing a pattern emerge again?</p>
+<p>Similar to before, the total number of floors we can check is constrained by <span class="math inline">\(N\)</span>:</p>
+<p><span class="math display">\[1 + f_2(x - 1) + 1 + f_2(x - 2) + 1 + f_2(x - 3) + \ldots + 1 &gt;= N\]</span></p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[\sum_{k=1}^{x-1} \left( 1 + f_2(k) \right) + 1 &gt;= N\]</span></p>
+<p><span class="math display">\[1 + \sum_{j=1}^{x-1} \left( 1 + \sum_{k=1}^{j} k \right) &gt;= N\]</span></p>
+<p><span class="math display">\[x + \sum_{j=1}^{x-1}\sum_{k=1}^{j} k &gt;= N\]</span></p>
+<p>which results in:</p>
+<p><span class="math display">\[\frac{x^3 + 5x}{6} &gt;= N\]</span></p>
+<p>Solving this, we get <span class="math inline">\(9\)</span> drops for <span class="math inline">\(3\)</span> eggs. With just <span class="math inline">\(9\)</span> drops, we can guarantee finding the breaking floor in a <span class="math inline">\(129\)</span> storey tower.</p>
+</section>
+<section id="n-eggs" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="n-eggs"><span class="math inline">\(N\)</span> eggs</h2>
+<p>Let’s see if we can generalize this for <span class="math inline">\(N\)</span> eggs.</p>
+<p>With <span class="math inline">\(1\)</span> egg and <span class="math inline">\(x\)</span> drops, we know we can check <span class="math inline">\(x\)</span> floors. Let’s define this as <span class="math inline">\(f(x, 1)\)</span>, i.e.:</p>
+<p><span id="eq-f_x_1"><span class="math display">\[f(x, 1) = x \tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(f(x, n)\)</span> is the floors that can be checked with <span class="math inline">\(x\)</span> drops and <span class="math inline">\(n\)</span> eggs.</p>
+<p>We can safely say that with <span class="math inline">\(0\)</span> drops or <span class="math inline">\(0\)</span> eggs we can check <span class="math inline">\(0\)</span> floors.</p>
+<p><span class="math display">\[f(0, n) = f(x, 0) = 0\]</span></p>
+<p>So we can write <a href="#eq-f_x_1">Equation&nbsp;1</a> as the following:</p>
+<p><span class="math display">\[f(x, 1) = 1 + f(x-1, 1) + f(x-1, 0)\]</span></p>
+<p>For <span class="math inline">\(2\)</span> eggs and <span class="math inline">\(x\)</span> drops, the number of floors we can check, i.e.&nbsp;<span class="math inline">\(f(x, 2)\)</span>, is:</p>
+<p><span id="eq-f_x_2"><span class="math display">\[f(x, 2) = \sum_{k=1}^{x} k \tag{2}\]</span></span></p>
+<p>We can expand this as the following:</p>
+<p><span class="math display">\[f(x, 2) = 1 + \sum_{k=1}^{x-1} k + x - 1\]</span></p>
+<p>and substitute in <a href="#eq-f_x_1">Equation&nbsp;1</a> to get:</p>
+<p><span class="math display">\[f(x, 2) = 1 + f(x-1, 2) + f(x-1, 1)\]</span></p>
+<p>And, for <span class="math inline">\(3\)</span> eggs and <span class="math inline">\(x\)</span> drops, the number of floors we can check, i.e.&nbsp;<span class="math inline">\(f(x, 2)\)</span>, is:</p>
+<p><span class="math display">\[f(x, 3) = x + \sum_{j=1}^{x-1}\sum_{k=1}^{j} k\]</span></p>
+<p>Again, we can expand it and rearrange some terms:</p>
+<p><span class="math display">\[f(x, 3) = x + \sum_{j=1}^{x-2}\sum_{k=1}^{j} k + \sum_{k=1}^{x-1} k\]</span></p>
+<p><span class="math display">\[f(x, 3) = 1 + x - 1 + \sum_{j=1}^{x-2}\sum_{k=1}^{j} k + \sum_{k=1}^{x-1} k\]</span></p>
+<p>and substitute in <a href="#eq-f_x_2">Equation&nbsp;2</a> to get:</p>
+<p><span class="math display">\[f(x, 3) = 1 + f(x - 1, 3) + f(x - 1, 2)\]</span></p>
+<p>We can see a pattern emerging here. The generalized equation can be written like so:</p>
+<p><span id="eq-f_x_n"><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1) \tag{3}\]</span></span></p>
+<p>This is also known as a recurrence relation.</p>
+<p>This result can be reasoned through intuition as well. To find the total floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x\)</span> drops, it will be <span class="math inline">\(1\)</span> (your first drop) plus the maximum number of floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x-1\)</span> eggs (if the first egg does not break) plus the maximum number of floors you can check with <span class="math inline">\(n-1\)</span> eggs with <span class="math inline">\(x-1\)</span> eggs (if the first egg does break).</p>
+<p>If we wanted to, we could expand this recurrence relation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Here is the expansion increasing the depth in the direction of number of drops:</p>
+<p><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1)\]</span></p>
+<p><span class="math display">\[f(x, n) = 3 + f(x - 2, n) + 2f(x - 2, n - 1) + f(x - 2, n - 2)\]</span></p>
+<p><span class="math display">\[f(x, n) = 7 + f(x - 3, n) + 3f(x - 3, n - 1) + 3f(x - 3, n - 2) + f(x - 3, n - 3)\]</span></p>
+<p><span class="math display">\[f(x, n) = 15 + f(x - 4, n) + 4f(x - 4, n - 1) + 6f(x - 4, n - 2) + 4f(x - 4, n - 3) + f(x - 4, n - 4)\]</span></p>
+<p><span class="math display">\[f(x, n) = 31 + f(x - 5, n) + 5f(x - 5, n - 1) + 10f(x - 5, n - 2) + 10f(x - 5, n - 3) + 5f(x - 5, n - 4) + f(x - 5, n - 5)\]</span></p>
+<p><span class="math display">\[f(x, n) = 63 + f(x - 6, n) + 6f(x - 6, n - 1) + 15f(x - 6, n - 2) + 20f(x - 6, n - 3) + 15f(x - 6, n - 4) + 6f(x - 6, n - 5) + f(x - 6, n - 6)\]</span></p>
+<p>Eagle eye readers will notice a pattern.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="pascaltriangle.svg" class="quarto-discovered-preview-image img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Binomial coefficients in Pascal’s triangle</figcaption><p></p>
+</figure>
+</div>
+<p>It turns out that this expansion is related to the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficients</a>.</p>
+<p>If we had infinite number of eggs, you’d see that the first element is the only term that contributes to <span class="math inline">\(f(x, n)\)</span>, since the others will be <span class="math inline">\(0\)</span> for <span class="math inline">\(x - d\)</span> where <span class="math inline">\(d\)</span> is the depth in the triangle. That is to say, if we had infinite eggs, with 6 drops we can guarantee checking 63 floors.</p>
+<p>Using this, we can say that, with <span class="math inline">\(x\)</span> drops we can guarantee checking <span class="math inline">\(2^x - 1\)</span> floors if we had infinite eggs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+</section>
+<section id="implementation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<p>Let’s implement this problem.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">println</span>(<span class="cn">VERSION</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.4.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can implement <a href="#eq-f_x_n">Equation&nbsp;3</a> as a function:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">f</span>(x, n) <span class="op">=</span> x <span class="op">==</span> <span class="fl">0</span> <span class="op">||</span> n <span class="op">==</span> <span class="fl">0</span> ? <span class="fl">0</span> <span class="op">:</span> <span class="fl">1</span> <span class="op">+</span> <span class="fu">f</span>(x <span class="op">-</span> <span class="fl">1</span>, n) <span class="op">+</span> <span class="fu">f</span>(x <span class="op">-</span> <span class="fl">1</span>, n <span class="op">-</span> <span class="fl">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>f (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For <span class="math inline">\(1\)</span> egg, the number of floors you can check is the number of drops you make.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="pp">@test</span> <span class="fu">f</span>.(arr, <span class="fl">1</span>) <span class="op">==</span> arr</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">Test</span> Passed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And, we can verify that it works for <span class="math inline">\(2\)</span> eggs as well.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="pp">@test</span> <span class="fu">f</span>(<span class="fl">14</span>, <span class="fl">2</span>) <span class="op">&gt;=</span> <span class="fl">100</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Test</span> Passed</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="pp">@test</span> <span class="fu">f</span>(<span class="fl">14</span>, <span class="fl">2</span>) <span class="op">==</span> <span class="fl">105</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Test</span> Passed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can implement this generally like so:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">starting_floor</span>(floors, n)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>         <span class="cf">for</span> x <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>floors</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span> <span class="fu">f</span>(x, n) <span class="op">&gt;=</span> floors</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                 <span class="cf">return</span> x</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>             <span class="cf">end</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="cf">end</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>starting_floor (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And get the answer to the problem programmatically.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">starting_floor</span>(<span class="fl">100</span>, <span class="fl">2</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fl">14</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Using the function <code>f</code>, we can also generate a table that explores what is the maximum number of floors that can be check for various number of drops and eggs.</p>
+<!-- prettier-ignore-start -->
+<figure class="fullwidth figure">
+<table class="table">
+<caption>Maximum number of floors that can be checked with <span class="math inline">\(x\)</span> drops and <span class="math inline">\(n\)</span> eggs</caption>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th>1 egg</th>
+<th>2 eggs</th>
+<th>3 eggs</th>
+<th>4 eggs</th>
+<th>5 eggs</th>
+<th>6 eggs</th>
+<th>7 eggs</th>
+<th>8 eggs</th>
+<th>9 eggs</th>
+<th>10 eggs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>1 drop</strong></td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2 drops</strong></td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3 drops</strong></td>
+<td>3</td>
+<td>6</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4 drops</strong></td>
+<td>4</td>
+<td>10</td>
+<td>14</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>5 drops</strong></td>
+<td>5</td>
+<td>15</td>
+<td>25</td>
+<td>30</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>6 drops</strong></td>
+<td>6</td>
+<td>21</td>
+<td>41</td>
+<td>56</td>
+<td>62</td>
+<td>63</td>
+<td>63</td>
+<td>63</td>
+<td>63</td>
+<td>63</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>7 drops</strong></td>
+<td>7</td>
+<td>28</td>
+<td>63</td>
+<td>98</td>
+<td>119</td>
+<td>126</td>
+<td>127</td>
+<td>127</td>
+<td>127</td>
+<td>127</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>8 drops</strong></td>
+<td>8</td>
+<td>36</td>
+<td>92</td>
+<td>162</td>
+<td>218</td>
+<td>246</td>
+<td>254</td>
+<td>255</td>
+<td>255</td>
+<td>255</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>9 drops</strong></td>
+<td>9</td>
+<td>45</td>
+<td>129</td>
+<td>255</td>
+<td>381</td>
+<td>465</td>
+<td>501</td>
+<td>510</td>
+<td>511</td>
+<td>511</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>10 drops</strong></td>
+<td>10</td>
+<td>55</td>
+<td>175</td>
+<td>385</td>
+<td>637</td>
+<td>847</td>
+<td>967</td>
+<td>1012</td>
+<td>1022</td>
+<td>1023</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>11 drops</strong></td>
+<td>11</td>
+<td>66</td>
+<td>231</td>
+<td>561</td>
+<td>1023</td>
+<td>1485</td>
+<td>1815</td>
+<td>1980</td>
+<td>2035</td>
+<td>2046</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>12 drops</strong></td>
+<td>12</td>
+<td>78</td>
+<td>298</td>
+<td>793</td>
+<td>1585</td>
+<td>2509</td>
+<td>3301</td>
+<td>3796</td>
+<td>4016</td>
+<td>4082</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>13 drops</strong></td>
+<td>13</td>
+<td>91</td>
+<td>377</td>
+<td>1092</td>
+<td>2379</td>
+<td>4095</td>
+<td>5811</td>
+<td>7098</td>
+<td>7813</td>
+<td>8099</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>14 drops</strong></td>
+<td>14</td>
+<td>105</td>
+<td>469</td>
+<td>1470</td>
+<td>3472</td>
+<td>6475</td>
+<td>9907</td>
+<td>12910</td>
+<td>14912</td>
+<td>15913</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>15 drops</strong></td>
+<td>15</td>
+<td>120</td>
+<td>575</td>
+<td>1940</td>
+<td>4943</td>
+<td>9948</td>
+<td>16383</td>
+<td>22818</td>
+<td>27823</td>
+<td>30826</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<!-- prettier-ignore-end -->
+<p>You’ll notice that the upper right corner of the table stays the same if you increase the number of eggs you have at your disposal. You can see this even more clearly in this visualization.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="egg-puzzle.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">The relationship between the number of floors that can be checked, the number of drops and number of eggs.</figcaption><p></p>
+</figure>
+</div>
+<p>There’s a minimal number of drops required to guarantee that you will find the breaking floor, even if you have unlimited eggs.</p>
+<p>If you want to check <span class="math inline">\(7\)</span> floors, as long as you have more than <span class="math inline">\(3\)</span> eggs, you can have to use a minimum of 3 drops to guarantee finding the breaking floor.</p>
+<p>For 100 floors, it is <span class="math inline">\(7\)</span> drops. If you had unlimited eggs, you would use the largest partition possible. That means dividing the total floors by <span class="math inline">\(2\)</span>.</p>
+<div class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+</div>
+</div>
+<p>Partitioning the floors equally or in other words bisecting the floors, and exploring the partition of interest using the same strategy is the most efficient way of finding the breaking floor.</p>
+<p>So there you go! We have solved the general case for the egg and tower puzzle.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-possiblywrong" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Light Bulb Puzzle Solution.”</span> [Online]. Available: <a href="https://possiblywrong.wordpress.com/2012/01/08/light-bulb-puzzle-solution/">https://possiblywrong.wordpress.com/2012/01/08/light-bulb-puzzle-solution/</a>.</div>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong"><a href="#ref-possiblywrong" role="doc-biblioref">[1]</a></span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1">/u/mark_ovchain’s insightful comment on this thread</a> for more information.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
+  author = {Krishnamurthy, Dheepak},
+  title = {The Egg Tower Puzzle},
+  date = {2020-06-06},
+  url = {https://kdheepak.com/blog/the-egg-tower-puzzle},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2020" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">D.
+Krishnamurthy, <span>“The egg tower puzzle,”</span> Jun. 06, 2020. <a href="https://kdheepak.com/blog/the-egg-tower-puzzle">https://kdheepak.com/blog/the-egg-tower-puzzle</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="" data-category="Comments" data-category-id="" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ The views expressed on this website are solely those of the author and do not represent any other organization the author is affiliated with.
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
