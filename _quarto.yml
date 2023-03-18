@@ -30,7 +30,7 @@ website:
         aria-label: GitHub
   page-footer:
     center:
-      - text: "The views expressed on this website are solely those of the author and do not represent any other organization the author is affiliated with."
+      - text: "The views expressed on this website are solely those of the author and do not represent any other organization or entity."
 format:
   html:
     grid:
