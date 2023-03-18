@@ -445,8 +445,15 @@ div.csl-indent {
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
 <span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The new object created is completely independent from the old, with its own unique address. Any changes made to the original object will not affect the copy and vice versa.</p>
-<div class="tip">
-<p>💡 Assignments always create labels, and may replace the value in an existing label with a new one.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Assignments always create labels, and may replace the value in an existing label with a new one.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="mutability" class="level2">
@@ -504,8 +511,15 @@ div.csl-indent {
 <p>Mutability is an important concept in Julia because it determines whether or not an object can be modified. In general, mutable objects can be modified, and other objects cannot be modified.</p>
 <p>In the analogy of the bookshelf, mutability would be like the ability to modify the contents of a book already on the bookshelf. It’s like erasing and re-writing some of the information on a page, without changing the location of the book on the shelf.</p>
 <p>If a book is mutable, you can add or remove pages or modify existing pages, while if a book is not mutable, you cannot modify its contents and must create a new book with the desired changes.</p>
-<div class="tip">
-<p>💡 Remember, mutations never create new labels in the current scope. They only modify values of existing variables.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Remember, mutations never create new labels in the current scope. They only modify values of existing variables.</p>
+</div>
+</div>
 </div>
 <p>There are a number of types that represent immutable objects. For example, <code>Int</code>s and <code>Float64</code>s are immutable.</p>
 <p>Interestingly, you can also have a <code>struct</code> that is <code>immutable</code> that contains an instance of a <code>mutable</code> type. You can create a <code>immutable</code> struct by dropping the <code>mutable</code> keyword from the struct definition.</p>
