@@ -442,7 +442,7 @@
   <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/tasker-and-google-maps/index.html</link>
-  <description><![CDATA[ I’ve shared this on <a href="https://unleashthephones.com/2013/06/03/tasker-tutorial-integrating-google-calendar-and-google-directions-using-transit/">UnleashThePhones</a> a while back as well. This is a small tutorial on how to use Python with SL4A. ]]></description>
+  <description><![CDATA[ This is a small tutorial on how to use Python with SL4A. ]]></description>
   <category>tasker</category>
   <category>android</category>
   <guid>https://kdheepak.com/blog/tasker-and-google-maps/index.html</guid>
@@ -460,7 +460,7 @@
   <title>Tasker Projects</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/tasker-projects/index.html</link>
-  <description><![CDATA[ <a href="https://kdheepak.com/blog/tasker-and-google-maps.html">This page</a> contains information about the <a href="https://github.com/kdheepak/tasker_sl4a">profile</a> that uses Tasker to get contextual information from Google Calendar and react based on it. ]]></description>
+  <description><![CDATA[ <a href="../tasker-and-google-maps">This page</a> contains information about the <a href="https://github.com/kdheepak/tasker_sl4a">profile</a> that uses Tasker to get contextual information from Google Calendar and react based on it. ]]></description>
   <category>tasker</category>
   <category>android</category>
   <guid>https://kdheepak.com/blog/tasker-projects/index.html</guid>
