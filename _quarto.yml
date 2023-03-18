@@ -29,7 +29,7 @@ website:
         href: https://github.com/kdheepak
         aria-label: GitHub
       - icon: rss
-        href: index.xml  
+        href: index.xml
         aria-label: RSS
   page-footer:
     center:
