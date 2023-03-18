@@ -2,35 +2,35 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "My personal website",
+    "title": "My personal thoughts and notes",
     "section": "",
     "text": "I’m a research engineer and software developer. I have experience running energy system models and simulations, such as transmission production cost models and power distribution system analyses, and have developed many bespoke models for energy system analysis. I’m proficient with Python, Julia, Rust, and Javascript, and am well versed in scientific data analysis and extract-transform-load workflows. I also enjoy working on open source projects and learning new technologies.\nSee my GitHub, Google Scholar or LinkedIn pages for more information."
   },
   {
     "objectID": "index.html#about",
     "href": "index.html#about",
-    "title": "My personal website",
+    "title": "My personal thoughts and notes",
     "section": "",
     "text": "I’m a research engineer and software developer. I have experience running energy system models and simulations, such as transmission production cost models and power distribution system analyses, and have developed many bespoke models for energy system analysis. I’m proficient with Python, Julia, Rust, and Javascript, and am well versed in scientific data analysis and extract-transform-load workflows. I also enjoy working on open source projects and learning new technologies.\nSee my GitHub, Google Scholar or LinkedIn pages for more information."
   },
   {
     "objectID": "index.html#blog",
     "href": "index.html#blog",
-    "title": "My personal website",
+    "title": "My personal thoughts and notes",
     "section": "Blog",
     "text": "Blog\nhttps://kdheepak.com/blog/"
   },
   {
     "objectID": "index.html#talks-and-tutorials",
     "href": "index.html#talks-and-tutorials",
-    "title": "My personal website",
+    "title": "My personal thoughts and notes",
     "section": "Talks and Tutorials",
     "text": "Talks and Tutorials\nTerminal User Interfaces in Julia\nCrash Course in Energy Systems Modeling & Analysis with Julia\nWhy writing C interfaces in Julia is so easy\nOpen Source Power System Production Cost Modeling in Julia\nScalable Power System Modeling and Analysis\nhttps://github.com/NREL-SIIP/SIIP-Tutorial/\nhttps://github.com/kdheepak/Python-Tutorial/\nhttps://github.com/GMLC-TDC/pesgm-2019-helics-tutorial/\nhttps://github.com/kdheepak/openmod-2019-helics-tutorial/\nhttps://kdheepak.com/think-git/\nhttps://kdheepak.com/interactive-data-visualizations-with-bokeh/"
   },
   {
     "objectID": "index.html#projects",
     "href": "index.html#projects",
-    "title": "My personal website",
+    "title": "My personal thoughts and notes",
     "section": "Projects",
     "text": "Projects\ntaskwarror-tui: A terminal user interface for taskwarrior written in Rust.\nHELICS: A co-simulation framework as a C/C++ library.\npyhelics: A CFFI interface to HELICS written in Python, with a CLI for process runner, and web client to python server based user interface for better UX.\nOpenDSSDirect.py: A CFFI interface to OpenDSS, a distribution system solver in Delphi/Pascal.\nTerminalUserInterfaces.jl: A terminal user interface library written in Julia.\nlazygit.nvim: A Lua based neovim plugin for interfacing with lazygit."
   },
