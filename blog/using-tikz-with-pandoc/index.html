@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.275">
+<meta name="generator" content="quarto-1.3.276">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dheepak Krishnamurthy">
-<meta name="dcterms.date" content="2022-02-18">
+<meta name="dcterms.date" content="2022-02-19">
 <meta name="keywords" content="tikz, latex, pandoc, lua, filter">
 
 <title>kdheepak - Using Tikz with Pandoc</title>
@@ -171,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 18, 2022</p>
+        <p class="date">February 19, 2022</p>
       </div>
     </div>
     
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    arc ({360/<span class="fu">\n</span> * (<span class="fu">\s</span> - 1)+<span class="fu">\margin</span>}:{360/<span class="fu">\n</span> * (<span class="fu">\s</span>)-<span class="fu">\margin</span>}:<span class="fu">\radius</span>);</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">TikzPictures</span></span>
@@ -226,69 +226,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre data-code-line-numbers="nil"><code>[ Info: Precompiling TikzPictures [37f6aa50-8035-52d0-81c2-5a1d08754b2d]</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre data-code-line-numbers="nil"><code>ERROR: LoadError: </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre data-code-line-numbers="nil"><code>Cannot locate artifact 'tectonic_bin' for aarch64-apple-darwin-libgfortran5-cxx11-julia_version+1.8.5 in '/Users/kd/.julia/packages/Tectonic/0KVMH/Artifacts.toml'
-Stacktrace:
- [1] error(s::String)
-   @ Base ./error.jl:35
- [2] artifact_slash_lookup(name::String, artifact_dict::Dict{String, Any}, artifacts_toml::String, platform::Base.BinaryPlatforms.Platform)
-   @ Artifacts ~/.julia/juliaup/julia-1.8.5+0.aarch64.apple.darwin14/share/julia/stdlib/v1.8/Artifacts/src/Artifacts.jl:609
- [3] var"@artifact_str"(__source__::LineNumberNode, __module__::Module, name::Any, platform::Any)
-   @ Artifacts ~/.julia/juliaup/julia-1.8.5+0.aarch64.apple.darwin14/share/julia/stdlib/v1.8/Artifacts/src/Artifacts.jl:679
- [4] var"@artifact_str"(__source__::LineNumberNode, __module__::Module, name::Any)
-   @ Artifacts ~/.julia/juliaup/julia-1.8.5+0.aarch64.apple.darwin14/share/julia/stdlib/v1.8/Artifacts/src/Artifacts.jl:642
- [5] include
-   @ ./Base.jl:419 [inlined]
- [6] include_package_for_output(pkg::Base.PkgId, input::String, depot_path::Vector{String}, dl_load_path::Vector{String}, load_path::Vector{String}, concrete_deps::Vector{Pair{Base.PkgId, UInt64}}, source::String)
-   @ Base ./loading.jl:1554
- [7] top-level scope
-   @ stdin:1
-in expression starting at /Users/kd/.julia/packages/Tectonic/0KVMH/src/Tectonic.jl:35
-in expression starting at /Users/kd/.julia/packages/Tectonic/0KVMH/src/Tectonic.jl:1
-in expression starting at stdin:1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre data-code-line-numbers="nil"><code>ERROR: LoadError: </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre data-code-line-numbers="nil"><code>Failed to precompile Tectonic [9ac5f52a-99c6-489f-af81-462ef484790f] to /Users/kd/.julia/compiled/v1.8/Tectonic/jl_kOc8Gt.
-Stacktrace:
-  [1] error(s::String)
-    @ Base ./error.jl:35
-  [2] compilecache(pkg::Base.PkgId, path::String, internal_stderr::IO, internal_stdout::IO, keep_loaded_modules::Bool)
-    @ Base ./loading.jl:1707
-  [3] compilecache
-    @ ./loading.jl:1651 [inlined]
-  [4] _require(pkg::Base.PkgId)
-    @ Base ./loading.jl:1337
-  [5] _require_prelocked</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre data-code-line-numbers="nil"><code>(uuidkey::Base.PkgId)
-    @ Base ./loading.jl:1200
-  [6] macro expansion
-    @ ./loading.jl:1180 [inlined]
-  [7] macro expansion
-    @ ./lock.jl:223 [inlined]
-  [8] require(into::Module, mod::Symbol)
-    @ Base ./loading.jl:1144
-  [9] include
-    @ ./Base.jl:419 [inlined]
- [10] include_package_for_output(pkg::Base.PkgId, input::String, depot_path::Vector{String}, dl_load_path::Vector{String}, load_path::Vector{String}, concrete_deps::Vector{Pair{Base.PkgId, UInt64}}, source::Nothing)
-    @ Base ./loading.jl:1554
- [11] top-level scope
-    @ stdin:1
-in expression starting at /Users/kd/.julia/packages/TikzPictures/4zjh8/src/TikzPictures.jl:1
-in expression starting at stdin:1</code></pre>
-</div>
 <div class="cell-output cell-output-error">
-<pre data-code-line-numbers="nil"><code>LoadError: Failed to precompile TikzPictures [37f6aa50-8035-52d0-81c2-5a1d08754b2d] to /Users/kd/.julia/compiled/v1.8/TikzPictures/jl_wt2fh4.</code></pre>
+<pre data-code-line-numbers="nil"><code>LoadError: syntax: invalid interpolation syntax: "$\"</code></pre>
 </div>
 </div>
 
@@ -297,13 +236,13 @@ in expression starting at stdin:1</code></pre>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2022,
   author = {Krishnamurthy, Dheepak},
   title = {Using {Tikz} with {Pandoc}},
-  date = {2022-02-18},
+  date = {2022-02-19},
   url = {https://kdheepak.com/blog/using-tikz-with-pandoc},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2022" class="csl-entry quarto-appendix-citeas" role="listitem">
 <div class="">D.
-Krishnamurthy, <span>“Using Tikz with Pandoc,”</span> Feb. 18, 2022. <a href="https://kdheepak.com/blog/using-tikz-with-pandoc">https://kdheepak.com/blog/using-tikz-with-pandoc</a>.</div>
+Krishnamurthy, <span>“Using Tikz with Pandoc,”</span> Feb. 19, 2022. <a href="https://kdheepak.com/blog/using-tikz-with-pandoc">https://kdheepak.com/blog/using-tikz-with-pandoc</a>.</div>
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
