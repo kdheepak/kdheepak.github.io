@@ -26,9 +26,7 @@ Here is a fun puzzle:
 
 If you are interested in an easy to understand intuitive explanation to the $2$ egg $100$ storey tower problem, check out the following video:
 
-<figure class="iframe-wrapper">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NGtt7GJ1uiM?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</figure>
+{{< video https://www.youtube-nocookie.com/embed/NGtt7GJ1uiM >}}
 
 We will go through this problem for the $2$ eggs and $3$ eggs variant, and derive the solution mathematically.
 Then, we will generalize the problem with $x$ floors and $N$ eggs.
@@ -222,7 +220,7 @@ $$f(x, n) = 63 + f(x - 6, n) + 6f(x - 6, n - 1) + 15f(x - 6, n - 2) + 20f(x - 6,
 
 Eagle eye readers will notice a pattern.
 
-![Binomial coefficients in Pascal's triangle](pascaltriangle.svg)
+![Binomial coefficients in Pascal's triangle](images/pascaltriangle.svg)
 
 It turns out that this expansion is related to the [binomial coefficients](https://en.wikipedia.org/wiki/Binomial_coefficient).
 
@@ -338,7 +336,7 @@ Table: Maximum number of floors that can be checked with $x$ drops and $n$ eggs
 You'll notice that the upper right corner of the table stays the same if you increase the number of eggs you have at your disposal.
 You can see this even more clearly in this visualization.
 
-![The relationship between the number of floors that can be checked, the number of drops and number of eggs.](egg-puzzle.png)
+![The relationship between the number of floors that can be checked, the number of drops and number of eggs.](images/egg-puzzle.png)
 
 There's a minimal number of drops required to guarantee that you will find the breaking floor, even if you have unlimited eggs.
 

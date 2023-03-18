@@ -1,25 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <meta charset="utf-8" />
     <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta
+      name="keywords"
+      content="markdown, pandoc, papers, writing, academic, scholarly, technical, scientific"
+    />
     <title>Writing Technical Papers with Markdown and Pandoc</title>
-    <style type="text/css">
+    <style>
       code {
-        white-space: pre;
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+      div.hanging-indent {
+        margin-left: 1.5em;
+        text-indent: -1.5em;
+      }
+      ul.task-list {
+        list-style: none;
       }
     </style>
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <link
       rel="stylesheet"
-      href="https://cdn.rawgit.com/thomaspark/pubcss/549f945ffeff64f1929011785adf1c8e75264058/formats/acm-sig/css/pub.css"
+      href="https://cdn.rawgit.com/claymcleod/pandoc-academic-publication/ce07fa7a20af53cab8c8a50c5bad5ad15d726bba/assets/css/academic-pub.css"
     />
     <script
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
       type="text/javascript"
     ></script>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
 
     <!-- pandoc-eqnos: equation style -->
     <style>
@@ -40,20 +63,10 @@
     </style>
   </head>
   <body>
-    <header>
-      <h3 class="date">2015-12-20T00:00:00-06:00</h3>
-
+    <header id="title-block-header">
       <h1 class="title">Writing Technical Papers with Markdown and Pandoc</h1>
+      <p class="date">2015-12-20T00:00:00-06:00</p>
     </header>
-
-    <p class="small">
-      <strong>Abstract: </strong
-      ><em
-        >Recently, I’ve had several people ask me about the Markdown workflow I use to write papers.
-        I figured I’d use this post to write about my workflow and my resources on this topic.</em
-      >
-    </p>
-
     <p>You can view this post in the following formats, thanks to Pandoc!</p>
     <figure class="fullwidth">
       <table>
@@ -67,7 +80,8 @@
           <tr class="odd">
             <td style="text-align: left">IEEE-PDF</td>
             <td style="text-align: left">
-              <a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.ieee.pdf"
+              <a
+                href="https://kdheepak.com/blog/writing-papers-with-markdown/www/writing-papers-with-markdown.ieee.pdf"
                 >LINK</a
               >
             </td>
@@ -75,7 +89,8 @@
           <tr class="even">
             <td style="text-align: left">IEEE-DOCX</td>
             <td style="text-align: left">
-              <a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.ieee.docx"
+              <a
+                href="https://kdheepak.com/blog/writing-papers-with-markdown/www/writing-papers-with-markdown.ieee.docx"
                 >LINK</a
               >
             </td>
@@ -83,7 +98,8 @@
           <tr class="odd">
             <td style="text-align: left">IEEE-HTML</td>
             <td style="text-align: left">
-              <a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.ieee.html"
+              <a
+                href="https://kdheepak.com/blog/writing-papers-with-markdown/www/writing-papers-with-markdown.ieee.html"
                 >LINK</a
               >
             </td>
@@ -91,7 +107,8 @@
           <tr class="even">
             <td style="text-align: left">PDF</td>
             <td style="text-align: left">
-              <a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.pdf"
+              <a
+                href="https://kdheepak.com/blog/writing-papers-with-markdown/www/writing-papers-with-markdown.pdf"
                 >LINK</a
               >
             </td>
@@ -99,7 +116,8 @@
           <tr class="odd">
             <td style="text-align: left">DOCX</td>
             <td style="text-align: left">
-              <a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.docx"
+              <a
+                href="https://kdheepak.com/blog/writing-papers-with-markdown/www/writing-papers-with-markdown.docx"
                 >LINK</a
               >
             </td>
@@ -107,7 +125,8 @@
           <tr class="even">
             <td style="text-align: left">HTML</td>
             <td style="text-align: left">
-              <a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.html"
+              <a
+                href="https://kdheepak.com/blog/writing-papers-with-markdown/www/writing-papers-with-markdown.html"
                 >LINK</a
               >
             </td>
@@ -115,7 +134,8 @@
           <tr class="odd">
             <td style="text-align: left">SLIDES-PDF</td>
             <td style="text-align: left">
-              <a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.slides.pdf"
+              <a
+                href="https://kdheepak.com/blog/writing-papers-with-markdown/www/writing-papers-with-markdown.slides.pdf"
                 >LINK</a
               >
             </td>

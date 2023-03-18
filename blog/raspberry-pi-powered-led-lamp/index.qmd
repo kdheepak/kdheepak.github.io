@@ -15,7 +15,7 @@ references:
 
 With a Raspberry Pi, you can control a RGB addressable LED strip.
 The instructions are very simple [@led] and the results are pretty cool.
-I decided to make a desk lamp with a web interface[![Raspberry Pi Powered LED Desk Lamp](raspberrypilamp.gif)]{.aside}.
+I decided to make a desk lamp with a web interface[![Raspberry Pi Powered LED Desk Lamp](images/raspberrypilamp.gif)]{.aside}.
 This post will go through the steps to build your own Pi powered desk lamp.
 
 # Requirements
@@ -37,7 +37,11 @@ First we need to set up the Raspberry Pi.
 To use SPI on the Raspberry Pi, you need to connect 4 pins.
 Adafruit has an excellent image in their tutorial that shows how you can do this, which I've also linked below.
 
-![Wiring Diagram](raspberry_pi_diagram.png){.fullwidth}
+::: column-screen
+
+![Wiring Diagram](images/raspberry_pi_diagram.png)
+
+:::
 
 I've used the same power source to the LED strip to power the Raspberry Pi as well.
 

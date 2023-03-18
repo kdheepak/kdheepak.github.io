@@ -9,7 +9,7 @@ summary: Solutions to all 25 days in the Julia programming language.
 It is Christmas night, and it is the first time this month that I haven't had to plan my schedule for the evening around a programming puzzle contest.
 For the last 25 days this month, I participated in [Advent of Code 2020](https://adventofcode.com/2020/), and I managed to collect all 50 stars!
 
-![](advent-of-code-2020-stars.png)
+![](images/advent-of-code-2020-stars.png)
 
 I solved all the puzzles in the [Julia](https://julialang.org/) programming language, and my solutions are available [here](https://github.com/kdheepak/adventofcode/tree/master/2020/julia/src).
 
@@ -471,7 +471,7 @@ part2(data = readInput()) = part2(data[1], data[2])
 part2(g, mapping) = total_bags(g, mapping["shiny gold bag"]) - 1
 ```
 
-![part1](adventofcode-day07-part1.png){ width=45% } ![part2](adventofcode-day07-part2.png){ width=45% }
+![part1](images/adventofcode-day07-part1.png){ width=45% } ![part2](images/adventofcode-day07-part2.png){ width=45% }
 
 Julia allows for [multiple dispatch](https://docs.julialang.org/en/v1/manual/methods/) based on the number of arguments and the type of each argument.
 This lets you define multiple methods of a function.
@@ -785,7 +785,7 @@ Check out his other solutions for more optimized takes on the problems.
 
 [Michael Krabbe Borregaard](https://github.com/mkborregaard) had some neat visualizations for this day.
 
-![part1](adventofcode-day12-part1.png){ width=45% } ![part2](adventofcode-day12-part2.png){ width=45% }
+![part1](images/adventofcode-day12-part1.png){ width=45% } ![part2](images/adventofcode-day12-part2.png){ width=45% }
 
 ## [Day 13: Shuttle Search](https://adventofcode.com/2020/day/13)
 
@@ -1521,7 +1521,7 @@ end
 
 Here are a couple of visualizations, the test data visualized as a graph is on the left and the maximum flow solution on the right.
 
-![Input data](adventofcode-day21-part1-1.png){ width=45% } ![Maximum flow solution](adventofcode-day21-part1-2.png){ width=45% }
+![Input data](images/adventofcode-day21-part1-1.png){ width=45% } ![Maximum flow solution](images/adventofcode-day21-part1-2.png){ width=45% }
 
 ## [Day 22: Crab Combat](https://adventofcode.com/2020/day/22)
 

@@ -21,7 +21,7 @@ summary: A number of Mac application can improve productivity. Here I've complie
 
 [https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/](https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/)
 
-![](geektool.png)
+![](images/geektool.png)
 
 [https://projects.tynsoe.org/en/geektool/](https://www.tynsoe.org/geektool/)
 

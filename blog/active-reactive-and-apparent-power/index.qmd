@@ -47,7 +47,7 @@ plt.savefig("./power_3_0.png", transparent=True, dpi=300)
 ```
 </details>
 
-![](power_3_0.png)
+![](images/power_3_0.png)
 
 We can calculate the maximum, minimum and the RMS value as follows:
 
@@ -141,7 +141,7 @@ plt.savefig("./power_11_0.png", transparent=True, dpi=300)
 ```
 </details>
 
-![](power_11_0.png)
+![](images/power_11_0.png)
 
 We can decompose the instantaneous power following the steps below.
 
@@ -246,7 +246,7 @@ plt.savefig("power_16_0.png", transparent=True, dpi=300)
 ```
 </details>
 
-![](power_16_0.png)
+![](images/power_16_0.png)
 
 The blue line (active power) is always positve and has an average value of $\frac{V_{max}I_{max}}{2}\cos\theta$. If we use RMS values, we get
 
@@ -293,7 +293,7 @@ plt.savefig("./schemdraw.png", dpi=300, transparent=True)
 ```
 </details>
 
-![](schemdraw.png)
+![](images/schemdraw.png)
 
 <details>
 <summary>Code</summary>
@@ -322,7 +322,7 @@ plt.savefig("./power_20_0.png", transparent=True, dpi=300)
 
 </details>
 
-![](./power_20_0.png)
+![](images/./power_20_0.png)
 
 We know that $\theta$ is the phase difference between the Voltage and Current.
 
@@ -414,7 +414,7 @@ plt.savefig("./power_26_0.png", dpi=300, transparent=True)
 
 </details>
 
-![](power_26_0.png)
+![](images/power_26_0.png)
 
 The Instantaneous power in the phase is equal to the active power.
 
@@ -478,7 +478,7 @@ plt.savefig("./power_30_0.png", dpi=300, transparent=True)
 
 </details>
 
-![](power_30_0.png)
+![](images/power_30_0.png)
 
 The Instantaneous power in the phase is equal to the reactive power. The power oscillates between the source and the inductive circuit.
 
@@ -542,7 +542,7 @@ plt.savefig("./power_34_0.png", dpi=300, transparent=True)
 
 </details>
 
-![](power_34_0.png)
+![](images/power_34_0.png)
 
 In a purely capacitive circuit, power oscillates between the source and electric field associated with the capacitor.
 

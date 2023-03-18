@@ -29,7 +29,7 @@ Advantages
 
 This is what this post looks like in Markdown.
 
-![](markdown-example.png)
+![](images/markdown-example.png)
 
 It really is that simple.
 

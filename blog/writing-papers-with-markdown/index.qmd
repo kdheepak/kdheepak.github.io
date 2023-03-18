@@ -19,13 +19,13 @@ You can view this post in the following formats, thanks to Pandoc!
 
 Format      Link
 -------     -------
-IEEE-PDF    [LINK](https://blog.kdheepak.com/downloads/writing-papers-with-markdown/writing-papers-with-markdown.ieee.pdf){rel="external"}
-IEEE-DOCX   [LINK](https://blog.kdheepak.com/downloads/writing-papers-with-markdown/writing-papers-with-markdown.ieee.docx){rel="external"}
-IEEE-HTML   [LINK](https://blog.kdheepak.com/downloads/writing-papers-with-markdown/writing-papers-with-markdown.ieee.html){rel="external"}
-PDF         [LINK](https://blog.kdheepak.com/downloads/writing-papers-with-markdown/writing-papers-with-markdown.pdf){rel="external"}
-DOCX        [LINK](https://blog.kdheepak.com/downloads/writing-papers-with-markdown/writing-papers-with-markdown.docx){rel="external"}
-HTML        [LINK](https://blog.kdheepak.com/downloads/writing-papers-with-markdown/writing-papers-with-markdown.html){rel="external"}
-SLIDES-PDF  [LINK](https://blog.kdheepak.com/downloads/writing-papers-with-markdown/writing-papers-with-markdown.slides.pdf){rel="external"}
+IEEE-PDF    [LINK](www/writing-papers-with-markdown.ieee.pdf)
+IEEE-DOCX   [LINK](www/writing-papers-with-markdown.ieee.docx)
+IEEE-HTML   [LINK](www/writing-papers-with-markdown.ieee.html)
+PDF         [LINK](www/writing-papers-with-markdown.pdf)
+DOCX        [LINK](www/writing-papers-with-markdown.docx)
+HTML        [LINK](www/writing-papers-with-markdown.html)
+SLIDES-PDF  [LINK](www/writing-papers-with-markdown.slides.pdf)
 
 <!-- BEGIN SLIDESNOHEADER -->
 
@@ -116,7 +116,7 @@ To quote Raymond Hettinger:
 
 <!-- BEGIN SLIDES -->
 
-![Raymond Hettinger](raymondhettinger.jpg)
+![Raymond Hettinger](images/raymondhettinger.jpg)
 
 <!-- END SLIDES -->
 
@@ -306,7 +306,7 @@ Right & Left & Center & Default\tabularnewline
 However, Markdown does not allow for the level of detailed customization that you can achieve using $\LaTeX$.
 Even a moderately complex table such as the one below is not supported (currently) by any form of Markdown.
 
-![Tabular $\LaTeX$ example [@noauthor_wikibooks_nodate]](table.png)
+![Tabular $\LaTeX$ example [@noauthor_wikibooks_nodate]](images/table.png)
 
 <!-- END SLIDES -->
 
@@ -463,12 +463,12 @@ And this text is in **_bold-italic_**.
 ### **_Images_**
 
 ```markdown
-![Caption](markdown.png)
+![Caption](images/markdown.png)
 ```
 
 **Example**
 
-![Caption](markdown.png)
+![Caption](images/markdown.png){width=300}
 
 ### **_Lists_**
 
@@ -795,7 +795,7 @@ Check out my attempt at describing the relationship between complexity of docume
 
 <!-- BEGIN SLIDESNOHEADER -->
 
-![Comparing Word, $\LaTeX$ and Markdown](learningcurve.png){#fig-learningcurve}
+![Comparing Word, $\LaTeX$ and Markdown](images/learningcurve.png){#fig-learningcurve}
 
 <!-- END SLIDES -->
 

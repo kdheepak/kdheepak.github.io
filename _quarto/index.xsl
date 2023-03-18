@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="https://blog.kdheepak.com/">
+    <a class="navbar-brand" href="https://kdheepak.com/blog/">
     <span class="navbar-title">Δ</span>
     </a>
   </div>

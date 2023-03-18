@@ -7,4 +7,4 @@ Monitoring temperature using Raspberry Pi
 
 The current ambient room temperature is 75.76 °F
 
-![](home-monitoring-system.png)
+![](images/home-monitoring-system.png)

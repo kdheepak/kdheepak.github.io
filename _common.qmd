@@ -18,9 +18,9 @@ function xml(posts)
     """
       <item>
         <title>$(post[:title])</title>
-        <link>https://blog.kdheepak.com/$(post[:slug])</link>
-        <guid isPermaLink="true">https://blog.kdheepak.com/$(post[:slug])</guid>
-        <atom:link href="https://blog.kdheepak.com/$(post[:slug])" rel="self"></atom:link>
+        <link>https://kdheepak.com/blog/$(post[:slug])</link>
+        <guid isPermaLink="true">https://kdheepak.com/blog/$(post[:slug])</guid>
+        <atom:link href="https://kdheepak.com/blog/$(post[:slug])" rel="self"></atom:link>
         <pubDate>$(Dates.format(DateTime(ZonedDateTime(post[:date], DateFormat("yyyy-mm-ddTHH:MM:SSz")), UTC), "e, d u yyyy HH:MM:SS")) GMT</pubDate>
         <description>$(post[:summary])</description>
       </item>
@@ -37,10 +37,10 @@ function xml(posts)
   <channel>
     <title>Dheepak Krishnamurthy's Blog</title>
     <description>My thoughts, notes and blogs</description>
-    <link>https://blog.kdheepak.com/</link>
+    <link>https://kdheepak.com/blog/</link>
     <language>en-us</language>
     <copyright>Copyright 2020, Dheepak Krishnamurthy</copyright>
-    <atom:link href="https://blog.kdheepak.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://kdheepak.com/blog/rss.xml" rel="self" type="application/rss+xml"/>
     <generator>quarto</generator>
     $(posts)
   </channel>

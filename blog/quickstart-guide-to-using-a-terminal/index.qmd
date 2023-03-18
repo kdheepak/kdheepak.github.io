@@ -209,7 +209,7 @@ src/posts/10-fast-track-to-being-productive-with-vim.md:When I first started usi
 12. `vi` or `vim` or `nano` or `emacs`
 
 Finally, learning how to use a text editor can go a long way in getting you comfortable with a terminal.
-Check out [my post on how to get started with vim](./../fast-track-to-being-productive-in-vim/index.qmd) for more information.
+Check out [my post on how to get started with vim](./../fast-track-to-being-productive-in-vim/) for more information.
 
 # Environment Variables
 

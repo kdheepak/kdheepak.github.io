@@ -14,7 +14,7 @@ They are **live substitution**, **highlight yanked text**, and the built-in **la
 By default, `vim`’s `:substitute` command only modifies the document when you execute the command by pressing `Enter` (`<CR>`).
 In `neovim`, you can update the document interactively. `neovim` also shows you a preview window of all the changes you are going to make in the document.
 
-![](nvim-live-substitution.mov.gif)
+![](images/nvim-live-substitution.mov.gif)
 
 Just add the following option to your `vimrc` file.
 
@@ -28,7 +28,7 @@ set inccommand=split
 
 With the latest version of neovim, you have the ability to highlight yanked text without using any plugins.
 
-![](nvim-highlight-yank.mov.gif)
+![](images/nvim-highlight-yank.mov.gif)
 
 At the time of writing, you'll need a `v0.5.0` or the `nightly`[^nightly] release of `neovim` for this feature.
 
@@ -55,7 +55,7 @@ augroup END
 
 `neovim` has a built-in implementation of the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) client and [default configurations for over 50 languages](https://github.com/neovim/nvim-lsp).
 
-![Completion, diagnostics and jump to references in lua.](nvim-built-in-lsp.mov.gif)
+![Completion, diagnostics and jump to references in lua.](images/nvim-built-in-lsp.mov.gif)
 
 At the time of writing, you'll need a `v0.5.0` or the `nightly` release of `neovim` for this feature.
 

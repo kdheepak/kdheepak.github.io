@@ -1,5 +1,5 @@
 local function add_target_blank(link)
-  if string.match(link.target, "^http") and (not string.match(link.target, "blog.kdheepak.com")) then
+  if string.match(link.target, "^http") and (not string.match(link.target, "kdheepak.com")) then
     link.attributes.target = "_blank"
   end
   return link
