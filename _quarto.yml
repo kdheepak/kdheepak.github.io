@@ -28,9 +28,12 @@ website:
       - icon: github
         href: https://github.com/kdheepak
         aria-label: GitHub
+      - icon: rss
+        href: index.xml  
+        aria-label: RSS
   page-footer:
     center:
-      - text: "The views expressed on this website are solely those of the author and do not represent any other organization or entity."
+      - text: "All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed in any manner by any employer or entity."
 format:
   html:
     grid:
