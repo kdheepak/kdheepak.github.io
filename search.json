@@ -252,6 +252,41 @@
     "text": "Welcome to my blog where I share random musings, pieces of learnings and my thoughts and notes.\n\n\n\nReusehttps://creativecommons.org/licenses/by-sa/4.0/CitationBibTeX citation:@online{krishnamurthy2014,\n  author = {Krishnamurthy, Dheepak},\n  title = {Welcome to My Blog},\n  date = {2014-01-05},\n  url = {https://kdheepak.com/blog/welcome-to-my-blog},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nD.\nKrishnamurthy, “Welcome to my blog,” Jan. 05, 2014. https://kdheepak.com/blog/welcome-to-my-blog."
   },
   {
+    "objectID": "blog/three-built-in-neovim-features/index.html",
+    "href": "blog/three-built-in-neovim-features/index.html",
+    "title": "Three built-in neovim features",
+    "section": "",
+    "text": "I want to share three built-in neovim features that I think are under the category of quality of life improvements. They are live substitution, highlight yanked text, and the built-in language server protocol support."
+  },
+  {
+    "objectID": "blog/three-built-in-neovim-features/index.html#live-substitution",
+    "href": "blog/three-built-in-neovim-features/index.html#live-substitution",
+    "title": "Three built-in neovim features",
+    "section": "Live Substitution",
+    "text": "Live Substitution\nBy default, vim’s :substitute command only modifies the document when you execute the command by pressing Enter (&lt;CR&gt;). In neovim, you can update the document interactively. neovim also shows you a preview window of all the changes you are going to make in the document.\n\nJust add the following option to your vimrc file.\nset inccommand=split"
+  },
+  {
+    "objectID": "blog/three-built-in-neovim-features/index.html#highlight-yanked-text",
+    "href": "blog/three-built-in-neovim-features/index.html#highlight-yanked-text",
+    "title": "Three built-in neovim features",
+    "section": "Highlight Yanked Text",
+    "text": "Highlight Yanked Text\nIf you want to use this feature in neovim v0.4.x or in vim 8, you can do so with this or this plugin. Also, check out this well written post on how this works under the hood.\nWith the latest version of neovim, you have the ability to highlight yanked text without using any plugins.\n\nAt the time of writing, you’ll need a v0.5.0 or the nightly1 release of neovim for this feature.\nnvim --version | head -1\nNVIM v0.5.0-556-ge78658348\nYou can add the following in your vimrc to enable this feature:\naugroup LuaHighlight\n  autocmd!\n  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()\naugroup END"
+  },
+  {
+    "objectID": "blog/three-built-in-neovim-features/index.html#language-server-protocol",
+    "href": "blog/three-built-in-neovim-features/index.html#language-server-protocol",
+    "title": "Three built-in neovim features",
+    "section": "Language Server Protocol",
+    "text": "Language Server Protocol\nneovim has a built-in implementation of the Language Server Protocol client and default configurations for over 50 languages.\n\n\n\nCompletion, diagnostics and jump to references in lua.\n\n\nAt the time of writing, you’ll need a v0.5.0 or the nightly release of neovim for this feature.\nnvim --version | head -1\nNVIM v0.5.0-556-ge78658348\nWhile technically you can configure the LSP client straight from your vimrc file, it is easier to use configurations from the neovim/nvim-lsp repository that the neovim developers maintain.\nIn order to set this up you need to do 3 things:\n\nAdd the neovim/nvim-lsp plugin:\nPlug 'neovim/nvim-lsp'\nRun :LspInstall {servername}:\n:LspInstall sumneko_lua\n:LspInstall julials\n:LspInstall nimls\n:LspInstall rust_analyzer\n:LspInstall vimls\n:LspInstall pyls\nSet up configurations with options in your vimrc:\nlua &lt;&lt;EOF\n    local nvim_lsp = require'nvim_lsp'\n    nvim_lsp.sumneko_lua.setup()\n    nvim_lsp.julials.setup()\n    nvim_lsp.nimls.setup()\n    nvim_lsp.vimls.setup()\n    nvim_lsp.pyls.setup{\n        settings = {\n            pyls = {\n                configurationSources = {\n                    pycodestyle,\n                    flake8\n                }\n            }\n        }\n    }\nEOF"
+  },
+  {
+    "objectID": "blog/three-built-in-neovim-features/index.html#footnotes",
+    "href": "blog/three-built-in-neovim-features/index.html#footnotes",
+    "title": "Three built-in neovim features",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nPrecompiled binaries are available on the github releases page.↩︎"
+  },
+  {
     "objectID": "blog/reinstall-xcode-command-line-developer-tools/index.html",
     "href": "blog/reinstall-xcode-command-line-developer-tools/index.html",
     "title": "Reinstall xcode command line developer tools",
@@ -397,41 +432,6 @@
     "title": "Fast track to being productive in Vim",
     "section": "",
     "text": "When I first started using vim three months ago, I found it quite challenging to get meaningful work done. I now realize that there were a list of things I had to grok in order to be productive in vim. Learning vim can be extremely gratifying, but the core ideas in vim are also probably unlike anything you have seen before. I thought it would be useful to share some steps one could take to maximize productivity with vim after committing to it. I haven’t been using vim for very long so I’m by no means an expert, and I still learn new things about vim every day. That said, this is in my experience the best bang for buck in priority order.\n\nSpend half an hour (maybe over lunch) using vimtutor.\n\nType vimtutor in a command line window and follow instructions.\n\nLearn to stay in normal mode often.\n\nIf you want to make a change, enter insert mode, edit text and return to normal mode.\n\nBreak old habits while learning new features by disabling functionality you are accustomed to.\n\nFor example, you can learn to navigate using hjkl by disabling arrow keys.\n\nUnderstand how to use macros:\n\nq : Start a macro\n[REG] : Assign a macro to a register, e.g. a. Starts recording a macro\n[keystrokes] : Perform a set of keystrokes, e.g. ciwhelloESC\nq : End recording a macro\n@[REG] : Play a macro from cursor current position\n@@ : Play last played macro\n\nLearn how to use and navigate buffers (:ls&lt;CR&gt;, :buffer N, C-^), jumplist (C-O, C-I), and taglist (C-], C-T).\nLearn about the built-in complete sub-mode: Use C-X in insert mode.\nCraft your lightsaber — make vim your own using ~/.vimrc.\n\nDon’t be afraid to customize your editor, but also don’t add anything in your .vimrc that you don’t understand.\n\nChange CAPSLOCK to ESC.\nWatch other people use vim on vimcasts and on YouTube.\nFind plugins to boost your productivity, and use a plugin manager.\n\n\n\n\nvimtutorReusehttps://creativecommons.org/licenses/by-sa/4.0/CitationBibTeX citation:@online{krishnamurthy2015,\n  author = {Krishnamurthy, Dheepak},\n  title = {Fast Track to Being Productive in {Vim}},\n  date = {2015-05-02},\n  url = {https://kdheepak.com/blog/fast-track-to-being-productive-in-vim},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nD.\nKrishnamurthy, “Fast track to being productive in Vim,” May\n02, 2015. https://kdheepak.com/blog/fast-track-to-being-productive-in-vim."
-  },
-  {
-    "objectID": "blog/three-builtin-neovim-features/index.html",
-    "href": "blog/three-builtin-neovim-features/index.html",
-    "title": "Three built-in neovim features",
-    "section": "",
-    "text": "I want to share three built-in neovim features that I think are under the category of quality of life improvements. They are live substitution, highlight yanked text, and the built-in language server protocol support."
-  },
-  {
-    "objectID": "blog/three-builtin-neovim-features/index.html#live-substitution",
-    "href": "blog/three-builtin-neovim-features/index.html#live-substitution",
-    "title": "Three built-in neovim features",
-    "section": "Live Substitution",
-    "text": "Live Substitution\nBy default, vim’s :substitute command only modifies the document when you execute the command by pressing Enter (&lt;CR&gt;). In neovim, you can update the document interactively. neovim also shows you a preview window of all the changes you are going to make in the document.\n\nJust add the following option to your vimrc file.\nset inccommand=split"
-  },
-  {
-    "objectID": "blog/three-builtin-neovim-features/index.html#highlight-yanked-text",
-    "href": "blog/three-builtin-neovim-features/index.html#highlight-yanked-text",
-    "title": "Three built-in neovim features",
-    "section": "Highlight Yanked Text",
-    "text": "Highlight Yanked Text\nIf you want to use this feature in neovim v0.4.x or in vim 8, you can do so with this or this plugin. Also, check out this well written post on how this works under the hood.\nWith the latest version of neovim, you have the ability to highlight yanked text without using any plugins.\n\nAt the time of writing, you’ll need a v0.5.0 or the nightly1 release of neovim for this feature.\nnvim --version | head -1\nNVIM v0.5.0-556-ge78658348\nYou can add the following in your vimrc to enable this feature:\naugroup LuaHighlight\n  autocmd!\n  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()\naugroup END"
-  },
-  {
-    "objectID": "blog/three-builtin-neovim-features/index.html#language-server-protocol",
-    "href": "blog/three-builtin-neovim-features/index.html#language-server-protocol",
-    "title": "Three built-in neovim features",
-    "section": "Language Server Protocol",
-    "text": "Language Server Protocol\nneovim has a built-in implementation of the Language Server Protocol client and default configurations for over 50 languages.\n\n\n\nCompletion, diagnostics and jump to references in lua.\n\n\nAt the time of writing, you’ll need a v0.5.0 or the nightly release of neovim for this feature.\nnvim --version | head -1\nNVIM v0.5.0-556-ge78658348\nWhile technically you can configure the LSP client straight from your vimrc file, it is easier to use configurations from the neovim/nvim-lsp repository that the neovim developers maintain.\nIn order to set this up you need to do 3 things:\n\nAdd the neovim/nvim-lsp plugin:\nPlug 'neovim/nvim-lsp'\nRun :LspInstall {servername}:\n:LspInstall sumneko_lua\n:LspInstall julials\n:LspInstall nimls\n:LspInstall rust_analyzer\n:LspInstall vimls\n:LspInstall pyls\nSet up configurations with options in your vimrc:\nlua &lt;&lt;EOF\n    local nvim_lsp = require'nvim_lsp'\n    nvim_lsp.sumneko_lua.setup()\n    nvim_lsp.julials.setup()\n    nvim_lsp.nimls.setup()\n    nvim_lsp.vimls.setup()\n    nvim_lsp.pyls.setup{\n        settings = {\n            pyls = {\n                configurationSources = {\n                    pycodestyle,\n                    flake8\n                }\n            }\n        }\n    }\nEOF"
-  },
-  {
-    "objectID": "blog/three-builtin-neovim-features/index.html#footnotes",
-    "href": "blog/three-builtin-neovim-features/index.html#footnotes",
-    "title": "Three built-in neovim features",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nPrecompiled binaries are available on the github releases page.↩︎"
   },
   {
     "objectID": "blog/how-to-install-gdb-on-osx/index.html",

@@ -160,10 +160,10 @@
 <item>
   <title>Three built-in neovim features</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/three-builtin-neovim-features/index.html</link>
+  <link>https://kdheepak.com/blog/three-built-in-neovim-features/index.html</link>
   <description><![CDATA[ I want to share three built-in <code>neovim</code> features that I think are under the category of <q>quality of life improvements</q>. They are <strong>live substitution</strong>, <strong>highlight yanked text</strong>, and the built-in <strong>language server protocol</strong> support. ]]></description>
   <category>neovim</category>
-  <guid>https://kdheepak.com/blog/three-builtin-neovim-features/index.html</guid>
+  <guid>https://kdheepak.com/blog/three-built-in-neovim-features/index.html</guid>
   <pubDate>Sat, 27 Jun 2020 15:42:32 GMT</pubDate>
 </item>
 <item>
