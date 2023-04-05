@@ -6,3 +6,15 @@ mjx-container {
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+.cell-output pre {
+  white-space: pre-wrap;
+  border: 1px solid grey;
+  padding: 1em;
+}
+
+pre.cell-output {
+  white-space: pre-wrap;
+  border: 1px solid grey;
+  padding: 1em;
+}
