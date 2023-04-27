@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.306">
+<meta name="generator" content="quarto-1.4.8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -253,7 +253,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/raspberry_pi_diagram.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Wiring Diagram</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Wiring Diagram</figcaption>
 </figure>
 </div>
 </div>
@@ -304,7 +304,12 @@ div.csl-indent {
 </section>
 </section>
 </section>
-
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Both <code>rdisk</code> and <code>disk</code> will work fine, but if you are using <code>disk</code> be prepared to wait longer - it took about an hour in my case.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-led" class="csl-entry" role="listitem">
@@ -313,12 +318,7 @@ div.csl-indent {
 <div id="ref-maniacallabs/bibliopixel" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“BiblioPixel - A pure Python 2 library for programming light animation.”</span> [Online]. Available: <a href="https://github.com/ManiacalLabs/BiblioPixel">https://github.com/ManiacalLabs/BiblioPixel</a>.</div>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Both <code>rdisk</code> and <code>disk</code> will work fine, but if you are using <code>disk</code> be prepared to wait longer - it took about an hour in my case.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2016,
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2016,
   author = {Krishnamurthy, Dheepak},
   title = {Raspberry {Pi} {Powered} {LED} {Lamp}},
   date = {2016-03-28},
@@ -602,6 +602,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, function() {
+      let href = xref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children.length > 2) {
+          for (let i = 0; i < 2; i++) {
+            container.appendChild(note.children[i].cloneNode(true));
+          }
+          return container.innerHTML
+        } else {
+          return note.innerHTML;
+        }
+      } else {
+        return note.innerHTML;
+      }
     });
   }
       let selectedAnnoteEl;

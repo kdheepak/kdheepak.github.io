@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.306">
+<meta name="generator" content="quarto-1.4.8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -315,7 +315,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/raymondhettinger.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Raymond Hettinger</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Raymond Hettinger</figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -395,7 +395,7 @@ div.csl-indent {
 <li>Flexible: HTML, PDF, DOCX, TEX are all supported output formats</li>
 </ul>
 <!-- END SLIDES -->
-<p>Markdown is awesome at a set of things, and a much better alternative than Word or <span class="math inline">\(\LaTeX\)</span> for those specific set of things. Take for example this table <a href="#tbl-table">Table&nbsp;2</a>.</p>
+<p>Markdown is awesome at a set of things, and a much better alternative than Word or <span class="math inline">\(\LaTeX\)</span> for those specific set of things. Take for example this table <a href="#tbl-table" class="quarto-xref">Table&nbsp;2</a>.</p>
 <!-- BEGIN SLIDES -->
 <!-- prettier-ignore -->
 <div id="tbl-table" class="anchored page-columns page-full">
@@ -456,7 +456,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/table.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Tabular <span class="math inline">\(\LaTeX\)</span> example <span class="citation" data-cites="noauthor_wikibooks_nodate"><a href="#ref-noauthor_wikibooks_nodate" role="doc-biblioref">[5]</a></span></figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Tabular <span class="math inline">\(\LaTeX\)</span> example <span class="citation" data-cites="noauthor_wikibooks_nodate"><a href="#ref-noauthor_wikibooks_nodate" role="doc-biblioref">[5]</a></span></figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -579,7 +579,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/markdown.png" class="img-fluid figure-img" width="300"></p>
-<p></p><figcaption class="figure-caption margin-caption">Caption</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Caption</figcaption>
 </figure>
 </div>
 </section>
@@ -774,7 +774,7 @@ for code block</code></pre>
 <li><code>--filter pandoc-tablenos</code>: table numbers</li>
 </ul>
 <!-- END SLIDES -->
-<p>They allow you reference a figure, equation or table. For example, Equation {<a href="#eq-pi">Equation&nbsp;1</a>} is an example of a block equation in Markdown.</p>
+<p>They allow you reference a figure, equation or table. For example, Equation {<a href="#eq-pi" class="quarto-xref">Equation&nbsp;1</a>} is an example of a block equation in Markdown.</p>
 <p>A paper may be generated using a command as shown below:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-s</span> <span class="at">-S</span> <span class="at">--latex-engine</span><span class="op">=</span>pdflatex <span class="dt">\</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--template</span><span class="op">=</span>./templates/ieee-latex.template <span class="dt">\</span></span>
@@ -816,12 +816,12 @@ for code block</code></pre>
 <section id="tldr" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="tldr">TLDR</h2>
 <!-- END SLIDES -->
-<p>You can write a complete paper in Markdown and render it in PDF without any issues. I recommend using Markdown and Pandoc for writing over <span class="math inline">\(\LaTeX\)</span> and Word because of its ease of use and its flexibility and versatility. And if you think Markdown is not cutting it for you, you can always convert it to a Word document or a TEX file and continue using your usual workflow. Check out my attempt at describing the relationship between complexity of document and difficulty in implementing when using Word, <span class="math inline">\(\LaTeX\)</span> and Markdown in <a href="#fig-learningcurve">Figure&nbsp;1</a>.</p>
+<p>You can write a complete paper in Markdown and render it in PDF without any issues. I recommend using Markdown and Pandoc for writing over <span class="math inline">\(\LaTeX\)</span> and Word because of its ease of use and its flexibility and versatility. And if you think Markdown is not cutting it for you, you can always convert it to a Word document or a TEX file and continue using your usual workflow. Check out my attempt at describing the relationship between complexity of document and difficulty in implementing when using Word, <span class="math inline">\(\LaTeX\)</span> and Markdown in <a href="#fig-learningcurve" class="quarto-xref">Figure&nbsp;1</a>.</p>
 <!-- BEGIN SLIDESNOHEADER -->
 <div id="fig-learningcurve" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/learningcurve.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1: Comparing Word, <span class="math inline">\(\LaTeX\)</span> and Markdown</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1: Comparing Word, <span class="math inline">\(\LaTeX\)</span> and Markdown</figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -832,7 +832,17 @@ for code block</code></pre>
 
 
 </section>
-
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>I understand that there may be more <em>correct</em> ways to go about it, I just don’t want to be thinking about all that while I’m writing.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>If you install Pandoc from a package, <code>pandoc-citeproc</code> should come pre-installed. However, if you want to use a package manager such as <code>brew</code>, you may need to install <code>pandoc-citeproc</code> separately as well. Just run <code>brew install pandoc pandoc-citeproc</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This is the content of a footnote.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>The features for references for figures, equations and tables are all python <code>pandocfilters</code> packages written by the one person <span class="citation" data-cites="duck_github_nodate"><a href="#ref-duck_github_nodate" role="doc-biblioref">[17]</a></span>. There is a two year long standing discussion on cross references <span class="citation" data-cites="noauthor_pandoc_nodate-1"><a href="#ref-noauthor_pandoc_nodate-1" role="doc-biblioref">[18]</a></span> that the curious reader is referred to.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-stallman_emacs" class="csl-entry" role="listitem">
@@ -889,17 +899,7 @@ for code block</code></pre>
 <div id="ref-noauthor_pandoc_nodate-1" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[18] </div><div class="csl-right-inline"><span>“Pandoc <span>README</span>.”</span> Accessed: Jan. 08, 2016. [Online]. Available: <a href="https://pandoc.org/MANUAL.html">https://pandoc.org/MANUAL.html</a>.</div>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>I understand that there may be more <em>correct</em> ways to go about it, I just don’t want to be thinking about all that while I’m writing.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>If you install Pandoc from a package, <code>pandoc-citeproc</code> should come pre-installed. However, if you want to use a package manager such as <code>brew</code>, you may need to install <code>pandoc-citeproc</code> separately as well. Just run <code>brew install pandoc pandoc-citeproc</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>This is the content of a footnote.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>The features for references for figures, equations and tables are all python <code>pandocfilters</code> packages written by the one person <span class="citation" data-cites="duck_github_nodate"><a href="#ref-duck_github_nodate" role="doc-biblioref">[17]</a></span>. There is a two year long standing discussion on cross references <span class="citation" data-cites="noauthor_pandoc_nodate-1"><a href="#ref-noauthor_pandoc_nodate-1" role="doc-biblioref">[18]</a></span> that the curious reader is referred to.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
   author = {Krishnamurthy, Dheepak},
   title = {Writing {Technical} {Papers} with {Markdown} and {Pandoc}},
   date = {2015-12-20},
@@ -1183,6 +1183,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, function() {
+      let href = xref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children.length > 2) {
+          for (let i = 0; i < 2; i++) {
+            container.appendChild(note.children[i].cloneNode(true));
+          }
+          return container.innerHTML
+        } else {
+          return note.innerHTML;
+        }
+      } else {
+        return note.innerHTML;
+      }
     });
   }
       let selectedAnnoteEl;

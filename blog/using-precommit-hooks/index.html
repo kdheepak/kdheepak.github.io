@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.306">
+<meta name="generator" content="quarto-1.4.8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -237,7 +237,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/pre-commit-hooks.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Running <code>git commit</code> with <code>pre-commit</code> hooks</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Running <code>git commit</code> with <code>pre-commit</code> hooks</figcaption>
 </figure>
 </div>
 <section id="setting-up-pre-commit-for-a-git-repo" class="level2 page-columns page-full">
@@ -246,7 +246,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/precommit_pipeline.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Pre-commit pipeline with <code>black</code> and <code>flake8</code> <span class="citation" data-cites="ljvmiranda921"><a href="#ref-ljvmiranda921" role="doc-biblioref">[1]</a></span></figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Pre-commit pipeline with <code>black</code> and <code>flake8</code> <span class="citation" data-cites="ljvmiranda921"><a href="#ref-ljvmiranda921" role="doc-biblioref">[1]</a></span></figcaption>
 </figure>
 </div>
 <p>Using <code>pre-commit</code> requires adding a <code>.pre-commit-config.yaml</code> file to the git repository, and running <code>pre-commit install</code>.</p>
@@ -366,18 +366,18 @@ div.csl-indent {
 
 
 </section>
-
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-ljvmiranda921" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Automate Python workflow using pre-commits: black and flake8.”</span> [Online]. Available: <a href="https://ljvmiranda921.github.io/notebook/2018/06/21/precommits-using-black-and-flake8/">https://ljvmiranda921.github.io/notebook/2018/06/21/precommits-using-black-and-flake8/</a>.</div>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
   author = {Krishnamurthy, Dheepak},
   title = {Using `Pre-Commit` Hooks},
   date = {2020-07-27},
@@ -661,6 +661,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, function() {
+      let href = xref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children.length > 2) {
+          for (let i = 0; i < 2; i++) {
+            container.appendChild(note.children[i].cloneNode(true));
+          }
+          return container.innerHTML
+        } else {
+          return note.innerHTML;
+        }
+      } else {
+        return note.innerHTML;
+      }
     });
   }
       let selectedAnnoteEl;

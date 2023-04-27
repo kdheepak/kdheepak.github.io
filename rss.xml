@@ -10,8 +10,17 @@
 <link>https://kdheepak.com/blog/index.html</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.306</generator>
-<lastBuildDate>Sun, 26 Feb 2023 02:14:15 GMT</lastBuildDate>
+<generator>quarto-1.4.8</generator>
+<lastBuildDate>Thu, 27 Apr 2023 00:22:45 GMT</lastBuildDate>
+<item>
+  <title>Using Makie with Quarto</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/using-makie-with-quarto/index.html</link>
+  <description><![CDATA[ Here’s an example of a static image generated using <code>CairoMakie</code>: ]]></description>
+  <category>julia</category>
+  <guid>https://kdheepak.com/blog/using-makie-with-quarto/index.html</guid>
+  <pubDate>Thu, 27 Apr 2023 00:22:45 GMT</pubDate>
+</item>
 <item>
   <title>Understanding Variables and Mutability in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
@@ -430,6 +439,14 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Robotics</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/robotics/index.html</link>
+  <description><![CDATA[ undefined ]]></description>
+  <guid>https://kdheepak.com/blog/robotics/index.html</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Geektool and Desktop Widgets in OSX</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</link>
@@ -446,14 +463,6 @@
   <category>tasker</category>
   <category>android</category>
   <guid>https://kdheepak.com/blog/tasker-and-google-maps/index.html</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Robotics</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/robotics/index.html</link>
-  <description><![CDATA[ undefined ]]></description>
-  <guid>https://kdheepak.com/blog/robotics/index.html</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>

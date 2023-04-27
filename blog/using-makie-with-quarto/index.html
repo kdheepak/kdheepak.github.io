@@ -9,7 +9,7 @@
 <meta name="author" content="Dheepak Krishnamurthy">
 <meta name="dcterms.date" content="2023-04-27">
 
-<title>kdheepak - My personal thoughts and notes</title>
+<title>kdheepak - Using Makie with Quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,52 +22,67 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
-<script src="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
-<link href="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
+<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -87,15 +102,18 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
 
 
-<link rel="stylesheet" href="_quarto/styles.css">
-<meta property="og:title" content="kdheepak - My personal thoughts and notes">
+<link rel="stylesheet" href="../../_quarto/styles.css">
+<meta property="og:title" content="kdheepak - Using Makie with Quarto">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://kdheepak.com/blog/using-makie-with-quarto/index_files/figure-html/cell-3-output-1.svg">
 <meta property="og:site-name" content="kdheepak">
-<meta name="twitter:title" content="kdheepak - My personal thoughts and notes">
+<meta name="twitter:title" content="kdheepak - Using Makie with Quarto">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kdheepak.com/blog/using-makie-with-quarto/index_files/figure-html/cell-3-output-1.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed fullcontent">
@@ -105,8 +123,8 @@ div.csl-indent {
     <nav class="navbar navbar-expand navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./_quarto/favicon.svg" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
     </a>
   </div>
           <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -116,7 +134,7 @@ div.csl-indent {
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img" aria-label="RSS">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img" aria-label="RSS">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -132,7 +150,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">My personal thoughts and notes</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Using Makie with Quarto</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -142,8 +160,8 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">My personal thoughts and notes</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/index.qmd"><i class="bi"></i> Code</button></div></div>
-                      </div>
+      <div class="quarto-title-block"><div><h1 class="title">Using Makie with Quarto</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/using-makie-with-quarto/index.qmd">View Source</a></li></ul></div></div>
+                                    </div>
   </div>
     
   
@@ -170,17 +188,7 @@ div.csl-indent {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a></li>
-  <li><a href="#blog" id="toc-blog" class="nav-link" data-scroll-target="#blog">Blog</a></li>
-  <li><a href="#talks-and-tutorials" id="toc-talks-and-tutorials" class="nav-link" data-scroll-target="#talks-and-tutorials">Talks and Tutorials</a></li>
-  <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -192,110 +200,52 @@ div.csl-indent {
 
 
 
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<p>I’m a research engineer and software developer. I have experience running energy system models and simulations, such as transmission production cost models and power distribution system analyses, and have developed many bespoke models for energy system analysis. I’m proficient with Python, Julia, Rust, and Javascript, and am well versed in scientific data analysis and extract-transform-load workflows. I also enjoy working on open source projects and learning new technologies.</p>
-<p>See my <a href="https://github.com/kdheepak">GitHub</a>, <a href="https://scholar.google.com/citations?user=nIXeaL0AAAAJ&amp;hl=en">Google Scholar</a> or <a href="https://www.linkedin.com/in/dheepak-krishnamurthy/">LinkedIn</a> pages for more information.</p>
-</section>
-<section id="blog" class="level2">
-<h2 class="anchored" data-anchor-id="blog">Blog</h2>
-<p><a href="./blog/">https://kdheepak.com/blog/</a></p>
-</section>
-<section id="talks-and-tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="talks-and-tutorials">Talks and Tutorials</h2>
-<p><a href="https://www.youtube.com/watch?v=-TASx67pphw">Terminal User Interfaces in Julia</a></p>
-<p><a href="https://www.youtube.com/watch?v=kQNOG4tGJdg">Crash Course in Energy Systems Modeling &amp; Analysis with Julia</a></p>
-<p><a href="https://www.youtube.com/watch?v=ez-KVi0leOw">Why writing C interfaces in Julia is so easy</a></p>
-<p><a href="https://www.youtube.com/watch?v=1TipY6g9IzE">Open Source Power System Production Cost Modeling in Julia</a></p>
-<p><a href="https://www.youtube.com/watch?v=-ZoO3npjwYU">Scalable Power System Modeling and Analysis</a></p>
-<p><a href="https://github.com/NREL-SIIP/SIIP-Tutorial/" class="uri">https://github.com/NREL-SIIP/SIIP-Tutorial/</a></p>
-<p><a href="https://github.com/kdheepak/Python-Tutorial/" class="uri">https://github.com/kdheepak/Python-Tutorial/</a></p>
-<p><a href="https://github.com/GMLC-TDC/pesgm-2019-helics-tutorial/" class="uri">https://github.com/GMLC-TDC/pesgm-2019-helics-tutorial/</a></p>
-<p><a href="https://github.com/kdheepak/openmod-2019-helics-tutorial/" class="uri">https://github.com/kdheepak/openmod-2019-helics-tutorial/</a></p>
-<p><a href="https://kdheepak.com/think-git/" class="uri">https://kdheepak.com/think-git/</a></p>
-<p><a href="https://kdheepak.com/interactive-data-visualizations-with-bokeh/" class="uri">https://kdheepak.com/interactive-data-visualizations-with-bokeh/</a></p>
-</section>
-<section id="projects" class="level2">
-<h2 class="anchored" data-anchor-id="projects">Projects</h2>
-<p><a href="https://github.com/kdheepak/taskwarrior-tui">taskwarror-tui</a>: A terminal user interface for taskwarrior written in Rust.</p>
-<p><a href="https://github.com/GMLC-TDC/HELICS">HELICS</a>: A co-simulation framework as a C/C++ library.</p>
-<p><a href="https://github.com/GMLC-TDC/pyhelics">pyhelics</a>: A CFFI interface to HELICS written in Python, with a CLI for process runner, and web client to python server based user interface for better UX.</p>
-<p><a href="https://github.com/dss-extensions/OpenDSSDirect.py">OpenDSSDirect.py</a>: A CFFI interface to OpenDSS, a distribution system solver in Delphi/Pascal.</p>
-<p><a href="https://github.com/kdheepak/TerminalUserInterfaces.jl">TerminalUserInterfaces.jl</a>: A terminal user interface library written in Julia.</p>
-<p><a href="https://github.com/kdheepak/lazygit.nvim">lazygit.nvim</a>: A Lua based neovim plugin for interfacing with lazygit.</p>
-</section>
-<section id="references" class="level2">
+<p>Here’s an example of a static image generated using <code>CairoMakie</code>:</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span>, <span class="bu">Random</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">123</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="fl">200</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x, y, color <span class="op">=</span> <span class="fu">randn</span>(n) <span class="op">/</span> <span class="fl">2</span>, <span class="fu">randn</span>(n), <span class="fu">randn</span>(n)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> <span class="fu">Figure</span>(resolution<span class="op">=</span>(<span class="fl">600</span>, <span class="fl">400</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>])</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">1</span>])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ax3 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">2</span>])</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist!</span>(ax1, x; color<span class="op">=</span>(<span class="op">:</span>orangered, <span class="fl">0.5</span>), strokewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter!</span>(ax2, x, y; color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>, strokewidth<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">hist!</span>(ax3, y; direction<span class="op">=:</span>x, color<span class="op">=</span>(<span class="op">:</span>dodgerblue, <span class="fl">0.5</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  strokewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">xlims!</span>(ax1, <span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">limits!</span>(ax2, <span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ylims!</span>(ax3, <span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">hideydecorations!</span>(ax3, ticks<span class="op">=</span><span class="cn">false</span>, grid<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">hidexdecorations!</span>(ax1, ticks<span class="op">=</span><span class="cn">false</span>, grid<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colsize!</span>(fig.layout, <span class="fl">1</span>, <span class="fu">Relative</span>(<span class="fl">2</span> <span class="op">/</span> <span class="fl">3</span>))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">rowsize!</span>(fig.layout, <span class="fl">1</span>, <span class="fu">Relative</span>(<span class="fl">1</span> <span class="op">/</span> <span class="fl">3</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">colgap!</span>(fig.layout, <span class="fl">10</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">rowgap!</span>(fig.layout, <span class="fl">10</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">current_figure</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<p><img src="index_files/figure-html/cell-3-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
 
 
 
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
-<div id="ref-krishnamurthy20158" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">D. Krishnamurthy, W. Li, and L. Tesfatsion, <span>“An 8-zone test system based on ISO new england data: Development and application,”</span> <em>IEEE Transactions on Power Systems</em>, vol. 31, no. 1, pp. 234–246, 2015.</div>
-</div>
-<div id="ref-li2015systematic" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W. Li, D. Krishnamurthy, and L. Tesfatsion, <span>“Systematic testing and comparison of deterministic and stochastic unit commitment on an 8-zone test case based on ISO new england data,”</span> in <em>2015 IEEE power &amp; energy society innovative smart grid technologies conference (ISGT)</em>, 2015, pp. 1–5.</div>
-</div>
-<div id="ref-krishnamurthy2016psst" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">D. Krishnamurthy, <span>“Psst: An open-source power system simulation toolbox in python,”</span> in <em>2016 north american power symposium (NAPS)</em>, 2016, pp. 1–6.</div>
-</div>
-<div id="ref-pratt2016transactive" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">A. Pratt, D. Krishnamurthy, M. Ruth, H. Wu, M. Lunacek, and P. Vaynshenk, <span>“Transactive home energy management systems: The impact of their proliferation on the electric grid,”</span> <em>IEEE Electrification Magazine</em>, vol. 4, no. 4, pp. 8–14, 2016.</div>
-</div>
-<div id="ref-palmintier2016design" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">B. Palmintier, D. Krishnamurthy, and H. Wu, <span>“Design flexibility for uncertain distributed generation from photovoltaics,”</span> in <em>2016 IEEE power &amp; energy society innovative smart grid technologies conference (ISGT)</em>, 2016, pp. 1–5.</div>
-</div>
-<div id="ref-krishnamurthy2017energy" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">D. Krishnamurthy, C. Uckun, Z. Zhou, P. R. Thimmapuram, and A. Botterud, <span>“Energy storage arbitrage under day-ahead and real-time price uncertainty,”</span> <em>IEEE Transactions on Power Systems</em>, vol. 33, no. 1, pp. 84–93, 2017.</div>
-</div>
-<div id="ref-pratt2017hardware" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">A. Pratt <em>et al.</em>, <span>“Hardware-in-the-loop simulation of a distribution system with air conditioners under model predictive control,”</span> in <em>2017 IEEE power &amp; energy society general meeting</em>, 2017, pp. 1–5.</div>
-</div>
-<div id="ref-jain2018studying" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">H. Jain, B. Palmintier, I. Krad, and D. Krishnamurthy, <span>“Studying the impact of distributed solar PV on power systems using integrated transmission and distribution models,”</span> in <em>2018 IEEE/PES transmission and distribution conference and exposition (t&amp;d)</em>, 2018, pp. 1–5.</div>
-</div>
-<div id="ref-palmintier2017design" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[9] </div><div class="csl-right-inline">B. Palmintier, D. Krishnamurthy, P. Top, S. Smith, J. Daily, and J. Fuller, <span>“Design of the HELICS high-performance transmission-distribution-communication-market go-simulation framework,”</span> in <em>Modeling and simulation of cyber-physical energy systems (MSCPES), 2017 workshop on</em>, 2017, pp. 1–6.</div>
-</div>
-<div id="ref-krishnamurthy2018impacts" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[10] </div><div class="csl-right-inline">D. Krishnamurthy, A. Pratt, M. F. Ruth, and B. F. Sparn, <span>“Impacts of high penetrations of home energy management systems under time-based electricity prices,”</span> National Renewable Energy Lab.(NREL), Golden, CO (United States), 2018.</div>
-</div>
-<div id="ref-latif2018optimizing" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[11] </div><div class="csl-right-inline">A. Latif, D. Krishnamurthy, and B. Palmintier, <span>“Optimizing storage operation for a probabilistic locational marginal pricing forecast,”</span> in <em>2018 IEEE international conference on probabilistic methods applied to power systems (PMAPS)</em>, 2018, pp. 1–6.</div>
-</div>
-<div id="ref-horowitz2018optimizing" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[12] </div><div class="csl-right-inline">K. A. Horowitz, D. Krishnamurthy, and B. Palmintier, <span>“Optimizing distributed photovoltaic system set points under uncertainty,”</span> in <em>2018 IEEE international conference on probabilistic methods applied to power systems (PMAPS)</em>, 2018, pp. 1–6.</div>
-</div>
-<div id="ref-sparn2018hardware" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[13] </div><div class="csl-right-inline">B. Sparn, D. Krishnamurthy, A. Pratt, M. Ruth, and H. Wu, <span>“Hardware-in-the-loop (HIL) simulations for smart grid impact studies,”</span> in <em>2018 IEEE power &amp; energy society general meeting (PESGM)</em>, 2018, pp. 1–5.</div>
-</div>
-<div id="ref-elgindy2018ditto" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[14] </div><div class="csl-right-inline">T. Elgindy <em>et al.</em>, <span>“DiTTo (distribution transformation tool),”</span> National Renewable Energy Lab.(NREL), Golden, CO (United States), 2018.</div>
-</div>
-<div id="ref-lara2018powersystems" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[15] </div><div class="csl-right-inline">J. D. Lara, D. Krishnamurthy, C. Barrows, D. Thom, and S. Dalvi, <span>“PowerSystems. Jl and PowerSimulations. jl,”</span> National Renewable Energy Lab.(NREL), Golden, CO (United States), 2018.</div>
-</div>
-<div id="ref-mittal2015system" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[16] </div><div class="csl-right-inline">S. Mittal, M. Ruth, A. Pratt, M. Lunacek, D. Krishnamurthy, and W. Jones, <span>“A system-of-systems approach for integration energy modeling and simulation,”</span> in <em>Summer computer simulation conference, chicago, IL</em>, 2015.</div>
-</div>
-<div id="ref-faqiry2018adp" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[17] </div><div class="csl-right-inline">M. N. Faqiry, L. Wang, H. Wu, D. Krishnamurthy, and B. Palmintier, <span>“ADP-based home energy management system: A case study using DYNAMO,”</span> in <em>2018 IEEE power &amp; energy society general meeting (PESGM)</em>, 2018, pp. 1–5.</div>
-</div>
-<div id="ref-jain2019evaluating" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[18] </div><div class="csl-right-inline">H. Jain, B. Palmintier, D. Krishnamurthy, I. Krad, and E. Hale, <span>“Evaluating the impact of price-responsive load on power systems using integrated t&amp;d simulation,”</span> in <em>2019 IEEE power &amp; energy society innovative smart grid technologies conference (ISGT)</em>, 2019, pp. 1–5.</div>
-</div>
-<div id="ref-chang2019scalable" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[19] </div><div class="csl-right-inline">J. Chang, G. W. Stephen, D. Krishnamurthy, D. Thom, and W. B. Jones, <span>“Scalable PETSc implementation of the three-phase unbalanced AC power flow solver,”</span> National Renewable Energy Lab.(NREL), Golden, CO (United States), 2019.</div>
-</div>
-<div id="ref-barrows2019ieee" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[20] </div><div class="csl-right-inline">C. Barrows <em>et al.</em>, <span>“The IEEE reliability test system: A proposed 2019 update,”</span> <em>IEEE Transactions on Power Systems</em>, vol. 35, no. 1, pp. 119–127, 2019.</div>
-</div>
-<div id="ref-lara2021powersystems" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[21] </div><div class="csl-right-inline">J. D. Lara, C. Barrows, D. Thom, D. Krishnamurthy, and D. Callaway, <span>“Powersystems. Jl—a power system data management package for large scale modeling,”</span> <em>SoftwareX</em>, vol. 15, p. 100747, 2021.</div>
-</div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
+  author = {Krishnamurthy, Dheepak},
+  title = {Using {Makie} with {Quarto}},
+  date = {2023-04-27},
+  url = {https://kdheepak.com/blog/using-makie-with-quarto},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">D.
+Krishnamurthy, <span>“Using Makie with Quarto,”</span> Apr. 27, 2023. <a href="https://kdheepak.com/blog/using-makie-with-quarto">https://kdheepak.com/blog/using-makie-with-quarto</a>.</div>
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -735,6 +685,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -747,7 +699,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed in any manner by any employer or entity.
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/using-makie-with-quarto/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
