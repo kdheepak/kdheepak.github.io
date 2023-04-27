@@ -2,7 +2,7 @@
 title: "Using Makie with Quarto"
 date: 2023-04-26T20:22:45-0400
 categories: [julia]
-summary: Use conda env to manage packages
+summary: Use Makie with Quarto using CairoMakie
 ---
 
 ```{julia}
