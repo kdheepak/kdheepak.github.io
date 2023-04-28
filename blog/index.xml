@@ -9,7 +9,7 @@
 <link>https://kdheepak.com/blog/index.html</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.8</generator>
+<generator>quarto-1.4.14</generator>
 <lastBuildDate>Thu, 27 Apr 2023 00:22:45 GMT</lastBuildDate>
 <item>
   <title>Using Makie with Quarto</title>
