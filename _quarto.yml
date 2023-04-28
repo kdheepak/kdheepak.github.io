@@ -1,5 +1,7 @@
 project:
   type: website
+  preview:
+    port: 4200
   post-render:
     - julia ./_quarto/post-render.jl
 
@@ -24,6 +26,9 @@ website:
     collapse: false
     search: true
     pinned: false
+    left:
+      - text: "Blog"
+        file: ./blog/index.qmd
     right:
       - icon: github
         href: https://github.com/kdheepak
@@ -61,7 +66,6 @@ format:
     shift-heading-level-by: 1
     number-sections: false
     callout-appearance: simple
-    title-block-banner: true
     title-block-categories: false
     citations-hover: true
     cap-location: margin
