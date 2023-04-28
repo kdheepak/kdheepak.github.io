@@ -44,12 +44,8 @@ format:
     grid:
       content-mode: full
     theme:
-      light:
-        - pulse
-        - ./_quarto/theme.scss
-      dark:
-        - solar
-        - ./_quarto/theme.scss
+      - pulse
+      - ./_quarto/theme.scss
     css:
       - ./_quarto/styles.css
     code-copy: hover
