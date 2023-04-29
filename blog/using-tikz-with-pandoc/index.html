@@ -218,22 +218,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">TikzPictures</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tp <span class="op">=</span> <span class="fu">TikzPicture</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"""</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\n</span><span class="st"> {5}</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\r</span><span class="st">adius {3cm}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">\def \margin {8} % margin in angles, depends on the radius</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="sc">\f</span><span class="st">oreach \s in {1,...,</span><span class="sc">\n</span><span class="st">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">\n</span><span class="st">ode[draw, circle] at ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)}:</span><span class="sc">\r</span><span class="st">adius) {</span><span class="sc">$</span><span class="st">\</span>s<span class="sc">$</span><span class="st">};</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">  \</span>draw<span class="st">[-&gt;, &gt;=latex] ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:</span><span class="sc">\r</span><span class="st">adius)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">    arc ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:{360/</span><span class="sc">\n</span><span class="st"> * (\s)-\margin}:</span><span class="sc">\r</span><span class="st">adius);</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tp <span class="op">=</span> <span class="fu">TikzPicture</span>(<span class="st">raw"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">\def \n {5}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">\def \radius {3cm}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">\def \margin {8} % margin in angles, depends on the radius</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">\foreach \s in {1,...,\n}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  \draw[-&gt;, &gt;=latex] ({360/\n * (\s - 1)+\margin}:\radius)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre data-code-line-numbers="nil"><code>LoadError: syntax: invalid interpolation syntax: "$\"</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre data-code-line-numbers="nil"><code>TikzPicture("\\def \\n {5}\n\\def \\radius {3cm}\n\\def \\margin {8} % margin in angles, depends on the radius\n\n\\foreach \\s in {1,...,\\n}\n{\n  \\node[draw, circle] at ({360/\\n * (\\s - 1)}:\\radius) {\$\\s\$};\n  \\draw[-&gt;, &gt;=latex] ({360/\\n * (\\s - 1)+\\margin}:\\radius)\n    arc ({360/\\n * (\\s - 1)+\\margin}:{360/\\n * (\\s)-\\margin}:\\radius);\n}\n", "", "", "tikzpicture", "", "", true, true)</code></pre>
 </div>
 </div>
 
