@@ -101,7 +101,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
 
 
 <link rel="stylesheet" href="../../_quarto/styles.css">
@@ -229,10 +228,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  \draw[-&gt;, &gt;=latex] ({360/\n * (\s - 1)+\margin}:\radius)</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(<span class="fu">SVG</span>(<span class="st">"test"</span>), tp)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Markdown.<span class="fu">parse</span>(<span class="st">"""![](./test.svg)"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre data-code-line-numbers="nil"><code>TikzPicture("\\def \\n {5}\n\\def \\radius {3cm}\n\\def \\margin {8} % margin in angles, depends on the radius\n\n\\foreach \\s in {1,...,\\n}\n{\n  \\node[draw, circle] at ({360/\\n * (\\s - 1)}:\\radius) {\$\\s\$};\n  \\draw[-&gt;, &gt;=latex] ({360/\\n * (\\s - 1)+\\margin}:\\radius)\n    arc ({360/\\n * (\\s - 1)+\\margin}:{360/\\n * (\\s)-\\margin}:\\radius);\n}\n", "", "", "tikzpicture", "", "", true, true)</code></pre>
+<div class="cell-output cell-output-error">
+<pre data-code-line-numbers="nil"><code>LoadError: IOError: could not spawn `lualatex -v`: no such file or directory (ENOENT)</code></pre>
 </div>
 </div>
 
