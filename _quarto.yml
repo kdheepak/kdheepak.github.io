@@ -81,7 +81,7 @@ format:
       - include-code-files
       - abstract-section
     comments:
-      hypothesis: true
+      # hypothesis: true
       giscus:
         repo: kdheepak/kdheepak.github.io
         category: Comments

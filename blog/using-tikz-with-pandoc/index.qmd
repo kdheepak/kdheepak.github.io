@@ -49,4 +49,6 @@ tp = TikzPicture(raw"""
     arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
 }
 """)
+save(SVG("test"), tp)
+Markdown.parse("""![](./test.svg)""")
 ```
