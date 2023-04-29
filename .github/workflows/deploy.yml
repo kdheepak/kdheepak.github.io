@@ -24,6 +24,9 @@ jobs:
       - name: Install IJulia Conda
         run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.add("Conda");'
 
+      - name: Install texlive
+        run: sudo apt-get install texlive-latex-base texlive-binaries
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:

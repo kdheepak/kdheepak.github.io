@@ -37,7 +37,7 @@ Pkg.instantiate()
 ```{julia}
 #| code-fold: true
 using TikzPictures
-tp = TikzPicture(raw"""
+tp = TikzPicture(L"""
 \def \n {5}
 \def \radius {3cm}
 \def \margin {8} % margin in angles, depends on the radius
