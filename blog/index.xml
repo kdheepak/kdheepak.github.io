@@ -10,7 +10,17 @@
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.14</generator>
-<lastBuildDate>Thu, 27 Apr 2023 00:22:45 GMT</lastBuildDate>
+<lastBuildDate>Sat, 29 Apr 2023 16:38:41 GMT</lastBuildDate>
+<item>
+  <title>Roads in the cities of Canada</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/roads-in-the-cities-of-canada/index.html</link>
+  <description><![CDATA[ Let’s import some packages first. ]]></description>
+  <category>julia</category>
+  <category>visualization</category>
+  <guid>https://kdheepak.com/blog/roads-in-the-cities-of-canada/index.html</guid>
+  <pubDate>Sat, 29 Apr 2023 16:38:41 GMT</pubDate>
+</item>
 <item>
   <title>Using Makie with Quarto</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>

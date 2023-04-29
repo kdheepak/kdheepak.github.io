@@ -2,6 +2,7 @@
   "listing": "/404.html",
   "items": [
     "/blog/index.html",
+    "/blog/roads-in-the-cities-of-canada/index.html",
     "/blog/using-makie-with-quarto/index.html",
     "/blog/understanding-variables-and-mutability-in-julia/index.html",
     "/blog/installing-homebrew-in-an-alternative-location/index.html",
