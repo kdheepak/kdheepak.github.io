@@ -1,0 +1,117 @@
+---
+title: Roads in the cities of Canada
+categories: [julia, visualization]
+keywords: julia
+date: 2023-04-29T12:38:41-0400
+---
+
+```{julia}
+#| include: false
+using Pkg
+Pkg.activate(@__DIR__)
+Pkg.instantiate()
+cd(@__DIR__)
+```
+
+Let's import some packages first.
+
+```{julia}
+#| output: false
+using GeoMakie
+using GeoInterfaceMakie
+using GeoInterface
+using CairoMakie
+using Shapefile
+using DataFrames
+using DataFramesMeta
+using StringEncodings
+using Pkg.Artifacts
+```
+
+Canada's road network files, i.e. representations of Canada's national road network are available from [Statistics Canada](https://www12.statcan.gc.ca/census-recensement/2011/geo/RNF-FRR/index-eng.cfm).
+
+```{julia}
+artifact_roadnetwork = Pkg.Artifacts.ensure_artifact_installed("roadnetwork", joinpath(@__DIR__, "Artifacts.toml"))
+path = joinpath(artifact_roadnetwork, "lrnf000r21a_e.shp")
+@time gdf = DataFrame(Shapefile.Table(path));
+@show size(gdf)
+first(gdf, 1)
+```
+
+The documentation says `CSDNAME` is the "Census subdivision name", which seems to map to cities.
+
+Let's convert it to a proper encoding first:
+
+```{julia}
+begin
+  gdf[!, :CSDNAME_L_UTF8] = decode.(Vector{UInt8}.(String.(coalesce.(gdf[!, :CSDNAME_L], ""))), "Windows-1252")
+  gdf[!, :CSDNAME_R_UTF8] = decode.(Vector{UInt8}.(String.(coalesce.(gdf[!, :CSDNAME_R], ""))), "Windows-1252")
+end
+nothing #| hide_line
+```
+
+We can then create a plot for each city using Makie:
+
+```{julia}
+#| code-fold: true
+function plot_city(gdf, city_name)
+  df = @rsubset gdf (:CSDNAME_L_UTF8 == city_name || :CSDNAME_R_UTF8 == city_name)
+  empty_theme = Theme(
+    fonts=(; weird="Blackchancery"),
+    fontsize=32,
+    Axis=(
+      backgroundcolor=:transparent,
+      leftspinevisible=false,
+      rightspinevisible=false,
+      bottomspinevisible=false,
+      topspinevisible=false,
+      xticklabelsvisible=false,
+      yticklabelsvisible=false,
+      xgridcolor=:transparent,
+      ygridcolor=:transparent,
+      xminorticksvisible=false,
+      yminorticksvisible=false,
+      xticksvisible=false,
+      yticksvisible=false,
+      xautolimitmargin=(0.0, 0.0),
+      yautolimitmargin=(0.0, 0.0),
+      titlefont=:weird,
+    ),
+  )
+  with_theme(empty_theme) do
+    fig = Figure()
+    ax = Axis(fig[1, 1])
+    poly!.(GeoInterface.convert.(Ref(CairoMakie.GeometryBasics), df[:, :geometry]); strokecolor=:black, color=:black)
+    ax.title = city_name
+    fig
+  end
+end;
+```
+
+```{julia}
+plot_city(gdf, "Toronto")
+```
+
+```{julia}
+plot_city(gdf, "Montréal")
+```
+
+```{julia}
+plot_city(gdf, "Vancouver")
+```
+
+```{julia}
+plot_city(gdf, "Ottawa")
+```
+
+```{julia}
+plot_city(gdf, "Calgary")
+```
+
+```{julia}
+plot_city(gdf, "Edmonton")
+```
+
+```{julia}
+plot_city(gdf, "Winnipeg")
+```
