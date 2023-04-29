@@ -5,7 +5,7 @@ categories: [pandoc]
 keywords: tikz, latex, pandoc, lua, filter
 summary: Showcase of using integrating Tikz with Pandoc lua filters
 execute:
-  freeze: false
+  freeze: false # macos issue with installing tectonic on arm m1. execute freeze false renders on github
 ---
 
 It would be nice to integrate Tikz as part of the blog.
@@ -30,7 +30,7 @@ It would be nice to integrate Tikz as part of the blog.
 #| include: false
 using Pkg
 Pkg.activate(@__DIR__)
-Pkg.add("TikzPictures")
+Pkg.instantiate()
 ```
 
 
