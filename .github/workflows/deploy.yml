@@ -28,7 +28,9 @@ jobs:
         uses: teatimeguest/setup-texlive-action@v2
 
       - name: Setup tlmgr standalone
-        run: tlmgr install standalone
+        run: |
+          tlmgr install standalone
+          sudo apt-get install texlive-luatex
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
