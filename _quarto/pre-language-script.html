@@ -1,0 +1,26 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>

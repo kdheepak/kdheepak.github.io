@@ -65,7 +65,7 @@ If you run into any issues, open an issue on <https://github.com/neovim/neovim/i
 
 Here is a minimal `.vimrc` configuration that works with `NVIM v0.5.0-539-g91e41c857`.
 
-```vim
+```{.sourceCode .vim}
 set nocompatible
 filetype off
 

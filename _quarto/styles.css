@@ -18,3 +18,109 @@ pre.cell-output {
   border: 1px solid grey;
   padding: 1em;
 }
+
+pre.sourceCode {
+  background-color: #F5F5F5;
+  overflow-x: auto !important;
+}
+
+pre.sourceCode[data-language]:not(:empty)::before {
+  content: attr(data-language);
+  color: #F5F5F5;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  text-transform: lowercase;
+}
+
+pre.sourceCode[data-language="python"]::before {
+  background: #3776AB;
+}
+
+pre.sourceCode[data-language="rust"]::before {
+  background: #DE6C42;
+}
+
+pre.sourceCode[data-language="julia"]::before {
+  background: #9558B2;
+}
+
+pre.sourceCode[data-language="diff"]::before {
+  background: #3863D9;
+}
+
+pre.sourceCode[data-language="javascript"]::before {
+  background: #F0DB4F;
+}
+
+pre.sourceCode[data-language="css"]::before {
+  background: #F0931D;
+}
+
+pre.sourceCode[data-language="c"]::before {
+  background: #5C7A92;
+}
+
+pre.sourceCode[data-language="cpp"]::before {
+  background: #659AD3;
+}
+
+pre.sourceCode[data-language="nim"]::before {
+  background: #9A66D3;
+}
+
+pre.sourceCode[data-language="latex"]::before {
+  background: #6AD7E5;
+}
+
+pre.sourceCode[data-language="lua"]::before {
+  background: #8892BF;
+}
+
+pre.sourceCode[data-language="vim"]::before {
+  background: #E9573F;
+}
+
+pre.sourceCode[data-language="svelte"]::before {
+  background: #F05138;
+}
+
+pre.sourceCode[data-language="typescript"]::before {
+  background: #2B7489;
+}
+
+pre.sourceCode[data-language="bash"]::before {
+  background: #F18E33;
+}
+
+pre.sourceCode[data-language="toml"]::before {
+  background: #9F7E69;
+}
+
+pre.sourceCode[data-language="json"]::before {
+  background: #F29920;
+}
+
+pre.sourceCode[data-language="yaml"]::before {
+  background: #5C6971;
+}
+
+pre.sourceCode[data-language="zsh"]::before {
+  background: #C6794D;
+}
+
+pre.sourceCode[data-language="tmux"]::before {
+  background: #1FAB89;
+}
+
+pre.sourceCode[data-language="emacs"]::before {
+  background: #7F5AB6;
+}
+
+pre.sourceCode[data-language="commonlisp"]::before {
+  background: #7F5AB6;
+}
+
+pre.sourceCode[data-language="markdown"]::before {
+  background: #5A5A5A;
+}

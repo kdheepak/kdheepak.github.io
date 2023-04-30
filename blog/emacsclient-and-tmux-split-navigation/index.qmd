@@ -41,7 +41,7 @@ nil                       ;; Moving within emacs
 
 The following was added to .tmux.conf
 
-```tmux
+```{.sourceCode .tmux}
 ## Smart pane switching with awareness of emacs splits.
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|emacs?)(diff)?$' && tmux send-keys C-h) || tmux select-pane -L"
 bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|emacs?)(diff)?$' && tmux send-keys C-j) || tmux select-pane -D"

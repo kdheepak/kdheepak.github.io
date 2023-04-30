@@ -30,6 +30,15 @@ using StringEncodings
 using Pkg.Artifacts
 ```
 
+If you want to run this interactively, you can replace `CairoMakie` with `GLMakie`, i.e.
+
+```diff
+- import CairoMakie
++ import GLMakie
+```
+
+## Data
+
 Canada's road network files, i.e. representations of Canada's national road network are available from [Statistics Canada](https://www12.statcan.gc.ca/census-recensement/2011/geo/RNF-FRR/index-eng.cfm).
 
 ```{julia}
@@ -53,7 +62,9 @@ end
 nothing #| hide_line
 ```
 
-We can then create a plot for each city using Makie:
+## Visualizations
+
+We can now create a plot for each city using Makie:
 
 ```{julia}
 #| code-fold: true

@@ -11,7 +11,7 @@ I've not found a greater combination of tools than vim, tmux and zsh. I've detai
 
 ![vim-tmux-zsh](images/vim-tmux-zsh.png)
 
-```default
+```{.sourceCode .tmux}
 # Change prefix key to `
 unbind C-b
 set -g prefix `
@@ -114,7 +114,7 @@ bind-key s command-prompt -p "send pane to:" "join-pane -t '%%'"
 
 ## zsh
 
-```zsh
+```{.sourceCode .zsh}
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/dheepakkrishnamurthy/.oh-my-zsh
 
@@ -129,7 +129,7 @@ source $ZSH/oh-my-zsh.sh
 
 ## vim
 
-```default
+```{.sourceCode .vim}
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'

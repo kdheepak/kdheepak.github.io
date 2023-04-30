@@ -22,7 +22,11 @@ Here is a fun puzzle:
 >
 > Once you solved it for two eggs, can you solve it for three eggs? Can you find a generalized solution when you have a tower with $x$ floors and if you have $N$ eggs?
 
-**_Spoiler warning_**: If you have not seen this problem before I urge you to give it a go before continuing further. I'm going to post the solution to this below, so this is your spoiler warning.
+::: callout-warning
+
+**Spoiler warning!** If you have not seen this problem before I urge you to give it a go before continuing further. I'm going to post the solution to this below, so this is your spoiler warning.
+
+:::
 
 If you are interested in an easy to understand intuitive explanation to the $2$ egg $100$ storey tower problem, check out the following video:
 

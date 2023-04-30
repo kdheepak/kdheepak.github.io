@@ -28,7 +28,7 @@ end tell
 
 Add this to the end of ~/.tmux.conf
 
-```tmux
+```{.sourceCode .tmux}
 # Bad Wolf by Steve Losh
 # Modified by Dheepak Krishnamurthy
 # =====================
