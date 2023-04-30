@@ -1,5 +1,5 @@
 project:
-  type: website
+  type: sverto
   preview:
     port: 4200
   post-render:
