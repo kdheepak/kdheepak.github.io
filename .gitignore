@@ -9,3 +9,4 @@
 /.quarto/
 /.luarc.json
 /node_modules
+.sverto
