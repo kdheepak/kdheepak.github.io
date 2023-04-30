@@ -218,23 +218,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">TikzPictures</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tp <span class="op">=</span> <span class="fu">TikzPicture</span>(L<span class="st">"""</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\n</span><span class="st"> {5}</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\r</span><span class="st">adius {3cm}</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">\def \margin {8} % margin in angles, depends on the radius</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="sc">\f</span><span class="st">oreach \s in {1,...,</span><span class="sc">\n</span><span class="st">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">\n</span><span class="st">ode[draw, circle] at ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)}:</span><span class="sc">\r</span><span class="st">adius) {</span><span class="sc">$</span><span class="st">\</span>s<span class="sc">$</span><span class="st">};</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  \</span>draw<span class="st">[-&gt;, &gt;=latex] ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:</span><span class="sc">\r</span><span class="st">adius)</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">    arc ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:{360/</span><span class="sc">\n</span><span class="st"> * (\s)-\margin}:</span><span class="sc">\r</span><span class="st">adius);</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(<span class="fu">SVG</span>(<span class="st">"test"</span>), tp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Markdown</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">TikzPictures</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tp <span class="op">=</span> <span class="fu">TikzPicture</span>(L<span class="st">"""</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\n</span><span class="st"> {5}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\r</span><span class="st">adius {3cm}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">\def \margin {8} % margin in angles, depends on the radius</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="sc">\f</span><span class="st">oreach \s in {1,...,</span><span class="sc">\n</span><span class="st">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">\n</span><span class="st">ode[draw, circle] at ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)}:</span><span class="sc">\r</span><span class="st">adius) {</span><span class="sc">$</span><span class="st">\</span>s<span class="sc">$</span><span class="st">};</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">  \</span>draw<span class="st">[-&gt;, &gt;=latex] ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:</span><span class="sc">\r</span><span class="st">adius)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">    arc ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:{360/</span><span class="sc">\n</span><span class="st"> * (\s)-\margin}:</span><span class="sc">\r</span><span class="st">adius);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(<span class="fu">SVG</span>(<span class="st">"test"</span>), tp)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>md<span class="st">"""![](./test.svg)"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
 <p><img src="./test.svg" class="img-fluid"></p>
+</div>
+</div>
 
 
 
