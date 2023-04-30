@@ -4,7 +4,6 @@ date: 2022-02-18T20:03:31-06:00
 categories: [pandoc]
 keywords: tikz, latex, pandoc, lua, filter
 summary: Showcase of using integrating Tikz with Pandoc lua filters
-draft: true
 execute:
   freeze: false # macos issue with installing tectonic on arm m1. execute freeze false renders on github
 ---
@@ -37,6 +36,7 @@ Pkg.instantiate()
 
 ```{julia}
 #| code-fold: true
+using Markdown
 using TikzPictures
 tp = TikzPicture(L"""
 \def \n {5}
@@ -51,6 +51,6 @@ tp = TikzPicture(L"""
 }
 """)
 save(SVG("test"), tp)
+md"""![](./test.svg)"""
 ```
 
-![](./test.svg)
