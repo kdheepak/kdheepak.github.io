@@ -98,15 +98,6 @@
   <pubDate>Sat, 19 Feb 2022 04:03:31 GMT</pubDate>
 </item>
 <item>
-  <title>Using Tikz with Pandoc</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/using-tikz-with-pandoc/index.html</link>
-  <description><![CDATA[ It would be nice to integrate Tikz as part of the blog. ]]></description>
-  <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/using-tikz-with-pandoc/index.html</guid>
-  <pubDate>Sat, 19 Feb 2022 02:03:31 GMT</pubDate>
-</item>
-<item>
   <title>Using MermaidJS with Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/using-mermaidjs-with-pandoc/index.html</link>
