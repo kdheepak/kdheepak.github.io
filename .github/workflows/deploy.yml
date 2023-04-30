@@ -24,11 +24,8 @@ jobs:
       - name: Install IJulia Conda
         run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.add("Conda");'
 
-      - name: Install texlive
-        run: |
-          sudo apt-get -qq update
-          sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-          tlmgr install standalone
+      - name: Setup TeX Live
+        uses: teatimeguest/setup-texlive-action@v2
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
