@@ -46,7 +46,7 @@ Let's convert it to a proper encoding first:
 
 ```{julia}
 latin1_to_utf8(s) = decode(Vector{UInt8}(String(coalesce(s, ""))), "Windows-1252")
-@time @rtransform gdf begin
+@time @rtransform! gdf begin
   :CSDNAME_L_UTF8 = latin1_to_utf8(:CSDNAME_L)
   :CSDNAME_R_UTF8 = latin1_to_utf8(:CSDNAME_R)
 end
