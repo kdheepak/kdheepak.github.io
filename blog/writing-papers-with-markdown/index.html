@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -97,9 +97,6 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -212,10 +209,39 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Writing Technical Papers with Markdown and Pandoc</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/writing-papers-with-markdown/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">pandoc</div>
+  </div>
   </div>
 
 
@@ -298,7 +324,7 @@ div.csl-indent {
 <section id="a-word-about-word" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="a-word-about-word">A word about Word</h3>
 <p>Microsoft Word is ubiquitous when it comes to writing reports. The great thing about Word is that there is almost no barrier to <em>begin</em> writing. You can incrementally build your skill in using this tool as and when you are using it. This is useful since it makes it immediately accessible, thereby decreasing the time and effort spent on learning how to use a software for writing and allowing you to concentrate on the writing itself.</p>
-<p>However, I’ve found a few fundamental problems with Microsoft Word. Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so <span class="citation" data-cites="stallman_emacs"><a href="#ref-stallman_emacs" role="doc-biblioref">[1]</a></span>). However, products like Word fail miserably at separating content from formatting. These products impose on the writer their own concept of how a document should be formatted, which I’ve found greatly hinders the writing process. Have you ever experienced a sudden jump in spacing? Or mismatched formatting after a copy and paste from one part of the document to another? Or have indents and bullet points misbehave haphazardly? Word applies these formatting changes seemingly at random! These are all typesetting and formatting processes and these should be applied <strong><em>after</em></strong> the text is completed. These processes should not distract from the task at hand<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> - writing!</p>
+<div class="page-columns page-full"><p>However, I’ve found a few fundamental problems with Microsoft Word. Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so <span class="citation" data-cites="stallman_emacs"><a href="#ref-stallman_emacs" role="doc-biblioref">[1]</a></span>). However, products like Word fail miserably at separating content from formatting. These products impose on the writer their own concept of how a document should be formatted, which I’ve found greatly hinders the writing process. Have you ever experienced a sudden jump in spacing? Or mismatched formatting after a copy and paste from one part of the document to another? Or have indents and bullet points misbehave haphazardly? Word applies these formatting changes seemingly at random! These are all typesetting and formatting processes and these should be applied <strong><em>after</em></strong> the text is completed. These processes should not distract from the task at hand<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> - writing!</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;I understand that there may be more <em>correct</em> ways to go about it, I just don’t want to be thinking about all that while I’m writing.</p></li></div></div>
 <p>There are other issues as well. Microsoft’s ecosystem comes at a price, literally. Word is proprietary, and Word’s format is a proprietary data format. When you use Word, by storing your work in this proprietary software’s proprietary data format, you tie yourself down to this particular licensed software for the forseeable future. You also make the implicit assumption that everyone you work with has the same software on their computer. Word also does not play well with its counterparts on OSX. With the same content, the document is presented differently depending on which machine you open it on. As far as I know there isn’t even a version for Linux machines. Heck, Microsoft Word does not even play well with previous versions of Microsoft Word. I understand why this issue occurs, considering the complexity in operating systems and software. Backward incompatible software or cross incompatibility are probably inevitable, but as an user, I shouldn’t have to be concerned about this. I shouldn’t have to think about what software or what version of a software my reviewers are using when I’m sending them a document. And speaking of sharing documents, did you know you can end up transferring malware through a Word document? Just think about that for a second. Opening what should be essentially a text file is a security risk for your machine. And some of these viruses (as of the time of this writing) do not even have patches yet <span class="citation" data-cites="beaumont_bypass_2015"><a href="#ref-beaumont_bypass_2015" role="doc-biblioref">[2]</a></span>. Loads of people have already talked about this and similar issues at some length <span class="citation" data-cites="cottrell_word_nodate"><a href="#ref-cottrell_word_nodate" role="doc-biblioref">[3]</a></span>, and have probably done more justice to this topic that I possibly could. With all these issues, it is hard to believe Word is so widely accepted as a standard.</p>
 <p>I think there is a strong case to be made about why you should consider dropping Word for your next paper. In addition to what has been discussed above:</p>
 <!-- BEGIN SLIDES -->
@@ -320,7 +346,7 @@ div.csl-indent {
 </div>
 <!-- END SLIDES -->
 </section>
-<section id="latex---lah-tekh-lah-tek-or-lay-tek" class="level3">
+<section id="latex---lah-tekh-lah-tek-or-lay-tek" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="latex---lah-tekh-lah-tek-or-lay-tek"><span class="math inline">\(\LaTeX\)</span> - lah-tekh, lah-tek or lay-tek</h3>
 <!-- BEGIN SLIDES -->
 <p>Enter <span class="math inline">\(\LaTeX\)</span>.</p>
@@ -348,7 +374,7 @@ div.csl-indent {
 <p>The source document that contains the content is a plain text file. This means you can use <code>git</code> to version control the paper. This allows you to track changes and collaborate with others without any additional effort. This also lets you work with your favourite text editor - Vim, Emacs, Atom. There are even TeX specific ones, such as TeXShop and Lyx.</p>
 <p><span class="math inline">\(\LaTeX\)</span> is free. Free as in beer and free as in freedom. You can have the confidence that your code and documents can survive possibly forever in its current format. The <span class="math inline">\(\LaTeX\)</span> community is great and are very helpful towards beginners. There are hundreds of packages that improve upon the functionality that <span class="math inline">\(\LaTeX\)</span> provides. There are packages like <em>TikZ</em> that let you to create high resolution print quality detailed diagrams, which I’ve seen used even outside a <span class="math inline">\(\LaTeX\)</span> environment.</p>
 <p>However, there is a barrier to entry which one must overcome in order to begin using <span class="math inline">\(\LaTeX\)</span>. Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them. The biggest problem with <span class="math inline">\(\LaTeX\)</span> is probably the error messages. Most of the time they are near useless, and sometimes they are even borderline cryptic.</p>
-<p>Personally, I found learning how to work with <span class="math inline">\(\LaTeX\)</span> extremely useful. It challenged me to think about the structure of a document, and how I could convey information effectively not just through the final document, but also in the source material<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I also didn’t think it was difficult. Solutions to my initial problems were only a quick Google search away. Tables were frustrating at first, but you get the hang of them over time. Equations are a joy to type in <span class="math inline">\(\LaTeX\)</span>. And the final product looks great!</p>
+<div class="page-columns page-full"><p>Personally, I found learning how to work with <span class="math inline">\(\LaTeX\)</span> extremely useful. It challenged me to think about the structure of a document, and how I could convey information effectively not just through the final document, but also in the source material<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I also didn’t think it was difficult. Solutions to my initial problems were only a quick Google search away. Tables were frustrating at first, but you get the hang of them over time. Equations are a joy to type in <span class="math inline">\(\LaTeX\)</span>. And the final product looks great!</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.</p></li></div></div>
 <p>That said, the markup language is a bit too heavy for notetaking, and not particularly readable. For example, take a look at the syntax for a creating a section, a subsection and list of items with some bold and italic elements.</p>
 <!-- BEGIN SLIDES -->
 <div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\section</span>{Section Name}</span>
@@ -535,8 +561,8 @@ div.csl-indent {
 <li>revealjs (reveal.js HTML5 + javascript slide show)</li>
 <li>s5 (S5 HTML and javascript slide show)</li>
 </ul>
-<p>With 21 input formats and 37 output formats, it doesn’t take long to guess that there’s no way they implemented a converter for each input to output format. Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage to convert one format to another<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This is the reason Pandoc is great at converting from and to a wide variety of formats, and why it is potentially easy to support new formats as well. Pandoc is also constantly under development. We can use Pandoc to convert a markdown file, to a PDF, HTML or DOCX file for a technical paper.</p>
-<p>First off, you will need <code>pandoc</code>. You can get the latest version from their GitHub page <span class="citation" data-cites="noauthor_github_nodate"><a href="#ref-noauthor_github_nodate" role="doc-biblioref">[6]</a></span>. You may want <code>pandoc-citeproc</code> as well<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. You will also need <span class="math inline">\(\LaTeX\)</span>. I’ve found that the following python packages are useful too.</p>
+<div class="page-columns page-full"><p>With 21 input formats and 37 output formats, it doesn’t take long to guess that there’s no way they implemented a converter for each input to output format. Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage to convert one format to another<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This is the reason Pandoc is great at converting from and to a wide variety of formats, and why it is potentially easy to support new formats as well. Pandoc is also constantly under development. We can use Pandoc to convert a markdown file, to a PDF, HTML or DOCX file for a technical paper.</p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.</p></li></div></div>
+<div class="page-columns page-full"><p>First off, you will need <code>pandoc</code>. You can get the latest version from their GitHub page <span class="citation" data-cites="noauthor_github_nodate"><a href="#ref-noauthor_github_nodate" role="doc-biblioref">[6]</a></span>. You may want <code>pandoc-citeproc</code> as well<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. You will also need <span class="math inline">\(\LaTeX\)</span>. I’ve found that the following python packages are useful too.</p><div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;If you install Pandoc from a package, <code>pandoc-citeproc</code> should come pre-installed. However, if you want to use a package manager such as <code>brew</code>, you may need to install <code>pandoc-citeproc</code> separately as well. Just run <code>brew install pandoc pandoc-citeproc</code>.</p></li></div></div>
 <ul>
 <li><code>pandoc-attributes</code></li>
 <li><code>pandoc-eqnos</code></li>
@@ -683,13 +709,13 @@ for code block</code></pre>
 </table>
 <div class="quarto-table-caption margin-caption">Table&nbsp;2: Demonstration of simple table syntax.</div></div>
 </section>
-<section id="footnotes" class="level4">
+<section id="footnotes" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="footnotes"><strong><em>Footnotes</em></strong></h4>
 <div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Example of a footnote <span class="ot">[^0]</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^0]: </span>This is the content of a footnote.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Example</strong></p>
-<p>Example of a footnote <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="page-columns page-full"><p>Example of a footnote <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;This is the content of a footnote.</p></li></div></div>
 </section>
 <section id="citations" class="level4">
 <h4 class="anchored" data-anchor-id="citations"><strong><em>Citations</em></strong></h4>
@@ -800,11 +826,11 @@ for code block</code></pre>
 <p>Also, Markdown / Pandoc does not support splitting the source document across multiple files. This was not as much a deal breaker for me, since the markup is pretty light and having it all in a single file is fine for a technical paper. However, for large reports extending hundreds of pages this may be a issue. There are workarounds for this (see next section), however they may be a bit of a hassle.</p>
 <!-- BEGIN SLIDESNOHEADER -->
 </section>
-<section id="bending-markdown-to-your-will" class="level2">
+<section id="bending-markdown-to-your-will" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="bending-markdown-to-your-will">Bending Markdown to your will</h2>
 <p>Fortunately, some of the problems I mentioned in the previous section can be solved using an excellent feature of Pandoc - filters!</p>
 <!-- END SLIDES -->
-<p>You can write your own custom filter, and you can use it to parse certain blocks in a custom fashion. For most people this will not be necessary since Pandoc is feature complete, and when a specific need arises<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> the community has often provided a custom filter that does the job. But if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.</p>
+<div class="page-columns page-full"><p>You can write your own custom filter, and you can use it to parse certain blocks in a custom fashion. For most people this will not be necessary since Pandoc is feature complete, and when a specific need arises<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> the community has often provided a custom filter that does the job. But if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.</p><div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;The features for references for figures, equations and tables are all python <code>pandocfilters</code> packages written by the one person <span class="citation" data-cites="duck_github_nodate"><a href="#ref-duck_github_nodate" role="doc-biblioref">[17]</a></span>. There is a two year long standing discussion on cross references <span class="citation" data-cites="noauthor_pandoc_nodate-1"><a href="#ref-noauthor_pandoc_nodate-1" role="doc-biblioref">[18]</a></span> that the curious reader is referred to.</p></li></div></div>
 <!-- BEGIN SLIDES -->
 <p>There is a python package called <code>pandocfilters</code> that allows you to walk the AST and parse specific formats or keys. It is very powerful, and can offer unique ways to expand on pandoc’s functionality. I wrote a pandocfilter <span class="citation" data-cites="krishnamurthy_github_nodate"><a href="#ref-krishnamurthy_github_nodate" role="doc-biblioref">[7]</a></span> to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this <a href="../active-reactive-and-apparent-power">post</a>.</p>
 <!-- END SLIDES -->
@@ -835,12 +861,12 @@ for code block</code></pre>
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>I understand that there may be more <em>correct</em> ways to go about it, I just don’t want to be thinking about all that while I’m writing.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>If you install Pandoc from a package, <code>pandoc-citeproc</code> should come pre-installed. However, if you want to use a package manager such as <code>brew</code>, you may need to install <code>pandoc-citeproc</code> separately as well. Just run <code>brew install pandoc pandoc-citeproc</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>This is the content of a footnote.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>The features for references for figures, equations and tables are all python <code>pandocfilters</code> packages written by the one person <span class="citation" data-cites="duck_github_nodate"><a href="#ref-duck_github_nodate" role="doc-biblioref">[17]</a></span>. There is a two year long standing discussion on cross references <span class="citation" data-cites="noauthor_pandoc_nodate-1"><a href="#ref-noauthor_pandoc_nodate-1" role="doc-biblioref">[18]</a></span> that the curious reader is referred to.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
+
+
+
+
+
 </ol>
 </aside>
 

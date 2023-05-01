@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,9 +96,6 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -202,10 +199,40 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">The egg tower puzzle</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/the-egg-tower-puzzle/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">julia</div>
+  </div>
   </div>
 
 
@@ -239,7 +266,16 @@ div.csl-indent {
 <p>The question is: What strategy should you adopt to minimize the number egg drops it takes to find the solution? (And what is the worst case for the number of drops it will take?)</p>
 <p>Once you solved it for two eggs, can you solve it for three eggs? Can you find a generalized solution when you have a tower with <span class="math inline">\(x\)</span> floors and if you have <span class="math inline">\(N\)</span> eggs?</p>
 </blockquote>
-<p><strong><em>Spoiler warning</em></strong>: If you have not seen this problem before I urge you to give it a go before continuing further. I’m going to post the solution to this below, so this is your spoiler warning.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Spoiler warning!</strong> If you have not seen this problem before I urge you to give it a go before continuing further. I’m going to post the solution to this below, so this is your spoiler warning.</p>
+</div>
+</div>
+</div>
 <p>If you are interested in an easy to understand intuitive explanation to the <span class="math inline">\(2\)</span> egg <span class="math inline">\(100\)</span> storey tower problem, check out the following video:</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/NGtt7GJ1uiM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>We will go through this problem for the <span class="math inline">\(2\)</span> eggs and <span class="math inline">\(3\)</span> eggs variant, and derive the solution mathematically. Then, we will generalize the problem with <span class="math inline">\(x\)</span> floors and <span class="math inline">\(N\)</span> eggs.</p>
@@ -319,7 +355,7 @@ div.csl-indent {
 <p><span id="eq-f_x_n"><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1) \tag{3}\]</span></span></p>
 <p>This is also known as a recurrence relation.</p>
 <p>This result can be reasoned through intuition as well. To find the total floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x\)</span> drops, it will be <span class="math inline">\(1\)</span> (your first drop) plus the maximum number of floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x-1\)</span> eggs (if the first egg does not break) plus the maximum number of floors you can check with <span class="math inline">\(n-1\)</span> eggs with <span class="math inline">\(x-1\)</span> eggs (if the first egg does break).</p>
-<p>If we wanted to, we could expand this recurrence relation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="page-columns page-full"><p>If we wanted to, we could expand this recurrence relation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong"><a href="#ref-possiblywrong" role="doc-biblioref">[1]</a></span>.</p></li></div></div>
 <p>Here is the expansion increasing the depth in the direction of number of drops:</p>
 <p><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1)\]</span></p>
 <p><span class="math display">\[f(x, n) = 3 + f(x - 2, n) + 2f(x - 2, n - 1) + f(x - 2, n - 2)\]</span></p>
@@ -336,7 +372,7 @@ div.csl-indent {
 </div>
 <p>It turns out that this expansion is related to the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficients</a>.</p>
 <p>If we had infinite number of eggs, you’d see that the first element is the only term that contributes to <span class="math inline">\(f(x, n)\)</span>, since the others will be <span class="math inline">\(0\)</span> for <span class="math inline">\(x - d\)</span> where <span class="math inline">\(d\)</span> is the depth in the triangle. That is to say, if we had infinite eggs, with 6 drops we can guarantee checking 63 floors.</p>
-<p>Using this, we can say that, with <span class="math inline">\(x\)</span> drops we can guarantee checking <span class="math inline">\(2^x - 1\)</span> floors if we had infinite eggs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="page-columns page-full"><p>Using this, we can say that, with <span class="math inline">\(x\)</span> drops we can guarantee checking <span class="math inline">\(2^x - 1\)</span> floors if we had infinite eggs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1">/u/mark_ovchain’s insightful comment on this thread</a> for more information.</p></li></div></div>
 </section>
 <section id="implementation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
@@ -614,7 +650,7 @@ div.csl-indent {
 <p>For 100 floors, it is <span class="math inline">\(7\)</span> drops. If you had unlimited eggs, you would use the largest partition possible. That means dividing the total floors by <span class="math inline">\(2\)</span>.</p>
 <div class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
-
+<p><img src="index_files/figure-html/cell-3-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <p>Partitioning the floors equally or in other words bisecting the floors, and exploring the partition of interest using the same strategy is the most efficient way of finding the breaking floor.</p>
@@ -626,8 +662,8 @@ div.csl-indent {
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong"><a href="#ref-possiblywrong" role="doc-biblioref">[1]</a></span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1">/u/mark_ovchain’s insightful comment on this thread</a> for more information.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
+
 </ol>
 </aside>
 

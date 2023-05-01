@@ -9,7 +9,7 @@
 <link>https://kdheepak.com/blog/index.html</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.14</generator>
+<generator>quarto-1.4.18</generator>
 <lastBuildDate>Sat, 29 Apr 2023 16:38:41 GMT</lastBuildDate>
 <item>
   <title>Visualizing roads in Canada</title>
@@ -122,16 +122,6 @@
   <category>osx</category>
   <guid>https://kdheepak.com/blog/reinstall-xcode-command-line-developer-tools/index.html</guid>
   <pubDate>Tue, 15 Feb 2022 22:03:31 GMT</pubDate>
-</item>
-<item>
-  <title>Svelte and Pandoc</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/svelte-and-pandoc/index.html</link>
-  <description><![CDATA[ This page is a test of using a svelte component when using pandoc as a preprocessor. ]]></description>
-  <category>svelte</category>
-  <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/svelte-and-pandoc/index.html</guid>
-  <pubDate>Wed, 12 Jan 2022 05:03:31 GMT</pubDate>
 </item>
 <item>
   <title>Loading a Rust library as a Lua module in Neovim</title>

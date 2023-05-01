@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -78,9 +78,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -211,10 +208,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Advent of Code 2020 Retrospective</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/advent-of-code-2020-retrospective/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">adventofcode</div>
+    <div class="quarto-category">julia</div>
+  </div>
   </div>
 
 
@@ -290,10 +317,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#day-24-lobby-layout">Lobby Layout</a></li>
 <li><a href="#day-25-combo-breaker">Combo Breaker</a></li>
 </ol>
-<section id="day-1-report-repair" class="level3">
+<section id="day-1-report-repair" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="day-1-report-repair"><a href="https://adventofcode.com/2020/day/1">Day 1: Report Repair</a></h3>
 <p>Day 1 of advent of code is basically intended to check that you have a programming language installed, and you know how to use simple features it in (e.g.&nbsp;<code>for</code> loops).</p>
-<p>You can solve the first day with just multiple <code>for</code> loops. However, a more idiomatic solution can be expressed using the <code>combinations</code> function from the <a href="https://github.com/JuliaMath/Combinatorics.jl">Combinatorics.jl</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="page-columns page-full"><p>You can solve the first day with just multiple <code>for</code> loops. However, a more idiomatic solution can be expressed using the <code>combinations</code> function from the <a href="https://github.com/JuliaMath/Combinatorics.jl">Combinatorics.jl</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<em>aside</em>: Python has a similar function in the standard library: <a href="https://docs.python.org/3/library/itertools.html#itertools.combinations" class="uri">https://docs.python.org/3/library/itertools.html#itertools.combinations</a></p></li></div></div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Combinatorics</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">readInput</span>() <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">parse</span>.(<span class="dt">Int</span>, <span class="fu">split</span>(<span class="fu">strip</span>(<span class="fu">read</span>(<span class="fu">joinpath</span>(<span class="pp">@__DIR__</span>, <span class="st">"./input.txt"</span>), <span class="dt">String</span>)))))</span>
@@ -1659,7 +1686,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p><em>aside</em>: Python has a similar function in the standard library: <a href="https://docs.python.org/3/library/itertools.html#itertools.combinations" class="uri">https://docs.python.org/3/library/itertools.html#itertools.combinations</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
 </ol>
 </aside>
 

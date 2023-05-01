@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,9 +96,6 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -201,10 +198,39 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Raspberry Pi Powered LED Lamp</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/raspberry-pi-powered-led-lamp/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">python</div>
+  </div>
   </div>
 
 
@@ -261,11 +287,11 @@ div.csl-indent {
 <p>I found the lamp shades on <a href="https://www.amazon.com/s/field-keywords=puzzle+lamp">Amazon</a>. I purchased them in white, since the LEDs are RGB.</p>
 <p>I purchased the LED strip from Adafruit.</p>
 </section>
-<section id="software" class="level3">
+<section id="software" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="software">Software</h3>
 <p>Download the latest Raspbian from the <a href="https://www.raspberrypi.com/software/operating-systems/">official source</a>. I used the image <code>2016-03-18-raspbian-jessie.img</code>. Flash the operating system onto a memory card.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dd bs=1m if=2016-03-18-raspbian-jessie.img of=/dev/rdisk<span class="va">$DISKNUMBER</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>When using <code>dd</code> on OSX, I’ve found that <code>rdisk</code> is much faster than <code>disk</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="page-columns page-full"><p>When using <code>dd</code> on OSX, I’ve found that <code>rdisk</code> is much faster than <code>disk</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Both <code>rdisk</code> and <code>disk</code> will work fine, but if you are using <code>disk</code> be prepared to wait longer - it took about an hour in my case.</p></li></div></div>
 <p>(<strong>Optional</strong>) Expand the file system to use all the available space on the memory card.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> raspi-config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>-&gt; Expand File System
@@ -307,7 +333,7 @@ div.csl-indent {
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Both <code>rdisk</code> and <code>disk</code> will work fine, but if you are using <code>disk</code> be prepared to wait longer - it took about an hour in my case.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
 </ol>
 </aside>
 

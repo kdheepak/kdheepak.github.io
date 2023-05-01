@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,9 +96,6 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -204,10 +201,40 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Using <code>pre-commit</code> hooks</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/using-precommit-hooks/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">git</div>
+    <div class="quarto-category">python</div>
+  </div>
   </div>
 
 
@@ -333,10 +360,10 @@ div.csl-indent {
 <p>This will install <code>install_requires</code>, <code>test_requires</code>, <code>extra_requires</code> and <code>dev_requires</code> dependencies. This will also run <code>pre-commit install</code> in the git repository, which will add the hooks from the <code>.pre-commit-config.yaml</code> file.</p>
 <p>If you don’t want to automatically run <code>pre-commit install</code>, remove the <code>cmdclass={"develop": PostDevelopCommand}</code> line in the <code>setup(...)</code> function arguments.</p>
 </section>
-<section id="using-pre-commit-hooks-for-all-git-repos" class="level2">
+<section id="using-pre-commit-hooks-for-all-git-repos" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="using-pre-commit-hooks-for-all-git-repos">Using <code>pre-commit-hooks</code> for all git repos</h2>
 <p>If you want to use <code>pre-commit-hooks</code> for all git repositories on your machine, you can set up a <code>git-templates</code> folder that is used as a <code>templatedir</code> when you run <code>git init</code>.</p>
-<p>Add the following to your <a href="https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/gitconfig#L176-L177"><code>~/.gitconfig</code></a> file <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="page-columns page-full"><p>Add the following to your <a href="https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/gitconfig#L176-L177"><code>~/.gitconfig</code></a> file <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.</p></li></div></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">init</span><span class="kw">]</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">templatedir</span> <span class="op">=</span> <span class="er">~/</span><span class="dt">gitrepos</span><span class="er">/</span><span class="dt">git-templates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now create a <code>~/gitrepos/dotfiles/git-templates</code> folder with a single folder inside it called <code>hooks</code>, and with a single executable file inside the <code>hooks</code> folder called <code>pre-commit</code>.</p>
@@ -369,7 +396,7 @@ div.csl-indent {
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
 </ol>
 </aside>
 

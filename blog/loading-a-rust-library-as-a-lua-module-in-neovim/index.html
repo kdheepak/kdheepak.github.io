@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -77,9 +77,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -179,10 +176,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Loading a Rust library as a Lua module in Neovim</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/loading-a-rust-library-as-a-lua-module-in-neovim/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">rust</div>
+    <div class="quarto-category">neovim</div>
+    <div class="quarto-category">lua</div>
+  </div>
   </div>
 
 
@@ -212,37 +240,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I was curious if it would be possible to write a lua plugin in pure rust. It turns out this is quite straightforward.</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/128466216-52621bfd-30cb-4d4c-babb-297c99cb79eb.png" class="fullwidth img-fluid"></p>
 <p>TLDR: You can use rust with a library like <a href="https://github.com/khvzak/mlua"><code>mlua</code></a> to compile a cdylib shared library that is also a valid lua module which then can be loaded by neovim. The link to the git tree for all the code in this blog post is <a href="https://github.com/kdheepak/moonshine.nvim/tree/d5b3893b7813e3a46a079d074ef1360c885a5e39">here</a>.</p>
-<section id="motivation" class="level2">
+<section id="motivation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
-<p><a href="https://github.com/neovim/neovim/releases/tag/v0.5.0">Neovim v0.5.0 is out</a> and has good support for using lua as an alternative to vimscript. You can now use a <code>init.lua</code> file instead of a <code>.vimrc</code>. There are now a bunch of really awesome plugins written in pure lua<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="page-columns page-full"><p><a href="https://github.com/neovim/neovim/releases/tag/v0.5.0">Neovim v0.5.0 is out</a> and has good support for using lua as an alternative to vimscript. You can now use a <code>init.lua</code> file instead of a <code>.vimrc</code>. There are now a bunch of really awesome plugins written in pure lua<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;You can find curated lists of neovim plugins and related projects <a href="https://github.com/rockerBOO/awesome-neovim">here</a> and <a href="http://neovimcraft.com/">here</a>.</p></li></div></div>
 <p>One reason I think there’s a lot of neat neovim plugins is that lua is a neat language: it is small and fast when using luajit, which neovim supports. Lua is also a clean and simple language, and has support for nice metaprogramming constructs and syntactic sugar that make code easy to read and write.</p>
 <p>However, there are a few things that can be quite odd or annoying when writing code in lua. There is no support for <code>continue</code> statements (although there is an acceptable workaround using <code>repeat break until true</code>). The standard library for string handling and manipulation is quite bare bones, and you have to heavily rely on using <code>string:gsub</code> with pattern matching. And as far as I can tell, there’s no Unicode support in the language. Neovim also uses lua 5.1, since that is the latest version of lua that works with luajit. And this means some of the improvements in lua 5.2 and lua 5.3 are not available to neovim users.</p>
 <p>Admittedly, these are quite minor gripes in the language. And there are lots of awesome packages from <a href="https://luarocks.org/">LuaRocks</a> that more than make up for the lack of a batteries included standard library in lua.</p>
 <p>Additionally, there are programming languages like <a href="https://fennel-lang.org/">Fennel</a> (a language that uses lisp syntax and provides a macro system), that compile <em>to</em> lua. Using fennel and the macro support provided by the language can make the configuration of your neovim settings concise and clean. Naturally, the neovim community have built excellent tools like <a href="https://github.com/Olical/aniseed">Aniseed</a> and <a href="https://github.com/rktjmp/hotpot.nvim">hotpot.nvim</a> to make it possible to write your entire configuration in fennel instead of lua. Alternatively, there’s even a <a href="https://github.com/TypeScriptToLua/TypeScriptToLua">TypeScript to lua transpiler</a>, for those so inclined.</p>
 <p>I figured it would be nice to write a lua plugin in pure rust and I wanted to explore how to go about doing that. Rust has metaprogramming features like macros, has a batteries included standard library and a thriving package ecosystem to boot. And more importantly, I like writing code in rust.</p>
-<p>Traditionally, writing a neovim plugin in rust can be achieved by neovim’s RPC mechanism<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. However I was curious to see what it would take to make it happen using a native lua module. This blog post is a summary of the scaffolding required to get a hello world lua plugin written in rust set up.</p>
+<div class="page-columns page-full"><p>Traditionally, writing a neovim plugin in rust can be achieved by neovim’s RPC mechanism<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. However I was curious to see what it would take to make it happen using a native lua module. This blog post is a summary of the scaffolding required to get a hello world lua plugin written in rust set up.</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;<a href="https://github.com/KillTheMule/nvim-rs" class="uri">https://github.com/KillTheMule/nvim-rs</a></p></li></div></div>
 </section>
-<section id="how-it-works" class="level2">
+<section id="how-it-works" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
 <p>When a <code>require 'mymodule'</code> expression is encountered in lua, the lua interpreter searches for <code>mymodule.lua</code> and <code>mymodule.so</code> files in a bunch of predefined locations. This is the output of typing <code>:lua require'mymodule'</code> in neovim:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>E5108: Error executing lua [string ":lua"]:1: module 'mymodule' not found:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        no field package.preload['mymodule']</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        no file './mymodule.lua'</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        no file '/Users/runner/work/neovim/neovim/.deps/usr/share/luajit-2.1.0-beta3/mymodule.lua'</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        no file '/usr/local/share/lua/5.1/mymodule.lua'</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        no file '/usr/local/share/lua/5.1/mymodule/init.lua'</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        no file '/Users/runner/work/neovim/neovim/.deps/usr/share/lua/5.1/mymodule.lua'</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        no file '/Users/runner/work/neovim/neovim/.deps/usr/share/lua/5.1/mymodule/init.lua'</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/mymodule.lua'</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/mymodule/init.lua'</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/mymodule.lua'</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/mymodule/init.lua'</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        no file './mymodule.so'</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        no file '/usr/local/lib/lua/5.1/mymodule.so'</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        no file '/Users/runner/work/neovim/neovim/.deps/usr/lib/lua/5.1/mymodule.so'</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        no file '/usr/local/lib/lua/5.1/loadall.so'</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/mymodule.so'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If a <code>mymodule.so</code> file exists, lua checks if it can call <code>luaopen_mymodule</code> as a function using the C ABI<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This is the template one would follow to write a lua module in C:</p>
+<div class="cell-output">
+<pre><code>E5108: Error executing lua [string ":lua"]:1: module 'mymodule' not found:
+        no field package.preload['mymodule']
+        no file './mymodule.lua'
+        no file '/Users/runner/work/neovim/neovim/.deps/usr/share/luajit-2.1.0-beta3/mymodule.lua'
+        no file '/usr/local/share/lua/5.1/mymodule.lua'
+        no file '/usr/local/share/lua/5.1/mymodule/init.lua'
+        no file '/Users/runner/work/neovim/neovim/.deps/usr/share/lua/5.1/mymodule.lua'
+        no file '/Users/runner/work/neovim/neovim/.deps/usr/share/lua/5.1/mymodule/init.lua'
+        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/mymodule.lua'
+        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/mymodule/init.lua'
+        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/mymodule.lua'
+        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/mymodule/init.lua'
+        no file './mymodule.so'
+        no file '/usr/local/lib/lua/5.1/mymodule.so'
+        no file '/Users/runner/work/neovim/neovim/.deps/usr/lib/lua/5.1/mymodule.so'
+        no file '/usr/local/lib/lua/5.1/loadall.so'
+        no file '/Users/USER/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/mymodule.so'</code></pre>
+</div>
+<div class="page-columns page-full"><p>If a <code>mymodule.so</code> file exists, lua checks if it can call <code>luaopen_mymodule</code> as a function using the C ABI<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This is the template one would follow to write a lua module in C:</p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp; <a href="https://www.lua.org/pil/26.2.html" class="uri">https://www.lua.org/pil/26.2.html</a></p></li></div></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> l_dir <span class="op">(</span>lua_State <span class="op">*</span>L<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
@@ -361,9 +391,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>You can find curated lists of neovim plugins and related projects <a href="https://github.com/rockerBOO/awesome-neovim">here</a> and <a href="http://neovimcraft.com/">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://github.com/KillTheMule/nvim-rs" class="uri">https://github.com/KillTheMule/nvim-rs</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p> <a href="https://www.lua.org/pil/26.2.html" class="uri">https://www.lua.org/pil/26.2.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
+
+
 </ol>
 </aside>
 

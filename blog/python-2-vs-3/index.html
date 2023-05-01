@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -78,9 +78,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -176,10 +173,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Python 2 vs 3</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/python-2-vs-3/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">python</div>
+  </div>
   </div>
 
 
@@ -207,12 +233,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>This post is an account of my personal experience. I’m interested in hearing other people’s opinions and having an open discussion on best practices to develop in Python. For the rest of this post, when I mention Python2 / Python3 please infer that I am referring to Python 2.7 / Python 3.5 respectively.</p>
-<section id="python-2-vs-3" class="level2">
+<section id="python-2-vs-3" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="python-2-vs-3">Python 2 vs 3</h2>
 <p>A lot of people talk about Python2 vs Python3, and having to make a choice between them. Some beginners venturing to learn Python may be posed with this question themselves. I’ve seen discussions claim that the main issue with picking Python3 is that most packages that were written for Python2 are not compatible with Python3. and I’ve also seen the counter arguments that show that the number of Python2 packages that don’t support Python3 is insignificant.</p>
 <p>It is true that a large number of PyPi packages are now compatible with both Python2 and Python3. If I had to list the biggest changes in Python3 from Python2 that made the jump between versions difficult, it would be the core updates to the CPython API and the implementation of Unicode everywhere.</p>
 <p>The changes to CPython API made it difficult to move packages across versions that heavily relied on C code. This has de-incentivised other tools that relied on packages to make the switch as well. Several of the scientific python stack faced this issue. Fortunately, thanks to the efforts of some incredibly smart and dedicated people, NumPy, SciPy, Pandas, Matplotlib now all support Python 3.5.</p>
-<p>In arguably one of the more contentious decisions, Python3 also changed strings to handled as Unicode by default. This, as a result made thinking about unicode a more conscious decision<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="page-columns page-full"><p>In arguably one of the more contentious decisions, Python3 also changed strings to handled as Unicode by default. This, as a result made thinking about unicode a more conscious decision<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;I highly recommend checking out <a href="https://www.youtube.com/watch?v=sgHbC6udIqc">Ned Batchelder’s talk</a> titled <q>Pragmatic Unicode, or, How do I stop the pain?</q> for an excellent summary on how to deal with unicode issues.</p></li></div></div>
 <p>Python3 makes dealing with unicode a lot easier, by providing error messages during compilation time instead of run time. With this change however, packages that often dealt with bytes/text/strings required some serious retooling. Many programs in the web stack in the Python world have taken time to move to the latest versions of Python. There are multiple other changes in Python3, but these are most commonly attributed to as the reason for making the transistion difficult.</p>
 <p>Overall, Python3 introduced a lot of niceties. The latest version of Python3 even introduces a more memory efficient dictionary, and since dictionaries are everywhere you can be sure to expect some improvements in your programs. In general, I sure I wouldn’t be alone in recommending anyone to use Python3 for their projects. Personally, I don’t think I’ve ever experienced an issue where a package that I wanted was written for Python2 alone.</p>
 <p>I have experienced another issue though.</p>
@@ -245,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>I highly recommend checking out <a href="https://www.youtube.com/watch?v=sgHbC6udIqc">Ned Batchelder’s talk</a> titled <q>Pragmatic Unicode, or, How do I stop the pain?</q> for an excellent summary on how to deal with unicode issues.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
 </ol>
 </aside>
 

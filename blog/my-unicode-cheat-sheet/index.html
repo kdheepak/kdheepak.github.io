@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -97,9 +97,6 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -198,10 +195,42 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">My Unicode cheat sheet</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/my-unicode-cheat-sheet/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">neovim</div>
+    <div class="quarto-category">python</div>
+    <div class="quarto-category">julia</div>
+    <div class="quarto-category">rust</div>
+  </div>
   </div>
 
 
@@ -296,9 +325,9 @@ div.csl-indent {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">9</span>]: <span class="st">b'</span><span class="ch">\xff\xfe</span><span class="st">h</span><span class="ch">\x00</span><span class="st">e</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st"> </span><span class="ch">\x00</span><span class="st">w</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st">r</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">d</span><span class="ch">\x00</span><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>When receiving or reading data, we <strong>must</strong> know the encoding used to interpret it correctly. A Unicode encoding is not guaranteed to contain any information about the encoding. Different encodings exist for efficiency, performance and backward compatibility. UTF-8 is a good pick for an encoding in the general case.</p></li>
 </ol>
-<section id="vim" class="level2">
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<a href="https://unicode.org/glossary/#code_point" class="uri">https://unicode.org/glossary/#code_point</a></p></li><li id="fn2"><p><sup>2</sup>&nbsp;<a href="https://unicode.org/glossary/#grapheme" class="uri">https://unicode.org/glossary/#grapheme</a></p></li></div><section id="vim" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="vim">Vim</h2>
-<p>In vim in insert mode, we can type <code>Ctrl+V</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> followed by either:</p>
+<div class="page-columns page-full"><p>In vim in insert mode, we can type <code>Ctrl+V</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> followed by either:</p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;<em>aside</em>: Check out <code>:help i_CTRL-V_digit</code> for more information.</p></li></div></div>
 <ul>
 <li>a decimal number [0-255]. <code>Ctrl-v255</code> will insert <code>ÿ</code>.</li>
 <li>the letter <code>o</code> and then an octal number [0-377]. <code>Ctrl-vo377</code> will insert <code>ÿ</code>.</li>
@@ -308,12 +337,12 @@ div.csl-indent {
 </ul>
 <p>Using <a href="https://github.com/chrisbra/unicode.vim"><code>unicode.vim</code></a>, we can use <code>:UnicodeName</code> to get the Unicode number of the code point under the cursor. With <code>unicode.vim</code> and <code>fzf</code> installed, you can even fuzzy find Unicode symbols.</p>
 </section>
-<section id="python" class="level2">
+<section id="python" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="python">Python</h2>
 <p>Since Python &gt;=3.3, the Unicode string type supports a <a href="https://peps.python.org/pep-0393/"><q>flexible string representation</q></a>. This means that any one of multiple internal representations may be used depending on the largest Unicode ordinal (1, 2, or 4 bytes) in a Unicode string.</p>
 <p>For the common case, a string used in the English speaking world may only use ASCII characters thereby using a Latin-1 encoding to store the data. If non Basic Multilingual Plane characters are used in a Python Unicode string, the internal representation may be stored as UCS2 or UCS4.</p>
 <p>In each of these cases, the internal representation uses the same number of bytes for each code point. This allows efficient indexing into a Python Unicode string, but indexing into a Python Unicode string will only return a valid code point and not a grapheme. The <code>length</code> of a Unicode string is defined as the number of code points in the string.</p>
-<p>As an example, let’s take this emoji: 🤦🏼‍♂️ <span class="citation" data-cites="hsivonen"><a href="#ref-hsivonen" role="doc-biblioref">[1]</a></span>. This emoji actually consists of 5 code points<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>:</p>
+<div class="page-columns page-full"><p>As an example, let’s take this emoji: 🤦🏼‍♂️ <span class="citation" data-cites="hsivonen"><a href="#ref-hsivonen" role="doc-biblioref">[1]</a></span>. This emoji actually consists of 5 code points<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>:</p><div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;<em>aside</em>: We can view this breakdown using <a href="https://r12a.github.io/uniview/?charlist=%F0%9F%A4%A6%F0%9F%8F%BC%E2%80%8D%E2%99%82%EF%B8%8F">uniview</a>. In <code>vim</code>, we can use <code>:UnicodeName</code>.</p></li></div></div>
 <ul>
 <li>🤦 : U+1F926 FACE PALM</li>
 <li><span>🏼</span> : U+1F3FC EMOJI MODIFIER FITZPATRICK TYPE-3</li>
@@ -434,7 +463,7 @@ div.csl-indent {
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -*- coding: utf-8 -*-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If your Python files are part of a package, just adding the second line is sufficient. I recommend using <a href="./../using-precommit-hooks/">pre-commit</a> hooks to ensure that <a href="https://github.com/pre-commit/pre-commit-hooks/blob/31d41ff29115a87808277ee0ec23999b17d5b583/pre_commit_hooks/fix_encoding_pragma.py">the encoding pragma of python files are fixed</a> before making a git commit.</p>
 </section>
-<section id="julia" class="level2">
+<section id="julia" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="julia">Julia</h2>
 <p>Let’s take a look at how Julia handles strings. This is the version of Julia that I’m using:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>               <span class="ex">_</span></span>
@@ -462,7 +491,7 @@ div.csl-indent {
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">codeunit</span>(s)</span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="dt">UInt8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Printing the length of the string in Julia returns <code>5</code>. As we saw earlier, this is the number of code points in the unicode string.</p>
-<p>Julia <code>String</code> literals are encoded using the UTF-8 encoding. In Python, the indexing into a string would return the code point at the string. In Julia, indexing into a string refers to code units<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, and for the default <code>String</code> this returns the byte as a <code>Char</code> type.</p>
+<div class="page-columns page-full"><p>Julia <code>String</code> literals are encoded using the UTF-8 encoding. In Python, the indexing into a string would return the code point at the string. In Julia, indexing into a string refers to code units<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, and for the default <code>String</code> this returns the byte as a <code>Char</code> type.</p><div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;<a href="https://unicode.org/glossary/#code_unit" class="uri">https://unicode.org/glossary/#code_unit</a></p></li></div></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> s[<span class="fl">1</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ch">'🤦'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">1F926</span> (category So<span class="op">:</span> <span class="dt">Symbol</span>, other)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -549,7 +578,7 @@ div.csl-indent {
 <span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>  at index [<span class="fl">18</span>]</span>
 <span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
 <span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>[<span class="op">...</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If we want each code point in a Julia <code>String</code>, we can use <code>eachindex</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<div class="page-columns page-full"><p>If we want each code point in a Julia <code>String</code>, we can use <code>eachindex</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;<em>aside</em>: See the Julia manual strings documentation for more information: <a href="https://docs.julialang.org/en/v1/manual/strings/" class="uri">https://docs.julialang.org/en/v1/manual/strings/</a></p></li></div></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> [s[i] for i <span class="kw">in</span> <span class="fu">eachindex</span>(s)]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fl">5</span><span class="op">-</span>element <span class="dt">Array</span>{<span class="dt">Char</span>,<span class="fl">1</span>}<span class="op">:</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a> <span class="ch">'🤦'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">1F926</span> (category So<span class="op">:</span> <span class="dt">Symbol</span>, other)</span>
@@ -566,7 +595,7 @@ div.csl-indent {
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">length</span>(<span class="fu">graphemes</span>(s))</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If we wish to encode a Julia string as UTF-8<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, we can use the following:</p>
+<div class="page-columns page-full"><p>If we wish to encode a Julia string as UTF-8<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, we can use the following:</p><div class="no-row-height column-margin column-container"><li id="fn7"><p><sup>7</sup>&nbsp;<em>aside</em>: As of Julia v1.5.0, only conversion to/from UTF-8 is currently supported: <a href="https://docs.julialang.org/en/v1/base/strings/#Base.transcode" class="uri">https://docs.julialang.org/en/v1/base/strings/#Base.transcode</a></p></li></div></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">transcode</span>(<span class="dt">UInt8</span>, s)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fl">17</span><span class="op">-</span>element <span class="bu">Base</span>.CodeUnits{<span class="dt">UInt8</span>,<span class="dt">String</span>}<span class="op">:</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a> <span class="bn">0xf0</span></span>
@@ -697,13 +726,13 @@ div.csl-indent {
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p><a href="https://unicode.org/glossary/#code_point" class="uri">https://unicode.org/glossary/#code_point</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://unicode.org/glossary/#grapheme" class="uri">https://unicode.org/glossary/#grapheme</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><em>aside</em>: Check out <code>:help i_CTRL-V_digit</code> for more information.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><em>aside</em>: We can view this breakdown using <a href="https://r12a.github.io/uniview/?charlist=%F0%9F%A4%A6%F0%9F%8F%BC%E2%80%8D%E2%99%82%EF%B8%8F">uniview</a>. In <code>vim</code>, we can use <code>:UnicodeName</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="https://unicode.org/glossary/#code_unit" class="uri">https://unicode.org/glossary/#code_unit</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p><em>aside</em>: See the Julia manual strings documentation for more information: <a href="https://docs.julialang.org/en/v1/manual/strings/" class="uri">https://docs.julialang.org/en/v1/manual/strings/</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p><em>aside</em>: As of Julia v1.5.0, only conversion to/from UTF-8 is currently supported: <a href="https://docs.julialang.org/en/v1/base/strings/#Base.transcode" class="uri">https://docs.julialang.org/en/v1/base/strings/#Base.transcode</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
+
+
+
+
+
+
 </ol>
 </aside>
 

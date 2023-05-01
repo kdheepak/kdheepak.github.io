@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.14">
+<meta name="generator" content="quarto-1.4.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,9 +96,6 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
-<script src="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
-<link href="../../site_libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -198,10 +195,40 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Pelican Margin Notes with Pandoc</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/pelican-margin-notes-with-pandoc/index.qmd"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">pandoc</div>
+    <div class="quarto-category">python</div>
+  </div>
   </div>
 
 
@@ -245,10 +272,10 @@ div.csl-indent {
 <div class="page-columns page-full"><p> And, on the rare occasion that you can’t find a plugin that does exactly what you want it to, you’ll be able to (with a little bit of research) create a plugin to do exactly just that. Their documentation is pretty good too. If you are looking at a creating a blog I highly recommend checking out Pelican.</p><div class="no-row-height column-margin column-container"><span class="">Pelican is only one of the few static site generators in Python. There are others such as <a href="https://github.com/getnikola/nikola">Nikola</a>, <a href="https://github.com/lektor/lektor">Lektor</a>, <a href="https://github.com/eudicots/Cactus">Cactus</a>, <a href="https://github.com/hyde/hyde">Hyde</a> and <a href="https://www.fullstackpython.com/static-site-generator.html">many more</a>. The main reason I chose Pelican was because it had a wide selection of <a href="https://github.com/getpelican/pelican-themes">themes</a>. There are also many popular ones in other languages, but I haven’t researched them or used them enough or to have a strong opinion on them.</span></div></div>
 <p>That’s probably not why you are reading this post though. You are probably interested in getting margin notes working on your blog too. I’ll have to caveat the following post by saying that this is a proof of concept and by no means a final stable version that you can deploy on your site. This approach worked for me, and the reason I went down this path was because I was curious to see how far I could push my static site generation workflow.</p>
 </section>
-<section id="setup" class="level2">
+<section id="setup" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Firstly, I’m not using Pelican’s built in reader for Markdown files, but instead am using Pandoc. I wrote a pretty long post on using <a href="../writing-papers-with-markdown/">Pandoc for academic writing</a>; I think it’s safe to say that I’m a fan of Pandoc. Pelican has better built-in support for RestructuredText compared to Markdown, but plugins allow you to do pretty much everything you want with Markdown as your source file format. However the number of plugins required to get everything you want working quickly adds up.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’ve used Pandoc for other projects before and wanted to see if I could get it working in my blogging workflow. I’ve since incorporated Pandoc and it seems to be working quite well. Getting jupyter notebooks working with Pandoc was a bit of challenge though, but I was able to get past it by writing a filter for converting Jupyter notebooks with Pandoc.</p>
-<p>And as I mentioned earlier, one of the main purposes of this implementation was because I was curious to see how far I could push this static site generation workflow. So if you are not using Pandoc in Pelican, you will not be able to use this theme with margin notes straight away<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. So, the short version is that this implementation of margin notes employs Pandoc, filters with Pandoc using the <a href="https://github.com/jgm/pandocfilters"><code>pandocfilters</code> package</a> and this current specific theme.</p>
+<div class="page-columns page-full"><p>Firstly, I’m not using Pelican’s built in reader for Markdown files, but instead am using Pandoc. I wrote a pretty long post on using <a href="../writing-papers-with-markdown/">Pandoc for academic writing</a>; I think it’s safe to say that I’m a fan of Pandoc. Pelican has better built-in support for RestructuredText compared to Markdown, but plugins allow you to do pretty much everything you want with Markdown as your source file format. However the number of plugins required to get everything you want working quickly adds up.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’ve used Pandoc for other projects before and wanted to see if I could get it working in my blogging workflow. I’ve since incorporated Pandoc and it seems to be working quite well. Getting jupyter notebooks working with Pandoc was a bit of challenge though, but I was able to get past it by writing a filter for converting Jupyter notebooks with Pandoc.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Not that’s a bad thing. I believe the way Pelican signals works will only activate a plugin if it has to, so it doesn’t slow down your deployment process.</p></li></div></div>
+<div class="page-columns page-full"><p>And as I mentioned earlier, one of the main purposes of this implementation was because I was curious to see how far I could push this static site generation workflow. So if you are not using Pandoc in Pelican, you will not be able to use this theme with margin notes straight away<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. So, the short version is that this implementation of margin notes employs Pandoc, filters with Pandoc using the <a href="https://github.com/jgm/pandocfilters"><code>pandocfilters</code> package</a> and this current specific theme.</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;You will still be able to use this theme, either with Pandoc or Pelican’s default readers, however as you might see later in the post, I use <code>aside</code> tag elements for side notes or margin notes and I haven’t been able to find a plugin that does just that</p></li></div></div>
 </section>
 <section id="inspiration" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="inspiration">Inspiration</h2>
@@ -305,8 +332,8 @@ div.csl-indent {
 <aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Not that’s a bad thing. I believe the way Pelican signals works will only activate a plugin if it has to, so it doesn’t slow down your deployment process.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>You will still be able to use this theme, either with Pandoc or Pelican’s default readers, however as you might see later in the post, I use <code>aside</code> tag elements for side notes or margin notes and I haven’t been able to find a plugin that does just that<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+
+
 </ol>
 </aside>
 
