@@ -42,7 +42,7 @@ website:
 format:
   html:
     grid:
-      content-mode: full
+      content-mode: standard
     theme:
       - pulse
       - ./_quarto/theme.scss
