@@ -48,11 +48,13 @@ format:
       - ./_quarto/theme.scss
     css:
       - ./_quarto/styles.css
+    mainfont: "Computer Modern Sans"
     code-copy: hover
     code-tools:
       source: repo
     highlight-style: printing
-    include-before-body:
+    include-in-header:
+      - ./_quarto/font.html
       - ./_quarto/pre-language-script.html
     anchor-sections: true
     section-divs: true
@@ -72,6 +74,7 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     link-external-filter: '^(?:http:|https:)\/\/.*kdheepak\.com\/'
+    code-block-border-left: true
     filters:
       - _quarto/alert.lua
       - code-visibility
