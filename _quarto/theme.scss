@@ -1,2 +1,8 @@
 /*-- scss:defaults --*/
 $font-family-code: "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+
+// Shrink blocks of code
+pre.text, pre.sourceCode, .cell-output pre {
+  font-size: 0.775em !important;
+}
