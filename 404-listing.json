@@ -1,7 +1,6 @@
 {
   "listing": "/404.html",
   "items": [
-    "/blog/index.html",
     "/blog/visualizing-roads-in-canada/index.html",
     "/blog/using-makie-with-quarto/index.html",
     "/blog/understanding-variables-and-mutability-in-julia/index.html",

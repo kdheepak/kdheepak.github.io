@@ -1,215 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://kdheepak.com/cv/index.html</loc>
+    <lastmod>2023-05-03T05:28:33.037Z</lastmod>
+  </url>
+  <url>
     <loc>https://kdheepak.com/blog/active-reactive-and-apparent-power/index.html</loc>
-    <lastmod>2023-05-03T04:21:46.892Z</lastmod>
+    <lastmod>2023-05-03T05:28:34.393Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/using-makie-with-quarto/index.html</loc>
-    <lastmod>2023-05-03T04:21:48.124Z</lastmod>
+    <lastmod>2023-05-03T05:28:35.553Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/writing-papers-with-markdown/index.html</loc>
-    <lastmod>2023-05-03T04:21:50.468Z</lastmod>
+    <lastmod>2023-05-03T05:28:37.725Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/pandoc-lua-filter-for-alerts/index.html</loc>
-    <lastmod>2023-05-03T04:21:51.700Z</lastmod>
+    <lastmod>2023-05-03T05:28:38.765Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/change-path-inside-vim/index.html</loc>
-    <lastmod>2023-05-03T04:21:52.620Z</lastmod>
+    <lastmod>2023-05-03T05:28:39.645Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal/index.html</loc>
-    <lastmod>2023-05-03T04:21:53.816Z</lastmod>
+    <lastmod>2023-05-03T05:28:40.909Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/better-git-log-with-git-ls/index.html</loc>
-    <lastmod>2023-05-03T04:21:54.852Z</lastmod>
+    <lastmod>2023-05-03T05:28:41.761Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/using-tikz-with-pandoc/index.html</loc>
-    <lastmod>2023-05-03T04:22:40.983Z</lastmod>
+    <lastmod>2023-05-03T05:29:24.544Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/patched-fonts-madness/index.html</loc>
-    <lastmod>2023-05-03T04:22:41.871Z</lastmod>
+    <lastmod>2023-05-03T05:29:25.388Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/mac-osx-tweaks/index.html</loc>
-    <lastmod>2023-05-03T04:22:42.891Z</lastmod>
+    <lastmod>2023-05-03T05:29:26.332Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/tasker-projects/index.html</loc>
-    <lastmod>2023-05-03T04:22:43.835Z</lastmod>
+    <lastmod>2023-05-03T05:29:27.308Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/my-unicode-cheat-sheet/index.html</loc>
-    <lastmod>2023-05-03T04:22:45.435Z</lastmod>
+    <lastmod>2023-05-03T05:29:28.876Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/three-built-in-neovim-features/index.html</loc>
-    <lastmod>2023-05-03T04:22:46.683Z</lastmod>
+    <lastmod>2023-05-03T05:29:30.108Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/loading-a-rust-library-as-a-lua-module-in-neovim/index.html</loc>
-    <lastmod>2023-05-03T04:22:48.271Z</lastmod>
+    <lastmod>2023-05-03T05:29:31.324Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/advent-of-code-2020-retrospective/index.html</loc>
-    <lastmod>2023-05-03T04:22:52.739Z</lastmod>
+    <lastmod>2023-05-03T05:29:35.540Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/mac-osx-productivity-apps/index.html</loc>
-    <lastmod>2023-05-03T04:22:53.867Z</lastmod>
+    <lastmod>2023-05-03T05:29:36.412Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/sveltekit-tailwind-starter/index.html</loc>
-    <lastmod>2023-05-03T04:22:55.699Z</lastmod>
+    <lastmod>2023-05-03T05:29:38.060Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/reinstall-xcode-command-line-developer-tools/index.html</loc>
-    <lastmod>2023-05-03T04:22:56.591Z</lastmod>
+    <lastmod>2023-05-03T05:29:39.252Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/spotify-and-tmux/index.html</loc>
-    <lastmod>2023-05-03T04:22:57.759Z</lastmod>
+    <lastmod>2023-05-03T05:29:40.316Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/drawing-in-ascii/index.html</loc>
-    <lastmod>2023-05-03T04:22:58.903Z</lastmod>
+    <lastmod>2023-05-03T05:29:41.408Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/index.html</loc>
-    <lastmod>2023-05-03T04:23:00.063Z</lastmod>
+    <lastmod>2023-05-03T05:29:42.516Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/how-to-add-line-numbers-for-code-blocks-in-pelican/index.html</loc>
-    <lastmod>2023-05-03T04:23:00.983Z</lastmod>
+    <lastmod>2023-05-03T05:29:43.580Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/index.html</loc>
-    <lastmod>2023-05-03T04:23:02.047Z</lastmod>
+    <lastmod>2023-05-03T05:29:44.552Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/how-to-set-up-a-pelican-blog-with-github-pages/index.html</loc>
-    <lastmod>2023-05-03T04:23:03.163Z</lastmod>
+    <lastmod>2023-05-03T05:29:45.572Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/jupyter-notebook-revealjs-and-github-pages/index.html</loc>
-    <lastmod>2023-05-03T04:23:04.087Z</lastmod>
+    <lastmod>2023-05-03T05:29:46.484Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/python-2-vs-3/index.html</loc>
-    <lastmod>2023-05-03T04:23:05.199Z</lastmod>
+    <lastmod>2023-05-03T05:29:47.632Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/emacsclient-and-tmux-split-navigation/index.html</loc>
-    <lastmod>2023-05-03T04:23:06.319Z</lastmod>
+    <lastmod>2023-05-03T05:29:48.764Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/home-monitoring-system/index.html</loc>
-    <lastmod>2023-05-03T04:23:07.323Z</lastmod>
+    <lastmod>2023-05-03T05:29:49.636Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</loc>
-    <lastmod>2023-05-03T04:23:09.691Z</lastmod>
+    <lastmod>2023-05-03T05:29:51.920Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/robotics/index.html</loc>
-    <lastmod>2023-05-03T04:23:10.711Z</lastmod>
+    <lastmod>2023-05-03T05:29:52.724Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/fast-track-to-being-productive-in-vim/index.html</loc>
-    <lastmod>2023-05-03T04:23:11.699Z</lastmod>
+    <lastmod>2023-05-03T05:29:53.720Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/emacs-tips-close-compilation-buffer-if-successful/index.html</loc>
-    <lastmod>2023-05-03T04:23:13.027Z</lastmod>
+    <lastmod>2023-05-03T05:29:54.764Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/using-mermaidjs-with-pandoc/index.html</loc>
-    <lastmod>2023-05-03T04:23:13.939Z</lastmod>
+    <lastmod>2023-05-03T05:29:55.696Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/installing-homebrew-in-an-alternative-location/index.html</loc>
-    <lastmod>2023-05-03T04:23:15.831Z</lastmod>
+    <lastmod>2023-05-03T05:29:57.456Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/pelican-margin-notes-with-pandoc/index.html</loc>
-    <lastmod>2023-05-03T04:23:17.119Z</lastmod>
+    <lastmod>2023-05-03T05:29:58.736Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/index.html</loc>
-    <lastmod>2023-05-03T04:23:18.475Z</lastmod>
+    <lastmod>2023-05-03T05:30:00.056Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/neovim-languageserver-julia/index.html</loc>
-    <lastmod>2023-05-03T04:23:19.707Z</lastmod>
+    <lastmod>2023-05-03T05:30:01.256Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/compiling-firmware-for-the-moonlander-keyboard-with-qmk/index.html</loc>
-    <lastmod>2023-05-03T04:23:20.779Z</lastmod>
+    <lastmod>2023-05-03T05:30:02.096Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/vim-tmux-zsh/index.html</loc>
-    <lastmod>2023-05-03T04:23:21.975Z</lastmod>
+    <lastmod>2023-05-03T05:30:03.264Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/using-precommit-hooks/index.html</loc>
-    <lastmod>2023-05-03T04:23:23.151Z</lastmod>
+    <lastmod>2023-05-03T05:30:04.312Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/welcome-to-my-blog/index.html</loc>
-    <lastmod>2023-05-03T04:23:24.067Z</lastmod>
+    <lastmod>2023-05-03T05:30:05.148Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</loc>
-    <lastmod>2023-05-03T04:23:25.171Z</lastmod>
+    <lastmod>2023-05-03T05:30:06.048Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/uninstalling-and-reinstalling-homebrew-on-osx/index.html</loc>
-    <lastmod>2023-05-03T04:23:26.139Z</lastmod>
+    <lastmod>2023-05-03T05:30:06.924Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/create-emacsclientapp-using-applescript/index.html</loc>
-    <lastmod>2023-05-03T04:23:27.063Z</lastmod>
+    <lastmod>2023-05-03T05:30:07.792Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/neovim-and-tmux/index.html</loc>
-    <lastmod>2023-05-03T04:23:28.011Z</lastmod>
+    <lastmod>2023-05-03T05:30:08.636Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/visualizing-roads-in-canada/index.html</loc>
-    <lastmod>2023-05-03T04:23:29.351Z</lastmod>
+    <lastmod>2023-05-03T05:30:09.996Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/emacs-workflow-using-emacs-in-the-terminal/index.html</loc>
-    <lastmod>2023-05-03T04:23:30.419Z</lastmod>
+    <lastmod>2023-05-03T05:30:10.936Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/how-to-install-gdb-on-osx/index.html</loc>
-    <lastmod>2023-05-03T04:23:31.315Z</lastmod>
+    <lastmod>2023-05-03T05:30:11.756Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/programmers-preferences-for-package-names/index.html</loc>
-    <lastmod>2023-05-03T04:23:32.822Z</lastmod>
+    <lastmod>2023-05-03T05:30:13.264Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/the-egg-tower-puzzle/index.html</loc>
-    <lastmod>2023-05-03T04:23:34.830Z</lastmod>
+    <lastmod>2023-05-03T05:30:15.060Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/using-conda-to-manage-packages/index.html</loc>
-    <lastmod>2023-05-03T04:23:35.890Z</lastmod>
+    <lastmod>2023-05-03T05:30:15.948Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/blog/tasker-and-google-maps/index.html</loc>
-    <lastmod>2023-05-03T04:23:36.946Z</lastmod>
+    <lastmod>2023-05-03T05:30:17.032Z</lastmod>
   </url>
   <url>
     <loc>https://kdheepak.com/index.html</loc>
-    <lastmod>2023-05-03T04:23:37.418Z</lastmod>
+    <lastmod>2023-05-03T05:30:17.416Z</lastmod>
   </url>
 </urlset>
