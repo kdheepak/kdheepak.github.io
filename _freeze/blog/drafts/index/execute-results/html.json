@@ -1,0 +1,11 @@
+{
+  "hash": "99fbfc3f9fefd1c649099c0f52798542",
+  "result": {
+    "markdown": "---\ntitle: Draft Page\ndraft: true\n---\n\n\n::: {.cell execution_count=2}\n``` {.julia .cell-code}\nusing CairoMakie\n```\n:::\n\n\n::: {.cell execution_count=3}\n``` {.julia .cell-code}\nfunction function_that_plots1(f)\n  ax = Axis(f)\n  scatter!(ax, 1:10, [rand(1:10) for i in 1:10])\n  ax\nend\n\nfunction function_that_plots2(f)\n  ax = Axis(f)\n  scatter!(ax, 1:10, [rand(1:10) for i in 1:10])\n  ax\nend\n\nfig = Figure()\ng1 = fig[1,1] = GridLayout()\nfunction_that_plots1(g1[1,1])\ng2 = fig[1,2] = GridLayout()\nfunction_that_plots2(g2[1,1])\nfig\n```\n\n::: {.cell-output .cell-output-display execution_count=4}\n![](index_files/figure-html/cell-4-output-1.svg){}\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

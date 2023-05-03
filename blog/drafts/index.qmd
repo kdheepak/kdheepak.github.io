@@ -1,0 +1,17 @@
+---
+title: Draft Page
+draft: true
+---
+
+```{julia}
+#| include: false
+using Pkg
+Pkg.activate(@__DIR__)
+Pkg.instantiate()
+```
+
+```{julia}
+#| output: false
+using CairoMakie
+```
+
