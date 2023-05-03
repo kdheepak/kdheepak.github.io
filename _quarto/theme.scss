@@ -12,3 +12,154 @@ pre.text, pre.sourceCode, .cell-output pre {
     display: none !important;
   }
 }
+
+.quarto-title-meta {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    flex-direction: column;
+
+    &:nth-child(2) {
+      align-items: flex-end;
+    }
+  }
+}
+
+#title-block-header.quarto-title-block .quarto-title-meta-heading {
+	text-transform: uppercase;
+	margin-top: 1em;
+	font-size: .8em;
+	opacity: .8;
+	font-weight: 400;
+}
+
+.column-margin.column-container :not(.collapse) {
+	padding-top: 0em;
+}
+
+mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.cell-output pre {
+  white-space: pre-wrap;
+  border: 1px solid grey;
+  padding: 1em;
+}
+
+pre.cell-output {
+  white-space: pre-wrap;
+  border: 1px solid grey;
+  padding: 1em;
+}
+
+
+pre.sourceCode {
+  overflow-x: auto !important;
+  margin-top: 0.5em;
+  padding-top: 0 !important;
+}
+
+.sourceCode .label[data-language] {
+  color: #F5F5F5;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  text-transform: lowercase;
+}
+
+.sourceCode .label[data-language="python"] {
+  background: #3776AB;
+}
+
+.sourceCode .label[data-language="rust"] {
+  background: #DE6C42;
+}
+
+.sourceCode .label[data-language="julia"] {
+  background: #9558B2;
+}
+
+.sourceCode .label[data-language="diff"] {
+  background: #3863D9;
+}
+
+.sourceCode .label[data-language="javascript"] {
+  background: #F0DB4F;
+}
+
+.sourceCode .label[data-language="css"] {
+  background: #F0931D;
+}
+
+.sourceCode .label[data-language="c"] {
+  background: #5C7A92;
+}
+
+.sourceCode .label[data-language="cpp"] {
+  background: #659AD3;
+}
+
+.sourceCode .label[data-language="nim"] {
+  background: #9A66D3;
+}
+
+.sourceCode .label[data-language="latex"] {
+  background: #6AD7E5;
+}
+
+.sourceCode .label[data-language="lua"] {
+  background: #8892BF;
+}
+
+.sourceCode .label[data-language="vim"] {
+  background: #E9573F;
+}
+
+.sourceCode .label[data-language="svelte"] {
+  background: #F05138;
+}
+
+.sourceCode .label[data-language="typescript"] {
+  background: #2B7489;
+}
+
+.sourceCode .label[data-language="bash"] {
+  background: #F18E33;
+}
+
+.sourceCode .label[data-language="toml"] {
+  background: #9F7E69;
+}
+
+.sourceCode .label[data-language="json"] {
+  background: #F29920;
+}
+
+.sourceCode .label[data-language="yaml"] {
+  background: #5C6971;
+}
+
+.sourceCode .label[data-language="zsh"] {
+  background: #C6794D;
+}
+
+.sourceCode .label[data-language="tmux"] {
+  background: #1FAB89;
+}
+
+.sourceCode .label[data-language="emacs"] {
+  background: #7F5AB6;
+}
+
+.sourceCode .label[data-language="commonlisp"] {
+  background: #7F5AB6;
+}
+
+.sourceCode .label[data-language="markdown"] {
+  background: #5A5A5A;
+}
+

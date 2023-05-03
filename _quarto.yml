@@ -84,6 +84,8 @@ format:
     link-external-newwindow: true
     link-external-filter: '^(?:http:|https:)\/\/.*kdheepak\.com\/'
     code-block-border-left: true
+    title-block-style: plain
+    title-block-categories: false
     filters:
       - _quarto/alert.lua
       - code-visibility
