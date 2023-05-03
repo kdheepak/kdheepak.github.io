@@ -121,7 +121,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
       // Set the data-language attribute only if a language is found
       if (language && language !== "bibtex") {
-        preElement.setAttribute("data-language", language);
+        const label = document.createElement("span");
+        label.textContent = language;
+        label.classList = ["label"];
+        label.setAttribute("data-language", language);
+        preElement.parentNode.insertBefore(label, preElement);
       }
     });
   });
@@ -211,9 +215,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Using Tikz with Pandoc</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/using-tikz-with-pandoc/index.qmd">View Source</a></li></ul></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">pandoc</div>
-  </div>
   </div>
 
 
@@ -254,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    arc ({360/<span class="fu">\n</span> * (<span class="fu">\s</span> - 1)+<span class="fu">\margin</span>}:{360/<span class="fu">\n</span> * (<span class="fu">\s</span>)-<span class="fu">\margin</span>}:<span class="fu">\radius</span>);</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="984ade61" class="cell" data-execution_count="2">
+<div id="398e7506" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Markdown</span></span>

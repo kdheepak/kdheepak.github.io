@@ -122,7 +122,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
       // Set the data-language attribute only if a language is found
       if (language && language !== "bibtex") {
-        preElement.setAttribute("data-language", language);
+        const label = document.createElement("span");
+        label.textContent = language;
+        label.classList = ["label"];
+        label.setAttribute("data-language", language);
+        preElement.parentNode.insertBefore(label, preElement);
       }
     });
   });
@@ -232,9 +236,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">How to set up a Pelican blog with Github pages</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/how-to-set-up-a-pelican-blog-with-github-pages/index.qmd"><i class="bi"></i> Code</button></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">pandoc</div>
-  </div>
   </div>
 
 

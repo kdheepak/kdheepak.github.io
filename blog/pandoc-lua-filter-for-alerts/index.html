@@ -87,7 +87,11 @@ ul.task-list li input[type="checkbox"] {
 
       // Set the data-language attribute only if a language is found
       if (language && language !== "bibtex") {
-        preElement.setAttribute("data-language", language);
+        const label = document.createElement("span");
+        label.textContent = language;
+        label.classList = ["label"];
+        label.setAttribute("data-language", language);
+        preElement.parentNode.insertBefore(label, preElement);
       }
     });
   });
@@ -177,9 +181,6 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Pandoc lua filter for alerts</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/pandoc-lua-filter-for-alerts/index.qmd"><i class="bi"></i> Code</button></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">pandoc</div>
-  </div>
   </div>
 
 
