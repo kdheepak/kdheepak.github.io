@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.18">
+<meta name="generator" content="quarto-1.4.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dheepak Krishnamurthy">
-<meta name="dcterms.date" content="2023-05-01">
+<meta name="dcterms.date" content="2023-05-03">
 
 <title>kdheepak - My personal thoughts and notes</title>
 <style>
@@ -82,6 +82,34 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+<link href="https://fonts.googleapis.com/css?family=Fira+Code&amp;display=swap" rel="stylesheet">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        preElement.setAttribute("data-language", language);
+      }
+    });
+  });
+</script>
 
 
 <link rel="stylesheet" href="_quarto/styles.css">
@@ -160,32 +188,6 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var preElements = document.querySelectorAll("pre.sourceCode");
-
-    preElements.forEach(function (preElement) {
-      var codeElement = preElement.querySelector("code");
-
-      // First, try to get the language from the <code> element's classList
-      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
-
-      // If the language is not found in the <code> element, get it from the <pre> element's classList
-      if (!language) {
-        preElement.classList.forEach(function (className) {
-          if (!["sourceCode", "code-with-copy"].includes(className)) {
-            language = className.toLowerCase();
-          }
-        });
-      }
-
-      // Set the data-language attribute only if a language is found
-      if (language && language !== "bibtex") {
-        preElement.setAttribute("data-language", language);
-      }
-    });
-  });
-</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -206,7 +208,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 1, 2023</p>
+      <p class="date">May 3, 2023</p>
     </div>
   </div>
   
