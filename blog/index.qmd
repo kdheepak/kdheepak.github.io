@@ -10,6 +10,7 @@ listing:
   categories: true
   sort-ui: false
   filter-ui: true
+  page-size: 99999
   feed:
     items: -1
     type: partial
