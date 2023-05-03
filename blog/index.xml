@@ -12,13 +12,13 @@
 <generator>quarto-1.4.25</generator>
 <lastBuildDate>Sat, 29 Apr 2023 16:38:41 GMT</lastBuildDate>
 <item>
-  <title>Visualizing roads in Canada</title>
+  <title>Visualizing roads in the cities of Canada</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/visualizing-roads-in-canada/index.html</link>
+  <link>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</link>
   <description><![CDATA[ Let’s import some packages first. ]]></description>
   <category>julia</category>
   <category>visualization</category>
-  <guid>https://kdheepak.com/blog/visualizing-roads-in-canada/index.html</guid>
+  <guid>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</guid>
   <pubDate>Sat, 29 Apr 2023 16:38:41 GMT</pubDate>
 </item>
 <item>
@@ -31,7 +31,7 @@
   <pubDate>Thu, 27 Apr 2023 00:22:45 GMT</pubDate>
 </item>
 <item>
-  <title>Understanding Variables and Mutability in Julia</title>
+  <title>Understanding variables and mutability in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</link>
   <description><![CDATA[ I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective. ]]></description>
@@ -79,7 +79,7 @@
   <pubDate>Thu, 31 Mar 2022 08:27:44 GMT</pubDate>
 </item>
 <item>
-  <title>Compiling Firmware for the Moonlander Keyboard with QMK</title>
+  <title>Compiling firmware for the Moonlander keyboard with QMK</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/compiling-firmware-for-the-moonlander-keyboard-with-qmk/index.html</link>
   <description><![CDATA[ First, clone the <code>qmk_firmware</code> GitHub repo, and make a fork to maintain your custom keyboard firmware. This is what my remotes look like: ]]></description>
@@ -115,7 +115,7 @@
   <pubDate>Fri, 18 Feb 2022 04:03:31 GMT</pubDate>
 </item>
 <item>
-  <title>Reinstall xcode command line developer tools</title>
+  <title>Reinstall Xcode command line developer tools</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/reinstall-xcode-command-line-developer-tools/index.html</link>
   <description><![CDATA[ Delete existing command line tools and install them again. ]]></description>
@@ -214,7 +214,7 @@
   <pubDate>Fri, 16 Dec 2016 21:31:07 GMT</pubDate>
 </item>
 <item>
-  <title>Pelican Margin Notes with Pandoc</title>
+  <title>Pelican margin notes with Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/pelican-margin-notes-with-pandoc/index.html</link>
   <description><![CDATA[ I’ve shifted to using quarto. I’ll leave this blog post up for reference if someone is interested. ]]></description>
@@ -233,7 +233,7 @@
   <pubDate>Sun, 02 Oct 2016 18:41:05 GMT</pubDate>
 </item>
 <item>
-  <title>Raspberry Pi Powered LED Lamp</title>
+  <title>Raspberry Pi powered LED lamp</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/index.html</link>
   <description><![CDATA[ With a Raspberry Pi, you can control a RGB addressable LED strip. The instructions are very simple <span class="citation" data-cites="led">[1]</span> and the results are pretty cool. I decided to make a desk lamp with a web interface. This post will go through the steps to build your own Pi powered desk lamp. ]]></description>
@@ -260,7 +260,7 @@
   <pubDate>Fri, 25 Dec 2015 10:32:51 GMT</pubDate>
 </item>
 <item>
-  <title>Writing Technical Papers with Markdown and Pandoc</title>
+  <title>Writing technical papers with Markdown and Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/writing-papers-with-markdown/index.html</link>
   <description><![CDATA[ You can view this post in the following formats, thanks to Pandoc! ]]></description>
@@ -297,7 +297,7 @@
   <pubDate>Sat, 19 Sep 2015 15:05:36 GMT</pubDate>
 </item>
 <item>
-  <title>Uninstalling and Re-Installing Homebrew on OSX</title>
+  <title>Uninstalling and re-installing Homebrew on OSX</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/uninstalling-and-reinstalling-homebrew-on-osx/index.html</link>
   <description><![CDATA[ <a href="https://gist.github.com/mxcl/1173223">Gist</a> ]]></description>
@@ -344,7 +344,7 @@
   <pubDate>Sun, 26 Jul 2015 04:00:50 GMT</pubDate>
 </item>
 <item>
-  <title>Emacs Tips — Close compilation buffer</title>
+  <title>Emacs tips — Close compilation buffer</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/emacs-tips-close-compilation-buffer-if-successful/index.html</link>
   <description><![CDATA[ When I work with markdown, <img src="https://latex.codecogs.com/png.latex?%5CLaTeX"> or code that requires compiling, I like to check often if everything looks okay. Emacs has a good description of everything you can do with the <a href="https://emacswiki.org/emacs/CompileCommand">CompileCommand</a>. ]]></description>
@@ -409,7 +409,7 @@
   <pubDate>Sat, 02 May 2015 04:59:49 GMT</pubDate>
 </item>
 <item>
-  <title>Active, Reactive and Apparent Power</title>
+  <title>Active, reactive and apparent power</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/active-reactive-and-apparent-power/index.html</link>
   <description><![CDATA[ <img src="https://latex.codecogs.com/png.latex?V"> and <img src="https://latex.codecogs.com/png.latex?I"> are used to indicate phasor representations of sinusoidal voltages and currents. <img src="https://latex.codecogs.com/png.latex?E"> is used to represent generated voltage or electromotive force (emf). <img src="https://latex.codecogs.com/png.latex?V"> is often used to measure a potential difference between two points. <img src="https://latex.codecogs.com/png.latex?v"> is used to represent the instantaneous voltage between two points. ]]></description>
@@ -420,7 +420,7 @@
   <pubDate>Thu, 30 Apr 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Mac OSX Productivity Apps</title>
+  <title>Mac OSX productivity apps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/mac-osx-productivity-apps/index.html</link>
   <description><![CDATA[ <a href="https://www.alfredapp.com/">https://www.alfredapp.com/</a> ]]></description>
@@ -465,7 +465,7 @@
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Tasker Projects</title>
+  <title>Tasker projects</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/tasker-projects/index.html</link>
   <description><![CDATA[ <a href="../tasker-and-google-maps">This page</a> contains information about the <a href="https://github.com/kdheepak/tasker_sl4a">profile</a> that uses Tasker to get contextual information from Google Calendar and react based on it. ]]></description>

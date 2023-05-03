@@ -12,13 +12,13 @@
 <generator>quarto-1.4.25</generator>
 <lastBuildDate>Sat, 29 Apr 2023 16:38:41 GMT</lastBuildDate>
 <item>
-  <title>Visualizing roads in Canada</title>
+  <title>Visualizing roads in the cities of Canada</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/visualizing-roads-in-canada/index.html</link>
+  <link>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</link>
   <description><![CDATA[ Let’s import some packages first. ]]></description>
   <category>julia</category>
   <category>visualization</category>
-  <guid>https://kdheepak.com/blog/visualizing-roads-in-canada/index.html</guid>
+  <guid>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</guid>
   <pubDate>Sat, 29 Apr 2023 16:38:41 GMT</pubDate>
 </item>
 <item>
@@ -31,7 +31,7 @@
   <pubDate>Thu, 27 Apr 2023 00:22:45 GMT</pubDate>
 </item>
 <item>
-  <title>Understanding Variables and Mutability in Julia</title>
+  <title>Understanding variables and mutability in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</link>
   <description><![CDATA[ I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective. ]]></description>
