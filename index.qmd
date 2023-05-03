@@ -3,7 +3,6 @@ title: "Hello!"
 author: ""
 citation: false
 comments: false
-license: ""
 ---
 
 # About
