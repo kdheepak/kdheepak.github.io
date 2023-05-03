@@ -6,3 +6,9 @@ $font-family-code: "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas, "Libera
 pre.text, pre.sourceCode, .cell-output pre {
   font-size: 0.775em !important;
 }
+
+@media (max-width: 991.98px) {
+  .navbar .quarto-navbar-tools {
+    display: none !important;
+  }
+}

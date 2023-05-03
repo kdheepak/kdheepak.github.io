@@ -17,9 +17,6 @@ website:
   repo-actions: [edit, issue]
   open-graph: true
   twitter-card: true
-  sidebar:
-    alignment: left
-    style: docked
   navbar:
     title: false
     logo: _quarto/favicon.svg
@@ -27,15 +24,27 @@ website:
     search: true
     pinned: false
     left:
+      - text: "About"
+        href: ./index.qmd
+      - text: "CV"
+        href: ./cv/index.qmd
       - text: "Blog"
-        file: ./blog/index.qmd
+        href: ./blog/index.qmd
     right:
-      - icon: github
-        href: https://github.com/kdheepak
-        aria-label: GitHub
       - icon: rss
         href: index.xml
         aria-label: RSS
+      - icon: github
+        href: https://github.com/kdheepak
+        aria-label: GitHub
+      - icon: linkedin
+        aria-label: linkedin
+        href: https://www.linkedin.com/in/dheepak-krishnamurthy
+        rel: me
+  sidebar:
+    alignment: left
+    style: docked
+    collapse-level: 1
   page-footer:
     center:
       - text: "All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed in any manner by any employer or entity."

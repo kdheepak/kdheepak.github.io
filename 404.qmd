@@ -4,7 +4,9 @@ citation: false
 comments: false
 draft: true
 listing:
-  contents: "./blog"
+  contents: "./blog/"
+  exclude:
+    title: "My personal thoughts and notes"
   sort: "date desc"
   type: table
   categories: true
