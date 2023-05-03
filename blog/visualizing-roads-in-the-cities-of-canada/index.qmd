@@ -1,5 +1,5 @@
 ---
-title: Visualizing roads in Canada
+title: Visualizing roads in the cities of Canada
 categories:
   - julia
   - visualization
@@ -39,7 +39,7 @@ If you want to run this interactively, you can replace `CairoMakie` with `GLMaki
 
 ## Data
 
-Canada's road network files, i.e. representations of Canada's national road network are available from [Statistics Canada](https://www12.statcan.gc.ca/census-recensement/2011/geo/RNF-FRR/index-eng.cfm).
+Representations of Canada's national road network are available from [Statistics Canada](https://www12.statcan.gc.ca/census-recensement/2011/geo/RNF-FRR/index-eng.cfm).
 
 ```{julia}
 artifact_roadnetwork = Pkg.Artifacts.ensure_artifact_installed("roadnetwork", joinpath(@__DIR__, "Artifacts.toml"))

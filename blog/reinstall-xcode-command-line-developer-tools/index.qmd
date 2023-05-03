@@ -1,5 +1,5 @@
 ---
-title: Reinstall xcode command line developer tools
+title: Reinstall Xcode command line developer tools
 date: 2022-02-15T16:03:31-06:00
 categories: [osx]
 keywords: reinstall xcode command line developer tools
