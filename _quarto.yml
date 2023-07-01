@@ -20,7 +20,7 @@ website:
   navbar:
     title: false
     logo: _quarto/favicon.svg
-    collapse: false
+    collapse: true
     search: true
     pinned: false
     left:
