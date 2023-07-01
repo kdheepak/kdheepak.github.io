@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.112">
+<meta name="generator" content="quarto-1.4.176">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,6 +105,9 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    null
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -155,16 +158,10 @@ div.csl-indent {
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Using pre-commit hooks">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/using-precommit-hooks/images/pre-commit-hooks.png">
-<meta property="og:site-name" content="kdheepak">
-<meta property="og:image:height" content="450">
-<meta property="og:image:width" content="900">
+<meta property="og:site_name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - Using pre-commit hooks">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/using-precommit-hooks/images/pre-commit-hooks.png">
-<meta name="twitter:image-height" content="450">
-<meta name="twitter:image-width" content="900">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -219,9 +216,9 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Using <code>pre-commit</code> hooks</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Using <code>pre-commit</code> hooks</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -379,8 +376,8 @@ div.csl-indent {
 <section id="using-pre-commit-hooks-for-all-git-repos" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="using-pre-commit-hooks-for-all-git-repos">Using <code>pre-commit-hooks</code> for all git repos</h2>
 <p>If you want to use <code>pre-commit-hooks</code> for all git repositories on your machine, you can set up a <code>git-templates</code> folder that is used as a <code>templatedir</code> when you run <code>git init</code>.</p>
-<div class="page-columns page-full"><p>Add the following to your <a href="https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/gitconfig#L176-L177"><code>~/.gitconfig</code></a> file <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.</p></li></div></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">init</span><span class="kw">]</span></span>
+<p>Add the following to your <a href="https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/gitconfig#L176-L177"><code>~/.gitconfig</code></a> file <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.</p></li></div><div class="sourceCode" id="cb5"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">init</span><span class="kw">]</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">templatedir</span> <span class="op">=</span> <span class="er">~/</span><span class="dt">gitrepos</span><span class="er">/</span><span class="dt">git-templates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now create a <code>~/gitrepos/dotfiles/git-templates</code> folder with a single folder inside it called <code>hooks</code>, and with a single executable file inside the <code>hooks</code> folder called <code>pre-commit</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> git-templates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -409,12 +406,7 @@ div.csl-indent {
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
 
-</ol>
-</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-ljvmiranda921" class="csl-entry" role="listitem">
@@ -641,7 +633,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
           const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
           if (note !== null) {
             const html = processXRef(id, note);
             instance.setContent(html);
@@ -818,6 +809,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

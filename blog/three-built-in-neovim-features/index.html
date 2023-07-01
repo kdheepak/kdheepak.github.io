@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.112">
+<meta name="generator" content="quarto-1.4.176">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -87,6 +87,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    null
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -137,12 +140,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Three built-in neovim features">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/three-built-in-neovim-features/images/nvim-live-substitution.mov.gif">
-<meta property="og:site-name" content="kdheepak">
+<meta property="og:site_name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - Three built-in neovim features">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/three-built-in-neovim-features/images/nvim-live-substitution.mov.gif">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -197,9 +198,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Three built-in <code>neovim</code> features</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Three built-in <code>neovim</code> features</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -266,8 +267,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you want to use this feature in <code>neovim</code> v0.4.x or in <code>vim</code> 8, you can do so with <a href="https://github.com/machakann/vim-highlightedyank">this</a> or <a href="https://github.com/statox/FYT.vim">this</a> plugin. Also, check out this well written <a href="https://www.statox.fr/posts/vim/vim_flash_yanked_text/">post</a> on how this works under the hood.</span></div></div>
 <p>With the latest version of neovim, you have the ability to highlight yanked text without using any plugins.</p>
 <p><img src="images/nvim-highlight-yank.mov.gif" class="img-fluid"></p>
-<div class="page-columns page-full"><p>At the time of writing, you’ll need a <code>v0.5.0</code> or the <code>nightly</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> release of <code>neovim</code> for this feature.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Precompiled binaries are available on the <a href="https://github.com/neovim/neovim/releases/tag/nightly">github releases</a> page.</p></li></div></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvim</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>At the time of writing, you’ll need a <code>v0.5.0</code> or the <code>nightly</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> release of <code>neovim</code> for this feature.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Precompiled binaries are available on the <a href="https://github.com/neovim/neovim/releases/tag/nightly">github releases</a> page.</p></li></div><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvim</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>NVIM v0.5.0-556-ge78658348</code></pre>
 <p>You can add the following in your vimrc to enable this feature:</p>
 <pre class="vim"><code>augroup LuaHighlight
@@ -321,12 +322,7 @@ augroup END</code></pre>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
 
-</ol>
-</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
   author = {Krishnamurthy, Dheepak},
@@ -549,7 +545,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
           const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
           if (note !== null) {
             const html = processXRef(id, note);
             instance.setContent(html);
@@ -726,6 +721,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

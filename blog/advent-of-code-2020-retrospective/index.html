@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.112">
+<meta name="generator" content="quarto-1.4.176">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -87,6 +87,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    null
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -137,16 +140,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Advent of Code 2020 Retrospective">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/advent-of-code-2020-retrospective/images/advent-of-code-2020-stars.png">
-<meta property="og:site-name" content="kdheepak">
-<meta property="og:image:height" content="75">
-<meta property="og:image:width" content="610">
+<meta property="og:site_name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - Advent of Code 2020 Retrospective">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/advent-of-code-2020-retrospective/images/advent-of-code-2020-stars.png">
-<meta name="twitter:image-height" content="75">
-<meta name="twitter:image-width" content="610">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -201,9 +198,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Advent of Code 2020 Retrospective</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Advent of Code 2020 Retrospective</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -336,8 +333,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="day-1-report-repair" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="day-1-report-repair"><a href="https://adventofcode.com/2020/day/1">Day 1: Report Repair</a></h3>
 <p>Day 1 of advent of code is basically intended to check that you have a programming language installed, and you know how to use simple features it in (e.g.&nbsp;<code>for</code> loops).</p>
-<div class="page-columns page-full"><p>You can solve the first day with just multiple <code>for</code> loops. However, a more idiomatic solution can be expressed using the <code>combinations</code> function from the <a href="https://github.com/JuliaMath/Combinatorics.jl">Combinatorics.jl</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<em>aside</em>: Python has a similar function in the standard library: <a href="https://docs.python.org/3/library/itertools.html#itertools.combinations" class="uri">https://docs.python.org/3/library/itertools.html#itertools.combinations</a></p></li></div></div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Combinatorics</span></span>
+<p>You can solve the first day with just multiple <code>for</code> loops. However, a more idiomatic solution can be expressed using the <code>combinations</code> function from the <a href="https://github.com/JuliaMath/Combinatorics.jl">Combinatorics.jl</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<em>aside</em>: Python has a similar function in the standard library: <a href="https://docs.python.org/3/library/itertools.html#itertools.combinations" class="uri">https://docs.python.org/3/library/itertools.html#itertools.combinations</a></p></li></div><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Combinatorics</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">readInput</span>() <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">parse</span>.(<span class="dt">Int</span>, <span class="fu">split</span>(<span class="fu">strip</span>(<span class="fu">read</span>(<span class="fu">joinpath</span>(<span class="pp">@__DIR__</span>, <span class="st">"./input.txt"</span>), <span class="dt">String</span>)))))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1699,12 +1696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
 
-</ol>
-</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
   author = {Krishnamurthy, Dheepak},
@@ -1927,7 +1919,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
           const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
           if (note !== null) {
             const html = processXRef(id, note);
             instance.setContent(html);
@@ -2104,6 +2095,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

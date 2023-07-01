@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.112">
+<meta name="generator" content="quarto-1.4.176">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,6 +105,9 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    null
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -155,7 +158,7 @@ div.csl-indent {
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Pelican margin notes with Pandoc">
 <meta property="og:description" content="">
-<meta property="og:site-name" content="kdheepak">
+<meta property="og:site_name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - Pelican margin notes with Pandoc">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
@@ -213,9 +216,9 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Pelican margin notes with Pandoc</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Pelican margin notes with Pandoc</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -293,8 +296,8 @@ div.csl-indent {
 </section>
 <section id="setup" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div class="page-columns page-full"><p>Firstly, I’m not using Pelican’s built in reader for Markdown files, but instead am using Pandoc. I wrote a pretty long post on using <a href="../writing-papers-with-markdown/">Pandoc for academic writing</a>; I think it’s safe to say that I’m a fan of Pandoc. Pelican has better built-in support for RestructuredText compared to Markdown, but plugins allow you to do pretty much everything you want with Markdown as your source file format. However the number of plugins required to get everything you want working quickly adds up.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’ve used Pandoc for other projects before and wanted to see if I could get it working in my blogging workflow. I’ve since incorporated Pandoc and it seems to be working quite well. Getting jupyter notebooks working with Pandoc was a bit of challenge though, but I was able to get past it by writing a filter for converting Jupyter notebooks with Pandoc.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Not that’s a bad thing. I believe the way Pelican signals works will only activate a plugin if it has to, so it doesn’t slow down your deployment process.</p></li></div></div>
-<div class="page-columns page-full"><p>And as I mentioned earlier, one of the main purposes of this implementation was because I was curious to see how far I could push this static site generation workflow. So if you are not using Pandoc in Pelican, you will not be able to use this theme with margin notes straight away<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. So, the short version is that this implementation of margin notes employs Pandoc, filters with Pandoc using the <a href="https://github.com/jgm/pandocfilters"><code>pandocfilters</code> package</a> and this current specific theme.</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;You will still be able to use this theme, either with Pandoc or Pelican’s default readers, however as you might see later in the post, I use <code>aside</code> tag elements for side notes or margin notes and I haven’t been able to find a plugin that does just that</p></li></div></div>
+<p>Firstly, I’m not using Pelican’s built in reader for Markdown files, but instead am using Pandoc. I wrote a pretty long post on using <a href="../writing-papers-with-markdown/">Pandoc for academic writing</a>; I think it’s safe to say that I’m a fan of Pandoc. Pelican has better built-in support for RestructuredText compared to Markdown, but plugins allow you to do pretty much everything you want with Markdown as your source file format. However the number of plugins required to get everything you want working quickly adds up.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’ve used Pandoc for other projects before and wanted to see if I could get it working in my blogging workflow. I’ve since incorporated Pandoc and it seems to be working quite well. Getting jupyter notebooks working with Pandoc was a bit of challenge though, but I was able to get past it by writing a filter for converting Jupyter notebooks with Pandoc.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Not that’s a bad thing. I believe the way Pelican signals works will only activate a plugin if it has to, so it doesn’t slow down your deployment process.</p></li><li id="fn2"><p><sup>2</sup>&nbsp;You will still be able to use this theme, either with Pandoc or Pelican’s default readers, however as you might see later in the post, I use <code>aside</code> tag elements for side notes or margin notes and I haven’t been able to find a plugin that does just that</p></li></div><p>And as I mentioned earlier, one of the main purposes of this implementation was because I was curious to see how far I could push this static site generation workflow. So if you are not using Pandoc in Pelican, you will not be able to use this theme with margin notes straight away<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. So, the short version is that this implementation of margin notes employs Pandoc, filters with Pandoc using the <a href="https://github.com/jgm/pandocfilters"><code>pandocfilters</code> package</a> and this current specific theme.</p>
 </section>
 <section id="inspiration" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="inspiration">Inspiration</h2>
@@ -348,13 +351,7 @@ div.csl-indent {
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
 
-
-</ol>
-</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-johnjameson" class="csl-entry" role="listitem">
@@ -584,7 +581,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
           const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
           if (note !== null) {
             const html = processXRef(id, note);
             instance.setContent(html);
@@ -761,6 +757,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

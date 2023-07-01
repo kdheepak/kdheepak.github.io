@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.112">
+<meta name="generator" content="quarto-1.4.176">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,6 +105,9 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    null
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -158,12 +161,10 @@ div.csl-indent {
 <link rel="stylesheet" href="equation.css">
 <meta property="og:title" content="kdheepak - The egg tower puzzle">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/images/pascaltriangle.svg">
-<meta property="og:site-name" content="kdheepak">
+<meta property="og:site_name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - The egg tower puzzle">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/images/pascaltriangle.svg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -218,9 +219,9 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The egg tower puzzle</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The egg tower puzzle</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -374,8 +375,8 @@ div.csl-indent {
 <p><span id="eq-f_x_n"><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1) \tag{3}\]</span></span></p>
 <p>This is also known as a recurrence relation.</p>
 <p>This result can be reasoned through intuition as well. To find the total floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x\)</span> drops, it will be <span class="math inline">\(1\)</span> (your first drop) plus the maximum number of floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x-1\)</span> eggs (if the first egg does not break) plus the maximum number of floors you can check with <span class="math inline">\(n-1\)</span> eggs with <span class="math inline">\(x-1\)</span> eggs (if the first egg does break).</p>
-<div class="page-columns page-full"><p>If we wanted to, we could expand this recurrence relation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong"><a href="#ref-possiblywrong" role="doc-biblioref">[1]</a></span>.</p></li></div></div>
-<p>Here is the expansion increasing the depth in the direction of number of drops:</p>
+<p>If we wanted to, we could expand this recurrence relation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong"><a href="#ref-possiblywrong" role="doc-biblioref">[1]</a></span>.</p></li></div><p>Here is the expansion increasing the depth in the direction of number of drops:</p>
 <p><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1)\]</span></p>
 <p><span class="math display">\[f(x, n) = 3 + f(x - 2, n) + 2f(x - 2, n - 1) + f(x - 2, n - 2)\]</span></p>
 <p><span class="math display">\[f(x, n) = 7 + f(x - 3, n) + 3f(x - 3, n - 1) + 3f(x - 3, n - 2) + f(x - 3, n - 3)\]</span></p>
@@ -391,8 +392,8 @@ div.csl-indent {
 </div>
 <p>It turns out that this expansion is related to the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficients</a>.</p>
 <p>If we had infinite number of eggs, you’d see that the first element is the only term that contributes to <span class="math inline">\(f(x, n)\)</span>, since the others will be <span class="math inline">\(0\)</span> for <span class="math inline">\(x - d\)</span> where <span class="math inline">\(d\)</span> is the depth in the triangle. That is to say, if we had infinite eggs, with 6 drops we can guarantee checking 63 floors.</p>
-<div class="page-columns page-full"><p>Using this, we can say that, with <span class="math inline">\(x\)</span> drops we can guarantee checking <span class="math inline">\(2^x - 1\)</span> floors if we had infinite eggs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1">/u/mark_ovchain’s insightful comment on this thread</a> for more information.</p></li></div></div>
-</section>
+<p>Using this, we can say that, with <span class="math inline">\(x\)</span> drops we can guarantee checking <span class="math inline">\(2^x - 1\)</span> floors if we had infinite eggs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1">/u/mark_ovchain’s insightful comment on this thread</a> for more information.</p></li></div></section>
 <section id="implementation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
 <p>Let’s implement this problem.</p>
@@ -678,13 +679,7 @@ div.csl-indent {
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
 
-
-</ol>
-</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-possiblywrong" class="csl-entry" role="listitem">
@@ -910,7 +905,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
           const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
           if (note !== null) {
             const html = processXRef(id, note);
             instance.setContent(html);
@@ -1087,6 +1081,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

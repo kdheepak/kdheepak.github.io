@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.112">
+<meta name="generator" content="quarto-1.4.176">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,6 +105,9 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    null
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -155,12 +158,10 @@ div.csl-indent {
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Raspberry Pi powered LED lamp">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/images/raspberrypilamp.gif">
-<meta property="og:site-name" content="kdheepak">
+<meta property="og:site_name" content="kdheepak">
 <meta name="twitter:title" content="kdheepak - Raspberry Pi powered LED lamp">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/images/raspberrypilamp.gif">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -215,9 +216,9 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Raspberry Pi powered LED lamp</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Raspberry Pi powered LED lamp</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -308,8 +309,8 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="software">Software</h3>
 <p>Download the latest Raspbian from the <a href="https://www.raspberrypi.com/software/operating-systems/">official source</a>. I used the image <code>2016-03-18-raspbian-jessie.img</code>. Flash the operating system onto a memory card.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dd bs=1m if=2016-03-18-raspbian-jessie.img of=/dev/rdisk<span class="va">$DISKNUMBER</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="page-columns page-full"><p>When using <code>dd</code> on OSX, I’ve found that <code>rdisk</code> is much faster than <code>disk</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Both <code>rdisk</code> and <code>disk</code> will work fine, but if you are using <code>disk</code> be prepared to wait longer - it took about an hour in my case.</p></li></div></div>
-<p>(<strong>Optional</strong>) Expand the file system to use all the available space on the memory card.</p>
+<p>When using <code>dd</code> on OSX, I’ve found that <code>rdisk</code> is much faster than <code>disk</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Both <code>rdisk</code> and <code>disk</code> will work fine, but if you are using <code>disk</code> be prepared to wait longer - it took about an hour in my case.</p></li></div><p>(<strong>Optional</strong>) Expand the file system to use all the available space on the memory card.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> raspi-config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>-&gt; Expand File System
 -&gt; Save
@@ -347,12 +348,7 @@ div.csl-indent {
 </section>
 </section>
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
 
-</ol>
-</aside>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-led" class="csl-entry" role="listitem">
@@ -582,7 +578,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
           const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
           if (note !== null) {
             const html = processXRef(id, note);
             instance.setContent(html);
@@ -759,6 +754,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 
