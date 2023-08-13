@@ -10,7 +10,7 @@ The language offers a flexible and expressive syntax, and also delivers the perf
 
 Like Python, Julia offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping.
 
-If you are an experienced Python developer, there are a few things you might want to know to improve your Julia developer experience.
+If you are fairly new to Julia, here are a few things you might want to know to improve your developer experience.
 
 ## `startup.jl`
 
@@ -200,4 +200,3 @@ For example, I've added into my [`Startup.jl/src/jl.jl`](https://github.com/kdhe
 ## Conclusion
 
 Julia's ecosystem is filled with tools designed to optimize the developer's workflow, making it easier and more efficient to write, test, and deploy code.
-Whether you're chasing performance, rapid prototyping, or a seamless testing experience, there's likely a package or tool in the Julia universe tailored to your needs.
