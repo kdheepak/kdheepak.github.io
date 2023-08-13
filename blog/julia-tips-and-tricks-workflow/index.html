@@ -312,10 +312,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><a href="https://discourse.julialang.org/t/what-is-in-your-startup-jl/18228">This thread on Discourse</a> has some neat examples of things you may want to add to your <code>startup.jl</code>.</p>
 <p>If you wish to go one step further, you can create a Julia package called <a href="https://github.com/kdheepak/Startup.jl">Startup.jl</a>, place it anywhere on your computer and load it in <code>startup.jl</code>.</p>
-<pre><code>if Base.isinteractive()
-  push!(LOAD_PATH, joinpath(ENV["HOME"], "gitrepos", "Startup.jl"))
-  using Startup
-end</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">Base</span>.<span class="fu">isinteractive</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(<span class="cn">LOAD_PATH</span>, <span class="fu">joinpath</span>(<span class="cn">ENV</span>[<span class="st">"HOME"</span>], <span class="st">"gitrepos"</span>, <span class="st">"Startup.jl"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="im">using</span> <span class="bu">Startup</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The advantage of this is that the contents of <code>Startup.jl</code> can be precompiled and your Julia REPL starts up very quickly.</p>
 <p>With the <code>Startup.jl</code> package approach, your root environment can be empty and you can still use functionality exposed by <code>Startup.jl</code>:</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" class="img-fluid"></p>
