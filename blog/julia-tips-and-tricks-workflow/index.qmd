@@ -101,7 +101,7 @@ In the screenshot below, I change a struct `Foo` like so after tracking the file
 
 `Revise` throws a warning and changes the color of the Julia prompt:
 
-![](https://user-images.githubusercontent.com/1813121/260273898-830f4ef9-7b23-4358-8f6c-6f186c7fbbbb.png)
+![](https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif)
 
 There are some workarounds for this but the easiest thing to do is to restart the Julia session if you are making changes to a `struct`.
 Watch for the `Revise` warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in "yellow", you know `Revise` wasn't able to track a change you made.
