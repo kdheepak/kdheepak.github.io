@@ -122,7 +122,7 @@ execute:
   eval: true
   daemon: true
 
-jupyter: julia-1.9
+jupyter: julia-1.8
 
 bibliography: ./_quarto/website.bib
 csl: ./_quarto/ieee.csl
