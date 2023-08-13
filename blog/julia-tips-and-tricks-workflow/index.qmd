@@ -54,14 +54,24 @@ The advantage of this is that the contents of `Startup.jl` can be precompiled an
 
 With the `Startup.jl` package approach, your root environment can be empty and you can still use functionality exposed by `Startup.jl`:
 
-![](https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png)
+![Using `Startup.jl` to load `BenchmarkTools` with an empty root environment.](https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png){fig-align="center" width=75%}
+
+::: callout-tip
+You can use `julia --startup-file=no` to _not_ execute the contents for `startup.jl`, i.e. get a clean Julia REPL.
+:::
 
 ## `OhMyREPL`
 
 [`OhMyREPL.jl`](https://github.com/KristofferC/OhMyREPL.jl) is a package that provides syntax highlighting, bracket highlighting, rainbow brackets, and more for the Julia REPL.
 Once installed, it can enhance your REPL experience dramatically, making it more visually appealing and easier to work with.
 
-![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png) ![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png)
+::: {layout-ncol=2}
+
+![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png){width=50% align="center"}
+
+![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png){width=51% align="center"}
+
+:::
 
 ## `Revise.jl`
 
@@ -70,16 +80,32 @@ It automatically reloads modified source files without restarting the Julia sess
 This makes iterative development much smoother.
 
 Once set up, any changes you make to your code files are immediately available in your active Julia session.
-See the [Revise](https://timholy.github.io/Revise.jl/stable/config/) documentation for how to set this up to happen automatically all the time.
+
+Revise can "track" changes in single files if you include them using `includet`:
 
 ![](https://user-images.githubusercontent.com/1813121/260274474-6dbd7408-d65e-4b74-b1d2-96eeb03f2581.gif)
 
+If you want `Revise` to track changes in a package you are developing locally, simply run `using Revise` before you load the package for the first time.
+
+See [Revise's documentation](https://timholy.github.io/Revise.jl/stable/config/) for how to set this up to happen automatically all the time by adding setup code to your `startup.jl` file.
+
 ::: callout-note
-`Revise.jl` cannot deal with changes in `struct`:
+`Revise.jl` cannot deal with changes in `struct`.
+In the screenshot below, I change a struct `Foo` like so after tracking the file with `Revise`:
+
+```diff
+  struct Foo
+-   x::Int
++   y::Float64
+  end
+```
+
+`Revise` throws a warning and changes the color of the Julia prompt:
 
 ![](https://user-images.githubusercontent.com/1813121/260273898-830f4ef9-7b23-4358-8f6c-6f186c7fbbbb.png)
 
-You'll have to restart the Julia session if you are making changes to a `struct`.
+There are some workarounds for this but the easiest thing to do is to restart the Julia session if you are making changes to a `struct`.
+Watch for the `Revise` warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in "yellow", you know `Revise` wasn't able to track a change you made.
 :::
 
 ## `Infiltrator`
@@ -87,14 +113,23 @@ You'll have to restart the Julia session if you are making changes to a `struct`
 [`Infiltrator.jl`](https://github.com/JuliaDebug/Infiltrator.jl) is a debugger and code inspection tool for Julia.
 It allows you to insert breakpoints in your code and inspect the current scope's variables.
 
-When Julia hits the `@infiltrate` macro, it'll pause execution, allowing you to inspect the current state.
-When using `@infiltrate conditional_expression` with `Revise`, you can jump into the call stack of any function and inspect values of variables in a Julia REPL, and that can make for a powerful developer experience.
+When Julia hits the `@infiltrate` macro, it'll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.
+
+![](https://user-images.githubusercontent.com/1813121/260305705-39841bca-d0c9-4889-ae48-bf7cb97d28d1.gif)
+
+You can also use `@infiltrate i == 3` and that'll drop you into a Julia REPL only in the third iteration of the `for` loop.
+
+When using `@infiltrate conditional_expression` with `Revise`, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL.
+You can even load additional packages like `DataFrames` or `Plots` to explore your data interactively while debugging.
+This combination can make for a versatile and productive debugging experience.
 
 ## `BenchmarkTools`
 
 Performance is one of the main reasons developers flock to Julia.
 [BenchmarkTools.jl](https://github.com/JuliaCI/BenchmarkTools.jl) is an essential package to help quantify the performance of your code.
 It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.
+
+For example, the `@benchmark` macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function:
 
 ![](https://user-images.githubusercontent.com/1813121/260274763-85f6a403-467f-4d51-b00b-5cbf9f0b6115.png)
 
@@ -104,20 +139,33 @@ Delving deep into Julia's compiler optimizations and type inference can sometime
 
 [`Cthulhu.jl`](https://github.com/JuliaDebug/Cthulhu.jl) is an alternative to `@code_lowered` and `@code_typed` that allows developers to dive into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia's JIT compiler optimizes code.
 
-![](https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png)
-
 Using Cthulhu, you can:
 
 - View the lowered representation of functions
 - Understand type-inference issues
-- Step through optimized LLVM code
+- Step through optimized LLVM code interactively
 
-## `InlineTests`
+For example, if we examine the `mysum` function from the previous section, we can see that `a` is being inferred as a `Int64` or a `Float64`.
 
-While Julia has its built-in package Test for unit testing, there's another approach you can take for more "live" development: using InlineTests.jl together with Revise.jl.
-This combination allows you to write tests directly in your source files, and they'll be run automatically when the source file changes, giving you immediate feedback.
+![](https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png)
 
-![](https://user-images.githubusercontent.com/1813121/260275198-6d590ff2-4d74-4f40-86a3-2642475654ce.png)
+In this particular case, by changing `a = 0` to `a = 0.0`, we can make the code generated by Julia more optimized.
+
+## `ReTest` and `InlineTests`
+
+Julia has a built-in package `Test` for unit testing.
+This requires writing tests in `test/runtests.jl` and are run in a separate process.
+
+Using `InlineTests` together with `Revise`.
+This combination allows you to write tests directly in your source files, and you can make changes that are tracked with Revise, allowing faster iteration with test driven development.
+
+In the screenshot below, I have shown an example of having a `@testset` as part of the package itself, i.e. in `./src/layout.jl`:
+
+![](https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png)
+
+This allows co-locating the tests with the implementation of the code.
+
+You'll also notice from the screenshot that `ReTest` contains a function called `retest` which allows running a subset of tests by passing in a pattern as the second argument.
 
 ## `LiveServer`
 
