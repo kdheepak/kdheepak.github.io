@@ -222,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#infiltrator" id="toc-infiltrator" class="nav-link" data-scroll-target="#infiltrator"><code>Infiltrator</code></a></li>
   <li><a href="#benchmarktools" id="toc-benchmarktools" class="nav-link" data-scroll-target="#benchmarktools"><code>BenchmarkTools</code></a></li>
   <li><a href="#cthulhu" id="toc-cthulhu" class="nav-link" data-scroll-target="#cthulhu"><code>Cthulhu</code></a></li>
-  <li><a href="#inlinetests" id="toc-inlinetests" class="nav-link" data-scroll-target="#inlinetests"><code>InlineTests</code></a></li>
+  <li><a href="#retest-and-inlinetests" id="toc-retest-and-inlinetests" class="nav-link" data-scroll-target="#retest-and-inlinetests"><code>ReTest</code> and <code>InlineTests</code></a></li>
   <li><a href="#liveserver" id="toc-liveserver" class="nav-link" data-scroll-target="#liveserver"><code>LiveServer</code></a></li>
   <li><a href="#comonicon" id="toc-comonicon" class="nav-link" data-scroll-target="#comonicon"><code>Comonicon</code></a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -234,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -266,10 +266,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++.</p>
-<p>Like Python, Julia offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping.</p>
-<p>If you are an experienced Python developer, there are a few things you might want to know to improve your Julia developer experience.</p>
-<section id="startup.jl" class="level3">
+<p>Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++. Like Python, Julia also offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping.</p>
+<p>If you are fairly new to Julia, here are a few things you might want to know to improve your developer experience.</p>
+<section id="startup.jl" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="startup.jl"><code>startup.jl</code></h3>
 <p>Every time you start Julia, it looks for a file named <code>startup.jl</code> in a <code>config</code> directory.</p>
 <table class="table">
@@ -318,27 +317,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The advantage of this is that the contents of <code>Startup.jl</code> can be precompiled and your Julia REPL starts up very quickly.</p>
 <p>With the <code>Startup.jl</code> package approach, your root environment can be empty and you can still use functionality exposed by <code>Startup.jl</code>:</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption class="figure-caption margin-caption">Using <code>Startup.jl</code> to load <code>BenchmarkTools</code> with an empty root environment.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>You can use <code>julia --startup-file=no</code> to <em>not</em> execute the contents for <code>startup.jl</code>, i.e.&nbsp;get a clean Julia REPL.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="ohmyrepl" class="level3">
 <h3 class="anchored" data-anchor-id="ohmyrepl"><code>OhMyREPL</code></h3>
 <p><a href="https://github.com/KristofferC/OhMyREPL.jl"><code>OhMyREPL.jl</code></a> is a package that provides syntax highlighting, bracket highlighting, rainbow brackets, and more for the Julia REPL. Once installed, it can enhance your REPL experience dramatically, making it more visually appealing and easier to work with.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png" class="img-fluid"> <img src="https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png" class="img-fluid"></p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 49.5%;justify-content: center;">
+<p><img src="https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png" class="img-fluid" data-align="center"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.5%;justify-content: center;">
+<p><img src="https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png" class="img-fluid" data-align="center"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="revise.jl" class="level3">
 <h3 class="anchored" data-anchor-id="revise.jl"><code>Revise.jl</code></h3>
 <p><a href="https://github.com/timholy/Revise.jl"><code>Revise.jl</code></a> is a game-changer for Julia development. It automatically reloads modified source files without restarting the Julia session. This makes iterative development much smoother.</p>
-<p>Once set up, any changes you make to your code files are immediately available in your active Julia session. See the <a href="https://timholy.github.io/Revise.jl/stable/config/">Revise</a> documentation for how to set this up to happen automatically all the time.</p>
+<p>Once set up, any changes you make to your code files are immediately available in your active Julia session.</p>
+<p>Revise can <q>track</q> changes in single files if you include them using <code>includet</code>:</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260274474-6dbd7408-d65e-4b74-b1d2-96eeb03f2581.gif" class="img-fluid"></p>
+<p>If you want <code>Revise</code> to track changes in a package you are developing locally, simply run <code>using Revise</code> before you load the package for the first time.</p>
+<p>See <a href="https://timholy.github.io/Revise.jl/stable/config/">Revise’s documentation</a> for how to set this up to happen automatically all the time by adding setup code to your <code>startup.jl</code> file.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>Revise.jl</code> cannot deal with changes in <code>struct</code>:</p>
+<p><code>Revise.jl</code> cannot deal with changes in <code>struct</code>. In the screenshot below, I change a struct <code>Foo</code> like so after tracking the file with <code>Revise</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  struct Foo</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">-   x::Int</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">+   y::Float64</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Revise</code> throws a warning and changes the color of the Julia prompt:</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260273898-830f4ef9-7b23-4358-8f6c-6f186c7fbbbb.png" class="img-fluid"></p>
-<p>You’ll have to restart the Julia session if you are making changes to a <code>struct</code>.</p>
+<p>There are some workarounds for this but the easiest thing to do is to restart the Julia session if you are making changes to a <code>struct</code>. Watch for the <code>Revise</code> warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in <q>yellow</q>, you know <code>Revise</code> wasn’t able to track a change you made.</p>
 </div>
 </div>
 </div>
@@ -346,39 +377,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="infiltrator" class="level3">
 <h3 class="anchored" data-anchor-id="infiltrator"><code>Infiltrator</code></h3>
 <p><a href="https://github.com/JuliaDebug/Infiltrator.jl"><code>Infiltrator.jl</code></a> is a debugger and code inspection tool for Julia. It allows you to insert breakpoints in your code and inspect the current scope’s variables.</p>
-<p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, allowing you to inspect the current state. When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into the call stack of any function and inspect values of variables in a Julia REPL, and that can make for a powerful developer experience.</p>
+<p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260305705-39841bca-d0c9-4889-ae48-bf7cb97d28d1.gif" class="img-fluid"></p>
+<p>You can also use <code>@infiltrate i == 3</code> and that’ll drop you into a Julia REPL only in the third iteration of the <code>for</code> loop.</p>
+<p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
 </section>
 <section id="benchmarktools" class="level3">
 <h3 class="anchored" data-anchor-id="benchmarktools"><code>BenchmarkTools</code></h3>
 <p>Performance is one of the main reasons developers flock to Julia. <a href="https://github.com/JuliaCI/BenchmarkTools.jl">BenchmarkTools.jl</a> is an essential package to help quantify the performance of your code. It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.</p>
+<p>For example, the <code>@benchmark</code> macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function:</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260274763-85f6a403-467f-4d51-b00b-5cbf9f0b6115.png" class="img-fluid"></p>
 </section>
 <section id="cthulhu" class="level3">
 <h3 class="anchored" data-anchor-id="cthulhu"><code>Cthulhu</code></h3>
 <p>Delving deep into Julia’s compiler optimizations and type inference can sometimes feel daunting.</p>
 <p><a href="https://github.com/JuliaDebug/Cthulhu.jl"><code>Cthulhu.jl</code></a> is an alternative to <code>@code_lowered</code> and <code>@code_typed</code> that allows developers to dive into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia’s JIT compiler optimizes code.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid"></p>
 <p>Using Cthulhu, you can:</p>
 <ul>
 <li>View the lowered representation of functions</li>
 <li>Understand type-inference issues</li>
-<li>Step through optimized LLVM code</li>
+<li>Step through optimized LLVM code interactively</li>
 </ul>
+<p>For example, if we examine the <code>mysum</code> function from the previous section, we can see that <code>a</code> is being inferred as a <code>Int64</code> or a <code>Float64</code>, i.e.&nbsp;<code>Union{Float64, Int64}</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid"></p>
+<p>In this particular case, by changing <code>a = 0</code> to <code>a = 0.0</code>, we can make the code generated by Julia more optimized.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid"></p>
+<p>Here’s the benchmark results with <code>a = 0</code> (left) and <code>a = 0.0</code> (right):</p>
+<div class="quarto-layout-panel" data-fig-cap-location="top">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png" class="img-fluid" alt="`a = 0`"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="https://user-images.githubusercontent.com/1813121/260308548-b8667f60-5caf-4974-9d5d-cfc7280a0ed2.png" class="img-fluid" alt="`a = 0.0`"></p>
+</div>
+</div>
+</div>
 </section>
-<section id="inlinetests" class="level3">
-<h3 class="anchored" data-anchor-id="inlinetests"><code>InlineTests</code></h3>
-<p>While Julia has its built-in package Test for unit testing, there’s another approach you can take for more <q>live</q> development: using InlineTests.jl together with Revise.jl. This combination allows you to write tests directly in your source files, and they’ll be run automatically when the source file changes, giving you immediate feedback.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260275198-6d590ff2-4d74-4f40-86a3-2642475654ce.png" class="img-fluid"></p>
+<section id="retest-and-inlinetests" class="level3">
+<h3 class="anchored" data-anchor-id="retest-and-inlinetests"><code>ReTest</code> and <code>InlineTests</code></h3>
+<p>Julia has a built-in package <code>Test</code> for unit testing. This requires writing tests in <code>test/runtests.jl</code> and are run in a separate process.</p>
+<p>Using <code>InlineTests</code> together with <code>Revise</code>. This combination allows you to write tests directly in your source files, and you can make changes that are tracked with Revise, allowing faster iteration with test driven development.</p>
+<p>In the screenshot below, I have shown an example of having a <code>@testset</code> as part of the package itself, i.e.&nbsp;in <code>./src/layout.jl</code>:</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png" class="img-fluid"></p>
+<p>This allows co-locating the tests with the implementation of the code.</p>
+<p>You’ll also notice from the screenshot that <code>ReTest</code> contains a function called <code>retest</code> which allows running a subset of tests by passing in a pattern as the second argument.</p>
 </section>
 <section id="liveserver" class="level3">
 <h3 class="anchored" data-anchor-id="liveserver"><code>LiveServer</code></h3>
 <p><a href="https://github.com/tlienart/LiveServer.jl"><code>LiveServer.jl</code></a> is a neat package for web developers using Julia. It serves static sites locally and refreshes your browser automatically as you edit source files.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># serve documentation of any package</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"./docs"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">servedocs</span>(; launch_browser <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># serve documentation of any package</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"./docs"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">servedocs</span>(; launch_browser <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="comonicon" class="level3">
 <h3 class="anchored" data-anchor-id="comonicon"><code>Comonicon</code></h3>
@@ -395,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>Julia’s ecosystem is filled with tools designed to optimize the developer’s workflow, making it easier and more efficient to write, test, and deploy code. Whether you’re chasing performance, rapid prototyping, or a seamless testing experience, there’s likely a package or tool in the Julia universe tailored to your needs.</p>
+<p>Julia’s ecosystem is filled with tools designed to optimize the developer’s workflow, making it easier and more efficient to write, test, and deploy code.</p>
 
 
 </section>
