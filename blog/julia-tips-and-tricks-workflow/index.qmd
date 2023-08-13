@@ -82,7 +82,7 @@ Once set up, any changes you make to your code files are immediately available i
 
 Revise can "track" changes in single files if you include them using `includet`:
 
-![](https://user-images.githubusercontent.com/1813121/260274474-6dbd7408-d65e-4b74-b1d2-96eeb03f2581.gif)
+![](https://user-images.githubusercontent.com/1813121/260318612-abf12aa0-9f48-4082-b6ef-037a81e8fbbb.gif)
 
 If you want `Revise` to track changes in a package you are developing locally, simply run `using Revise` before you load the package for the first time.
 
