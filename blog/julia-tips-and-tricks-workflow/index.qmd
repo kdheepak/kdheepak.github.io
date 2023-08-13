@@ -128,9 +128,16 @@ Performance is one of the main reasons developers flock to Julia.
 [BenchmarkTools.jl](https://github.com/JuliaCI/BenchmarkTools.jl) is an essential package to help quantify the performance of your code.
 It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.
 
-For example, the `@benchmark` macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function:
+For example, the `@benchmark` macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function.
+As an example, we can compare the performance of a custom `sum` function without and with `simd`:
 
-![](https://user-images.githubusercontent.com/1813121/260274763-85f6a403-467f-4d51-b00b-5cbf9f0b6115.png)
+::: {layout-ncol=2}
+
+![](https://user-images.githubusercontent.com/1813121/260319654-904e72cb-633d-490f-8fbc-fbef61fabb4f.png)
+
+![](https://user-images.githubusercontent.com/1813121/260319610-309b43b8-1476-43a3-a279-ab3c0158bc74.png)
+
+:::
 
 ## `Cthulhu`
 
@@ -154,7 +161,7 @@ In this particular case, by changing `a = 0` to `a = 0.0`, we can make the code 
 
 Here's the benchmark results with `a = 0` (left) and `a = 0.0` (right):
 
-::: {layout-ncol=2 fig-cap-location=top}
+::: {layout-ncol=2}
 
 ![](https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png){fig-alt="`a = 0`" width=50%}
 
