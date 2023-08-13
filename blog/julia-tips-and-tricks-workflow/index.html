@@ -353,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://github.com/timholy/Revise.jl"><code>Revise.jl</code></a> is a game-changer for Julia development. It automatically reloads modified source files without restarting the Julia session. This makes iterative development much smoother.</p>
 <p>Once set up, any changes you make to your code files are immediately available in your active Julia session.</p>
 <p>Revise can <q>track</q> changes in single files if you include them using <code>includet</code>:</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260274474-6dbd7408-d65e-4b74-b1d2-96eeb03f2581.gif" class="img-fluid"></p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260318612-abf12aa0-9f48-4082-b6ef-037a81e8fbbb.gif" class="img-fluid"></p>
 <p>If you want <code>Revise</code> to track changes in a package you are developing locally, simply run <code>using Revise</code> before you load the package for the first time.</p>
 <p>See <a href="https://timholy.github.io/Revise.jl/stable/config/">Revise’s documentation</a> for how to set this up to happen automatically all the time by adding setup code to your <code>startup.jl</code> file.</p>
 <div class="callout callout-style-simple callout-note">
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">+   y::Float64</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>Revise</code> throws a warning and changes the color of the Julia prompt:</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260273898-830f4ef9-7b23-4358-8f6c-6f186c7fbbbb.png" class="img-fluid"></p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid"></p>
 <p>There are some workarounds for this but the easiest thing to do is to restart the Julia session if you are making changes to a <code>struct</code>. Watch for the <code>Revise</code> warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in <q>yellow</q>, you know <code>Revise</code> wasn’t able to track a change you made.</p>
 </div>
 </div>
@@ -378,15 +378,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="infiltrator"><code>Infiltrator</code></h3>
 <p><a href="https://github.com/JuliaDebug/Infiltrator.jl"><code>Infiltrator.jl</code></a> is a debugger and code inspection tool for Julia. It allows you to insert breakpoints in your code and inspect the current scope’s variables.</p>
 <p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260305705-39841bca-d0c9-4889-ae48-bf7cb97d28d1.gif" class="img-fluid"></p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid"></p>
 <p>You can also use <code>@infiltrate i == 3</code> and that’ll drop you into a Julia REPL only in the third iteration of the <code>for</code> loop.</p>
 <p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
 </section>
 <section id="benchmarktools" class="level3">
 <h3 class="anchored" data-anchor-id="benchmarktools"><code>BenchmarkTools</code></h3>
 <p>Performance is one of the main reasons developers flock to Julia. <a href="https://github.com/JuliaCI/BenchmarkTools.jl">BenchmarkTools.jl</a> is an essential package to help quantify the performance of your code. It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.</p>
-<p>For example, the <code>@benchmark</code> macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function:</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260274763-85f6a403-467f-4d51-b00b-5cbf9f0b6115.png" class="img-fluid"></p>
+<p>For example, the <code>@benchmark</code> macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function. As an example, we can compare the performance of a custom <code>sum</code> function without and with <code>simd</code>:</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="https://user-images.githubusercontent.com/1813121/260319654-904e72cb-633d-490f-8fbc-fbef61fabb4f.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="https://user-images.githubusercontent.com/1813121/260319610-309b43b8-1476-43a3-a279-ab3c0158bc74.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="cthulhu" class="level3">
 <h3 class="anchored" data-anchor-id="cthulhu"><code>Cthulhu</code></h3>
@@ -403,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this particular case, by changing <code>a = 0</code> to <code>a = 0.0</code>, we can make the code generated by Julia more optimized.</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid"></p>
 <p>Here’s the benchmark results with <code>a = 0</code> (left) and <code>a = 0.0</code> (right):</p>
-<div class="quarto-layout-panel" data-fig-cap-location="top">
+<div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png" class="img-fluid" alt="`a = 0`"></p>
