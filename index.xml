@@ -13,7 +13,7 @@
 <generator>quarto-1.4.315</generator>
 <lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
 <item>
-  <title>My Favourite Julia Tips and Tricks for a Better Developer Experience</title>
+  <title>Julia Tips and Tricks for a Better Developer Experience</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/julia-tips-and-tricks-workflow/index.html</link>
   <description><![CDATA[ Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++. ]]></description>
