@@ -43,7 +43,7 @@ end
 
 If you wish to go one step further, you can create a Julia package called [Startup.jl](https://github.com/kdheepak/Startup.jl), place it anywhere on your computer and load it in `startup.jl`.
 
-```
+```julia
 if Base.isinteractive()
   push!(LOAD_PATH, joinpath(ENV["HOME"], "gitrepos", "Startup.jl"))
   using Startup
