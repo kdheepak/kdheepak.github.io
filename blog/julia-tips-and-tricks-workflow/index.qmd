@@ -144,7 +144,7 @@ Using Cthulhu, you can:
 - Understand type-inference issues
 - Step through optimized LLVM code interactively
 
-For example, if we examine the `mysum` function from the previous section, we can see that `a` is being inferred as a `Int64` or a `Float64`.
+For example, if we examine the `mysum` function from the previous section, we can see that `a` is being inferred as a `Int64` or a `Float64`, i.e. `Union{Float64, Int64}`.
 
 ![](https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png)
 
