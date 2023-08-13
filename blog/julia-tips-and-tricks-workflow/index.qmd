@@ -1,0 +1,156 @@
+---
+title: "My Favourite Julia Tips and Tricks for a Better Developer Experience"
+summary: In this blog post, I present some ways you can improve your developer experience using Julia
+date: 2023-08-12T21:14:15-0500
+categories: [julia]
+keywords: julia, tips, tricks, developer, experience, workflow
+---
+
+Julia is a high-performance, dynamic programming language designed for technical computing and data science.
+The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++.
+
+Like Python, Julia offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping.
+
+If you are an experienced Python developer, there are a couple of things you might want to know to improve your Julia developer experience.
+
+## `startup.jl`
+
+Every time you start Julia, it looks for a file named `startup.jl` in a `config` directory.
+
+| Operating System | `startup.jl` Location                                |
+|------------------|-------------------------------------------------------|
+| Windows          | `C:\Users\USERNAME\.julia\config\startup.jl`         |
+| macOS            | `/Users/USERNAME/.julia/config/startup.jl`           |
+| Linux            | `/home/USERNAME/.julia/config/startup.jl`            |
+
+This file is executed before the REPL starts, allowing you to customize your Julia environment.
+
+For example, if you added the following code to your `startup.jl`, it would ensure that `Revise`, `OhMyREPL` and `BenchmarkTools` are always installed whenever you start Julia.
+
+```julia
+# Setup OhMyREPL and Revise
+import Pkg
+let 
+  pkgs = ["Revise", "OhMyREPL", "BenchmarkTools"]
+  for pkg in pkgs
+    if Base.find_package(pkg) === nothing
+      Pkg.add(pkg)
+    end
+  end
+end
+```
+
+[This thread on Discourse](https://discourse.julialang.org/t/what-is-in-your-startup-jl/18228) has some neat examples of things you may want to add to your `startup.jl`.
+
+If you wish to go one step further, you can create a Julia package called [Startup.jl](https://github.com/kdheepak/Startup.jl), place it anywhere on your computer and load it in `startup.jl`.
+
+```
+if Base.isinteractive()
+  push!(LOAD_PATH, joinpath(ENV["HOME"], "gitrepos", "Startup.jl"))
+  using Startup
+end
+```
+
+The advantage of this is that the contents of `Startup.jl` can be precompiled and your Julia REPL starts up very quickly.
+
+With the `Startup.jl` package approach, your root environment can be empty and you can still use functionality exposed by `Startup.jl`:
+
+![](https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png)
+
+## `OhMyREPL`
+
+[`OhMyREPL.jl`](https://github.com/KristofferC/OhMyREPL.jl) is a package that provides syntax highlighting, bracket highlighting, rainbow brackets, and more for the Julia REPL.
+Once installed, it can enhance your REPL experience dramatically, making it more visually appealing and easier to work with.
+
+![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png) ![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png)
+
+## `Revise.jl`
+
+[`Revise.jl`](https://github.com/timholy/Revise.jl) is a game-changer for Julia development. 
+It automatically reloads modified source files without restarting the Julia session. 
+This makes iterative development much smoother.
+
+Once set up, any changes you make to your code files are immediately available in your active Julia session.
+See the [Revise](https://timholy.github.io/Revise.jl/stable/config/) documentation for how to set this up to happen automatically all the time.
+
+![](https://user-images.githubusercontent.com/1813121/260274474-6dbd7408-d65e-4b74-b1d2-96eeb03f2581.gif)
+
+::: callout-note
+`Revise.jl` cannot deal with changes in `struct`:
+
+![](https://user-images.githubusercontent.com/1813121/260273898-830f4ef9-7b23-4358-8f6c-6f186c7fbbbb.png)
+
+You'll have to restart the Julia session if you are making changes to a `struct`.
+:::
+
+## `Infiltrator`
+
+[`Infiltrator.jl`](https://github.com/JuliaDebug/Infiltrator.jl) is a debugger and code inspection tool for Julia.
+It allows you to insert breakpoints in your code and inspect the current scope's variables.
+
+When Julia hits the `@infiltrate` macro, it'll pause execution, allowing you to inspect the current state.
+When using `@infiltrate conditional_expression` with `Revise`, you can jump into the call stack of any function and inspect values of variables in a Julia REPL, and that can make for a powerful developer experience.
+
+## `BenchmarkTools`
+
+Performance is one of the main reasons developers flock to Julia.
+[BenchmarkTools.jl](https://github.com/JuliaCI/BenchmarkTools.jl) is an essential package to help quantify the performance of your code.
+It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.
+
+![](https://user-images.githubusercontent.com/1813121/260274763-85f6a403-467f-4d51-b00b-5cbf9f0b6115.png)
+
+## `Cthulhu`
+
+Delving deep into Julia's compiler optimizations and type inference can sometimes feel daunting. 
+
+[`Cthulhu.jl`](https://github.com/JuliaDebug/Cthulhu.jl) is an alternative to `@code_lowered` and `@code_typed` that allows developers to dive into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia's JIT compiler optimizes code.
+
+![](https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png)
+
+Using Cthulhu, you can:
+
+- View the lowered representation of functions
+- Understand type-inference issues
+- Step through optimized LLVM code
+
+## `InlineTests`
+
+While Julia has its built-in package Test for unit testing, there's another approach you can take for more "live" development: using InlineTests.jl together with Revise.jl.
+This combination allows you to write tests directly in your source files, and they'll be run automatically when the source file changes, giving you immediate feedback.
+
+![](https://user-images.githubusercontent.com/1813121/260275198-6d590ff2-4d74-4f40-86a3-2642475654ce.png)
+
+## `LiveServer`
+
+[`LiveServer.jl`](https://github.com/tlienart/LiveServer.jl) is a neat package for web developers using Julia.
+It serves static sites locally and refreshes your browser automatically as you edit source files.
+
+```julia
+# serve contents of any folder
+LiveServer.serve(; dir, launch_browser = true)
+
+# serve documentation of any package
+Pkg.activate("./docs")
+LiveServer.servedocs(; launch_browser = true)
+```
+
+## `Comonicon`
+
+[Comonicon.jl](https://github.com/comonicon/Comonicon.jl) is a rich tool for building command-line applications.
+Comonicon allows you to easily convert your Julia scripts and packages into command-line tools with minimal effort.
+
+Using Comonicon, you can:
+
+- Parse command-line arguments
+- Generate help messages
+- Handle subcommands
+- And more
+
+For example, I've added into my [`Startup.jl/src/jl.jl`](https://github.com/kdheepak/Startup.jl/blob/d1959b2d08868b04d3f33911b6260275bb22a34b/src/jl.jl) some helper subcommands that I can access from that command line in any folder.
+
+![](https://user-images.githubusercontent.com/1813121/260273139-d07af2d5-fd2c-4ebb-bd97-d7fd67698f3e.png)
+
+## Conclusion
+
+Julia's ecosystem is filled with tools designed to optimize the developer's workflow, making it easier and more efficient to write, test, and deploy code.
+Whether you're chasing performance, rapid prototyping, or a seamless testing experience, there's likely a package or tool in the Julia universe tailored to your needs.
