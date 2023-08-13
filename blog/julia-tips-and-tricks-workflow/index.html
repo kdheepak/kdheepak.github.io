@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dheepak Krishnamurthy">
-<meta name="dcterms.date" content="2022-07-12">
-<meta name="keywords" content="terminal, bash, zsh, shell">
+<meta name="dcterms.date" content="2023-08-13">
+<meta name="keywords" content="julia, tips, tricks, developer, experience, workflow">
 
-<title>kdheepak - Quickstart guide to using a terminal</title>
+<title>kdheepak - My Favourite Julia Tips and Tricks for a Better Developer Experience</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,10 +138,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../_quarto/styles.css">
-<meta property="og:title" content="kdheepak - Quickstart guide to using a terminal">
+<meta property="og:title" content="kdheepak - My Favourite Julia Tips and Tricks for a Better Developer Experience">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="kdheepak">
-<meta name="twitter:title" content="kdheepak - Quickstart guide to using a terminal">
+<meta name="twitter:title" content="kdheepak - My Favourite Julia Tips and Tricks for a Better Developer Experience">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Quickstart guide to using a terminal</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">My Favourite Julia Tips and Tricks for a Better Developer Experience</li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -217,14 +217,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#movement" id="toc-movement" class="nav-link active" data-scroll-target="#movement">Movement</a></li>
-  <li><a href="#useful-built-in-terminal-utilties" id="toc-useful-built-in-terminal-utilties" class="nav-link" data-scroll-target="#useful-built-in-terminal-utilties">Useful built-in terminal utilties</a></li>
-  <li><a href="#environment-variables" id="toc-environment-variables" class="nav-link" data-scroll-target="#environment-variables">Environment Variables</a></li>
-  <li><a href="#bashrc-and-.bash_profile" id="toc-bashrc-and-.bash_profile" class="nav-link" data-scroll-target="#bashrc-and-.bash_profile"><code>.bashrc</code> and <code>.bash_profile</code></a></li>
-  <li><a href="#ctrl-c" id="toc-ctrl-c" class="nav-link" data-scroll-target="#ctrl-c"><kbd>Ctrl + c</kbd></a></li>
-  <li><a href="#piping" id="toc-piping" class="nav-link" data-scroll-target="#piping">Piping</a></li>
+  <li><a href="#startup.jl" id="toc-startup.jl" class="nav-link active" data-scroll-target="#startup.jl"><code>startup.jl</code></a></li>
+  <li><a href="#ohmyrepl" id="toc-ohmyrepl" class="nav-link" data-scroll-target="#ohmyrepl"><code>OhMyREPL</code></a></li>
+  <li><a href="#revise.jl" id="toc-revise.jl" class="nav-link" data-scroll-target="#revise.jl"><code>Revise.jl</code></a></li>
+  <li><a href="#infiltrator" id="toc-infiltrator" class="nav-link" data-scroll-target="#infiltrator"><code>Infiltrator</code></a></li>
+  <li><a href="#benchmarktools" id="toc-benchmarktools" class="nav-link" data-scroll-target="#benchmarktools"><code>BenchmarkTools</code></a></li>
+  <li><a href="#cthulhu" id="toc-cthulhu" class="nav-link" data-scroll-target="#cthulhu"><code>Cthulhu</code></a></li>
+  <li><a href="#inlinetests" id="toc-inlinetests" class="nav-link" data-scroll-target="#inlinetests"><code>InlineTests</code></a></li>
+  <li><a href="#liveserver" id="toc-liveserver" class="nav-link" data-scroll-target="#liveserver"><code>LiveServer</code></a></li>
+  <li><a href="#comonicon" id="toc-comonicon" class="nav-link" data-scroll-target="#comonicon"><code>Comonicon</code></a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/quickstart-guide-to-using-a-terminal/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/julia-tips-and-tricks-workflow/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -235,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Quickstart guide to using a terminal</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/quickstart-guide-to-using-a-terminal/index.qmd"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">My Favourite Julia Tips and Tricks for a Better Developer Experience</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/julia-tips-and-tricks-workflow/index.qmd"><i class="bi"></i> Code</button></div></div>
   </div>
 
 
@@ -252,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 12, 2022</p>
+      <p class="date">August 13, 2023</p>
     </div>
   </div>
   
@@ -263,235 +267,158 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>terminal, bash, zsh, shell</p>
+    <p>julia, tips, tricks, developer, experience, workflow</p>
   </div>
 </div>
 
 </header>
 
-<p>If you are typically used to GUI applications, you may feel lost when you are getting started with a terminal. In this post, I’ll share a number of basic things that I think you should know that will help you get familiar with a terminal based workflow.</p>
-<p>Typically, when you open a terminal on a linux or a mac, you may see something like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Or</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bash-5.1$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This is your terminal prompt. In the examples below, I will elide the prompt characters and show only the command you would type or the output of the command.</p>
-<section id="movement" class="level2">
-<h2 class="anchored" data-anchor-id="movement">Movement</h2>
-<p>One of the first things you should know is that you can’t use your mouse to move your cursor, and almost everything you do needs to be done using your keyboard.</p>
-<p>For starters, you can use <kbd>Ctrl + a</kbd> to move to the beginning of the line and <kbd>Ctrl + e</kbd> to move to the end of the line.</p>
+<p>Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++.</p>
+<p>Like Python, Julia offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping.</p>
+<p>If you are an experienced Python developer, there are a couple of things you might want to know to improve your Julia developer experience.</p>
+<section id="startup.jl" class="level3">
+<h3 class="anchored" data-anchor-id="startup.jl"><code>startup.jl</code></h3>
+<p>Every time you start Julia, it looks for a file named <code>startup.jl</code> in a <code>config</code> directory.</p>
 <table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Keyboard shortcut</th>
-<th>Action</th>
+<th>Operating System</th>
+<th><code>startup.jl</code> Location</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><kbd>Ctrl + h</kbd></td>
-<td>Delete one character back</td>
+<td>Windows</td>
+<td><code>C:\Users\USERNAME\.julia\config\startup.jl</code></td>
 </tr>
 <tr class="even">
-<td><kbd>Ctrl + d</kbd></td>
-<td>Delete one character forward</td>
+<td>macOS</td>
+<td><code>/Users/USERNAME/.julia/config/startup.jl</code></td>
 </tr>
 <tr class="odd">
-<td><kbd>Ctrl + k</kbd></td>
-<td>Delete to the end of line</td>
-</tr>
-<tr class="even">
-<td><kbd>Ctrl + u</kbd></td>
-<td>Delete to the beginning of line</td>
-</tr>
-<tr class="odd">
-<td><kbd>Ctrl + w</kbd></td>
-<td>Delete previous word</td>
-</tr>
-<tr class="even">
-<td><kbd>Ctrl + f</kbd></td>
-<td>Move forward one character</td>
-</tr>
-<tr class="odd">
-<td><kbd>Ctrl + b</kbd></td>
-<td>Move backward one character</td>
+<td>Linux</td>
+<td><code>/home/USERNAME/.julia/config/startup.jl</code></td>
 </tr>
 </tbody>
 </table>
-<p>These are <code>readline</code> keybindings and we’ll talk more about this in a future post.</p>
+<p>This file is executed before the REPL starts, allowing you to customize your Julia environment.</p>
+<p>For example, if you added the following code to your <code>startup.jl</code>, it would ensure that <code>Revise</code>, <code>OhMyREPL</code> and <code>BenchmarkTools</code> are always installed whenever you start Julia.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup OhMyREPL and Revise</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Pkg</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  pkgs <span class="op">=</span> [<span class="st">"Revise"</span>, <span class="st">"OhMyREPL"</span>, <span class="st">"BenchmarkTools"</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> pkg <span class="kw">in</span> pkgs</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">Base</span>.<span class="fu">find_package</span>(pkg) <span class="op">===</span> <span class="cn">nothing</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="bu">Pkg</span>.<span class="fu">add</span>(pkg)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://discourse.julialang.org/t/what-is-in-your-startup-jl/18228">This thread on Discourse</a> has some neat examples of things you may want to add to your <code>startup.jl</code>.</p>
+<p>If you wish to go one step further, you can create a Julia package called <a href="https://github.com/kdheepak/Startup.jl">Startup.jl</a>, place it anywhere on your computer and load it in <code>startup.jl</code>.</p>
+<pre><code>if Base.isinteractive()
+  push!(LOAD_PATH, joinpath(ENV["HOME"], "gitrepos", "Startup.jl"))
+  using Startup
+end</code></pre>
+<p>The advantage of this is that the contents of <code>Startup.jl</code> can be precompiled and your Julia REPL starts up very quickly.</p>
+<p>With the <code>Startup.jl</code> package approach, your root environment can be empty and you can still use functionality exposed by <code>Startup.jl</code>:</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" class="img-fluid"></p>
 </section>
-<section id="useful-built-in-terminal-utilties" class="level2">
-<h2 class="anchored" data-anchor-id="useful-built-in-terminal-utilties">Useful built-in terminal utilties</h2>
-<ol type="1">
-<li><code>echo</code></li>
-</ol>
-<p>Type the following in your terminal:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"hello world"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>hello world</code></pre>
-<ol start="2" type="1">
-<li><code>ls</code></li>
-</ol>
-<p>Now type the following:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="va">$HOME</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>ls</code> lists the files and folders in a particular directory.</p>
-<p>Now try running <code>ls -al $HOME</code>. Notice the <code>-al</code> flags. The <code>-a</code> flag is for <q>all</q> files or folders and <code>-l</code> is for printing it out in a <q>list</q> form.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> <span class="va">$HOME</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!-- prettier-ignore -->
-<pre><code>Permissions Size Date Modified Name
-drwx------     - 28 Jan  2020  .bash_sessions/
-drwxr-xr-x     - 22 Jun 18:40  .cache/
-drwxr-xr-x     - 15 Aug  2021  .cargo/
-drwxr-xr-x     - 13 Apr  2020  .cmake/
-drwxrwxr-x     - 12 Mar  2020  .conda/
-drwxr-xr-x     -  6 Jun 09:23  .config/
-drwxr-xr-x     - 23 Oct  2020  .gem/
-drwxr-xr-x     -  5 Feb  2020  .ipython/
-drwxr-xr-x     - 28 Feb  2021  .iterm2/
-drwxr-xr-x     - 26 Jul  2020  .vit/
-drwxr-xr-x     - 12 Jul  2020  .vscode/
-drwxr-xr-x     -  4 Feb  2020  .yarn/
-drwxr-xr-x     - 16 Sep  2021  .zfunc/
-drwx--xr-x     - 26 Jul  2020  .zinit/
-drwxr-xr-x     - 28 Jun 08:44  Applications/
-drwxr-xr-x@    -  5 Jul 13:28  Desktop/
-drwxr-xr-x     - 14 Dec  2021  Documents/
-drwxr-xr-x@    -  5 Jul 13:21  Downloads/
-drwxr-xr-x     - 28 Jun 14:39  gitrepos/
-drwx------@    - 17 Feb 11:35  Library/
-drwxr-xr-x     - 17 Jun 10:18  local/
-drwxr-xr-x     -  9 May 11:34  miniconda3/
-drwx------     -  2 Dec  2021  Movies/
-drwx------     - 19 Feb  2020  Music/
-drwx------     - 30 Jan  2020  Pictures/
-drwxr-xr-x     - 28 Jan  2020  Public/</code></pre>
-<div class="tip">
-<p>💡 Learning how to read <q>permissions</q> for files and folders when you use <code>ls -al path/to/file-or-folder</code> is crucial to debugging issues with permissions.</p>
+<section id="ohmyrepl" class="level3">
+<h3 class="anchored" data-anchor-id="ohmyrepl"><code>OhMyREPL</code></h3>
+<p><a href="https://github.com/KristofferC/OhMyREPL.jl"><code>OhMyREPL.jl</code></a> is a package that provides syntax highlighting, bracket highlighting, rainbow brackets, and more for the Julia REPL. Once installed, it can enhance your REPL experience dramatically, making it more visually appealing and easier to work with.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png" class="img-fluid"> <img src="https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png" class="img-fluid"></p>
+</section>
+<section id="revise.jl" class="level3">
+<h3 class="anchored" data-anchor-id="revise.jl"><code>Revise.jl</code></h3>
+<p><a href="https://github.com/timholy/Revise.jl"><code>Revise.jl</code></a> is a game-changer for Julia development. It automatically reloads modified source files without restarting the Julia session. This makes iterative development much smoother.</p>
+<p>Once set up, any changes you make to your code files are immediately available in your active Julia session. See the <a href="https://timholy.github.io/Revise.jl/stable/config/">Revise</a> documentation for how to set this up to happen automatically all the time.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260274474-6dbd7408-d65e-4b74-b1d2-96eeb03f2581.gif" class="img-fluid"></p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>A couple of things to note about flags.</p>
+<div class="callout-body-container">
+<p><code>Revise.jl</code> cannot deal with changes in <code>struct</code>:</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260273898-830f4ef9-7b23-4358-8f6c-6f186c7fbbbb.png" class="img-fluid"></p>
+<p>You’ll have to restart the Julia session if you are making changes to a <code>struct</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="infiltrator" class="level3">
+<h3 class="anchored" data-anchor-id="infiltrator"><code>Infiltrator</code></h3>
+<p><a href="https://github.com/JuliaDebug/Infiltrator.jl"><code>Infiltrator.jl</code></a> is a debugger and code inspection tool for Julia. It allows you to insert breakpoints in your code and inspect the current scope’s variables.</p>
+<p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, allowing you to inspect the current state. When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into the call stack of any function and inspect values of variables in a Julia REPL, and that can make for a powerful developer experience.</p>
+</section>
+<section id="benchmarktools" class="level3">
+<h3 class="anchored" data-anchor-id="benchmarktools"><code>BenchmarkTools</code></h3>
+<p>Performance is one of the main reasons developers flock to Julia. <a href="https://github.com/JuliaCI/BenchmarkTools.jl">BenchmarkTools.jl</a> is an essential package to help quantify the performance of your code. It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260274763-85f6a403-467f-4d51-b00b-5cbf9f0b6115.png" class="img-fluid"></p>
+</section>
+<section id="cthulhu" class="level3">
+<h3 class="anchored" data-anchor-id="cthulhu"><code>Cthulhu</code></h3>
+<p>Delving deep into Julia’s compiler optimizations and type inference can sometimes feel daunting.</p>
+<p><a href="https://github.com/JuliaDebug/Cthulhu.jl"><code>Cthulhu.jl</code></a> is an alternative to <code>@code_lowered</code> and <code>@code_typed</code> that allows developers to dive into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia’s JIT compiler optimizes code.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid"></p>
+<p>Using Cthulhu, you can:</p>
 <ul>
-<li>You can typically use them in any order, i.e.&nbsp;<code>ls -al</code> is equivalent to <code>ls -la</code></li>
-<li>You can see the full list of options available by using <code>man ls</code>.</li>
-<li>Other command line tools might have a <code>-h/--help</code> flag that prints out all available flags.</li>
+<li>View the lowered representation of functions</li>
+<li>Understand type-inference issues</li>
+<li>Step through optimized LLVM code</li>
 </ul>
-<p>I personally always want to see the output of <code>ls</code> in a list form. If you add the following <q>alias</q> to your <code>.bashrc</code> or <code>.bash_profile</code>, you can use <code>ls</code> to invoke <code>ls -al</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> ls=<span class="st">"ls -al"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li><code>pwd</code></li>
-</ol>
-<p>Type <code>pwd</code> in your terminal. It should print the full path to the <q>present working directory</q> folder in your terminal. This can be useful to figure out in which directory your prompt is currently is <q>in</q>. Typically, any script or command you run will use the <code>pwd</code> as the current directory in the script.</p>
-<ol start="4" type="1">
-<li><code>cd</code></li>
-</ol>
-<p>You can use <code>cd</code> to <q>change directory</q>. Use <code>cd</code> or <code>cd ~</code> to change to your home directory, and use <code>cd -</code> to go back to the last directory that you were in. Run the following line by line in your terminal:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="at">-</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="5" type="1">
-<li><code>cp</code></li>
-</ol>
-<p>You can use <code>cp /path/to/source /path/to/destination</code> to <q>copy</q> a file from a source location to a destination location. If you want to copy a folder, you’ll need to use <code>cp -r</code> for <q>recursively copy</q>.</p>
-<ol start="6" type="1">
-<li><code>mv</code></li>
-</ol>
-<p>You can use <code>mv /path/to/source /path/to/destination</code> to <q>move</q> a file or folder from a source location to a destination location. If you want to rename a file or folder, you will have to <code>mv oldname newname</code>. You want to ensure that the destination does not exist or there is no folder by that name, otherwise you may end up overwriting or moving it to an unintended location.</p>
-<p><code>mv</code> has the following flags:</p>
-<pre><code>   -i      Cause mv to write a prompt to standard error before moving a file that would overwrite an existing file.  If
-   the response from the standard input begins with the character `y' or `Y', the move is attempted.  (The -i option
-   overrides any previous -f or -n options.)
-
-   -v      Cause mv to be verbose, showing files after they are moved.</code></pre>
-<p>I like to alias <code>mv</code> to <code>mv -iv</code> since I always want to play it safe.</p>
-<ol start="7" type="1">
-<li><code>rm</code></li>
-</ol>
-<p>You can use <code>rm</code> to remove files. You can use <code>rm -r</code> to remove folders.</p>
-<ol start="8" type="1">
-<li><code>mkdir</code></li>
-</ol>
-<p>You can use <code>mkdir /path/to/dir</code> to <q>make a directory</q> if <code>/path/to/</code> already exists. If you wish to create nested directories, you can use the <code>-p</code> flag, i.e.&nbsp;<code>mkdir /path/to/nested/dir</code>.</p>
-<ol start="9" type="1">
-<li><code>cat</code></li>
-</ol>
-<p><code>cat</code> concatenates and prints files to the terminal standard out. This is useful for seeing the contents of a text file without opening it.</p>
-<p>There are two additional commands that are useful for seeing the first or last <code>n</code> lines in a file, i.e.&nbsp;<code>head</code> and <code>tail</code>.</p>
-<ol start="10" type="1">
-<li><code>find</code></li>
-</ol>
-<p><code>find</code> is extremely useful in finding if a file of a certain name or type exists.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-name</span> <span class="pp">*</span>.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can use regular expressions to widen your search criteria.</p>
-<ol start="11" type="1">
-<li><code>grep</code></li>
-</ol>
-<p><code>grep</code> is handy in finding text within files. I like to use <code>-ri</code> for recursively searching for a case insensitive match in a particular folder.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-ri</span> <span class="st">"when I first"</span> src/posts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>src/posts/10-fast-track-to-being-productive-with-vim.md:summary: What I wish I had known when I first started using vim
-src/posts/10-fast-track-to-being-productive-with-vim.md:When I first started using vim three months ago, I found it quite challenging to get meaningful work done.</code></pre>
-<ol start="12" type="1">
-<li><code>vi</code> or <code>vim</code> or <code>nano</code> or <code>emacs</code></li>
-</ol>
-<p>Finally, learning how to use a text editor can go a long way in getting you comfortable with a terminal. Check out <a href="../fast-track-to-being-productive-in-vim">my post on how to get started with vim</a> for more information.</p>
 </section>
-<section id="environment-variables" class="level2">
-<h2 class="anchored" data-anchor-id="environment-variables">Environment Variables</h2>
-<p>If you type the following and hit enter:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$HOME</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>you should see something like this being printed in your terminal:</p>
-<pre><code>/Users/USERNAME</code></pre>
-<p><code>$HOME</code> is an environment variable that contains the value of your user’s <q>home</q> directory.</p>
-<p>Type <code>echo $PATH</code> in your command line. On unix, the <code>$PATH</code> environment variable contains <code>:</code> separated paths to folders. Your shell looks through these in order when searching for binaries to execute.</p>
+<section id="inlinetests" class="level3">
+<h3 class="anchored" data-anchor-id="inlinetests"><code>InlineTests</code></h3>
+<p>While Julia has its built-in package Test for unit testing, there’s another approach you can take for more <q>live</q> development: using InlineTests.jl together with Revise.jl. This combination allows you to write tests directly in your source files, and they’ll be run automatically when the source file changes, giving you immediate feedback.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260275198-6d590ff2-4d74-4f40-86a3-2642475654ce.png" class="img-fluid"></p>
 </section>
-<section id="bashrc-and-.bash_profile" class="level2">
-<h2 class="anchored" data-anchor-id="bashrc-and-.bash_profile"><code>.bashrc</code> and <code>.bash_profile</code></h2>
-<p>The <code>bash</code> shell, when invoked, can read and execute commands from a set of start up files.</p>
-<p>When invoked as an interactive login shell, <code>bash</code> looks for <code>/etc/profile</code>, then <code>~/.bash_profile</code>, then <code>~/.bash_login</code> and then <code>~/.profile</code>.</p>
-<p>When invoked as an interactive non-login shell, <code>bash</code> reads and executes from <code>~/.bashrc</code>.</p>
-<p><code>~/.profile</code> or <code>~/.bash_profile</code> should contain modifications to <code>$PATH</code> whereas <code>~/.bashrc</code> can contain modifications to your prompt or aliases or other customizations. <code>~/.profile</code> is typically run just once, but <code>~/.bashrc</code> is run everytime you run a new shell.</p>
+<section id="liveserver" class="level3">
+<h3 class="anchored" data-anchor-id="liveserver"><code>LiveServer</code></h3>
+<p><a href="https://github.com/tlienart/LiveServer.jl"><code>LiveServer.jl</code></a> is a neat package for web developers using Julia. It serves static sites locally and refreshes your browser automatically as you edit source files.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># serve documentation of any package</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"./docs"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">servedocs</span>(; launch_browser <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="ctrl-c" class="level2">
-<h2 class="anchored" data-anchor-id="ctrl-c"><kbd>Ctrl + c</kbd></h2>
-<p>For long running processes, you can use <kbd>Ctrl + c</kbd> to kill the process. You can use <kbd>Ctrl + z</kbd> to background a currently running process and type <code>fg</code> to foreground the last backgrounded process.</p>
+<section id="comonicon" class="level3">
+<h3 class="anchored" data-anchor-id="comonicon"><code>Comonicon</code></h3>
+<p><a href="https://github.com/comonicon/Comonicon.jl">Comonicon.jl</a> is a rich tool for building command-line applications. Comonicon allows you to easily convert your Julia scripts and packages into command-line tools with minimal effort.</p>
+<p>Using Comonicon, you can:</p>
+<ul>
+<li>Parse command-line arguments</li>
+<li>Generate help messages</li>
+<li>Handle subcommands</li>
+<li>And more</li>
+</ul>
+<p>For example, I’ve added into my <a href="https://github.com/kdheepak/Startup.jl/blob/d1959b2d08868b04d3f33911b6260275bb22a34b/src/jl.jl"><code>Startup.jl/src/jl.jl</code></a> some helper subcommands that I can access from that command line in any folder.</p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260273139-d07af2d5-fd2c-4ebb-bd97-d7fd67698f3e.png" class="img-fluid"></p>
 </section>
-<section id="piping" class="level2">
-<h2 class="anchored" data-anchor-id="piping">Piping</h2>
-<p>One of the advantages of working from the terminal is that once you have some basics down, you can chain together commands really easily. You can do this using the pipe operator, i.e.&nbsp;<code>|</code>.</p>
-<p>Let’s say I wanted to show the last 3 lines or the <code>README.md</code> in my current folder:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bat</span> README.md <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>  44   │ ```bash
-  45   │ npm run deploy
-  46   │ ```
-───────┴────────────────────────────────────────────────────────────────────────</code></pre>
-<p>Let’s say I wanted to find all the files with <q>vim</q> in the name:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rg</span> <span class="at">--files</span> <span class="kw">|</span> <span class="ex">rg</span> vim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>58:src/posts/38-rust-lua-nvim.md
-91:src/posts/11-vim-tmux-zsh.md
-99:src/posts/34-three-built-in-neovim-features.md
-110:src/posts/videos/vimtutor.webm
-112:src/posts/32-neovim-languageserver-julia.md
-113:src/posts/10-fast-track-to-being-productive-with-vim.md
-127:src/posts/25-tmux-neovim.md
-135:src/posts/20-custom-path-vim.md
-157:src/posts/images/nvim-highlight-yank.mov.gif
-176:src/posts/images/nvim-live-substitution.mov.gif
-182:src/posts/images/nvim-built-in-lsp.mov.gif
-189:src/posts/images/vim-tmux-zsh.png</code></pre>
-<p>The <code>|</code> operator takes the <code>stdout</code> of one command and feeds it as input to the next.</p>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Julia’s ecosystem is filled with tools designed to optimize the developer’s workflow, making it easier and more efficient to write, test, and deploy code. Whether you’re chasing performance, rapid prototyping, or a seamless testing experience, there’s likely a package or tool in the Julia universe tailored to your needs.</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2022,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
   author = {Krishnamurthy, Dheepak},
-  title = {Quickstart Guide to Using a Terminal},
-  date = {2022-07-12},
-  url = {https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal},
+  title = {My {Favourite} {Julia} {Tips} and {Tricks} for a {Better}
+    {Developer} {Experience}},
+  date = {2023-08-13},
+  url = {https://kdheepak.com/blog/julia-tips-and-tricks-workflow},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 <div class="">D.
-Krishnamurthy, <span>“Quickstart guide to using a terminal,”</span> Jul.
-12, 2022. <a href="https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal">https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal</a>.</div>
+Krishnamurthy, <span>“My Favourite Julia Tips and Tricks for a Better
+Developer Experience,”</span> Aug. 13, 2023. <a href="https://kdheepak.com/blog/julia-tips-and-tricks-workflow">https://kdheepak.com/blog/julia-tips-and-tricks-workflow</a>.</div>
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -9,8 +9,17 @@
 <link>https://kdheepak.com/blog/index.html</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.176</generator>
-<lastBuildDate>Sat, 29 Apr 2023 16:38:41 GMT</lastBuildDate>
+<generator>quarto-1.4.315</generator>
+<lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
+<item>
+  <title>My Favourite Julia Tips and Tricks for a Better Developer Experience</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/julia-tips-and-tricks-workflow/index.html</link>
+  <description><![CDATA[ Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++. ]]></description>
+  <category>julia</category>
+  <guid>https://kdheepak.com/blog/julia-tips-and-tricks-workflow/index.html</guid>
+  <pubDate>Sun, 13 Aug 2023 02:14:15 GMT</pubDate>
+</item>
 <item>
   <title>Visualizing roads in the cities of Canada</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
@@ -438,19 +447,12 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Geektool and Desktop Widgets in OSX</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</link>
-  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
-  <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Robotics</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/robotics/index.html</link>
-  <description><![CDATA[ undefined ]]></description>
+  <description><![CDATA[ 
+Robotics and Microcontroller Projects
+ ]]></description>
   <guid>https://kdheepak.com/blog/robotics/index.html</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
@@ -462,6 +464,15 @@
   <category>tasker</category>
   <category>android</category>
   <guid>https://kdheepak.com/blog/tasker-and-google-maps/index.html</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Geektool and Desktop Widgets in OSX</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</link>
+  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
+  <category>osx</category>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
