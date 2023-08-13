@@ -114,7 +114,7 @@ It allows you to insert breakpoints in your code and inspect the current scope's
 
 When Julia hits the `@infiltrate` macro, it'll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.
 
-![](https://user-images.githubusercontent.com/1813121/260305705-39841bca-d0c9-4889-ae48-bf7cb97d28d1.gif)
+![](https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif)
 
 You can also use `@infiltrate i == 3` and that'll drop you into a Julia REPL only in the third iteration of the `for` loop.
 
