@@ -41,10 +41,11 @@ end
 ```
 
 ::: callout-note
-Keep in mind that these packages will be added to your root environment. This means they are not available to import inside a package, and only in a REPL environment.
-Also, if you want to ensure you have reproducible environments for yourself and for the people you share your code with, you should use dedicated per-project local environments for that, instead of adding packages to your global environment.
+When adding packages in Julia, they typically get added to what's known as the "global environment." While these packages can be readily used within the Julia REPL (an interactive command-line interface for Julia), they won't be available for import within Julia packages.
 
-I personally only add packages that improve my developer workflow, e.g. `Revise`, `BenchmarkTools`, `OhMyREPL`, to my root environment.
+For those aiming to ensure consistency in code execution—both for themselves and others—it's essential to use dedicated, per-project local environments. This approach ensures that the same set of package versions are always used, enhancing reproducibility.
+
+Personally, I reserve the global environment for packages that enhance my development workflow, such as `Revise`, `BenchmarkTools`, and `OhMyREPL`.
 :::
 
 [This thread on the JuliaLang Discourse](https://discourse.julialang.org/t/what-is-in-your-startup-jl/18228) has some neat examples of things you may want to add to your `startup.jl`.
