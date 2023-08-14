@@ -117,7 +117,7 @@ Let's say I wanted to make a change like this:
   end
 ```
 
-`Revise` throws a warning and changes the color of the Julia prompt:
+`Revise` throws an error and warning because it is unable to make that change; and `Revise` changes the color of the Julia prompt:
 
 ![](https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif){fig-align="center" width=75%}
 
