@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.315">
+<meta name="generator" content="quarto-1.4.320">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -542,7 +542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="jet" class="level3">
 <h3 class="anchored" data-anchor-id="jet"><code>JET</code></h3>
-<p><a href="https://github.com/aviatesk/JET.jl"><code>JET.jl</code></a> is a powerful static code analyzer tailored for the Julia programming language. <code>JET</code> serves as a <q>linter</q> – not only flagging syntax errors but also identifying potential runtime errors without actually executing the code. It works by simulating the Julia compiler’s type inference process.</p>
+<p><a href="https://github.com/aviatesk/JET.jl"><code>JET.jl</code></a> is a powerful static code analyzer tailored for the Julia programming language. <code>JET</code> serves as a <q>linter</q> – identifying potential runtime errors without actually executing the code. It works by simulating the Julia compiler’s type inference process.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(n) <span class="op">=</span> n <span class="op">≤</span> <span class="fl">2</span> ? n <span class="op">:</span> <span class="fu">fib</span>(n<span class="op">-</span><span class="fl">1</span>) <span class="op">+</span> <span class="fu">fib</span>(n<span class="op">-</span><span class="fl">2</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(<span class="fl">1000</span>)   <span class="co"># =&gt; never terminates</span></span>
