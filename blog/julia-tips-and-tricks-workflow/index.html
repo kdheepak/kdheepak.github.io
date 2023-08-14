@@ -376,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>Revise</code> throws a warning and changes the color of the Julia prompt:</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid"></p>
-<p>There are some workarounds for this but the easiest thing to do is to restart the Julia session if you are making changes to a <code>struct</code>. Watch for the <code>Revise</code> warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in <q>yellow</q>, you know <code>Revise</code> wasn’t able to track a change you made.</p>
+<p>There are some workarounds for this but the easiest thing to do is to <strong>restart the Julia session</strong> if you are making changes to a <code>struct</code>. Watch for the <code>Revise</code> warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in <q>yellow</q>, you know <code>Revise</code> wasn’t able to track a change you made.</p>
 </div>
 </div>
 </div>
@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid"></p>
 <p>You can also use <code>@infiltrate i == 3</code> and that’ll drop you into a Julia REPL only in the third iteration of the <code>for</code> loop.</p>
-<p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
+<p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data in the scope of any function interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
 </section>
 <section id="benchmarktools" class="level3">
 <h3 class="anchored" data-anchor-id="benchmarktools"><code>BenchmarkTools</code></h3>
