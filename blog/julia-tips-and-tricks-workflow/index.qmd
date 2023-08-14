@@ -174,21 +174,20 @@ Here's the benchmark results with `a = 0` (left) and `a = 0.0` (right):
 Julia has a built-in package `Test` for unit testing.
 This requires writing tests in `test/runtests.jl` and are run in a separate process.
 
-Using `InlineTests` together with `Revise`.
-This combination allows you to write tests directly in your source files, and you can make changes that are tracked with Revise, allowing faster iteration with test driven development.
+Using `InlineTests` together with `Revise` allows you to write tests directly in your source files, and you can make changes that are tracked with `Revise`, allowing faster iteration with test driven development.
 
 In the screenshot below, I have shown an example of having a `@testset` as part of the package itself, i.e. in `./src/layout.jl`:
 
 ![](https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png)
 
-This allows co-locating the tests with the implementation of the code.
+This allows co-locating tests along with the implementation.
 
 You'll also notice from the screenshot that `ReTest` contains a function called `retest` which allows running a subset of tests by passing in a pattern as the second argument.
 
 ## `LiveServer`
 
-[`LiveServer.jl`](https://github.com/tlienart/LiveServer.jl) is a neat package for web developers using Julia.
-It serves static sites locally and refreshes your browser automatically as you edit source files.
+[`LiveServer.jl`](https://github.com/tlienart/LiveServer.jl) allows developers to serve static sites locally and refreshes your browser automatically as you edit source files.
+You can even use it as to view or update documentation.
 
 ```julia
 # serve contents of any folder
@@ -213,7 +212,7 @@ Using Comonicon, you can:
 
 For example, I've added into my [`Startup.jl/src/jl.jl`](https://github.com/kdheepak/Startup.jl/blob/d1959b2d08868b04d3f33911b6260275bb22a34b/src/jl.jl) some helper subcommands that I can access from that command line in any folder.
 
-![](https://user-images.githubusercontent.com/1813121/260273139-d07af2d5-fd2c-4ebb-bd97-d7fd67698f3e.png)
+![](https://user-images.githubusercontent.com/1813121/260335151-77fd4892-ae97-49e2-ab54-7b2fee44bda0.png)
 
 ## Conclusion
 
