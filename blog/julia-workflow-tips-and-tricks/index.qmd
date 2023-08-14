@@ -221,6 +221,12 @@ In the screenshot below, I have shown an example of having a `@testset` as part 
 
 You'll also notice from the screenshot that `ReTest` contains a function called `retest` which allows running a subset of tests by passing in a pattern as the second argument.
 
+::: callout-tip
+
+You may also be interested in [`TestEnv.jl`](https://github.com/JuliaTesting/TestEnv.jl), which lets you activate the test environment of a given package.
+
+:::
+
 ## `PkgTemplates`
 
 [`PkgTemplates.jl`](https://github.com/invenia/PkgTemplates.jl) is a utility package that makes the process of creating new packages efficient, systematic, and customizable.
