@@ -2,6 +2,10 @@
 $font-family-code: "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
   "Courier New", monospace !default;
 
+.keywords {
+  display: none;
+}
+
 // Shrink blocks of code
 pre.text,
 pre.sourceCode,
