@@ -379,14 +379,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>If you want <code>Revise</code> to track changes in a package you are developing locally, simply run <code>using Revise</code> before you load the package for the first time.</p>
-<p>See <a href="https://timholy.github.io/Revise.jl/stable/config/">Revise’s documentation</a> for how to set this up to happen automatically all the time by adding setup code to your <code>startup.jl</code> file.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>Revise.jl</code> cannot deal with changes in <code>struct</code>. In the screenshot below, I change a struct <code>Foo</code> like so after tracking the file with <code>Revise</code>:</p>
+<p>If you use VSCode and start a REPL using the <code>Julia: Start REPL</code> command, <code>Revise</code> is automatically loaded by default.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>See <a href="https://timholy.github.io/Revise.jl/stable/config/">Revise’s documentation</a> for how to set this up to happen automatically all the time by adding setup code to your <code>startup.jl</code> file.</p>
+<p>One of the issues with <code>Revise</code> is that it cannot deal with changes in <code>struct</code>. Let’s say I wanted to make a change like this:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  struct Foo</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">-   x::Int</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">+   y::Float64</span></span>
@@ -397,7 +406,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid figure-img" style="width:75.0%"></p>
 </figure>
 </div>
-<p>There are some workarounds for this but the easiest thing to do is to <strong>restart the Julia session</strong> if you are making changes to a <code>struct</code>. Watch for the <code>Revise</code> warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in <q>yellow</q>, you know <code>Revise</code> wasn’t able to track a change you made.</p>
+<p>There are some workarounds for this but the easiest thing to do is to <strong>restart the Julia session</strong> after you are make changes to any <code>struct</code>.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Watch for the <code>Revise</code> warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see the prompt in <q>yellow</q>, you know <code>Revise</code> wasn’t able to track a change you made.</p>
 </div>
 </div>
 </div>
