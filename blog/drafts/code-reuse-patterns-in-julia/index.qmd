@@ -1,0 +1,75 @@
+---
+title: "Code Reuse Patterns in Julia"
+summary: "I want to showcase some ways you can minimize code duplication"
+date: 2023-08-19T20:12:13-0500
+keywords:
+  - julia
+  - best practices
+  - code reuse
+  - inheritance
+  - composition
+categories: [python, julia]
+draft: true
+---
+
+Let's say you were interested in building a `TrafficLight` simulator in Python.
+
+You might start off with something like this:
+
+```python
+class TrafficLight:
+    def __init__(self):
+        self.state = "Red"
+
+    def next(self):
+        if self.state == "Red":
+            self.state = "Yellow"
+        elif self.state == "Yellow":
+            self.state = "Green"
+        elif self.state == "Green":
+            self.state = "Red"
+
+    def __repr__(self):
+        return f"TrafficLight(state = '{self.state}')"
+```
+
+
+```python
+class PedestrianTrafficLight(TrafficLight):
+    def __init__(self):
+        super().__init__()
+        self.state = "Stop"
+
+    def next(self):
+        if self.state == "Stop":
+            self.state = "Walk"
+        elif self.state == "Walk":
+            self.state = "Stop"
+```
+
+```python
+ptl = PedestrianTrafficLight()
+ptl
+```
+
+```
+TrafficLight(state = 'Stop')
+```
+
+```python
+ptl.next()
+ptl
+```
+
+```
+TrafficLight(state = 'Walk')
+```
+
+```python
+ptl.next()
+ptl
+```
+
+```
+TrafficLight(state = 'Stop')
+```
