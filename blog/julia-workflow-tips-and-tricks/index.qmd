@@ -157,7 +157,7 @@ end
 [BenchmarkTools.jl](https://github.com/JuliaCI/BenchmarkTools.jl) is an essential package to help quantify the performance of your code.
 It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.
 
-For example, the `@benchmark` macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function.
+The `@benchmark` macro runs a number of trials of a function and plots a histogram in the terminal showing what kind of performance you are getting out of that particular function.
 As an example, we can compare the performance of a custom `sum` function without and with the `@simd` macro:
 
 ::: {layout-ncol=2}
