@@ -120,7 +120,7 @@ When Julia hits the `@infiltrate` macro, it'll pause execution, and drop you int
 You can also use `@infiltrate i == 3` and that'll drop you into a Julia REPL only in the third iteration of the `for` loop.
 
 When using `@infiltrate conditional_expression` with `Revise`, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL.
-You can even load additional packages like `DataFrames` or `Plots` to explore your data interactively while debugging.
+You can even load additional packages like `DataFrames` or `Plots` to explore your data in the scope of any function interactively while debugging.
 This combination can make for a versatile and productive debugging experience.
 
 ## `BenchmarkTools`
