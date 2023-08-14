@@ -225,6 +225,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#benchmarktools" id="toc-benchmarktools" class="nav-link" data-scroll-target="#benchmarktools"><code>BenchmarkTools</code></a></li>
   <li><a href="#cthulhu" id="toc-cthulhu" class="nav-link" data-scroll-target="#cthulhu"><code>Cthulhu</code></a></li>
   <li><a href="#retest-and-inlinetests" id="toc-retest-and-inlinetests" class="nav-link" data-scroll-target="#retest-and-inlinetests"><code>ReTest</code> and <code>InlineTests</code></a></li>
+  <li><a href="#pkgtemplates" id="toc-pkgtemplates" class="nav-link" data-scroll-target="#pkgtemplates"><code>PkgTemplates</code></a></li>
+  <li><a href="#jet" id="toc-jet" class="nav-link" data-scroll-target="#jet"><code>JET</code></a></li>
   <li><a href="#liveserver" id="toc-liveserver" class="nav-link" data-scroll-target="#liveserver"><code>LiveServer</code></a></li>
   <li><a href="#comonicon" id="toc-comonicon" class="nav-link" data-scroll-target="#comonicon"><code>Comonicon</code></a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -406,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid figure-img" style="width:75.0%"></p>
 </figure>
 </div>
-<p>There are some workarounds for this but the easiest thing to do is to <strong>restart the Julia session</strong> after you are make changes to any <code>struct</code>.</p>
+<p>There are some <a href="https://timholy.github.io/Revise.jl/stable/limitations/">workarounds</a> for this but the easiest thing to do is to <strong>restart the Julia session</strong> after you are make changes to any <code>struct</code>.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -507,15 +509,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>You’ll also notice from the screenshot that <code>ReTest</code> contains a function called <code>retest</code> which allows running a subset of tests by passing in a pattern as the second argument.</p>
 </section>
+<section id="pkgtemplates" class="level3">
+<h3 class="anchored" data-anchor-id="pkgtemplates"><code>PkgTemplates</code></h3>
+<p><a href="https://github.com/invenia/PkgTemplates.jl"><code>PkgTemplates.jl</code></a> is a utility package that makes the process of creating new packages efficient, systematic, and customizable. <code>PkgTemplates</code> offers a simplified way to generate new Julia packages with numerous features out-of-the-box that adhere to best practices (e.g.&nbsp;GitHub Actions, Documenter, etc).</p>
+<p>Creating a new package then becomes as straightforward as running the following:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PkgTemplates</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="fu">Template</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="st">"MyNewPackage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can customize the template too:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PkgTemplates</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="fu">Template</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  dir <span class="op">=</span> <span class="st">"~/gitrepos/"</span>, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  julia <span class="op">=</span> <span class="st">v"1.10"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  plugins <span class="op">=</span> [</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Git</span>(; ssh <span class="op">=</span> <span class="cn">true</span>, manifest <span class="op">=</span> <span class="cn">true</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">GitHubActions</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Documenter</span><span class="dt">{GitHubActions}</span>(),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="st">"MyNewPackage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="jet" class="level3">
+<h3 class="anchored" data-anchor-id="jet"><code>JET</code></h3>
+<p><a href="https://github.com/aviatesk/JET.jl"><code>JET.jl</code></a> is a powerful static code analyzer tailored for the Julia programming language. <code>JET</code> serves as a <q>linter</q> – not only flagging syntax errors but also identifying potential runtime errors without actually executing the code. It works by simulating the Julia compiler’s type inference process.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(n) <span class="op">=</span> n <span class="op">≤</span> <span class="fl">2</span> ? n <span class="op">:</span> <span class="fu">fib</span>(n<span class="op">-</span><span class="fl">1</span>) <span class="op">+</span> <span class="fu">fib</span>(n<span class="op">-</span><span class="fl">2</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(<span class="fl">1000</span>)   <span class="co"># =&gt; never terminates</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(m)      <span class="co"># =&gt; ERROR: UndefVarError: `m` not defined</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(<span class="st">"1000"</span>) <span class="co"># =&gt; ERROR: MethodError: no method matching isless(::String, ::Int64)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can see the other kinds of warnings that JET can produce in the <a href="https://github.com/aviatesk/JET.jl/blob/master/demo.jl"><code>demo.jl</code></a>.</p>
+</section>
 <section id="liveserver" class="level3">
 <h3 class="anchored" data-anchor-id="liveserver"><code>LiveServer</code></h3>
-<p><a href="https://github.com/tlienart/LiveServer.jl"><code>LiveServer.jl</code></a> allows developers to serve static sites locally and refreshes your browser automatically as you edit source files. You can even use it as to view or update documentation.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># serve documentation of any package</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"./docs"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">servedocs</span>(; launch_browser <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://github.com/tlienart/LiveServer.jl"><code>LiveServer.jl</code></a> allows developers to serve static sites locally and refreshes your browser automatically as you edit source files. You can even use it to view or update documentation.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># serve documentation of any package</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"./docs"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">servedocs</span>(; launch_browser <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="comonicon" class="level3">
 <h3 class="anchored" data-anchor-id="comonicon"><code>Comonicon</code></h3>
