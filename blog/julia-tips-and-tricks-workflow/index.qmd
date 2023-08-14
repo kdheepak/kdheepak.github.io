@@ -143,7 +143,7 @@ As an example, we can compare the performance of a custom `sum` function without
 
 Delving deep into Julia's compiler optimizations and type inference can sometimes feel daunting. 
 
-[`Cthulhu.jl`](https://github.com/JuliaDebug/Cthulhu.jl) is an alternative to `@code_lowered` and `@code_typed` that allows developers to dive into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia's JIT compiler optimizes code.
+[`Cthulhu.jl`](https://github.com/JuliaDebug/Cthulhu.jl) is an alternative interactive terminal user interface to `@code_lowered` and `@code_typed` that allows developers to dive into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia's JIT compiler optimizes code.
 
 Using Cthulhu, you can:
 
