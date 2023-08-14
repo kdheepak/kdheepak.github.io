@@ -43,7 +43,7 @@ end
 ::: callout-note
 When adding packages in Julia, they typically get added to what's known as the "global environment." While these packages can be readily used within the Julia REPL, they won't be available for import within Julia packages.
 
-For those aiming to ensure consistency in code execution—both for themselves and others—it's essential to use dedicated, per-project local environments. This approach ensures that the same set of package versions are always used, enhancing reproducibility.
+For those aiming to ensure reproducibility in code execution --- both for themselves and others --- it's essential to use dedicated, per-project local environments. This approach ensures that the same set of package versions are always used.
 
 Personally, I reserve the global environment for packages that enhance my development workflow, such as `Revise`, `BenchmarkTools`, and `OhMyREPL`.
 :::
