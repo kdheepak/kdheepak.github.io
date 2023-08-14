@@ -8,6 +8,7 @@
 
 <meta name="author" content="Dheepak Krishnamurthy">
 <meta name="dcterms.date" content="2023-08-13">
+<meta name="keywords" content="julia, tips, tricks, developer, experience, workflow">
 
 <title>kdheepak - Julia Tips and Tricks for a Better Developer Experience</title>
 <style>
@@ -263,6 +264,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>julia, tips, tricks, developer, experience, workflow</p>
+  </div>
+</div>
 
 </header>
 
@@ -426,15 +433,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="retest-and-inlinetests" class="level3">
 <h3 class="anchored" data-anchor-id="retest-and-inlinetests"><code>ReTest</code> and <code>InlineTests</code></h3>
 <p>Julia has a built-in package <code>Test</code> for unit testing. This requires writing tests in <code>test/runtests.jl</code> and are run in a separate process.</p>
-<p>Using <code>InlineTests</code> together with <code>Revise</code>. This combination allows you to write tests directly in your source files, and you can make changes that are tracked with Revise, allowing faster iteration with test driven development.</p>
+<p>Using <code>InlineTests</code> together with <code>Revise</code> allows you to write tests directly in your source files, and you can make changes that are tracked with <code>Revise</code>, allowing faster iteration with test driven development.</p>
 <p>In the screenshot below, I have shown an example of having a <code>@testset</code> as part of the package itself, i.e.&nbsp;in <code>./src/layout.jl</code>:</p>
 <p><img src="https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png" class="img-fluid"></p>
-<p>This allows co-locating the tests with the implementation of the code.</p>
+<p>This allows co-locating tests along with the implementation.</p>
 <p>You’ll also notice from the screenshot that <code>ReTest</code> contains a function called <code>retest</code> which allows running a subset of tests by passing in a pattern as the second argument.</p>
 </section>
 <section id="liveserver" class="level3">
 <h3 class="anchored" data-anchor-id="liveserver"><code>LiveServer</code></h3>
-<p><a href="https://github.com/tlienart/LiveServer.jl"><code>LiveServer.jl</code></a> is a neat package for web developers using Julia. It serves static sites locally and refreshes your browser automatically as you edit source files.</p>
+<p><a href="https://github.com/tlienart/LiveServer.jl"><code>LiveServer.jl</code></a> allows developers to serve static sites locally and refreshes your browser automatically as you edit source files. You can even use it as to view or update documentation.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -453,7 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>And more</li>
 </ul>
 <p>For example, I’ve added into my <a href="https://github.com/kdheepak/Startup.jl/blob/d1959b2d08868b04d3f33911b6260275bb22a34b/src/jl.jl"><code>Startup.jl/src/jl.jl</code></a> some helper subcommands that I can access from that command line in any folder.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260273139-d07af2d5-fd2c-4ebb-bd97-d7fd67698f3e.png" class="img-fluid"></p>
+<p><img src="https://user-images.githubusercontent.com/1813121/260335151-77fd4892-ae97-49e2-ab54-7b2fee44bda0.png" class="img-fluid"></p>
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
