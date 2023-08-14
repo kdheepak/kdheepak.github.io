@@ -259,7 +259,7 @@ t("MyNewPackage")
 ## `JET`
 
 [`JET.jl`](https://github.com/aviatesk/JET.jl) is a powerful static code analyzer tailored for the Julia programming language.
-`JET` serves as a "linter" – not only flagging syntax errors but also identifying potential runtime errors without actually executing the code.
+`JET` serves as a "linter" – identifying potential runtime errors without actually executing the code.
 It works by simulating the Julia compiler's type inference process.
 
 ```julia
