@@ -2,6 +2,7 @@
 title: "Julia Tips and Tricks for a Better Developer Experience"
 summary: In this blog post, I present some ways you can improve your developer experience using Julia
 date: 2023-08-12T21:14:15-0500
+keywords: julia, tips, tricks, developer, experience, workflow
 categories: [julia]
 ---
 
