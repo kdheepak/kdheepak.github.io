@@ -326,8 +326,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Keep in mind that these packages will be added to your root environment. This means they are not available to import inside a package, and only in a REPL environment. Also, if you want to ensure you have reproducible environments for yourself and for the people you share your code with, you should use dedicated per-project local environments for that, instead of adding packages to your global environment.</p>
-<p>I personally only add packages that improve my developer workflow, e.g.&nbsp;<code>Revise</code>, <code>BenchmarkTools</code>, <code>OhMyREPL</code>, to my root environment.</p>
+<p>When adding packages in Julia, they typically get added to what’s known as the <q>global environment.</q> While these packages can be readily used within the Julia REPL (an interactive command-line interface for Julia), they won’t be available for import within Julia packages.</p>
+<p>For those aiming to ensure consistency in code execution—both for themselves and others—it’s essential to use dedicated, per-project local environments. This approach ensures that the same set of package versions are always used, enhancing reproducibility.</p>
+<p>Personally, I reserve the global environment for packages that enhance my development workflow, such as <code>Revise</code>, <code>BenchmarkTools</code>, and <code>OhMyREPL</code>.</p>
 </div>
 </div>
 </div>
@@ -537,7 +538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(<span class="fl">1000</span>)   <span class="co"># =&gt; never terminates</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(m)      <span class="co"># =&gt; ERROR: UndefVarError: `m` not defined</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fib</span>(<span class="st">"1000"</span>) <span class="co"># =&gt; ERROR: MethodError: no method matching isless(::String, ::Int64)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can see the other kinds of warnings that JET can produce in the <a href="https://github.com/aviatesk/JET.jl/blob/master/demo.jl"><code>demo.jl</code></a>.</p>
+<p>You can see the other kinds of warnings that JET can produce in the <a href="https://github.com/aviatesk/JET.jl/blob/master/demo.jl"><code>demo.jl file</code></a>.</p>
 </section>
 <section id="liveserver" class="level3">
 <h3 class="anchored" data-anchor-id="liveserver"><code>LiveServer</code></h3>
