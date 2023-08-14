@@ -229,8 +229,9 @@ You may also be interested in [`TestEnv.jl`](https://github.com/JuliaTesting/Tes
 
 ## `PkgTemplates`
 
-[`PkgTemplates.jl`](https://github.com/invenia/PkgTemplates.jl) is a utility package that makes the process of creating new packages efficient, systematic, and customizable.
-`PkgTemplates` offers a simplified way to generate new Julia packages with numerous features out-of-the-box that adhere to best practices (e.g. GitHub Actions, Documenter, etc).
+Julia has a built-in way to create a new package, using `Pkg.generate()`.
+However, [`PkgTemplates.jl`](https://github.com/invenia/PkgTemplates.jl) is a package that makes the process of creating new packages as easy and customizable at the same time.
+`PkgTemplates` can generate new Julia packages with numerous features out-of-the-box that follow best practices (e.g. GitHub Actions, Documenter, etc).
 
 Creating a new package then becomes as straightforward as running the following:
 
