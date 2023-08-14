@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-08-13">
 <meta name="keywords" content="julia, tips, tricks, developer, experience, workflow">
 
-<title>kdheepak - Julia Tips and Tricks for a Better Developer Experience</title>
+<title>kdheepak - Julia Workflow Tips and Tricks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,11 +138,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../_quarto/styles.css">
-<meta property="og:title" content="kdheepak - Julia Tips and Tricks for a Better Developer Experience">
-<meta property="og:description" content="">
+<meta property="og:title" content="kdheepak - Julia Workflow Tips and Tricks">
+<meta property="og:description" content="For a Better Developer Experience">
 <meta property="og:site_name" content="kdheepak">
-<meta name="twitter:title" content="kdheepak - Julia Tips and Tricks for a Better Developer Experience">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="kdheepak - Julia Workflow Tips and Tricks">
+<meta name="twitter:description" content="For a Better Developer Experience">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Julia Tips and Tricks for a Better Developer Experience</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Julia Workflow Tips and Tricks</li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#comonicon" id="toc-comonicon" class="nav-link" data-scroll-target="#comonicon"><code>Comonicon</code></a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/julia-tips-and-tricks-workflow/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/julia-workflow-tips-and-tricks/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -240,7 +240,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Julia Tips and Tricks for a Better Developer Experience</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/julia-tips-and-tricks-workflow/index.qmd"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Julia Workflow Tips and Tricks</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/julia-workflow-tips-and-tricks/index.qmd"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">For a Better Developer Experience</p>
   </div>
 
 
@@ -361,7 +362,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://github.com/timholy/Revise.jl"><code>Revise.jl</code></a> is a game-changer for Julia development. It automatically reloads modified source files without restarting the Julia session. This makes iterative development much smoother.</p>
 <p>Once set up, any changes you make to your code files are immediately available in your active Julia session.</p>
 <p>Revise can <q>track</q> changes in single files if you include them using <code>includet</code>:</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260318612-abf12aa0-9f48-4082-b6ef-037a81e8fbbb.gif" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://user-images.githubusercontent.com/1813121/260318612-abf12aa0-9f48-4082-b6ef-037a81e8fbbb.gif" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
 <p>If you want <code>Revise</code> to track changes in a package you are developing locally, simply run <code>using Revise</code> before you load the package for the first time.</p>
 <p>See <a href="https://timholy.github.io/Revise.jl/stable/config/">Revise’s documentation</a> for how to set this up to happen automatically all the time by adding setup code to your <code>startup.jl</code> file.</p>
 <div class="callout callout-style-simple callout-note">
@@ -376,7 +381,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">+   y::Float64</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>Revise</code> throws a warning and changes the color of the Julia prompt:</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
 <p>There are some workarounds for this but the easiest thing to do is to <strong>restart the Julia session</strong> if you are making changes to a <code>struct</code>. Watch for the <code>Revise</code> warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in <q>yellow</q>, you know <code>Revise</code> wasn’t able to track a change you made.</p>
 </div>
 </div>
@@ -386,7 +395,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="infiltrator"><code>Infiltrator</code></h3>
 <p><a href="https://github.com/JuliaDebug/Infiltrator.jl"><code>Infiltrator.jl</code></a> is a debugger and code inspection tool for Julia. It allows you to insert breakpoints in your code and inspect the current scope’s variables.</p>
 <p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
 <p>You can also use <code>@infiltrate i == 3</code> and that’ll drop you into a Julia REPL only in the third iteration of the <code>for</code> loop.</p>
 <p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data in the scope of any function interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
 </section>
@@ -438,9 +451,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Step through optimized LLVM code interactively</li>
 </ul>
 <p>For example, if we examine the <code>mysum</code> function from the previous section, we can see that <code>a</code> is being inferred as a <code>Int64</code> or a <code>Float64</code>, i.e.&nbsp;<code>Union{Float64, Int64}</code>.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
 <p>In this particular case, by changing <code>a = 0</code> to <code>a = 0.0</code>, we can make the code generated by Julia more optimized.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
 <p>Here’s the benchmark results with <code>a = 0</code> (left) and <code>a = 0.0</code> (right):</p>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -494,16 +515,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
   author = {Krishnamurthy, Dheepak},
-  title = {Julia {Tips} and {Tricks} for a {Better} {Developer}
-    {Experience}},
+  title = {Julia {Workflow} {Tips} and {Tricks}},
   date = {2023-08-13},
-  url = {https://kdheepak.com/blog/julia-tips-and-tricks-workflow},
+  url = {https://kdheepak.com/blog/julia-workflow-tips-and-tricks},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 <div class="">D.
-Krishnamurthy, <span>“Julia Tips and Tricks for a Better Developer
-Experience,”</span> Aug. 13, 2023. <a href="https://kdheepak.com/blog/julia-tips-and-tricks-workflow">https://kdheepak.com/blog/julia-tips-and-tricks-workflow</a>.</div>
+Krishnamurthy, <span>“Julia Workflow Tips and Tricks,”</span> Aug. 13,
+2023. <a href="https://kdheepak.com/blog/julia-workflow-tips-and-tricks">https://kdheepak.com/blog/julia-workflow-tips-and-tricks</a>.</div>
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
