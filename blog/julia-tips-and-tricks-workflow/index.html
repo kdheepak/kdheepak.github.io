@@ -221,6 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ohmyrepl" id="toc-ohmyrepl" class="nav-link" data-scroll-target="#ohmyrepl"><code>OhMyREPL</code></a></li>
   <li><a href="#revise.jl" id="toc-revise.jl" class="nav-link" data-scroll-target="#revise.jl"><code>Revise.jl</code></a></li>
   <li><a href="#infiltrator" id="toc-infiltrator" class="nav-link" data-scroll-target="#infiltrator"><code>Infiltrator</code></a></li>
+  <li><a href="#precompiletools" id="toc-precompiletools" class="nav-link" data-scroll-target="#precompiletools"><code>PrecompileTools</code></a></li>
   <li><a href="#benchmarktools" id="toc-benchmarktools" class="nav-link" data-scroll-target="#benchmarktools"><code>BenchmarkTools</code></a></li>
   <li><a href="#cthulhu" id="toc-cthulhu" class="nav-link" data-scroll-target="#cthulhu"><code>Cthulhu</code></a></li>
   <li><a href="#retest-and-inlinetests" id="toc-retest-and-inlinetests" class="nav-link" data-scroll-target="#retest-and-inlinetests"><code>ReTest</code> and <code>InlineTests</code></a></li>
@@ -322,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(<span class="cn">LOAD_PATH</span>, <span class="fu">joinpath</span>(<span class="cn">ENV</span>[<span class="st">"HOME"</span>], <span class="st">"gitrepos"</span>, <span class="st">"Startup.jl"</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="im">using</span> <span class="bu">Startup</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The advantage of this is that the contents of <code>Startup.jl</code> can be precompiled and your Julia REPL starts up very quickly.</p>
+<p>The advantage of this approach is that the contents of <code>Startup.jl</code> can be precompiled and your Julia REPL starts up very quickly.</p>
 <p>With the <code>Startup.jl</code> package approach, your root environment can be empty and you can still use functionality exposed by <code>Startup.jl</code>:</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -389,6 +390,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can also use <code>@infiltrate i == 3</code> and that’ll drop you into a Julia REPL only in the third iteration of the <code>for</code> loop.</p>
 <p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data in the scope of any function interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
 </section>
+<section id="precompiletools" class="level3">
+<h3 class="anchored" data-anchor-id="precompiletools"><code>PrecompileTools</code></h3>
+<p><a href="https://julialang.github.io/PrecompileTools.jl/stable/">PrecompileTools</a> is a package that allows package developers to specify which parts of the package should be precompiled. From the official documentation:</p>
+<blockquote class="blockquote">
+<p><code>PrecompileTools</code> can force precompilation of specific workloads; particularly with Julia 1.9 and higher, the precompiled code can be saved to disk, so that it doesn’t need to be compiled freshly in each Julia session. You can use <code>PrecompileTools</code> as a package developer, to reduce the latency experienced by users of your package for <q>typical</q> workloads; you can also use <code>PrecompileTools</code> as a user, creating custom <q>Startup</q> package(s) that precompile workloads important for your work.</p>
+</blockquote>
+<p>Precompiling Julia packages can significantly reduce the loading times for you and your users, providing a much more responsive experience.</p>
+<p>For example, I have the following in my <code>Startup.jl</code> to reduce Julia REPL startup times:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> Startup</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PrecompileTools</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="pp">@setup_workload</span> <span class="cf">begin</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="pp">@compile_workload</span> <span class="cf">begin</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">Revise</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">OhMyREPL</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="benchmarktools" class="level3">
 <h3 class="anchored" data-anchor-id="benchmarktools"><code>BenchmarkTools</code></h3>
 <p><a href="https://github.com/JuliaCI/BenchmarkTools.jl">BenchmarkTools.jl</a> is an essential package to help quantify the performance of your code. It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.</p>
@@ -442,12 +465,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="liveserver" class="level3">
 <h3 class="anchored" data-anchor-id="liveserver"><code>LiveServer</code></h3>
 <p><a href="https://github.com/tlienart/LiveServer.jl"><code>LiveServer.jl</code></a> allows developers to serve static sites locally and refreshes your browser automatically as you edit source files. You can even use it as to view or update documentation.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># serve documentation of any package</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"./docs"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">servedocs</span>(; launch_browser <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># serve contents of any folder</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">serve</span>(; dir, launch_browser <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># serve documentation of any package</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"./docs"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>LiveServer.<span class="fu">servedocs</span>(; launch_browser <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="comonicon" class="level3">
 <h3 class="anchored" data-anchor-id="comonicon"><code>Comonicon</code></h3>
