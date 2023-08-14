@@ -5,6 +5,8 @@ summary: In this blog post, I present some ways you can improve your developer e
 date: 2023-08-12T21:14:15-0500
 keywords: julia, tips, tricks, developer, experience, workflow
 categories: [julia]
+filters:
+  - ../../_quarto/image-to-link.lua
 ---
 
 Julia is a high-performance, dynamic programming language designed for technical computing and data science.
