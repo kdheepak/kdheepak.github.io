@@ -40,6 +40,13 @@ let
 end
 ```
 
+::: callout-note
+Keep in mind that these packages will be added to your root environment. This means they are not available to import inside a package, and only in a REPL environment.
+Also, if you want to ensure you have reproducible environments for yourself and for the people you share your code with, you should use dedicated environments for that.
+
+I personally only add packages that improve my developer workflow, e.g. `Revise`, `BenchmarkTools`, `OhMyREPL`, to my root environment.
+:::
+
 [This thread on the JuliaLang Discourse](https://discourse.julialang.org/t/what-is-in-your-startup-jl/18228) has some neat examples of things you may want to add to your `startup.jl`.
 
 If you wish to go one step further, you can create a Julia package called [Startup.jl](https://github.com/kdheepak/Startup.jl), place it anywhere on your computer and load it in `startup.jl` using the following code:
