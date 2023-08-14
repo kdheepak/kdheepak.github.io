@@ -263,7 +263,7 @@ fib(m)      # => ERROR: UndefVarError: `m` not defined
 fib("1000") # => ERROR: MethodError: no method matching isless(::String, ::Int64)
 ```
 
-You can see the other kinds of warnings that JET can produce in the [`demo.jl`](https://github.com/aviatesk/JET.jl/blob/master/demo.jl).
+You can see the other kinds of warnings that JET can produce in the [`demo.jl file`](https://github.com/aviatesk/JET.jl/blob/master/demo.jl).
 
 ## `LiveServer`
 
