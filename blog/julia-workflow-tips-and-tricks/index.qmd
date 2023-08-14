@@ -95,11 +95,16 @@ Revise can "track" changes in single files if you include them using `includet`:
 
 If you want `Revise` to track changes in a package you are developing locally, simply run `using Revise` before you load the package for the first time.
 
+::: callout-note
+If you use VSCode and start a REPL using the `Julia: Start REPL` command, `Revise` is automatically loaded by default.
+
+![](https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png){fig-align="center" width=75%}
+:::
+
 See [Revise's documentation](https://timholy.github.io/Revise.jl/stable/config/) for how to set this up to happen automatically all the time by adding setup code to your `startup.jl` file.
 
-::: callout-note
-`Revise.jl` cannot deal with changes in `struct`.
-In the screenshot below, I change a struct `Foo` like so after tracking the file with `Revise`:
+One of the issues with `Revise` is that it cannot deal with changes in `struct`.
+Let's say I wanted to make a change like this:
 
 ```diff
   struct Foo
@@ -112,8 +117,10 @@ In the screenshot below, I change a struct `Foo` like so after tracking the file
 
 ![](https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif){fig-align="center" width=75%}
 
-There are some workarounds for this but the easiest thing to do is to **restart the Julia session** if you are making changes to a `struct`.
-Watch for the `Revise` warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see it in "yellow", you know `Revise` wasn't able to track a change you made.
+There are some workarounds for this but the easiest thing to do is to **restart the Julia session** after you are make changes to any `struct`.
+
+::: callout-note
+Watch for the `Revise` warnings and errors and keep an eye out for the color of your Julia REPL prompt. If you see the prompt in "yellow", you know `Revise` wasn't able to track a change you made.
 :::
 
 ## `Infiltrator`
