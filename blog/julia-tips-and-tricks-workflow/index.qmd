@@ -41,7 +41,7 @@ end
 
 [This thread on the JuliaLang Discourse](https://discourse.julialang.org/t/what-is-in-your-startup-jl/18228) has some neat examples of things you may want to add to your `startup.jl`.
 
-If you wish to go one step further, you can create a Julia package called [Startup.jl](https://github.com/kdheepak/Startup.jl), place it anywhere on your computer and load it in `startup.jl`.
+If you wish to go one step further, you can create a Julia package called [Startup.jl](https://github.com/kdheepak/Startup.jl), place it anywhere on your computer and load it in `startup.jl` using the following code:
 
 ```julia
 if Base.isinteractive()
