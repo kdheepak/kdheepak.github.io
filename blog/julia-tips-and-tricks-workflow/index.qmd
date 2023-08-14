@@ -50,7 +50,7 @@ if Base.isinteractive()
 end
 ```
 
-The advantage of this is that the contents of `Startup.jl` can be precompiled and your Julia REPL starts up very quickly.
+The advantage of this approach is that the contents of `Startup.jl` can be precompiled and your Julia REPL starts up very quickly.
 
 With the `Startup.jl` package approach, your root environment can be empty and you can still use functionality exposed by `Startup.jl`:
 
@@ -122,6 +122,34 @@ You can also use `@infiltrate i == 3` and that'll drop you into a Julia REPL onl
 When using `@infiltrate conditional_expression` with `Revise`, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL.
 You can even load additional packages like `DataFrames` or `Plots` to explore your data in the scope of any function interactively while debugging.
 This combination can make for a versatile and productive debugging experience.
+
+## `PrecompileTools`
+
+[PrecompileTools](https://julialang.github.io/PrecompileTools.jl/stable/) is a package that allows package developers to specify which parts of the package should be precompiled.
+From the official documentation:
+
+> `PrecompileTools` can force precompilation of specific workloads; particularly with Julia 1.9 and higher, the precompiled code can be saved to disk, so that it doesn't need to be compiled freshly in each Julia session. 
+> You can use `PrecompileTools` as a package developer, to reduce the latency experienced by users of your package for "typical" workloads; you can also use `PrecompileTools` as a user, creating custom "Startup" package(s) that precompile workloads important for your work.
+
+Precompiling Julia packages can significantly reduce the loading times for you and your users, providing a much more responsive experience.
+
+For example, I have the following in my `Startup.jl` to improve Julia REPL startup times:
+
+```julia
+module Startup
+
+using PrecompileTools
+
+@setup_workload begin
+  @compile_workload begin
+    using Pkg
+    using Revise
+    using OhMyREPL
+  end
+end
+
+end
+```
 
 ## `BenchmarkTools`
 
