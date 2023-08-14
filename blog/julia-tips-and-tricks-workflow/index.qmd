@@ -125,7 +125,6 @@ This combination can make for a versatile and productive debugging experience.
 
 ## `BenchmarkTools`
 
-Performance is one of the main reasons developers flock to Julia.
 [BenchmarkTools.jl](https://github.com/JuliaCI/BenchmarkTools.jl) is an essential package to help quantify the performance of your code.
 It provides utilities to benchmark code snippets, giving insights into their run-time and memory allocations.
 
