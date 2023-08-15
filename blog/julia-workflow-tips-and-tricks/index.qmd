@@ -5,8 +5,6 @@ summary: In this blog post, I present some ways you can improve your developer e
 date: 2023-08-12T21:14:15-0500
 keywords: julia, tips, tricks, developer, experience, workflow
 categories: [julia]
-filters:
-  - ../../_quarto/image-to-link.lua
 ---
 
 Julia is a high-performance, dynamic programming language designed for technical computing and data science.
@@ -66,7 +64,7 @@ The advantage of this approach is that the contents of `Startup.jl` can be preco
 
 With the `Startup.jl` package approach, your root environment can be empty and you can still use functionality exposed by `Startup.jl`:
 
-![Using `Startup.jl` to load `BenchmarkTools` with an empty root environment.](https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png){fig-align="center" width=75%}
+![Using `Startup.jl` to load `BenchmarkTools` with an empty root environment.](https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png){fig-align="center" width=75% clickable=true}
 
 ::: callout-tip
 You can use `julia --startup-file=no` to _not_ execute the contents for `startup.jl`, i.e. get a clean Julia REPL.
@@ -79,9 +77,9 @@ Once installed, it can enhance your REPL experience dramatically, making it more
 
 ::: {layout-ncol=2}
 
-![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png){width=50% align="center"}
+![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png){width=50% align="center" clickable=true}
 
-![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png){width=51% align="center"}
+![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png){width=51% align="center" clickable=true}
 
 :::
 
@@ -95,14 +93,14 @@ Once set up, any changes you make to your code files are immediately available i
 
 Revise can "track" changes in single files if you include them using `includet`:
 
-![](https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif){fig-align="center" width=75%}
+![](https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif){fig-align="center" width=75% clickable=true}
 
 If you want `Revise` to track changes in a package you are developing locally, simply run `using Revise` before you load the package for the first time.
 
 ::: callout-note
 If you use VSCode and start a REPL using the `Julia: Start REPL` command, `Revise` is automatically loaded by default.
 
-![](https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png){fig-align="center" width=75%}
+![](https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png){fig-align="center" width=75% clickable=true}
 :::
 
 See [Revise's documentation](https://timholy.github.io/Revise.jl/stable/config/) for how to set this up to happen automatically all the time by adding setup code to your `startup.jl` file.
@@ -119,7 +117,7 @@ Let's say I wanted to make a change like this:
 
 `Revise` throws an error and warning because it is unable to make that change; and `Revise` changes the color of the Julia prompt:
 
-![](https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif){fig-align="center" width=75%}
+![](https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif){fig-align="center" width=75% clickable=true}
 
 There are some [workarounds](https://timholy.github.io/Revise.jl/stable/limitations/) for this but the easiest thing to do is to **restart the Julia session** after you are make changes to any `struct`.
 
@@ -134,7 +132,7 @@ It allows you to insert breakpoints in your code and inspect the current scope's
 
 When Julia hits the `@infiltrate` macro, it'll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.
 
-![](https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif){fig-align="center" width=75%}
+![](https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif){fig-align="center" width=75% clickable=true}
 
 You can also use `@infiltrate i == 3` and that'll drop you into a Julia REPL only in the third iteration of the `for` loop.
 
@@ -180,9 +178,9 @@ As an example, we can compare the performance of a custom `sum` function without
 
 ::: {layout-ncol=2}
 
-![](https://user-images.githubusercontent.com/1813121/260319654-904e72cb-633d-490f-8fbc-fbef61fabb4f.png)
+![](https://user-images.githubusercontent.com/1813121/260319654-904e72cb-633d-490f-8fbc-fbef61fabb4f.png){ clickable=true }
 
-![](https://user-images.githubusercontent.com/1813121/260319610-309b43b8-1476-43a3-a279-ab3c0158bc74.png)
+![](https://user-images.githubusercontent.com/1813121/260319610-309b43b8-1476-43a3-a279-ab3c0158bc74.png){ clickable=true }
 
 :::
 
@@ -193,19 +191,19 @@ Delving deep into Julia's compiler optimizations and type inference can sometime
 
 For example, if we examine the `mysum` function from the previous section, we can see that `a` is being inferred as a `Int64` or a `Float64`, i.e. `Union{Float64, Int64}`.
 
-![](https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png){fig-align="center" width=75%}
+![](https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png){fig-align="center" width=75% clickable=true}
 
 In this particular case, by changing `a = 0` to `a = 0.0`, we can make the code generated by Julia more optimized, i.e. `a` is now being inferred only as a `Float64`.
 
-![](https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png){fig-align="center" width=75%}
+![](https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png){fig-align="center" width=75% clickable=true}
 
 Here's the benchmark results with `a = 0` (left) and `a = 0.0` (right), with the latter being almost 3 times faster.
 
 ::: {layout-ncol=2}
 
-![](https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png){fig-alt="`a = 0`" width=50%}
+![](https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png){fig-alt="`a = 0`" width=50% clickable=true}
 
-![](https://user-images.githubusercontent.com/1813121/260308548-b8667f60-5caf-4974-9d5d-cfc7280a0ed2.png){fig-alt="`a = 0.0`" width=50%}
+![](https://user-images.githubusercontent.com/1813121/260308548-b8667f60-5caf-4974-9d5d-cfc7280a0ed2.png){fig-alt="`a = 0.0`" width=50% clickable=true}
 
 :::
 
@@ -220,7 +218,7 @@ If you choose to run it with `retest`, you can make changes that are tracked wit
 
 In the screenshot below, I have shown an example of having a `@testset` as part of the package itself, i.e. in `./src/layout.jl`:
 
-![`InlineTests` allows co-locating tests along with the implementation.](https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png)
+![`InlineTests` allows co-locating tests along with the implementation.](https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png){ clickable=true }
 
 You'll also notice from the screenshot that `ReTest` contains a function called `retest` which allows running a subset of tests by passing in a pattern as the second argument.
 
@@ -304,7 +302,7 @@ Using Comonicon, you can:
 
 For example, I've added into my [`Startup.jl/src/jl.jl`](https://github.com/kdheepak/Startup.jl/blob/d1959b2d08868b04d3f33911b6260275bb22a34b/src/jl.jl) some helper subcommands that I can access from that command line in any folder.
 
-![](https://user-images.githubusercontent.com/1813121/260335151-77fd4892-ae97-49e2-ab54-7b2fee44bda0.png)
+![](https://user-images.githubusercontent.com/1813121/260335151-77fd4892-ae97-49e2-ab54-7b2fee44bda0.png){ clickable=true }
 
 ## Conclusion
 
