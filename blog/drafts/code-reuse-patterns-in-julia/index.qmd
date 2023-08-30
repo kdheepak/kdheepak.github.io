@@ -1,6 +1,5 @@
 ---
-title: "Code Reuse Patterns in Julia"
-summary: "I want to showcase some ways you can minimize code duplication"
+title: "Code Reuse Patterns in Python, Rust and Julia"
 date: 2023-08-19T20:12:13-0500
 keywords:
   - julia
@@ -8,68 +7,190 @@ keywords:
   - code reuse
   - inheritance
   - composition
-categories: [python, julia]
+categories: [python, rust, julia]
 draft: true
 ---
 
-Let's say you were interested in building a `TrafficLight` simulator in Python.
-
-You might start off with something like this:
+## Python
 
 ```python
-class TrafficLight:
-    def __init__(self):
-        self.state = "Red"
+class Light:
+    def __init__(self, color=None):
+        if color is not None:
+            self.color = color
+        else:
+            self.color = "Red"
 
-    def next(self):
-        if self.state == "Red":
-            self.state = "Yellow"
-        elif self.state == "Yellow":
-            self.state = "Green"
-        elif self.state == "Green":
-            self.state = "Red"
 
-    def __repr__(self):
-        return f"TrafficLight(state = '{self.state}')"
+class BlinkingLight(Light):
+    def __init__(self, color=None, blink_speed=None):
+        Light.__init__(self, color)
+        if blink_speed is not None:
+            self.blink_speed = blink_speed
+        else:
+            self.blink_speed = "Fast"
+
+
+class SoundAlert(Light):
+    def __init__(self, color=None, sound_type=None):
+        Light.__init__(self, color)
+        if sound_type is not None:
+            self.sound_type = sound_type
+        else:
+            self.sound_type = "Ping"
+
+
+class PedestrianCrossingLight(BlinkingLight, SoundAlert):
+    def __init__(self, color=None, blink_speed=None, sound_type=None):
+        BlinkingLight.__init__(self, color, blink_speed)
+        SoundAlert.__init__(self, color, sound_type)
+
+    def safety_message(self):
+        return "Please wait for the light before crossing."
+
+
+def pedestrian_crossing_greeting(light):
+    return f"This light is {light.color}. It blinks at a speed of {light.blink_speed}. The sound alert type is {light.sound_type}. Safety message: {light.safety_message()}"
+
+
+def main():
+    crossing_light = PedestrianCrossingLight("Red", "Medium", "Beep beep")
+    greeting = pedestrian_crossing_greeting(crossing_light)
+    print(greeting)
+
+
+if __name__ == "__main__":
+    main()
 ```
 
+## Julia
 
-```python
-class PedestrianTrafficLight(TrafficLight):
-    def __init__(self):
-        super().__init__()
-        self.state = "Stop"
+```julia
+struct Light
+  color::String
+  function Light(color::String="Red")
+    new(color)
+  end
+end
+color(l::Light) = l.color
 
-    def next(self):
-        if self.state == "Stop":
-            self.state = "Walk"
-        elif self.state == "Walk":
-            self.state = "Stop"
+struct BlinkingLight
+  light::Light
+  blink_speed::String
+  function BlinkingLight(color::String="Red", blink_speed::String="Fast")
+    new(Light(color), blink_speed)
+  end
+end
+color(l::BlinkingLight) = color(l.light)
+blink_speed(l::BlinkingLight) = l.blink_speed
+
+struct SoundAlert
+  light::Light
+  sound_type::String
+  function SoundAlert(color::String="Red", sound_type::String="Ping")
+    new(Light(color), sound_type)
+  end
+end
+color(l::SoundAlert) = color(l.light)
+sound_type(l::SoundAlert) = l.sound_type
+
+struct PedestrianCrossingLight
+  blinking_light::BlinkingLight
+  sound_alert::SoundAlert
+
+  function PedestrianCrossingLight(color::String="Red", blink_speed::String="Fast", sound_type::String="Ping")
+    new(BlinkingLight(color, blink_speed), SoundAlert(color, sound_type))
+  end
+end
+color(l::PedestrianCrossingLight) = color(l.blinking_light)
+blink_speed(l::PedestrianCrossingLight) = blink_speed(l.blinking_light)
+sound_type(l::PedestrianCrossingLight) = sound_type(l.sound_alert)
+
+function safety_message(light::PedestrianCrossingLight)
+  return "Please wait for the light before crossing."
+end
+
+function pedestrian_crossing_greeting(light::PedestrianCrossingLight)
+  return "This light is $(color(light)). It blinks at a speed of $(blink_speed(light)). The sound alert type is $(sound_type(light)). Safety message: $(safety_message(light))"
+end
+
+function main()
+  crossing_light = PedestrianCrossingLight("Red", "Medium", "Beep beep")
+  greeting = pedestrian_crossing_greeting(crossing_light)
+  println(greeting)
+end
+
+main()
+
 ```
 
-```python
-ptl = PedestrianTrafficLight()
-ptl
-```
+## Rust
 
-```
-TrafficLight(state = 'Stop')
-```
+```rust
+trait Light {
+  fn color(&self) -> String;
+}
 
-```python
-ptl.next()
-ptl
-```
+trait BlinkingLight: Light {
+  fn blinking_speed(&self) -> &str;
+}
 
-```
-TrafficLight(state = 'Walk')
-```
+trait SoundAlert: Light {
+  fn sound_type(&self) -> String;
+}
 
-```python
-ptl.next()
-ptl
-```
+trait PedestrianCrossingLight: BlinkingLight + SoundAlert {
+  fn safety_message(&self) -> String;
+}
 
-```
-TrafficLight(state = 'Stop')
+struct PedestrianTrafficLight {
+  light_color: String,
+  blink_speed: String,
+  alert_sound: String,
+}
+
+impl Light for PedestrianTrafficLight {
+  fn color(&self) -> String {
+    self.light_color.clone()
+  }
+}
+
+impl BlinkingLight for PedestrianTrafficLight {
+  fn blinking_speed(&self) -> &str {
+    &self.blink_speed
+  }
+}
+
+impl SoundAlert for PedestrianTrafficLight {
+  fn sound_type(&self) -> String {
+    self.alert_sound.clone()
+  }
+}
+
+impl PedestrianCrossingLight for PedestrianTrafficLight {
+  fn safety_message(&self) -> String {
+    "Please wait for the light before crossing.".to_string()
+  }
+}
+
+fn pedestrian_crossing_greeting(light: &dyn PedestrianCrossingLight) -> String {
+  format!(
+    "This light is {}. It blinks at a speed of {}. The sound alert type is {}. Safety message: {}",
+    light.color(),
+    light.blinking_speed(),
+    light.sound_type(),
+    light.safety_message()
+  )
+}
+
+fn main() {
+  let crossing_light = PedestrianTrafficLight {
+    light_color: "Red".to_string(),
+    blink_speed: "Medium".to_string(),
+    alert_sound: "Beep beep".to_string(),
+  };
+
+  let greeting = pedestrian_crossing_greeting(&crossing_light);
+  println!("{}", greeting);
+}
 ```
