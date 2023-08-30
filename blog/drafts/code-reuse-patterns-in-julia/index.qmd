@@ -65,21 +65,19 @@ if __name__ == "__main__":
 
 ## Julia
 
+### Method 1
+
 ```julia
 struct Light
   color::String
-  function Light(color::String="Red")
-    new(color)
-  end
+  Light(color::Union{Nothing, String}=nothing) = new(isnothing(color) ? "Red" : color)
 end
 color(l::Light) = l.color
 
 struct BlinkingLight
   light::Light
   blink_speed::String
-  function BlinkingLight(color::String="Red", blink_speed::String="Fast")
-    new(Light(color), blink_speed)
-  end
+  BlinkingLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing) = new(Light(color), isnothing(blink_speed) ? "Fast" : blink_speed)
 end
 color(l::BlinkingLight) = color(l.light)
 blink_speed(l::BlinkingLight) = l.blink_speed
@@ -87,9 +85,7 @@ blink_speed(l::BlinkingLight) = l.blink_speed
 struct SoundAlert
   light::Light
   sound_type::String
-  function SoundAlert(color::String="Red", sound_type::String="Ping")
-    new(Light(color), sound_type)
-  end
+  SoundAlert(color::Union{Nothin, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(Light(color), isnothing(sound_type) ? "Ping" : sound_type)
 end
 color(l::SoundAlert) = color(l.light)
 sound_type(l::SoundAlert) = l.sound_type
@@ -97,10 +93,7 @@ sound_type(l::SoundAlert) = l.sound_type
 struct PedestrianCrossingLight
   blinking_light::BlinkingLight
   sound_alert::SoundAlert
-
-  function PedestrianCrossingLight(color::String="Red", blink_speed::String="Fast", sound_type::String="Ping")
-    new(BlinkingLight(color, blink_speed), SoundAlert(color, sound_type))
-  end
+  PedestrianCrossingLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(BlinkingLight(color, blink_speed), SoundAlert(color, sound_type))
 end
 color(l::PedestrianCrossingLight) = color(l.blinking_light)
 blink_speed(l::PedestrianCrossingLight) = blink_speed(l.blinking_light)
@@ -121,7 +114,77 @@ function main()
 end
 
 main()
+```
 
+### Method 2
+
+```julia
+struct Light
+    color::String
+    Light(color::Union{Nothing, String}=nothing) = new(isnothing(color) ? "Red" : color)
+end
+
+struct BlinkingLight
+    light::Light
+    blink_speed::String
+    BlinkingLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing) = new(Light(color), isnothing(blink_speed) ? "Fast" : blink_speed)
+end
+
+function Base.getproperty(pcl::BlinkingLight, sym::Symbol)
+    if sym === :color
+        return getproperty(pcl.light, sym)
+    else
+        return getfield(pcl, sym)
+    end
+end
+
+struct SoundAlert
+    light::Light
+    sound_type::String
+    SoundAlert(color::Union{Nothing, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(Light(color), isnothing(sound_type) ? "Ping" : sound_type)
+end
+
+function Base.getproperty(pcl::SoundAlert, sym::Symbol)
+    if sym === :color
+        return getproperty(pcl.light, sym)
+    else
+        return getfield(pcl, sym)
+    end
+end
+
+struct PedestrianCrossingLight
+    blinking_light::BlinkingLight
+    sound_alert::SoundAlert
+    PedestrianCrossingLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(BlinkingLight(color, blink_speed), SoundAlert(color, sound_type))
+end
+
+function Base.getproperty(pcl::PedestrianCrossingLight, sym::Symbol)
+    if sym === :color
+        return getproperty(pcl.blinking_light, sym)
+    elseif sym === :blink_speed
+        return getproperty(pcl.blinking_light, sym)
+    elseif sym === :sound_type
+        return getproperty(pcl.sound_alert, sym)
+    else
+        return getfield(pcl, sym)
+    end
+end
+
+function safety_message(light::PedestrianCrossingLight)
+    return "Please wait for the light before crossing."
+end
+
+function pedestrian_crossing_greeting(light::PedestrianCrossingLight)
+    return "This light is $(light.color). It blinks at a speed of $(light.blink_speed). The sound alert type is $(light.sound_type). Safety message: $(safety_message(light))"
+end
+
+function main()
+    crossing_light = PedestrianCrossingLight("Red", "Medium", "Beep beep")
+    greeting = pedestrian_crossing_greeting(crossing_light)
+    println(greeting)
+end
+
+main()
 ```
 
 ## Rust
