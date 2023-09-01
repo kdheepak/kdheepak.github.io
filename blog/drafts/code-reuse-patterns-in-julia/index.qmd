@@ -1,5 +1,5 @@
 ---
-title: "Code Reuse Patterns in Python, Rust and Julia"
+title: "Code Reuse Patterns in Python, Rust and Julia: Part 1"
 date: 2023-08-19T20:12:13-0500
 keywords:
   - julia
@@ -10,8 +10,6 @@ keywords:
 categories: [python, rust, julia]
 draft: true
 ---
-
-One of the most common ways to make code re-usable in Python is by using classes and inheritance.
 
 Let's say for example we wanted to model traffic lights in Python and Julia.
 
@@ -43,6 +41,8 @@ In Julia, we can use a `struct` and the `@kwdef` macro
 
 :::
 
+One of the most common ways to make data re-usable in Python is by using classes and inheritance.
+However, Julia doesn't support inheritance and requires the use of composition and delegation.
 
 ::: {.panel-tabset group="language"}
 
@@ -62,20 +62,29 @@ class BlinkingTrafficLight(TrafficLight):
 const DEFAULT_TRAFFIC_LIGHT_BLINK_SPEED = "Fast"
 
 struct BlinkingTrafficLight
-    light::TrafficLight
-    blink_speed::String
+  light::TrafficLight
+  blink_speed::String
 end
 BlinkingTrafficLight(; blink_speed, kwargs...) = BlinkingTrafficLight(; light = TrafficLight(; kwargs...), blink_speed)
 
 function Base.getproperty(pcl::BlinkingTrafficLight, sym::Symbol)
-    if sym === :color
-        return getproperty(pcl.light, sym)
-    else
-        return getfield(pcl, sym)
-    end
+  if sym === :color
+    return getproperty(pcl.light, sym)
+  else
+    return getfield(pcl, sym)
+  end
 end
 ```
+
 :::
+
+The `BlinkingTrafficLight` struct in Julia is using composition by containing a `TrafficLight`
+within it and is using delegation by forwarding requests for the color property to its internal
+`TrafficLight` object.
+
+::: {.panel-tabset group="language"}
+
+## Python
 
 ```python
 DEFAULT_TRAFFIC_LIGHT_SOUND_TYPE = "Ping"
@@ -83,118 +92,37 @@ DEFAULT_TRAFFIC_LIGHT_SOUND_TYPE = "Ping"
 @dataclass
 class SoundAlert(TrafficLight):
   sound_type: str = "Ping"
-```
 
-
-```python
 @dataclass
 class PedestrianTrafficLight(BlinkingTrafficLight, SoundAlert):
   pass
 ```
 
-
-```python
-PedestrianTrafficLight("Red", "Medium", "Beep beep")
-```
-
-```
-PedestrianTrafficLight(color='Red', sound_type='Medium', blink_speed='Beep beep')
-```
-
 ## Julia
 
-### Method 1
-
 ```julia
-struct TrafficLight
-  color::String
-  TrafficLight(color::Union{Nothing, String}=nothing) = new(isnothing(color) ? "Red" : color)
-end
-color(l::TrafficLight) = l.color
-
-struct BlinkingTrafficLight
-  light::TrafficLight
-  blink_speed::String
-  BlinkingTrafficLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing) = new(TrafficLight(color), isnothing(blink_speed) ? "Fast" : blink_speed)
-end
-color(l::BlinkingTrafficLight) = color(l.light)
-blink_speed(l::BlinkingTrafficLight) = l.blink_speed
-
 struct SoundAlert
   light::TrafficLight
   sound_type::String
-  SoundAlert(color::Union{Nothin, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(TrafficLight(color), isnothing(sound_type) ? "Ping" : sound_type)
 end
-color(l::SoundAlert) = color(l.light)
-sound_type(l::SoundAlert) = l.sound_type
+SoundAlert(; sound_type, kwargs...) = SoundAlert(; light = TrafficLight(; kwargs...), sound_type)
+function Base.getproperty(pcl::SoundAlert, sym::Symbol)
+  if sym === :color
+    return getproperty(pcl.light, sym)
+  else
+    return getfield(pcl, sym)
+  end
+end
 
 struct PedestrianTrafficLight
   blinking_light::BlinkingTrafficLight
   sound_alert::SoundAlert
-  PedestrianTrafficLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(BlinkingTrafficLight(color, blink_speed), SoundAlert(color, sound_type))
 end
-color(l::PedestrianTrafficLight) = color(l.blinking_light)
-blink_speed(l::PedestrianTrafficLight) = blink_speed(l.blinking_light)
-sound_type(l::PedestrianTrafficLight) = sound_type(l.sound_alert)
-
-function safety_message(light::PedestrianTrafficLight)
-  return "Please wait for the light before crossing."
+function PedestrianTrafficLight(; blink_speed = DEFAULT_TRAFFIC_LIGHT_BLINK_SPEED, sound_type = DEFAULT_TRAFFIC_LIGHT_SOUND_TYPE, color = DEFAULT_TRAFFIC_LIGHT_COLOR)
+  blinking_light = BlinkingTrafficLight(blink_speed = blink_speed, color = color)
+  sound_alert = SoundAlert(sound_type = sound_type, color = color)
+  PedestrianTrafficLight(blinking_light, sound_alert)
 end
-
-function pedestrian_light_status(light::PedestrianTrafficLight)
-  return "This light is $(color(light)). It blinks at a speed of $(blink_speed(light)). The sound alert type is $(sound_type(light)). Safety message: $(safety_message(light))"
-end
-
-function main()
-  crossing_light = PedestrianTrafficLight("Red", "Medium", "Beep beep")
-  greeting = pedestrian_light_status(crossing_light)
-  println(greeting)
-end
-
-main()
-```
-
-### Method 2
-
-```julia
-struct TrafficLight
-    color::String
-end
-
-struct BlinkingTrafficLight
-    light::TrafficLight
-    blink_speed::String
-    BlinkingTrafficLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing) = new(TrafficLight(color), isnothing(blink_speed) ? "Fast" : blink_speed)
-end
-
-function Base.getproperty(pcl::BlinkingTrafficLight, sym::Symbol)
-    if sym === :color
-        return getproperty(pcl.light, sym)
-    else
-        return getfield(pcl, sym)
-    end
-end
-
-struct SoundAlert
-    light::TrafficLight
-    sound_type::String
-    SoundAlert(color::Union{Nothing, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(TrafficLight(color), isnothing(sound_type) ? "Ping" : sound_type)
-end
-
-function Base.getproperty(pcl::SoundAlert, sym::Symbol)
-    if sym === :color
-        return getproperty(pcl.light, sym)
-    else
-        return getfield(pcl, sym)
-    end
-end
-
-struct PedestrianTrafficLight
-    blinking_light::BlinkingTrafficLight
-    sound_alert::SoundAlert
-    PedestrianTrafficLight(color::Union{Nothing, String}=nothing, blink_speed::Union{Nothing, String}=nothing, sound_type::Union{Nothing, String}=nothing) = new(BlinkingTrafficLight(color, blink_speed), SoundAlert(color, sound_type))
-end
-
 function Base.getproperty(pcl::PedestrianTrafficLight, sym::Symbol)
     if sym === :color
         return getproperty(pcl.blinking_light, sym)
@@ -206,21 +134,4 @@ function Base.getproperty(pcl::PedestrianTrafficLight, sym::Symbol)
         return getfield(pcl, sym)
     end
 end
-
-function safety_message(light::PedestrianTrafficLight)
-    return "Please wait for the light before crossing."
-end
-
-function pedestrian_light_status(light::PedestrianTrafficLight)
-    return "This light is $(light.color). It blinks at a speed of $(light.blink_speed). The sound alert type is $(light.sound_type). Safety message: $(safety_message(light))"
-end
-
-function main()
-    crossing_light = PedestrianTrafficLight("Red", "Medium", "Beep beep")
-    greeting = pedestrian_light_status(crossing_light)
-    println(greeting)
-end
-
-main()
 ```
-
