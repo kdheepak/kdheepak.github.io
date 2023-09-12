@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.320">
+<meta name="generator" content="quarto-1.4.358">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="&quot;me&quot;"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
+    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="me"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>It would be nice to integrate Tikz as part of the blog.</p>
+<p>This is a demo of integrating Tikz as part of the blog.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\def</span> <span class="fu">\n</span> {5}</span>
@@ -271,31 +271,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    arc ({360/<span class="fu">\n</span> * (<span class="fu">\s</span> - 1)+<span class="fu">\margin</span>}:{360/<span class="fu">\n</span> * (<span class="fu">\s</span>)-<span class="fu">\margin</span>}:<span class="fu">\radius</span>);</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="5c9bf74b" class="cell" data-execution_count="2">
+<div id="5dbac3c1" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Markdown</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="bu">Sys</span>.<span class="fu">isapple</span>()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="im">using</span> <span class="bu">TikzPictures</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  tp <span class="op">=</span> <span class="fu">TikzPicture</span>(L<span class="st">"""</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">  \def </span><span class="sc">\n</span><span class="st"> {5}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">  \def </span><span class="sc">\r</span><span class="st">adius {3cm}</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">  \def \margin {8} % margin in angles, depends on the radius</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">\f</span><span class="st">oreach \s in {1,...,</span><span class="sc">\n</span><span class="st">}</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  {</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">\n</span><span class="st">ode[draw, circle] at ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)}:</span><span class="sc">\r</span><span class="st">adius) {</span><span class="sc">$</span><span class="st">\</span>s<span class="sc">$</span><span class="st">};</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">    \</span>draw<span class="st">[-&gt;, &gt;=latex] ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:</span><span class="sc">\r</span><span class="st">adius)</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">      arc ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:{360/</span><span class="sc">\n</span><span class="st"> * (\s)-\margin}:</span><span class="sc">\r</span><span class="st">adius);</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">  """</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save</span>(<span class="fu">SVG</span>(<span class="st">"test"</span>), tp)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  md<span class="st">"""![](./test.svg)"""</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">TikzPictures</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tp <span class="op">=</span> <span class="fu">TikzPicture</span>(L<span class="st">"""</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\n</span><span class="st"> {5}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">\def </span><span class="sc">\r</span><span class="st">adius {3cm}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">\def \margin {8} % margin in angles, depends on the radius</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="sc">\f</span><span class="st">oreach \s in {1,...,</span><span class="sc">\n</span><span class="st">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">\n</span><span class="st">ode[draw, circle] at ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)}:</span><span class="sc">\r</span><span class="st">adius) {</span><span class="sc">$</span><span class="st">\</span>s<span class="sc">$</span><span class="st">};</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">  \</span>draw<span class="st">[-&gt;, &gt;=latex] ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:</span><span class="sc">\r</span><span class="st">adius)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">    arc ({360/</span><span class="sc">\n</span><span class="st"> * (\s - 1)+\margin}:{360/</span><span class="sc">\n</span><span class="st"> * (\s)-\margin}:</span><span class="sc">\r</span><span class="st">adius);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(<span class="fu">SVG</span>(<span class="st">"test"</span>), tp)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>md<span class="st">"""![](./test.svg)"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre data-code-line-numbers="nil"><code>LoadError: LoadError: UndefVarError: `@L_str` not defined
-in expression starting at In[3]:4</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<p><img src="./test.svg" class="img-fluid"></p>
 </div>
 </div>
 
@@ -304,6 +301,7 @@ in expression starting at In[3]:4</code></pre>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2022,
   author = {Krishnamurthy, Dheepak},
   title = {Using {Tikz} with {Pandoc}},
+  pages = {undefined},
   date = {2022-02-19},
   url = {https://kdheepak.com/blog/using-tikz-with-pandoc},
   langid = {en}

@@ -10,7 +10,7 @@
 <link>https://kdheepak.com/blog/index.html</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.320</generator>
+<generator>quarto-1.4.358</generator>
 <lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
 <item>
   <title>Julia Workflow Tips and Tricks</title>
@@ -110,7 +110,7 @@
   <title>Using Tikz with Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/using-tikz-with-pandoc/index.html</link>
-  <description><![CDATA[ It would be nice to integrate Tikz as part of the blog. ]]></description>
+  <description><![CDATA[ This is a demo of integrating Tikz as part of the blog. ]]></description>
   <category>pandoc</category>
   <guid>https://kdheepak.com/blog/using-tikz-with-pandoc/index.html</guid>
   <pubDate>Sat, 19 Feb 2022 02:03:31 GMT</pubDate>
@@ -448,16 +448,6 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Robotics</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/robotics/index.html</link>
-  <description><![CDATA[ 
-Robotics and Microcontroller Projects
- ]]></description>
-  <guid>https://kdheepak.com/blog/robotics/index.html</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/tasker-and-google-maps/index.html</link>
@@ -474,6 +464,16 @@ Robotics and Microcontroller Projects
   <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
   <category>osx</category>
   <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Robotics</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/robotics/index.html</link>
+  <description><![CDATA[ 
+Robotics and Microcontroller Projects
+ ]]></description>
+  <guid>https://kdheepak.com/blog/robotics/index.html</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>

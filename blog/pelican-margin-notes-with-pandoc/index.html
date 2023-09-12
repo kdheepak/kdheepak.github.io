@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.320">
+<meta name="generator" content="quarto-1.4.358">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -206,7 +206,7 @@ div.csl-indent {
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="&quot;me&quot;"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
+    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="me"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -341,15 +341,15 @@ div.csl-indent {
 <div class="page-columns page-full"><p>This is the syntax in Markdown.</p><div class="no-row-height column-margin column-container"><span class="">And this is the margin note.</span></div></div>
 </blockquote>
 <p>When run through the filter, the above will be rendered as the following html.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>This is an example for the syntax<span class="dt">&lt;</span><span class="kw">span</span> <span class="er">id</span><span class="ot">=</span><span class="st">"aside-0"</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> in Markdown.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"div-aside-0"</span><span class="dt">&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">aside</span> <span class="er">id</span><span class="ot">=</span><span class="st">"aside-0"</span><span class="dt">&gt;</span>This is a note that will appear in a tag<span class="dt">&lt;/</span><span class="kw">aside</span><span class="dt">&gt;</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>This is an example for the syntax<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> id</span><span class="op">=</span><span class="st">"aside-0"</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> in Markdown.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"div-aside-0"</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">aside</span><span class="ot"> id</span><span class="op">=</span><span class="st">"aside-0"</span><span class="dt">&gt;</span>This is a note that will appear in a tag<span class="dt">&lt;/</span><span class="kw">aside</span><span class="dt">&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The location of the footnote is replaced with a <code>&lt;span&gt;</code> tag, and an <code>&lt;aside&gt;</code> tag wrapped in a <code>&lt;div&gt;</code> tag is added to the end of the paragraph. This filter will also assign <code>id</code> to the <code>&lt;span&gt;</code>, <code>&lt;aside&gt;</code> and <code>&lt;div&gt;</code> tags sequentially. Additional functionally can be added here, but for now this seems to work for my purposes.</p>
 <p>With the HTML generated with <code>&lt;aside&gt;</code> tags, it is now a question of assigning the right css. This turned out to be more tricky than I originally anticipated. The current theme uses bootstrap and the following layout to display content.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"row"</span><span class="dt">&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"col-sm-8"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"col-sm-4"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"row"</span><span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-sm-8"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-sm-4"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Because of the way Pelican and Jinja work, and because of how Pandoc returns the content to Pelican, the entire article content is stored in the first <code>&lt;div&gt;</code> element of width 8 units. Ideally, each paragraph would be wrapped in <code>&lt;div&gt;</code> elements of one class, with <code>&lt;aside&gt;</code> elements wrapped in a neighboring div class. With the current structure of Pelican, the only way I could do that is by injecting <code>&lt;div&gt;</code> elements all over the place using something like <a href="https://www.crummy.com/software/BeautifulSoup/">beautifulsoup</a>. However I decided against it for now, and am using CSS to move the <code>&lt;aside&gt;</code> elements outside the element they are currently positioned in. Since the <code>&lt;aside&gt;</code> elements are located below the actual paragraph, I added javascript to move them up by their height. A better implementation could use the location of the <code>&lt;span&gt;</code> elements to fix the position of the notes.</p>
 </section>
@@ -372,6 +372,7 @@ div.csl-indent {
 </div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2016,
   author = {Krishnamurthy, Dheepak},
   title = {Pelican Margin Notes with {Pandoc}},
+  pages = {undefined},
   date = {2016-10-09},
   url = {https://kdheepak.com/blog/pelican-margin-notes-with-pandoc},
   langid = {en}

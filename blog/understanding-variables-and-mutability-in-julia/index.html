@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.320">
+<meta name="generator" content="quarto-1.4.358">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -26,7 +26,7 @@ ul.task-list li input[type="checkbox"] {
 q { quotes: "“" "”" "‘" "’"; }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -207,7 +207,7 @@ div.csl-indent {
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="&quot;me&quot;"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
+    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="me"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -335,30 +335,30 @@ div.csl-indent {
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This creates a new label <code>x</code> that is associated to an object in memory. You can retrieve a value that is bound to a label using the label itself.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 0. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┘  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                  │</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>           │             │</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>           │             │</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>           │      x      │</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>           │             │</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>           │             │</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
+     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x30 │    │    │    │    │ 0. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x60 │    │    │  ┌─┼────┼─┘  │    │    │    │    │    │    │    │    │    │    │    │
+     └────┴────┴──┼─┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
+                  │
+           ┌──────┴──────┐
+           │             │
+           │             │
+           │      x      │
+           │             │
+           │             │
+           └─────────────┘</code></pre>
 <p>We can use existing labels in assignments in the Right Hand Side (RHS):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y <span class="op">=</span> x;</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -370,30 +370,30 @@ div.csl-indent {
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you see a <code>=</code> symbol and to the left of the <code>=</code> there is a simple name of a variable, that is an assignment operation. When you ask to perform this action, <code>x = [0.0, 0.0, 0.0, 0.0]</code>, the <code>[0.0, 0.0, 0.0, 0.0]</code> object is created, and label called <code>x</code> that is bound to said created object.</p>
 <p>When you assign <code>y = x</code>, you are asking to create new label called <code>y</code> that is also bound to the same object as the <code>x</code> label.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 0. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┴──┼────┼─┐  │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                  │                  │</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
+     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x30 │    │    │    │    │ 0. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x60 │    │    │  ┌─┼────┼─┴──┼────┼─┐  │    │    │    │    │    │    │    │    │    │
+     └────┴────┴──┼─┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
+                  │                  │
+           ┌──────┴──────┐    ┌──────┴──────┐
+           │             │    │             │
+           │             │    │             │
+           │      x      │    │      y      │
+           │             │    │             │
+           │             │    │             │
+           └─────────────┘    └─────────────┘</code></pre>
 <p>So in our analogy, the <code>x</code> and <code>y</code> variables are two labels that you and the librarian agree point to the same <q>book</q> on the <q>bookshelf</q> (i.e.&nbsp;the same object in memory).</p>
 <div class="page-columns page-full"><p>In Julia, you can check the location by using the <code>pointer()</code> function:</p><div class="no-row-height column-margin column-container"><span class="">The <code>pointer</code> function only works for mutable objects</span></div></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(x)</span>
@@ -433,30 +433,30 @@ div.csl-indent {
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is like if the librarian changed a page in the book located at label <code>x</code>. If you came back later and asked for the book located at label <code>y</code>, you’d get the same book as you would have with label <code>y</code>, which would contain the same changes.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┴──┼────┼─┐  │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                  │                  │</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
+     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x50 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x60 │    │    │  ┌─┼────┼─┴──┼────┼─┐  │    │    │    │    │    │    │    │    │    │
+     └────┴────┴──┼─┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
+                  │                  │
+           ┌──────┴──────┐    ┌──────┴──────┐
+           │             │    │             │
+           │             │    │             │
+           │      x      │    │      y      │
+           │             │    │             │
+           │             │    │             │
+           └─────────────┘    └─────────────┘</code></pre>
 <p>When you modify <code>x[1] = 2.0</code>, you are telling Julia to make a change to the object bound to the <code>x</code> label, which in this case changes the first element of the vector to <code>2.0</code>. And since <code>y</code> points to the same memory location as <code>x</code>, when you inspect the <code>y</code> variable, you will see that it also reflects the same changes made to the underlying memory location. Because both <code>x</code> and <code>y</code> are just different labels pointing to the same memory location, any changes made through one of the labels will be visible when you look at the contents through the other label.</p>
 <p>But what if you did want to create a entirely new object instead? You can do that using the <code>deepcopy()</code> function:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> y <span class="op">=</span> <span class="fu">deepcopy</span>(x)</span>
@@ -472,30 +472,30 @@ div.csl-indent {
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(y)</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x0000000107e4c880</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the analogy of the bookshelf, using <code>deepcopy()</code> would be like asking the librarian to make a photocopy of a book and place it at a new location on the shelf.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┘  │    │    │ │  │    │    │    │    │    │    │    │    │</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┘</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                  │                  ┌────┘</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
+     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x50 │    │    │    │    │ │  │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x60 │    │    │  ┌─┼────┼─┘  │    │    │ │  │    │    │    │    │    │    │    │    │
+     └────┴────┴──┼─┴────┴────┴────┴────┴─┼──┴────┴────┴────┴────┴────┴────┴────┴────┘
+                  │                  ┌────┘
+           ┌──────┴──────┐    ┌──────┴──────┐
+           │             │    │             │
+           │             │    │             │
+           │      x      │    │      y      │
+           │             │    │             │
+           │             │    │             │
+           └─────────────┘    └─────────────┘</code></pre>
 <p>The new object created is completely independent from the old, with its own unique address. Any changes made to the original object will not affect the copy and vice versa.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
@@ -944,7 +944,7 @@ div.csl-indent {
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>is equivalent to:</p>
+<p>is essentially equivalent to:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> <span class="cn">nothing</span>)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="fu">isnothing</span>(arr)</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> []</span>
@@ -1016,30 +1016,30 @@ div.csl-indent {
 <p>In Julia, you can use the <code>const</code> keyword before declaring a variable for the first time in the global scope.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> <span class="fu">Dict</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In our analogy, this is like if the librarian handed back a label that would always be bound to the same object for the life of the program.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │</span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │</span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>0x50 │    │    │    │    │ │  │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │</span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>     ├────┼────┼────┼────┼─┼──┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┤</span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>0x60 │    │    │  ┌─┼────┼─┘  │    │    │ │  │    │Dict│    │    │    │    │    │    │</span>
-<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>     └────┴────┴──┼─┴────┴────┴────┴────┴─┼──┴────┴─▲──┴────┴────┴────┴────┴────┴────┘</span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>                  │                  ┌────┘         ╚══════════╗</span>
-<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>           ┌──────┴──────┐    ┌──────┴──────┐           ╔══════╩═══════╗</span>
-<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
-<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
-<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>           │      x      │    │      y      │           ║    CONFIG    ║</span>
-<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
-<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>           │             │    │             │           ║              ║</span>
-<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>           └─────────────┘    └─────────────┘           ╚══════════════╝</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>      0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
+     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x10 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x20 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x30 │    │    │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x40 │    │    │    │    │ │  │    │    │    │    │    │    │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x50 │    │    │    │    │ │  │    │    │ 2. │ 0. │ 0. │ 0. │    │    │    │    │    │
+     ├────┼────┼────┼────┼─┼──┼────┼────┼─▲──┼────┼────┼────┼────┼────┼────┼────┼────┤
+0x60 │    │    │  ┌─┼────┼─┘  │    │    │ │  │    │Dict│    │    │    │    │    │    │
+     └────┴────┴──┼─┴────┴────┴────┴────┴─┼──┴────┴─▲──┴────┴────┴────┴────┴────┴────┘
+                  │                  ┌────┘         ╚══════════╗
+           ┌──────┴──────┐    ┌──────┴──────┐           ╔══════╩═══════╗
+           │             │    │             │           ║              ║
+           │             │    │             │           ║              ║
+           │      x      │    │      y      │           ║    CONFIG    ║
+           │             │    │             │           ║              ║
+           │             │    │             │           ║              ║
+           └─────────────┘    └─────────────┘           ╚══════════════╝</code></pre>
 <p>For the duration of the program, the <code>CONFIG</code> label will point to location <code>0x6009</code>.</p>
 <p>Trying to redefine a <code>const</code> variable to bind to a different value is an error:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> []</span>
@@ -1073,6 +1073,7 @@ div.csl-indent {
 </div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
   author = {Krishnamurthy, Dheepak},
   title = {Understanding Variables and Mutability in {Julia}},
+  pages = {undefined},
   date = {2023-02-26},
   url = {https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia},
   langid = {en}
