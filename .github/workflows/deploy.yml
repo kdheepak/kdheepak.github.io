@@ -22,7 +22,7 @@ jobs:
       - run: pip install jupyter jupyter-client jupyter-cache
 
       - name: Install IJulia Conda
-        run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.add("Conda");'
+        run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.add("Conda"); Pkg.instantiate(); Pkg.build()'
 
       - name: Run apt update and install
         run: |
