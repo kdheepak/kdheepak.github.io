@@ -1,0 +1,11 @@
+{
+  "hash": "81f3418cd4b02c89c9dd2b3f0a1c486a",
+  "result": {
+    "markdown": "---\ntitle: Using Tikz with Pandoc\ndate: 2022-02-18T20:03:31-06:00\ncategories: [pandoc]\nkeywords: tikz, latex, pandoc, lua, filter\nsummary: Showcase of using integrating Tikz with Pandoc lua filters\n---\n\nThis is a demo of integrating Tikz as part of the blog.\n\n```tikz\n\\begin{tikzpicture}\n\n\\def \\n {5}\n\\def \\radius {3cm}\n\\def \\margin {8} % margin in angles, depends on the radius\n\n\\foreach \\s in {1,...,\\n}\n{\n  \\node[draw, circle] at ({360/\\n * (\\s - 1)}:\\radius) {$\\s$};\n  \\draw[->, >=latex] ({360/\\n * (\\s - 1)+\\margin}:\\radius)\n    arc ({360/\\n * (\\s - 1)+\\margin}:{360/\\n * (\\s)-\\margin}:\\radius);\n}\n\\end{tikzpicture}\n```\n\n\n::: {#5dbac3c1 .cell execution_count=3}\n``` {.julia .cell-code code-fold=\"true\"}\nusing Markdown\nusing TikzPictures\ntp = TikzPicture(L\"\"\"\n\\def \\n {5}\n\\def \\radius {3cm}\n\\def \\margin {8} % margin in angles, depends on the radius\n\n\\foreach \\s in {1,...,\\n}\n{\n  \\node[draw, circle] at ({360/\\n * (\\s - 1)}:\\radius) {$\\s$};\n  \\draw[->, >=latex] ({360/\\n * (\\s - 1)+\\margin}:\\radius)\n    arc ({360/\\n * (\\s - 1)+\\margin}:{360/\\n * (\\s)-\\margin}:\\radius);\n}\n\"\"\")\nsave(SVG(\"test\"), tp)\nmd\"\"\"![](./test.svg)\"\"\"\n```\n\n::: {.cell-output .cell-output-display execution_count=3}\n![](./test.svg)\n\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
