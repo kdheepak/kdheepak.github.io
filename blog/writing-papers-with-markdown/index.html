@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.358">
+<meta name="generator" content="quarto-1.4.373">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -371,7 +372,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/raymondhettinger.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Raymond Hettinger</figcaption>
+<figcaption class="margin-caption">Raymond Hettinger</figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -454,9 +455,10 @@ div.csl-indent {
 <p>Markdown is awesome at a set of things, and a much better alternative than Word or <span class="math inline">\(\LaTeX\)</span> for those specific set of things. Take for example this table <a href="#tbl-table" class="quarto-xref">Table&nbsp;2</a>.</p>
 <!-- BEGIN SLIDES -->
 <!-- prettier-ignore -->
-<div id="tbl-table" class="anchored page-columns page-full">
+<div id="tbl-table" class="anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-
 <thead>
 <tr class="header">
 <th style="text-align: right;">Right</th>
@@ -486,7 +488,12 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="quarto-table-caption margin-caption">Table&nbsp;1: Demonstration of simple table syntax.</div></div>
+</div>
+<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Demonstration of simple table syntax.
+</figcaption>
+</figure>
+</div>
 <!-- END SLIDES -->
 <!-- BEGIN SLIDES -->
 <p>This is what the same table looks like in <span class="math inline">\(\LaTeX\)</span>.</p>
@@ -512,7 +519,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/table.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Tabular <span class="math inline">\(\LaTeX\)</span> example <span class="citation" data-cites="noauthor_wikibooks_nodate"><a href="#ref-noauthor_wikibooks_nodate" role="doc-biblioref">[5]</a></span></figcaption>
+<figcaption class="margin-caption">Tabular <span class="math inline">\(\LaTeX\)</span> example <span class="citation" data-cites="noauthor_wikibooks_nodate"><a href="#ref-noauthor_wikibooks_nodate" role="doc-biblioref">[5]</a></span></figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -635,7 +642,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/markdown.png" class="img-fluid figure-img" width="300"></p>
-<figcaption class="figure-caption margin-caption">Caption</figcaption>
+<figcaption class="margin-caption">Caption</figcaption>
 </figure>
 </div>
 </section>
@@ -693,7 +700,7 @@ div.csl-indent {
 <pre><code>Tab space
 for code block</code></pre>
 </section>
-<section id="tables" class="level4 page-columns page-full">
+<section id="tables" class="level4">
 <h4 class="anchored" data-anchor-id="tables"><strong><em>Tables</em></strong></h4>
 <!-- prettier-ignore-start -->
 <div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  Right     Left     Center     Default</span>
@@ -705,9 +712,10 @@ for code block</code></pre>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>:  Demonstration of simple table syntax. {#tbl-table}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!-- prettier-ignore-end -->
 <p><strong>Example</strong></p>
-<div id="tbl-table" class="anchored page-columns page-full">
+<div id="tbl-table" class="anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-
 <thead>
 <tr class="header">
 <th style="text-align: right;">Right</th>
@@ -737,7 +745,12 @@ for code block</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="quarto-table-caption margin-caption">Table&nbsp;2: Demonstration of simple table syntax.</div></div>
+</div>
+<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Demonstration of simple table syntax.
+</figcaption>
+</figure>
+</div>
 </section>
 
 <section id="citations" class="level4">
@@ -868,9 +881,13 @@ for code block</code></pre>
 <p>You can write a complete paper in Markdown and render it in PDF without any issues. I recommend using Markdown and Pandoc for writing over <span class="math inline">\(\LaTeX\)</span> and Word because of its ease of use and its flexibility and versatility. And if you think Markdown is not cutting it for you, you can always convert it to a Word document or a TEX file and continue using your usual workflow. Check out my attempt at describing the relationship between complexity of document and difficulty in implementing when using Word, <span class="math inline">\(\LaTeX\)</span> and Markdown in <a href="#fig-learningcurve" class="quarto-xref">Figure&nbsp;1</a>.</p>
 <!-- BEGIN SLIDESNOHEADER -->
 <div id="fig-learningcurve" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="images/learningcurve.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;1: Comparing Word, <span class="math inline">\(\LaTeX\)</span> and Markdown</figcaption>
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-learningcurve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/learningcurve.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig margin-caption" id="fig-learningcurve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Comparing Word, <span class="math inline">\(\LaTeX\)</span> and Markdown
+</figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -893,7 +910,7 @@ for code block</code></pre>
 </ol>
 </aside>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-stallman_emacs" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Emacs as a word processors.”</span> [Online]. Available: <a href="https://lists.gnu.org/archive/html/emacs-devel/2013-11/msg00515.html">https://lists.gnu.org/archive/html/emacs-devel/2013-11/msg00515.html</a>.</div>
 </div>
@@ -948,7 +965,7 @@ for code block</code></pre>
 <div id="ref-noauthor_pandoc_nodate-1" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[18] </div><div class="csl-right-inline"><span>“Pandoc <span>README</span>.”</span> Accessed: Jan. 08, 2016. [Online]. Available: <a href="https://pandoc.org/MANUAL.html">https://pandoc.org/MANUAL.html</a>.</div>
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
   author = {Krishnamurthy, Dheepak},
   title = {Writing Technical Papers with {Markdown} and {Pandoc}},
   pages = {undefined},

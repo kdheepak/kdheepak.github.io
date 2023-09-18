@@ -10,7 +10,7 @@
 <link>https://kdheepak.com/blog/index.html</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.358</generator>
+<generator>quarto-1.4.373</generator>
 <lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
 <item>
   <title>Julia Workflow Tips and Tricks</title>
@@ -291,7 +291,7 @@
   <title>Spotify and tmux</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/spotify-and-tmux/index.html</link>
-  <description><![CDATA[ <img src="https://kdheepak.com/blog/spotify-and-tmux/images/tmux-spotify.png" class="img-fluid"> ]]></description>
+  <description><![CDATA[ Create a file named tmux-spotify-info and place it in a directory that in your <code>$PATH</code>. Add the following snippet of code into the file and make sure it is executable. ]]></description>
   <category>tmux</category>
   <guid>https://kdheepak.com/blog/spotify-and-tmux/index.html</guid>
   <pubDate>Sun, 20 Sep 2015 15:26:15 GMT</pubDate>
@@ -448,6 +448,16 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Robotics</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/robotics/index.html</link>
+  <description><![CDATA[ 
+Robotics and Microcontroller Projects
+ ]]></description>
+  <guid>https://kdheepak.com/blog/robotics/index.html</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/tasker-and-google-maps/index.html</link>
@@ -464,16 +474,6 @@
   <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
   <category>osx</category>
   <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Robotics</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/robotics/index.html</link>
-  <description><![CDATA[ 
-Robotics and Microcontroller Projects
- ]]></description>
-  <guid>https://kdheepak.com/blog/robotics/index.html</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>

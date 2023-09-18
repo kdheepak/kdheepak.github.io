@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.358">
+<meta name="generator" content="quarto-1.4.373">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -703,7 +704,7 @@ div.csl-indent {
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="fu">s.chars()</span><span class="ex">[3]</span> = <span class="st">'♂'</span></span>
 <span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="fu">s.chars()</span><span class="ex">[4]</span> = <span class="st">'\u{fe0f}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There are also additional crates such as <a href="https://github.com/unicode-rs/unicode-width/"><code>unicode-width</code></a> and <a href="https://unicode-rs.github.io/unicode-segmentation/unicode_segmentation/index.html"><code>unicode-segmentation</code></a>.</p>
-<p><code>unicode-width</code> helps determine how many column widths a grapheme will occupy based on the <a href="http://www.unicode.org/reports/tr11/">Unicode Standard Annex #11 rules</a>. For example <code>abc</code> occupies 3 columns but <code>写作业</code> occupies 6 columns but they are both 3 codepoints and 3 graphemes each.</p>
+<p><code>unicode-width</code> helps determine how many column widths a grapheme will occupy based on the <a href="http://www.unicode.org/reports/tr11/">Unicode Standard Annex #11 rules</a>. For example <code>abc</code> occupies 3 columns but <code>写作业</code> occupies 6 columns but they are both 3 codepoints and 3 graphemes each. <code>unicode-segmentation</code> helps with determining the number of graphemes in a string.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.rs</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">unicode_width::</span>UnicodeWidthStr<span class="op">;</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">unicode_segmentation::</span>UnicodeSegmentation<span class="op">;</span></span>
@@ -712,49 +713,45 @@ div.csl-indent {
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> s <span class="op">=</span> <span class="st">"abc"</span><span class="op">;</span></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s)<span class="op">;</span></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>len())<span class="op">;</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>graphemes(<span class="cn">true</span>)<span class="op">.</span>count())<span class="op">;</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>width())<span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>width())<span class="op">;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>graphemes(<span class="cn">true</span>)<span class="op">.</span>count())<span class="op">;</span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="pp">println!</span>(<span class="st">""</span>)<span class="op">;</span></span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> s <span class="op">=</span> <span class="st">"写作业"</span><span class="op">;</span></span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s)<span class="op">;</span></span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>len())<span class="op">;</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>graphemes(<span class="cn">true</span>)<span class="op">.</span>count())<span class="op">;</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>width())<span class="op">;</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>width())<span class="op">;</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>graphemes(<span class="cn">true</span>)<span class="op">.</span>count())<span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="pp">println!</span>(<span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> s <span class="op">=</span> <span class="st">"🤦🏼‍♂️"</span><span class="op">;</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>len())<span class="op">;</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>width())<span class="op">;</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>graphemes(<span class="cn">true</span>)<span class="op">.</span>count())<span class="op">;</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rustc main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:7]</span> s = <span class="st">"abc"</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:8]</span> s.len<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:9]</span> s.graphemes<span class="er">(</span><span class="fu">true</span><span class="kw">)</span><span class="fu">.count()</span> <span class="ex">=</span> 3</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:10]</span> s.width<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:6]</span> s = <span class="st">"abc"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:7]</span> s.len<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:8]</span> s.width<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:9]</span> s.graphemes<span class="er">(</span><span class="fu">true</span><span class="kw">)</span><span class="fu">.count()</span> <span class="ex">=</span> 3</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:15]</span> s = <span class="st">"写作业"</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:16]</span> s.len<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 9</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:17]</span> s.graphemes<span class="er">(</span><span class="fu">true</span><span class="kw">)</span><span class="fu">.count()</span> <span class="ex">=</span> 3</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:18]</span> s.width<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>unicode-segmentation</code> helps with determining the number of graphemes in a string.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.rs</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">unicode_segmentation::</span>UnicodeSegmentation<span class="op">;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">"🤦🏼‍♂️"</span><span class="op">;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="pp">dbg!</span>(s<span class="op">.</span>len())<span class="op">;</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="pp">dbg!</span>(s<span class="op">.</span>graphemes(<span class="cn">true</span>)<span class="op">.</span>count())<span class="op">;</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rustc</span> main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>[src/main.rs:8] s.len() = 17
-[src/main.rs:9] s.graphemes(true).count() = 1</code></pre>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:14]</span> s = <span class="st">"写作业"</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:15]</span> s.len<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 9</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:16]</span> s.width<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 6</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:17]</span> s.graphemes<span class="er">(</span><span class="fu">true</span><span class="kw">)</span><span class="fu">.count()</span> <span class="ex">=</span> 3</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:22]</span> s.len<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 17</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:23]</span> s.width<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 5</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:24]</span> s.graphemes<span class="er">(</span><span class="fu">true</span><span class="kw">)</span><span class="fu">.count()</span> <span class="ex">=</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-hsivonen" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“It’s Not Wrong that <span>‘🤦🏼‍♂️.’</span>length == 7.”</span> [Online]. Available: <a href="https://hsivonen.fi/string-length/">https://hsivonen.fi/string-length/</a>.</div>
 </div>
@@ -776,7 +773,7 @@ div.csl-indent {
 <div id="ref-blist" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[7] </div><div class="csl-right-inline"><span>“How Python does Unicode.”</span> [Online]. Available: <a href="https://www.b-list.org/weblog/2017/sep/05/how-python-does-unicode/">https://www.b-list.org/weblog/2017/sep/05/how-python-does-unicode/</a>.</div>
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
   author = {Krishnamurthy, Dheepak},
   title = {My {Unicode} Cheat Sheet},
   pages = {undefined},

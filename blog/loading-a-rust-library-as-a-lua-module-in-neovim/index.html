@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.358">
+<meta name="generator" content="quarto-1.4.373">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -266,7 +266,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>I was curious if it would be possible to write a lua plugin in pure rust. It turns out this is quite straightforward.</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/128466216-52621bfd-30cb-4d4c-babb-297c99cb79eb.png" class="fullwidth img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="fullwidth quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="https://user-images.githubusercontent.com/1813121/128466216-52621bfd-30cb-4d4c-babb-297c99cb79eb.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="fullwidth img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>TLDR: You can use rust with a library like <a href="https://github.com/khvzak/mlua"><code>mlua</code></a> to compile a cdylib shared library that is also a valid lua module which then can be loaded by neovim. The link to the git tree for all the code in this blog post is <a href="https://github.com/kdheepak/moonshine.nvim/tree/d5b3893b7813e3a46a079d074ef1360c885a5e39">here</a>.</p>
 <section id="motivation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
@@ -405,7 +411,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now in neovim, after a <code>PackerInstall</code> and <code>PackerCompiler</code> you can run <code>:lua print(vim.inspect(require'moonshine'.hello("rust")))</code>:</p>
-<p><img src="https://user-images.githubusercontent.com/1813121/128464855-5da25f9e-5d6d-42e0-b970-adadd8254dc0.gif" class="fullwidth img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="fullwidth quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="https://user-images.githubusercontent.com/1813121/128464855-5da25f9e-5d6d-42e0-b970-adadd8254dc0.gif" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="fullwidth img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>Tada!</p>
 </section>
 <section id="why-is-this-useful" class="level2">
@@ -418,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2021,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2021,
   author = {Krishnamurthy, Dheepak},
   title = {Loading a {Rust} Library as a {Lua} Module in {Neovim}},
   pages = {undefined},

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.358">
+<meta name="generator" content="quarto-1.4.373">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -270,7 +270,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="live-substitution" class="level2">
 <h2 class="anchored" data-anchor-id="live-substitution">Live Substitution</h2>
 <p>By default, <code>vim</code>’s <code>:substitute</code> command only modifies the document when you execute the command by pressing <code>Enter</code> (<code>&lt;CR&gt;</code>). In <code>neovim</code>, you can update the document interactively. <code>neovim</code> also shows you a preview window of all the changes you are going to make in the document.</p>
-<p><img src="images/nvim-live-substitution.mov.gif" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/nvim-live-substitution.mov.gif" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>Just add the following option to your <code>vimrc</code> file.</p>
 <pre class="vim"><code>set inccommand=split</code></pre>
 </section>
@@ -278,7 +284,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="highlight-yanked-text">Highlight Yanked Text</h2>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you want to use this feature in <code>neovim</code> v0.4.x or in <code>vim</code> 8, you can do so with <a href="https://github.com/machakann/vim-highlightedyank">this</a> or <a href="https://github.com/statox/FYT.vim">this</a> plugin. Also, check out this well written <a href="https://www.statox.fr/posts/vim/vim_flash_yanked_text/">post</a> on how this works under the hood.</span></div></div>
 <p>With the latest version of neovim, you have the ability to highlight yanked text without using any plugins.</p>
-<p><img src="images/nvim-highlight-yank.mov.gif" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/nvim-highlight-yank.mov.gif" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>At the time of writing, you’ll need a <code>v0.5.0</code> or the <code>nightly</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> release of <code>neovim</code> for this feature.</p>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Precompiled binaries are available on the <a href="https://github.com/neovim/neovim/releases/tag/nightly">github releases</a> page.</p></li></div><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvim</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>NVIM v0.5.0-556-ge78658348</code></pre>
@@ -294,7 +306,7 @@ augroup END</code></pre>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/nvim-built-in-lsp.mov.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Completion, diagnostics and jump to references in lua.</figcaption>
+<figcaption class="margin-caption">Completion, diagnostics and jump to references in lua.</figcaption>
 </figure>
 </div>
 <p>At the time of writing, you’ll need a <code>v0.5.0</code> or the <code>nightly</code> release of <code>neovim</code> for this feature.</p>
@@ -336,7 +348,7 @@ augroup END</code></pre>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
   author = {Krishnamurthy, Dheepak},
   title = {Three Built-in `Neovim` Features},
   pages = {undefined},

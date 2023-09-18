@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.358">
+<meta name="generator" content="quarto-1.4.373">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -309,7 +309,13 @@ Code
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_3_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/power_3_0.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/power_3_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>We can calculate the maximum, minimum and the RMS value as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rms(x):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(np.mean(x<span class="op">**</span><span class="dv">2</span>))</span>
@@ -386,7 +392,13 @@ Code
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_11_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/power_11_0.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/power_11_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>We can decompose the instantaneous power following the steps below.</p>
 <p><span class="math inline">\(v_{an} = V_{max} \cos(\omega t + \theta)\)</span></p>
 <p><span class="math inline">\(i_{an} = I_{max} \cos\omega t\)</span></p>
@@ -464,7 +476,13 @@ Code
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"power_16_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/power_16_0.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/power_16_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>The blue line (active power) is always positve and has an average value of <span class="math inline">\(\frac{V_{max}I_{max}}{2}\cos\theta\)</span>. If we use RMS values, we get</p>
 <p><span class="math inline">\(P = \frac{V_{max}}{\sqrt{2}} \frac{I_{max}}{\sqrt{2}} \cos\theta\)</span></p>
 <p><span class="math inline">\(P = |V||I|\cos\theta\)</span></p>
@@ -502,7 +520,13 @@ Code
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>d.draw(ax<span class="op">=</span>ax, show<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./schemdraw.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/schemdraw.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/schemdraw.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <details>
 <summary>
 Code
@@ -527,7 +551,13 @@ Code
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_20_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/./power_20_0.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/./power_20_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>We know that <span class="math inline">\(\theta\)</span> is the phase difference between the Voltage and Current.</p>
 <p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t) + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta\)</span></p>
 <p>The first term can be rewritten as</p>
@@ -601,7 +631,13 @@ Code
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_26_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/power_26_0.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/power_26_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>The Instantaneous power in the phase is equal to the active power.</p>
 </section>
 <section id="case-2-theta-is-90" class="level3">
@@ -660,7 +696,13 @@ Code
 <span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_30_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/power_30_0.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/power_30_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>The Instantaneous power in the phase is equal to the reactive power. The power oscillates between the source and the inductive circuit.</p>
 </section>
 <section id="case-3-theta-is--90" class="level3">
@@ -719,7 +761,13 @@ Code
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_34_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p><img src="images/power_34_0.png" class="img-fluid"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<img src="images/power_34_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
 <p>In a purely capacitive circuit, power oscillates between the source and electric field associated with the capacitor.</p>
 </section>
 </section>
@@ -742,7 +790,7 @@ Code
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
   author = {Krishnamurthy, Dheepak},
   title = {Active, Reactive and Apparent Power},
   pages = {undefined},
