@@ -615,7 +615,8 @@ $ rustc main.rs && ./main
 [src/main.rs:16] s.width() = 6
 [src/main.rs:17] s.graphemes(true).count() = 3
 
-[src/main.rs:22] s.len() = 17
-[src/main.rs:23] s.width() = 5
-[src/main.rs:24] s.graphemes(true).count() = 1
+[src/main.rs:22] s = "🤦🏼‍♂️"
+[src/main.rs:23] s.len() = 17
+[src/main.rs:24] s.width() = 5
+[src/main.rs:25] s.graphemes(true).count() = 1
 ```
