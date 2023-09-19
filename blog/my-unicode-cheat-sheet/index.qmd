@@ -597,6 +597,7 @@ fn main() {
   println!("");
 
   let s = "🤦🏼‍♂️";
+  dbg!(s);
   dbg!(s.len());
   dbg!(s.width());
   dbg!(s.graphemes(true).count());
