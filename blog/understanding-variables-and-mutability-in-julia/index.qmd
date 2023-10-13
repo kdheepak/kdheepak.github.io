@@ -79,7 +79,7 @@ julia> x
 This creates a new label `x` that is associated to an object in memory.
 You can retrieve a value that is bound to a label using the label itself.
 
-```
+```svgbob
       0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
      ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
 0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
@@ -125,7 +125,7 @@ and label called `x` that is bound to said created object.
 
 When you assign `y = x`, you are asking to create new label called `y` that is also bound to the same object as the `x` label.
 
-```
+```svgbob
       0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
      ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
 0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
@@ -204,7 +204,7 @@ julia> y
 This is like if the librarian changed a page in the book located at label `x`.
 If you came back later and asked for the book located at label `y`, you'd get the same book as you would have with label `y`, which would contain the same changes.
 
-```
+```svgbob
       0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
      ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
 0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
@@ -254,7 +254,7 @@ Ptr{Float64} @0x0000000107e4c880
 
 In the analogy of the bookshelf, using `deepcopy()` would be like asking the librarian to make a photocopy of a book and place it at a new location on the shelf.
 
-```
+```svgbob
       0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
      ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
 0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
@@ -973,7 +973,7 @@ julia> const CONFIG = Dict()
 
 In our analogy, this is like if the librarian handed back a label that would always be bound to the same object for the life of the program.
 
-```
+```svgbob
       0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F
      ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
 0x00 │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
