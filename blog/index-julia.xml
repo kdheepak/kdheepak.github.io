@@ -6,90 +6,90 @@
       version="2.0">
 <channel>
 <title>kdheepak</title>
-<link>https://kdheepak.com/blog/index.html#category=julia</link>
+<link>https://kdheepak.com/blog/#category=julia</link>
 <atom:link href="https://kdheepak.com/blog/index-julia.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.373</generator>
+<generator>quarto-1.4.420</generator>
 <lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
 <item>
   <title>Julia Workflow Tips and Tricks</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/index.html</link>
+  <link>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/</link>
   <description><![CDATA[ Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++. Like Python, Julia also offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping. ]]></description>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/index.html</guid>
+  <guid>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/</guid>
   <pubDate>Sun, 13 Aug 2023 02:14:15 GMT</pubDate>
 </item>
 <item>
   <title>Visualizing roads in the cities of Canada</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</link>
+  <link>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/</link>
   <description><![CDATA[ Let’s import some packages first. ]]></description>
   <category>julia</category>
   <category>visualization</category>
-  <guid>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</guid>
+  <guid>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/</guid>
   <pubDate>Sat, 29 Apr 2023 16:38:41 GMT</pubDate>
 </item>
 <item>
   <title>Using Makie with Quarto</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/using-makie-with-quarto/index.html</link>
+  <link>https://kdheepak.com/blog/using-makie-with-quarto/</link>
   <description><![CDATA[ Here’s an example of a static image generated using <code>CairoMakie</code>: ]]></description>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/using-makie-with-quarto/index.html</guid>
+  <guid>https://kdheepak.com/blog/using-makie-with-quarto/</guid>
   <pubDate>Thu, 27 Apr 2023 00:22:45 GMT</pubDate>
 </item>
 <item>
   <title>Understanding variables and mutability in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</link>
+  <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/</link>
   <description><![CDATA[ I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective. ]]></description>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</guid>
+  <guid>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/</guid>
   <pubDate>Sun, 26 Feb 2023 02:14:15 GMT</pubDate>
 </item>
 <item>
   <title>Programmers’ preferences for package names</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/index.html</link>
+  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/</link>
   <description><![CDATA[ Are there trends in choosing package names in various programming ecosystems? Do package authors choose names for their packages that are <a href="https://en.wikipedia.org/wiki/Alliteration">alliterated</a> with the name of the programming language? Let’s venture to find out. ]]></description>
   <category>analysis</category>
   <category>python</category>
   <category>julia</category>
   <category>rust</category>
-  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/index.html</guid>
+  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/</guid>
   <pubDate>Fri, 29 Jul 2022 07:47:12 GMT</pubDate>
 </item>
 <item>
   <title>Advent of Code 2020 Retrospective</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/advent-of-code-2020-retrospective/index.html</link>
+  <link>https://kdheepak.com/blog/advent-of-code-2020-retrospective/</link>
   <description><![CDATA[ It is Christmas night, and it is the first time this month that I haven’t had to plan my schedule for the evening around a programming puzzle contest. For the last 25 days this month, I participated in <a href="https://adventofcode.com/2020/">Advent of Code 2020</a>, and I managed to collect all 50 stars! ]]></description>
   <category>adventofcode</category>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/advent-of-code-2020-retrospective/index.html</guid>
+  <guid>https://kdheepak.com/blog/advent-of-code-2020-retrospective/</guid>
   <pubDate>Fri, 25 Dec 2020 07:00:00 GMT</pubDate>
 </item>
 <item>
   <title>My Unicode cheat sheet</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/my-unicode-cheat-sheet/index.html</link>
+  <link>https://kdheepak.com/blog/my-unicode-cheat-sheet/</link>
   <description><![CDATA[ I wanted to make a cheat sheet for myself containing a reference of things I use when it comes to Unicode and when using Unicode in Vim, Python, Julia and Rust. ]]></description>
   <category>neovim</category>
   <category>python</category>
   <category>julia</category>
   <category>rust</category>
-  <guid>https://kdheepak.com/blog/my-unicode-cheat-sheet/index.html</guid>
+  <guid>https://kdheepak.com/blog/my-unicode-cheat-sheet/</guid>
   <pubDate>Sat, 19 Sep 2020 08:29:49 GMT</pubDate>
 </item>
 <item>
   <title>The egg tower puzzle</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/the-egg-tower-puzzle/index.html</link>
+  <link>https://kdheepak.com/blog/the-egg-tower-puzzle/</link>
   <description><![CDATA[ Here is a fun puzzle: ]]></description>
   <category>math</category>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/the-egg-tower-puzzle/index.html</guid>
+  <guid>https://kdheepak.com/blog/the-egg-tower-puzzle/</guid>
   <pubDate>Sun, 07 Jun 2020 02:14:19 GMT</pubDate>
 </item>
 </channel>

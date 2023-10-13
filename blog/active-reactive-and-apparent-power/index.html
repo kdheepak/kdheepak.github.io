@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.373">
+<meta name="generator" content="quarto-1.4.420">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -85,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     null
   ],
@@ -274,6 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+
 <section id="introduction-to-basic-concepts" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-to-basic-concepts">Introduction to basic concepts</h2>
 <p><span class="math inline">\(V\)</span> and <span class="math inline">\(I\)</span> are used to indicate phasor representations of sinusoidal voltages and currents. <span class="math inline">\(E\)</span> is used to represent generated voltage or electromotive force (emf). <span class="math inline">\(V\)</span> is often used to measure a potential difference between two points. <span class="math inline">\(v\)</span> is used to represent the instantaneous voltage between two points.</p>
@@ -309,13 +310,7 @@ Code
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_3_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/power_3_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/power_3_0.png" class="img-fluid"></p>
 <p>We can calculate the maximum, minimum and the RMS value as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rms(x):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(np.mean(x<span class="op">**</span><span class="dv">2</span>))</span>
@@ -392,13 +387,7 @@ Code
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_11_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/power_11_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/power_11_0.png" class="img-fluid"></p>
 <p>We can decompose the instantaneous power following the steps below.</p>
 <p><span class="math inline">\(v_{an} = V_{max} \cos(\omega t + \theta)\)</span></p>
 <p><span class="math inline">\(i_{an} = I_{max} \cos\omega t\)</span></p>
@@ -476,13 +465,7 @@ Code
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"power_16_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/power_16_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/power_16_0.png" class="img-fluid"></p>
 <p>The blue line (active power) is always positve and has an average value of <span class="math inline">\(\frac{V_{max}I_{max}}{2}\cos\theta\)</span>. If we use RMS values, we get</p>
 <p><span class="math inline">\(P = \frac{V_{max}}{\sqrt{2}} \frac{I_{max}}{\sqrt{2}} \cos\theta\)</span></p>
 <p><span class="math inline">\(P = |V||I|\cos\theta\)</span></p>
@@ -520,13 +503,7 @@ Code
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>d.draw(ax<span class="op">=</span>ax, show<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./schemdraw.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/schemdraw.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/schemdraw.png" class="img-fluid"></p>
 <details>
 <summary>
 Code
@@ -551,13 +528,7 @@ Code
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_20_0.png"</span>, transparent<span class="op">=</span><span class="va">True</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/./power_20_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/./power_20_0.png" class="img-fluid"></p>
 <p>We know that <span class="math inline">\(\theta\)</span> is the phase difference between the Voltage and Current.</p>
 <p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t) + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta\)</span></p>
 <p>The first term can be rewritten as</p>
@@ -631,13 +602,7 @@ Code
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_26_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/power_26_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/power_26_0.png" class="img-fluid"></p>
 <p>The Instantaneous power in the phase is equal to the active power.</p>
 </section>
 <section id="case-2-theta-is-90" class="level3">
@@ -696,13 +661,7 @@ Code
 <span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_30_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/power_30_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/power_30_0.png" class="img-fluid"></p>
 <p>The Instantaneous power in the phase is equal to the reactive power. The power oscillates between the source and the inductive circuit.</p>
 </section>
 <section id="case-3-theta-is--90" class="level3">
@@ -761,13 +720,7 @@ Code
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"./power_34_0.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<img src="images/power_34_0.png" id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="images/power_34_0.png" class="img-fluid"></p>
 <p>In a purely capacitive circuit, power oscillates between the source and electric field associated with the capacitor.</p>
 </section>
 </section>
@@ -982,15 +935,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -999,6 +975,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1041,6 +1018,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1116,7 +1116,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -1197,17 +1196,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
     var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
           // target, if specified
           link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
           // default icon
           link.classList.add("external");
       }

@@ -6,491 +6,491 @@
       version="2.0">
 <channel>
 <title>kdheepak</title>
-<link>https://kdheepak.com/blog/index.html</link>
+<link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.373</generator>
+<generator>quarto-1.4.420</generator>
 <lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
 <item>
   <title>Julia Workflow Tips and Tricks</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/index.html</link>
+  <link>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/</link>
   <description><![CDATA[ Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++. Like Python, Julia also offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping. ]]></description>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/index.html</guid>
+  <guid>https://kdheepak.com/blog/julia-workflow-tips-and-tricks/</guid>
   <pubDate>Sun, 13 Aug 2023 02:14:15 GMT</pubDate>
 </item>
 <item>
   <title>Visualizing roads in the cities of Canada</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</link>
+  <link>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/</link>
   <description><![CDATA[ Let’s import some packages first. ]]></description>
   <category>julia</category>
   <category>visualization</category>
-  <guid>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/index.html</guid>
+  <guid>https://kdheepak.com/blog/visualizing-roads-in-the-cities-of-canada/</guid>
   <pubDate>Sat, 29 Apr 2023 16:38:41 GMT</pubDate>
 </item>
 <item>
   <title>Using Makie with Quarto</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/using-makie-with-quarto/index.html</link>
+  <link>https://kdheepak.com/blog/using-makie-with-quarto/</link>
   <description><![CDATA[ Here’s an example of a static image generated using <code>CairoMakie</code>: ]]></description>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/using-makie-with-quarto/index.html</guid>
+  <guid>https://kdheepak.com/blog/using-makie-with-quarto/</guid>
   <pubDate>Thu, 27 Apr 2023 00:22:45 GMT</pubDate>
 </item>
 <item>
   <title>Understanding variables and mutability in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</link>
+  <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/</link>
   <description><![CDATA[ I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective. ]]></description>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/index.html</guid>
+  <guid>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/</guid>
   <pubDate>Sun, 26 Feb 2023 02:14:15 GMT</pubDate>
 </item>
 <item>
   <title>Installing homebrew in an alternative location</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/installing-homebrew-in-an-alternative-location/index.html</link>
+  <link>https://kdheepak.com/blog/installing-homebrew-in-an-alternative-location/</link>
   <description><![CDATA[ See <a href="https://gist.github.com/pudquick/29bc95b6c49703992981864e48f8e341">https://gist.github.com/pudquick/29bc95b6c49703992981864e48f8e341</a> ]]></description>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/installing-homebrew-in-an-alternative-location/index.html</guid>
+  <guid>https://kdheepak.com/blog/installing-homebrew-in-an-alternative-location/</guid>
   <pubDate>Wed, 03 Aug 2022 19:47:12 GMT</pubDate>
 </item>
 <item>
   <title>Programmers’ preferences for package names</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/index.html</link>
+  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/</link>
   <description><![CDATA[ Are there trends in choosing package names in various programming ecosystems? Do package authors choose names for their packages that are <a href="https://en.wikipedia.org/wiki/Alliteration">alliterated</a> with the name of the programming language? Let’s venture to find out. ]]></description>
   <category>analysis</category>
   <category>python</category>
   <category>julia</category>
   <category>rust</category>
-  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/index.html</guid>
+  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/</guid>
   <pubDate>Fri, 29 Jul 2022 07:47:12 GMT</pubDate>
 </item>
 <item>
   <title>Quickstart guide to using a terminal</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal/index.html</link>
+  <link>https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal/</link>
   <description><![CDATA[ If you are typically used to GUI applications, you may feel lost when you are getting started with a terminal. In this post, I’ll share a number of basic things that I think you should know that will help you get familiar with a terminal based workflow. ]]></description>
   <category>terminal</category>
-  <guid>https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal/index.html</guid>
+  <guid>https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal/</guid>
   <pubDate>Tue, 12 Jul 2022 06:03:15 GMT</pubDate>
 </item>
 <item>
   <title>Pandoc lua filter for alerts</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/pandoc-lua-filter-for-alerts/index.html</link>
+  <link>https://kdheepak.com/blog/pandoc-lua-filter-for-alerts/</link>
   <description><![CDATA[ This is the example output of the markdown containing alert divs in pandoc. The unicode icons are inserted into the HTML using a pandoc lua filter. ]]></description>
   <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/pandoc-lua-filter-for-alerts/index.html</guid>
+  <guid>https://kdheepak.com/blog/pandoc-lua-filter-for-alerts/</guid>
   <pubDate>Thu, 31 Mar 2022 08:27:44 GMT</pubDate>
 </item>
 <item>
   <title>Compiling firmware for the Moonlander keyboard with QMK</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/compiling-firmware-for-the-moonlander-keyboard-with-qmk/index.html</link>
+  <link>https://kdheepak.com/blog/compiling-firmware-for-the-moonlander-keyboard-with-qmk/</link>
   <description><![CDATA[ First, clone the <code>qmk_firmware</code> GitHub repo, and make a fork to maintain your custom keyboard firmware. This is what my remotes look like: ]]></description>
   <category>keyboards</category>
-  <guid>https://kdheepak.com/blog/compiling-firmware-for-the-moonlander-keyboard-with-qmk/index.html</guid>
+  <guid>https://kdheepak.com/blog/compiling-firmware-for-the-moonlander-keyboard-with-qmk/</guid>
   <pubDate>Sun, 20 Mar 2022 02:40:31 GMT</pubDate>
 </item>
 <item>
   <title>Sveltekit tailwind starter</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/sveltekit-tailwind-starter/index.html</link>
+  <link>https://kdheepak.com/blog/sveltekit-tailwind-starter/</link>
   <description><![CDATA[ The following is minimal instructions for getting started with the SvelteKit skeleton app, with tailwind and font awesome support. Run the following and follow prompts: ]]></description>
   <category>svelte</category>
-  <guid>https://kdheepak.com/blog/sveltekit-tailwind-starter/index.html</guid>
+  <guid>https://kdheepak.com/blog/sveltekit-tailwind-starter/</guid>
   <pubDate>Sat, 19 Feb 2022 04:03:31 GMT</pubDate>
 </item>
 <item>
   <title>Using Tikz with Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/using-tikz-with-pandoc/index.html</link>
+  <link>https://kdheepak.com/blog/using-tikz-with-pandoc/</link>
   <description><![CDATA[ This is a demo of integrating Tikz as part of the blog. ]]></description>
   <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/using-tikz-with-pandoc/index.html</guid>
+  <guid>https://kdheepak.com/blog/using-tikz-with-pandoc/</guid>
   <pubDate>Sat, 19 Feb 2022 02:03:31 GMT</pubDate>
 </item>
 <item>
   <title>Using MermaidJS with Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/using-mermaidjs-with-pandoc/index.html</link>
+  <link>https://kdheepak.com/blog/using-mermaidjs-with-pandoc/</link>
   <description><![CDATA[ Quarto supports native MermaidJS integration, so I’ve decided to use that instead. You can use the filter from here: <a href="https://github.com/kdheepak/blog/blob/61d1186313f3eb73ac51968a4bd5d051d822da37/pandoc/render.lua" class="uri">https://github.com/kdheepak/blog/blob/61d1186313f3eb73ac51968a4bd5d051d822da37/pandoc/render.lua</a>. ]]></description>
   <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/using-mermaidjs-with-pandoc/index.html</guid>
+  <guid>https://kdheepak.com/blog/using-mermaidjs-with-pandoc/</guid>
   <pubDate>Fri, 18 Feb 2022 04:03:31 GMT</pubDate>
 </item>
 <item>
   <title>Reinstall Xcode command line developer tools</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/reinstall-xcode-command-line-developer-tools/index.html</link>
+  <link>https://kdheepak.com/blog/reinstall-xcode-command-line-developer-tools/</link>
   <description><![CDATA[ Delete existing command line tools and install them again. ]]></description>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/reinstall-xcode-command-line-developer-tools/index.html</guid>
+  <guid>https://kdheepak.com/blog/reinstall-xcode-command-line-developer-tools/</guid>
   <pubDate>Tue, 15 Feb 2022 22:03:31 GMT</pubDate>
 </item>
 <item>
   <title>Loading a Rust library as a Lua module in Neovim</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/loading-a-rust-library-as-a-lua-module-in-neovim/index.html</link>
+  <link>https://kdheepak.com/blog/loading-a-rust-library-as-a-lua-module-in-neovim/</link>
   <description><![CDATA[ I was curious if it would be possible to write a lua plugin in pure rust. It turns out this is quite straightforward. ]]></description>
   <category>rust</category>
   <category>neovim</category>
   <category>lua</category>
-  <guid>https://kdheepak.com/blog/loading-a-rust-library-as-a-lua-module-in-neovim/index.html</guid>
+  <guid>https://kdheepak.com/blog/loading-a-rust-library-as-a-lua-module-in-neovim/</guid>
   <pubDate>Fri, 06 Aug 2021 07:35:00 GMT</pubDate>
 </item>
 <item>
   <title>Advent of Code 2020 Retrospective</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/advent-of-code-2020-retrospective/index.html</link>
+  <link>https://kdheepak.com/blog/advent-of-code-2020-retrospective/</link>
   <description><![CDATA[ It is Christmas night, and it is the first time this month that I haven’t had to plan my schedule for the evening around a programming puzzle contest. For the last 25 days this month, I participated in <a href="https://adventofcode.com/2020/">Advent of Code 2020</a>, and I managed to collect all 50 stars! ]]></description>
   <category>adventofcode</category>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/advent-of-code-2020-retrospective/index.html</guid>
+  <guid>https://kdheepak.com/blog/advent-of-code-2020-retrospective/</guid>
   <pubDate>Fri, 25 Dec 2020 07:00:00 GMT</pubDate>
 </item>
 <item>
   <title>My Unicode cheat sheet</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/my-unicode-cheat-sheet/index.html</link>
+  <link>https://kdheepak.com/blog/my-unicode-cheat-sheet/</link>
   <description><![CDATA[ I wanted to make a cheat sheet for myself containing a reference of things I use when it comes to Unicode and when using Unicode in Vim, Python, Julia and Rust. ]]></description>
   <category>neovim</category>
   <category>python</category>
   <category>julia</category>
   <category>rust</category>
-  <guid>https://kdheepak.com/blog/my-unicode-cheat-sheet/index.html</guid>
+  <guid>https://kdheepak.com/blog/my-unicode-cheat-sheet/</guid>
   <pubDate>Sat, 19 Sep 2020 08:29:49 GMT</pubDate>
 </item>
 <item>
   <title>Using pre-commit hooks</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/using-precommit-hooks/index.html</link>
+  <link>https://kdheepak.com/blog/using-precommit-hooks/</link>
   <description><![CDATA[ <img src="https://kdheepak.com/blog/using-precommit-hooks/images/pre-commit-hooks.png" class="img-fluid figure-img"> ]]></description>
   <category>git</category>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/using-precommit-hooks/index.html</guid>
+  <guid>https://kdheepak.com/blog/using-precommit-hooks/</guid>
   <pubDate>Mon, 27 Jul 2020 16:58:11 GMT</pubDate>
 </item>
 <item>
   <title>Three built-in neovim features</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/three-built-in-neovim-features/index.html</link>
+  <link>https://kdheepak.com/blog/three-built-in-neovim-features/</link>
   <description><![CDATA[ I want to share three built-in <code>neovim</code> features that I think are under the category of <q>quality of life improvements</q>. They are <strong>live substitution</strong>, <strong>highlight yanked text</strong>, and the built-in <strong>language server protocol</strong> support. ]]></description>
   <category>neovim</category>
-  <guid>https://kdheepak.com/blog/three-built-in-neovim-features/index.html</guid>
+  <guid>https://kdheepak.com/blog/three-built-in-neovim-features/</guid>
   <pubDate>Sat, 27 Jun 2020 15:42:32 GMT</pubDate>
 </item>
 <item>
   <title>The egg tower puzzle</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/the-egg-tower-puzzle/index.html</link>
+  <link>https://kdheepak.com/blog/the-egg-tower-puzzle/</link>
   <description><![CDATA[ Here is a fun puzzle: ]]></description>
   <category>math</category>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/the-egg-tower-puzzle/index.html</guid>
+  <guid>https://kdheepak.com/blog/the-egg-tower-puzzle/</guid>
   <pubDate>Sun, 07 Jun 2020 02:14:19 GMT</pubDate>
 </item>
 <item>
   <title>Drawing in ASCII</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/drawing-in-ascii/index.html</link>
+  <link>https://kdheepak.com/blog/drawing-in-ascii/</link>
   <description><![CDATA[ We can define <a href="https://github.com/kdheepak/blog/blob/39513edbb284ed29ce58508f74192d189603c96d/scripts/render.lua">a lua filter for pandoc</a> that takes a code block that has the language defined as <code>render_svgbob</code>, and passes the text inside that code block to <a href="https://github.com/ivanceras/svgbob">svgbob</a>. ]]></description>
   <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/drawing-in-ascii/index.html</guid>
+  <guid>https://kdheepak.com/blog/drawing-in-ascii/</guid>
   <pubDate>Fri, 05 Jun 2020 19:54:19 GMT</pubDate>
 </item>
 <item>
   <title>Neovim + LanguageServer.jl</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/neovim-languageserver-julia/index.html</link>
+  <link>https://kdheepak.com/blog/neovim-languageserver-julia/</link>
   <description><![CDATA[ This is a showcase of some of the capabilities of <a href="https://github.com/julia-vscode/LanguageServer.jl">Julia’s LanguageServer.jl</a> and <a href="https://neovim.io/doc/user/lsp.html">Neovim’s built-in Language Server Protocol (LSP) client</a>, as well as the instructions to install this setup. ]]></description>
   <category>neovim</category>
   <category>julia</category>
-  <guid>https://kdheepak.com/blog/neovim-languageserver-julia/index.html</guid>
+  <guid>https://kdheepak.com/blog/neovim-languageserver-julia/</guid>
   <pubDate>Tue, 02 Jun 2020 07:28:44 GMT</pubDate>
 </item>
 <item>
   <title>Python 2 vs 3</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/python-2-vs-3/index.html</link>
+  <link>https://kdheepak.com/blog/python-2-vs-3/</link>
   <description><![CDATA[ This post is an account of my personal experience. I’m interested in hearing other people’s opinions and having an open discussion on best practices to develop in Python. For the rest of this post, when I mention Python2 / Python3 please infer that I am referring to Python 2.7 / Python 3.5 respectively. ]]></description>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/python-2-vs-3/index.html</guid>
+  <guid>https://kdheepak.com/blog/python-2-vs-3/</guid>
   <pubDate>Fri, 16 Dec 2016 21:31:07 GMT</pubDate>
 </item>
 <item>
   <title>Pelican margin notes with Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/pelican-margin-notes-with-pandoc/index.html</link>
+  <link>https://kdheepak.com/blog/pelican-margin-notes-with-pandoc/</link>
   <description><![CDATA[ I’ve shifted to using quarto. I’ll leave this blog post up for reference if someone is interested. ]]></description>
   <category>pandoc</category>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/pelican-margin-notes-with-pandoc/index.html</guid>
+  <guid>https://kdheepak.com/blog/pelican-margin-notes-with-pandoc/</guid>
   <pubDate>Sun, 09 Oct 2016 23:42:12 GMT</pubDate>
 </item>
 <item>
   <title>mpld3 networkx d3.js force layout</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/index.html</link>
+  <link>https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/</link>
   <description><![CDATA[ <a href="https://mpld3.github.io/">mpld3</a> is a matplotlib to d3 library. It is lightweight and a pure Python / Javascript package, allowing a lot of the matplotlib interface to be accessible in the web. There are a number of <a href="https://mpld3.github.io/examples/">examples</a> on their website. Its integration with d3 allows someone familiar with Javascript to use Python and visualize using the power of d3. d3.js is a powerful low level visualization library and there are loads of examples online on the many features it brings to the table. ]]></description>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/index.html</guid>
+  <guid>https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/</guid>
   <pubDate>Sun, 02 Oct 2016 18:41:05 GMT</pubDate>
 </item>
 <item>
   <title>Raspberry Pi powered LED lamp</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/index.html</link>
+  <link>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/</link>
   <description><![CDATA[ With a Raspberry Pi, you can control a RGB addressable LED strip. The instructions are very simple <span class="citation" data-cites="led">[1]</span> and the results are pretty cool. I decided to make a desk lamp with a web interface. This post will go through the steps to build your own Pi powered desk lamp. ]]></description>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/index.html</guid>
+  <guid>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/</guid>
   <pubDate>Mon, 28 Mar 2016 01:17:58 GMT</pubDate>
 </item>
 <item>
   <title>Neovim and Tmux</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/neovim-and-tmux/index.html</link>
+  <link>https://kdheepak.com/blog/neovim-and-tmux/</link>
   <description><![CDATA[ These instructions are OSX specific. On Windows machines, I tend to use Sublime Text or Atom. On Linux machines, I use Vim when my local machine is OSX running tmux. ]]></description>
   <category>neovim</category>
-  <guid>https://kdheepak.com/blog/neovim-and-tmux/index.html</guid>
+  <guid>https://kdheepak.com/blog/neovim-and-tmux/</guid>
   <pubDate>Sat, 06 Feb 2016 06:54:00 GMT</pubDate>
 </item>
 <item>
   <title>Using conda to manage packages</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/using-conda-to-manage-packages/index.html</link>
+  <link>https://kdheepak.com/blog/using-conda-to-manage-packages/</link>
   <description><![CDATA[ The following quote is from Conda’s github page <span class="citation" data-cites="conda/conda">[1]</span> ]]></description>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/using-conda-to-manage-packages/index.html</guid>
+  <guid>https://kdheepak.com/blog/using-conda-to-manage-packages/</guid>
   <pubDate>Fri, 25 Dec 2015 10:32:51 GMT</pubDate>
 </item>
 <item>
   <title>Writing technical papers with Markdown and Pandoc</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/writing-papers-with-markdown/index.html</link>
+  <link>https://kdheepak.com/blog/writing-papers-with-markdown/</link>
   <description><![CDATA[ You can view this post in the following formats, thanks to Pandoc! ]]></description>
   <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/writing-papers-with-markdown/index.html</guid>
+  <guid>https://kdheepak.com/blog/writing-papers-with-markdown/</guid>
   <pubDate>Sun, 20 Dec 2015 06:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Jupyter Notebook, Reveal.js and Github Pages</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/jupyter-notebook-revealjs-and-github-pages/index.html</link>
+  <link>https://kdheepak.com/blog/jupyter-notebook-revealjs-and-github-pages/</link>
   <description><![CDATA[ Jupyter Notebook has the ability to convert an notebook <code>ipynb</code> to markdown, rst, html and interestingly slides. And these Reveal.js powered slides can be hosted on GitHub pages, like any other html page. The following steps works well for me to generate a static set of slides from a notebook that can be used as a presentation ]]></description>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/jupyter-notebook-revealjs-and-github-pages/index.html</guid>
+  <guid>https://kdheepak.com/blog/jupyter-notebook-revealjs-and-github-pages/</guid>
   <pubDate>Sat, 05 Dec 2015 19:03:54 GMT</pubDate>
 </item>
 <item>
   <title>Spotify and tmux</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/spotify-and-tmux/index.html</link>
-  <description><![CDATA[ Create a file named tmux-spotify-info and place it in a directory that in your <code>$PATH</code>. Add the following snippet of code into the file and make sure it is executable. ]]></description>
+  <link>https://kdheepak.com/blog/spotify-and-tmux/</link>
+  <description><![CDATA[ <img src="https://kdheepak.com/blog/spotify-and-tmux/images/tmux-spotify.png" class="img-fluid"> ]]></description>
   <category>tmux</category>
-  <guid>https://kdheepak.com/blog/spotify-and-tmux/index.html</guid>
+  <guid>https://kdheepak.com/blog/spotify-and-tmux/</guid>
   <pubDate>Sun, 20 Sep 2015 15:26:15 GMT</pubDate>
 </item>
 <item>
   <title>Change $PATH inside vim</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/change-path-inside-vim/index.html</link>
+  <link>https://kdheepak.com/blog/change-path-inside-vim/</link>
   <description><![CDATA[ Save the following script in <code>/usr/local/bin/cpvim</code> ]]></description>
   <category>neovim</category>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/change-path-inside-vim/index.html</guid>
+  <guid>https://kdheepak.com/blog/change-path-inside-vim/</guid>
   <pubDate>Sat, 19 Sep 2015 15:05:36 GMT</pubDate>
 </item>
 <item>
   <title>Uninstalling and re-installing Homebrew on OSX</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/uninstalling-and-reinstalling-homebrew-on-osx/index.html</link>
+  <link>https://kdheepak.com/blog/uninstalling-and-reinstalling-homebrew-on-osx/</link>
   <description><![CDATA[ <a href="https://gist.github.com/mxcl/1173223">Gist</a> ]]></description>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/uninstalling-and-reinstalling-homebrew-on-osx/index.html</guid>
+  <guid>https://kdheepak.com/blog/uninstalling-and-reinstalling-homebrew-on-osx/</guid>
   <pubDate>Fri, 28 Aug 2015 04:52:17 GMT</pubDate>
 </item>
 <item>
   <title>How to add line numbers for code blocks in Pelican</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/how-to-add-line-numbers-for-code-blocks-in-pelican/index.html</link>
+  <link>https://kdheepak.com/blog/how-to-add-line-numbers-for-code-blocks-in-pelican/</link>
   <description><![CDATA[ I’ve found that line numbering with word wrap could only be achieved in Pelican by a certain set of steps. I’ve listed the CSS and the Plugin I’ve used to get that to work. ]]></description>
   <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/how-to-add-line-numbers-for-code-blocks-in-pelican/index.html</guid>
+  <guid>https://kdheepak.com/blog/how-to-add-line-numbers-for-code-blocks-in-pelican/</guid>
   <pubDate>Tue, 18 Aug 2015 08:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How to install gdb on OSX</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/how-to-install-gdb-on-osx/index.html</link>
+  <link>https://kdheepak.com/blog/how-to-install-gdb-on-osx/</link>
   <description><![CDATA[ Certificate issue can be resolved by the following steps ]]></description>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/how-to-install-gdb-on-osx/index.html</guid>
+  <guid>https://kdheepak.com/blog/how-to-install-gdb-on-osx/</guid>
   <pubDate>Mon, 27 Jul 2015 16:52:17 GMT</pubDate>
 </item>
 <item>
   <title>Emacsclient and tmux split navigation</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/emacsclient-and-tmux-split-navigation/index.html</link>
+  <link>https://kdheepak.com/blog/emacsclient-and-tmux-split-navigation/</link>
   <description><![CDATA[ I’ve described some of the scripts that I use regularly when using emacs in the terminal. I also using emacs with tmux, even though it seems like emacs itself could be tweaked to replace tmux. Currently, my tmux+zsh setup has been much more powerful that what emacs alone can provide. zsh did not play well, even with multiterm and I’ve had mixed results with getting ipython to work well inside emacs. ]]></description>
   <category>emacs</category>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/emacsclient-and-tmux-split-navigation/index.html</guid>
+  <guid>https://kdheepak.com/blog/emacsclient-and-tmux-split-navigation/</guid>
   <pubDate>Mon, 27 Jul 2015 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Emacs workflow — Using Emacs in the terminal</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/emacs-workflow-using-emacs-in-the-terminal/index.html</link>
+  <link>https://kdheepak.com/blog/emacs-workflow-using-emacs-in-the-terminal/</link>
   <description><![CDATA[ I use the command line a lot, frequently editing files locally or remotely. Up until now, I’ve been using <a href="./../vim-tmux-zsh/">vim with tmux and zsh</a>. I’ve recently been experimenting with emacs and have been trying to get it to work well inplace of vim. I personally think the author of <a href="https://mjwall.com/blog/2013/10/04/how-i-use-emacs/">this post</a> nailed it regarding emacs workflow. I’ve only made minor modifications to get it to suit my requirements. ]]></description>
   <category>emacs</category>
   <category>tmux</category>
-  <guid>https://kdheepak.com/blog/emacs-workflow-using-emacs-in-the-terminal/index.html</guid>
+  <guid>https://kdheepak.com/blog/emacs-workflow-using-emacs-in-the-terminal/</guid>
   <pubDate>Sun, 26 Jul 2015 04:00:50 GMT</pubDate>
 </item>
 <item>
   <title>Emacs tips — Close compilation buffer</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/emacs-tips-close-compilation-buffer-if-successful/index.html</link>
+  <link>https://kdheepak.com/blog/emacs-tips-close-compilation-buffer-if-successful/</link>
   <description><![CDATA[ When I work with markdown, <img src="https://latex.codecogs.com/png.latex?%5CLaTeX"> or code that requires compiling, I like to check often if everything looks okay. Emacs has a good description of everything you can do with the <a href="https://emacswiki.org/emacs/CompileCommand">CompileCommand</a>. ]]></description>
   <category>emacs</category>
-  <guid>https://kdheepak.com/blog/emacs-tips-close-compilation-buffer-if-successful/index.html</guid>
+  <guid>https://kdheepak.com/blog/emacs-tips-close-compilation-buffer-if-successful/</guid>
   <pubDate>Sun, 19 Jul 2015 18:43:56 GMT</pubDate>
 </item>
 <item>
   <title>Create Emacsclient.app using AppleScript</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/create-emacsclientapp-using-applescript/index.html</link>
+  <link>https://kdheepak.com/blog/create-emacsclientapp-using-applescript/</link>
   <description><![CDATA[ Open Automator and go to File-&gt;New. Click on Application. ]]></description>
   <category>emacs</category>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/create-emacsclientapp-using-applescript/index.html</guid>
+  <guid>https://kdheepak.com/blog/create-emacsclientapp-using-applescript/</guid>
   <pubDate>Sat, 18 Jul 2015 16:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Patched fonts madness</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/patched-fonts-madness/index.html</link>
+  <link>https://kdheepak.com/blog/patched-fonts-madness/</link>
   <description><![CDATA[ Getting patched fonts for a powerline in the terminal can be quite an adventure, especially when you are using vim and tmux. I almost gave up on it, but now that I’ve figured it out it seems extremely obvious. ]]></description>
   <category>neovim</category>
   <category>tmux</category>
-  <guid>https://kdheepak.com/blog/patched-fonts-madness/index.html</guid>
+  <guid>https://kdheepak.com/blog/patched-fonts-madness/</guid>
   <pubDate>Mon, 13 Jul 2015 01:59:22 GMT</pubDate>
 </item>
 <item>
   <title>Better git log with git ls</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/better-git-log-with-git-ls/index.html</link>
+  <link>https://kdheepak.com/blog/better-git-log-with-git-ls/</link>
   <description><![CDATA[ Add the following command to <code>~/.gitconfig</code>: ]]></description>
   <category>git</category>
-  <guid>https://kdheepak.com/blog/better-git-log-with-git-ls/index.html</guid>
+  <guid>https://kdheepak.com/blog/better-git-log-with-git-ls/</guid>
   <pubDate>Tue, 02 Jun 2015 02:45:00 GMT</pubDate>
 </item>
 <item>
   <title>Vim, tmux and zsh — the productivity trio</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/vim-tmux-zsh/index.html</link>
+  <link>https://kdheepak.com/blog/vim-tmux-zsh/</link>
   <description><![CDATA[ I’ve not found a greater combination of tools than vim, tmux and zsh. I’ve detailed below some of the configuration to get it working the way I want it to. ]]></description>
   <category>neovim</category>
-  <guid>https://kdheepak.com/blog/vim-tmux-zsh/index.html</guid>
+  <guid>https://kdheepak.com/blog/vim-tmux-zsh/</guid>
   <pubDate>Sat, 09 May 2015 04:58:18 GMT</pubDate>
 </item>
 <item>
   <title>How to set up a Pelican blog with Github pages</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/how-to-set-up-a-pelican-blog-with-github-pages/index.html</link>
+  <link>https://kdheepak.com/blog/how-to-set-up-a-pelican-blog-with-github-pages/</link>
   <description><![CDATA[ I’ve been quite vocal about the benefits of blogging using Markdown, and using a static page generator with Pandoc instead of the conventional CMS. But a lot of people I’ve spoken to have expressed their doubts about the simplicity of the process. I figured if I could fit it in one blog post I could claim it were simple, right? ]]></description>
   <category>pandoc</category>
-  <guid>https://kdheepak.com/blog/how-to-set-up-a-pelican-blog-with-github-pages/index.html</guid>
+  <guid>https://kdheepak.com/blog/how-to-set-up-a-pelican-blog-with-github-pages/</guid>
   <pubDate>Sun, 03 May 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Fast track to being productive in Vim</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/fast-track-to-being-productive-in-vim/index.html</link>
+  <link>https://kdheepak.com/blog/fast-track-to-being-productive-in-vim/</link>
   <description><![CDATA[ When I first started using vim three months ago, I found it quite challenging to get meaningful work done. I now realize that there were a list of things I had to grok in order to be productive in vim. Learning vim can be extremely gratifying, but the core ideas in vim are also probably unlike anything you have seen before. I thought it would be useful to share some steps one could take to maximize productivity with vim after committing to it. I haven’t been using vim for very long so I’m by no means an expert, and I still learn new things about vim every day. That said, this is in my experience the best bang for buck in priority order. ]]></description>
   <category>neovim</category>
-  <guid>https://kdheepak.com/blog/fast-track-to-being-productive-in-vim/index.html</guid>
+  <guid>https://kdheepak.com/blog/fast-track-to-being-productive-in-vim/</guid>
   <pubDate>Sat, 02 May 2015 04:59:49 GMT</pubDate>
 </item>
 <item>
   <title>Active, reactive and apparent power</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/active-reactive-and-apparent-power/index.html</link>
+  <link>https://kdheepak.com/blog/active-reactive-and-apparent-power/</link>
   <description><![CDATA[ <img src="https://latex.codecogs.com/png.latex?V"> and <img src="https://latex.codecogs.com/png.latex?I"> are used to indicate phasor representations of sinusoidal voltages and currents. <img src="https://latex.codecogs.com/png.latex?E"> is used to represent generated voltage or electromotive force (emf). <img src="https://latex.codecogs.com/png.latex?V"> is often used to measure a potential difference between two points. <img src="https://latex.codecogs.com/png.latex?v"> is used to represent the instantaneous voltage between two points. ]]></description>
   <category>analysis</category>
   <category>math</category>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/active-reactive-and-apparent-power/index.html</guid>
+  <guid>https://kdheepak.com/blog/active-reactive-and-apparent-power/</guid>
   <pubDate>Thu, 30 Apr 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Mac OSX productivity apps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/mac-osx-productivity-apps/index.html</link>
+  <link>https://kdheepak.com/blog/mac-osx-productivity-apps/</link>
   <description><![CDATA[ <a href="https://www.alfredapp.com/">https://www.alfredapp.com/</a> ]]></description>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/mac-osx-productivity-apps/index.html</guid>
+  <guid>https://kdheepak.com/blog/mac-osx-productivity-apps/</guid>
   <pubDate>Thu, 02 Apr 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Mac OSX Tweaks</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/mac-osx-tweaks/index.html</link>
+  <link>https://kdheepak.com/blog/mac-osx-tweaks/</link>
   <description><![CDATA[ <strong><em>Update</em></strong>: I’ve decided to maintain a repo <a href="https://github.com/kdheepak/dotfiles/blob/master/.osx">here</a> instead. ]]></description>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/mac-osx-tweaks/index.html</guid>
+  <guid>https://kdheepak.com/blog/mac-osx-tweaks/</guid>
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Robotics</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/robotics/index.html</link>
-  <description><![CDATA[ 
-Robotics and Microcontroller Projects
- ]]></description>
-  <guid>https://kdheepak.com/blog/robotics/index.html</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/tasker-and-google-maps/index.html</link>
+  <link>https://kdheepak.com/blog/tasker-and-google-maps/</link>
   <description><![CDATA[ This is a small tutorial on how to use Python with SL4A. ]]></description>
   <category>tasker</category>
   <category>android</category>
-  <guid>https://kdheepak.com/blog/tasker-and-google-maps/index.html</guid>
+  <guid>https://kdheepak.com/blog/tasker-and-google-maps/</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Robotics</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/robotics/</link>
+  <description><![CDATA[ 
+Robotics and Microcontroller Projects
+ ]]></description>
+  <guid>https://kdheepak.com/blog/robotics/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Geektool and Desktop Widgets in OSX</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</link>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
   <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
   <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/index.html</guid>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Tasker projects</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/tasker-projects/index.html</link>
+  <link>https://kdheepak.com/blog/tasker-projects/</link>
   <description><![CDATA[ <a href="../tasker-and-google-maps">This page</a> contains information about the <a href="https://github.com/kdheepak/tasker_sl4a">profile</a> that uses Tasker to get contextual information from Google Calendar and react based on it. ]]></description>
   <category>tasker</category>
   <category>android</category>
-  <guid>https://kdheepak.com/blog/tasker-projects/index.html</guid>
+  <guid>https://kdheepak.com/blog/tasker-projects/</guid>
   <pubDate>Sat, 13 Dec 2014 01:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Home monitoring system</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/home-monitoring-system/index.html</link>
+  <link>https://kdheepak.com/blog/home-monitoring-system/</link>
   <description><![CDATA[ Monitoring temperature using Raspberry Pi ]]></description>
-  <guid>https://kdheepak.com/blog/home-monitoring-system/index.html</guid>
+  <guid>https://kdheepak.com/blog/home-monitoring-system/</guid>
   <pubDate>Thu, 11 Dec 2014 19:03:31 GMT</pubDate>
 </item>
 </channel>
