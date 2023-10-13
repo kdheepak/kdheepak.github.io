@@ -90,6 +90,7 @@ format:
       - _quarto/alert.lua
       - _quarto/image-to-link.lua
       - code-visibility
+      - quarto-svgbob
       - collapse-callout
       - pseudocode
       - hide-comment

@@ -29,6 +29,22 @@ jobs:
           sudo apt-get update
           sudo apt install texlive-latex-extra texlive-base texlive-fonts-extra texlive-luatex pdf2svg imagemagick ghostscript
 
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Cache cargo installs
+        uses: actions/cache@v3
+        id: cache-cargo
+        with:
+          path: |
+            ~/.cargo/
+          key: ${{ runner.os }}-cargo
+      - name: Cargo install
+        run: |
+          cargo install svgbob_cli --force
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+        if: steps.cache-cargo.outputs.cache-hit != 'true'
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
