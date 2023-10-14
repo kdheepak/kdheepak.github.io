@@ -658,7 +658,7 @@ Stacktrace:
    @ REPL[138]:1
 ```
 
-It is easiest to just create a new `String` that has the modification you want:
+You have to create a new `String` that contains the content you want:
 
 ```julia
 julia> title_author = title * " - Douglas Adams" # you can concat strings together in Julia using `*`
@@ -669,6 +669,13 @@ Ptr{UInt8} @0x0000000160f687f8
 
 julia> pointer(title_author)
 Ptr{UInt8} @0x0000000107ea82a0
+```
+
+Alternatively, you can use string formatting:
+
+```julia
+julia> title_author = "$title - Douglas Adams"
+"The Hitchhiker's Guide to the Galaxy - Douglas Adams"
 ```
 
 # Pass by sharing
