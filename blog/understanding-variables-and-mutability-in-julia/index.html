@@ -1376,7 +1376,7 @@ div.csl-indent {
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>] top<span class="op">-</span>level scope</span>
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">REPL</span>[<span class="fl">138</span>]<span class="op">:</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It is easiest to just create a new <code>String</code> that has the modification you want:</p>
+<p>You have to create a new <code>String</code> that contains the content you want:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> title_author <span class="op">=</span> title <span class="op">*</span> <span class="st">" - Douglas Adams"</span> <span class="co"># you can concat strings together in Julia using `*`</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="st">"The Hitchhiker's Guide to the Galaxy - Douglas Adams"</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1385,234 +1385,237 @@ div.csl-indent {
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(title_author)</span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">UInt8</span>} @<span class="bn">0x0000000107ea82a0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Alternatively, you can use string formatting:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> title_author <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>title<span class="st"> - Douglas Adams"</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="st">"The Hitchhiker's Guide to the Galaxy - Douglas Adams"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="pass-by-sharing" class="level2">
 <h2 class="anchored" data-anchor-id="pass-by-sharing">Pass by sharing</h2>
 <p>In Julia, arguments to functions are always <q><a href="https://en.wikipedia.org/wiki/Evaluation_strategy#Call_by_sharing">passed by sharing</a></q>. This means that when a function is called with an argument, the function receives a reference to the object that the argument refers to, rather than a copy of the object. The function can modify the object if it is mutable, but the modifications will also be visible to the caller.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">add_one</span>(V)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(V)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    V[i] <span class="op">+=</span> <span class="fl">1</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">add_one</span>(arr);</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a> <span class="fl">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">add_one</span>(V)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(V)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    V[i] <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">add_one</span>(arr);</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a> <span class="fl">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the analogy, passing an argument to a function is like reference’s a book’s location and handing that address over to the function. The function can read the content of the book using this location address and make changes to it, but it cannot change the location address itself that was given to it. If the book is mutable, any changes made by the function will also be visible to anyone else holding the same address.</p>
 <p>The function <code>add_one</code> is like someone taking a book from the shelf, incrementing every number in it by one, and putting it back in the same location. Any object that is holding a reference to the address of the book will be able to see the updated content.</p>
 <p>A function cannot modify the <q>address</q> that the label points to in the call site.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">incorrect_replace_with_zeros</span>(arr)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  arr <span class="op">=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">incorrect_replace_with_zeros</span>(arr);</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This may be more obvious if we add calls to the <code>pointer()</code> function:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">incorrect_replace_with_zeros</span>(arr)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"Before assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  arr <span class="op">=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"After assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">incorrect_replace_with_zeros</span>(arr);</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>Before assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>After assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x000000012de42b60</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">incorrect_replace_with_zeros</span>(arr)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  arr <span class="op">=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">incorrect_replace_with_zeros</span>(arr);</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This may be more obvious if we add calls to the <code>pointer()</code> function:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">incorrect_replace_with_zeros</span>(arr)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"Before assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  arr <span class="op">=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span>(<span class="st">"After assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">incorrect_replace_with_zeros</span>(arr);</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>Before assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>After assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x000000012de42b60</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The function <code>incorrect_replace_with_zeros</code> is like someone taking a book from the shelf, creating a new book, and putting the new book in a different location on the shelf and leaving the old book in the same location. Therefore, the caller still has the original book, and the original book was unaffected by this function. The function also doesn’t return any reference to the new book, and the new book is effectively lost forever.</p>
 <p>You can only modify the values of the object <q>shared</q> from the call site using the <code>[]</code>, <code>.=</code> or <code>.fieldname</code> syntax.</p>
 <p>If you wanted to write a version that correctly replaces the values of the arr with zeros, you can do the following:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">replace_with_zeros!</span>(arr)</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">println</span>(<span class="st">"Before assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>          arr <span class="op">.=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>          <span class="fu">println</span>(<span class="st">"After assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>replace_with_zeros! (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">replace_with_zeros!</span>(arr);</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>Before assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>After assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">replace_with_zeros!</span>(arr)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">println</span>(<span class="st">"Before assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>          arr <span class="op">.=</span> [<span class="fl">0.0</span> for _ <span class="kw">in</span> <span class="fu">eachindex</span>(arr)]</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>          <span class="fu">println</span>(<span class="st">"After assignment: "</span>, <span class="fu">pointer</span>(arr))</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>replace_with_zeros! (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">replace_with_zeros!</span>(arr);</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>Before assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>After assignment<span class="op">:</span> <span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">0</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(arr)</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Int64</span>} @<span class="bn">0x000000010d156070</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The function <code>replace_with_zeros!</code> is like someone taking a book from the shelf, erasing its content, and putting it back in the same location. Since the location address is not changed, anyone else holding the same address will see the updated content.</p>
 <p>By convention, the <code>!</code> at the end of the function name is a convention in Julia to indicate that the function modifies its argument in place.</p>
 <section id="default-keyword-arguments" class="level3">
 <h3 class="anchored" data-anchor-id="default-keyword-arguments">Default keyword arguments</h3>
 <p>Both Python and Julia support keyword arguments with default values for functions, but their behavior is subtly different.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>   ...:   arr.append(<span class="dv">1</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>   ...:   <span class="cf">return</span> arr</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>   ...:</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: append_to_arr()</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">2</span>]: [<span class="dv">1</span>]</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: append_to_arr()</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">3</span>]: [<span class="dv">1</span>, <span class="dv">1</span>]</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">4</span>]: append_to_arr()</span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: append_to_arr()</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: append_to_arr()</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">6</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> arr</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>append_to_arr (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>   ...:   arr.append(<span class="dv">1</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>   ...:   <span class="cf">return</span> arr</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>   ...:</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: append_to_arr()</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">2</span>]: [<span class="dv">1</span>]</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: append_to_arr()</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">3</span>]: [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">4</span>]: append_to_arr()</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
 <span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: append_to_arr()</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: append_to_arr()</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">6</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> arr</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>append_to_arr (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>()</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In Python, a function like this:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  arr.append(<span class="dv">1</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  arr.append(<span class="dv">1</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>is equivalent to the following:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>GLOBAL_ARR <span class="op">=</span> []</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> arr <span class="kw">is</span> <span class="va">None</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> GLOBAL_ARR</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  arr.append(<span class="dv">1</span>)</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>GLOBAL_ARR <span class="op">=</span> []</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> arr <span class="kw">is</span> <span class="va">None</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> GLOBAL_ARR</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  arr.append(<span class="dv">1</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So every time you call <code>append_to_arr</code>, you are modifying the global array.</p>
 <p>But in Julia, a function like this:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>is essentially equivalent to:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> <span class="cn">nothing</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="fu">isnothing</span>(arr)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> []</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> <span class="cn">nothing</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="fu">isnothing</span>(arr)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> []</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> arr</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So every time you call the function, the default value is recreated.</p>
 <p>Other than that, the pass by sharing semantics are the same in Python and Julia. If you passed an keyword argument into these functions in Python and Julia, you’ll get the same behavior.</p>
 <p>In Python:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>          arr.append(<span class="dv">1</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>          <span class="cf">return</span> arr</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: arr <span class="op">=</span> []</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">3</span>]: [<span class="dv">1</span>]</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">4</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: [<span class="dv">1</span>, <span class="dv">1</span>]</span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: arr</span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">6</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In Julia:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">return</span> arr</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>append_to_arr (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="kw">def</span> append_to_arr(<span class="op">*</span>, arr<span class="op">=</span>[]):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>          arr.append(<span class="dv">1</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>          <span class="cf">return</span> arr</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: arr <span class="op">=</span> []</span>
 <span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> []</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Any</span>[]</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">3</span>]: [<span class="dv">1</span>]</span>
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> arr)</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr)</span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr)</span>
-<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
-<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
-<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
-<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">4</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: [<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: append_to_arr(arr <span class="op">=</span> arr)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: arr</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">6</span>]: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In Julia:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> [])</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">push!</span>(arr, <span class="fl">1</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">return</span> arr</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>append_to_arr (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr <span class="op">=</span> []</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Any</span>[]</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> arr)</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr)</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr)</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> arr</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You may have noticed that we skipped the <code>= arr</code> in the latter two function calls.</p>
 <p>For keyword arguments written after a <code>;</code>, if the variable name is the same as the keyword argument name, Julia lets you use a shorthand syntax that lets you skip writing the same variable name twice.</p>
 <p>The following are identical:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> arr);</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr <span class="op">=</span> arr);</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">append_to_arr</span>(; arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If the variable name is different from the keyword argument name, you’ll have to use the explicit syntax.</p>
 </section>
 </section>
 <section id="const-variables" class="level2">
 <h2 class="anchored" data-anchor-id="const-variables"><code>const</code> variables</h2>
 <p>In Julia, you can use the <code>const</code> keyword before declaring a variable for the first time in the global scope.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> <span class="fu">Dict</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> <span class="fu">Dict</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In our analogy, this is like if the librarian handed back a label that would always be bound to the same object for the life of the program.</p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="696" height="400" class="svgbob">
   <style>.svgbob line, .svgbob path, .svgbob circle, .svgbob rect, .svgbob polygon {
@@ -1823,17 +1826,17 @@ div.csl-indent {
 </p>
 <p>For the duration of the program, the <code>CONFIG</code> label will point to location <code>0x6009</code>.</p>
 <p>Trying to redefine a <code>const</code> variable to bind to a different value is an error:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> []</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> invalid redefinition of constant CONFIG</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>] top<span class="op">-</span>level scope</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">REPL</span>[<span class="fl">172</span>]<span class="op">:</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">const</span> CONFIG <span class="op">=</span> []</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> invalid redefinition of constant CONFIG</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>] top<span class="op">-</span>level scope</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">REPL</span>[<span class="fl">172</span>]<span class="op">:</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It is important to remember that even though the variable is <code>const</code>, the object is still mutable.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> CONFIG[<span class="st">"debug"</span>] <span class="op">=</span> <span class="cn">false</span>;</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> CONFIG</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Dict</span>{<span class="dt">Any</span>, <span class="dt">Any</span>} with <span class="fl">1</span> entry<span class="op">:</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"debug"</span> <span class="op">=&gt;</span> <span class="cn">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> CONFIG[<span class="st">"debug"</span>] <span class="op">=</span> <span class="cn">false</span>;</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> CONFIG</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Dict</span>{<span class="dt">Any</span>, <span class="dt">Any</span>} with <span class="fl">1</span> entry<span class="op">:</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"debug"</span> <span class="op">=&gt;</span> <span class="cn">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="conclusions" class="level2">
 <h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
