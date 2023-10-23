@@ -1,0 +1,223 @@
+---
+title: Graphing CGP Grey's Rock-Paper-Scissors YouTube Game
+categories:
+  - analysis
+  - python
+keywords: python
+date: '2023-10-23T04:21:19-0400'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.14.5
+  kernelspec:
+    display_name: Julia 1.9.2
+    language: julia
+    name: julia-1.9
+---
+
+```{julia}
+#| include: false
+using Pkg
+Pkg.activate(@__DIR__)
+Pkg.instantiate()
+cd(@__DIR__)
+# Pkg.add("PyCall")
+# Pkg.add("Conda")
+# Pkg.add("Graphs")
+# Pkg.add("CairoMakie")
+# Pkg.add("GraphMakie")
+# Conda.pip("install", "google-api-python-client")
+```
+
+If you haven't already checked it out, go watch CGPGrey's Rock-Paper-Scissors YouTube Game.
+
+{{< video https://www.youtube.com/watch?v=PmWQmZXYd74 >}}
+
+In this post, I'm going to explore what all the possible paths available are.
+Let's import some packages first.
+
+```{julia}
+#| output: false
+using PyCall
+using Conda
+using Graphs
+using CairoMakie, GraphMakie
+using GraphMakie.NetworkLayout
+```
+
+Fortunately for us, CGPGrey was kind enough to put links to the choices in the
+description of (_almost_) every video.
+We can use Google's YouTube API to get the video descriptions and get all the YouTube
+links in the description.
+
+We are going to use the `google-api-python-client` in Python from Julia.
+
+```{julia}
+#| code-fold: true
+API_KEY=ENV["YOUTUBE_API_KEY"]; # Get API_KEY from google console
+build = pyimport("googleapiclient.discovery").build # from googleapiclient.discovery import build
+youtube = build("youtube", "v3", developerKey=API_KEY) # call build function in Python
+```
+
+Now we can get the description of every video, and extract the metadata from it into a `Dict` of `Dict`s.
+
+```{julia}
+#| code-fold: true
+#| output: false
+youtubeid(url) = string(first(split(replace(url, "https://www.youtube.com/watch?v="=>""), "&t")))
+
+function metadata(url)
+    id = youtubeid(url)
+    request = youtube.videos().list(part="snippet", id=id)
+    response = request.execute()
+    description = response["items"][1]["snippet"]["description"]
+    title = response["items"][1]["snippet"]["title"]
+    if isempty(description)
+        # Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is empty)
+        return (; description = "WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI\nLOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ\n\n🌐 Website: https://www.cgpgrey.com\n💖 Patreon: https://www.patreon.com/cgpgrey \n📒 Cortex: http://www.cortexbrand.com\n\n\n\n\n⛔️ Ah01F ✅", title = "🔴")
+    end
+    (; description, title)
+end
+
+function links(url, visited=Dict())
+    m = metadata(url)
+    r = Dict(
+        :id => youtubeid(url),
+        :code => last(split(strip(m.description), "\n")), # last line is a special code
+        :url => url,
+        :links => [],
+        :children => [],
+        :title => m.title
+    )
+    for line in split(m.description, "\n")
+        if occursin("https://www.youtube.com/watch?v=", line)
+            _status, video = split(line, ":", limit=2)
+            video = strip(video)
+            push!(r[:links], Dict(:status => string(_status), :url => string(video)))
+        end
+    end
+
+    for link in r[:links]
+        url = link[:url]
+        if !(url in keys(visited))
+            visited[url] = Dict()
+            s = links(url, visited)
+            push!(r[:children], s)
+            visited[url] = s
+        else
+            push!(r[:children], visited[url])
+        end
+    end
+
+    return r
+end
+```
+
+```{julia}
+data = links("https://www.youtube.com/watch?v=PmWQmZXYd74")
+```
+
+Now we can build a graph:
+
+```{julia}
+#| code-fold: true
+function clean_titles(str)
+    t = join([c for c in str if isascii(c)])
+    t = strip(t)
+    if occursin("Cortex", t)
+        return ""
+    end
+    string(t)
+end
+
+function _node_builder(nodes, d)
+    for c in d[:children]
+        push!(nodes, (; id = c[:id], title = clean_titles(c[:code]), url = c[:url]))
+        _node_builder(nodes, c)
+    end
+    nothing
+end
+
+nodes = [(; id = data[:id], title = clean_titles(data[:title]), url = data[:url])]
+_node_builder(nodes, data)
+nodes = unique(nodes)
+
+ids = [n.id for n in nodes]
+titles = [n.title for n in nodes]
+urls = [n.url for n in nodes]
+function graph_builder(G, d)
+    from = d[:id]
+    for c in d[:children]
+        to = c[:id]
+        add_edge!(G, findfirst(isequal(from), ids), findfirst(isequal(to), ids))
+        graph_builder(G, c)
+    end
+end
+
+G = SimpleDiGraph(length(nodes))
+graph_builder(G, data)
+G
+```
+
+```{julia}
+#| echo: false
+using Markdown
+display(md"There's **$(nv(G))** videos in the Graph with **$(ne(G))** connections between the videos.")
+```
+
+Here's what that graph visualized looks like:
+
+```{julia}
+#| code-fold: true
+empty_theme = Theme(
+    fonts=(; weird="Blackchancery"),
+    Axis=(
+      backgroundcolor=:transparent,
+      leftspinevisible=false,
+      rightspinevisible=false,
+      bottomspinevisible=false,
+      topspinevisible=false,
+      xticklabelsvisible=false,
+      yticklabelsvisible=false,
+      xgridcolor=:transparent,
+      ygridcolor=:transparent,
+      xminorticksvisible=false,
+      yminorticksvisible=false,
+    ),
+)
+node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles] # If there's a space it is probably a unique name
+
+with_theme(empty_theme) do
+    graphplot(G;
+        nlabels=titles,
+        nlabels_fontsize=10,
+        node_color=node_colors,
+        node_size=10,
+        layout=Spring()
+    )
+end
+```
+
+Here's all the YouTube videos we were able to scrap (with the special code as the title):
+
+```{julia}
+#| code-fold: true
+using IJulia
+
+function display_youtube_video(node)
+    video_id = split(node.url, "=")[end]
+    title = node.title
+    html_code = """
+    <b>$(title)</b>
+    <br/>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/$video_id" frameborder="0" allowfullscreen></iframe>
+    """
+    display("text/html", HTML(html_code))
+end
+
+@assert unique(nodes) == nodes
+display_youtube_video.(nodes);
+```
