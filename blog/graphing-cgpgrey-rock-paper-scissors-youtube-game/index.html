@@ -264,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you haven’t already checked it out, go watch CGPGrey’s Rock-Paper-Scissors YouTube Game.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/PmWQmZXYd74" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>In this post, I’m going to explore what all the possible paths available are. Let’s import some packages first.</p>
-<div id="d086ca4a" class="cell" data-execution_count="2">
+<div id="2409aaaa" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PyCall</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Conda</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Graphs</span></span>
@@ -273,19 +273,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Fortunately for us, CGPGrey was kind enough to put links to the choices in the description of (<em>almost</em>) every video. We can use Google’s YouTube API to get the video descriptions and get all the YouTube links in the description.</p>
 <p>We are going to use the <code>google-api-python-client</code> in Python from Julia.</p>
-<div id="0ad9777d" class="cell" data-execution_count="3">
+<div id="a7ea3fcb" class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="cn">ENV</span>[<span class="st">"YOUTUBE_API_KEY"</span>]; <span class="co"># Get API_KEY from google console</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>build <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"googleapiclient.discovery"</span>).build <span class="co"># from googleapiclient.discovery import build</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>youtube <span class="op">=</span> <span class="fu">build</span>(<span class="st">"youtube"</span>, <span class="st">"v3"</span>, developerKey<span class="op">=</span>API_KEY) <span class="co"># call build function in Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<pre data-code-line-numbers="nil"><code>PyObject &lt;googleapiclient.discovery.Resource object at 0x155b07e50&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre data-code-line-numbers="nil"><code>PyObject &lt;googleapiclient.discovery.Resource object at 0x29295e610&gt;</code></pre>
 </div>
 </div>
-<p>Now we can get the description of every video, and extract the metadata from it into a <code>Dict</code> of <code>Dict</code>s.</p>
-<div id="5320e09f" class="cell" data-execution_count="4">
+<p>Now we can get the description of every video, extract the metadata from it into a <code>Dict</code> of <code>Dict</code>s, build a graph:</p>
+<div id="9166b070" class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">youtubeid</span>(url) <span class="op">=</span> <span class="fu">string</span>(<span class="fu">first</span>(<span class="fu">split</span>(<span class="fu">replace</span>(url, <span class="st">"https://www.youtube.com/watch?v="</span><span class="op">=&gt;</span><span class="st">""</span>), <span class="st">"&amp;t"</span>)))</span>
@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    (; description, title)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">links</span>(url, visited<span class="op">=</span><span class="fu">Dict</span>())</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">links</span>(url; visited<span class="op">=</span><span class="fu">Dict</span>(), duplicate_links <span class="op">=</span> <span class="cn">false</span>)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> <span class="fu">metadata</span>(url)</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">Dict</span>(</span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>id <span class="op">=&gt;</span> <span class="fu">youtubeid</span>(url),</span>
@@ -325,138 +325,168 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        url <span class="op">=</span> link[<span class="op">:</span>url]</span>
 <span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> !(url <span class="kw">in</span> <span class="fu">keys</span>(visited))</span>
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>            visited[url] <span class="op">=</span> <span class="fu">Dict</span>()</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>            s <span class="op">=</span> <span class="fu">links</span>(url, visited)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>            s <span class="op">=</span> <span class="fu">links</span>(url; visited, duplicate_links)</span>
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>            <span class="fu">push!</span>(r[<span class="op">:</span>children], s)</span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>            visited[url] <span class="op">=</span> s</span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>            <span class="fu">push!</span>(r[<span class="op">:</span>children], visited[url])</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>            duplicate_links <span class="op">&amp;&amp;</span> <span class="fu">push!</span>(r[<span class="op">:</span>children], visited[url])</span>
 <span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
 <span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">_clean_titles</span>(str)</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  t <span class="op">=</span> <span class="fu">join</span>([c for c <span class="kw">in</span> str if <span class="fu">isascii</span>(c)])</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  t <span class="op">=</span> <span class="fu">strip</span>(t)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="fu">occursin</span>(<span class="st">"Cortex"</span>, t)</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="st">""</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">string</span>(t)</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">_node_builder</span>(nodes, d)</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> c <span class="kw">in</span> d[<span class="op">:</span>children]</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">push!</span>(nodes, (; id <span class="op">=</span> c[<span class="op">:</span>id], title <span class="op">=</span> <span class="fu">_clean_titles</span>(c[<span class="op">:</span>code]), url <span class="op">=</span> c[<span class="op">:</span>url]))</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">_node_builder</span>(nodes, c)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">_graph_builder</span>(G, d, ids)</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  from <span class="op">=</span> d[<span class="op">:</span>id]</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> c <span class="kw">in</span> d[<span class="op">:</span>children]</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    to <span class="op">=</span> c[<span class="op">:</span>id]</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_edge!</span>(G, <span class="fu">findfirst</span>(<span class="fu">isequal</span>(from), ids), <span class="fu">findfirst</span>(<span class="fu">isequal</span>(to), ids))</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">_graph_builder</span>(G, c, ids)</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">get_nodes</span>(data)</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  nodes <span class="op">=</span> [(; id <span class="op">=</span> data[<span class="op">:</span>id], title <span class="op">=</span> <span class="fu">_clean_titles</span>(data[<span class="op">:</span>title]), url <span class="op">=</span> data[<span class="op">:</span>url])]</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">_node_builder</span>(nodes, data)</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  nodes <span class="op">=</span> <span class="fu">unique</span>(nodes)</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  ids <span class="op">=</span> [n.id for n <span class="kw">in</span> nodes]</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  titles <span class="op">=</span> [n.title for n <span class="kw">in</span> nodes]</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>  urls <span class="op">=</span> [n.url for n <span class="kw">in</span> nodes]</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>  (; ids, titles, urls, nodes)</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">grapher</span>(data, ids)</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>  G <span class="op">=</span> <span class="fu">SimpleDiGraph</span>(<span class="fu">length</span>(ids))</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">_graph_builder</span>(G, data, ids)</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>  G</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="019cadd9" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">links</span>(<span class="st">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
-<pre data-code-line-numbers="nil"><code>Dict{Symbol, Any} with 6 entries:
-  :links    =&gt; Any[Dict(:url=&gt;"https://www.youtube.com/watch?v=Ul8r0Thgx44", :s…
-  :url      =&gt; "https://www.youtube.com/watch?v=PmWQmZXYd74"
-  :children =&gt; Any[Dict{Symbol, Any}(:links=&gt;Any[Dict(:url=&gt;"https://www.youtub…
-  :id       =&gt; "PmWQmZXYd74"
-  :code     =&gt; "☘️ R1 START ✅"
-  :title    =&gt; "One-in-a-Million YouTube Game: Can YOU Win?"</code></pre>
-</div>
-</div>
-<p>Now we can build a graph:</p>
-<div id="8023dd03" class="cell" data-execution_count="6">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">clean_titles</span>(str)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fu">join</span>([c for c <span class="kw">in</span> str if <span class="fu">isascii</span>(c)])</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fu">strip</span>(t)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">occursin</span>(<span class="st">"Cortex"</span>, t)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">""</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">string</span>(t)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">_node_builder</span>(nodes, d)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> d[<span class="op">:</span>children]</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">push!</span>(nodes, (; id <span class="op">=</span> c[<span class="op">:</span>id], title <span class="op">=</span> <span class="fu">clean_titles</span>(c[<span class="op">:</span>code]), url <span class="op">=</span> c[<span class="op">:</span>url]))</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">_node_builder</span>(nodes, c)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cn">nothing</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> [(; id <span class="op">=</span> data[<span class="op">:</span>id], title <span class="op">=</span> <span class="fu">clean_titles</span>(data[<span class="op">:</span>title]), url <span class="op">=</span> data[<span class="op">:</span>url])]</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">_node_builder</span>(nodes, data)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> <span class="fu">unique</span>(nodes)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> [n.id for n <span class="kw">in</span> nodes]</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>titles <span class="op">=</span> [n.title for n <span class="kw">in</span> nodes]</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>urls <span class="op">=</span> [n.url for n <span class="kw">in</span> nodes]</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">graph_builder</span>(G, d)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    from <span class="op">=</span> d[<span class="op">:</span>id]</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> d[<span class="op">:</span>children]</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        to <span class="op">=</span> c[<span class="op">:</span>id]</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">add_edge!</span>(G, <span class="fu">findfirst</span>(<span class="fu">isequal</span>(from), ids), <span class="fu">findfirst</span>(<span class="fu">isequal</span>(to), ids))</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">graph_builder</span>(G, c)</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> <span class="fu">SimpleDiGraph</span>(<span class="fu">length</span>(nodes))</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_builder</span>(G, data)</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div id="a8be3b8a" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">links</span>(<span class="st">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span>, duplicate_links <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>(; ids, titles, urls, nodes) <span class="op">=</span> <span class="fu">get_nodes</span>(data)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> <span class="fu">grapher</span>(data, ids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre data-code-line-numbers="nil"><code>{111, 206} directed simple Int64 graph</code></pre>
 </div>
 </div>
-<div id="44939e62" class="cell" data-execution_count="7">
+<div id="88a43b54" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <p>There’s <strong>111</strong> videos in the Graph with <strong>206</strong> connections between the videos.</p>
 </div>
 </div>
 <p>Here’s what that graph visualized looks like:</p>
-<div id="0c6e1b6b" class="cell" data-execution_count="8">
+<div id="93acb6a1" class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>empty_theme <span class="op">=</span> <span class="fu">Theme</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    fonts<span class="op">=</span>(; weird<span class="op">=</span><span class="st">"Blackchancery"</span>, title <span class="op">=</span> <span class="st">"CMU Serif"</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    Axis<span class="op">=</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      backgroundcolor<span class="op">=:</span>transparent,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      leftspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      rightspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      bottomspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      topspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      xticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      yticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      xgridcolor<span class="op">=:</span>transparent,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      ygridcolor<span class="op">=:</span>transparent,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      xminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      yminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>      titlefont<span class="op">=:</span>title,</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> [<span class="fu">length</span>(<span class="fu">split</span>(<span class="fu">strip</span>(t))) <span class="op">&gt;</span> <span class="fl">1</span> ? <span class="op">:</span>red <span class="op">:</span> <span class="op">:</span>black for t <span class="kw">in</span> titles] <span class="co"># If there's a space it is probably a unique name</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">with_theme</span>(empty_theme) <span class="cf">do</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    f, ax, p <span class="op">=</span> <span class="fu">graphplot</span>(G;</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        nlabels<span class="op">=</span>titles,</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        nlabels_fontsize<span class="op">=</span><span class="fl">10</span>,</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        node_color<span class="op">=</span>node_colors,</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        node_size<span class="op">=</span><span class="fl">10</span>,</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        layout<span class="op">=</span><span class="fu">Spring</span>()</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    ax.title <span class="op">=</span> <span class="st">"CGP Grey's Rock-Paper-Scissors YouTube Game"</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    f</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>empty_theme <span class="op">=</span> <span class="fu">Theme</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    fonts<span class="op">=</span>(; weird<span class="op">=</span><span class="st">"Blackchancery"</span>, title <span class="op">=</span> <span class="st">"CMU Serif"</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> [<span class="fu">length</span>(<span class="fu">split</span>(<span class="fu">strip</span>(t))) <span class="op">&gt;</span> <span class="fl">1</span> ? <span class="op">:</span>red <span class="op">:</span> <span class="op">:</span>black for t <span class="kw">in</span> titles] <span class="co"># If there's a space it is probably a unique name</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>f, ax, p <span class="op">=</span> <span class="fu">graphplot</span>(G;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    nlabels<span class="op">=</span>titles,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    nlabels_fontsize<span class="op">=</span><span class="fl">5</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span>node_colors,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="fl">5</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    arrow_size<span class="op">=</span><span class="fl">10</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    layout<span class="op">=</span><span class="fu">Stress</span>()</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">hidedecorations!</span>(ax); <span class="fu">hidespines!</span>(ax);</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># offsets = [Point2f(0.1, -0.5) for _ in p[:node_pos][]]</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># offsets[1] = Point2f(0.1, 0.5)</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># p.nlabels_offset[] = offsets</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">autolimits!</span>(ax)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>ax.title <span class="op">=</span> <span class="st">"CGP Grey's Rock-Paper-Scissors YouTube Game"</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="31">
-<p><img src="index_files/figure-html/cell-9-output-1.svg" class="img-fluid"></p>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<p><img src="index_files/figure-html/cell-8-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
-<p>Here’s all the YouTube videos we were able to scrap (with the special code as the title):</p>
-<div id="c23fc0ca" class="cell" data-execution_count="9">
+<p>This graph contains a lot of duplicate links to the same video. For example when losing after different number of wins, you might end up at the same video. Let’s remove those connections so we can visualize it as a tree.</p>
+<div id="852364a2" class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">IJulia</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">display_youtube_video</span>(node)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    video_id <span class="op">=</span> <span class="fu">split</span>(node.url, <span class="st">"="</span>)[<span class="kw">end</span>]</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> node.title</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    html_code <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;b&gt;</span><span class="sc">$</span>(title)<span class="st">&lt;/b&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;br/&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/</span><span class="sc">$</span>video_id<span class="st">" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">display</span>(<span class="st">"text/html"</span>, <span class="fu">HTML</span>(html_code))</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="pp">@assert</span> <span class="fu">unique</span>(nodes) <span class="op">==</span> nodes</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">display_youtube_video</span>.(nodes);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">links</span>(<span class="st">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span>, duplicate_links <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>(; ids, titles, urls, nodes) <span class="op">=</span> <span class="fu">get_nodes</span>(data)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> <span class="fu">grapher</span>(data, ids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre data-code-line-numbers="nil"><code>{111, 110} directed simple Int64 graph</code></pre>
+</div>
+</div>
+<div id="9f6ab5f4" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<p>There’s <strong>111</strong> videos in the Graph with <strong>110</strong> connections between the videos.</p>
+</div>
+</div>
+<p>Here’s what the graph now visualized looks like:</p>
+<div id="5c839151" class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>empty_theme <span class="op">=</span> <span class="fu">Theme</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    fonts<span class="op">=</span>(; weird<span class="op">=</span><span class="st">"Blackchancery"</span>, title <span class="op">=</span> <span class="st">"CMU Serif"</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> [<span class="fu">length</span>(<span class="fu">split</span>(<span class="fu">strip</span>(t))) <span class="op">&gt;</span> <span class="fl">1</span> ? <span class="op">:</span>red <span class="op">:</span> <span class="op">:</span>black for t <span class="kw">in</span> titles] <span class="co"># If there's a space it is probably a unique name</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>f, ax, p <span class="op">=</span> <span class="fu">graphplot</span>(G;</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    nlabels<span class="op">=</span>titles,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    nlabels_fontsize<span class="op">=</span><span class="fl">10</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span>node_colors,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="fl">5</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    layout<span class="op">=</span><span class="fu">Buchheim</span>()</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hidedecorations!</span>(ax); <span class="fu">hidespines!</span>(ax);</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>offsets <span class="op">=</span> [<span class="fu">Point2f</span>(<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.5</span>) for _ <span class="kw">in</span> p[<span class="op">:</span>node_pos][]]</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>offsets[<span class="fl">1</span>] <span class="op">=</span> <span class="fu">Point2f</span>(<span class="fl">0.1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>p.nlabels_offset[] <span class="op">=</span> offsets</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">autolimits!</span>(ax)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>ax.title <span class="op">=</span> <span class="st">"CGP Grey's Rock-Paper-Scissors YouTube Game"</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<p><img src="index_files/figure-html/cell-11-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>There we have it; a flowchart of the Rock-Paper-Scissors game.</p>
+<p>If you liked this blog post, consider subscribing to <a href="https://www.patreon.com/cgpgrey">CGP Grey’s Patreon</a> so that they can make more awesome content like this.</p>
+<p>If you are interested in viewing all the videos, you can check them out below:</p>
+<div id="9fa5e9ae" class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">IJulia</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">display_youtube_video</span>(node)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    video_id <span class="op">=</span> <span class="fu">split</span>(node.url, <span class="st">"="</span>)[<span class="kw">end</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> node.title</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    html_code <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;b&gt;</span><span class="sc">$</span>(title)<span class="st">&lt;/b&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;br/&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/</span><span class="sc">$</span>video_id<span class="st">" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">display</span>(<span class="st">"text/html"</span>, <span class="fu">HTML</span>(html_code))</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="pp">@assert</span> <span class="fu">unique</span>(nodes) <span class="op">==</span> nodes</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">display_youtube_video</span>.(nodes);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <b>One-in-a-Million YouTube Game: Can YOU Win?</b>
