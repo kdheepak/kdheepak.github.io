@@ -173,7 +173,7 @@ Here's what that graph visualized looks like:
 ```{julia}
 #| code-fold: true
 empty_theme = Theme(
-    fonts=(; weird="Blackchancery"),
+    fonts=(; weird="Blackchancery", title = "CMU Serif"),
     Axis=(
       backgroundcolor=:transparent,
       leftspinevisible=false,
@@ -186,18 +186,21 @@ empty_theme = Theme(
       ygridcolor=:transparent,
       xminorticksvisible=false,
       yminorticksvisible=false,
+      titlefont=:title,
     ),
 )
 node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles] # If there's a space it is probably a unique name
 
 with_theme(empty_theme) do
-    graphplot(G;
+    f, ax, p = graphplot(G;
         nlabels=titles,
         nlabels_fontsize=10,
         node_color=node_colors,
         node_size=10,
         layout=Spring()
     )
+    ax.title = "CGP Grey's Rock-Paper-Scissors YouTube Game"
+    f
 end
 ```
 
