@@ -9,8 +9,18 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.420</generator>
-<lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
+<generator>quarto-1.4.439</generator>
+<lastBuildDate>Mon, 23 Oct 2023 08:21:19 GMT</lastBuildDate>
+<item>
+  <title>Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/</link>
+  <description><![CDATA[ If you haven’t already checked it out, go watch CGPGrey’s Rock-Paper-Scissors YouTube Game. ]]></description>
+  <category>analysis</category>
+  <category>python</category>
+  <guid>https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/</guid>
+  <pubDate>Mon, 23 Oct 2023 08:21:19 GMT</pubDate>
+</item>
 <item>
   <title>Julia Workflow Tips and Tricks</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
@@ -457,6 +467,15 @@
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Geektool and Desktop Widgets in OSX</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
+  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
+  <category>osx</category>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Robotics</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/robotics/</link>
@@ -464,15 +483,6 @@
 Robotics and Microcontroller Projects
  ]]></description>
   <guid>https://kdheepak.com/blog/robotics/</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Geektool and Desktop Widgets in OSX</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
-  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
-  <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>

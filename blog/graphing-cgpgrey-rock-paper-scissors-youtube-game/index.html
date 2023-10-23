@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.439">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dheepak Krishnamurthy">
+<meta name="dcterms.date" content="2023-10-23">
+<meta name="keywords" content="python">
+
+<title>kdheepak - Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    null
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+<link href="https://fonts.googleapis.com/css?family=Fira+Code&amp;display=swap" rel="stylesheet">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        const label = document.createElement("span");
+        label.textContent = language;
+        label.classList = ["label"];
+        label.setAttribute("data-language", language);
+        preElement.parentNode.insertBefore(label, preElement);
+      }
+    });
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../_quarto/styles.css">
+<meta property="og:title" content="kdheepak - Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="kdheepak">
+<meta name="twitter:title" content="kdheepak - Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv/index.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kdheepak"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="me"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.qmd">View Source</a></li></ul></div></div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dheepak Krishnamurthy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 23, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>python</p>
+  </div>
+</div>
+
+</header>
+
+
+<p>If you haven’t already checked it out, go watch CGPGrey’s Rock-Paper-Scissors YouTube Game.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/PmWQmZXYd74" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>In this post, I’m going to explore what all the possible paths available are. Let’s import some packages first.</p>
+<div id="778da82b" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PyCall</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Conda</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Graphs</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span>, <span class="bu">GraphMakie</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GraphMakie.NetworkLayout</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Fortunately for us, CGPGrey was kind enough to put links to the choices in the description of (<em>almost</em>) every video. We can use Google’s YouTube API to get the video descriptions and get all the YouTube links in the description.</p>
+<p>We are going to use the <code>google-api-python-client</code> in Python from Julia.</p>
+<div id="9cc9dbd1" class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>API_KEY<span class="op">=</span><span class="cn">ENV</span>[<span class="st">"YOUTUBE_API_KEY"</span>]; <span class="co"># Get API_KEY from google console</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>build <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"googleapiclient.discovery"</span>).build <span class="co"># from googleapiclient.discovery import build</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>youtube <span class="op">=</span> <span class="fu">build</span>(<span class="st">"youtube"</span>, <span class="st">"v3"</span>, developerKey<span class="op">=</span>API_KEY) <span class="co"># call build function in Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre data-code-line-numbers="nil"><code>PyObject &lt;googleapiclient.discovery.Resource object at 0x1664211c0&gt;</code></pre>
+</div>
+</div>
+<p>Now we can get the description of every video, and extract the metadata from it into a <code>Dict</code> of <code>Dict</code>s.</p>
+<div id="0a6103b8" class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">youtubeid</span>(url) <span class="op">=</span> <span class="fu">string</span>(<span class="fu">first</span>(<span class="fu">split</span>(<span class="fu">replace</span>(url, <span class="st">"https://www.youtube.com/watch?v="</span><span class="op">=&gt;</span><span class="st">""</span>), <span class="st">"&amp;t"</span>)))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">metadata</span>(url)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    id <span class="op">=</span> <span class="fu">youtubeid</span>(url)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    request <span class="op">=</span> youtube.<span class="fu">videos</span>().<span class="fu">list</span>(part<span class="op">=</span><span class="st">"snippet"</span>, id<span class="op">=</span>id)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> request.<span class="fu">execute</span>()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    description <span class="op">=</span> response[<span class="st">"items"</span>][<span class="fl">1</span>][<span class="st">"snippet"</span>][<span class="st">"description"</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> response[<span class="st">"items"</span>][<span class="fl">1</span>][<span class="st">"snippet"</span>][<span class="st">"title"</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">isempty</span>(description)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is empty)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (; description <span class="op">=</span> <span class="st">"WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI</span><span class="sc">\n</span><span class="st">LOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ</span><span class="sc">\n\n</span><span class="st">🌐 Website: https://www.cgpgrey.com</span><span class="sc">\n</span><span class="st">💖 Patreon: https://www.patreon.com/cgpgrey </span><span class="sc">\n</span><span class="st">📒 Cortex: http://www.cortexbrand.com</span><span class="sc">\n\n\n\n\n</span><span class="st">⛔️ Ah01F ✅"</span>, title <span class="op">=</span> <span class="st">"🔴"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    (; description, title)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">links</span>(url, visited<span class="op">=</span><span class="fu">Dict</span>())</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> <span class="fu">metadata</span>(url)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">Dict</span>(</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>id <span class="op">=&gt;</span> <span class="fu">youtubeid</span>(url),</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>code <span class="op">=&gt;</span> <span class="fu">last</span>(<span class="fu">split</span>(<span class="fu">strip</span>(m.description), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)), <span class="co"># last line is a special code</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>url <span class="op">=&gt;</span> url,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>links <span class="op">=&gt;</span> [],</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>children <span class="op">=&gt;</span> [],</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>title <span class="op">=&gt;</span> m.title</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> <span class="fu">split</span>(m.description, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="fu">occursin</span>(<span class="st">"https://www.youtube.com/watch?v="</span>, line)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>            _status, video <span class="op">=</span> <span class="fu">split</span>(line, <span class="st">":"</span>, limit<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            video <span class="op">=</span> <span class="fu">strip</span>(video)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>            <span class="fu">push!</span>(r[<span class="op">:</span>links], <span class="fu">Dict</span>(<span class="op">:</span>status <span class="op">=&gt;</span> <span class="fu">string</span>(_status), <span class="op">:</span>url <span class="op">=&gt;</span> <span class="fu">string</span>(video)))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> link <span class="kw">in</span> r[<span class="op">:</span>links]</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        url <span class="op">=</span> link[<span class="op">:</span>url]</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> !(url <span class="kw">in</span> <span class="fu">keys</span>(visited))</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>            visited[url] <span class="op">=</span> <span class="fu">Dict</span>()</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>            s <span class="op">=</span> <span class="fu">links</span>(url, visited)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>            <span class="fu">push!</span>(r[<span class="op">:</span>children], s)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>            visited[url] <span class="op">=</span> s</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>            <span class="fu">push!</span>(r[<span class="op">:</span>children], visited[url])</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="c7e5855d" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">links</span>(<span class="st">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre data-code-line-numbers="nil"><code>Dict{Symbol, Any} with 6 entries:
+  :links    =&gt; Any[Dict(:url=&gt;"https://www.youtube.com/watch?v=Ul8r0Thgx44", :s…
+  :url      =&gt; "https://www.youtube.com/watch?v=PmWQmZXYd74"
+  :children =&gt; Any[Dict{Symbol, Any}(:links=&gt;Any[Dict(:url=&gt;"https://www.youtub…
+  :id       =&gt; "PmWQmZXYd74"
+  :code     =&gt; "☘️ R1 START ✅"
+  :title    =&gt; "One-in-a-Million YouTube Game: Can YOU Win?"</code></pre>
+</div>
+</div>
+<p>Now we can build a graph:</p>
+<div id="78f61670" class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">clean_titles</span>(str)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fu">join</span>([c for c <span class="kw">in</span> str if <span class="fu">isascii</span>(c)])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fu">strip</span>(t)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">occursin</span>(<span class="st">"Cortex"</span>, t)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">""</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">string</span>(t)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">_node_builder</span>(nodes, d)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> d[<span class="op">:</span>children]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">push!</span>(nodes, (; id <span class="op">=</span> c[<span class="op">:</span>id], title <span class="op">=</span> <span class="fu">clean_titles</span>(c[<span class="op">:</span>code]), url <span class="op">=</span> c[<span class="op">:</span>url]))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">_node_builder</span>(nodes, c)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cn">nothing</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> [(; id <span class="op">=</span> data[<span class="op">:</span>id], title <span class="op">=</span> <span class="fu">clean_titles</span>(data[<span class="op">:</span>title]), url <span class="op">=</span> data[<span class="op">:</span>url])]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">_node_builder</span>(nodes, data)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> <span class="fu">unique</span>(nodes)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> [n.id for n <span class="kw">in</span> nodes]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>titles <span class="op">=</span> [n.title for n <span class="kw">in</span> nodes]</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>urls <span class="op">=</span> [n.url for n <span class="kw">in</span> nodes]</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">graph_builder</span>(G, d)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    from <span class="op">=</span> d[<span class="op">:</span>id]</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> d[<span class="op">:</span>children]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        to <span class="op">=</span> c[<span class="op">:</span>id]</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">add_edge!</span>(G, <span class="fu">findfirst</span>(<span class="fu">isequal</span>(from), ids), <span class="fu">findfirst</span>(<span class="fu">isequal</span>(to), ids))</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">graph_builder</span>(G, c)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> <span class="fu">SimpleDiGraph</span>(<span class="fu">length</span>(nodes))</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_builder</span>(G, data)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre data-code-line-numbers="nil"><code>{111, 206} directed simple Int64 graph</code></pre>
+</div>
+</div>
+<div id="1e044f22" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<p>There’s <strong>111</strong> videos in the Graph with <strong>206</strong> connections between the videos.</p>
+</div>
+</div>
+<p>Here’s what that graph visualized looks like:</p>
+<div id="4a409ad3" class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>empty_theme <span class="op">=</span> <span class="fu">Theme</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    fonts<span class="op">=</span>(; weird<span class="op">=</span><span class="st">"Blackchancery"</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    Axis<span class="op">=</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      backgroundcolor<span class="op">=:</span>transparent,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      leftspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      rightspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      bottomspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      topspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      xticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      yticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      xgridcolor<span class="op">=:</span>transparent,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      ygridcolor<span class="op">=:</span>transparent,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      xminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      yminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> [<span class="fu">length</span>(<span class="fu">split</span>(<span class="fu">strip</span>(t))) <span class="op">&gt;</span> <span class="fl">1</span> ? <span class="op">:</span>red <span class="op">:</span> <span class="op">:</span>black for t <span class="kw">in</span> titles] <span class="co"># If there's a space it is probably a unique name</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">with_theme</span>(empty_theme) <span class="cf">do</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">graphplot</span>(G;</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        nlabels<span class="op">=</span>titles,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        nlabels_fontsize<span class="op">=</span><span class="fl">10</span>,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        node_color<span class="op">=</span>node_colors,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        node_size<span class="op">=</span><span class="fl">10</span>,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        layout<span class="op">=</span><span class="fu">Spring</span>()</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<p><img src="index_files/figure-html/cell-9-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>Here’s all the YouTube videos we were able to scrap (with the special code as the title):</p>
+<div id="114d8490" class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">IJulia</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">display_youtube_video</span>(node)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    video_id <span class="op">=</span> <span class="fu">split</span>(node.url, <span class="st">"="</span>)[<span class="kw">end</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> node.title</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    html_code <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;b&gt;</span><span class="sc">$</span>(title)<span class="st">&lt;/b&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;br/&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/</span><span class="sc">$</span>video_id<span class="st">" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">display</span>(<span class="st">"text/html"</span>, <span class="fu">HTML</span>(html_code))</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="pp">@assert</span> <span class="fu">unique</span>(nodes) <span class="op">==</span> nodes</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">display_youtube_video</span>.(nodes);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<b>One-in-a-Million YouTube Game: Can YOU Win?</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PmWQmZXYd74" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h01W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ul8r0Thgx44" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b></b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_mrAeT9kpPM" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h03W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hoaLwPc571E" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h04W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z8zjvT8Qx8U" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h05W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uHoYnV9JX4w" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h06W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jRDLtKUsq8U" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h07W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RXy0Kc1Cl9s" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h08</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/v3oXQrWu-PA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h09W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bN5M3caw6b8" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h10W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DDmnplXv6pY" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h11W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6auFOPOuHuE" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h12W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0M39bd9euEI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h13W    One Million Rock</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E3pdr5hNBe4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Post Game Blue</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/s3rUNS68AKs" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Billion or Bust</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K1kVsxsnYyc" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh14W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wf6sqW38AmM" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh15W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j92TH0iaCrE" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh16W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/r8LgYG67bCA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh17W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DZLnWKM90nQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh18W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aSjsXUdaIgQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh19W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HunlKDzXNv0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh19 5W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gv7_NTC_Rgs" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh20W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sbgMHxUkfFI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh21W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4Nk29OAqZTw" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh22W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OjHzloSmLZg" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh23W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I32ZGazBqWY" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh24W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-bGMZAWuL1o" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh25W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7GEmEWf1KgY" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>RTh26W    Trillion End</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4wUukNXczpM" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Over a Billion, Under a Trillion</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d0R5Csv7ogU" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Over a Million, Under a Billion</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AgHpWh77STQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h13F    Paper</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YohvsF9mF3g" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h01W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RVLUX6BUEJI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h02W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KHtDsZvsoMw" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h03W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t0hJIw19ChI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h04W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/e6zLBO0vez8" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h05W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WR7AbrjBZNI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h06W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fMyFx3bFW-s" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h07W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hi4166mPpmA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h08W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SxWZDOgaIog" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h09W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-D_g1k0IzTQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h10W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AnsaswKGPHk" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h11W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8UKflLZq61E" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h12W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tAcIxmJOA9o" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h12F - Rock</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QxC-EQAsTuM" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h01W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/b41_jrE8jFw" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h02W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oOufgnObuhQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h03W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/N7UCPssq-X8" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h04W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FlwMxN9-mec" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h05W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ghJAsm9W3k0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h06W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/55nbeaYL7hQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h07W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dB8-XaRclhk" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h08W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ddWvzSxz4AA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h09W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0xFOAtGBdUg" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h10W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HSdwcDFDyQY" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h11W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Q5kgEN3rb_c" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3h12W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pteggMrRnk4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3 Rock</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D8iP2qINaSE" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Post Game</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dU22iL1ZsWQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R3 Paper</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hhDh6_RD7tU" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h13W    One Million Scissors</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/87zN8iWo5pU" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Really Over</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LvcxrEP2U-o" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h13W    One Million Paper</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yQKjsA90kpc" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2h12F    Scissors</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_WKzx6tClQw" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2xF PretFar</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7VmxQumJAL4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R2xF</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0odtRIBvjes" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h13F    Scissors</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AGL2OMZzn2g" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1hPretFarF</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yCwdjfzxI4I" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1hXF</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qYaLoO40kjM" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h03F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/r9-jSTCiHd0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>R1h02F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fWOtjGJvlGI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah01F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CPb168NUwGc" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah02F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jDQqv3zkbIQ" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah03F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HXtheRKAkIw" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah04F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3qoxLsQ9464" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah05F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xjo-L59q8K4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah06F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dzK444eg53c" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Most Anti Lucky</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LLZJ-U1UB5M" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah07F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/83hQScodfDA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>AntiEnd Under 1k</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j-jqX7AdQT8" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah08F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TFlsl2ZkBlI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah09F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4ojQK570hDA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah10F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WQ9wBn2Qk14" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah11F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hT-25A8LFAE" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah12F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/e8zbuI-qJX4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah13F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xCb7UVssqlY" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah14F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/54ZevZGGXZw" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah15F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d84UbmiyBOs" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah16F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/X9jKHujmt1M" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah17F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SeX6WzVRZ4Y" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah18F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j8fHcBHeKwk" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>AntiEnd Over 1k</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/b6_QOYNf73g" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah19F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VtWv7m270kY" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah20F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LSHMwceP0X8" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah21F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BvL-kq_LLsI" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah22F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KIcQP_OL0-0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah23F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ei5WZihztGk" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah24F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/74E6BTyhv_c" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah25F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YnACGEG1tTc" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah26F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7Jp8Xp_9v90" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah27F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ILrJDLjx6sA" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah28F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sJXuw8QM0W4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah29F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Gh_preEUg74" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah30F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YVJh73INvXk" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah31F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9HDYmP-l_oM" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah32F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ugkWE2cy370" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah33F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F-j5y5dyPDo" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah34F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tlTOyDEZGUU" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah35W</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wUjs_vVwh68" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<div class="cell-output cell-output-display">
+<b>Ah35F</b>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GG6AZGhLCS4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
+  author = {Krishnamurthy, Dheepak},
+  title = {Graphing {CGP} {Grey’s} {Rock-Paper-Scissors} {YouTube}
+    {Game}},
+  pages = {undefined},
+  date = {2023-10-23},
+  url = {https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">D.
+Krishnamurthy, <span>“Graphing CGP Grey’s Rock-Paper-Scissors YouTube
+Game,”</span> Oct. 23, 2023. <a href="https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game">https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed in any manner by any employer or entity.
+  </li>  
+</ul>
+    <div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

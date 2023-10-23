@@ -2,6 +2,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.html",
       "/blog/julia-workflow-tips-and-tricks/index.html",
       "/blog/visualizing-roads-in-the-cities-of-canada/index.html",
       "/blog/using-makie-with-quarto/index.html",
@@ -49,8 +50,8 @@
       "/blog/mac-osx-productivity-apps/index.html",
       "/blog/mac-osx-tweaks/index.html",
       "/blog/tasker-and-google-maps/index.html",
-      "/blog/robotics/index.html",
       "/blog/geektool-and-desktop-widgets-in-osx/index.html",
+      "/blog/robotics/index.html",
       "/blog/tasker-projects/index.html",
       "/blog/home-monitoring-system/index.html",
       "/blog/welcome-to-my-blog/index.html"
