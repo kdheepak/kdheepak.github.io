@@ -264,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you haven’t already checked it out, go watch CGPGrey’s Rock-Paper-Scissors YouTube Game.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/PmWQmZXYd74" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>In this post, I’m going to explore what all the possible paths available are. Let’s import some packages first.</p>
-<div id="778da82b" class="cell" data-execution_count="2">
+<div id="179b0ea7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PyCall</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Conda</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Graphs</span></span>
@@ -273,19 +273,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Fortunately for us, CGPGrey was kind enough to put links to the choices in the description of (<em>almost</em>) every video. We can use Google’s YouTube API to get the video descriptions and get all the YouTube links in the description.</p>
 <p>We are going to use the <code>google-api-python-client</code> in Python from Julia.</p>
-<div id="9cc9dbd1" class="cell" data-execution_count="3">
+<div id="317c1af1" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>API_KEY<span class="op">=</span><span class="cn">ENV</span>[<span class="st">"YOUTUBE_API_KEY"</span>]; <span class="co"># Get API_KEY from google console</span></span>
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="cn">ENV</span>[<span class="st">"YOUTUBE_API_KEY"</span>]; <span class="co"># Get API_KEY from google console</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>build <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"googleapiclient.discovery"</span>).build <span class="co"># from googleapiclient.discovery import build</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>youtube <span class="op">=</span> <span class="fu">build</span>(<span class="st">"youtube"</span>, <span class="st">"v3"</span>, developerKey<span class="op">=</span>API_KEY) <span class="co"># call build function in Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<pre data-code-line-numbers="nil"><code>PyObject &lt;googleapiclient.discovery.Resource object at 0x1664211c0&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre data-code-line-numbers="nil"><code>PyObject &lt;googleapiclient.discovery.Resource object at 0x166479400&gt;</code></pre>
 </div>
 </div>
 <p>Now we can get the description of every video, and extract the metadata from it into a <code>Dict</code> of <code>Dict</code>s.</p>
-<div id="0a6103b8" class="cell" data-execution_count="4">
+<div id="b7f9131f" class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">youtubeid</span>(url) <span class="op">=</span> <span class="fu">string</span>(<span class="fu">first</span>(<span class="fu">split</span>(<span class="fu">replace</span>(url, <span class="st">"https://www.youtube.com/watch?v="</span><span class="op">=&gt;</span><span class="st">""</span>), <span class="st">"&amp;t"</span>)))</span>
@@ -337,9 +337,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c7e5855d" class="cell" data-execution_count="5">
+<div id="319c5682" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">links</span>(<span class="st">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="28">
 <pre data-code-line-numbers="nil"><code>Dict{Symbol, Any} with 6 entries:
   :links    =&gt; Any[Dict(:url=&gt;"https://www.youtube.com/watch?v=Ul8r0Thgx44", :s…
   :url      =&gt; "https://www.youtube.com/watch?v=PmWQmZXYd74"
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Now we can build a graph:</p>
-<div id="78f61670" class="cell" data-execution_count="6">
+<div id="0551b16b" class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">clean_titles</span>(str)</span>
@@ -390,17 +390,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_builder</span>(G, data)</span>
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <pre data-code-line-numbers="nil"><code>{111, 206} directed simple Int64 graph</code></pre>
 </div>
 </div>
-<div id="1e044f22" class="cell" data-execution_count="7">
+<div id="6886c1f7" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <p>There’s <strong>111</strong> videos in the Graph with <strong>206</strong> connections between the videos.</p>
 </div>
 </div>
 <p>Here’s what that graph visualized looks like:</p>
-<div id="4a409ad3" class="cell" data-execution_count="8">
+<div id="f18ae65b" class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>empty_theme <span class="op">=</span> <span class="fu">Theme</span>(</span>
@@ -431,12 +431,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <p><img src="index_files/figure-html/cell-9-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <p>Here’s all the YouTube videos we were able to scrap (with the special code as the title):</p>
-<div id="114d8490" class="cell" data-execution_count="9">
+<div id="e216c381" class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">IJulia</span></span>
