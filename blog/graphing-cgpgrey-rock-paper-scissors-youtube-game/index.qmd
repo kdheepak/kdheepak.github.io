@@ -57,7 +57,7 @@ We are going to use the `google-api-python-client` in Python from Julia.
 
 ```{julia}
 #| code-fold: true
-API_KEY=ENV["YOUTUBE_API_KEY"]; # Get API_KEY from google console
+API_KEY = ENV["YOUTUBE_API_KEY"]; # Get API_KEY from google console
 build = pyimport("googleapiclient.discovery").build # from googleapiclient.discovery import build
 youtube = build("youtube", "v3", developerKey=API_KEY) # call build function in Python
 ```
