@@ -29,6 +29,7 @@ cd(@__DIR__)
 # Pkg.add("Graphs")
 # Pkg.add("CairoMakie")
 # Pkg.add("GraphMakie")
+# Pkg.add("JSON3")
 # Conda.pip("install", "google-api-python-client")
 ```
 
@@ -46,6 +47,7 @@ using Conda
 using Graphs
 using CairoMakie, GraphMakie
 using GraphMakie.NetworkLayout
+using JSON3
 ```
 
 Fortunately for us, CGPGrey was kind enough to put links to the choices in the
@@ -111,8 +113,19 @@ function links(url; visited=Dict(), duplicate_links = false)
             duplicate_links && push!(r[:children], visited[url])
         end
     end
-
     return r
+end
+
+function cached_links(url; duplicate_links)
+    bfile = """$(youtubeid(url))-$(duplicate_links ? "dup-links" : "no-dup-links").json"""
+    if isfile(bfile)
+        return JSON3.read(bfile)
+    end
+    r = links(url; duplicate_links)
+    open(bfile, "w") do f
+        JSON3.write(f, r)
+    end
+    r
 end
 
 function _clean_titles(str)
@@ -159,7 +172,7 @@ end
 ```
 
 ```{julia}
-data = links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links = true)
+data = cached_links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links = true)
 (; ids, titles, urls, nodes) = get_nodes(data)
 G = grapher(data, ids)
 ```
@@ -175,15 +188,17 @@ Here's what that graph visualized looks like:
 ```{julia}
 #| code-fold: true
 empty_theme = Theme(
-    fonts=(; weird="Blackchancery", title = "CMU Serif"),
+    fonts=(; title = "CMU Serif"),
 )
-node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles] # If there's a space it is probably a unique name
+# If there's a space it is probably a unique name
+node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles]
+node_size = [length(split(strip(t))) > 1 ? 8 : 5 for t in titles]
 
 f, ax, p = graphplot(G;
     nlabels=titles,
     nlabels_fontsize=5,
     node_color=node_colors,
-    node_size=5,
+    node_size,
     arrow_size=10,
     layout=Stress()
 )
@@ -202,7 +217,7 @@ Let's remove those connections so we can visualize it as a tree.
 
 ```{julia}
 #| code-fold: true
-data = links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links = false)
+data = cached_links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links = false)
 (; ids, titles, urls, nodes) = get_nodes(data)
 G = grapher(data, ids)
 ```
@@ -218,15 +233,19 @@ Here's what the graph now visualized looks like:
 ```{julia}
 #| code-fold: true
 empty_theme = Theme(
-    fonts=(; weird="Blackchancery", title = "CMU Serif"),
+    fonts=(; title = "CMU Serif"),
 )
-node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles] # If there's a space it is probably a unique name
+# If there's a space it is probably a unique name
+node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles]
+node_size = [length(split(strip(t))) > 1 ? 8 : 5 for t in titles]
 
 f, ax, p = graphplot(G;
     nlabels=titles,
     nlabels_fontsize=10,
     node_color=node_colors,
-    node_size=5,
+    node_size,
+    arrow_size=8,
+    arrow_shift=:end,
     layout=Buchheim()
 )
 hidedecorations!(ax); hidespines!(ax);
@@ -264,4 +283,3 @@ end
 @assert unique(nodes) == nodes
 display_youtube_video.(nodes);
 ```
-
