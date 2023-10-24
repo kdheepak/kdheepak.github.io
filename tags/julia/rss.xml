@@ -10,7 +10,18 @@
 <atom:link href="https://kdheepak.com/blog/index-julia.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.444</generator>
-<lastBuildDate>Sun, 13 Aug 2023 02:14:15 GMT</lastBuildDate>
+<lastBuildDate>Mon, 23 Oct 2023 08:21:19 GMT</lastBuildDate>
+<item>
+  <title>Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/</link>
+  <description><![CDATA[ If you haven’t already checked it out, go watch CGPGrey’s Rock-Paper-Scissors YouTube Game. ]]></description>
+  <category>analysis</category>
+  <category>python</category>
+  <category>julia</category>
+  <guid>https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/</guid>
+  <pubDate>Mon, 23 Oct 2023 08:21:19 GMT</pubDate>
+</item>
 <item>
   <title>Julia Workflow Tips and Tricks</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
