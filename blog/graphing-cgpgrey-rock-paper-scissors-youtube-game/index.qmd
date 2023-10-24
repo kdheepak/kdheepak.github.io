@@ -79,7 +79,16 @@ function metadata(url)
     title = response["items"][1]["snippet"]["title"]
     if isempty(description)
         # Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is empty)
-        return (; description = "WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI\nLOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ\n\n🌐 Website: https://www.cgpgrey.com\n💖 Patreon: https://www.patreon.com/cgpgrey \n📒 Cortex: http://www.cortexbrand.com\n\n\n\n\n⛔️ Ah01F ✅", title = "🔴")
+        return (; description = """
+    WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI
+    LOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ
+
+    🌐 Website: https://www.cgpgrey.com
+    💖 Patreon: https://www.patreon.com/cgpgrey
+    📒 Cortex: http://www.cortexbrand.com
+
+    ⛔️ Ah01F ✅
+    """, title = "🔴")
     end
     (; description, title)
 end
@@ -188,19 +197,19 @@ Here's what that graph visualized looks like:
 ```{julia}
 #| code-fold: true
 empty_theme = Theme(
-    fonts=(; title = "CMU Serif"),
+  fonts=(; title = "CMU Serif"),
 )
 # If there's a space it is probably a unique name
 node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles]
 node_size = [length(split(strip(t))) > 1 ? 8 : 5 for t in titles]
 
 f, ax, p = graphplot(G;
-    nlabels=titles,
-    nlabels_fontsize=5,
-    node_color=node_colors,
-    node_size,
-    arrow_size=10,
-    layout=Stress()
+  nlabels=titles,
+  nlabels_fontsize=5,
+  node_color=node_colors,
+  node_size,
+  arrow_size=10,
+  layout=Stress()
 )
 hidedecorations!(ax); hidespines!(ax);
 # offsets = [Point2f(0.1, -0.5) for _ in p[:node_pos][]]
@@ -233,20 +242,20 @@ Here's what the graph now visualized looks like:
 ```{julia}
 #| code-fold: true
 empty_theme = Theme(
-    fonts=(; title = "CMU Serif"),
+  fonts=(; title = "CMU Serif"),
 )
 # If there's a space it is probably a unique name
 node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles]
 node_size = [length(split(strip(t))) > 1 ? 8 : 5 for t in titles]
 
 f, ax, p = graphplot(G;
-    nlabels=titles,
-    nlabels_fontsize=10,
-    node_color=node_colors,
-    node_size,
-    arrow_size=8,
-    arrow_shift=:end,
-    layout=Buchheim()
+  nlabels=titles,
+  nlabels_fontsize=10,
+  node_color=node_colors,
+  node_size,
+  arrow_size=8,
+  arrow_shift=:end,
+  layout=Buchheim()
 )
 hidedecorations!(ax); hidespines!(ax);
 offsets = [Point2f(0.1, -0.5) for _ in p[:node_pos][]]
@@ -270,14 +279,14 @@ If you are interested in viewing all the videos, you can check them out below:
 using IJulia
 
 function display_youtube_video(node)
-    video_id = split(node.url, "=")[end]
-    title = node.title
-    html_code = """
-    <b>$(title)</b>
-    <br/>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/$video_id" frameborder="0" allowfullscreen></iframe>
-    """
-    display("text/html", HTML(html_code))
+  video_id = split(node.url, "=")[end]
+  title = node.title
+  html_code = """
+  <b>$(title)</b>
+  <br/>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/$video_id" frameborder="0" allowfullscreen></iframe>
+  """
+  display("text/html", HTML(html_code))
 end
 
 @assert unique(nodes) == nodes
