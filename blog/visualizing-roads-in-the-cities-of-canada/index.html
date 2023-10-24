@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.439">
+<meta name="generator" content="quarto-1.4.444">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -412,7 +412,7 @@ size(gdf) = (2242117, 26)</code></pre>
 <h3 class="anchored" data-anchor-id="visualizations">Visualizations</h3>
 <p>We can now create a plot for each city using Makie:</p>
 <div class="cell" data-execution_count="5">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plot_city</span>(gdf, city_name)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> <span class="pp">@rsubset</span> gdf (<span class="op">:</span>CSDNAME_L_UTF8 <span class="op">==</span> city_name <span class="op">||</span> <span class="op">:</span>CSDNAME_R_UTF8 <span class="op">==</span> city_name)</span>
