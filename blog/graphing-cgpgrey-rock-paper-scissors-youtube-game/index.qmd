@@ -5,7 +5,7 @@ categories:
   - python
   - julia
 keywords: python, julia, cgpgrey rock paper scissors youtube game
-date: '2023-10-23T04:21:19-0400'
+date: '2023-10-22T22:21:19-0400'
 jupyter:
   jupytext:
     text_representation:
