@@ -208,7 +208,7 @@ f, ax, p = graphplot(G;
   nlabels_fontsize=5,
   node_color=node_colors,
   node_size,
-  arrow_size=10,
+  arrow_size=8,
   layout=Stress()
 )
 hidedecorations!(ax); hidespines!(ax);
