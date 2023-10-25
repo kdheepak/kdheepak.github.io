@@ -52,10 +52,9 @@ using GraphMakie
 using GraphMakie.NetworkLayout
 using JSON3
 using JSServe, Markdown
-Page(exportable=true, offline=true) # for Franklin, you still need to configure
+Page(exportable=true, offline=true)
 WGLMakie.activate!()
-Makie.inline!(true) # Make sure to inline plots into Documenter output!
-nothing
+Makie.inline!(true)
 ```
 
 Fortunately for us, CGPGrey was kind enough to put links to the choices in the
