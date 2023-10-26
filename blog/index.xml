@@ -458,16 +458,6 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Robotics</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/robotics/</link>
-  <description><![CDATA[ 
-Robotics and Microcontroller Projects
- ]]></description>
-  <guid>https://kdheepak.com/blog/robotics/</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/tasker-and-google-maps/</link>
@@ -484,6 +474,16 @@ Robotics and Microcontroller Projects
   <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
   <category>osx</category>
   <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Robotics</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/robotics/</link>
+  <description><![CDATA[ 
+Robotics and Microcontroller Projects
+ ]]></description>
+  <guid>https://kdheepak.com/blog/robotics/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
