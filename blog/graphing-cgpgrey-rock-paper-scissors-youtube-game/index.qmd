@@ -299,10 +299,10 @@ display(md"Here's a table that contains the sorted view count as of $(Dates.toda
 
 ```{julia}
 #| code-fold: true
-using DataFrames
+import DataFrames as DF
 
 # Create an empty DataFrame
-df = DataFrame(Title=String[], Views=Int[])
+df = DF.DataFrame(Title=String[], Views=Int[])
 
 for idx in sortperm(views, rev=true)
   push!(df, (; Title=titles[idx], Views=views[idx]))
