@@ -290,12 +290,7 @@ f
 
 There we have it; a flowchart of the Rock-Paper-Scissors game.
 
-```{julia}
-#| echo: false
-using Markdown
-using Dates
-display(md"Here's a table that contains the sorted view count as of $(Dates.today()):")
-```
+Here's a table that contains the sorted view count as of Oct 25th, 2023.
 
 ```{julia}
 #| code-fold: true
