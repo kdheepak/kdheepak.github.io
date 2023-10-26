@@ -325,15 +325,20 @@ using IJulia
 function display_youtube_video(node)
   video_id = split(node.url, "=")[end]
   title = node.title
+  if isempty(title)
+    title = "---no special code---"
+  end
   html_code = """
-  <b>$(title)</b>
-  <br/>
+<details>
+  <summary>$(title)</summary>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/$video_id" frameborder="0" allowfullscreen></iframe>
+</details>
   """
   display("text/html", HTML(html_code))
 end
 
 @assert unique(nodes) == nodes
+
 display_youtube_video.(nodes);
 ```
 
