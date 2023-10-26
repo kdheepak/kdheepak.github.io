@@ -31,6 +31,7 @@ cd(@__DIR__)
 # Pkg.add("CairoMakie")
 # Pkg.add("GraphMakie")
 # Pkg.add("JSON3")
+# Pkg.add("ColorSchemes")
 # Conda.pip("install", "google-api-python-client")
 ```
 
@@ -52,6 +53,7 @@ using GraphMakie
 using GraphMakie.NetworkLayout
 using JSON3
 using JSServe, Markdown
+using ColorSchemes
 Page(exportable=true, offline=true)
 WGLMakie.activate!()
 Makie.inline!(true)
@@ -80,12 +82,13 @@ youtubeid(url) = string(first(split(replace(url, "https://www.youtube.com/watch?
 
 function metadata(url)
     id = youtubeid(url)
-    request = youtube.videos().list(part="snippet", id=id)
+    request = youtube.videos().list(part=["snippet", "statistics"], id=id)
     response = request.execute()
     description = response["items"][1]["snippet"]["description"]
     title = response["items"][1]["snippet"]["title"]
-    if isempty(description)
-        # Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is empty)
+    views = parse(Int, response["items"][1]["statistics"]["viewCount"])
+    if url == "https://www.youtube.com/watch?v=CPb168NUwGc"
+        # Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is not standard)
         return (; description = """
     WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI
     LOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ
@@ -95,9 +98,9 @@ function metadata(url)
     📒 Cortex: http://www.cortexbrand.com
 
     ⛔️ Ah01F ✅
-    """, title = "🔴")
+    """, title = "🔴", views)
     end
-    (; description, title)
+    (; description, title, views)
 end
 
 function links(url; visited=Dict(), duplicate_links = false)
@@ -108,7 +111,8 @@ function links(url; visited=Dict(), duplicate_links = false)
         :url => url,
         :links => [],
         :children => [],
-        :title => m.title
+        :title => m.title,
+        :views => m.views,
     )
     for line in split(m.description, "\n")
         if occursin("https://www.youtube.com/watch?v=", line)
@@ -156,7 +160,7 @@ end
 
 function _node_builder(nodes, d)
   for c in d[:children]
-    push!(nodes, (; id = c[:id], title = _clean_titles(c[:code]), url = c[:url]))
+    push!(nodes, (; id = c[:id], title = _clean_titles(c[:code]), url = c[:url], views = c[:views]))
     _node_builder(nodes, c)
   end
 end
@@ -171,7 +175,7 @@ function _graph_builder(G, d, ids)
 end
 
 function get_nodes(data)
-  nodes = [(; id = data[:id], title = _clean_titles(data[:title]), url = data[:url])]
+  nodes = [(; id = data[:id], title = _clean_titles(data[:title]), url = data[:url], views = data[:views])]
   _node_builder(nodes, data)
   nodes = unique(nodes)
   ids = [n.id for n in nodes]
@@ -196,7 +200,7 @@ G = grapher(data, ids)
 ```{julia}
 #| echo: false
 using Markdown
-display(md"There's **$(nv(G))** videos in the Graph with **$(ne(G))** connections between the videos.")
+display(md"There's **$(nv(G))** videos in this graph with **$(ne(G))** connections between the videos.")
 ```
 
 Here's what that graph visualized looks like:
@@ -208,25 +212,31 @@ set_theme!(; resolution=(1600, 900))
 empty_theme = Theme(
   fonts=(; title = "CMU Serif"),
 )
-# If there's a space it is probably a unique name
-node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles]
-node_size = [length(split(strip(t))) > 1 ? 8 : 5 for t in titles]
+views = [node[:views] for node in nodes]
+min_val, max_val = extrema(views[2:end])
+normed_views = (views .- min_val) ./ (max_val - min_val)
+colors = cgrad(:viridis, scale=log)
+node_colors = ColorSchemes.get.(Ref(colors), normed_views)
 
 f, ax, p = graphplot(G;
   nlabels=titles,
   nlabels_fontsize=10,
   node_color=node_colors,
-  node_size,
+  node_size = 20,
   arrow_size=8,
   layout=Stress(dim=3)
 )
+Colorbar(f[1, 2], limits = extrema(views), colormap = colors, label = "YouTube Views")
 # hidedecorations!(ax); hidespines!(ax);
 # offsets = [Point2f(0.1, -0.5) for _ in p[:node_pos][]]
 # offsets[1] = Point2f(0.1, 0.5)
 # p.nlabels_offset[] = offsets
 # autolimits!(ax)
 # ax.title = "CGP Grey's Rock-Paper-Scissors YouTube Game"
+f
 ```
+
+You can click to drag and use the mouse wheel to zoom in the above plot.
 
 This graph contains a lot of duplicate links to the same video.
 For example when losing after different number of wins, you might end up at the same video.
@@ -242,7 +252,7 @@ G = grapher(data, ids)
 ```{julia}
 #| echo: false
 using Markdown
-display(md"There's **$(nv(G))** videos in the Graph with **$(ne(G))** connections between the videos.")
+display(md"There's **$(nv(G))** videos in this graph with **$(ne(G))** connections between the videos.")
 ```
 
 Here's what the graph now visualized looks like:
@@ -254,9 +264,15 @@ set_theme!(; resolution=(1800, 900))
 empty_theme = Theme(
   fonts=(; title = "CMU Serif"),
 )
+
+views = [node[:views] for node in nodes]
+min_val, max_val = extrema(views[2:end])
+normed_views = (views .- min_val) ./ (max_val - min_val)
+colors = cgrad(:viridis, scale=log)
+node_colors = ColorSchemes.get.(Ref(colors), normed_views)
+
 # If there's a space it is probably a unique name
-node_colors = [length(split(strip(t))) > 1 ? :red : :black for t in titles]
-node_size = [length(split(strip(t))) > 1 ? 8 : 5 for t in titles]
+node_size = [length(split(strip(t))) > 1 ? 25 : 15 for t in titles]
 
 f, ax, p = graphplot(G;
   nlabels=titles,
@@ -273,6 +289,7 @@ offsets[1] = Point2f(0.1, 0.5)
 p.nlabels_offset[] = offsets
 autolimits!(ax)
 ax.title = "CGP Grey's Rock-Paper-Scissors YouTube Game"
+Colorbar(f[1, 2], limits = extrema(views), colormap = colors, label = "YouTube Views")
 f
 ```
 
@@ -302,3 +319,4 @@ end
 @assert unique(nodes) == nodes
 display_youtube_video.(nodes);
 ```
+
