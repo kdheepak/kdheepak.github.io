@@ -208,10 +208,7 @@ Here's what that graph visualized looks like:
 ```{julia}
 #| code-fold: true
 WGLMakie.activate!()
-set_theme!(; resolution=(1600, 900))
-empty_theme = Theme(
-  fonts=(; title = "CMU Serif"),
-)
+set_theme!(; resolution=(1600, 900), fonts=(; title = "CMU Serif"))
 views = [node[:views] for node in nodes]
 min_val, max_val = extrema(views[2:end])
 normed_views = (views .- min_val) ./ (max_val - min_val)
@@ -260,10 +257,7 @@ Here's what the graph now visualized looks like:
 ```{julia}
 #| code-fold: true
 CairoMakie.activate!()
-set_theme!(; resolution=(1800, 900))
-empty_theme = Theme(
-  fonts=(; title = "CMU Serif"),
-)
+set_theme!(; resolution=(1600, 900), fonts=(; title = "CMU Serif"))
 
 views = [node[:views] for node in nodes]
 min_val, max_val = extrema(views[2:end])
