@@ -233,7 +233,7 @@ Colorbar(f[1, 2], limits = extrema(views), colormap = colors, label = "YouTube V
 f
 ```
 
-You can click to drag and use the mouse wheel to zoom in the above plot.
+You can click and drag to rotate and use the mouse wheel to zoom in the above plot.
 
 This graph contains a lot of duplicate links to the same video.
 For example when losing after different number of wins, you might end up at the same video.
