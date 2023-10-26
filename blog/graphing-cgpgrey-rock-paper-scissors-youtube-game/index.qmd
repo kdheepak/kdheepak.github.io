@@ -289,6 +289,28 @@ f
 
 There we have it; a flowchart of the Rock-Paper-Scissors game.
 
+```{julia}
+#| echo: false
+using Markdown
+using Dates
+display(md"Here's a table that contains the sorted view count as of $(Dates.today()):")
+```
+
+```{julia}
+#| code-fold: true
+using DataFrames
+
+# Create an empty DataFrame
+df = DataFrame(Title=String[], Views=Int[])
+
+for idx in sortperm(views, rev=true)
+  push!(df, (; Title=titles[idx], Views=views[idx]))
+end
+
+# Display the DataFrame
+display(df)
+```
+
 If you liked this blog post, consider subscribing to
 [CGP Grey's Patreon](https://www.patreon.com/cgpgrey)
 so that they can make more awesome content like this.
