@@ -192,6 +192,7 @@ end
 ```
 
 ```{julia}
+#| code-fold: true
 data = cached_links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links = true)
 (; ids, titles, urls, nodes) = get_nodes(data)
 G = grapher(data, ids)
