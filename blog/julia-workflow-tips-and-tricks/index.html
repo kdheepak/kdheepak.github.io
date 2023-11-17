@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.451">
+<meta name="generator" content="quarto-1.4.506">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -200,11 +200,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Julia Workflow Tips and Tricks</li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/julia-workflow-tips-and-tricks/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
@@ -343,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>With the <code>Startup.jl</code> package approach, your root environment can be empty and you can still use functionality exposed by <code>Startup.jl</code>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" class="img-fluid quarto-figure-center figure-img" style="width:75.0%" data-clickable="true" alt="Using Startup.jl to load BenchmarkTools with an empty root environment."></a></p>
+<p><a href="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true" alt="Using Startup.jl to load BenchmarkTools with an empty root environment."></a></p>
 <figcaption>Using <code>Startup.jl</code> to load <code>BenchmarkTools</code> with an empty root environment.</figcaption>
 </figure>
 </div>
@@ -380,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://github.com/timholy/Revise.jl"><code>Revise.jl</code></a> is a game-changer for Julia development. It automatically reloads modified source files without restarting the Julia session. This makes iterative development much smoother.</p>
 <p>Once set up, any changes you make to your code files are immediately available in your active Julia session.</p>
 <p>Revise can <q>track</q> changes in single files if you include them using <code>includet</code>:</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" class="img-fluid quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<p><a href="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
 <p>If you want <code>Revise</code> to track changes in a package you are developing locally, simply run <code>using Revise</code> before you load the package for the first time.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -389,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p>If you use VSCode and start a REPL using the <code>Julia: Start REPL</code> command, <code>Revise</code> is automatically loaded by default.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" class="img-fluid quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<p><a href="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
 </div>
 </div>
 </div>
@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">+   y::Float64</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>Revise</code> throws an error and warning because it is unable to make that change; and <code>Revise</code> changes the color of the Julia prompt:</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<p><a href="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
 <p>There are some <a href="https://timholy.github.io/Revise.jl/stable/limitations/">workarounds</a> for this but the easiest thing to do is to <strong>restart the Julia session</strong> after you are make changes to any <code>struct</code>.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="infiltrator"><code>Infiltrator</code></h3>
 <p><a href="https://github.com/JuliaDebug/Infiltrator.jl"><code>Infiltrator.jl</code></a> is a debugger and code inspection tool for Julia. It allows you to insert breakpoints in your code and inspect the current scope’s variables.</p>
 <p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<p><a href="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
 <p>You can also use <code>@infiltrate i == 3</code> and that’ll drop you into a Julia REPL only in the third iteration of the <code>for</code> loop.</p>
 <p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data in the scope of any function interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
 </section>
@@ -465,9 +465,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="cthulhu"><code>Cthulhu</code></h3>
 <p>Delving deep into Julia’s compiler optimizations and type inference can sometimes feel daunting and that’s where <a href="https://github.com/JuliaDebug/Cthulhu.jl"><code>Cthulhu.jl</code></a> comes to the rescue. <code>Cthulhu</code> is an interactive terminal user interface that is an alternative to <code>@code_lowered</code> and <code>@code_typed</code>, and allows developers to interactively <q>descend</q> into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia’s JIT compiler optimizes code.</p>
 <p>For example, if we examine the <code>mysum</code> function from the previous section, we can see that <code>a</code> is being inferred as a <code>Int64</code> or a <code>Float64</code>, i.e.&nbsp;<code>Union{Float64, Int64}</code>.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<p><a href="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
 <p>In this particular case, by changing <code>a = 0</code> to <code>a = 0.0</code>, we can make the code generated by Julia more optimized, i.e.&nbsp;<code>a</code> is now being inferred only as a <code>Float64</code>.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<p><a href="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
 <p>Here’s the benchmark results with <code>a = 0</code> (left) and <code>a = 0.0</code> (right), with the latter being almost 3 times faster.</p>
 <div>
 
@@ -709,6 +709,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -783,8 +803,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
         typesetMath(container);
         return container.innerHTML
@@ -1018,26 +1045,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 <script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
@@ -1053,7 +1060,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
- All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed in any manner by any employer or entity.
+ All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
     </div>
