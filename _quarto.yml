@@ -47,7 +47,7 @@ website:
     collapse-level: 1
   page-footer:
     center:
-      - text: "All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed in any manner by any employer or entity."
+      - text: "All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner."
 format:
   html:
     grid:
