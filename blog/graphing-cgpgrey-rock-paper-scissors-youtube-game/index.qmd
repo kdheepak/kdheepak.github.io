@@ -68,6 +68,7 @@ We are going to use the `google-api-python-client` in Python from Julia.
 
 ```{julia}
 #| code-fold: true
+#| output: false
 API_KEY = ENV["YOUTUBE_API_KEY"]; # Get API_KEY from google console
 build = pyimport("googleapiclient.discovery").build # from googleapiclient.discovery import build
 youtube = build("youtube", "v3", developerKey=API_KEY) # call build function in Python
@@ -78,81 +79,81 @@ Now we can get the description of every video, extract the metadata from it into
 ```{julia}
 #| code-fold: true
 #| output: false
-youtubeid(url) = string(first(split(replace(url, "https://www.youtube.com/watch?v="=>""), "&t")))
+youtubeid(url) = string(first(split(replace(url, "https://www.youtube.com/watch?v=" => ""), "&t")))
 
 function metadata(url)
-    id = youtubeid(url)
-    request = youtube.videos().list(part=["snippet", "statistics"], id=id)
-    response = request.execute()
-    description = response["items"][1]["snippet"]["description"]
-    title = response["items"][1]["snippet"]["title"]
-    views = parse(Int, response["items"][1]["statistics"]["viewCount"])
-    if url == "https://www.youtube.com/watch?v=CPb168NUwGc"
-        # Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is not standard)
-        return (; description = """
-    WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI
-    LOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ
+  id = youtubeid(url)
+  request = youtube.videos().list(part=["snippet", "statistics"], id=id)
+  response = request.execute()
+  description = response["items"][1]["snippet"]["description"]
+  title = response["items"][1]["snippet"]["title"]
+  views = parse(Int, response["items"][1]["statistics"]["viewCount"])
+  if url == "https://www.youtube.com/watch?v=CPb168NUwGc"
+    # Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is not standard)
+    return (; description="""
+WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI
+LOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ
 
-    🌐 Website: https://www.cgpgrey.com
-    💖 Patreon: https://www.patreon.com/cgpgrey
-    📒 Cortex: http://www.cortexbrand.com
+🌐 Website: https://www.cgpgrey.com
+💖 Patreon: https://www.patreon.com/cgpgrey
+📒 Cortex: http://www.cortexbrand.com
 
-    ⛔️ Ah01F ✅
-    """, title = "🔴", views)
-    end
-    (; description, title, views)
+⛔️ Ah01F ✅
+""", title="🔴", views)
+  end
+  (; description, title, views)
 end
 
-function links(url; visited=Dict(), duplicate_links = false)
-    m = metadata(url)
-    r = Dict(
-        :id => youtubeid(url),
-        :code => last(split(strip(m.description), "\n")), # last line is a special code
-        :url => url,
-        :links => [],
-        :children => [],
-        :title => m.title,
-        :views => m.views,
-    )
-    for line in split(m.description, "\n")
-        if occursin("https://www.youtube.com/watch?v=", line)
-            _status, video = split(line, ":", limit=2)
-            video = strip(video)
-            push!(r[:links], Dict(:status => string(_status), :url => string(video)))
-        end
+function links(url; visited=Dict(), duplicate_links=false)
+  m = metadata(url)
+  r = Dict(
+    :id => youtubeid(url),
+    :code => last(split(strip(m.description), "\n")), # last line is a special code
+    :url => url,
+    :links => [],
+    :children => [],
+    :title => m.title,
+    :views => m.views,
+  )
+  for line in split(m.description, "\n")
+    if occursin("https://www.youtube.com/watch?v=", line)
+      _status, video = split(line, ":", limit=2)
+      video = strip(video)
+      push!(r[:links], Dict(:status => string(_status), :url => string(video)))
     end
+  end
 
-    for link in r[:links]
-        url = link[:url]
-        if !(url in keys(visited))
-            visited[url] = Dict()
-            s = links(url; visited, duplicate_links)
-            push!(r[:children], s)
-            visited[url] = s
-        else
-            duplicate_links && push!(r[:children], visited[url])
-        end
+  for link in r[:links]
+    url = link[:url]
+    if !(url in keys(visited))
+      visited[url] = Dict()
+      s = links(url; visited, duplicate_links)
+      push!(r[:children], s)
+      visited[url] = s
+    else
+      duplicate_links && push!(r[:children], visited[url])
     end
-    return r
+  end
+  return r
 end
 
 function cached_links(url; duplicate_links)
-    bfile = """$(youtubeid(url))-$(duplicate_links ? "dup-links" : "no-dup-links").json"""
-    if isfile(bfile)
-        return JSON3.read(bfile)
-    end
-    r = links(url; duplicate_links)
-    open(bfile, "w") do f
-        JSON3.write(f, r)
-    end
-    r
+  bfile = """$(youtubeid(url))-$(duplicate_links ? "dup-links" : "no-dup-links").json"""
+  if isfile(bfile)
+    return JSON3.read(bfile)
+  end
+  r = links(url; duplicate_links)
+  open(bfile, "w") do f
+    JSON3.write(f, r)
+  end
+  r
 end
 
 function _clean_titles(str)
   t = join([c for c in str if isascii(c)])
   t = strip(t)
   if occursin("Cortex", t)
-      return ""
+    return ""
   end
   string(t)
 end
@@ -160,7 +161,7 @@ end
 
 function _node_builder(nodes, d)
   for c in d[:children]
-    push!(nodes, (; id = c[:id], title = _clean_titles(c[:code]), url = c[:url], views = c[:views]))
+    push!(nodes, (; id=c[:id], title=_clean_titles(c[:code]), url=c[:url], views=c[:views]))
     _node_builder(nodes, c)
   end
 end
@@ -175,7 +176,7 @@ function _graph_builder(G, d, ids)
 end
 
 function get_nodes(data)
-  nodes = [(; id = data[:id], title = _clean_titles(data[:title]), url = data[:url], views = data[:views])]
+  nodes = [(; id=data[:id], title=_clean_titles(data[:title]), url=data[:url], views=data[:views])]
   _node_builder(nodes, data)
   nodes = unique(nodes)
   ids = [n.id for n in nodes]
@@ -192,8 +193,8 @@ end
 ```
 
 ```{julia}
-#| code-fold: true
-data = cached_links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links = true)
+#| code-fold: false
+data = cached_links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links=true)
 (; ids, titles, urls, nodes) = get_nodes(data)
 G = grapher(data, ids)
 ```
@@ -209,7 +210,7 @@ Here's what that graph visualized looks like:
 ```{julia}
 #| code-fold: true
 WGLMakie.activate!()
-set_theme!(; resolution=(1600, 900), fonts=(; title = "CMU Serif"))
+set_theme!(; resolution=(1600, 900), fonts=(; title="CMU Serif"))
 views = [node[:views] for node in nodes]
 min_val, max_val = extrema(views[2:end])
 normed_views = (views .- min_val) ./ (max_val - min_val)
@@ -220,11 +221,11 @@ f, ax, p = graphplot(G;
   nlabels=titles,
   nlabels_fontsize=10,
   node_color=node_colors,
-  node_size = 20,
+  node_size=20,
   arrow_size=8,
   layout=Stress(dim=3)
 )
-Colorbar(f[1, 2], limits = extrema(views), colormap = colors, label = "YouTube Views")
+Colorbar(f[1, 2], limits=extrema(views), colormap=colors, label="YouTube Views")
 # hidedecorations!(ax); hidespines!(ax);
 # offsets = [Point2f(0.1, -0.5) for _ in p[:node_pos][]]
 # offsets[1] = Point2f(0.1, 0.5)
@@ -242,7 +243,7 @@ Let's remove those connections so we can visualize it as a tree.
 
 ```{julia}
 #| code-fold: true
-data = cached_links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links = false)
+data = cached_links("https://www.youtube.com/watch?v=PmWQmZXYd74", duplicate_links=false)
 (; ids, titles, urls, nodes) = get_nodes(data)
 G = grapher(data, ids)
 ```
@@ -258,7 +259,7 @@ Here's what the graph now visualized looks like:
 ```{julia}
 #| code-fold: true
 CairoMakie.activate!()
-set_theme!(; resolution=(1600, 900), fonts=(; title = "CMU Serif"))
+set_theme!(; resolution=(1600, 900), fonts=(; title="CMU Serif"))
 
 views = [node[:views] for node in nodes]
 min_val, max_val = extrema(views[2:end])
@@ -278,13 +279,14 @@ f, ax, p = graphplot(G;
   arrow_shift=:end,
   layout=Buchheim()
 )
-hidedecorations!(ax); hidespines!(ax);
+hidedecorations!(ax);
+hidespines!(ax);
 offsets = [Point2f(0.1, -1.5) for _ in p[:node_pos][]]
 offsets[1] = Point2f(0.1, 0.5)
 p.nlabels_offset[] = offsets
 autolimits!(ax)
 ax.title = "CGP Grey's Rock-Paper-Scissors YouTube Game"
-Colorbar(f[1, 2], limits = extrema(views), colormap = colors, label = "YouTube Views")
+Colorbar(f[1, 2], limits=extrema(views), colormap=colors, label="YouTube Views")
 f
 ```
 
