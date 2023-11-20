@@ -67,7 +67,8 @@ I believe Quarto is a compelling alternative to Docsaurus, mkdocs, mdbook, hugo,
 
 Over the past year, every report, paper, presentation, and tutorial I've created has used Quarto and its features.
 At the time of writing this post, Quarto is even the backbone of my blog.
-I think Quarto isn't without its [fair share of issues](https://github.com/quarto-dev/quarto-cli/issues) but it shows real promise in my humble opinion.
+I think Quarto isn't without its [fair share of issues](https://github.com/quarto-dev/quarto-cli/issues), and I do think for highly custom layouts or professional typesetting, directly working in $\LaTeX$ is probably easier.
+But for such a young project, it shows real promise in my humble opinion.
 
 Given that I've been using Quarto extensively for a while, I figured it was appropriate to revise the earlier diagram to reflect my experience:
 
