@@ -282,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="page-columns page-full"><p>For technical publications where you want to show results inline, I believe using Quarto is a no-brainer. If you are already using Jupyter Notebooks, using Quarto is incredibly seamless.  But even without using any of Quarto’s computational features, I think it is a compelling alternative to many static site generation tools (e.g.&nbsp;Docsaurus, mkdocs, mdbook, hugo, sphinx, etc) as a means to develop high quality technical documentation. Over the past year, every report, paper, presentation, and tutorial I’ve created has used Quarto in one way or another. At the time of writing this post, Quarto is even the backbone of my blog.</p><div class="no-row-height column-margin column-container"><span class="">If you are interested in a static site generator writing in Julia with a similar feature set, you should check out <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>.</span></div></div>
 <p>Quarto isn’t without its <a href="https://github.com/quarto-dev/quarto-cli/issues">fair share of issues</a>, and I do think for highly custom layouts or professional typesetting, directly working in <span class="math inline">\(\LaTeX\)</span> is probably easier. But for such a young project, it shows real promise (in my humble opinion) and is worthy of giving it a shot.</p>
 <p>Given that I’ve been using Quarto extensively for a while, I figured it was appropriate to revise the earlier diagram to reflect my experience:</p>
-<div id="23a93f0d" class="cell" data-execution_count="2">
+<div id="f648a333" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                    arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'&lt;-&gt;'</span>, color<span class="op">=</span><span class="st">'black'</span>))</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, position <span class="kw">in</span> <span class="bu">enumerate</span>(segment_positions):</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        ax.axvline(x<span class="op">=</span>position, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        ax.axvline(x<span class="op">=</span>position, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-.'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>)</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        ax.annotate(segment_labels[i],</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                    xy<span class="op">=</span>(position, <span class="dv">0</span>), xycoords<span class="op">=</span>(<span class="st">'data'</span>, <span class="st">'axes fraction'</span>),</span>
@@ -362,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Versions
 </summary>
-<div id="4544821e" class="cell" data-execution_count="3">
+<div id="25450e07" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
