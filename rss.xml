@@ -18,6 +18,7 @@
   <link>https://kdheepak.com/blog/publish-documents-with-quarto/</link>
   <description><![CDATA[ 8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to <a href="../../blog/writing-papers-with-markdown/index.html">write academic papers with Pandoc Markdown</a>. ]]></description>
   <category>pandoc</category>
+  <category>python</category>
   <guid>https://kdheepak.com/blog/publish-documents-with-quarto/</guid>
   <pubDate>Mon, 20 Nov 2023 03:10:00 GMT</pubDate>
 </item>
