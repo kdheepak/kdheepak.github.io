@@ -2,6 +2,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/publish-documents-with-quarto/index.html",
       "/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.html",
       "/blog/julia-workflow-tips-and-tricks/index.html",
       "/blog/visualizing-roads-in-the-cities-of-canada/index.html",
