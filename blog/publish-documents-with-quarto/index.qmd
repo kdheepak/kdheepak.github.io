@@ -107,7 +107,7 @@ with plt.xkcd():
                     arrowprops=dict(arrowstyle='<->', color='black'))
 
     for i, position in enumerate(segment_positions):
-        ax.axvline(x=position, color='black', linestyle='--', linewidth=1)
+        ax.axvline(x=position, color='black', linestyle='-.', linewidth=0.5, alpha = 0.5)
 
         ax.annotate(segment_labels[i],
                     xy=(position, 0), xycoords=('data', 'axes fraction'),
