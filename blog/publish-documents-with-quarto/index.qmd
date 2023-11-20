@@ -3,6 +3,7 @@ title: Publishing documents with Quarto
 date: '2023-11-19T23:10:00-04:00'
 categories:
   - pandoc
+  - python
 keywords: 'quarto, markdown, pandoc, papers, writing, academic, scholarly, technical, scientific'
 jupyter:
   jupytext:
