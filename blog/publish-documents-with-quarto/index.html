@@ -274,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Yet, Pandoc has not achieved widespread popularity in the academic sphere.</p>
-<p>Collaborative academic writing often gravitates towards using Microsoft Word with OneDrive support. WYSIWYG is a powerful paradigm and provides immediate ease of use. Word’s robust commenting and review tools are second to none. Outside of Word, OverLeaf or ShareLaTeX seem to have the most mindshare. I <em>think</em> people choose it because is a safe bet. As a markup language, it is older than I am. That means there are resources online to address pretty much any problem you will come across<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> , there are templates <em>everywhere</em> for all kinds of publications, and text editor support is high quality.</p>
+<p>Collaborative academic writing often gravitates towards using Microsoft Word with OneDrive support. WYSIWYG is a powerful paradigm and provides immediate ease of use. Word’s robust commenting and review tools are second to none. Outside of Word, OverLeaf or ShareLaTeX seem to have the most mindshare. I think when people choose <span class="math inline">\(\LaTeX\)</span>, they tend to do so because it is a safe bet. As a markup language, it is older than I am. That means there are resources online to address pretty much any problem you will come across<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> , there are templates <em>everywhere</em> for all kinds of publications, and text editor support is high quality.</p>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Pour one out if you’ve tasked a graduate student to figure out why your paper isn’t compiling.</p></li></div><p>I still believe Pandoc is a phenomenal piece of software for writing academic papers (or any technical content for that matter). Being able to version control through git, and to produce outputs in diverse formats like PDF, Word, and HTML, adds immense value for me. But is it really going to be easier for everyone I’m collaborating with?</p>
 <p>Enter <a href="https://quarto.org/">Quarto</a>, a potential game-changer in persuading researchers to transition from Word or <span class="math inline">\(\LaTeX\)</span>.</p>
 <p>If this is the first time you’ve heard of Quarto, you are probably not alone. Quarto is a nascent open-source publishing system from the creators of RMarkdown and RStudio that builds upon Pandoc and Jupyter.</p>
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>But even without using any of Quarto’s computational features, I think it compares really well to many static site generation tools as a means to develop high quality technical documentation. I believe Quarto is a compelling alternative to Docsaurus, mkdocs, mdbook, hugo, sphinx, etc.</p>
 <p>Over the past year, every report, paper, presentation, and tutorial I’ve created has used Quarto and its features. At the time of writing this post, Quarto is even the backbone of my blog. I think Quarto isn’t without its <a href="https://github.com/quarto-dev/quarto-cli/issues">fair share of issues</a>, and I do think for highly custom layouts or professional typesetting, directly working in <span class="math inline">\(\LaTeX\)</span> is probably easier. But for such a young project, it shows real promise in my humble opinion.</p>
 <p>Given that I’ve been using Quarto extensively for a while, I figured it was appropriate to revise the earlier diagram to reflect my experience:</p>
-<div id="23a93f0d" class="cell" data-execution_count="1">
+<div id="23a93f0d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
@@ -363,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Version
 </summary>
-<div id="4544821e" class="cell" data-execution_count="2">
+<div id="4544821e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
