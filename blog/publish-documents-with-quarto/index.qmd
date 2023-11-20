@@ -49,7 +49,7 @@ But is it really going to be easier for everyone I'm collaborating with?
 Enter [Quarto](https://quarto.org/), a potential game-changer in persuading researchers to transition from Word or $\LaTeX$.
 
 If this is the first time you've heard of Quarto, you are probably not alone.
-Quarto is a nascent open-source publishing system from the creators of RMarkdown and RStudio that builds upon Pandoc and Jupyter.
+Quarto is a nascent open-source publishing system from the creators of RMarkdown and RStudio that builds upon [Pandoc](https://pandoc.org/) and [Jupyter](https://jupyter.org/).
 
 Quarto can [embed Jupyter Notebook cells](https://quarto.org/docs/authoring/notebook-embed.html) straight into the publication output.
 This allows a seamless integration of research and data analysis into the publication process.
