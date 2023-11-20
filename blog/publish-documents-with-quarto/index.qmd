@@ -153,3 +153,18 @@ None #| hide_line
 
 I hope this brief exploration into Quarto's and Pandoc's capabilities has been insightful.
 Let me know if you have any questions in the comments below.
+
+<details>
+<summary>Version</summary>
+
+```{python}
+import matplotlib
+import sys
+import numpy as np
+
+print("Matplotlib version:", matplotlib.__version__)
+print("NumPy version:", np.__version__)
+print("Python version:", sys.version)
+```
+
+</details>
