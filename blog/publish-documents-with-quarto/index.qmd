@@ -37,7 +37,7 @@ Collaborative academic writing often gravitates towards using Microsoft Word wit
 WYSIWYG is a powerful paradigm and provides immediate ease of use.
 Word's robust commenting and review tools are second to none.
 Outside of Word, OverLeaf or ShareLaTeX seem to have the most mindshare.
-I _think_ people choose it because is a safe bet.
+I reckon when people choose $\LaTeX$, they tend to do so because it is a safe bet.
 As a markup language, it is older than I am.
 That means there are resources online to address pretty much any problem you will come across^[Pour one out if you've tasked a graduate student to figure out why your paper isn't compiling.]
 , there are templates _everywhere_ for all kinds of publications, and text editor support is high quality.
