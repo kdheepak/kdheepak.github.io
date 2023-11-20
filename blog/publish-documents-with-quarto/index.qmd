@@ -52,13 +52,13 @@ If this is the first time you've heard of Quarto, you are probably not alone.
 Quarto is a nascent open-source publishing system from the creators of RMarkdown and RStudio that builds upon [Pandoc](https://pandoc.org/) and [Jupyter](https://jupyter.org/).
 
 Quarto can [embed Jupyter Notebook cells](https://quarto.org/docs/authoring/notebook-embed.html) straight into the publication output.
-This allows a seamless integration of research and data analysis into the publication process.
+This allows for seamless integration of research and data analysis into the publication process.
 As most scientific research increasingly relies on interactive environments like RStudio and Jupyter Notebooks,
 Quarto's ability to incorporate this work into publishing workflows is immensely productive.
-And since Quarto builds on top of Pandoc, it supports [extensions that are basically Lua filters](https://quarto.org/docs/extensions/) to enhance the output.
-Quarto's VSCode and neovim extension make it easier for even non-technical contributors to collaborate on writing.
+And since it builds on top of Pandoc, Quarto supports [extensions that are basically Lua filters](https://quarto.org/docs/extensions/) to enhance the output.
+Quarto's [VSCode extension](https://quarto.org/docs/tools/vscode.html) makes it easier for even non-technical contributors to collaborate on writing.
 
-For technical publications where you want to show results inline, Quarto is a no-brainer.
+For technical publications where you want to show results inline, I believe using Quarto is a no-brainer.
 If you are already using Jupyter Notebooks, using Quarto is incredibly seamless.
 [If you are interested in a static site generator writing in Julia with a similar feature set, you should check out [Franklin.jl](https://github.com/tlienart/Franklin.jl).]{.aside}
 
