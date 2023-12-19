@@ -9,7 +9,7 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.506</generator>
+<generator>quarto-1.4.529</generator>
 <lastBuildDate>Mon, 20 Nov 2023 03:10:00 GMT</lastBuildDate>
 <item>
   <title>Publishing documents with Quarto</title>

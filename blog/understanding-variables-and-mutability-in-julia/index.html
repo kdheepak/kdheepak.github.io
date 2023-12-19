@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.4.529">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -108,7 +108,9 @@ div.csl-indent {
   "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
-    null
+    "f",
+    "/",
+    "s"
   ],
   "language": {
     "search-no-results-text": "No results",
@@ -118,6 +120,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -301,7 +304,7 @@ div.csl-indent {
 </header>
 
 
-<div class="page-columns page-full"><p>I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective.</p><div class="no-row-height column-margin column-container"><span class="">While analogies can be useful because they allow us to understand complex concepts by comparing them to something more familiar or simpler, they can also be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand any subject, I recommend using multiple different analogies to bolster your confidence and then dive deeper into the subject matter to harden your intuition.</span></div></div>
+<div class="page-columns page-full"><p>I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">While analogies can be useful because they allow us to understand complex concepts by comparing them to something more familiar or simpler, they can also be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand any subject, I recommend using multiple different analogies to bolster your confidence and then dive deeper into the subject matter to harden your intuition.</span></div></div>
 <p>Imagine you are at a library full of books on bookshelves, but they are all over the place and you can’t find what you want. Also, you can’t interact directly with the books or bookshelves.</p>
 <p>Instead, you have to ask a very smart and helpful librarian, who knows where all the books are and can help you find what you need, to retrieve or modify the books for you. But in order for them to help you, you are form a pact with the librarian to speak in a very specific language with certain rules and decrees.</p>
 <p><img src="images/bookshelf-analogy.png" class="img-fluid"></p>
@@ -687,7 +690,7 @@ div.csl-indent {
 </svg>
 </p>
 <p>So in our analogy, the <code>x</code> and <code>y</code> variables are two labels that you and the librarian agree point to the same <q>book</q> on the <q>bookshelf</q> (i.e.&nbsp;the same object in memory).</p>
-<div class="page-columns page-full"><p>In Julia, you can check the location by using the <code>pointer()</code> function:</p><div class="no-row-height column-margin column-container"><span class="">The <code>pointer</code> function only works for mutable objects</span></div></div>
+<div class="page-columns page-full"><p>In Julia, you can check the location by using the <code>pointer()</code> function:</p><div class="no-row-height column-margin column-container"><span class="margin-aside">The <code>pointer</code> function only works for mutable objects</span></div></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(x)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x0000000161c60d60</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1847,17 +1850,16 @@ div.csl-indent {
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-ndarray" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Multi-dimensional Arrays.”</span> [Online]. Available: <a href="https://docs.julialang.org/en/v1/manual/arrays/">https://docs.julialang.org/en/v1/manual/arrays/</a>.</div>
 </div>
 <div id="ref-functions" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“Functions.”</span> [Online]. Available: <a href="https://docs.julialang.org/en/v1/manual/functions/">https://docs.julialang.org/en/v1/manual/functions/</a>.</div>
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
   author = {Krishnamurthy, Dheepak},
   title = {Understanding Variables and Mutability in {Julia}},
-  pages = {undefined},
   date = {2023-02-26},
   url = {https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia},
   langid = {en}
@@ -2066,27 +2068,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -2101,10 +2082,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -2113,7 +2098,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }
@@ -2351,7 +2338,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/understanding-variables-and-mutability-in-julia/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

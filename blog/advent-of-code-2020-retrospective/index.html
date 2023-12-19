@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.4.529">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -88,7 +88,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
-    null
+    "f",
+    "/",
+    "s"
   ],
   "language": {
     "search-no-results-text": "No results",
@@ -98,6 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -422,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> xy <span class="op">=</span> <span class="fu">findall</span>(<span class="op">==</span>(<span class="ch">'#'</span>), A);</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="im">using</span> <span class="bu">SparseArrays; </span><span class="fu">sparse</span>([p.I[<span class="fl">1</span>] for p <span class="kw">in</span> xy], [p.I[<span class="fl">2</span>] for p <span class="kw">in</span> xy], [<span class="fl">1</span> for _ <span class="kw">in</span> xy])</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="im">using</span> <span class="bu">SparseArrays;</span> sparse([p.I[1] for p in xy], <span class="bu">[p.I[2]</span> for p in xy], <span class="bu">[1</span> for _ in xy])</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fl">323</span><span class="op">×</span><span class="fl">31</span> <span class="dt">SparseMatrixCSC</span>{<span class="dt">Int64</span>, <span class="dt">Int64</span>} with <span class="fl">2611</span> stored entries<span class="op">:</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>⠟⣿⡿⡯⣮⣿⡇</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>⡗⣿⣿⢿⢝⣽⡇</span>
@@ -1214,7 +1217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can even use the variable from the outer loop as the index in the inner loop, like you’d expect. This can help reduce the nesting level of your inner expressions.</p>
 </section>
-<section id="day-17-conway-cubes" class="level3 page-columns page-full">
+<section id="day-17-conway-cubes" class="level3">
 <h3 class="anchored" data-anchor-id="day-17-conway-cubes"><a href="https://adventofcode.com/2020/day/17">Day 17: Conway Cubes</a></h3>
 <p>Another homage to <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">John Conway</a>, this time in multiple dimensions.</p>
 <p>Here’s <a href="https://github.com/mkborregaard">Michael Krabbe Borregaard’s</a> succinct solution that takes advantage of <code>CartesianIndices</code>:</p>
@@ -1243,16 +1246,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="fu">part1</span>(data <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">startup</span>(data, <span class="fl">6</span>, <span class="fl">3</span>)</span>
 <span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(data <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">startup</span>(data, <span class="fl">6</span>, <span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Cellular automata puzzles are always fun, and make for some neat visualizations. Here are a couple of multi dimensional visualizations by <a href="https://github.com/tk3369/AdventOfCode2020/">Tom Kwong</a>:</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="img-fluid quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="https://user-images.githubusercontent.com/1813121/103164882-1371eb00-47ce-11eb-92d7-624ebf54c0f9.gif" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption"><a href="https://twitter.com/tomkwong/status/1339468003608387586" class="uri">https://twitter.com/tomkwong/status/1339468003608387586</a></figcaption>
+<figcaption><a href="https://twitter.com/tomkwong/status/1339468003608387586" class="uri">https://twitter.com/tomkwong/status/1339468003608387586</a></figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="img-fluid quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="https://user-images.githubusercontent.com/1813121/103164897-39978b00-47ce-11eb-8c36-d9477cb839d1.gif" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption"><a href="https://twitter.com/tomkwong/status/1339735696194457600" class="uri">https://twitter.com/tomkwong/status/1339735696194457600</a></figcaption>
+<figcaption><a href="https://twitter.com/tomkwong/status/1339735696194457600" class="uri">https://twitter.com/tomkwong/status/1339735696194457600</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1705,7 +1708,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a><span class="fu">part1</span>(cups <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">join</span>(<span class="fu">peek</span>(<span class="fu">run</span>(cups, <span class="fl">100</span>), <span class="fl">1</span>, <span class="fl">8</span>))</span>
 <span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(cups <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">prod</span>(<span class="fu">peek</span>(<span class="fu">run</span>(<span class="fu">vcat</span>(cups, <span class="fl">10</span><span class="op">:</span><span class="fl">1_000_000</span>), <span class="fl">10_000_000</span>), <span class="fl">1</span>, <span class="fl">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="day-24-lobby-layout" class="level3 page-columns page-full">
+<section id="day-24-lobby-layout" class="level3">
 <h3 class="anchored" data-anchor-id="day-24-lobby-layout"><a href="https://adventofcode.com/2020/day/24">Day 24: Lobby Layout</a></h3>
 <p>In another tribute to John Conway, now you must model hexagon grids.</p>
 <p>Having never worked with hexagon grid before, I reached for complex numbers again, which turned out to be a bad idea. I was indexing a dictionary with the real and imaginary components of the complex number which were floating point numbers. This caused all sorts of indexing problems due to rounding issues.</p>
@@ -1921,10 +1924,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb52-46"><a href="#cb52-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-47"><a href="#cb52-47" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(data <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">count</span>(<span class="fu">flip_tiles!</span>(<span class="fu">init_tiles</span>(data), <span class="fl">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And another neat visualization by <a href="https://github.com/tk3369/AdventOfCode2020/">Tom Kwong</a>:</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="img-fluid quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="https://user-images.githubusercontent.com/1813121/103164912-71063780-47ce-11eb-839a-c0608ca36b70.gif" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption"><a href="https://twitter.com/tomkwong/status/1342661344424652801" class="uri">https://twitter.com/tomkwong/status/1342661344424652801</a></figcaption>
+<figcaption><a href="https://twitter.com/tomkwong/status/1342661344424652801" class="uri">https://twitter.com/tomkwong/status/1342661344424652801</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1956,10 +1959,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2020,
   author = {Krishnamurthy, Dheepak},
   title = {Advent of {Code} 2020 {Retrospective}},
-  pages = {undefined},
   date = {2020-12-25},
   url = {https://kdheepak.com/blog/advent-of-code-2020-retrospective},
   langid = {en}
@@ -2168,27 +2170,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -2203,10 +2184,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -2215,7 +2200,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }
@@ -2453,7 +2440,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/advent-of-code-2020-retrospective/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

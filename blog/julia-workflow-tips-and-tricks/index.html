@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.4.529">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -88,7 +88,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
-    null
+    "f",
+    "/",
+    "s"
   ],
   "language": {
     "search-no-results-text": "No results",
@@ -98,6 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -238,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -280,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Julia is a high-performance, dynamic programming language designed for technical computing and data science. The language offers a flexible and expressive syntax, and also delivers the performance benefits of compiled languages like C++. Like Python, Julia also offers an interactive REPL (Read-Eval-Print Loop) environment for real-time data exploration and rapid prototyping.</p>
 <p>If you are fairly new to Julia, here are a few things you might want to know to improve your developer experience.</p>
-<section id="startup.jl" class="level3">
+<section id="startup.jl" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="startup.jl"><code>startup.jl</code></h3>
 <p>Every time you start Julia, it looks for a file named <code>startup.jl</code> in a <code>config</code> directory.</p>
 <table class="table">
@@ -341,10 +344,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The advantage of this approach is that the contents of <code>Startup.jl</code> can be precompiled and your Julia REPL starts up very quickly.</p>
 <p>With the <code>Startup.jl</code> package approach, your root environment can be empty and you can still use functionality exposed by <code>Startup.jl</code>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><a href="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true" alt="Using Startup.jl to load BenchmarkTools with an empty root environment."></a></p>
-<figcaption>Using <code>Startup.jl</code> to load <code>BenchmarkTools</code> with an empty root environment.</figcaption>
+<figcaption class="margin-caption">Using <code>Startup.jl</code> to load <code>BenchmarkTools</code> with an empty root environment.</figcaption>
 </figure>
 </div>
 <div class="callout callout-style-simple callout-tip">
@@ -365,11 +368,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;display: flex;">
 <p><a href="https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png" class="img-fluid" style="width:50.0%" data-align="center" data-clickable="true"></a></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;display: flex;">
 <p><a href="https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png" class="img-fluid" style="width:51.0%" data-align="center" data-clickable="true"></a></p>
 </div>
 </div>
@@ -380,7 +383,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://github.com/timholy/Revise.jl"><code>Revise.jl</code></a> is a game-changer for Julia development. It automatically reloads modified source files without restarting the Julia session. This makes iterative development much smoother.</p>
 <p>Once set up, any changes you make to your code files are immediately available in your active Julia session.</p>
 <p>Revise can <q>track</q> changes in single files if you include them using <code>includet</code>:</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260360485-07d3e4bd-a4e3-406e-b513-7693d0cede01.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true"></a></p>
+</figure>
+</div>
 <p>If you want <code>Revise</code> to track changes in a package you are developing locally, simply run <code>using Revise</code> before you load the package for the first time.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -389,7 +396,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p>If you use VSCode and start a REPL using the <code>Julia: Start REPL</code> command, <code>Revise</code> is automatically loaded by default.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260358935-ccb1a3fb-3b7e-4219-a2f4-12f5c922c7da.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -400,7 +411,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">+   y::Float64</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>Revise</code> throws an error and warning because it is unable to make that change; and <code>Revise</code> changes the color of the Julia prompt:</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260318027-906d7506-0c98-417f-9ef3-008d39097117.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true"></a></p>
+</figure>
+</div>
 <p>There are some <a href="https://timholy.github.io/Revise.jl/stable/limitations/">workarounds</a> for this but the easiest thing to do is to <strong>restart the Julia session</strong> after you are make changes to any <code>struct</code>.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -417,7 +432,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="infiltrator"><code>Infiltrator</code></h3>
 <p><a href="https://github.com/JuliaDebug/Infiltrator.jl"><code>Infiltrator.jl</code></a> is a debugger and code inspection tool for Julia. It allows you to insert breakpoints in your code and inspect the current scope’s variables.</p>
 <p>When Julia hits the <code>@infiltrate</code> macro, it’ll pause execution, and drop you into a Julia REPL that allows you to inspect the current scope.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260319341-8f1d5ca9-f192-4277-abc3-be4f89dd8610.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true"></a></p>
+</figure>
+</div>
 <p>You can also use <code>@infiltrate i == 3</code> and that’ll drop you into a Julia REPL only in the third iteration of the <code>for</code> loop.</p>
 <p>When using <code>@infiltrate conditional_expression</code> with <code>Revise</code>, you can jump into any function at any point of the execution to inspect values of variables in a Julia REPL. You can even load additional packages like <code>DataFrames</code> or <code>Plots</code> to explore your data in the scope of any function interactively while debugging. This combination can make for a versatile and productive debugging experience.</p>
 </section>
@@ -451,11 +470,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;display: flex;">
 <p><a href="https://user-images.githubusercontent.com/1813121/260319654-904e72cb-633d-490f-8fbc-fbef61fabb4f.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260319654-904e72cb-633d-490f-8fbc-fbef61fabb4f.png" class="img-fluid" data-clickable="true"></a></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;display: flex;">
 <p><a href="https://user-images.githubusercontent.com/1813121/260319610-309b43b8-1476-43a3-a279-ab3c0158bc74.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260319610-309b43b8-1476-43a3-a279-ab3c0158bc74.png" class="img-fluid" data-clickable="true"></a></p>
 </div>
 </div>
@@ -465,33 +484,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="cthulhu"><code>Cthulhu</code></h3>
 <p>Delving deep into Julia’s compiler optimizations and type inference can sometimes feel daunting and that’s where <a href="https://github.com/JuliaDebug/Cthulhu.jl"><code>Cthulhu.jl</code></a> comes to the rescue. <code>Cthulhu</code> is an interactive terminal user interface that is an alternative to <code>@code_lowered</code> and <code>@code_typed</code>, and allows developers to interactively <q>descend</q> into the lowered and optimized versions of their Julia code, making it easier to debug performance issues and understand how Julia’s JIT compiler optimizes code.</p>
 <p>For example, if we examine the <code>mysum</code> function from the previous section, we can see that <code>a</code> is being inferred as a <code>Int64</code> or a <code>Float64</code>, i.e.&nbsp;<code>Union{Float64, Int64}</code>.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260274805-ea3dcdbd-a750-4b4a-8869-ea7ee9d92e8b.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true"></a></p>
+</figure>
+</div>
 <p>In this particular case, by changing <code>a = 0</code> to <code>a = 0.0</code>, we can make the code generated by Julia more optimized, i.e.&nbsp;<code>a</code> is now being inferred only as a <code>Float64</code>.</p>
-<p><a href="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%" data-clickable="true"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260308464-07577d0f-e577-40a7-bb96-3a109f53a815.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-clickable="true"></a></p>
+</figure>
+</div>
 <p>Here’s the benchmark results with <code>a = 0</code> (left) and <code>a = 0.0</code> (right), with the latter being almost 3 times faster.</p>
 <div>
 
 </div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;display: flex;">
 <p><a href="https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png" class="img-fluid" style="width:50.0%" data-clickable="true" alt="`a = 0`"></a></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;display: flex;">
 <p><a href="https://user-images.githubusercontent.com/1813121/260308548-b8667f60-5caf-4974-9d5d-cfc7280a0ed2.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260308548-b8667f60-5caf-4974-9d5d-cfc7280a0ed2.png" class="img-fluid" style="width:50.0%" data-clickable="true" alt="`a = 0.0`"></a></p>
 </div>
 </div>
 </div>
 </section>
-<section id="retest-and-inlinetests" class="level3">
+<section id="retest-and-inlinetests" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="retest-and-inlinetests"><code>ReTest</code> and <code>InlineTests</code></h3>
 <p>Julia has a built-in package <code>Test</code> for unit testing. This requires writing tests in a separate folder, i.e.&nbsp;in <code>test/runtests.jl</code>; and these tests are run in a separate process when you can <code>Pkg.test()</code>. There’s also no out of the box solution to run a subset of tests.</p>
 <p>Using <code>InlineTests</code> allows you to write tests directly in your source files, and you can also choose to run a subset of tests. If you choose to run it with <code>retest</code>, you can make changes that are tracked with <code>Revise</code>, allowing faster iteration using a test driven development workflow.</p>
 <p>In the screenshot below, I have shown an example of having a <code>@testset</code> as part of the package itself, i.e.&nbsp;in <code>./src/layout.jl</code>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><a href="https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png" target="_blank"><img src="https://user-images.githubusercontent.com/1813121/260308140-a1b24006-3495-4d3a-8534-c6bb24a621c8.png" class="img-fluid figure-img" data-clickable="true" alt="InlineTests allows co-locating tests along with the implementation."></a></p>
-<figcaption><code>InlineTests</code> allows co-locating tests along with the implementation.</figcaption>
+<figcaption class="margin-caption"><code>InlineTests</code> allows co-locating tests along with the implementation.</figcaption>
 </figure>
 </div>
 <p>You’ll also notice from the screenshot that <code>ReTest</code> contains a function called <code>retest</code> which allows running a subset of tests by passing in a pattern as the second argument.</p>
@@ -566,10 +593,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
   author = {Krishnamurthy, Dheepak},
   title = {Julia {Workflow} {Tips} and {Tricks}},
-  pages = {undefined},
   date = {2023-08-13},
   url = {https://kdheepak.com/blog/julia-workflow-tips-and-tricks},
   langid = {en}
@@ -778,27 +804,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -813,10 +818,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -825,7 +834,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }
@@ -1063,7 +1074,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/julia-workflow-tips-and-tricks/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

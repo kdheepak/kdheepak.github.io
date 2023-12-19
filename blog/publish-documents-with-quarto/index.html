@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.4.529">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -87,7 +87,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
-    null
+    "f",
+    "/",
+    "s"
   ],
   "language": {
     "search-no-results-text": "No results",
@@ -97,6 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -137,6 +140,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Publishing documents with Quarto">
@@ -279,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Enter <a href="https://quarto.org/">Quarto</a>, a potential game-changer in persuading researchers to transition from Word or <span class="math inline">\(\LaTeX\)</span>.</p>
 <p>If this is the first time you’ve heard of Quarto, you are probably not alone. Quarto is a nascent open-source publishing system from the creators of RMarkdown and RStudio that builds upon <a href="https://pandoc.org/">Pandoc</a> and <a href="https://jupyter.org/">Jupyter</a>.</p>
 <p>Quarto can <a href="https://quarto.org/docs/authoring/notebook-embed.html">embed Jupyter Notebook cells</a> straight into the publication output. This allows for seamless integration of research and data analysis into the publication process. As most scientific research increasingly relies on interactive environments like RStudio and Jupyter Notebooks, Quarto’s ability to incorporate this work into publishing workflows is immensely productive. And since it builds on top of Pandoc, Quarto supports <a href="https://quarto.org/docs/extensions/">extensions that are basically Lua filters</a> to enhance the output. Quarto’s <a href="https://quarto.org/docs/tools/vscode.html">VSCode extension</a> makes it easier for even non-technical contributors to collaborate on writing.</p>
-<div class="page-columns page-full"><p>For technical publications where you want to show results inline, I believe using Quarto is a no-brainer. If you are already using Jupyter Notebooks, using Quarto is incredibly seamless.  But even without using any of Quarto’s computational features, I think it is a compelling alternative to many static site generation tools (e.g.&nbsp;Docsaurus, mkdocs, mdbook, hugo, sphinx, etc) as a means to develop high quality technical documentation. Over the past year, every report, paper, presentation, and tutorial I’ve created has used Quarto in one way or another. At the time of writing this post, Quarto is even the backbone of my blog.</p><div class="no-row-height column-margin column-container"><span class="">If you are interested in a static site generator writing in Julia with a similar feature set, you should check out <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>.</span></div></div>
+<div class="page-columns page-full"><p>For technical publications where you want to show results inline, I believe using Quarto is a no-brainer. If you are already using Jupyter Notebooks, using Quarto is incredibly seamless.  But even without using any of Quarto’s computational features, I think it is a compelling alternative to many static site generation tools (e.g.&nbsp;Docsaurus, mkdocs, mdbook, hugo, sphinx, etc) as a means to develop high quality technical documentation. Over the past year, every report, paper, presentation, and tutorial I’ve created has used Quarto in one way or another. At the time of writing this post, Quarto is even the backbone of my blog.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">If you are interested in a static site generator writing in Julia with a similar feature set, you should check out <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>.</span></div></div>
 <p>Quarto isn’t without its <a href="https://github.com/quarto-dev/quarto-cli/issues">fair share of issues</a>, and I do think for highly custom layouts or professional typesetting, directly working in <span class="math inline">\(\LaTeX\)</span> is probably easier. But for such a young project, it shows real promise (in my humble opinion) and is worthy of giving it a shot.</p>
 <p>Given that I’ve been using Quarto extensively for a while, I figured it was appropriate to revise the earlier diagram to reflect my experience:</p>
 <div id="f648a333" class="cell" data-execution_count="2">
@@ -381,10 +411,9 @@ Python version: 3.10.12 | packaged by conda-forge | (main, Jun 23 2023, 22:41:52
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2023,
   author = {Krishnamurthy, Dheepak},
   title = {Publishing Documents with {Quarto}},
-  pages = {undefined},
   date = {2023-11-20},
   url = {https://kdheepak.com/blog/publish-documents-with-quarto},
   langid = {en}
@@ -593,27 +622,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -628,10 +636,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -640,7 +652,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }

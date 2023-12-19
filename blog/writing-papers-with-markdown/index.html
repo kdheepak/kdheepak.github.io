@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.4.529">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -108,7 +108,9 @@ div.csl-indent {
   "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
-    null
+    "f",
+    "/",
+    "s"
   ],
   "language": {
     "search-no-results-text": "No results",
@@ -118,6 +120,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -158,6 +161,33 @@ div.csl-indent {
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="kdheepak - Writing technical papers with Markdown and Pandoc">
@@ -370,10 +400,10 @@ div.csl-indent {
 <!-- END SLIDES -->
 <p>Let us assume that scientific research papers consists of only 3 steps (if only!) - notetaking, analysis and presentation. Word fails at delivering at all these tasks. Word doesn’t quite work for notetaking. Org mode, Evernote or Onenote are most people’s preferred solution. Word doesn’t fit data analysis requirements as well, with Python, R or Excel being the go-to tools. I personally use Emacs / Vim for notetaking and store them in a git repository and all of my data analysis is done in Jupyter Notebooks. After collecting the required data from an experiment and post-processing it, I can save plots into an image or the data into a table in a particular format programmatically using scripts. Word however, does not allow me to import these images or tables programmatically. If I did somehow manage to contort my workflow and store my data and information in this software, I have absolutely no way of retrieving it. The final presentation/report/paper, information and data will exist confined in this closed source proprietary software. Word just does not fit into an analysis or research workflow. To quote Raymond Hettinger:</p>
 <!-- BEGIN SLIDES -->
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="img-fluid quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="images/raymondhettinger.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Raymond Hettinger</figcaption>
+<figcaption>Raymond Hettinger</figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -425,7 +455,7 @@ div.csl-indent {
 <!-- END SLIDES -->
 <p>With good IDEs for <span class="math inline">\(\LaTeX\)</span> this isn’t as bad as it looks, although they still hinder the writer’s flow. Over time and with experience, one can become proficient in <span class="math inline">\(\LaTeX\)</span>. And once you invest the time to learn <span class="math inline">\(\LaTeX\)</span> I can’t think of any reason why you would go back to Word. But it is likely that beginners will have a hard time getting started. So, if you cannot afford to experiment with <span class="math inline">\(\LaTeX\)</span>, are you resigned to Word? I don’t think so. Markdown to the rescue!</p>
 </section>
-<section id="markdown" class="level3 page-columns page-full">
+<section id="markdown" class="level3">
 <h3 class="anchored" data-anchor-id="markdown">Markdown</h3>
 <!-- BEGIN SLIDES -->
 <p>Markdown is a very lightweight easy-to-read easy-to-write plain text markup language. The same example as before looks like this in Markdown.</p>
@@ -490,7 +520,7 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl" id="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Demonstration of simple table syntax.
 </figcaption>
 </figure>
@@ -517,10 +547,10 @@ Table&nbsp;1: Demonstration of simple table syntax.
 <!-- END SLIDES -->
 <!-- BEGIN SLIDES -->
 <p>However, Markdown does not allow for the level of detailed customization that you can achieve using <span class="math inline">\(\LaTeX\)</span>. Even a moderately complex table such as the one below is not supported (currently) by any form of Markdown.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="img-fluid quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="images/table.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Tabular <span class="math inline">\(\LaTeX\)</span> example <span class="citation" data-cites="noauthor_wikibooks_nodate"><a href="#ref-noauthor_wikibooks_nodate" role="doc-biblioref">[5]</a></span></figcaption>
+<figcaption>Tabular <span class="math inline">\(\LaTeX\)</span> example <span class="citation" data-cites="noauthor_wikibooks_nodate"><a href="#ref-noauthor_wikibooks_nodate" role="doc-biblioref">[5]</a></span></figcaption>
 </figure>
 </div>
 <!-- END SLIDES -->
@@ -610,7 +640,7 @@ Table&nbsp;1: Demonstration of simple table syntax.
 </ul>
 <p>You can run <code>pip install &lt;package-name&gt;</code>. Alternatively you can create a virtual environment using <code>conda</code> with a suitable environment file <span class="citation" data-cites="krishnamurthy_github_nodate"><a href="#ref-krishnamurthy_github_nodate" role="doc-biblioref">[7]</a></span>, which is the approach I recommend <span class="citation" data-cites="krishnamurthy_using_nodate"><a href="#ref-krishnamurthy_using_nodate" role="doc-biblioref">[8]</a></span>.</p>
 <p>There are several people that have shared their complete workflow along with all their resources <span class="citation" data-cites="healy_plain_nodate noauthor_writing_nodate noauthor_writing_nodate-1 noauthor_academic_nodate"><a href="#ref-healy_plain_nodate" role="doc-biblioref">[9]</a>–<a href="#ref-noauthor_academic_nodate" role="doc-biblioref">[12]</a></span>. Mine is available on GitHub <span class="citation" data-cites="krishnamurthy_github_nodate-1"><a href="#ref-krishnamurthy_github_nodate-1" role="doc-biblioref">[13]</a></span> as well. While someone else’s workflow will work for you, I encourage you to start from scratch and craft your own. That way you will figure out why each item has been added into a workflow, and if that works for you. You will also know what to do if (when?) it breaks, and how to fix it. Feel free to go through other people’s Makefiles to see what they have done, and how you can improve your own.</p>
-<section id="syntax" class="level3 page-columns page-full">
+<section id="syntax" class="level3">
 <h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
 <section id="headings" class="level4">
 <h4 class="anchored" data-anchor-id="headings"><strong><em>Headings</em></strong></h4>
@@ -636,14 +666,14 @@ Table&nbsp;1: Demonstration of simple table syntax.
 <p><strong>Example</strong></p>
 <p><a href="https://google.com">Text</a></p>
 </section>
-<section id="images" class="level4 page-columns page-full">
+<section id="images" class="level4">
 <h4 class="anchored" data-anchor-id="images"><strong><em>Images</em></strong></h4>
 <div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Caption](images/markdown.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Example</strong></p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="img-fluid quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="images/markdown.png" class="img-fluid figure-img" width="300"></p>
-<figcaption class="margin-caption">Caption</figcaption>
+<figcaption>Caption</figcaption>
 </figure>
 </div>
 </section>
@@ -747,7 +777,7 @@ for code block</code></pre>
 </tbody>
 </table>
 </div>
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl" id="tbl-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Demonstration of simple table syntax.
 </figcaption>
 </figure>
@@ -886,7 +916,7 @@ Table&nbsp;2: Demonstration of simple table syntax.
 <div aria-describedby="fig-learningcurve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/learningcurve.png" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig margin-caption" id="fig-learningcurve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-learningcurve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Comparing Word, <span class="math inline">\(\LaTeX\)</span> and Markdown
 </figcaption>
 </figure>
@@ -899,19 +929,9 @@ Figure&nbsp;1: Comparing Word, <span class="math inline">\(\LaTeX\)</span> and M
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
 
 
-
-
-
-
-</ol>
-</aside>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-stallman_emacs" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Emacs as a word processors.”</span> [Online]. Available: <a href="https://lists.gnu.org/archive/html/emacs-devel/2013-11/msg00515.html">https://lists.gnu.org/archive/html/emacs-devel/2013-11/msg00515.html</a>.</div>
 </div>
@@ -966,10 +986,9 @@ Figure&nbsp;1: Comparing Word, <span class="math inline">\(\LaTeX\)</span> and M
 <div id="ref-noauthor_pandoc_nodate-1" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[18] </div><div class="csl-right-inline"><span>“Pandoc <span>README</span>.”</span> Accessed: Jan. 08, 2016. [Online]. Available: <a href="https://pandoc.org/MANUAL.html">https://pandoc.org/MANUAL.html</a>.</div>
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
   author = {Krishnamurthy, Dheepak},
   title = {Writing Technical Papers with {Markdown} and {Pandoc}},
-  pages = {undefined},
   date = {2015-12-20},
   url = {https://kdheepak.com/blog/writing-papers-with-markdown},
   langid = {en}
@@ -1178,27 +1197,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -1213,10 +1211,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -1225,7 +1227,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }
@@ -1463,7 +1467,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/writing-papers-with-markdown/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
