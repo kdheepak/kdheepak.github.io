@@ -60,18 +60,6 @@
   <pubDate>Sun, 26 Feb 2023 02:14:15 GMT</pubDate>
 </item>
 <item>
-  <title>Programmers’ preferences for package names</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/</link>
-  <description><![CDATA[ Are there trends in choosing package names in various programming ecosystems? Do package authors choose names for their packages that are <a href="https://en.wikipedia.org/wiki/Alliteration">alliterated</a> with the name of the programming language? Let’s venture to find out. ]]></description>
-  <category>analysis</category>
-  <category>python</category>
-  <category>julia</category>
-  <category>rust</category>
-  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/</guid>
-  <pubDate>Fri, 29 Jul 2022 07:47:12 GMT</pubDate>
-</item>
-<item>
   <title>Advent of Code 2020 Retrospective</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/advent-of-code-2020-retrospective/</link>

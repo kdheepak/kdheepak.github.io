@@ -79,18 +79,6 @@
   <pubDate>Wed, 03 Aug 2022 19:47:12 GMT</pubDate>
 </item>
 <item>
-  <title>Programmers’ preferences for package names</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/</link>
-  <description><![CDATA[ Are there trends in choosing package names in various programming ecosystems? Do package authors choose names for their packages that are <a href="https://en.wikipedia.org/wiki/Alliteration">alliterated</a> with the name of the programming language? Let’s venture to find out. ]]></description>
-  <category>analysis</category>
-  <category>python</category>
-  <category>julia</category>
-  <category>rust</category>
-  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/</guid>
-  <pubDate>Fri, 29 Jul 2022 07:47:12 GMT</pubDate>
-</item>
-<item>
   <title>Quickstart guide to using a terminal</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/quickstart-guide-to-using-a-terminal/</link>
