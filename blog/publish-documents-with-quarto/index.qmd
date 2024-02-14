@@ -18,7 +18,7 @@ jupyter:
     name: python3
 ---
 
-8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to [write academic papers with Pandoc Markdown](../writing-papers-with-markdown/index.qmd).
+8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to [write academic papers with Pandoc Markdown](../writing-papers-with-markdown/index.md).
 
 ![](https://kdheepak.com/blog/writing-papers-with-markdown/images/learningcurve.png)
 
