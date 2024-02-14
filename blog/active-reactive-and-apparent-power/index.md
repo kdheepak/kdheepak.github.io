@@ -20,6 +20,7 @@ Let us plot this and see what it looks like.
 
 <details>
 <summary>Code</summary>
+
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
@@ -45,6 +46,7 @@ ax.legend();
 
 plt.savefig("./power_3_0.png", transparent=True, dpi=300)
 ```
+
 </details>
 
 ![](images/power_3_0.png)
@@ -139,6 +141,7 @@ ax2.axis([0, 1/f0, -120, 120]);
 
 plt.savefig("./power_11_0.png", transparent=True, dpi=300)
 ```
+
 </details>
 
 ![](images/power_11_0.png)
@@ -244,6 +247,7 @@ ax2.axis([0, 1/f0, -1500, 1500]);
 
 plt.savefig("power_16_0.png", transparent=True, dpi=300)
 ```
+
 </details>
 
 ![](images/power_16_0.png)
@@ -291,6 +295,7 @@ d.add( e.GND )
 d.draw(ax=ax, show=False)
 plt.savefig("./schemdraw.png", dpi=300, transparent=True)
 ```
+
 </details>
 
 ![](images/schemdraw.png)

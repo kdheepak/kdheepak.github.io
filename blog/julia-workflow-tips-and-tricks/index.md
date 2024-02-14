@@ -17,11 +17,11 @@ If you are fairly new to Julia, here are a few things you might want to know to 
 
 Every time you start Julia, it looks for a file named `startup.jl` in a `config` directory.
 
-| Operating System | `startup.jl` Location                                |
-|------------------|-------------------------------------------------------|
-| Windows          | `C:\Users\USERNAME\.julia\config\startup.jl`         |
-| macOS            | `/Users/USERNAME/.julia/config/startup.jl`           |
-| Linux            | `/home/USERNAME/.julia/config/startup.jl`            |
+| Operating System | `startup.jl` Location                        |
+| ---------------- | -------------------------------------------- |
+| Windows          | `C:\Users\USERNAME\.julia\config\startup.jl` |
+| macOS            | `/Users/USERNAME/.julia/config/startup.jl`   |
+| Linux            | `/home/USERNAME/.julia/config/startup.jl`    |
 
 This file is executed before the REPL starts, allowing you to customize your Julia environment.
 
@@ -30,7 +30,7 @@ For example, if you added the following code to your `startup.jl`, it would ensu
 ```julia
 # Setup OhMyREPL and Revise
 import Pkg
-let 
+let
   pkgs = ["Revise", "OhMyREPL", "BenchmarkTools"]
   for pkg in pkgs
     if Base.find_package(pkg) === nothing
@@ -41,7 +41,7 @@ end
 ```
 
 ::: callout-note
-When adding packages in Julia, they are added by default to what's known as the "global environment". 
+When adding packages in Julia, they are added by default to what's known as the "global environment".
 While these packages can be readily used within the Julia REPL, they won't be available for import within Julia packages.
 
 For those aiming to ensure reproducibility in code execution --- both for themselves and others --- it's essential to use dedicated, per-project local environments. This approach ensures that the same set of package versions are always used.
@@ -85,8 +85,8 @@ Once installed, it can enhance your REPL experience dramatically, making it more
 
 ## `Revise.jl`
 
-[`Revise.jl`](https://github.com/timholy/Revise.jl) is a game-changer for Julia development. 
-It automatically reloads modified source files without restarting the Julia session. 
+[`Revise.jl`](https://github.com/timholy/Revise.jl) is a game-changer for Julia development.
+It automatically reloads modified source files without restarting the Julia session.
 This makes iterative development much smoother.
 
 Once set up, any changes you make to your code files are immediately available in your active Julia session.
@@ -145,7 +145,7 @@ This combination can make for a versatile and productive debugging experience.
 [PrecompileTools](https://julialang.github.io/PrecompileTools.jl/stable/) is a package that allows package developers to specify which parts of the package should be precompiled.
 From the official documentation:
 
-> `PrecompileTools` can force precompilation of specific workloads; particularly with Julia 1.9 and higher, the precompiled code can be saved to disk, so that it doesn't need to be compiled freshly in each Julia session. 
+> `PrecompileTools` can force precompilation of specific workloads; particularly with Julia 1.9 and higher, the precompiled code can be saved to disk, so that it doesn't need to be compiled freshly in each Julia session.
 > You can use `PrecompileTools` as a package developer, to reduce the latency experienced by users of your package for "typical" workloads; you can also use `PrecompileTools` as a user, creating custom "Startup" package(s) that precompile workloads important for your work.
 
 Precompiling Julia packages can significantly reduce the loading times for you and your users, providing a much more responsive experience.
@@ -213,7 +213,7 @@ Julia has a built-in package `Test` for unit testing.
 This requires writing tests in a separate folder, i.e. in `test/runtests.jl`; and these tests are run in a separate process when you can `Pkg.test()`.
 There's also no out of the box solution to run a subset of tests.
 
-Using `InlineTests` allows you to write tests directly in your source files, and you can also choose to run a subset of tests. 
+Using `InlineTests` allows you to write tests directly in your source files, and you can also choose to run a subset of tests.
 If you choose to run it with `retest`, you can make changes that are tracked with `Revise`, allowing faster iteration using a test driven development workflow.
 
 In the screenshot below, I have shown an example of having a `@testset` as part of the package itself, i.e. in `./src/layout.jl`:
@@ -247,7 +247,7 @@ You can customize the template too:
 ```julia
 using PkgTemplates
 t = Template(
-  dir = "~/gitrepos/", 
+  dir = "~/gitrepos/",
   julia = v"1.10",
   plugins = [
     Git(; ssh = true, manifest = true),

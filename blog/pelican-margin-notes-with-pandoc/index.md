@@ -41,7 +41,6 @@ exactly that. There is in fact a collection of [pelican-plugins](https://github.
 And, on the rare occasion that you can't find a plugin that does exactly what you want it to, you'll be able to (with a little bit of research) create a plugin to do exactly just that. Their documentation is pretty good too.
 If you are looking at a creating a blog I highly recommend checking out Pelican.
 
-
 That's probably not why you are reading this post though. You are probably interested in getting margin notes working on your blog too.
 I'll have to caveat the following post by saying that this is a proof of concept and by no means a final stable version that you can deploy on your site.
 This approach worked for me, and the reason I went down this path was because I was curious to see how far I could push my static site generation workflow.
@@ -72,7 +71,6 @@ They both speak to some length on how margin notes can be used to improve the ex
 [Butterick’s Practical Typography](https://practicaltypography.com/)[I highly recommend reading Butterick's web book. It is freely available at Practical Typography. It's challenged me to think critically about every aspect of a presentation. I also encourage buying his book or his fonts to aid Butterick in maintaining this content and producing more like this.]{.aside} is also a great example of effective use of margin notes.
 There are a few other articles [@johnjameson;@jgruber] that talk about this.
 The CSS for this page originally and the CSS for the margin notes had been heavily inspired by [gameprogrammingpatterns.com](https://gameprogrammingpatterns.com/).
-
 
 # Implementation
 

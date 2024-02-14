@@ -25,7 +25,7 @@ website:
     pinned: false
     left:
       - text: "About"
-        href: ./index.qmd
+        href: ./index.md
       - text: "CV"
         href: ./cv/index.qmd
       - text: "Blog"

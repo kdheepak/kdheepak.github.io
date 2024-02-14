@@ -5,7 +5,28 @@ date: last-modified
 citation: false
 comments: false
 nocite: |
-    @krishnamurthy20158, @li2015systematic, @krishnamurthy2016psst, @mittal2015system, @pratt2016transactive, @palmintier2016design, @krishnamurthy2017energy, @pratt2017hardware, @jain2018studying, @palmintier2017design, @krishnamurthy2018impacts, @latif2018optimizing, @horowitz2018optimizing, @sparn2018hardware, @elgindy2018ditto, @lara2018powersystems, @mittal2015system, @faqiry2018adp, @jain2019evaluating, @chang2019scalable, @barrows2019ieee, @lara2021powersystems
+    - @krishnamurthy20158
+    - @li2015systematic
+    - @krishnamurthy2016psst
+    - @mittal2015system
+    - @pratt2016transactive
+    - @palmintier2016design
+    - @krishnamurthy2017energy
+    - @pratt2017hardware
+    - @jain2018studying
+    - @palmintier2017design
+    - @krishnamurthy2018impacts
+    - @latif2018optimizing
+    - @horowitz2018optimizing
+    - @sparn2018hardware
+    - @elgindy2018ditto
+    - @lara2018powersystems
+    - @mittal2015system
+    - @faqiry2018adp
+    - @jain2019evaluating
+    - @chang2019scalable
+    - @barrows2019ieee
+    - @lara2021powersystems
 ---
 
 # Talks and Tutorials

@@ -17,15 +17,15 @@ references:
 
 You can view this post in the following formats, thanks to Pandoc!
 
-Format      Link
--------     -------
-IEEE-PDF    [LINK](www/writing-papers-with-markdown.ieee.pdf)
-IEEE-DOCX   [LINK](www/writing-papers-with-markdown.ieee.docx)
-IEEE-HTML   [LINK](www/writing-papers-with-markdown.ieee.html)
-PDF         [LINK](www/writing-papers-with-markdown.pdf)
-DOCX        [LINK](www/writing-papers-with-markdown.docx)
-HTML        [LINK](www/writing-papers-with-markdown.html)
-SLIDES-PDF  [LINK](www/writing-papers-with-markdown.slides.pdf)
+| Format     | Link                                                |
+| ---------- | --------------------------------------------------- |
+| IEEE-PDF   | [LINK](www/writing-papers-with-markdown.ieee.pdf)   |
+| IEEE-DOCX  | [LINK](www/writing-papers-with-markdown.ieee.docx)  |
+| IEEE-HTML  | [LINK](www/writing-papers-with-markdown.ieee.html)  |
+| PDF        | [LINK](www/writing-papers-with-markdown.pdf)        |
+| DOCX       | [LINK](www/writing-papers-with-markdown.docx)       |
+| HTML       | [LINK](www/writing-papers-with-markdown.html)       |
+| SLIDES-PDF | [LINK](www/writing-papers-with-markdown.slides.pdf) |
 
 <!-- BEGIN SLIDESNOHEADER -->
 
@@ -267,12 +267,14 @@ Take for example this table @tbl-table.
 
 <!-- prettier-ignore -->
   Right     Left     Center     Default
--------     ------ ----------   -------
+
+---
+
       12     12        12            12
     123     123       123          123
       1     1          1             1
 
-Table:  Demonstration of simple table syntax. {#tbl-table}
+Table: Demonstration of simple table syntax. {#tbl-table}
 
 <!-- END SLIDES -->
 
@@ -546,13 +548,15 @@ And this text is in **_bold-italic_**.
 
 **Example**
 
-  Right     Left     Center     Default
--------     ------ ----------   -------
+Right Left Center Default
+
+---
+
      12     12        12            12
     123     123       123          123
       1     1          1             1
 
-:  Demonstration of simple table syntax. {#tbl-table}
+: Demonstration of simple table syntax. {#tbl-table}
 
 ### **_Footnotes_**
 
@@ -608,6 +612,7 @@ Block equations
 $$
 \pi
 $$ {#eq-pi}
+$$
 ```
 
 **Example**
@@ -806,3 +811,4 @@ Let me know if you have any questions in the comments below.
 <!-- BEGIN SLIDESNOHEADER -->
 
 <!-- END SLIDES -->
+$$
