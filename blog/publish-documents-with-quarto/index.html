@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.529">
+<meta name="generator" content="quarto-1.5.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-11-20">
 <meta name="keywords" content="quarto, markdown, pandoc, papers, writing, academic, scholarly, technical, scientific">
 
-<title>kdheepak - Publishing documents with Quarto</title>
+<title>kdheepak – Publishing documents with Quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -248,7 +248,7 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -290,7 +290,7 @@ window.Quarto = {
 </header>
 
 
-<p>8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to <a href="../../blog/writing-papers-with-markdown/index.html">write academic papers with Pandoc Markdown</a>.</p>
+<p>8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to <a href="../writing-papers-with-markdown/index.qmd">write academic papers with Pandoc Markdown</a>.</p>
 <p><img src="https://kdheepak.com/blog/writing-papers-with-markdown/images/learningcurve.png" class="img-fluid"></p>
 <p>Since then, there’s been a lot of improvements to the Pandoc Markdown workflow for writing papers. Pandoc went from 1.15.2 to 3.1.9, <a href="https://pandoc.org/releases.html">adding an extraordinary number of features</a>. Of note, <a href="https://github.com/sergiocorreia/panflute">panflute</a> was created as a better and more fun way to write Python Pandoc filters. And Pandoc embedded <a href="https://pandoc.org/lua-filters.html">lua filters</a> to allow writing pandoc filters directly in lua to prevent any marshalling of data.</p>
 <div class="callout callout-style-simple callout-important no-icon">
@@ -305,7 +305,7 @@ window.Quarto = {
 </div>
 <p>Yet, Pandoc has not achieved widespread popularity in the academic sphere.</p>
 <p>Collaborative academic writing often gravitates towards using Microsoft Word with OneDrive support. WYSIWYG is a powerful paradigm and provides immediate ease of use. Word’s robust commenting and review tools are second to none. Outside of Word, OverLeaf or ShareLaTeX seem to have the most mindshare. I reckon when people choose <span class="math inline">\(\LaTeX\)</span>, they tend to do so because it is a safe bet. As a markup language, it is older than I am. That means there are resources online to address pretty much any problem you will come across<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> , there are templates <em>everywhere</em> for all kinds of publications, and text editor support is high quality.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Pour one out if you’ve tasked a graduate student to figure out why your paper isn’t compiling.</p></li></div><p>I still believe Pandoc is a phenomenal piece of software for writing academic papers (or any technical content for that matter). Being able to version control through git, and to produce outputs in diverse formats like PDF, Word, and HTML, adds immense value for me. But is it really going to be easier for everyone I’m collaborating with?</p>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;Pour one out if you’ve tasked a graduate student to figure out why your paper isn’t compiling.</p></div><p>I still believe Pandoc is a phenomenal piece of software for writing academic papers (or any technical content for that matter). Being able to version control through git, and to produce outputs in diverse formats like PDF, Word, and HTML, adds immense value for me. But is it really going to be easier for everyone I’m collaborating with?</p>
 <p>Enter <a href="https://quarto.org/">Quarto</a>, a potential game-changer in persuading researchers to transition from Word or <span class="math inline">\(\LaTeX\)</span>.</p>
 <p>If this is the first time you’ve heard of Quarto, you are probably not alone. Quarto is a nascent open-source publishing system from the creators of RMarkdown and RStudio that builds upon <a href="https://pandoc.org/">Pandoc</a> and <a href="https://jupyter.org/">Jupyter</a>.</p>
 <p>Quarto can <a href="https://quarto.org/docs/authoring/notebook-embed.html">embed Jupyter Notebook cells</a> straight into the publication output. This allows for seamless integration of research and data analysis into the publication process. As most scientific research increasingly relies on interactive environments like RStudio and Jupyter Notebooks, Quarto’s ability to incorporate this work into publishing workflows is immensely productive. And since it builds on top of Pandoc, Quarto supports <a href="https://quarto.org/docs/extensions/">extensions that are basically Lua filters</a> to enhance the output. Quarto’s <a href="https://quarto.org/docs/tools/vscode.html">VSCode extension</a> makes it easier for even non-technical contributors to collaborate on writing.</p>
@@ -655,7 +655,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {

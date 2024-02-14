@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.529">
+<meta name="generator" content="quarto-1.5.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2020-12-25">
 <meta name="keywords" content="adventofcode, 2020, julia">
 
-<title>kdheepak - Advent of Code 2020 Retrospective</title>
+<title>kdheepak – Advent of Code 2020 Retrospective</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -251,18 +251,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words">Final words</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/advent-of-code-2020-retrospective/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/advent-of-code-2020-retrospective/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Advent of Code 2020 Retrospective</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/advent-of-code-2020-retrospective/index.qmd"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Advent of Code 2020 Retrospective</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/advent-of-code-2020-retrospective/index.md"><i class="bi"></i> Code</button></div></div>
   </div>
 
 
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="day-1-report-repair"><a href="https://adventofcode.com/2020/day/1">Day 1: Report Repair</a></h3>
 <p>Day 1 of advent of code is basically intended to check that you have a programming language installed, and you know how to use simple features it in (e.g.&nbsp;<code>for</code> loops).</p>
 <p>You can solve the first day with just multiple <code>for</code> loops. However, a more idiomatic solution can be expressed using the <code>combinations</code> function from the <a href="https://github.com/JuliaMath/Combinatorics.jl">Combinatorics.jl</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<em>aside</em>: Python has a similar function in the standard library: <a href="https://docs.python.org/3/library/itertools.html#itertools.combinations" class="uri">https://docs.python.org/3/library/itertools.html#itertools.combinations</a></p></li></div><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Combinatorics</span></span>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;<em>aside</em>: Python has a similar function in the standard library: <a href="https://docs.python.org/3/library/itertools.html#itertools.combinations" class="uri">https://docs.python.org/3/library/itertools.html#itertools.combinations</a></p></div><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Combinatorics</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">readInput</span>() <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">parse</span>.(<span class="dt">Int</span>, <span class="fu">split</span>(<span class="fu">strip</span>(<span class="fu">read</span>(<span class="fu">joinpath</span>(<span class="pp">@__DIR__</span>, <span class="st">"./input.txt"</span>), <span class="dt">String</span>)))))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1217,7 +1217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can even use the variable from the outer loop as the index in the inner loop, like you’d expect. This can help reduce the nesting level of your inner expressions.</p>
 </section>
-<section id="day-17-conway-cubes" class="level3">
+<section id="day-17-conway-cubes" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="day-17-conway-cubes"><a href="https://adventofcode.com/2020/day/17">Day 17: Conway Cubes</a></h3>
 <p>Another homage to <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">John Conway</a>, this time in multiple dimensions.</p>
 <p>Here’s <a href="https://github.com/mkborregaard">Michael Krabbe Borregaard’s</a> succinct solution that takes advantage of <code>CartesianIndices</code>:</p>
@@ -1246,16 +1246,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="fu">part1</span>(data <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">startup</span>(data, <span class="fl">6</span>, <span class="fl">3</span>)</span>
 <span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(data <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">startup</span>(data, <span class="fl">6</span>, <span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Cellular automata puzzles are always fun, and make for some neat visualizations. Here are a couple of multi dimensional visualizations by <a href="https://github.com/tk3369/AdventOfCode2020/">Tom Kwong</a>:</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="https://user-images.githubusercontent.com/1813121/103164882-1371eb00-47ce-11eb-92d7-624ebf54c0f9.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://twitter.com/tomkwong/status/1339468003608387586" class="uri">https://twitter.com/tomkwong/status/1339468003608387586</a></figcaption>
+<figcaption class="margin-caption"><a href="https://twitter.com/tomkwong/status/1339468003608387586" class="uri">https://twitter.com/tomkwong/status/1339468003608387586</a></figcaption>
 </figure>
 </div>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="https://user-images.githubusercontent.com/1813121/103164897-39978b00-47ce-11eb-8c36-d9477cb839d1.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://twitter.com/tomkwong/status/1339735696194457600" class="uri">https://twitter.com/tomkwong/status/1339735696194457600</a></figcaption>
+<figcaption class="margin-caption"><a href="https://twitter.com/tomkwong/status/1339735696194457600" class="uri">https://twitter.com/tomkwong/status/1339735696194457600</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1708,7 +1708,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a><span class="fu">part1</span>(cups <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">join</span>(<span class="fu">peek</span>(<span class="fu">run</span>(cups, <span class="fl">100</span>), <span class="fl">1</span>, <span class="fl">8</span>))</span>
 <span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(cups <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">prod</span>(<span class="fu">peek</span>(<span class="fu">run</span>(<span class="fu">vcat</span>(cups, <span class="fl">10</span><span class="op">:</span><span class="fl">1_000_000</span>), <span class="fl">10_000_000</span>), <span class="fl">1</span>, <span class="fl">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="day-24-lobby-layout" class="level3">
+<section id="day-24-lobby-layout" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="day-24-lobby-layout"><a href="https://adventofcode.com/2020/day/24">Day 24: Lobby Layout</a></h3>
 <p>In another tribute to John Conway, now you must model hexagon grids.</p>
 <p>Having never worked with hexagon grid before, I reached for complex numbers again, which turned out to be a bad idea. I was indexing a dictionary with the real and imaginary components of the complex number which were floating point numbers. This caused all sorts of indexing problems due to rounding issues.</p>
@@ -1924,10 +1924,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb52-46"><a href="#cb52-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-47"><a href="#cb52-47" aria-hidden="true" tabindex="-1"></a><span class="fu">part2</span>(data <span class="op">=</span> <span class="fu">readInput</span>()) <span class="op">=</span> <span class="fu">count</span>(<span class="fu">flip_tiles!</span>(<span class="fu">init_tiles</span>(data), <span class="fl">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And another neat visualization by <a href="https://github.com/tk3369/AdventOfCode2020/">Tom Kwong</a>:</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="https://user-images.githubusercontent.com/1813121/103164912-71063780-47ce-11eb-839a-c0608ca36b70.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://twitter.com/tomkwong/status/1342661344424652801" class="uri">https://twitter.com/tomkwong/status/1342661344424652801</a></figcaption>
+<figcaption class="margin-caption"><a href="https://twitter.com/tomkwong/status/1342661344424652801" class="uri">https://twitter.com/tomkwong/status/1342661344424652801</a></figcaption>
 </figure>
 </div>
 </section>
@@ -2203,7 +2203,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -2440,7 +2445,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/advent-of-code-2020-retrospective/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/advent-of-code-2020-retrospective/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

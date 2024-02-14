@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.529">
+<meta name="generator" content="quarto-1.5.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2020-06-02">
 <meta name="keywords" content="neovim, vim, languageserver, julia, lsp">
 
-<title>kdheepak - Neovim + LanguageServer.jl</title>
+<title>kdheepak – Neovim + LanguageServer.jl</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -216,18 +216,18 @@ div.csl-indent {
   </ul></li>
   <li><a href="#install" id="toc-install" class="nav-link" data-scroll-target="#install">Install</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/neovim-languageserver-julia/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/neovim-languageserver-julia/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Neovim + LanguageServer.jl</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/neovim-languageserver-julia/index.qmd"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Neovim + LanguageServer.jl</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/neovim-languageserver-julia/index.md"><i class="bi"></i> Code</button></div></div>
   </div>
 
 
@@ -263,60 +263,60 @@ div.csl-indent {
 
 
 <p>This is a showcase of some of the capabilities of <a href="https://github.com/julia-vscode/LanguageServer.jl">Julia’s LanguageServer.jl</a> and <a href="https://neovim.io/doc/user/lsp.html">Neovim’s built-in Language Server Protocol (LSP) client</a>, as well as the instructions to install this setup.</p>
-<section id="capabilities" class="level2">
+<section id="capabilities" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="capabilities">Capabilities</h2>
 <p>The <code>.vimrc</code> code corresponding to the capability is linked in the caption of each screencapture.</p>
-<section id="completion" class="level3">
+<section id="completion" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="completion">Completion</h3>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/autocomplete.mov.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L648">vim.lsp.omnifunc</a></figcaption>
+<figcaption class="margin-caption"><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L648">vim.lsp.omnifunc</a></figcaption>
 </figure>
 </div>
 </section>
-<section id="documentation" class="level3">
+<section id="documentation" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/documentation.mov.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L971">vim.lsp.buf.hover</a></figcaption>
+<figcaption class="margin-caption"><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L971">vim.lsp.buf.hover</a></figcaption>
 </figure>
 </div>
 </section>
-<section id="jump-to-definition" class="level3">
+<section id="jump-to-definition" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="jump-to-definition">Jump to definition</h3>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/jumptodefinition.mov.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L968">vim.lsp.buf.definition</a></figcaption>
+<figcaption class="margin-caption"><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L968">vim.lsp.buf.definition</a></figcaption>
 </figure>
 </div>
 </section>
-<section id="linting" class="level3">
+<section id="linting" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="linting">Linting</h3>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/linting.mov.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L992">vim.lsp.util.show_line_diagnostics</a></figcaption>
+<figcaption class="margin-caption"><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L992">vim.lsp.util.show_line_diagnostics</a></figcaption>
 </figure>
 </div>
 </section>
-<section id="references" class="level3">
+<section id="references" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="references">References</h3>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/references.mov.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L983">vim.lsp.buf.references</a></figcaption>
+<figcaption class="margin-caption"><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L983">vim.lsp.buf.references</a></figcaption>
 </figure>
 </div>
 </section>
-<section id="document-symbols" class="level3">
+<section id="document-symbols" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="document-symbols">Document symbols</h3>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/symbols.mov.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L986">vim.lsp.buf.document_symbol</a></figcaption>
+<figcaption class="margin-caption"><a href="https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L986">vim.lsp.buf.document_symbol</a></figcaption>
 </figure>
 </div>
 </section>
@@ -612,7 +612,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -849,7 +854,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/neovim-languageserver-julia/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/neovim-languageserver-julia/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

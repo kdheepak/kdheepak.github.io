@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.529">
+<meta name="generator" content="quarto-1.5.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2020-07-27">
 <meta name="keywords" content="git, python, pre-commit, pre-commit hooks">
 
-<title>kdheepak - Using pre-commit hooks</title>
+<title>kdheepak – Using pre-commit hooks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -245,18 +245,18 @@ div.csl-indent {
   <li><a href="#git-commit---no-verify" id="toc-git-commit---no-verify" class="nav-link" data-scroll-target="#git-commit---no-verify"><code>git commit --no-verify</code></a></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/using-precommit-hooks/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/using-precommit-hooks/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Using <code>pre-commit</code> hooks</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/using-precommit-hooks/index.qmd"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Using <code>pre-commit</code> hooks</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/using-precommit-hooks/index.md"><i class="bi"></i> Code</button></div></div>
   </div>
 
 
@@ -291,19 +291,19 @@ div.csl-indent {
 </header>
 
 
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/pre-commit-hooks.png" class="img-fluid figure-img"></p>
-<figcaption>Running <code>git commit</code> with <code>pre-commit</code> hooks</figcaption>
+<figcaption class="margin-caption">Running <code>git commit</code> with <code>pre-commit</code> hooks</figcaption>
 </figure>
 </div>
-<section id="setting-up-pre-commit-for-a-git-repo" class="level2">
+<section id="setting-up-pre-commit-for-a-git-repo" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="setting-up-pre-commit-for-a-git-repo">Setting up <code>pre-commit</code> for a git repo</h2>
 <p>You can run scripts before creating a commit in a git repo, i.e.&nbsp;<code>pre-commit</code> hooks, to verify that the files you are checking in meet a predefined standard. <a href="https://pre-commit.com/"><code>pre-commit</code></a> is a Python package that let’s you manage and run <code>pre-commit</code> hooks in any git repository.</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/precommit_pipeline.png" class="img-fluid figure-img"></p>
-<figcaption>Pre-commit pipeline with <code>black</code> and <code>flake8</code> <span class="citation" data-cites="ljvmiranda921"><a href="#ref-ljvmiranda921" role="doc-biblioref">[1]</a></span></figcaption>
+<figcaption class="margin-caption">Pre-commit pipeline with <code>black</code> and <code>flake8</code> <span class="citation" data-cites="ljvmiranda921"><a href="#ref-ljvmiranda921" role="doc-biblioref">[1]</a></span></figcaption>
 </figure>
 </div>
 <p>Using <code>pre-commit</code> requires adding a <code>.pre-commit-config.yaml</code> file to the git repository, and running <code>pre-commit install</code>.</p>
@@ -394,7 +394,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="using-pre-commit-hooks-for-all-git-repos">Using <code>pre-commit-hooks</code> for all git repos</h2>
 <p>If you want to use <code>pre-commit-hooks</code> for all git repositories on your machine, you can set up a <code>git-templates</code> folder that is used as a <code>templatedir</code> when you run <code>git init</code>.</p>
 <p>Add the following to your <a href="https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/gitconfig#L176-L177"><code>~/.gitconfig</code></a> file <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.</p></li></div><div class="sourceCode" id="cb5"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[init]</span></span>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;On Windows, the file is located at <code>C:\Users\USERNAME\.gitconfig</code>. Also, <code>git</code> will not create this file unless you ask for it. You can create it by running <code>git config --global --edit</code>.</p></div><div class="sourceCode" id="cb5"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[init]</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">templatedir</span> <span class="op">=</span> <span class="er">~/</span><span class="dt">gitrepos</span><span class="er">/</span><span class="dt">git-templates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now create a <code>~/gitrepos/dotfiles/git-templates</code> folder with a single folder inside it called <code>hooks</code>, and with a single executable file inside the <code>hooks</code> folder called <code>pre-commit</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> git-templates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -673,7 +673,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -910,7 +915,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/using-precommit-hooks/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/using-precommit-hooks/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

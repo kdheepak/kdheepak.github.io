@@ -10,13 +10,13 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.529</generator>
+<generator>quarto-1.5.14</generator>
 <lastBuildDate>Mon, 20 Nov 2023 03:10:00 GMT</lastBuildDate>
 <item>
   <title>Publishing documents with Quarto</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/publish-documents-with-quarto/</link>
-  <description><![CDATA[ 8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to <a href="../../blog/writing-papers-with-markdown/index.html">write academic papers with Pandoc Markdown</a>. ]]></description>
+  <description><![CDATA[ 8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to <a href="../writing-papers-with-markdown/index.qmd">write academic papers with Pandoc Markdown</a>. ]]></description>
   <category>pandoc</category>
   <category>python</category>
   <guid>https://kdheepak.com/blog/publish-documents-with-quarto/</guid>
@@ -457,6 +457,15 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Geektool and Desktop Widgets in OSX</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
+  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
+  <category>osx</category>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Robotics</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/robotics/</link>
@@ -474,15 +483,6 @@ Robotics and Microcontroller Projects
   <category>tasker</category>
   <category>android</category>
   <guid>https://kdheepak.com/blog/tasker-and-google-maps/</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Geektool and Desktop Widgets in OSX</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
-  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
-  <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>

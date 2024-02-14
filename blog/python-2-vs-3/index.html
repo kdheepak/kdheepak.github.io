@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.529">
+<meta name="generator" content="quarto-1.5.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2016-12-16">
 <meta name="keywords" content="python, python2, python3">
 
-<title>kdheepak - Python 2 vs 3</title>
+<title>kdheepak – Python 2 vs 3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -222,18 +222,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#python-2-vs-3" id="toc-python-2-vs-3" class="nav-link active" data-scroll-target="#python-2-vs-3">Python 2 vs 3</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/python-2-vs-3/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/python-2-vs-3/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Python 2 vs 3</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/python-2-vs-3/index.qmd"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Python 2 vs 3</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/python-2-vs-3/index.md"><i class="bi"></i> Code</button></div></div>
   </div>
 
 
@@ -275,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It is true that a large number of PyPi packages are now compatible with both Python2 and Python3. If I had to list the biggest changes in Python3 from Python2 that made the jump between versions difficult, it would be the core updates to the CPython API and the implementation of Unicode everywhere.</p>
 <p>The changes to CPython API made it difficult to move packages across versions that heavily relied on C code. This has de-incentivised other tools that relied on packages to make the switch as well. Several of the scientific python stack faced this issue. Fortunately, thanks to the efforts of some incredibly smart and dedicated people, NumPy, SciPy, Pandas, Matplotlib now all support Python 3.5.</p>
 <p>In arguably one of the more contentious decisions, Python3 also changed strings to handled as Unicode by default. This, as a result made thinking about unicode a more conscious decision<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;I highly recommend checking out <a href="https://www.youtube.com/watch?v=sgHbC6udIqc">Ned Batchelder’s talk</a> titled <q>Pragmatic Unicode, or, How do I stop the pain?</q> for an excellent summary on how to deal with unicode issues.</p></li></div><p>Python3 makes dealing with unicode a lot easier, by providing error messages during compilation time instead of run time. With this change however, packages that often dealt with bytes/text/strings required some serious retooling. Many programs in the web stack in the Python world have taken time to move to the latest versions of Python. There are multiple other changes in Python3, but these are most commonly attributed to as the reason for making the transistion difficult.</p>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;I highly recommend checking out <a href="https://www.youtube.com/watch?v=sgHbC6udIqc">Ned Batchelder’s talk</a> titled <q>Pragmatic Unicode, or, How do I stop the pain?</q> for an excellent summary on how to deal with unicode issues.</p></div><p>Python3 makes dealing with unicode a lot easier, by providing error messages during compilation time instead of run time. With this change however, packages that often dealt with bytes/text/strings required some serious retooling. Many programs in the web stack in the Python world have taken time to move to the latest versions of Python. There are multiple other changes in Python3, but these are most commonly attributed to as the reason for making the transistion difficult.</p>
 <p>Overall, Python3 introduced a lot of niceties. The latest version of Python3 even introduces a more memory efficient dictionary, and since dictionaries are everywhere you can be sure to expect some improvements in your programs. In general, I sure I wouldn’t be alone in recommending anyone to use Python3 for their projects. Personally, I don’t think I’ve ever experienced an issue where a package that I wanted was written for Python2 alone.</p>
 <p>I have experienced another issue though.</p>
 <p>Multiple times now I’ve tried to install packages that have been built for Python3 that are completely incompatible with Python2. When I’ve experienced Python2 packages that are incompatible with Python3, it has been for reasons mentioned above. CPython changes require someone with an understanding of the C Python API ( or the willingness and patience to undertake the task ) to rewrite a significant portion of the library. Unicode issues are a little less demanding, and with a clear understanding of text interfaces one can update their code for Python3 compatibility. However, when a Python3 package is not compatible with Python2 the changes aren’t straightforward, and sometimes even impossible.</p>
@@ -549,7 +549,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -786,7 +791,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/python-2-vs-3/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/python-2-vs-3/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

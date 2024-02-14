@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.529">
+<meta name="generator" content="quarto-1.5.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2020-06-07">
 <meta name="keywords" content="math, analytical, closed form, riddle, puzzle, problem, egg, tower, building, marble, light bulb, julia,">
 
-<title>kdheepak - The egg tower puzzle</title>
+<title>kdheepak – The egg tower puzzle</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -278,7 +278,7 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -417,7 +417,7 @@ window.Quarto = {
 <p>This is also known as a recurrence relation.</p>
 <p>This result can be reasoned through intuition as well. To find the total floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x\)</span> drops, it will be <span class="math inline">\(1\)</span> (your first drop) plus the maximum number of floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x-1\)</span> eggs (if the first egg does not break) plus the maximum number of floors you can check with <span class="math inline">\(n-1\)</span> eggs with <span class="math inline">\(x-1\)</span> eggs (if the first egg does break).</p>
 <p>If we wanted to, we could expand this recurrence relation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong"><a href="#ref-possiblywrong" role="doc-biblioref">[1]</a></span>.</p></li></div><p>Here is the expansion increasing the depth in the direction of number of drops:</p>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong"><a href="#ref-possiblywrong" role="doc-biblioref">[1]</a></span>.</p></div><p>Here is the expansion increasing the depth in the direction of number of drops:</p>
 <p><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1)\]</span></p>
 <p><span class="math display">\[f(x, n) = 3 + f(x - 2, n) + 2f(x - 2, n - 1) + f(x - 2, n - 2)\]</span></p>
 <p><span class="math display">\[f(x, n) = 7 + f(x - 3, n) + 3f(x - 3, n - 1) + 3f(x - 3, n - 2) + f(x - 3, n - 3)\]</span></p>
@@ -425,17 +425,17 @@ window.Quarto = {
 <p><span class="math display">\[f(x, n) = 31 + f(x - 5, n) + 5f(x - 5, n - 1) + 10f(x - 5, n - 2) + 10f(x - 5, n - 3) + 5f(x - 5, n - 4) + f(x - 5, n - 5)\]</span></p>
 <p><span class="math display">\[f(x, n) = 63 + f(x - 6, n) + 6f(x - 6, n - 1) + 15f(x - 6, n - 2) + 20f(x - 6, n - 3) + 15f(x - 6, n - 4) + 6f(x - 6, n - 5) + f(x - 6, n - 6)\]</span></p>
 <p>Eagle eye readers will notice a pattern.</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/pascaltriangle.svg" class="img-fluid figure-img"></p>
-<figcaption>Binomial coefficients in Pascal’s triangle</figcaption>
+<figcaption class="margin-caption">Binomial coefficients in Pascal’s triangle</figcaption>
 </figure>
 </div>
 <p>It turns out that this expansion is related to the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficients</a>.</p>
 <p>If we had infinite number of eggs, you’d see that the first element is the only term that contributes to <span class="math inline">\(f(x, n)\)</span>, since the others will be <span class="math inline">\(0\)</span> for <span class="math inline">\(x - d\)</span> where <span class="math inline">\(d\)</span> is the depth in the triangle. That is to say, if we had infinite eggs, with 6 drops we can guarantee checking 63 floors.</p>
 <p>Using this, we can say that, with <span class="math inline">\(x\)</span> drops we can guarantee checking <span class="math inline">\(2^x - 1\)</span> floors if we had infinite eggs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1">/u/mark_ovchain’s insightful comment on this thread</a> for more information.</p></li></div></section>
-<section id="implementation" class="level2">
+<div class="no-row-height column-margin column-container"><p><sup>2</sup>&nbsp;If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1">/u/mark_ovchain’s insightful comment on this thread</a> for more information.</p></div></section>
+<section id="implementation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
 <p>Let’s implement this problem.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">println</span>(<span class="cn">VERSION</span>)</span>
@@ -700,10 +700,10 @@ window.Quarto = {
 </figure>
 <!-- prettier-ignore-end -->
 <p>You’ll notice that the upper right corner of the table stays the same if you increase the number of eggs you have at your disposal. You can see this even more clearly in this visualization.</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/egg-puzzle.png" class="img-fluid figure-img"></p>
-<figcaption>The relationship between the number of floors that can be checked, the number of drops and number of eggs.</figcaption>
+<figcaption class="margin-caption">The relationship between the number of floors that can be checked, the number of drops and number of eggs.</figcaption>
 </figure>
 </div>
 <p>There’s a minimal number of drops required to guarantee that you will find the breaking floor, even if you have unlimited eggs.</p>
@@ -973,7 +973,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
