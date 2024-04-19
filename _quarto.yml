@@ -27,7 +27,7 @@ website:
       - text: "About"
         href: ./index.md
       - text: "CV"
-        href: ./cv/index.qmd
+        href: ./cv/index.md
       - text: "Blog"
         href: ./blog/index.qmd
     right:
@@ -123,8 +123,6 @@ execute:
   freeze: true
   eval: true
   daemon: true
-
-jupyter: julia-1.9
 
 bibliography: ./_quarto/website.bib
 csl: ./_quarto/ieee.csl
