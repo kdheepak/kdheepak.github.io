@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.14">
+<meta name="generator" content="quarto-1.5.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,7 +37,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -275,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It is true that a large number of PyPi packages are now compatible with both Python2 and Python3. If I had to list the biggest changes in Python3 from Python2 that made the jump between versions difficult, it would be the core updates to the CPython API and the implementation of Unicode everywhere.</p>
 <p>The changes to CPython API made it difficult to move packages across versions that heavily relied on C code. This has de-incentivised other tools that relied on packages to make the switch as well. Several of the scientific python stack faced this issue. Fortunately, thanks to the efforts of some incredibly smart and dedicated people, NumPy, SciPy, Pandas, Matplotlib now all support Python 3.5.</p>
 <p>In arguably one of the more contentious decisions, Python3 also changed strings to handled as Unicode by default. This, as a result made thinking about unicode a more conscious decision<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;I highly recommend checking out <a href="https://www.youtube.com/watch?v=sgHbC6udIqc">Ned Batchelder’s talk</a> titled <q>Pragmatic Unicode, or, How do I stop the pain?</q> for an excellent summary on how to deal with unicode issues.</p></div><p>Python3 makes dealing with unicode a lot easier, by providing error messages during compilation time instead of run time. With this change however, packages that often dealt with bytes/text/strings required some serious retooling. Many programs in the web stack in the Python world have taken time to move to the latest versions of Python. There are multiple other changes in Python3, but these are most commonly attributed to as the reason for making the transistion difficult.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I highly recommend checking out <a href="https://www.youtube.com/watch?v=sgHbC6udIqc">Ned Batchelder’s talk</a> titled <q>Pragmatic Unicode, or, How do I stop the pain?</q> for an excellent summary on how to deal with unicode issues.</p></div></div><p>Python3 makes dealing with unicode a lot easier, by providing error messages during compilation time instead of run time. With this change however, packages that often dealt with bytes/text/strings required some serious retooling. Many programs in the web stack in the Python world have taken time to move to the latest versions of Python. There are multiple other changes in Python3, but these are most commonly attributed to as the reason for making the transistion difficult.</p>
 <p>Overall, Python3 introduced a lot of niceties. The latest version of Python3 even introduces a more memory efficient dictionary, and since dictionaries are everywhere you can be sure to expect some improvements in your programs. In general, I sure I wouldn’t be alone in recommending anyone to use Python3 for their projects. Personally, I don’t think I’ve ever experienced an issue where a package that I wanted was written for Python2 alone.</p>
 <p>I have experienced another issue though.</p>
 <p>Multiple times now I’ve tried to install packages that have been built for Python3 that are completely incompatible with Python2. When I’ve experienced Python2 packages that are incompatible with Python3, it has been for reasons mentioned above. CPython changes require someone with an understanding of the C Python API ( or the willingness and patience to undertake the task ) to rewrite a significant portion of the library. Unicode issues are a little less demanding, and with a clear understanding of text interfaces one can update their code for Python3 compatibility. However, when a Python3 package is not compatible with Python2 the changes aren’t straightforward, and sometimes even impossible.</p>
@@ -352,18 +352,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -395,7 +384,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -454,10 +465,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -501,7 +517,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

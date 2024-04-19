@@ -9,13 +9,13 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.14</generator>
+<generator>quarto-1.5.30</generator>
 <lastBuildDate>Mon, 20 Nov 2023 03:10:00 GMT</lastBuildDate>
 <item>
   <title>Publishing documents with Quarto</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/publish-documents-with-quarto/</link>
-  <description><![CDATA[ 8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to <a href="../writing-papers-with-markdown/index.qmd">write academic papers with Pandoc Markdown</a>. ]]></description>
+  <description><![CDATA[ 8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it was possible to <a href="../../blog/writing-papers-with-markdown/index.html">write academic papers with Pandoc Markdown</a>. ]]></description>
   <category>pandoc</category>
   <category>python</category>
   <guid>https://kdheepak.com/blog/publish-documents-with-quarto/</guid>
@@ -77,6 +77,18 @@
   <category>osx</category>
   <guid>https://kdheepak.com/blog/installing-homebrew-in-an-alternative-location/</guid>
   <pubDate>Wed, 03 Aug 2022 19:47:12 GMT</pubDate>
+</item>
+<item>
+  <title>Programmers’ preferences for package names</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/programmers-preferences-for-package-names/</link>
+  <description><![CDATA[ Are there trends in choosing package names in various programming ecosystems? Do package authors choose names for their packages that are <a href="https://en.wikipedia.org/wiki/Alliteration">alliterated</a> with the name of the programming language? Let’s venture to find out. ]]></description>
+  <category>analysis</category>
+  <category>python</category>
+  <category>julia</category>
+  <category>rust</category>
+  <guid>https://kdheepak.com/blog/programmers-preferences-for-package-names/</guid>
+  <pubDate>Fri, 29 Jul 2022 07:47:12 GMT</pubDate>
 </item>
 <item>
   <title>Quickstart guide to using a terminal</title>

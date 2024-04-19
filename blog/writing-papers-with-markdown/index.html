@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.14">
+<meta name="generator" content="quarto-1.5.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,7 +37,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -159,7 +159,7 @@ div.csl-indent {
   });
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -246,7 +246,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -387,7 +387,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="a-word-about-word">A word about Word</h3>
 <p>Microsoft Word is ubiquitous when it comes to writing reports. The great thing about Word is that there is almost no barrier to <em>begin</em> writing. You can incrementally build your skill in using this tool as and when you are using it. This is useful since it makes it immediately accessible, thereby decreasing the time and effort spent on learning how to use a software for writing and allowing you to concentrate on the writing itself.</p>
 <p>However, I’ve found a few fundamental problems with Microsoft Word. Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so <span class="citation" data-cites="stallman_emacs"><a href="#ref-stallman_emacs" role="doc-biblioref">[1]</a></span>). However, products like Word fail miserably at separating content from formatting. These products impose on the writer their own concept of how a document should be formatted, which I’ve found greatly hinders the writing process. Have you ever experienced a sudden jump in spacing? Or mismatched formatting after a copy and paste from one part of the document to another? Or have indents and bullet points misbehave haphazardly? Word applies these formatting changes seemingly at random! These are all typesetting and formatting processes and these should be applied <strong><em>after</em></strong> the text is completed. These processes should not distract from the task at hand<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> - writing!</p>
-<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;I understand that there may be more <em>correct</em> ways to go about it, I just don’t want to be thinking about all that while I’m writing.</p></div><p>There are other issues as well. Microsoft’s ecosystem comes at a price, literally. Word is proprietary, and Word’s format is a proprietary data format. When you use Word, by storing your work in this proprietary software’s proprietary data format, you tie yourself down to this particular licensed software for the forseeable future. You also make the implicit assumption that everyone you work with has the same software on their computer. Word also does not play well with its counterparts on OSX. With the same content, the document is presented differently depending on which machine you open it on. As far as I know there isn’t even a version for Linux machines. Heck, Microsoft Word does not even play well with previous versions of Microsoft Word. I understand why this issue occurs, considering the complexity in operating systems and software. Backward incompatible software or cross incompatibility are probably inevitable, but as an user, I shouldn’t have to be concerned about this. I shouldn’t have to think about what software or what version of a software my reviewers are using when I’m sending them a document. And speaking of sharing documents, did you know you can end up transferring malware through a Word document? Just think about that for a second. Opening what should be essentially a text file is a security risk for your machine. And some of these viruses (as of the time of this writing) do not even have patches yet <span class="citation" data-cites="beaumont_bypass_2015"><a href="#ref-beaumont_bypass_2015" role="doc-biblioref">[2]</a></span>. Loads of people have already talked about this and similar issues at some length <span class="citation" data-cites="cottrell_word_nodate"><a href="#ref-cottrell_word_nodate" role="doc-biblioref">[3]</a></span>, and have probably done more justice to this topic that I possibly could. With all these issues, it is hard to believe Word is so widely accepted as a standard.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I understand that there may be more <em>correct</em> ways to go about it, I just don’t want to be thinking about all that while I’m writing.</p></div></div><p>There are other issues as well. Microsoft’s ecosystem comes at a price, literally. Word is proprietary, and Word’s format is a proprietary data format. When you use Word, by storing your work in this proprietary software’s proprietary data format, you tie yourself down to this particular licensed software for the forseeable future. You also make the implicit assumption that everyone you work with has the same software on their computer. Word also does not play well with its counterparts on OSX. With the same content, the document is presented differently depending on which machine you open it on. As far as I know there isn’t even a version for Linux machines. Heck, Microsoft Word does not even play well with previous versions of Microsoft Word. I understand why this issue occurs, considering the complexity in operating systems and software. Backward incompatible software or cross incompatibility are probably inevitable, but as an user, I shouldn’t have to be concerned about this. I shouldn’t have to think about what software or what version of a software my reviewers are using when I’m sending them a document. And speaking of sharing documents, did you know you can end up transferring malware through a Word document? Just think about that for a second. Opening what should be essentially a text file is a security risk for your machine. And some of these viruses (as of the time of this writing) do not even have patches yet <span class="citation" data-cites="beaumont_bypass_2015"><a href="#ref-beaumont_bypass_2015" role="doc-biblioref">[2]</a></span>. Loads of people have already talked about this and similar issues at some length <span class="citation" data-cites="cottrell_word_nodate"><a href="#ref-cottrell_word_nodate" role="doc-biblioref">[3]</a></span>, and have probably done more justice to this topic that I possibly could. With all these issues, it is hard to believe Word is so widely accepted as a standard.</p>
 <p>I think there is a strong case to be made about why you should consider dropping Word for your next paper. In addition to what has been discussed above:</p>
 <!-- BEGIN SLIDES -->
 <ul>
@@ -437,7 +437,7 @@ window.Quarto = {
 <p><span class="math inline">\(\LaTeX\)</span> is free. Free as in beer and free as in freedom. You can have the confidence that your code and documents can survive possibly forever in its current format. The <span class="math inline">\(\LaTeX\)</span> community is great and are very helpful towards beginners. There are hundreds of packages that improve upon the functionality that <span class="math inline">\(\LaTeX\)</span> provides. There are packages like <em>TikZ</em> that let you to create high resolution print quality detailed diagrams, which I’ve seen used even outside a <span class="math inline">\(\LaTeX\)</span> environment.</p>
 <p>However, there is a barrier to entry which one must overcome in order to begin using <span class="math inline">\(\LaTeX\)</span>. Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them. The biggest problem with <span class="math inline">\(\LaTeX\)</span> is probably the error messages. Most of the time they are near useless, and sometimes they are even borderline cryptic.</p>
 <p>Personally, I found learning how to work with <span class="math inline">\(\LaTeX\)</span> extremely useful. It challenged me to think about the structure of a document, and how I could convey information effectively not just through the final document, but also in the source material<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I also didn’t think it was difficult. Solutions to my initial problems were only a quick Google search away. Tables were frustrating at first, but you get the hang of them over time. Equations are a joy to type in <span class="math inline">\(\LaTeX\)</span>. And the final product looks great!</p>
-<div class="no-row-height column-margin column-container"><p><sup>2</sup>&nbsp;Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.</p></div><p>That said, the markup language is a bit too heavy for notetaking, and not particularly readable. For example, take a look at the syntax for a creating a section, a subsection and list of items with some bold and italic elements.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.</p></div></div><p>That said, the markup language is a bit too heavy for notetaking, and not particularly readable. For example, take a look at the syntax for a creating a section, a subsection and list of items with some bold and italic elements.</p>
 <!-- BEGIN SLIDES -->
 <div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\section</span>{Section Name}</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>This is text in the section</span>
@@ -597,7 +597,7 @@ window.Quarto = {
 <li>s5 (S5 HTML and javascript slide show)</li>
 </ul>
 <p>With 21 input formats and 37 output formats, it doesn’t take long to guess that there’s no way they implemented a converter for each input to output format. Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage to convert one format to another<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This is the reason Pandoc is great at converting from and to a wide variety of formats, and why it is potentially easy to support new formats as well. Pandoc is also constantly under development. We can use Pandoc to convert a markdown file, to a PDF, HTML or DOCX file for a technical paper.</p>
-<div class="no-row-height column-margin column-container"><p><sup>3</sup>&nbsp;Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.</p><p><sup>4</sup>&nbsp;If you install Pandoc from a package, <code>pandoc-citeproc</code> should come pre-installed. However, if you want to use a package manager such as <code>brew</code>, you may need to install <code>pandoc-citeproc</code> separately as well. Just run <code>brew install pandoc pandoc-citeproc</code>.</p></div><p>First off, you will need <code>pandoc</code>. You can get the latest version from their GitHub page <span class="citation" data-cites="noauthor_github_nodate"><a href="#ref-noauthor_github_nodate" role="doc-biblioref">[6]</a></span>. You may want <code>pandoc-citeproc</code> as well<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. You will also need <span class="math inline">\(\LaTeX\)</span>. I’ve found that the following python packages are useful too.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.</p></div><div id="fn4"><p><sup>4</sup>&nbsp;If you install Pandoc from a package, <code>pandoc-citeproc</code> should come pre-installed. However, if you want to use a package manager such as <code>brew</code>, you may need to install <code>pandoc-citeproc</code> separately as well. Just run <code>brew install pandoc pandoc-citeproc</code>.</p></div></div><p>First off, you will need <code>pandoc</code>. You can get the latest version from their GitHub page <span class="citation" data-cites="noauthor_github_nodate"><a href="#ref-noauthor_github_nodate" role="doc-biblioref">[6]</a></span>. You may want <code>pandoc-citeproc</code> as well<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. You will also need <span class="math inline">\(\LaTeX\)</span>. I’ve found that the following python packages are useful too.</p>
 <ul>
 <li><code>pandoc-attributes</code></li>
 <li><code>pandoc-eqnos</code></li>
@@ -834,7 +834,7 @@ for code block</code></pre>
 <!-- END SLIDES -->
 <p>You can write your own custom filter, and you can use it to parse certain blocks in a custom fashion. For most people this will not be necessary since Pandoc is feature complete, and when a specific need arises<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> the community has often provided a custom filter that does the job. But if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.</p>
 <!-- BEGIN SLIDES -->
-<div class="no-row-height column-margin column-container"><p><sup>6</sup>&nbsp;The features for references for figures, equations and tables are all python <code>pandocfilters</code> packages written by the one person <span class="citation" data-cites="duck_github_nodate"><a href="#ref-duck_github_nodate" role="doc-biblioref">[17]</a></span>. There is a two year long standing discussion on cross references <span class="citation" data-cites="noauthor_pandoc_nodate-1"><a href="#ref-noauthor_pandoc_nodate-1" role="doc-biblioref">[18]</a></span> that the curious reader is referred to.</p></div><p>There is a python package called <code>pandocfilters</code> that allows you to walk the AST and parse specific formats or keys. It is very powerful, and can offer unique ways to expand on pandoc’s functionality. I wrote a pandocfilter <span class="citation" data-cites="krishnamurthy_github_nodate"><a href="#ref-krishnamurthy_github_nodate" role="doc-biblioref">[7]</a></span> to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this <a href="../active-reactive-and-apparent-power">post</a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;The features for references for figures, equations and tables are all python <code>pandocfilters</code> packages written by the one person <span class="citation" data-cites="duck_github_nodate"><a href="#ref-duck_github_nodate" role="doc-biblioref">[17]</a></span>. There is a two year long standing discussion on cross references <span class="citation" data-cites="noauthor_pandoc_nodate-1"><a href="#ref-noauthor_pandoc_nodate-1" role="doc-biblioref">[18]</a></span> that the curious reader is referred to.</p></div></div><p>There is a python package called <code>pandocfilters</code> that allows you to walk the AST and parse specific formats or keys. It is very powerful, and can offer unique ways to expand on pandoc’s functionality. I wrote a pandocfilter <span class="citation" data-cites="krishnamurthy_github_nodate"><a href="#ref-krishnamurthy_github_nodate" role="doc-biblioref">[7]</a></span> to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this <a href="../active-reactive-and-apparent-power">post</a>.</p>
 <!-- END SLIDES -->
 <p>In theory, you can write a filter that finds a <span class="math inline">\(\LaTeX\)</span> table block in Markdown, converts it to an image and renders that in Word. Or you can write a filter that inputs other files during run time, allowing you to split your source document.</p>
 <p>My understanding is that the Python <code>pandocfilters</code> package is limited in scope. Alternatively, if you choose to, you can yield Pandoc’s complete power by writing a Haskell filter instead of using Python, but then you will be writing Haskell ;)</p>
@@ -969,18 +969,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1012,7 +1001,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -1071,10 +1082,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -1118,7 +1134,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
