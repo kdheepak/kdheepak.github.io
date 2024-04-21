@@ -527,20 +527,11 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 <blockquote class="blockquote">
 <p>If you cannot avoid containers with abstract value types, it is sometimes better to parametrize with <code>Any</code> to avoid runtime type checking. E.g. <code>IdDict{Any, Any}</code> performs better than <code>IdDict{Type, Vector}</code></p>
 </blockquote>
-<p>What is interesting is that <code>Union{Circle, Rectangle, Square, Triangle}</code> is a concrete type parameter.</p>
-<div id="599e0c2d-80b1-4823-8294-6d7939c1f66d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:31.868&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:31.868&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:31.869&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:31.869&quot;}" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(Shape)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(<span class="dt">Union</span>{Circle, Rectangle, Square, Triangle})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code>isconcretetype(Shape) = false
-isconcretetype(Union{Circle, Rectangle, Square, Triangle}) = false</code></pre>
-</div>
-</div>
-<p>And <code>Vector{Union{Circle, Rectangle, Square, Triangle}}</code> can perform better than <code>Vector{Shape}</code> or <code>Vector{Any}</code>.</p>
+<p>What is interesting is that <code>Union{Circle, Rectangle, Square, Triangle}</code> can perform better than <code>Shape</code> or <code>Any</code> when used as a concrete type parameter.</p>
 <p>You can see difference show up clearly in the performance benchmark:</p>
 <div id="9fb14edb-9ea2-4de3-ac7e-784476f220c0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T01:49:01.680&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T01:49:01.679&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T01:49:12.330&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T01:49:12.330&quot;}" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>sorted_shapes_union)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>sorted_shapes_union)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}</code></pre>
 </div>
@@ -557,26 +548,26 @@ isconcretetype(Union{Circle, Rectangle, Square, Triangle}) = false</code></pre>
 </div>
 </div>
 </div>
-<div id="b7258cd1-da7a-4c03-ae1b-9b433d877b0c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T01:45:37.826&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T01:45:37.826&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T01:45:37.832&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T01:45:37.831&quot;}" data-execution_count="54">
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="54">
-<p><code>Vector{Union{Circle, Rectangle, Square, Triangle}}</code> is faster than <code>Vector{Shape}</code> by a factor of roughly 36 times.</p>
+<div id="b7258cd1-da7a-4c03-ae1b-9b433d877b0c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T02:55:09.655&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T02:55:09.654&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T02:55:09.660&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T02:55:09.660&quot;}" data-execution_count="64">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="64">
+<p><code>Vector{Union{Circle, Rectangle, Square, Triangle}}</code> is faster than <code>Vector{Shape}</code> by roughly a factor of 36 times.</p>
 </div>
 </div>
 <p>It’s possible to get even better performance by calculating the <code>sum</code>s for the individual arrays and summing them up at the end.</p>
 <div id="852e4dc2-fb51-4727-9f3b-1330c3972631" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:57.041&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:57.041&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:57.046&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:57.044&quot;}" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main2</span>(arrs<span class="op">...</span>) <span class="op">=</span> <span class="fu">sum</span>(main1, arrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main2</span>(arrs<span class="op">...</span>) <span class="op">=</span> <span class="fu">sum</span>(main1, arrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <pre data-code-line-numbers="nil"><code>main2 (generic function with 1 method)</code></pre>
 </div>
 </div>
 <div id="f2f78446-5522-42f1-a254-8dbe18eb07db" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:57.764&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:57.763&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:57.797&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:57.797&quot;}" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb39" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>  0.002709 seconds (406 allocations: 27.609 KiB, 85.41% compilation time)</code></pre>
 </div>
 </div>
 <div id="b2f5e136-872b-4149-ac66-cb64a8553fa5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T01:47:30.986&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T01:47:30.986&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T01:47:39.418&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T01:47:39.418&quot;}" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(<span class="op">$</span>square_arr, <span class="op">$</span>rectangle_arr, <span class="op">$</span>triangle_arr, <span class="op">$</span>circle_arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(<span class="op">$</span>square_arr, <span class="op">$</span>rectangle_arr, <span class="op">$</span>triangle_arr, <span class="op">$</span>circle_arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="56">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
@@ -592,9 +583,9 @@ isconcretetype(Union{Circle, Rectangle, Square, Triangle}) = false</code></pre>
 </div>
 <p>This performance is equivalent to having a uniform type (e.g.&nbsp;just <code>Square</code>s).</p>
 <div id="913b0b44-d4a9-4c4f-9b4b-a83d56fcbe23" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T01:47:19.049&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T01:47:19.048&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T01:47:27.067&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T01:47:27.067&quot;}" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb42" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [<span class="fu">Square</span>() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>count]</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>squares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [<span class="fu">Square</span>() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>count]</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>squares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="55">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
