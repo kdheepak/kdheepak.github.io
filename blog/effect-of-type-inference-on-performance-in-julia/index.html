@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div id="b3a8fbdd-6b28-4a20-a055-bb95ac990072" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:12.841&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:12.841&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:13.129&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:13.129&quot;}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">versioninfo</span>(verbose<span class="op">=</span><span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">versioninfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>Julia Version 1.10.2
 Commit bd47eca2c8a (2024-03-01 10:14 UTC)
@@ -455,6 +455,10 @@ typeof(triangle_arr) = Vector{Triangle}
 typeof(circle_arr) = Vector{Circle}</code></pre>
 </div>
 </div>
+</section>
+<section id="benchmarks" class="level2">
+<h2 class="anchored" data-anchor-id="benchmarks">Benchmarks</h2>
+<p>Let’s combine these arrays into three vectors of different types:</p>
 <div id="88bed1fb-5da1-4c41-97cf-328baa5c8a52" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:37:51.949&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:37:51.949&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:37:52.469&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:37:52.469&quot;}" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sorted_shapes_shape <span class="op">=</span> <span class="fu">vcat</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sorted_shapes_any <span class="op">=</span> <span class="dt">Any</span>[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
@@ -469,9 +473,6 @@ typeof(sorted_shapes_any) = Vector{Any}
 typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}</code></pre>
 </div>
 </div>
-</section>
-<section id="benchmarks" class="level2">
-<h2 class="anchored" data-anchor-id="benchmarks">Benchmarks</h2>
 <p>We can benchmark the performance of these different types using <code>BenchmarkTools</code>:</p>
 <div id="cb11a309-14c8-454d-b2e9-bc9ce4bab4ff" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:38:46.576&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:38:46.575&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:38:57.195&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:38:57.195&quot;}" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span>
@@ -494,7 +495,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 </div>
-<p>Both benchmarks for <code>Vector{Shape}</code> and <code>Vector{Any}</code> can be inefficient.</p>
+<p>Both benchmarks for <code>Vector{Shape}</code> and <code>Vector{Any}</code> can be inefficient but are usually similar in performance to each other.</p>
 <p>The Julia manual has the following to say:</p>
 <blockquote class="blockquote">
 <p>If you cannot avoid containers with abstract value types, it is sometimes better to parametrize with <code>Any</code> to avoid runtime type checking. E.g. IdDict{Any, Any} performs better than IdDict{Type, Vector}</p>
