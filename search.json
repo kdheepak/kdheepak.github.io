@@ -151,7 +151,7 @@
     "href": "blog/effect-of-type-inference-on-performance-in-julia/index.html",
     "title": "Effect of type inference on performance in Julia",
     "section": "",
-    "text": "versioninfo()\n\nJulia Version 1.10.2\nCommit bd47eca2c8a (2024-03-01 10:14 UTC)\nBuild Info:\n  Official https://julialang.org/ release\nPlatform Info:\n  OS: macOS (arm64-apple-darwin22.4.0)\n  CPU: 10 × Apple M1 Pro\n  WORD_SIZE: 64\n  LIBM: libopenlibm\n  LLVM: libLLVM-15.0.7 (ORCJIT, apple-m1)\nThreads: 1 default, 0 interactive, 1 GC (on 8 virtual cores)\nEnvironment:\n  JULIA_PROJECT = @.\nIn Julia, to ensure that the code you write executes fast and efficiently, it is important to benchmark frequently. There’s lots of really useful tips in the [Performance Tips] section in the official documentation.\nPerformance Tips\nIn this blog post, I want to touch on one specific performance tip: containers with abstract types and type inference."
+    "text": "In Julia, to ensure that the code you write executes fast and efficiently, it is important to benchmark frequently. There’s lots of really useful tips in the Performance Tips section in the official documentation.\nIn this blog post, I want to touch on one specific performance tip: containers with abstract types and type inference."
   },
   {
     "objectID": "blog/effect-of-type-inference-on-performance-in-julia/index.html#toy-problem",
