@@ -483,11 +483,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 </div>
-<p>Both benchmarks for <code>Vector{Shape}</code> and <code>Vector{Any}</code> can be inefficient but are usually similar in performance to each other.</p>
-<p>The Julia manual has the following to say:</p>
-<blockquote class="blockquote">
-<p>If you cannot avoid containers with abstract value types, it is sometimes better to parametrize with <code>Any</code> to avoid runtime type checking. E.g. <code>IdDict{Any, Any}</code> performs better than <code>IdDict{Type, Vector}</code></p>
-</blockquote>
+<p>Let’s run the benchmark for <code>sorted_shapes_shape</code> and <code>sorted_shapes_any</code>.</p>
 <div id="6608a0dd-158d-45c0-9cf0-e15203e81afb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:10.624&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:10.624&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:21.242&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:21.242&quot;}" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_shape)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>sorted_shapes_shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -526,7 +522,12 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 </div>
-<p>However, what is interesting is that <code>Union{Circle, Rectangle, Square, Triangle}</code> is a concrete type parameter.</p>
+<p>Both benchmarks for <code>Vector{Shape}</code> and <code>Vector{Any}</code> are similar in performance to each other.</p>
+<p>The Julia manual has the following to say:</p>
+<blockquote class="blockquote">
+<p>If you cannot avoid containers with abstract value types, it is sometimes better to parametrize with <code>Any</code> to avoid runtime type checking. E.g. <code>IdDict{Any, Any}</code> performs better than <code>IdDict{Type, Vector}</code></p>
+</blockquote>
+<p>What is interesting is that <code>Union{Circle, Rectangle, Square, Triangle}</code> is a concrete type parameter.</p>
 <div id="599e0c2d-80b1-4823-8294-6d7939c1f66d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:31.868&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:31.868&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:31.869&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:31.869&quot;}" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(Shape)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(<span class="dt">Union</span>{Circle, Rectangle, Square, Triangle})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -535,7 +536,8 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 isconcretetype(Union{Circle, Rectangle, Square, Triangle}) = false</code></pre>
 </div>
 </div>
-<p>You can see difference show up clearly in the performance benchmarks.</p>
+<p>And <code>Vector{Union{Circle, Rectangle, Square, Triangle}}</code> can perform better than <code>Vector{Shape}</code> or <code>Vector{Any}</code>.</p>
+<p>You can see difference show up clearly in the performance benchmark:</p>
 <div id="9fb14edb-9ea2-4de3-ac7e-784476f220c0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T01:49:01.680&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T01:49:01.679&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T01:49:12.330&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T01:49:12.330&quot;}" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>sorted_shapes_union)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
