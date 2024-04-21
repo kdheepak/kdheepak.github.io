@@ -23,6 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+q { quotes: "“" "”" "‘" "’"; }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { line-height: 1.25; }
@@ -220,10 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#toy-problem" id="toc-toy-problem" class="nav-link active" data-scroll-target="#toy-problem">Toy problem</a></li>
-  <li><a href="#type-inference" id="toc-type-inference" class="nav-link" data-scroll-target="#type-inference">Type inference</a>
-  <ul class="collapse">
-  <li><a href="#example-of-type-inference-failing" id="toc-example-of-type-inference-failing" class="nav-link" data-scroll-target="#example-of-type-inference-failing">Example of type inference failing</a></li>
-  </ul></li>
+  <li><a href="#type-inference" id="toc-type-inference" class="nav-link" data-scroll-target="#type-inference">Type inference</a></li>
   <li><a href="#benchmarks" id="toc-benchmarks" class="nav-link" data-scroll-target="#benchmarks">Benchmarks</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
@@ -273,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="b3a8fbdd-6b28-4a20-a055-bb95ac990072" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:07:45.351&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:07:45.350&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:07:45.356&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:07:45.356&quot;}" data-execution_count="6">
+<div id="b3a8fbdd-6b28-4a20-a055-bb95ac990072" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:12.841&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:12.841&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:13.129&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:13.129&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">versioninfo</span>(verbose<span class="op">=</span><span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>Julia Version 1.10.2
@@ -297,7 +295,7 @@ Environment:
 <section id="toy-problem" class="level2">
 <h2 class="anchored" data-anchor-id="toy-problem">Toy problem</h2>
 <p>Let’s define a toy problem to work with.</p>
-<div id="b1e5ad21-3024-4076-9b16-f5d4c4ca4663" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:42.105&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:42.104&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:42.130&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:42.130&quot;}" data-execution_count="9">
+<div id="b1e5ad21-3024-4076-9b16-f5d4c4ca4663" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:13.129&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:13.129&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:13.324&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:13.324&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">abstract type</span> Shape <span class="kw">end</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(<span class="op">::</span><span class="dt">Shape</span>) <span class="op">=</span> <span class="fl">0.0</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -322,12 +320,12 @@ Environment:
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    radius<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fu">rand</span>()</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(c<span class="op">::</span><span class="dt">Circle</span>) <span class="op">=</span> <span class="cn">π</span> <span class="op">*</span> c.radius<span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre data-code-line-numbers="nil"><code>area (generic function with 5 methods)</code></pre>
 </div>
 </div>
 <p>We can use the builtin <code>Test</code> module to check that the code we wrote is correct.</p>
-<div id="31a5cc81-a7e4-401c-ad44-c91ab139d0f9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:45.088&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:45.087&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:45.361&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:45.360&quot;}" data-execution_count="10">
+<div id="31a5cc81-a7e4-401c-ad44-c91ab139d0f9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:13.324&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:13.324&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:13.571&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:13.571&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Test</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@testset</span> <span class="st">"Areas"</span> <span class="cf">begin</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@test</span> <span class="fu">area</span>(<span class="fu">Square</span>(<span class="fl">2</span>)) <span class="op">==</span> <span class="fl">4</span></span>
@@ -341,7 +339,7 @@ Areas         |    4      4  0.1s</code></pre>
 </div>
 </div>
 <p>Let’s also build 1 million random shapes.</p>
-<div id="89712b98-7612-43da-bc3e-f667abd7e2ee" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:45.900&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:45.900&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:46.081&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:46.080&quot;}" data-execution_count="11">
+<div id="89712b98-7612-43da-bc3e-f667abd7e2ee" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:13.571&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:13.571&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:13.707&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:13.707&quot;}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">42</span>)</span>
@@ -361,8 +359,8 @@ Areas         |    4      4  0.1s</code></pre>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="fl">1_000_000</span></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>shapes <span class="op">=</span> [<span class="fu">shape_builder</span>(<span class="fu">rand</span>((<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>))) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>count];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6cb04f19-d92e-401a-a475-746266921ac0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:58.776&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:58.775&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:58.955&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:58.955&quot;}" data-execution_count="12">
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="12">
+<div id="6cb04f19-d92e-401a-a475-746266921ac0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:13.707&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:13.707&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:13.980&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:13.980&quot;}" data-execution_count="7">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="7">
 <p>The total number of shapes we have is 1,000,000.</p>
 </div>
 </div>
@@ -370,50 +368,48 @@ Areas         |    4      4  0.1s</code></pre>
 <section id="type-inference" class="level2">
 <h2 class="anchored" data-anchor-id="type-inference">Type inference</h2>
 <p>We can use the <code>typeof</code> function to see what the type of the data in the <code>shapes</code> variable is:</p>
-<div id="c8ef2b3a-734b-4697-9696-91e3d3221842" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:22:20.314&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:22:20.314&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:22:20.319&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:22:20.318&quot;}" data-execution_count="23">
+<div id="c8ef2b3a-734b-4697-9696-91e3d3221842" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:13.980&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:13.980&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:14.130&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:14.129&quot;}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div class="ansi-escaped-output">
 <pre>Vector{Shape}<span class="ansi-bright-black-fg"> (alias for </span><span class="ansi-bright-black-fg">Array{Shape, 1}</span><span class="ansi-bright-black-fg">)</span></pre>
 </div>
 </div>
 </div>
 <p>By default, Julia will infer the type at the bottom of the tree that fits all the data in the container. For example, if we just built a vector with the same elements (e.g.&nbsp;<code>Square</code>), Julia will infer the container to be <code>Vector{Square}</code>.</p>
-<div id="2af0824b-d7f2-4903-be70-6566c54b1221" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:06.523&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:06.523&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:06.549&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:06.549&quot;}" data-execution_count="27">
+<div id="2af0824b-d7f2-4903-be70-6566c54b1221" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:14.130&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:14.130&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:14.151&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:14.151&quot;}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>([<span class="fu">shape_builder</span>(<span class="fu">rand</span>((<span class="fl">1</span>,))) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div class="ansi-escaped-output">
 <pre>Vector{Square}<span class="ansi-bright-black-fg"> (alias for </span><span class="ansi-bright-black-fg">Array{Square, 1}</span><span class="ansi-bright-black-fg">)</span></pre>
 </div>
 </div>
 </div>
-<div id="eff7f503-59de-4eb6-9a3e-30a764b3cf4d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:10.305&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:10.304&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:10.344&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:10.344&quot;}" data-execution_count="28">
+<div id="eff7f503-59de-4eb6-9a3e-30a764b3cf4d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:14.152&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:14.151&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:14.177&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:14.177&quot;}" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="fu">join</span>(<span class="fu">string</span>.(<span class="fu">supertypes</span>(Square)), <span class="st">" &lt;: "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>Square &lt;: Shape &lt;: Any</code></pre>
 </div>
 </div>
 <p>Let’s define a function that calculates the <code>area</code> for all the shapes and adds them all up</p>
-<div id="c91b5a9d-ca77-4cf8-893b-f64a9feaea1f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:34.307&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:34.307&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:34.312&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:34.311&quot;}" data-execution_count="29">
+<div id="c91b5a9d-ca77-4cf8-893b-f64a9feaea1f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:14.177&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:14.177&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:14.183&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:14.183&quot;}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main1</span>(shapes) <span class="op">=</span> <span class="fu">sum</span>(area, shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre data-code-line-numbers="nil"><code>main1 (generic function with 1 method)</code></pre>
 </div>
 </div>
 <p>We can test this function and precompile it by running it once.</p>
-<div id="add2506f-2afb-4cb0-831c-11d5ee223341" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:35.822&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:35.821&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:35.968&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:35.968&quot;}" data-execution_count="30">
+<div id="add2506f-2afb-4cb0-831c-11d5ee223341" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:14.396&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:14.396&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:14.585&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:14.585&quot;}" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="fu">main1</span>(shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code>  0.119760 seconds (2.00 M allocations: 30.552 MiB, 49.17% gc time, 1.84% compilation time)</code></pre>
+<pre data-code-line-numbers="nil"><code>  0.081926 seconds (2.03 M allocations: 32.311 MiB, 11.31% gc time, 31.45% compilation time)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre data-code-line-numbers="nil"><code>439078.977716569</code></pre>
 </div>
 </div>
-<section id="example-of-type-inference-failing" class="level3">
-<h3 class="anchored" data-anchor-id="example-of-type-inference-failing">Example of type inference failing</h3>
 <p>Unfortunately, it can be easy to accidentally construct a container with an abstract type for the type parameter of a generic type.</p>
-<div id="663e79c1-c9b6-4685-b8c7-1c5599351040" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:00:46.433&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:00:46.433&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:00:46.518&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:00:46.518&quot;}" data-execution_count="42">
+<div id="663e79c1-c9b6-4685-b8c7-1c5599351040" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:35:15.727&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:35:15.727&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:35:15.874&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:35:15.874&quot;}" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bad_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T <span class="op">=</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>shape_arr1 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Square, shapes)</span>
@@ -433,20 +429,25 @@ typeof(shape_arr3) = Vector{Shape}
 typeof(shape_arr4) = Vector{Shape}</code></pre>
 </div>
 </div>
-<p>For better performance, it helps to have concrete types in the generic parameters for a container.</p>
-<div id="db373b50-b4fe-4392-bf9b-3124e9a722a6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:59:00.275&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:59:00.274&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:59:00.398&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:59:00.398&quot;}" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">good_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T <span class="op">=</span> [shape for shape <span class="kw">in</span> shapes if <span class="fu">isa</span>(shape, T)]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>square_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Square, shapes)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>rectangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Rectangle, shapes)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>triangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Triangle, shapes)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>circle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Circle, shapes)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(square_arr)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(rectangle_arr)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(triangle_arr)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(circle_arr)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="cn">nothing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This can happen if the Julia compiler cannot infer the types at <q>compile time</q>.</p>
+<p>For better performance, it helps to have concrete types in the generic parameters for a container. We can do this by helping the compiler figure out the correct concrete type parameter by explicitly listing it before the brackets for constructing the array, i.e.&nbsp;<code>T[...]</code>.</p>
+<div id="a49e7bce-6944-4982-9788-63af0b6908ae" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:37:49.011&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:37:49.011&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:37:49.024&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:37:49.022&quot;}" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">good_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T <span class="op">=</span> T[shape for shape <span class="kw">in</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre data-code-line-numbers="nil"><code>good_shapes_by_type (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div id="db373b50-b4fe-4392-bf9b-3124e9a722a6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:37:49.997&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:37:49.996&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:37:50.108&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:37:50.108&quot;}" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>square_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Square, shapes)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>rectangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Rectangle, shapes)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>triangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Triangle, shapes)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>circle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Circle, shapes)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(square_arr)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(rectangle_arr)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(triangle_arr)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(circle_arr)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="cn">nothing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>typeof(square_arr) = Vector{Square}
 typeof(rectangle_arr) = Vector{Rectangle}
@@ -454,14 +455,14 @@ typeof(triangle_arr) = Vector{Triangle}
 typeof(circle_arr) = Vector{Circle}</code></pre>
 </div>
 </div>
-<div id="88bed1fb-5da1-4c41-97cf-328baa5c8a52" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:06:18.072&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:06:18.071&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:06:18.542&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:06:18.542&quot;}" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sorted_shapes_shape <span class="op">=</span> <span class="fu">vcat</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sorted_shapes_any <span class="op">=</span> <span class="dt">Any</span>[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>sorted_shapes_union <span class="op">=</span> <span class="dt">Union</span>{Square, Rectangle, Triangle, Circle}[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_shape)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_any)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="88bed1fb-5da1-4c41-97cf-328baa5c8a52" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:37:51.949&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:37:51.949&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:37:52.469&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:37:52.469&quot;}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sorted_shapes_shape <span class="op">=</span> <span class="fu">vcat</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sorted_shapes_any <span class="op">=</span> <span class="dt">Any</span>[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sorted_shapes_union <span class="op">=</span> <span class="dt">Union</span>{Square, Rectangle, Triangle, Circle}[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_shape)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_any)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>typeof(sorted_shapes_shape) = Vector{Shape}
 typeof(sorted_shapes_any) = Vector{Any}
@@ -469,23 +470,26 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 </section>
-</section>
 <section id="benchmarks" class="level2">
 <h2 class="anchored" data-anchor-id="benchmarks">Benchmarks</h2>
 <p>We can benchmark the performance of these different types using <code>BenchmarkTools</code>:</p>
-<div id="cb11a309-14c8-454d-b2e9-bc9ce4bab4ff" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:25:29.255&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:25:29.254&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:25:40.083&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:25:40.082&quot;}" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cb11a309-14c8-454d-b2e9-bc9ce4bab4ff" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:38:46.576&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:38:46.575&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:38:57.195&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:38:57.195&quot;}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(shapes)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof(shapes) = Vector{Shape}</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <div class="ansi-escaped-output">
-<pre>BenchmarkTools.Trial: 127 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">38.655 ms</span> … <span class="ansi-magenta-fg"> 40.566 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.75%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">39.363 ms               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.70%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">39.403 ms</span> ± <span class="ansi-green-fg">404.816 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.50% ± 0.34%
-             ▂█ ▂▄▂▄    ▂ <span class="ansi-blue-fg">▆</span> <span class="ansi-green-fg">▄</span> ▂       ▄    ▂                    
-  ▄▆▆▆▄▁▄█▆▁▁██▆████▆▆█▁██<span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">█</span>██▄▁████▆██▄▄▄██▁▆▆▄▁▁▄▄▄▄▁▆▁▄▁▁▄ ▄
-  38.7 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>         40.4 ms <span class="ansi-bold">&lt;</span>
+<pre>BenchmarkTools.Trial: 121 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">39.196 ms</span> … <span class="ansi-magenta-fg">48.168 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 8.63%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">40.279 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">41.548 ms</span> ± <span class="ansi-green-fg"> 2.268 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>3.35% ± 4.24%
+  ▁ █▂     <span class="ansi-blue-fg"> </span>          <span class="ansi-green-fg"> </span>                                        
+  █▆███▇██▆<span class="ansi-blue-fg">▃</span>▄▄▄▅▆▁▄▁▃▁<span class="ansi-green-fg">▁</span>▃▁▁▁▁▁▁▁▁▁▁▁▁▅▅▃▅▄▅▅▅▅▃▅▄▅▁▄▄▅▁▁▃▁▁▁▁▃ ▃
+  39.2 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        46.3 ms <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">30.52 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1999999</span>.</pre>
 </div>
 </div>
@@ -495,90 +499,102 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 <blockquote class="blockquote">
 <p>If you cannot avoid containers with abstract value types, it is sometimes better to parametrize with <code>Any</code> to avoid runtime type checking. E.g. IdDict{Any, Any} performs better than IdDict{Type, Vector}</p>
 </blockquote>
-<div id="6608a0dd-158d-45c0-9cf0-e15203e81afb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:06:20.195&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:06:20.194&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:06:30.859&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:06:30.859&quot;}" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(sorted_shapes_shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="61">
+<div id="6608a0dd-158d-45c0-9cf0-e15203e81afb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:10.624&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:10.624&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:21.242&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:21.242&quot;}" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb27" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_shape)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>sorted_shapes_shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof(sorted_shapes_shape) = Vector{Shape}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div class="ansi-escaped-output">
-<pre>BenchmarkTools.Trial: 150 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">30.877 ms</span> … <span class="ansi-magenta-fg">38.375 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 12.04%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">31.742 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">33.335 ms</span> ± <span class="ansi-green-fg"> 2.679 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>4.81% ±  5.99%
-  █▆▂ ▁▁ <span class="ansi-blue-fg"> </span>             <span class="ansi-green-fg"> </span>                           ▁           
-  ███▆██▃<span class="ansi-blue-fg">▆</span>▇▅▃▄▃▃▃▃▁▁▁▁▃<span class="ansi-green-fg">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▄▁▃▄▆▆█▅▇▃▃▄▄▁▃▃ ▃
-  30.9 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        37.9 ms <span class="ansi-bold">&lt;</span>
+<pre>BenchmarkTools.Trial: 151 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">31.052 ms</span> … <span class="ansi-magenta-fg">37.758 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 10.25%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">31.946 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">33.165 ms</span> ± <span class="ansi-green-fg"> 2.176 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>4.09% ±  5.15%
+  █▄      <span class="ansi-blue-fg"> </span>           <span class="ansi-green-fg"> </span>                                        
+  ██▇▆▆▆▆▆<span class="ansi-blue-fg">█</span>▄▃▄▄▃▃▃▁▃▃▁<span class="ansi-green-fg">▁</span>▁▁▁▁▁▁▁▁▁▃▁▁▁▁▁▃▃▆▁▃▆▄▃▄▆▇▃▃▃▄▃▃▃▁▃▁▁▄ ▃
+  31.1 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        37.3 ms <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">30.52 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1999999</span>.</pre>
 </div>
 </div>
 </div>
-<div id="87d39970-fb7e-4951-a2ba-e2564c72f183" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:08:12.701&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:08:12.701&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:08:23.468&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:08:23.468&quot;}" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(sorted_shapes_any)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div id="87d39970-fb7e-4951-a2ba-e2564c72f183" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:21.242&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:21.242&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:31.868&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:31.868&quot;}" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_any)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>sorted_shapes_any)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof(sorted_shapes_any) = Vector{Any}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="36">
 <div class="ansi-escaped-output">
-<pre>BenchmarkTools.Trial: 148 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">31.392 ms</span> … <span class="ansi-magenta-fg">39.047 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 13.01%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">32.419 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">33.877 ms</span> ± <span class="ansi-green-fg"> 2.629 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>4.55% ±  5.71%
-  █▄▃▃▃   <span class="ansi-blue-fg"> </span>▁           <span class="ansi-green-fg"> </span>                                       
-  ██████▆▃<span class="ansi-blue-fg">▆</span>█▄█▁▁▃▄▃▃▃▁▁<span class="ansi-green-fg">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▃▄▁▅▆▆▆▄▆▆▄▆▆▄▅▁▄ ▃
-  31.4 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        38.4 ms <span class="ansi-bold">&lt;</span>
+<pre>BenchmarkTools.Trial: 151 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">31.087 ms</span> … <span class="ansi-magenta-fg">37.602 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 10.10%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">32.221 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">33.200 ms</span> ± <span class="ansi-green-fg"> 2.068 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>3.74% ±  4.73%
+  ██         <span class="ansi-blue-fg"> </span>        <span class="ansi-green-fg"> </span>                                        
+  ██▆▆▄▅▆▅▅▃▆<span class="ansi-blue-fg">▄</span>▅▄▃▃▃▃▁▃<span class="ansi-green-fg">▁</span>▁▃▁▃▃▁▃▁▁▁▁▃▃▁▄▃▄▄▄▃▄▅▃▆▄▃▃▁▃▃▁▃▁▃▃▃▃▃ ▃
+  31.1 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        37.4 ms <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">30.52 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1999999</span>.</pre>
 </div>
 </div>
 </div>
 <p>However, what is interesting is that <code>Vector{Union{Circle, Rectangle, Square, Triangle}}</code> has a concrete type parameter for the <code>Vector</code> container.</p>
-<div id="599e0c2d-80b1-4823-8294-6d7939c1f66d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:09:47.474&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:09:47.474&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:09:47.479&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:09:47.478&quot;}" data-execution_count="67">
-<div class="sourceCode cell-code" id="cb26" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(Shape)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(<span class="dt">Union</span>{Circle, Rectangle, Square, Triangle});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="599e0c2d-80b1-4823-8294-6d7939c1f66d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:31.868&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:31.868&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:31.869&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:31.869&quot;}" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(Shape)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(<span class="dt">Union</span>{Circle, Rectangle, Square, Triangle});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>isconcretetype(Shape) = false
 isconcretetype(Union{Circle, Rectangle, Square, Triangle}) = false</code></pre>
 </div>
 </div>
 <p>You can see difference show up clearly in the performance benchmarks.</p>
-<div id="b7258cd1-da7a-4c03-ae1b-9b433d877b0c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:14:26.736&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:14:26.736&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:14:26.741&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:14:26.740&quot;}" data-execution_count="77">
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="77">
+<div id="b7258cd1-da7a-4c03-ae1b-9b433d877b0c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:31.869&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:31.869&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:31.871&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:31.871&quot;}" data-execution_count="38">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="38">
 <p><code>Union{Circle, Rectangle, Square, Triangle}</code> is faster than <code>Shape</code> by a factor of roughly 36 times.</p>
 </div>
 </div>
-<div id="9fb14edb-9ea2-4de3-ac7e-784476f220c0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:13:27.525&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:13:27.525&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:13:38.085&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:13:38.084&quot;}" data-execution_count="72">
-<div class="sourceCode cell-code" id="cb28" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(sorted_shapes_union)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="72">
+<div id="9fb14edb-9ea2-4de3-ac7e-784476f220c0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:42.732&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:42.732&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:53.336&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:53.336&quot;}" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(sorted_shapes_union)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="39">
 <div class="ansi-escaped-output">
-<pre>BenchmarkTools.Trial: 5319 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">927.708 μs</span> … <span class="ansi-magenta-fg"> 1.203 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">934.917 μs              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">938.103 μs</span> ± <span class="ansi-green-fg">11.475 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
-      ▅█▅<span class="ansi-blue-fg">▆</span>▆▂<span class="ansi-green-fg">▃</span>▁▂▁                                               ▁
-  ▅▆▇████<span class="ansi-blue-fg">█</span>██<span class="ansi-green-fg">█</span>██████▇████▇█▇▇▇▇▆▇▇▅▆▆▅▅▅▄▆▅▂▃▄▅▅▅▅▆▄▅▅▂▅▄▄▅▅▅▅▄ █
-  928 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       991 μs <span class="ansi-bold">&lt;</span>
+<pre>BenchmarkTools.Trial: 5292 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">928.209 μs</span> … <span class="ansi-magenta-fg"> 1.122 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">934.333 μs              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">941.559 μs</span> ± <span class="ansi-green-fg">13.085 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
+    ▁▂▆█<span class="ansi-blue-fg">▅</span>▄▂▂▃▃▂▁<span class="ansi-green-fg">▁</span>▁▁    ▁▄▄▂▁  ▁▁▁                              ▁
+  ▅▇████<span class="ansi-blue-fg">█</span>███████<span class="ansi-green-fg">█</span>████▇████████████▇███▇█▇▇▆▇▇▆▅▅▅▅▇▆▅▅▅▅▆▄▅▅▅▇ █
+  928 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       987 μs <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">16 bytes</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1</span>.</pre>
 </div>
 </div>
 </div>
 <p>It’s possible to get even better performance by calculating the <code>sum</code>s for the individual arrays and summing them up together</p>
-<div id="852e4dc2-fb51-4727-9f3b-1330c3972631" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:15:50.234&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:15:50.233&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:15:50.237&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:15:50.236&quot;}" data-execution_count="79">
-<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main2</span>(arrs<span class="op">...</span>) <span class="op">=</span> <span class="fu">sum</span>(main1, arrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="79">
+<div id="852e4dc2-fb51-4727-9f3b-1330c3972631" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:57.041&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:57.041&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:57.046&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:57.044&quot;}" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main2</span>(arrs<span class="op">...</span>) <span class="op">=</span> <span class="fu">sum</span>(main1, arrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
 <pre data-code-line-numbers="nil"><code>main2 (generic function with 1 method)</code></pre>
 </div>
 </div>
-<div id="f2f78446-5522-42f1-a254-8dbe18eb07db" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:15:50.687&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:15:50.686&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:15:50.801&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:15:50.801&quot;}" data-execution_count="80">
-<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f2f78446-5522-42f1-a254-8dbe18eb07db" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:57.764&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:57.763&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:39:57.797&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:39:57.797&quot;}" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code>  0.087025 seconds (271.86 k allocations: 18.823 MiB, 99.55% compilation time)</code></pre>
+<pre data-code-line-numbers="nil"><code>  0.002709 seconds (406 allocations: 27.609 KiB, 85.41% compilation time)</code></pre>
 </div>
 </div>
-<div id="b2f5e136-872b-4149-ac66-cb64a8553fa5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:15:51.270&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:15:51.269&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:15:59.665&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:15:59.665&quot;}" data-execution_count="81">
-<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="81">
+<div id="b2f5e136-872b-4149-ac66-cb64a8553fa5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:39:58.447&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:39:58.447&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:40:06.816&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:40:06.816&quot;}" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb39" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">276.000 μs</span> … <span class="ansi-magenta-fg">383.500 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">278.959 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">281.081 μs</span> ± <span class="ansi-green-fg">  6.649 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
-     ▃▇<span class="ansi-blue-fg">█</span>▅▁▂<span class="ansi-green-fg">▅</span>▅▂ ▁▁                                               ▁
-  ▂▆███<span class="ansi-blue-fg">█</span>███<span class="ansi-green-fg">█</span>██████▇▇█▇▇▆▆▆▇▆▆▇▆▇▇▇▇▇▇▇▇▇▇▇▆▆▇▆▅▆▆▆▅▅▇▆▆▄▆▆▅▅▅▅▆ █
-  276 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>        309 μs <span class="ansi-bold">&lt;</span>
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">276.792 μs</span> … <span class="ansi-magenta-fg">346.958 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">278.917 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">279.432 μs</span> ± <span class="ansi-green-fg">  2.322 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
+      ▂▄▆▇██<span class="ansi-blue-fg">█</span>▇▆<span class="ansi-green-fg">▅</span>▄▂▁ ▁▂▃▃▄▃▂▂▁                                   ▃
+  ▄▁▅███████<span class="ansi-blue-fg">█</span>██<span class="ansi-green-fg">█</span>██████████████▇█▇████▇▇▆▇▆▅▆▅▅▇▆▆▆▆▅▆▆▆▅▆▆▅▆▅▁▅ █
+  277 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>        290 μs <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">160 bytes</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">4</span>.</pre>
 </div>
 </div>
