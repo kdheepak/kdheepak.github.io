@@ -1,2 +1,1111 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dheepak Krishnamurthy">
+<meta name="dcterms.date" content="2024-04-21">
+<meta name="keywords" content="julia">
+
+<title>kdheepak – Effect of type inference on performance in Julia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+<link href="https://fonts.googleapis.com/css?family=Fira+Code&amp;display=swap" rel="stylesheet">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var preElements = document.querySelectorAll("pre.sourceCode");
+
+    preElements.forEach(function (preElement) {
+      var codeElement = preElement.querySelector("code");
+
+      // First, try to get the language from the <code> element's classList
+      var language = codeElement.classList[1] ? codeElement.classList[1].toLowerCase() : null;
+
+      // If the language is not found in the <code> element, get it from the <pre> element's classList
+      if (!language) {
+        preElement.classList.forEach(function (className) {
+          if (!["sourceCode", "code-with-copy"].includes(className)) {
+            language = className.toLowerCase();
+          }
+        });
+      }
+
+      // Set the data-language attribute only if a language is found
+      if (language && language !== "bibtex") {
+        const label = document.createElement("span");
+        label.textContent = language;
+        label.classList = ["label"];
+        label.setAttribute("data-language", language);
+        preElement.parentNode.insertBefore(label, preElement);
+      }
+    });
+  });
+</script>
+
+
+<link rel="stylesheet" href="../../_quarto/styles.css">
+<meta property="og:title" content="kdheepak - Effect of type inference on performance in Julia">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="kdheepak">
+<meta name="twitter:title" content="kdheepak - Effect of type inference on performance in Julia">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv/index.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kdheepak"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="me"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Effect of type inference on performance in Julia</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#toy-problem" id="toc-toy-problem" class="nav-link active" data-scroll-target="#toy-problem">Toy problem</a></li>
+  <li><a href="#type-inference" id="toc-type-inference" class="nav-link" data-scroll-target="#type-inference">Type inference</a>
+  <ul class="collapse">
+  <li><a href="#example-of-type-inference-failing" id="toc-example-of-type-inference-failing" class="nav-link" data-scroll-target="#example-of-type-inference-failing">Example of type inference failing</a></li>
+  </ul></li>
+  <li><a href="#benchmarks" id="toc-benchmarks" class="nav-link" data-scroll-target="#benchmarks">Benchmarks</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/kdheepak/kdheepak.github.io/blob/main/blog/effect-of-type-inference-on-performance-in-julia/index.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Effect of type inference on performance in Julia</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/effect-of-type-inference-on-performance-in-julia/index.ipynb"><i class="bi"></i> Code</button></div></div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dheepak Krishnamurthy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 21, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>julia</p>
+  </div>
+</div>
+
+</header>
+
+
+<div id="b3a8fbdd-6b28-4a20-a055-bb95ac990072" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:07:45.351&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:07:45.350&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:07:45.356&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:07:45.356&quot;}" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">versioninfo</span>(verbose<span class="op">=</span><span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>Julia Version 1.10.2
+Commit bd47eca2c8a (2024-03-01 10:14 UTC)
+Build Info:
+  Official https://julialang.org/ release
+Platform Info:
+  OS: macOS (arm64-apple-darwin22.4.0)
+  CPU: 10 × Apple M1 Pro
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-15.0.7 (ORCJIT, apple-m1)
+Threads: 1 default, 0 interactive, 1 GC (on 8 virtual cores)
+Environment:
+  JULIA_PROJECT = @.</code></pre>
+</div>
+</div>
+<p>In Julia, to ensure that the code you write executes fast and efficiently, it is important to benchmark frequently. There’s lots of really useful tips in the [Performance Tips] section in the official documentation.</p>
+<p><a href="https://docs.julialang.org/en/v1/manual/performance-tips/">Performance Tips</a></p>
+<p>In this blog post, I want to touch on one specific performance tip: containers with abstract types and type inference.</p>
+<section id="toy-problem" class="level2">
+<h2 class="anchored" data-anchor-id="toy-problem">Toy problem</h2>
+<p>Let’s define a toy problem to work with.</p>
+<div id="b1e5ad21-3024-4076-9b16-f5d4c4ca4663" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:42.105&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:42.104&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:42.130&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:42.130&quot;}" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">abstract type</span> Shape <span class="kw">end</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(<span class="op">::</span><span class="dt">Shape</span>) <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">@kwdef</span> <span class="kw">struct</span> Square <span class="op">&lt;:</span><span class="dt"> Shape</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    side<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fu">rand</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(s<span class="op">::</span><span class="dt">Square</span>) <span class="op">=</span> s.side <span class="op">*</span> s.side</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@kwdef</span> <span class="kw">struct</span> Rectangle <span class="op">&lt;:</span><span class="dt"> Shape</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    width<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fu">rand</span>()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    height<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fu">rand</span>()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(r<span class="op">::</span><span class="dt">Rectangle</span>) <span class="op">=</span> r.width <span class="op">*</span> r.height</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="pp">@kwdef</span> <span class="kw">struct</span> Triangle <span class="op">&lt;:</span><span class="dt"> Shape</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    base<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fu">rand</span>()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    height<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fu">rand</span>()</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(t<span class="op">::</span><span class="dt">Triangle</span>) <span class="op">=</span> <span class="fl">1.0</span><span class="op">/</span><span class="fl">2.0</span> <span class="op">*</span> t.base <span class="op">*</span> t.height</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="pp">@kwdef</span> <span class="kw">struct</span> Circle <span class="op">&lt;:</span><span class="dt"> Shape</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    radius<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fu">rand</span>()</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(c<span class="op">::</span><span class="dt">Circle</span>) <span class="op">=</span> <span class="cn">π</span> <span class="op">*</span> c.radius<span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre data-code-line-numbers="nil"><code>area (generic function with 5 methods)</code></pre>
+</div>
+</div>
+<p>We can use the builtin <code>Test</code> module to check that the code we wrote is correct.</p>
+<div id="31a5cc81-a7e4-401c-ad44-c91ab139d0f9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:45.088&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:45.087&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:45.361&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:45.360&quot;}" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Test</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@testset</span> <span class="st">"Areas"</span> <span class="cf">begin</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@test</span> <span class="fu">area</span>(<span class="fu">Square</span>(<span class="fl">2</span>)) <span class="op">==</span> <span class="fl">4</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@test</span> <span class="fu">area</span>(<span class="fu">Rectangle</span>(<span class="fl">2</span>,<span class="fl">3</span>)) <span class="op">==</span> <span class="fl">6</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@test</span> <span class="fu">area</span>(<span class="fu">Triangle</span>(<span class="fl">2</span>,<span class="fl">3</span>)) <span class="op">==</span> <span class="fl">3</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@test</span> <span class="fu">area</span>(<span class="fu">Circle</span>(<span class="fl">2</span>)) <span class="op">≈</span> <span class="fl">4</span>π</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>Test Summary: | Pass  Total  Time
+Areas         |    4      4  0.1s</code></pre>
+</div>
+</div>
+<p>Let’s also build 1 million random shapes.</p>
+<div id="89712b98-7612-43da-bc3e-f667abd7e2ee" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:45.900&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:45.900&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:46.081&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:46.080&quot;}" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">42</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">shape_builder</span>(choice<span class="op">::</span><span class="dt">Integer</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> choice <span class="op">==</span> <span class="fl">1</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Square</span>(<span class="fu">rand</span>())</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elseif</span> choice <span class="op">==</span> <span class="fl">2</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Rectangle</span>(<span class="fu">rand</span>(), <span class="fu">rand</span>())</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elseif</span> choice <span class="op">==</span> <span class="fl">3</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Triangle</span>(<span class="fu">rand</span>(), <span class="fu">rand</span>())</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elseif</span> choice <span class="op">==</span> <span class="fl">4</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Circle</span>(<span class="fu">rand</span>())</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="fl">1_000_000</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>shapes <span class="op">=</span> [<span class="fu">shape_builder</span>(<span class="fu">rand</span>((<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>))) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>count];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="6cb04f19-d92e-401a-a475-746266921ac0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:18:58.776&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:18:58.775&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:18:58.955&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:18:58.955&quot;}" data-execution_count="12">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="12">
+<p>The total number of shapes we have is 1,000,000.</p>
+</div>
+</div>
+</section>
+<section id="type-inference" class="level2">
+<h2 class="anchored" data-anchor-id="type-inference">Type inference</h2>
+<p>We can use the <code>typeof</code> function to see what the type of the data in the <code>shapes</code> variable is:</p>
+<div id="c8ef2b3a-734b-4697-9696-91e3d3221842" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:22:20.314&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:22:20.314&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:22:20.319&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:22:20.318&quot;}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="ansi-escaped-output">
+<pre>Vector{Shape}<span class="ansi-bright-black-fg"> (alias for </span><span class="ansi-bright-black-fg">Array{Shape, 1}</span><span class="ansi-bright-black-fg">)</span></pre>
+</div>
+</div>
+</div>
+<p>By default, Julia will infer the type at the bottom of the tree that fits all the data in the container. For example, if we just built a vector with the same elements (e.g.&nbsp;<code>Square</code>), Julia will infer the container to be <code>Vector{Square}</code>.</p>
+<div id="2af0824b-d7f2-4903-be70-6566c54b1221" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:06.523&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:06.523&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:06.549&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:06.549&quot;}" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>([<span class="fu">shape_builder</span>(<span class="fu">rand</span>((<span class="fl">1</span>,))) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="ansi-escaped-output">
+<pre>Vector{Square}<span class="ansi-bright-black-fg"> (alias for </span><span class="ansi-bright-black-fg">Array{Square, 1}</span><span class="ansi-bright-black-fg">)</span></pre>
+</div>
+</div>
+</div>
+<div id="eff7f503-59de-4eb6-9a3e-30a764b3cf4d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:10.305&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:10.304&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:10.344&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:10.344&quot;}" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="fu">join</span>(<span class="fu">string</span>.(<span class="fu">supertypes</span>(Square)), <span class="st">" &lt;: "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>Square &lt;: Shape &lt;: Any</code></pre>
+</div>
+</div>
+<p>Let’s define a function that calculates the <code>area</code> for all the shapes and adds them all up</p>
+<div id="c91b5a9d-ca77-4cf8-893b-f64a9feaea1f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:34.307&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:34.307&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:34.312&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:34.311&quot;}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main1</span>(shapes) <span class="op">=</span> <span class="fu">sum</span>(area, shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre data-code-line-numbers="nil"><code>main1 (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>We can test this function and precompile it by running it once.</p>
+<div id="add2506f-2afb-4cb0-831c-11d5ee223341" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:24:35.822&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:24:35.821&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:24:35.968&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:24:35.968&quot;}" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="fu">main1</span>(shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>  0.119760 seconds (2.00 M allocations: 30.552 MiB, 49.17% gc time, 1.84% compilation time)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre data-code-line-numbers="nil"><code>439078.977716569</code></pre>
+</div>
+</div>
+<section id="example-of-type-inference-failing" class="level3">
+<h3 class="anchored" data-anchor-id="example-of-type-inference-failing">Example of type inference failing</h3>
+<p>Unfortunately, it can be easy to accidentally construct a container with an abstract type for the type parameter of a generic type.</p>
+<div id="663e79c1-c9b6-4685-b8c7-1c5599351040" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:00:46.433&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:00:46.433&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:00:46.518&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:00:46.518&quot;}" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bad_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T <span class="op">=</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>shape_arr1 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Square, shapes)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>shape_arr2 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Rectangle, shapes)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>shape_arr3 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Triangle, shapes)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>shape_arr4 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Circle, shapes)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(shape_arr1)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(shape_arr2)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(shape_arr3)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(shape_arr4)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="cn">nothing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof(shape_arr1) = Vector{Shape}
+typeof(shape_arr2) = Vector{Shape}
+typeof(shape_arr3) = Vector{Shape}
+typeof(shape_arr4) = Vector{Shape}</code></pre>
+</div>
+</div>
+<p>For better performance, it helps to have concrete types in the generic parameters for a container.</p>
+<div id="db373b50-b4fe-4392-bf9b-3124e9a722a6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:59:00.275&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:59:00.274&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:59:00.398&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:59:00.398&quot;}" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">good_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T <span class="op">=</span> [shape for shape <span class="kw">in</span> shapes if <span class="fu">isa</span>(shape, T)]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>square_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Square, shapes)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>rectangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Rectangle, shapes)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>triangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Triangle, shapes)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>circle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Circle, shapes)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(square_arr)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(rectangle_arr)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(triangle_arr)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(circle_arr)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="cn">nothing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof(square_arr) = Vector{Square}
+typeof(rectangle_arr) = Vector{Rectangle}
+typeof(triangle_arr) = Vector{Triangle}
+typeof(circle_arr) = Vector{Circle}</code></pre>
+</div>
+</div>
+<div id="88bed1fb-5da1-4c41-97cf-328baa5c8a52" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:06:18.072&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:06:18.071&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:06:18.542&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:06:18.542&quot;}" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sorted_shapes_shape <span class="op">=</span> <span class="fu">vcat</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sorted_shapes_any <span class="op">=</span> <span class="dt">Any</span>[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>sorted_shapes_union <span class="op">=</span> <span class="dt">Union</span>{Square, Rectangle, Triangle, Circle}[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_shape)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_any)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof(sorted_shapes_shape) = Vector{Shape}
+typeof(sorted_shapes_any) = Vector{Any}
+typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="benchmarks" class="level2">
+<h2 class="anchored" data-anchor-id="benchmarks">Benchmarks</h2>
+<p>We can benchmark the performance of these different types using <code>BenchmarkTools</code>:</p>
+<div id="cb11a309-14c8-454d-b2e9-bc9ce4bab4ff" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T23:25:29.255&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T23:25:29.254&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T23:25:40.083&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T23:25:40.082&quot;}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="ansi-escaped-output">
+<pre>BenchmarkTools.Trial: 127 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">38.655 ms</span> … <span class="ansi-magenta-fg"> 40.566 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.75%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">39.363 ms               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.70%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">39.403 ms</span> ± <span class="ansi-green-fg">404.816 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.50% ± 0.34%
+             ▂█ ▂▄▂▄    ▂ <span class="ansi-blue-fg">▆</span> <span class="ansi-green-fg">▄</span> ▂       ▄    ▂                    
+  ▄▆▆▆▄▁▄█▆▁▁██▆████▆▆█▁██<span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">█</span>██▄▁████▆██▄▄▄██▁▆▆▄▁▁▄▄▄▄▁▆▁▄▁▁▄ ▄
+  38.7 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>         40.4 ms <span class="ansi-bold">&lt;</span>
+ Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">30.52 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1999999</span>.</pre>
+</div>
+</div>
+</div>
+<p>Both benchmarks for <code>Vector{Shape}</code> and <code>Vector{Any}</code> can be inefficient.</p>
+<p>The Julia manual has the following to say:</p>
+<blockquote class="blockquote">
+<p>If you cannot avoid containers with abstract value types, it is sometimes better to parametrize with <code>Any</code> to avoid runtime type checking. E.g. IdDict{Any, Any} performs better than IdDict{Type, Vector}</p>
+</blockquote>
+<div id="6608a0dd-158d-45c0-9cf0-e15203e81afb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:06:20.195&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:06:20.194&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:06:30.859&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:06:30.859&quot;}" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(sorted_shapes_shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<div class="ansi-escaped-output">
+<pre>BenchmarkTools.Trial: 150 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">30.877 ms</span> … <span class="ansi-magenta-fg">38.375 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 12.04%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">31.742 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">33.335 ms</span> ± <span class="ansi-green-fg"> 2.679 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>4.81% ±  5.99%
+  █▆▂ ▁▁ <span class="ansi-blue-fg"> </span>             <span class="ansi-green-fg"> </span>                           ▁           
+  ███▆██▃<span class="ansi-blue-fg">▆</span>▇▅▃▄▃▃▃▃▁▁▁▁▃<span class="ansi-green-fg">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▄▁▃▄▆▆█▅▇▃▃▄▄▁▃▃ ▃
+  30.9 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        37.9 ms <span class="ansi-bold">&lt;</span>
+ Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">30.52 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1999999</span>.</pre>
+</div>
+</div>
+</div>
+<div id="87d39970-fb7e-4951-a2ba-e2564c72f183" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:08:12.701&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:08:12.701&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:08:23.468&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:08:23.468&quot;}" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(sorted_shapes_any)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<div class="ansi-escaped-output">
+<pre>BenchmarkTools.Trial: 148 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">31.392 ms</span> … <span class="ansi-magenta-fg">39.047 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 13.01%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">32.419 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">33.877 ms</span> ± <span class="ansi-green-fg"> 2.629 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>4.55% ±  5.71%
+  █▄▃▃▃   <span class="ansi-blue-fg"> </span>▁           <span class="ansi-green-fg"> </span>                                       
+  ██████▆▃<span class="ansi-blue-fg">▆</span>█▄█▁▁▃▄▃▃▃▁▁<span class="ansi-green-fg">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▃▄▁▅▆▆▆▄▆▆▄▆▆▄▅▁▄ ▃
+  31.4 ms<span class="ansi-bright-black-fg">         Histogram: frequency by time</span>        38.4 ms <span class="ansi-bold">&lt;</span>
+ Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">30.52 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1999999</span>.</pre>
+</div>
+</div>
+</div>
+<p>However, what is interesting is that <code>Vector{Union{Circle, Rectangle, Square, Triangle}}</code> has a concrete type parameter for the <code>Vector</code> container.</p>
+<div id="599e0c2d-80b1-4823-8294-6d7939c1f66d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:09:47.474&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:09:47.474&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:09:47.479&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:09:47.478&quot;}" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb26" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(Shape)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(<span class="dt">Union</span>{Circle, Rectangle, Square, Triangle});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>isconcretetype(Shape) = false
+isconcretetype(Union{Circle, Rectangle, Square, Triangle}) = false</code></pre>
+</div>
+</div>
+<p>You can see difference show up clearly in the performance benchmarks.</p>
+<div id="b7258cd1-da7a-4c03-ae1b-9b433d877b0c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:14:26.736&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:14:26.736&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:14:26.741&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:14:26.740&quot;}" data-execution_count="77">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="77">
+<p><code>Union{Circle, Rectangle, Square, Triangle}</code> is faster than <code>Shape</code> by a factor of roughly 36 times.</p>
+</div>
+</div>
+<div id="9fb14edb-9ea2-4de3-ac7e-784476f220c0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:13:27.525&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:13:27.525&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:13:38.085&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:13:38.084&quot;}" data-execution_count="72">
+<div class="sourceCode cell-code" id="cb28" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(sorted_shapes_union)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="72">
+<div class="ansi-escaped-output">
+<pre>BenchmarkTools.Trial: 5319 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">927.708 μs</span> … <span class="ansi-magenta-fg"> 1.203 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">934.917 μs              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">938.103 μs</span> ± <span class="ansi-green-fg">11.475 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
+      ▅█▅<span class="ansi-blue-fg">▆</span>▆▂<span class="ansi-green-fg">▃</span>▁▂▁                                               ▁
+  ▅▆▇████<span class="ansi-blue-fg">█</span>██<span class="ansi-green-fg">█</span>██████▇████▇█▇▇▇▇▆▇▇▅▆▆▅▅▅▄▆▅▂▃▄▅▅▅▅▆▄▅▅▂▅▄▄▅▅▅▅▄ █
+  928 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       991 μs <span class="ansi-bold">&lt;</span>
+ Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">16 bytes</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">1</span>.</pre>
+</div>
+</div>
+</div>
+<p>It’s possible to get even better performance by calculating the <code>sum</code>s for the individual arrays and summing them up together</p>
+<div id="852e4dc2-fb51-4727-9f3b-1330c3972631" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:15:50.234&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:15:50.233&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:15:50.237&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:15:50.236&quot;}" data-execution_count="79">
+<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main2</span>(arrs<span class="op">...</span>) <span class="op">=</span> <span class="fu">sum</span>(main1, arrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="79">
+<pre data-code-line-numbers="nil"><code>main2 (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div id="f2f78446-5522-42f1-a254-8dbe18eb07db" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:15:50.687&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:15:50.686&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:15:50.801&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:15:50.801&quot;}" data-execution_count="80">
+<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>  0.087025 seconds (271.86 k allocations: 18.823 MiB, 99.55% compilation time)</code></pre>
+</div>
+</div>
+<div id="b2f5e136-872b-4149-ac66-cb64a8553fa5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T00:15:51.270&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T00:15:51.269&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T00:15:59.665&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T00:15:59.665&quot;}" data-execution_count="81">
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(square_arr, rectangle_arr, triangle_arr, circle_arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="81">
+<div class="ansi-escaped-output">
+<pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">276.000 μs</span> … <span class="ansi-magenta-fg">383.500 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">278.959 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">281.081 μs</span> ± <span class="ansi-green-fg">  6.649 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.00% ± 0.00%
+     ▃▇<span class="ansi-blue-fg">█</span>▅▁▂<span class="ansi-green-fg">▅</span>▅▂ ▁▁                                               ▁
+  ▂▆███<span class="ansi-blue-fg">█</span>███<span class="ansi-green-fg">█</span>██████▇▇█▇▇▆▆▆▇▆▆▇▆▇▇▇▇▇▇▇▇▇▇▇▆▆▇▆▅▆▆▆▅▅▇▆▆▄▆▆▅▅▅▅▆ █
+  276 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>        309 μs <span class="ansi-bold">&lt;</span>
+ Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">160 bytes</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">4</span>.</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The key takeaway is that if you care about performance in Julia, you have to be mindful of types! Keeping types as concrete as possible is important because when type inference fails, it can propogate through your program. Even small changes to your code can improve performance significantly.</p>
+<p>Many thanks to the helpful <a href="https://discourse.julialang.org/t/unusual-non-deterministic-benchmark-results/113273/">Julia community on Discourse</a> for always offering insightful comments and advise.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2024,
+  author = {Krishnamurthy, Dheepak},
+  title = {Effect of Type Inference on Performance in {Julia}},
+  date = {2024-04-21},
+  url = {https://kdheepak.com/blog/effect-of-type-inference-on-performance-in-julia},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">D.
+Krishnamurthy, <span>“Effect of type inference on performance in
+Julia,”</span> Apr. 21, 2024. <a href="https://kdheepak.com/blog/effect-of-type-inference-on-performance-in-julia">https://kdheepak.com/blog/effect-of-type-inference-on-performance-in-julia</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/kdheepak/kdheepak.github.io/blob/main/blog/effect-of-type-inference-on-performance-in-julia/index.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

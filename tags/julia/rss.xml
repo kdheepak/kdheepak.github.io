@@ -10,7 +10,16 @@
 <atom:link href="https://kdheepak.com/blog/index-julia.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.30</generator>
-<lastBuildDate>Mon, 23 Oct 2023 02:21:19 GMT</lastBuildDate>
+<lastBuildDate>Sun, 21 Apr 2024 04:27:32 GMT</lastBuildDate>
+<item>
+  <title>Effect of type inference on performance in Julia</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/effect-of-type-inference-on-performance-in-julia/</link>
+  <description><![CDATA[ In Julia, to ensure that the code you write executes fast and efficiently, it is important to benchmark frequently. There’s lots of really useful tips in the [Performance Tips] section in the official documentation. ]]></description>
+  <category>julia</category>
+  <guid>https://kdheepak.com/blog/effect-of-type-inference-on-performance-in-julia/</guid>
+  <pubDate>Sun, 21 Apr 2024 04:27:32 GMT</pubDate>
+</item>
 <item>
   <title>Graphing CGP Grey’s Rock-Paper-Scissors YouTube Game</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
