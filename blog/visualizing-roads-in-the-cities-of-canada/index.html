@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Let’s import some packages first.</p>
-<div id="cell-3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-19T19:37:16.664&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-19T19:37:16.663&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-19T19:37:20.914&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-19T19:37:20.914&quot;}" data-execution_count="2">
+<div id="cell-3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T20:48:07.175&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T20:48:07.175&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T20:48:10.131&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T20:48:10.131&quot;}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GeoMakie</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GeoInterfaceMakie</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GeoInterface</span></span>
@@ -290,14 +290,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>Representations of Canada’s national road network are available from <a href="https://www12.statcan.gc.ca/census-recensement/2011/geo/RNF-FRR/index-eng.cfm">Statistics Canada</a>.</p>
-<div id="cell-5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-19T19:37:31.435&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-19T19:37:31.131&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-19T19:38:12.404&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-19T19:38:12.404&quot;}" data-execution_count="3">
+<div id="cell-5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T20:48:10.704&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T20:48:10.464&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T20:48:48.403&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T20:48:48.403&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>artifact_roadnetwork <span class="op">=</span> <span class="bu">Pkg</span>.<span class="bu">Artifacts</span>.<span class="fu">ensure_artifact_installed</span>(<span class="st">"roadnetwork"</span>, <span class="fu">joinpath</span>(<span class="pp">@__DIR__</span>, <span class="st">"Artifacts.toml"</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> <span class="fu">joinpath</span>(artifact_roadnetwork, <span class="st">"lrnf000r21a_e.shp"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> gdf <span class="op">=</span> <span class="fu">DataFrame</span>(Shapefile.<span class="fu">Table</span>(path));</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">size</span>(gdf)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">first</span>(gdf, <span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code> 38.145360 seconds (169.74 M allocations: 8.115 GiB, 19.21% gc time, 1.30% compilation time)
+<pre data-code-line-numbers="nil"><code> 35.535843 seconds (169.74 M allocations: 8.115 GiB, 23.57% gc time, 1.44% compilation time)
 size(gdf) = (2242117, 26)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -402,71 +402,147 @@ size(gdf) = (2242117, 26)</code></pre>
 </div>
 <p>The documentation says <code>CSDNAME</code> is the <q>Census subdivision name</q>, which seems to map to cities.</p>
 <p>Let’s convert it to a proper encoding first:</p>
-<div id="cell-7" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-19T19:38:12.405&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-19T19:38:12.404&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-19T19:38:29.585&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-19T19:38:29.585&quot;}" data-execution_count="4">
+<div id="cell-7" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T20:48:48.403&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T20:48:48.403&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T20:49:06.054&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T20:49:06.054&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">latin1_to_utf8</span>(s) <span class="op">=</span> <span class="fu">decode</span>(<span class="fu">Vector</span><span class="dt">{UInt8}</span>(<span class="fu">String</span>(<span class="fu">coalesce</span>(s, <span class="st">""</span>))), <span class="st">"Windows-1252"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@time</span> <span class="pp">@rtransform</span>! gdf <span class="cf">begin</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span>CSDNAME_L_UTF8 <span class="op">=</span> <span class="fu">latin1_to_utf8</span>(<span class="op">:</span>CSDNAME_L)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span>CSDNAME_R_UTF8 <span class="op">=</span> <span class="fu">latin1_to_utf8</span>(<span class="op">:</span>CSDNAME_R)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code> 16.805160 seconds (107.98 M allocations: 9.264 GiB, 31.19% gc time, 1.20% compilation time: 7% of which was recompilation)</code></pre>
+<pre data-code-line-numbers="nil"><code> 17.307230 seconds (107.98 M allocations: 9.264 GiB, 31.09% gc time, 1.18% compilation time: 7% of which was recompilation)</code></pre>
 </div>
 </div>
 </section>
 <section id="visualizations" class="level3">
 <h3 class="anchored" data-anchor-id="visualizations">Visualizations</h3>
 <p>We can now create a plot for each city using Makie:</p>
-<div id="cell-9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-19T19:47:41.058&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-19T19:47:41.057&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-19T19:47:41.073&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-19T19:47:41.073&quot;}" data-execution_count="15">
+<div id="cell-9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:09:38.530&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:09:38.529&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:09:38.536&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:09:38.535&quot;}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>CairoMakie.<span class="fu">activate!</span>(pt_per_unit<span class="op">=</span><span class="fl">1.0</span>, <span class="kw">type</span> <span class="op">=</span> <span class="st">"svg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-10" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:09:39.127&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:09:39.127&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:09:39.147&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:09:39.147&quot;}" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plot_city</span>(gdf, city_name)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> <span class="pp">@rsubset</span> gdf (<span class="op">:</span>CSDNAME_L_UTF8 <span class="op">==</span> city_name <span class="op">||</span> <span class="op">:</span>CSDNAME_R_UTF8 <span class="op">==</span> city_name)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  empty_theme <span class="op">=</span> <span class="fu">Theme</span>(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    fonts<span class="op">=</span>(; weird<span class="op">=</span><span class="st">"Blackchancery"</span>),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="fl">32</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    Axis<span class="op">=</span>(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      backgroundcolor<span class="op">=:</span>transparent,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>      leftspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>      rightspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      bottomspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      topspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      xticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>      yticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      xgridcolor<span class="op">=:</span>transparent,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>      ygridcolor<span class="op">=:</span>transparent,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      xminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      yminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      xticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      yticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>      xautolimitmargin<span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">0.0</span>),</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>      yautolimitmargin<span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">0.0</span>),</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>      titlefont<span class="op">=:</span>weird,</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_theme</span>(empty_theme) <span class="cf">do</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>])</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">poly!</span>.(GeoInterface.<span class="fu">convert</span>.(<span class="fu">Ref</span>(CairoMakie.GeometryBasics), df[<span class="op">:</span>, <span class="op">:</span>geometry]); strokecolor<span class="op">=:</span>black, color<span class="op">=:</span>black)</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    ax.title <span class="op">=</span> city_name</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plot_city</span>(gdf, city_name, province <span class="op">=</span> <span class="cn">nothing</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="fu">isnothing</span>(province)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> <span class="pp">@rsubset</span> gdf (<span class="op">:</span>CSDNAME_L_UTF8 <span class="op">==</span> city_name <span class="op">||</span> <span class="op">:</span>CSDNAME_R_UTF8 <span class="op">==</span> city_name)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> <span class="pp">@rsubset</span> gdf (( <span class="op">:</span>CSDNAME_L_UTF8 <span class="op">==</span> city_name <span class="op">||</span> <span class="op">:</span>CSDNAME_R_UTF8 <span class="op">==</span> city_name ) <span class="op">&amp;&amp;</span> <span class="fu">contains</span>(<span class="op">:</span>PRNAME_L, province))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if province</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   df = @rsubset df </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># end</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  empty_theme <span class="op">=</span> <span class="fu">Theme</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    fonts<span class="op">=</span>(; weird<span class="op">=</span><span class="st">"Blackchancery"</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="fl">32</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    Axis<span class="op">=</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>      backgroundcolor<span class="op">=:</span>transparent,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>      leftspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>      rightspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>      bottomspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>      topspinevisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>      xticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>      yticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      xgridcolor<span class="op">=:</span>transparent,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>      ygridcolor<span class="op">=:</span>transparent,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>      xminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      yminorticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>      xticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>      yticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>      xautolimitmargin<span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">0.0</span>),</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>      yautolimitmargin<span class="op">=</span>(<span class="fl">0.0</span>, <span class="fl">0.0</span>),</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>      titlefont<span class="op">=:</span>weird,</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_theme</span>(empty_theme) <span class="cf">do</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>])</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">poly!</span>.(GeoInterface.<span class="fu">convert</span>.(<span class="fu">Ref</span>(CairoMakie.GeometryBasics), df[<span class="op">:</span>, <span class="op">:</span>geometry]); strokewidth<span class="op">=</span><span class="fl">0.1</span>, strokecolor<span class="op">=:</span>black, color<span class="op">=:</span>black)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    ax.title <span class="op">=</span> city_name</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Toronto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./images/cell-7-output-1.svg" class="img-fluid"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Montréal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./images/cell-8-output-1.svg" class="img-fluid"></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Vancouver"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./images/cell-9-output-1.svg" class="img-fluid"></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Ottawa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./images/cell-10-output-1.svg" class="img-fluid"></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Calgary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./images/cell-11-output-1.svg" class="img-fluid"></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Edmonton"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./images/cell-12-output-1.svg" class="img-fluid"></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Winnipeg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./images/cell-13-output-1.svg" class="img-fluid"></p>
+<div id="cell-11" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:09:40.360&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:09:40.359&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:13:37.957&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:13:37.957&quot;}" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Toronto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-8-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-12" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:13:37.958&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:13:37.957&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:17:06.595&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:17:06.595&quot;}" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Montréal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-9-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-13" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:17:06.595&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:17:06.595&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:18:59.003&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:18:59.003&quot;}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Vancouver"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-10-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-14" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:18:59.004&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:18:59.003&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:23:15.647&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:23:15.646&quot;}" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Ottawa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-11-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:23:15.648&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:23:15.647&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:30:30.349&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:30:30.349&quot;}" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Calgary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-12-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-16" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:30:30.350&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:30:30.350&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:37:15.728&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:37:15.727&quot;}" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Edmonton"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-13-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-17" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:37:15.729&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:37:15.728&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:41:35.421&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:41:35.419&quot;}" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Winnipeg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-14-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-18" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-20T22:41:35.423&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-20T22:41:35.422&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-20T22:43:13.149&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-20T22:43:13.149&quot;}" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_city</span>(gdf, <span class="st">"Victoria"</span>, <span class="st">"British Columbia"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-15-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
