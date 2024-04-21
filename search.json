@@ -179,7 +179,7 @@
     "href": "blog/effect-of-type-inference-on-performance-in-julia/index.html#conclusion",
     "title": "Effect of type inference on performance in Julia",
     "section": "Conclusion",
-    "text": "Conclusion\nThe key takeaway is that if you care about performance in Julia, you have to be mindful of types and type inference! Keeping types as concrete as possible is important because when type inference fails, it can propogate through your program. Even small changes to your code can improve performance significantly.\nMany thanks to the helpful Julia community on Discourse for always offering insightful comments and advise."
+    "text": "Conclusion\nThe key takeaway is that if you care about performance in Julia, you have to be mindful of types and type inference! Keeping types as concrete as possible is important because when type inference fails, it can propogate through your program. Even small changes to your code can improve performance significantly.\nMany thanks to the helpful Julia community on Discourse for always offering insightful comments and advice."
   },
   {
     "objectID": "blog/tasker-and-google-maps/index.html",
