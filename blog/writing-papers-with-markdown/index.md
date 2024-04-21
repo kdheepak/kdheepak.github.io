@@ -267,14 +267,12 @@ Take for example this table @tbl-table.
 
 <!-- prettier-ignore -->
   Right     Left     Center     Default
-
----
-
-      12     12        12            12
+-------     ------ ----------   -------
+     12     12        12            12
     123     123       123          123
       1     1          1             1
 
-Table: Demonstration of simple table syntax. {#tbl-table}
+:  Demonstration of simple table syntax. {#tbl-table}
 
 <!-- END SLIDES -->
 
@@ -548,15 +546,13 @@ And this text is in **_bold-italic_**.
 
 **Example**
 
-Right Left Center Default
-
----
-
+  Right     Left     Center     Default
+-------     ------ ----------   -------
      12     12        12            12
     123     123       123          123
       1     1          1             1
 
-: Demonstration of simple table syntax. {#tbl-table}
+:  Demonstration of simple table syntax. {#tbl-table}
 
 ### **_Footnotes_**
 
