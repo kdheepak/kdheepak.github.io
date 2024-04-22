@@ -348,38 +348,29 @@ Areas         |    4      4  0.1s</code></pre>
 </section>
 <section id="type-inference" class="level2">
 <h2 class="anchored" data-anchor-id="type-inference">Type inference</h2>
-<p>We can use the <code>typeof</code> function to see what the type of the data in the <code>shapes</code> variable is:</p>
-<div id="c8ef2b3a-734b-4697-9696-91e3d3221842" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:39.916&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:39.916&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:39.953&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:39.953&quot;}" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<div class="ansi-escaped-output">
-<pre>Vector{Shape}<span class="ansi-bright-black-fg"> (alias for </span><span class="ansi-bright-black-fg">Array{Shape, 1}</span><span class="ansi-bright-black-fg">)</span></pre>
-</div>
-</div>
-</div>
-<p>By default, Julia will infer the type as close to the bottom of the tree that fits all the data in the container.</p>
-<p>For example, if we just built a vector with the same elements (e.g.&nbsp;<code>Square</code>), Julia will infer the container to be <code>Vector{Square}</code>.</p>
-<div id="2af0824b-d7f2-4903-be70-6566c54b1221" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:40.243&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:40.243&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:40.283&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:40.282&quot;}" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>([<span class="fu">Square</span>() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
-<div class="ansi-escaped-output">
-<pre>Vector{Square}<span class="ansi-bright-black-fg"> (alias for </span><span class="ansi-bright-black-fg">Array{Square, 1}</span><span class="ansi-bright-black-fg">)</span></pre>
-</div>
-</div>
-</div>
 <p>Here’s the type trees for the shapes:</p>
 <div id="eff7f503-59de-4eb6-9a3e-30a764b3cf4d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:40.584&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:40.583&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:40.812&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:40.812&quot;}" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="fu">subtypes</span>(Shape)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="fu">join</span>(<span class="fu">string</span>.(<span class="fu">supertypes</span>(s)), <span class="st">" &lt;: "</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="fu">subtypes</span>(Shape)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="fu">join</span>(<span class="fu">string</span>.(<span class="fu">supertypes</span>(s)), <span class="st">" &lt;: "</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>Circle &lt;: Shape &lt;: Any
 Rectangle &lt;: Shape &lt;: Any
 Square &lt;: Shape &lt;: Any
 Triangle &lt;: Shape &lt;: Any</code></pre>
+</div>
+</div>
+<p>By default, Julia will infer the type as close to the bottom of the tree that fits all the data in the container.</p>
+<p>For example, if we just built a vector with the same elements (e.g.&nbsp;<code>Square</code>), Julia will infer the container to be <code>Vector{Square}</code></p>
+<div id="2af0824b-d7f2-4903-be70-6566c54b1221" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T23:34:06.430&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T23:34:06.429&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T23:34:06.640&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T23:34:06.640&quot;}" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>([<span class="fu">rand</span>((Square,Rectangle))() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>([<span class="fu">Square</span>() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre data-code-line-numbers="nil"><code>typeof([(rand((Square, Rectangle)))() for _ = 1:COUNT]) = Vector{Shape}
+typeof([Square() for _ = 1:COUNT]) = Vector{Square}</code></pre>
 </div>
 </div>
 <p>Let’s define a function that calculates the <code>area</code> for all the shapes and adds them all up</p>
