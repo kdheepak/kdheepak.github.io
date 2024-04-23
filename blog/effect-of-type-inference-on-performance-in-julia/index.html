@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.30">
+<meta name="generator" content="quarto-1.5.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -317,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Areas         |    4      4  0.1s</code></pre>
 </div>
 </div>
-<p>Let’s build 1 million random shapes.</p>
+<p>Let’s build 1 million random shapes:</p>
 <div id="89712b98-7612-43da-bc3e-f667abd7e2ee" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:39.274&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:39.274&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:39.416&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:39.415&quot;}" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">42</span>)</span>
@@ -325,7 +325,7 @@ Areas         |    4      4  0.1s</code></pre>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>COUNT <span class="op">=</span> <span class="fl">1_000_000</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>shapes <span class="op">=</span> [<span class="fu">rand</span>((Square,Rectangle,Triangle,Circle))() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6cb04f19-d92e-401a-a475-746266921ac0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:39.437&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:39.437&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:39.502&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:39.502&quot;}" data-execution_count="25">
+<div id="6cb04f19-d92e-401a-a475-746266921ac0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:09.689&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:09.689&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:09.750&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:09.750&quot;}" data-execution_count="64">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Format</span></span>
@@ -333,16 +333,11 @@ Areas         |    4      4  0.1s</code></pre>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>len <span class="op">=</span> <span class="fu">cfmt</span>(<span class="st">"%'d"</span>, <span class="fu">length</span>(shapes))</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">number_of</span>(T) <span class="op">=</span> <span class="fu">cfmt</span>(<span class="st">"%'d"</span>, <span class="fu">count</span>(<span class="fu">s-&gt;isa</span>(s, T), shapes))</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(Markdown.md<span class="st">"The total number of shapes we have in the array is </span><span class="sc">$</span>len<span class="st">."</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(Markdown.md<span class="st">"In the array, there's </span><span class="sc">$</span>(<span class="fu">number_of</span>(Square))<span class="st"> squares, </span><span class="sc">$</span>(<span class="fu">number_of</span>(Rectangle))<span class="st"> rectangles, </span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="op">$</span>(<span class="fu">number_of</span>(Triangle)) triangles, and <span class="op">$</span>(<span class="fu">number_of</span>(Circle)) circles.<span class="st">")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(Markdown.md<span class="st">"The total number of shapes we have in the array is </span><span class="sc">$</span>len<span class="st">. In this array, there's </span><span class="sc">$</span>(<span class="fu">number_of</span>(Square))<span class="st"> squares, </span><span class="sc">$</span>(<span class="fu">number_of</span>(Rectangle))<span class="st"> rectangles, </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">$</span>(<span class="fu">number_of</span>(Triangle)) triangles, and <span class="op">$</span>(<span class="fu">number_of</span>(Circle)) circles.<span class="st">")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p>The total number of shapes we have in the array is 1,000,000.</p>
-</div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<p>In the array, there’s 249,740 squares, 249,980 rectangles, 249,831 triangles, and 250,449 circles.</p>
+<p>The total number of shapes we have in the array is 1,000,000. In this array, there’s 249,740 squares, 249,980 rectangles, 249,831 triangles, and 250,449 circles.</p>
 </div>
 </div>
 </section>
@@ -374,8 +369,8 @@ typeof([(rand((Square, Rectangle)))() for _ = 1:COUNT]) = Vector{Shape}</code></
 </div>
 </div>
 <p>Let’s filter out shapes of a specific kind so that each array contains data of the same type. You might think to write this function like so:</p>
-<div id="c5ef2915-b4f5-4722-aef6-203bc056c28d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T04:28:04&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T04:28:04&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T04:28:04.012&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T04:28:04.011&quot;}" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bad_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T<span class="op">&lt;:</span><span class="dt">Shape </span><span class="op">=</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c5ef2915-b4f5-4722-aef6-203bc056c28d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:56.307&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:56.306&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:56.312&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:56.312&quot;}" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bad_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T<span class="op">&lt;:</span><span class="dt">Shape </span><span class="op">=</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, while this function works, it has a subtle issue. It returns a type of <code>Vector{Shape}</code>.</p>
 <p>Julia is a dynamic language. And it can be easy to accidentally construct a container with an abstract type for the type parameter of a generic type, even if there is only one type in container.</p>
@@ -407,8 +402,8 @@ isconcretetype(Vector{Shape}) = true</code></pre>
 </div>
 </div>
 <p>For better performance in Julia, it helps to have concrete types in the generic parameters for a container. We can do this by helping the compiler by in this case explicitly listing the generic type parameter before the brackets for constructing the array, i.e.&nbsp;<code>T[...]</code>.</p>
-<div id="a49e7bce-6944-4982-9788-63af0b6908ae" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T04:28:15.964&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T04:28:15.963&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T04:28:15.973&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T04:28:15.972&quot;}" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">good_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T<span class="op">&lt;:</span><span class="dt">Shape </span><span class="op">=</span> T[shape for shape <span class="kw">in</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a49e7bce-6944-4982-9788-63af0b6908ae" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:47.434&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:47.433&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:47.443&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:47.443&quot;}" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">good_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T<span class="op">&lt;:</span><span class="dt">Shape </span><span class="op">=</span> T[shape for shape <span class="kw">in</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With this function, we get <code>Vector{Square}</code> for an array with only squares in it.</p>
 <div id="db373b50-b4fe-4392-bf9b-3124e9a722a6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T04:28:16.769&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T04:28:16.769&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T04:28:16.877&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T04:28:16.877&quot;}" data-execution_count="63">
@@ -428,7 +423,7 @@ typeof(triangle_arr) = Vector{Triangle}
 typeof(circle_arr) = Vector{Circle}</code></pre>
 </div>
 </div>
-<p>As we’ll see in the next section, this can have drastic effects on performance.</p>
+<p>As we’ll see in the next section, this can have significant impacts on performance.</p>
 </section>
 <section id="benchmarks" class="level2">
 <h2 class="anchored" data-anchor-id="benchmarks">Benchmarks</h2>
@@ -573,7 +568,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 </div>
-<p>Keep in mind that we would only get this kind of performance if the type parameter is concrete. If we used <code>Vector{Shape}</code> instead, we get poor results.</p>
+<p>Keep in mind that we would only get this kind of performance if the type parameter is concrete. If we used <code>Vector{Shape}</code> values instead, we’d get poor performance results:</p>
 <div id="6ca87f48-2d46-4f3d-8c1d-aea971f439e6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T00:24:08.072&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T00:24:08.071&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T00:24:19.272&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T00:24:19.272&quot;}" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(<span class="op">$</span>shape_arr1, <span class="op">$</span>shape_arr2, <span class="op">$</span>shape_arr3, <span class="op">$</span>shape_arr4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
@@ -592,7 +587,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </section>
 <section id="struct-with-type-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="struct-with-type-parameters">Struct with type parameters</h2>
-<p>In Julia, structs can have untyped fields.</p>
+<p>In Julia, <code>struct</code>s can have untyped fields.</p>
 <div id="9c242846-1de6-4734-8ac8-39299d62f33e" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:33.709&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:33.709&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:33.710&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:33.710&quot;}" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb32" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Foo</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    a</span>
@@ -610,7 +605,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    a<span class="op">::</span><span class="dt">Float64</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>structs can also have generic type parameters</p>
+<p><code>struct</code>s can also have generic type parameters</p>
 <div id="a61fd965-3505-4886-b933-49142bbd2c33" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:15:56.173&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:15:56.172&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:15:56.181&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:15:56.181&quot;}" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb34" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Bar{T}</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    a<span class="op">::</span><span class="dt">T</span></span>
@@ -628,7 +623,6 @@ typeof(Bar(sorted_shapes_any)) = Bar{Vector{Any}}
 typeof(Bar(sorted_shapes_union)) = Bar{Vector{Union{Circle, Rectangle, Square, Triangle}}}</code></pre>
 </div>
 </div>
-<p>For large structs with multiple type parameters, this can make the type signature while printing unwieldy however it will result be better performance if you can ensure they are all concrete types.</p>
 <p>There’s a lot more useful information in <a href="https://docs.julialang.org/en/v1/manual/performance-tips/#Type-declarations">Type Declarations</a> section of the performance tips.</p>
 </section>
 <section id="conclusion" class="level2">
