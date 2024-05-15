@@ -10,8 +10,17 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.31</generator>
-<lastBuildDate>Sun, 21 Apr 2024 04:27:32 GMT</lastBuildDate>
+<generator>quarto-1.5.35</generator>
+<lastBuildDate>Wed, 15 May 2024 02:03:04 GMT</lastBuildDate>
+<item>
+  <title>Building blocks of Ratatui</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/building-blocks-of-ratatui/</link>
+  <description><![CDATA[ Ratatui is a crate for building terminal user interfaces in Rust. ]]></description>
+  <category>rust</category>
+  <guid>https://kdheepak.com/blog/building-blocks-of-ratatui/</guid>
+  <pubDate>Wed, 15 May 2024 02:03:04 GMT</pubDate>
+</item>
 <item>
   <title>Effect of type inference on performance in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
@@ -74,7 +83,7 @@
   <title>Understanding variables and mutability in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/</link>
-  <description><![CDATA[ I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective. ]]></description>
+  <description><![CDATA[ I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy<span class="margin-aside">While analogies can be useful because they allow us to understand complex concepts by comparing them to something more familiar or simpler, they can also be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand any subject, I recommend using multiple different analogies to bolster your confidence and then dive deeper into the subject matter to harden your intuition.</span> involving books and bookshelves, from a complete beginner’s perspective. ]]></description>
   <category>julia</category>
   <guid>https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/</guid>
   <pubDate>Sun, 26 Feb 2023 02:14:15 GMT</pubDate>
@@ -276,7 +285,7 @@
   <title>Raspberry Pi powered LED lamp</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/</link>
-  <description><![CDATA[ With a Raspberry Pi, you can control a RGB addressable LED strip. The instructions are very simple <span class="citation" data-cites="led">[1]</span> and the results are pretty cool. I decided to make a desk lamp with a web interface. This post will go through the steps to build your own Pi powered desk lamp. ]]></description>
+  <description><![CDATA[ With a Raspberry Pi, you can control a RGB addressable LED strip. The instructions are very simple <span class="citation" data-cites="led">[1]</span> and the results are pretty cool. I decided to make a desk lamp with a web interface<span class="margin-aside"><img src="https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/images/raspberrypilamp.gif" class="img-fluid" alt="Raspberry Pi Powered LED Desk Lamp"></span>. This post will go through the steps to build your own Pi powered desk lamp. ]]></description>
   <category>python</category>
   <guid>https://kdheepak.com/blog/raspberry-pi-powered-led-lamp/</guid>
   <pubDate>Mon, 28 Mar 2016 01:17:58 GMT</pubDate>

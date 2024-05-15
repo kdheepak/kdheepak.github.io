@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dheepak Krishnamurthy">
-<meta name="dcterms.date" content="2015-05-09">
-<meta name="keywords" content="vim, tmux, zsh">
+<meta name="dcterms.date" content="2024-05-15">
+<meta name="keywords" content="rust, ratatui">
 
-<title>kdheepak – Vim, tmux and zsh — the productivity trio</title>
+<title>kdheepak – Building blocks of Ratatui</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -137,14 +137,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     });
   });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../_quarto/styles.css">
-<meta property="og:title" content="kdheepak - Vim, tmux and zsh — the productivity trio">
-<meta property="og:description" content="">
+<meta property="og:title" content="kdheepak - Building blocks of Ratatui">
+<meta property="og:description" content="Ratatui is a crate for building terminal user interfaces in Rust.">
 <meta property="og:site_name" content="kdheepak">
-<meta name="twitter:title" content="kdheepak - Vim, tmux and zsh — the productivity trio">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="kdheepak - Building blocks of Ratatui">
+<meta name="twitter:description" content="Ratatui is a crate for building terminal user interfaces in Rust.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -205,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Vim, tmux and zsh — the productivity trio</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Building blocks of Ratatui</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -219,21 +222,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#zsh" id="toc-zsh" class="nav-link active" data-scroll-target="#zsh">zsh</a></li>
-  <li><a href="#vim" id="toc-vim" class="nav-link" data-scroll-target="#vim">vim</a></li>
+  <li><a href="#immediate-mode-rendering" id="toc-immediate-mode-rendering" class="nav-link active" data-scroll-target="#immediate-mode-rendering">Immediate Mode Rendering</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/vim-tmux-zsh/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/kdheepak/kdheepak.github.io/blob/main/blog/building-blocks-of-ratatui/index.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Vim, tmux and zsh — the productivity trio</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/vim-tmux-zsh/index.md"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Building blocks of Ratatui</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/building-blocks-of-ratatui/index.ipynb"><i class="bi"></i> Code</button></div></div>
   </div>
 
 
@@ -250,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 9, 2015</p>
+      <p class="date">May 15, 2024</p>
     </div>
   </div>
   
@@ -261,163 +263,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>vim, tmux, zsh</p>
+    <p>rust, ratatui</p>
   </div>
 </div>
 
 </header>
 
 
-<p>I’ve not found a greater combination of tools than vim, tmux and zsh. I’ve detailed below some of the configuration to get it working the way I want it to.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="images/vim-tmux-zsh.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">vim-tmux-zsh</figcaption>
-</figure>
+<div id="7864dad5-68b0-41c7-a5a1-3127e70776fe" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T04:09:25.852811+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T04:09:25.852637+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T04:09:25.852769+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T04:09:25.854742+00:00&quot;}" data-execution_count="279">
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui<span class="op">-</span>macros</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<pre class="sourceCode tmux code-with-copy"><code># Change prefix key to `
-unbind C-b
-set -g prefix `
-bind-key ` send-prefix
-bind-key C-a set-option -g prefix C-a
-bind-key C-b set-option -g prefix `
-
-# we might need ` at some point, allow switching
-bind-key C-a set-option -g prefix C-a
-bind-key C-b set-option -g prefix `
-
-setw -g monitor-activity on
-set -g visual-activity on
-
-set-window-option -g window-status-current-bg yellow
-
-set -g mouse-resize-pane on
-set-option -g mouse-select-pane on
-set-option -g mouse-select-window on
-set-window-option -g mode-mouse on
-
-setw -g mode-mouse on
-set -g terminal-overrides 'xterm*:smcup@:rmcup@'
-
-# set-option -g default-command "reattach-to-user-namespace -l zsh"
-
-# Use vim keybindings in copy mode
-setw -g mode-keys vi
-
-bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
-
-unbind -t vi-copy Enter
-bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
-
-## Keep your finger on ctrl, or don't
-bind-key ^D detach-client
-
-## Pane resize in all four directions using vi bindings.
-## Can use these raw but I map them to shift-ctrl-&lt;h,j,k,l&gt; in iTerm.
-bind -r H resize-pane -L 5
-bind -r J resize-pane -D 5
-bind -r K resize-pane -U 5
-bind -r L resize-pane -R 5
-
-## Smart pane switching with awareness of vim splits.
-## Source: https://github.com/christoomey/vim-tmux-navigator
-bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|vim?)(diff)?$' &amp;&amp; tmux send-keys C-h) || tmux select-pane -L"
-bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|vim?)(diff)?$' &amp;&amp; tmux send-keys C-j) || tmux select-pane -D"
-bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|vim?)(diff)?$' &amp;&amp; tmux send-keys C-k) || tmux select-pane -U"
-bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|vim?)(diff)?$' &amp;&amp; tmux send-keys C-l) || tmux select-pane -R"
-bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|vim?)(diff)?$' &amp;&amp; tmux send-keys 'C-\\') || tmux select-pane -l"
-
-set -g default-terminal "xterm"
-
-## No escape time for vi mode
-set -sg escape-time 0
-
-## Screen like binding for last window
-unbind l
-bind C-a last-window
-
-## Bigger history
-set -g history-limit 10000
-
-## New windows/pane in $PWD
-bind c new-window -c "#{pane_current_path}"
-
-## force a reload of the config file
-unbind r
-bind r source-file ~/.tmux.conf \; display "Reloaded!"
-
-## Easy bindings for split
-unbind %
-bind | split-window -h -c "#{pane_current_path}"
-bind - split-window -v -c "#{pane_current_path}"
-
-#bind y run 'tmux save-buffer - | reattach-to-user-namespace pbcopy '
-#bind C-y run 'tmux save-buffer - | reattach-to-user-namespace pbcopy '
-
-# start window numbering at 1
-set -g base-index 1
-
-# start pane numbering at 1
-set -g pane-base-index 1
-
-bind-key -n C-S-Left swap-window -t -1
-bind-key -n C-S-Right swap-window -t +1
-
-## Here is a jewel of a bind which does the task of flipping the orientation of the current pane with the pane before it (in the ordering) -- I had a SO question on this and nobody answered.
-bind -n M-f move-pane -t '.-'
-bind M-f move-pane -t '.-'
-bind -n M-r move-pane -h -t '.-'
-bind M-r move-pane -h -t '.-'
-
-### Join windows: &lt;prefix&gt; s, &lt;prefix&gt; j
-bind-key j command-prompt -p "join pane from:" "join-pane -s '%%'"
-bind-key s command-prompt -p "send pane to:" "join-pane -t '%%'"</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<section id="zsh" class="level3">
-<h3 class="anchored" data-anchor-id="zsh">zsh</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to your oh-my-zsh installation.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ZSH</span><span class="op">=</span>/Users/dheepakkrishnamurthy/.oh-my-zsh</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">ZSH_THEME</span><span class="op">=</span><span class="st">"rawsyntax"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> vim=<span class="st">'mvim -v'</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">TERM</span><span class="op">=</span>xterm-256color</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="va">$ZSH</span>/oh-my-zsh.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="vim" class="level3">
-<h3 class="anchored" data-anchor-id="vim">vim</h3>
-<pre class="sourceCode vim code-with-copy"><code>Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'honza/vim-snippets'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'morhetz/gruvbox'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'searchcomplete'
-Plugin 'sjl/gundo.vim'
-Plugin 'tomasr/molokai'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-
-
+<p>Ratatui is a crate for building terminal user interfaces in Rust.</p>
+<p>One of the unique features of Ratatui is that it is an immediate mode rendering library. In this post, I’m going to describe some of the primitives of Ratatui. I rely on the concepts described in this post in every Ratatui application I build.</p>
+<section id="immediate-mode-rendering" class="level3">
+<h3 class="anchored" data-anchor-id="immediate-mode-rendering">Immediate Mode Rendering</h3>
+<p>User interfaces can broadly be classified into two kinds:</p>
+<ul>
+<li>immediate mode GUIs,</li>
+<li>retained mode GUIs.</li>
+</ul>
+<p>Casey Muratori has a great video on immediate mode rendering.</p>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2024,
   author = {Krishnamurthy, Dheepak},
-  title = {Vim, Tmux and Zsh — the Productivity Trio},
-  date = {2015-05-09},
-  url = {https://kdheepak.com/blog/vim-tmux-zsh},
+  title = {Building Blocks of {Ratatui}},
+  date = {2024-05-15},
+  url = {https://kdheepak.com/blog/building-blocks-of-ratatui},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2015" class="csl-entry quarto-appendix-citeas" role="listitem">
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2024" class="csl-entry quarto-appendix-citeas" role="listitem">
 <div class="">D.
-Krishnamurthy, <span>“Vim, tmux and zsh — the productivity trio,”</span>
-May 09, 2015. <a href="https://kdheepak.com/blog/vim-tmux-zsh">https://kdheepak.com/blog/vim-tmux-zsh</a>.</div>
+Krishnamurthy, <span>“Building blocks of Ratatui,”</span> May 15, 2024.
+<a href="https://kdheepak.com/blog/building-blocks-of-ratatui">https://kdheepak.com/blog/building-blocks-of-ratatui</a>.</div>
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -913,7 +792,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
  All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/blog/vim-tmux-zsh/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/kdheepak/kdheepak.github.io/blob/main/blog/building-blocks-of-ratatui/index.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
