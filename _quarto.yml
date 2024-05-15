@@ -64,7 +64,6 @@ format:
     highlight-style: printing
     include-in-header:
       - ./_quarto/font.html
-      - ./_quarto/pre-language-script.html
     anchor-sections: true
     section-divs: true
     email-obfuscation: javascript
