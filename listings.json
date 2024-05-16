@@ -2,7 +2,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
-      "/blog/building-blocks-of-ratatui/index.html",
+      "/blog/the-basic-building-blocks-of-ratatui/index.html",
       "/blog/effect-of-type-inference-on-performance-in-julia/index.html",
       "/blog/publish-documents-with-quarto/index.html",
       "/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.html",

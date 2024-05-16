@@ -12,12 +12,12 @@
 <generator>quarto-1.5.37</generator>
 <lastBuildDate>Wed, 15 May 2024 02:03:04 GMT</lastBuildDate>
 <item>
-  <title>Building blocks of Ratatui</title>
+  <title>The Basic Building blocks of Ratatui</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/building-blocks-of-ratatui/</link>
+  <link>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui/</link>
   <description><![CDATA[ Ratatui is a crate for building terminal user interfaces in Rust. ]]></description>
   <category>rust</category>
-  <guid>https://kdheepak.com/blog/building-blocks-of-ratatui/</guid>
+  <guid>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui/</guid>
   <pubDate>Wed, 15 May 2024 02:03:04 GMT</pubDate>
 </item>
 <item>
