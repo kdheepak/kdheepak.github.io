@@ -11,16 +11,7 @@
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.37</generator>
-<lastBuildDate>Wed, 15 May 2024 02:03:04 GMT</lastBuildDate>
-<item>
-  <title>The Basic Building blocks of Ratatui</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui/</link>
-  <description><![CDATA[ Ratatui is a crate for building terminal user interfaces in Rust. ]]></description>
-  <category>rust</category>
-  <guid>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui/</guid>
-  <pubDate>Wed, 15 May 2024 02:03:04 GMT</pubDate>
-</item>
+<lastBuildDate>Sun, 21 Apr 2024 04:27:32 GMT</lastBuildDate>
 <item>
   <title>Effect of type inference on performance in Julia</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
