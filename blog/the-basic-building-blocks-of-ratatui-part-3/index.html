@@ -1,2 +1,979 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dheepak Krishnamurthy">
+<meta name="dcterms.date" content="2024-05-17">
+<meta name="keywords" content="rust, ratatui">
+
+<title>kdheepak – The Basic Building blocks of Ratatui - Part 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+<link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+<link href="https://fonts.googleapis.com/css?family=Fira+Code&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../_quarto/styles.css">
+<meta property="og:title" content="kdheepak - The Basic Building blocks of Ratatui - Part 3">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="kdheepak">
+<meta name="twitter:title" content="kdheepak - The Basic Building blocks of Ratatui - Part 3">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv/index.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kdheepak"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/dheepak-krishnamurthy" rel="me"> <i class="bi bi-linkedin" role="img" aria-label="linkedin">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The Basic Building blocks of Ratatui - Part 3</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#text-primitives" id="toc-text-primitives" class="nav-link active" data-scroll-target="#text-primitives">Text primitives</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/kdheepak/kdheepak.github.io/blob/main/blog/the-basic-building-blocks-of-ratatui-part-3/index.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">The Basic Building blocks of Ratatui - Part 3</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button" data-quarto-source-url="https://github.com/kdheepak/kdheepak.github.io/blob/main/blog/the-basic-building-blocks-of-ratatui-part-3/index.ipynb">View Source</a></li></ul></div></div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dheepak Krishnamurthy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 17, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>rust, ratatui</p>
+  </div>
+</div>
+
+</header>
+
+
+<p>Ratatui is a crate for building terminal user interfaces in Rust.</p>
+<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-16T13:40:30.959089+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-16T13:40:30.958910+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T13:40:30.959061+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T13:40:31.163643+00:00&quot;}" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> show_html<span class="op">&lt;</span>D<span class="op">&gt;</span>(content<span class="op">:</span> D) <span class="kw">where</span> D<span class="op">:</span> <span class="pp">std::fmt::</span><span class="bu">Display</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">r#"EVCXR_BEGIN_CONTENT text/html</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div style="display: flex; justify-content:start; gap: 1em; margin: 1em"&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">{}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">EVCXR_END_CONTENT"#</span><span class="op">,</span> content)<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="7864dad5-68b0-41c7-a5a1-3127e70776fe" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-16T13:40:35.875821+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-16T13:40:35.875685+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T13:40:35.875793+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T13:40:45.372166+00:00&quot;}" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui <span class="op">=</span> <span class="st">"0.26.2"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui<span class="op">-</span>macros <span class="op">=</span> <span class="st">"0.4.0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="text-primitives" class="level3">
+<h3 class="anchored" data-anchor-id="text-primitives">Text primitives</h3>
+<p>In Ratatui, there are 3 fundamental text primitives that you should be aware of.</p>
+<section id="span" class="level4">
+<h4 class="anchored" data-anchor-id="span">Span</h4>
+<p>The first is a <code>Span</code>.</p>
+<div id="4352a49f-2b40-4bd8-a37c-7f020879a4a6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:11.590355+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:11.590283+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:11.590339+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:12.298698+00:00&quot;}" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Span<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> span <span class="op">=</span> <span class="pp">Span::</span>raw(<span class="st">"hello world"</span>)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>span</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
+</div>
+</div>
+<p>A <code>Span</code> contains two fields.</p>
+<div id="e244e525-83f6-4319-9c26-e12bf745084f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:12.298908+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:12.298862+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:12.298896+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:12.858469+00:00&quot;}" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>span<span class="op">.</span>content</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<pre data-code-line-numbers="nil"><code>"hello world"</code></pre>
+</div>
+</div>
+<div id="32bc98a5-da0c-425d-8d7b-fde5530a2edf" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:12.858542+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:12.858519+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:12.858538+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:13.370042+00:00&quot;}" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>span<span class="op">.</span>style</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre data-code-line-numbers="nil"><code>Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE }</code></pre>
+</div>
+</div>
+<p>A <code>Style</code> object contains foreground color, background color, and modifiers for whether the style being applied is <strong>bold</strong>, <em>italics</em>, etc</p>
+<p>There are a number of constructors for <code>Span</code> that you may use, but <code>ratatui</code> exposes a <code>Stylize</code> trait that makes it easy to style content which I find very useful.</p>
+<div id="e6a3b553-6720-4fd7-8954-65ebbb49a04f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:13.370116+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:13.370095+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:13.370112+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:13.931198+00:00&quot;}" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::style::</span>Stylize<span class="op">;</span> <span class="co">// required trait to use style methods</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">"hello world"</span><span class="op">.</span>bold()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: BOLD, sub_modifier: NONE } }</code></pre>
+</div>
+</div>
+<p>You can even chain these trait methods to add more styles:</p>
+<div id="c00050c6-fa55-4a82-817a-5c563e8708fe" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:13.931269+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:13.931250+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:13.931266+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:14.457097+00:00&quot;}" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">"hello world"</span><span class="op">.</span>bold()<span class="op">.</span>yellow()<span class="op">.</span>on_black()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: Some(Yellow), bg: Some(Black), underline_color: None, add_modifier: BOLD, sub_modifier: NONE } }</code></pre>
+</div>
+</div>
+<div id="7a538856-9b07-4e9d-83be-f2780c74ac17" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:14.457179+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:14.457156+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:14.457174+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:14.749470+00:00&quot;}" data-execution_count="48">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> show_span(s<span class="op">:</span> Span) <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="kw">mut</span> html <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"&lt;span style=</span><span class="sc">\"</span><span class="st">"</span>)<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set foreground color</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(color) <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">.</span>style<span class="op">.</span>fg <span class="op">{</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        html<span class="op">.</span>push_str(<span class="op">&amp;</span><span class="pp">format!</span>(<span class="st">"color: {};"</span><span class="op">,</span> color))<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set background color</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(color) <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">.</span>style<span class="op">.</span>bg <span class="op">{</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        html<span class="op">.</span>push_str(<span class="op">&amp;</span><span class="pp">format!</span>(<span class="st">"background-color: {};"</span><span class="op">,</span> color))<span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add modifiers</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">match</span> s<span class="op">.</span>style<span class="op">.</span>add_modifier <span class="op">{</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="pp">ratatui::style::Modifier::</span>BOLD <span class="op">=&gt;</span> html<span class="op">.</span>push_str(<span class="st">"font-weight: bold;"</span>)<span class="op">,</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="pp">ratatui::style::Modifier::</span>UNDERLINED <span class="op">=&gt;</span> html<span class="op">.</span>push_str(<span class="st">"text-decoration: underline;"</span>)<span class="op">,</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=&gt;</span> <span class="op">{}</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"</span><span class="sc">\"</span><span class="st">&gt;"</span>)<span class="op">;</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="op">&amp;</span>s<span class="op">.</span>content)<span class="op">;</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"&lt;/span&gt;"</span>)<span class="op">;</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    show_html(html)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="253de6ed-ea89-4d11-be95-0fae4c33914a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:14.749604+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:14.749581+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:14.749599+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:15.617213+00:00&quot;}" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>show_span(<span class="st">"hello world"</span><span class="op">.</span>bold())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
+<span style="font-weight: bold;">hello world</span>
+</div>
+</div>
+</div>
+<div id="1438f4a8-3e43-43a2-bbb9-0ac34351762c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:15.617497+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:15.617427+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:15.617480+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:16.188929+00:00&quot;}" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>show_span(<span class="st">"hello world"</span><span class="op">.</span>yellow()<span class="op">.</span>bold()<span class="op">.</span>on_black())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
+<span style="color: Yellow;background-color: Black;font-weight: bold;">hello world</span>
+</div>
+</div>
+</div>
+<p>With <code>ratatui-macros</code>, you can even use a <code>format!</code> style macro to create a <code>Span</code></p>
+<div id="572ceda9-2651-4b89-9d1d-425117e3f656" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:16.189006+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:16.188981+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:16.189002+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:16.917794+00:00&quot;}" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>span<span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> world <span class="op">=</span> <span class="st">"world"</span><span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="pp">span!</span>(<span class="st">"hello {}"</span><span class="op">,</span> world)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
+</div>
+</div>
+</section>
+<section id="line" class="level4">
+<h4 class="anchored" data-anchor-id="line">Line</h4>
+<p>The second primitive to be aware of is a <code>Line</code>.</p>
+<p>A line consists of one or more spans.</p>
+<div id="e70835fd-f437-49b9-9837-754ef710310a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:16.917956+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:16.917912+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:16.917949+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:17.595517+00:00&quot;}" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Line<span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> line <span class="op">=</span> <span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
+<pre data-code-line-numbers="nil"><code>Line { spans: [Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }], style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE }, alignment: None }</code></pre>
+</div>
+</div>
+<div id="4bd65ed0-d0d7-4486-82b0-da22e72aecdd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:17.595589+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:17.595569+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:17.595586+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:18.377455+00:00&quot;}" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb20" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<pre data-code-line-numbers="nil"><code>[Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }]</code></pre>
+</div>
+</div>
+<div id="6390f239-e2c4-4c6e-901d-c5b660dc388c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:18.377897+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:18.377725+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:18.377878+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:18.977921+00:00&quot;}" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans<span class="op">.</span>len()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<pre data-code-line-numbers="nil"><code>1</code></pre>
+</div>
+</div>
+<p>A unique feature of lines is that new lines are removed but the content is split into multiple spans.</p>
+<div id="ef6d2a85-b97b-40a6-b543-f8092d585906" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:18.978005+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:18.977982+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:18.978+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:19.467549+00:00&quot;}" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> line <span class="op">=</span> <span class="pp">Line::</span>raw(<span class="st">"hello world</span><span class="sc">\n</span><span class="st">goodbye world"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7046bc44-1ad3-4484-b1ce-f0391b6fd747" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:19.467678+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:19.467653+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:19.467673+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:20.050317+00:00&quot;}" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="56">
+<pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
+</div>
+</div>
+<div id="7cd65ce3-c807-42a4-84be-e5886647fed9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:20.050385+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:20.050364+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:20.050381+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:20.584442+00:00&quot;}" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb27" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="57">
+<pre data-code-line-numbers="nil"><code>Span { content: "goodbye world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
+</div>
+</div>
+<p>A line can also be styled with methods from the <code>Stylize</code> trait:</p>
+<div id="606d46e5-ba7e-4829-89cc-8b15c0a234d3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:20.584526+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:20.584505+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:20.584520+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:21.191337+00:00&quot;}" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">.</span>bold()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<pre data-code-line-numbers="nil"><code>Line { spans: [Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }], style: Style { fg: None, bg: None, underline_color: None, add_modifier: BOLD, sub_modifier: NONE }, alignment: None }</code></pre>
+</div>
+</div>
+<p>In this case, the individual span’s styles are left untouched but the <code>Line</code>’s style is updated.</p>
+<p>Another unique feature about <code>Line</code> is that they can be aligned.</p>
+<div id="e1567286-4f47-412e-b118-cfbd3e4d2ee9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:21.191410+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:21.191389+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:21.191406+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:22.120553+00:00&quot;}" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> centered_line <span class="op">=</span> line<span class="op">.</span>centered()<span class="op">;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>centered_line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<pre data-code-line-numbers="nil"><code>Line { spans: [Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }, Span { content: "goodbye world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }], style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE }, alignment: Some(Center) }</code></pre>
+</div>
+</div>
+<p>With <code>ratatui-macros</code>, you can create a <code>Line</code> using the <code>line!</code> macro using a <code>vec!</code>-like syntax.</p>
+<div id="e938287b-10f9-4bf2-b96c-c2f35b4fb1e3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:22.120698+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:22.120654+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:22.120689+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:22.610771+00:00&quot;}" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>line<span class="op">;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="pp">line!</span>[<span class="st">"hello"</span><span class="op">,</span> <span class="st">" "</span><span class="op">,</span> <span class="st">"world"</span>]<span class="op">.</span>yellow()<span class="op">.</span>bold()<span class="op">.</span>centered()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Every element in the <code>line!</code> macro is converted to a <code>Span</code>.</p>
+</section>
+<section id="text" class="level4">
+<h4 class="anchored" data-anchor-id="text">Text</h4>
+<p>Finally there is <code>Text</code>, which is a collection of <code>Line</code>s.</p>
+<div id="d5419388-ff32-4f24-9f90-da167c726761" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:22.610911+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:22.610887+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:22.610906+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:23.137538+00:00&quot;}" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb34" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Text<span class="op">;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="pp">Text::</span>from(<span class="pp">vec!</span>[<span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">,</span> <span class="pp">Line::</span>raw(<span class="st">"goodbye world"</span>)])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With ratatui-macros, you can create a <code>Text</code> using <code>text!</code> macro using a <code>vec!</code>-like syntax.</p>
+<div id="8d530c4e-6bfd-4623-9cac-f50291a4cfce" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:23.137751+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:23.137716+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:23.137743+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:23.662856+00:00&quot;}" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>text<span class="op">;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="pp">text!</span>[<span class="st">"hello world"</span><span class="op">,</span> <span class="st">"goodbye world"</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, every element in the <code>text!</code> macro is converted to a <code>Line</code>.</p>
+<p>Like <code>Line</code>, <code>Text</code> can also be aligned. In this case, the alignment occurs on every <code>Line</code> inside the <code>Text</code>.</p>
+<div id="ea805003-1ea1-4e48-ba5e-d4e62950aa0d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:23.662995+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:23.662968+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:23.662989+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:24.330304+00:00&quot;}" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> t <span class="op">=</span> <span class="pp">text!</span>[<span class="st">"hello world"</span><span class="op">,</span> <span class="st">"goodbye world"</span>]<span class="op">.</span>right_aligned()<span class="op">;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>t<span class="op">.</span>alignment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
+<pre data-code-line-numbers="nil"><code>Some(Right)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>In the next post, we’ll examine the a few commonly used widgets.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2024,
+  author = {Krishnamurthy, Dheepak},
+  title = {The {Basic} {Building} Blocks of {Ratatui} - {Part} 3},
+  date = {2024-05-17},
+  url = {https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-3},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">D.
+Krishnamurthy, <span>“The Basic Building blocks of Ratatui - Part
+3,”</span> May 17, 2024. <a href="https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-3">https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-3</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/.*kdheepak\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ All views or opinions expressed here are solely mine and are not represented, shared, supported, or endorsed by any employer or entity in any manner.
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/kdheepak/kdheepak.github.io/blob/main/blog/the-basic-building-blocks-of-ratatui-part-3/index.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kdheepak/kdheepak.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

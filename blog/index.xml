@@ -10,7 +10,34 @@
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.37</generator>
-<lastBuildDate>Wed, 15 May 2024 02:03:04 GMT</lastBuildDate>
+<lastBuildDate>Sat, 18 May 2024 02:03:04 GMT</lastBuildDate>
+<item>
+  <title>The Basic Building blocks of Ratatui - Part 4</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-4/</link>
+  <description><![CDATA[ Ratatui is a crate for building terminal user interfaces in Rust. ]]></description>
+  <category>rust</category>
+  <guid>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-4/</guid>
+  <pubDate>Sat, 18 May 2024 02:03:04 GMT</pubDate>
+</item>
+<item>
+  <title>The Basic Building blocks of Ratatui - Part 3</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-3/</link>
+  <description><![CDATA[ Ratatui is a crate for building terminal user interfaces in Rust. ]]></description>
+  <category>rust</category>
+  <guid>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-3/</guid>
+  <pubDate>Fri, 17 May 2024 02:03:04 GMT</pubDate>
+</item>
+<item>
+  <title>The Basic Building blocks of Ratatui - Part 2</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-2/</link>
+  <description><![CDATA[ Ratatui is a crate for building terminal user interfaces in Rust. ]]></description>
+  <category>rust</category>
+  <guid>https://kdheepak.com/blog/the-basic-building-blocks-of-ratatui-part-2/</guid>
+  <pubDate>Thu, 16 May 2024 02:03:04 GMT</pubDate>
+</item>
 <item>
   <title>The Basic Building blocks of Ratatui - Part 1</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
