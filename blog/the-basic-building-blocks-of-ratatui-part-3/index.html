@@ -242,23 +242,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Ratatui is a crate for building terminal user interfaces in Rust.</p>
+<p>In this post, we’ll explore the text primitives of <code>ratatui</code>.</p>
 <div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-16T13:40:30.959089+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-16T13:40:30.958910+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T13:40:30.959061+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T13:40:31.163643+00:00&quot;}" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> show_html<span class="op">&lt;</span>D<span class="op">&gt;</span>(content<span class="op">:</span> D) <span class="kw">where</span> D<span class="op">:</span> <span class="pp">std::fmt::</span><span class="bu">Display</span> <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">r#"EVCXR_BEGIN_CONTENT text/html</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div style="display: flex; justify-content:start; gap: 1em; margin: 1em"&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">{}</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">EVCXR_END_CONTENT"#</span><span class="op">,</span> content)<span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div id="7864dad5-68b0-41c7-a5a1-3127e70776fe" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-16T13:40:35.875821+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-16T13:40:35.875685+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T13:40:35.875793+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T13:40:45.372166+00:00&quot;}" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui <span class="op">=</span> <span class="st">"0.26.2"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui<span class="op">-</span>macros <span class="op">=</span> <span class="st">"0.4.0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui <span class="op">=</span> <span class="st">"0.26.2"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui<span class="op">-</span>macros <span class="op">=</span> <span class="st">"0.4.0"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> show_html<span class="op">&lt;</span>D<span class="op">&gt;</span>(content<span class="op">:</span> D) <span class="kw">where</span> D<span class="op">:</span> <span class="pp">std::fmt::</span><span class="bu">Display</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">r#"EVCXR_BEGIN_CONTENT text/html</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div style="display: flex; justify-content:start; gap: 1em; margin: 1em"&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">{}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">EVCXR_END_CONTENT"#</span><span class="op">,</span> content)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="text-primitives" class="level3">
@@ -268,23 +265,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="span">Span</h4>
 <p>The first is a <code>Span</code>.</p>
 <div id="4352a49f-2b40-4bd8-a37c-7f020879a4a6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:11.590355+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:11.590283+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:11.590339+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:12.298698+00:00&quot;}" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Span<span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> span <span class="op">=</span> <span class="pp">Span::</span>raw(<span class="st">"hello world"</span>)<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>span</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Span<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> span <span class="op">=</span> <span class="pp">Span::</span>raw(<span class="st">"hello world"</span>)<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>span</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="43">
 <pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
 </div>
 </div>
 <p>A <code>Span</code> contains two fields.</p>
 <div id="e244e525-83f6-4319-9c26-e12bf745084f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:12.298908+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:12.298862+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:12.298896+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:12.858469+00:00&quot;}" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>span<span class="op">.</span>content</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>span<span class="op">.</span>content</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="44">
 <pre data-code-line-numbers="nil"><code>"hello world"</code></pre>
 </div>
 </div>
 <div id="32bc98a5-da0c-425d-8d7b-fde5530a2edf" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:12.858542+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:12.858519+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:12.858538+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:13.370042+00:00&quot;}" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>span<span class="op">.</span>style</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>span<span class="op">.</span>style</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="45">
 <pre data-code-line-numbers="nil"><code>Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE }</code></pre>
 </div>
@@ -292,16 +289,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A <code>Style</code> object contains foreground color, background color, and modifiers for whether the style being applied is <strong>bold</strong>, <em>italics</em>, etc</p>
 <p>There are a number of constructors for <code>Span</code> that you may use, but <code>ratatui</code> exposes a <code>Stylize</code> trait that makes it easy to style content which I find very useful.</p>
 <div id="e6a3b553-6720-4fd7-8954-65ebbb49a04f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:13.370116+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:13.370095+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:13.370112+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:13.931198+00:00&quot;}" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::style::</span>Stylize<span class="op">;</span> <span class="co">// required trait to use style methods</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">"hello world"</span><span class="op">.</span>bold()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::style::</span>Stylize<span class="op">;</span> <span class="co">// required trait to use style methods</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">"hello world"</span><span class="op">.</span>bold()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: BOLD, sub_modifier: NONE } }</code></pre>
 </div>
 </div>
 <p>You can even chain these trait methods to add more styles:</p>
 <div id="c00050c6-fa55-4a82-817a-5c563e8708fe" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:13.931269+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:13.931250+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:13.931266+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:14.457097+00:00&quot;}" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">"hello world"</span><span class="op">.</span>bold()<span class="op">.</span>yellow()<span class="op">.</span>on_black()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">"hello world"</span><span class="op">.</span>bold()<span class="op">.</span>yellow()<span class="op">.</span>on_black()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="47">
 <pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: Some(Yellow), bg: Some(Black), underline_color: None, add_modifier: BOLD, sub_modifier: NONE } }</code></pre>
 </div>
@@ -309,35 +306,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="7a538856-9b07-4e9d-83be-f2780c74ac17" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:14.457179+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:14.457156+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:14.457174+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:14.749470+00:00&quot;}" data-execution_count="48">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> show_span(s<span class="op">:</span> Span) <span class="op">{</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="kw">mut</span> html <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"&lt;span style=</span><span class="sc">\"</span><span class="st">"</span>)<span class="op">;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set foreground color</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(color) <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">.</span>style<span class="op">.</span>fg <span class="op">{</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        html<span class="op">.</span>push_str(<span class="op">&amp;</span><span class="pp">format!</span>(<span class="st">"color: {};"</span><span class="op">,</span> color))<span class="op">;</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set background color</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(color) <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">.</span>style<span class="op">.</span>bg <span class="op">{</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        html<span class="op">.</span>push_str(<span class="op">&amp;</span><span class="pp">format!</span>(<span class="st">"background-color: {};"</span><span class="op">,</span> color))<span class="op">;</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add modifiers</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">match</span> s<span class="op">.</span>style<span class="op">.</span>add_modifier <span class="op">{</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="pp">ratatui::style::Modifier::</span>BOLD <span class="op">=&gt;</span> html<span class="op">.</span>push_str(<span class="st">"font-weight: bold;"</span>)<span class="op">,</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="pp">ratatui::style::Modifier::</span>UNDERLINED <span class="op">=&gt;</span> html<span class="op">.</span>push_str(<span class="st">"text-decoration: underline;"</span>)<span class="op">,</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=&gt;</span> <span class="op">{}</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"</span><span class="sc">\"</span><span class="st">&gt;"</span>)<span class="op">;</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="op">&amp;</span>s<span class="op">.</span>content)<span class="op">;</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"&lt;/span&gt;"</span>)<span class="op">;</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    show_html(html)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> show_span(s<span class="op">:</span> Span) <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="kw">mut</span> html <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"&lt;span style=</span><span class="sc">\"</span><span class="st">"</span>)<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set foreground color</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(color) <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">.</span>style<span class="op">.</span>fg <span class="op">{</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        html<span class="op">.</span>push_str(<span class="op">&amp;</span><span class="pp">format!</span>(<span class="st">"color: {};"</span><span class="op">,</span> color))<span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set background color</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(color) <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">.</span>style<span class="op">.</span>bg <span class="op">{</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        html<span class="op">.</span>push_str(<span class="op">&amp;</span><span class="pp">format!</span>(<span class="st">"background-color: {};"</span><span class="op">,</span> color))<span class="op">;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add modifiers</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">match</span> s<span class="op">.</span>style<span class="op">.</span>add_modifier <span class="op">{</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="pp">ratatui::style::Modifier::</span>BOLD <span class="op">=&gt;</span> html<span class="op">.</span>push_str(<span class="st">"font-weight: bold;"</span>)<span class="op">,</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="pp">ratatui::style::Modifier::</span>UNDERLINED <span class="op">=&gt;</span> html<span class="op">.</span>push_str(<span class="st">"text-decoration: underline;"</span>)<span class="op">,</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=&gt;</span> <span class="op">{}</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"</span><span class="sc">\"</span><span class="st">&gt;"</span>)<span class="op">;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="op">&amp;</span>s<span class="op">.</span>content)<span class="op">;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    html<span class="op">.</span>push_str(<span class="st">"&lt;/span&gt;"</span>)<span class="op">;</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    show_html(html)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="253de6ed-ea89-4d11-be95-0fae4c33914a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:14.749604+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:14.749581+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:14.749599+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:15.617213+00:00&quot;}" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>show_span(<span class="st">"hello world"</span><span class="op">.</span>bold())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>show_span(<span class="st">"hello world"</span><span class="op">.</span>bold())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="49">
 <div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
 <span style="font-weight: bold;">hello world</span>
@@ -345,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="1438f4a8-3e43-43a2-bbb9-0ac34351762c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:15.617497+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:15.617427+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:15.617480+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:16.188929+00:00&quot;}" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>show_span(<span class="st">"hello world"</span><span class="op">.</span>yellow()<span class="op">.</span>bold()<span class="op">.</span>on_black())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>show_span(<span class="st">"hello world"</span><span class="op">.</span>yellow()<span class="op">.</span>bold()<span class="op">.</span>on_black())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="50">
 <div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
 <span style="color: Yellow;background-color: Black;font-weight: bold;">hello world</span>
@@ -354,10 +351,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>With <code>ratatui-macros</code>, you can even use a <code>format!</code> style macro to create a <code>Span</code></p>
 <div id="572ceda9-2651-4b89-9d1d-425117e3f656" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:16.189006+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:16.188981+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:16.189002+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:16.917794+00:00&quot;}" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>span<span class="op">;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> world <span class="op">=</span> <span class="st">"world"</span><span class="op">;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="pp">span!</span>(<span class="st">"hello {}"</span><span class="op">,</span> world)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>span<span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> world <span class="op">=</span> <span class="st">"world"</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">span!</span>(<span class="st">"hello {}"</span><span class="op">,</span> world)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="51">
 <pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
 </div>
@@ -368,45 +365,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The second primitive to be aware of is a <code>Line</code>.</p>
 <p>A line consists of one or more spans.</p>
 <div id="e70835fd-f437-49b9-9837-754ef710310a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:16.917956+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:16.917912+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:16.917949+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:17.595517+00:00&quot;}" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Line<span class="op">;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> line <span class="op">=</span> <span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Line<span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> line <span class="op">=</span> <span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="52">
 <pre data-code-line-numbers="nil"><code>Line { spans: [Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }], style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE }, alignment: None }</code></pre>
 </div>
 </div>
 <div id="4bd65ed0-d0d7-4486-82b0-da22e72aecdd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:17.595589+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:17.595569+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:17.595586+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:18.377455+00:00&quot;}" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb20" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
 <pre data-code-line-numbers="nil"><code>[Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }]</code></pre>
 </div>
 </div>
 <div id="6390f239-e2c4-4c6e-901d-c5b660dc388c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:18.377897+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:18.377725+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:18.377878+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:18.977921+00:00&quot;}" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans<span class="op">.</span>len()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans<span class="op">.</span>len()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="54">
 <pre data-code-line-numbers="nil"><code>1</code></pre>
 </div>
 </div>
 <p>A unique feature of lines is that new lines are removed but the content is split into multiple spans.</p>
 <div id="ef6d2a85-b97b-40a6-b543-f8092d585906" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:18.978005+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:18.977982+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:18.978+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:19.467549+00:00&quot;}" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> line <span class="op">=</span> <span class="pp">Line::</span>raw(<span class="st">"hello world</span><span class="sc">\n</span><span class="st">goodbye world"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> line <span class="op">=</span> <span class="pp">Line::</span>raw(<span class="st">"hello world</span><span class="sc">\n</span><span class="st">goodbye world"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="7046bc44-1ad3-4484-b1ce-f0391b6fd747" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:19.467678+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:19.467653+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:19.467673+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:20.050317+00:00&quot;}" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="56">
 <pre data-code-line-numbers="nil"><code>Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
 </div>
 </div>
 <div id="7cd65ce3-c807-42a4-84be-e5886647fed9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:20.050385+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:20.050364+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:20.050381+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:20.584442+00:00&quot;}" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb27" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>line<span class="op">.</span>spans[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="57">
 <pre data-code-line-numbers="nil"><code>Span { content: "goodbye world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }</code></pre>
 </div>
 </div>
 <p>A line can also be styled with methods from the <code>Stylize</code> trait:</p>
 <div id="606d46e5-ba7e-4829-89cc-8b15c0a234d3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:20.584526+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:20.584505+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:20.584520+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:21.191337+00:00&quot;}" data-execution_count="58">
-<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">.</span>bold()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">.</span>bold()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="58">
 <pre data-code-line-numbers="nil"><code>Line { spans: [Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }], style: Style { fg: None, bg: None, underline_color: None, add_modifier: BOLD, sub_modifier: NONE }, alignment: None }</code></pre>
 </div>
@@ -414,17 +411,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this case, the individual span’s styles are left untouched but the <code>Line</code>’s style is updated.</p>
 <p>Another unique feature about <code>Line</code> is that they can be aligned.</p>
 <div id="e1567286-4f47-412e-b118-cfbd3e4d2ee9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:21.191410+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:21.191389+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:21.191406+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:22.120553+00:00&quot;}" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> centered_line <span class="op">=</span> line<span class="op">.</span>centered()<span class="op">;</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>centered_line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> centered_line <span class="op">=</span> line<span class="op">.</span>centered()<span class="op">;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>centered_line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <pre data-code-line-numbers="nil"><code>Line { spans: [Span { content: "hello world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }, Span { content: "goodbye world", style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE } }], style: Style { fg: None, bg: None, underline_color: None, add_modifier: NONE, sub_modifier: NONE }, alignment: Some(Center) }</code></pre>
 </div>
 </div>
 <p>With <code>ratatui-macros</code>, you can create a <code>Line</code> using the <code>line!</code> macro using a <code>vec!</code>-like syntax.</p>
 <div id="e938287b-10f9-4bf2-b96c-c2f35b4fb1e3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:22.120698+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:22.120654+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:22.120689+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:22.610771+00:00&quot;}" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>line<span class="op">;</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="pp">line!</span>[<span class="st">"hello"</span><span class="op">,</span> <span class="st">" "</span><span class="op">,</span> <span class="st">"world"</span>]<span class="op">.</span>yellow()<span class="op">.</span>bold()<span class="op">.</span>centered()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>line<span class="op">;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="pp">line!</span>[<span class="st">"hello"</span><span class="op">,</span> <span class="st">" "</span><span class="op">,</span> <span class="st">"world"</span>]<span class="op">.</span>yellow()<span class="op">.</span>bold()<span class="op">.</span>centered()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Every element in the <code>line!</code> macro is converted to a <code>Span</code>.</p>
 </section>
@@ -432,21 +429,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="text">Text</h4>
 <p>Finally there is <code>Text</code>, which is a collection of <code>Line</code>s.</p>
 <div id="d5419388-ff32-4f24-9f90-da167c726761" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:22.610911+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:22.610887+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:22.610906+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:23.137538+00:00&quot;}" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb34" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Text<span class="op">;</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="pp">Text::</span>from(<span class="pp">vec!</span>[<span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">,</span> <span class="pp">Line::</span>raw(<span class="st">"goodbye world"</span>)])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::text::</span>Text<span class="op">;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="pp">Text::</span>from(<span class="pp">vec!</span>[<span class="pp">Line::</span>raw(<span class="st">"hello world"</span>)<span class="op">,</span> <span class="pp">Line::</span>raw(<span class="st">"goodbye world"</span>)])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With ratatui-macros, you can create a <code>Text</code> using <code>text!</code> macro using a <code>vec!</code>-like syntax.</p>
 <div id="8d530c4e-6bfd-4623-9cac-f50291a4cfce" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:23.137751+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:23.137716+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:23.137743+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:23.662856+00:00&quot;}" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>text<span class="op">;</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="pp">text!</span>[<span class="st">"hello world"</span><span class="op">,</span> <span class="st">"goodbye world"</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>text<span class="op">;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="pp">text!</span>[<span class="st">"hello world"</span><span class="op">,</span> <span class="st">"goodbye world"</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, every element in the <code>text!</code> macro is converted to a <code>Line</code>.</p>
 <p>Like <code>Line</code>, <code>Text</code> can also be aligned. In this case, the alignment occurs on every <code>Line</code> inside the <code>Text</code>.</p>
 <div id="ea805003-1ea1-4e48-ba5e-d4e62950aa0d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-15T20:59:23.662995+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-15T20:59:23.662968+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-15T20:59:23.662989+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-15T20:59:24.330304+00:00&quot;}" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> t <span class="op">=</span> <span class="pp">text!</span>[<span class="st">"hello world"</span><span class="op">,</span> <span class="st">"goodbye world"</span>]<span class="op">.</span>right_aligned()<span class="op">;</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>t<span class="op">.</span>alignment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> t <span class="op">=</span> <span class="pp">text!</span>[<span class="st">"hello world"</span><span class="op">,</span> <span class="st">"goodbye world"</span>]<span class="op">.</span>right_aligned()<span class="op">;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>t<span class="op">.</span>alignment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
 <pre data-code-line-numbers="nil"><code>Some(Right)</code></pre>
 </div>
