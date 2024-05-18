@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Z1qyvQsjK5Y" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>At a very high level, in retained mode GUIs, you create UI elements and pass it to a framework and the framework is in charge of displaying them. For example, you can create a text field and input field, and then the browser will render them. The browser is in charge of handling events, and as a developer you have to define how these events interact with these widgets.</p>
 <p>For example, in a simple counter example in a browser, we have to set up an <code>incrementCounter</code> and <code>decrementCounter</code> callbacks that update the relevant element’s state. The browser is responsible for displaying these elements, receiving user inputs, calling the appropriate <code>onclick</code> callback, etc.</p>
-<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-18T08:44:07.084667+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-18T08:44:07.084610+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-18T08:44:07.084653+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-18T08:44:20.997987+00:00&quot;}" data-execution_count="2">
+<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-18T09:54:56.842792+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-18T09:54:56.842584+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-18T09:54:56.842742+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-18T09:54:57.661109+00:00&quot;}" data-execution_count="56">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui <span class="op">=</span> <span class="st">"0.26.2"</span></span>
@@ -335,38 +335,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>show_html(<span class="st">r#"</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;text&gt; Counter: &lt;/text&gt;</span></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;text id="counter"&gt;0&lt;/text&gt;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;button onclick="decrementCounter()"&gt;Decrement&lt;/button&gt;</span></span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;button onclick="incrementCounter()"&gt;Increment&lt;/button&gt;</span></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;button onclick="decrementCounter()"&gt;Decrement&lt;/button&gt;</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;text&gt; Counter: &lt;/text&gt;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;text id="counter"&gt;0&lt;/text&gt;</span></span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script&gt;</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="st">    var counterElement = document.getElementById("counter");</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="st">    var counterValue = 0;</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="st">    counterElement.textContent = counterValue;</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="st">    function incrementCounter() {</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="st">        counterValue++;</span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="st">        counterElement.textContent = counterValue;</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="st">    function decrementCounter() {</span></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="st">        counterValue--;</span></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="st">        counterElement.textContent = counterValue;</span></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="st">"#</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;button onclick="incrementCounter()"&gt;Increment&lt;/button&gt;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script&gt;</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="st">    var counterElement = document.getElementById("counter");</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="st">    var counterValue = 0;</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="st">    counterElement.textContent = counterValue;</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="st">    function incrementCounter() {</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="st">        counterValue++;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="st">        counterElement.textContent = counterValue;</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="st">    function decrementCounter() {</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="st">        counterValue--;</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="st">        counterElement.textContent = counterValue;</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="st">"#</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="56">
 <div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
+
+
+<button onclick="decrementCounter()">Decrement</button>
 
 <text> Counter: </text>
 <text id="counter">0</text>
 
 <button onclick="incrementCounter()">Increment</button>
-<button onclick="decrementCounter()">Decrement</button>
 
 <script>
     var counterElement = document.getElementById("counter");
@@ -612,11 +616,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>If we repeat this process of <q>updating state</q> and <q>drawing UI</q> in a loop, we get an immediate mode rendered UI.</p>
-<p>Here’s what a more complete counter application might look like with keyboard events.</p>
-<p><img src="./basic-app.webp" class="img-fluid"></p>
-<p>If you are interested in seeing the full code regarding this, you can check out the <a href="https://ratatui.rs/tutorials/counter-app/basic-app/"><code>basic-app</code></a> tutorial on the Ratatui website.</p>
-<p>Ratatui uses a double buffer rendering technique that you can read about <a href="https://ratatui.rs/concepts/rendering/under-the-hood/">here</a>.</p>
 </section>
 <section id="frame-primitive" class="level3">
 <h3 class="anchored" data-anchor-id="frame-primitive">Frame primitive</h3>
@@ -702,7 +701,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>All of <code>ratatui</code> functionality is to be used to draw into this <code>Buffer</code> of the <code>Frame</code> passed into the callback. <code>ratatui</code> then figures out how to print the <code>Buffer</code> to a terminal to display a UI.</p>
-<p>Let’s draw our app from earlier into the Buffer of the frame.</p>
+<p>Let’s draw our app from earlier into the <code>Buffer</code> of the frame.</p>
 <div id="877df936-2b15-424a-a505-eb9b908b5df8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-18T08:55:59.972910+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-18T08:55:59.972843+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-18T08:55:59.972904+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-18T08:56:00.612939+00:00&quot;}" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>terminal<span class="op">.</span>backend()<span class="op">.</span>buffer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
@@ -745,6 +744,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</code></pre>
 </div>
 </div>
+<p>If we repeat this process of <q>updating state</q> and <q>drawing UI</q> in a loop, we get an immediate mode rendered UI.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="cn">true</span> <span class="op">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// update app state</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    app<span class="op">.</span>counter <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// draw app state</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    terminal<span class="op">.</span>draw(<span class="op">|</span>frame<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> <span class="kw">mut</span> buf <span class="op">=</span> frame<span class="op">.</span>buffer_mut()<span class="op">;</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>        draw_ui(<span class="op">&amp;</span>app<span class="op">,</span> area<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> buf)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here’s what a more complete counter application might look like with keyboard events.</p>
+<p><img src="./basic-app.webp" class="img-fluid"></p>
+<p>If you are interested in seeing the full code regarding this, you can check out the <a href="https://ratatui.rs/tutorials/counter-app/basic-app/"><code>basic-app</code></a> tutorial on the Ratatui website.</p>
+<p>Ratatui uses a double buffer rendering technique that you can read about <a href="https://ratatui.rs/concepts/rendering/under-the-hood/">here</a>.</p>
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
