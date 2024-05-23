@@ -10,7 +10,7 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.37</generator>
+<generator>quarto-1.5.39</generator>
 <lastBuildDate>Sat, 18 May 2024 02:03:04 GMT</lastBuildDate>
 <item>
   <title>The Basic Building blocks of Ratatui - Part 4</title>
