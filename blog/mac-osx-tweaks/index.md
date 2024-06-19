@@ -5,7 +5,7 @@ categories: [osx]
 summary: OSX is more customizable than you think. Here are a bunch of tweaks that I found useful.
 ---
 
-**_Update_**: I've decided to maintain a repo [here](https://github.com/kdheepak/dotfiles/blob/master/.osx) instead.
+**_Update_**: I've decided to maintain a repo [here](https://github.com/kdheepak/dotfiles/blob/main/osx) instead.
 
 # General UI
 
