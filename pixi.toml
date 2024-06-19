@@ -1,7 +1,7 @@
 [project]
 name = "kdheepak.github.io"
 version = "0.1.0"
-description = "WEbsite"
+description = "Website"
 authors = ["Dheepak Krishnamurthy <me@kdheepak.com>"]
 channels = ["conda-forge"]
 platforms = ["osx-arm64"]
