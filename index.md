@@ -5,18 +5,19 @@ citation: false
 comments: false
 ---
 
-# About
-
 ::: {.grid .align-items-center .align-content-center}
 
 ::: {.g-col-12 .g-col-sm-8}
 
-I'm a research engineer and software developer.
-I have experience running energy system models and simulations, such as transmission production cost models and power distribution system analyses, and have developed bespoke models for energy system analysis.
-I'm proficient with Python, Julia, Rust, and Javascript, and am well versed in scientific data analysis and extract-transform-load workflows. I also enjoy working on open source projects and learning new technologies.
+I'm Dheepak!
+
+I'm a research engineer and software developer. I have experience running energy system models and
+simulations, such as transmission production cost models and power distribution system analyses, and
+have developed bespoke models for energy system analysis. I'm proficient with Python, Julia, Rust,
+and Javascript, and am well versed in scientific data analysis and extract-transform-load workflows.
+I also enjoy working on open source projects and learning new technologies.
 
 :::
-
 
 ::: {.g-col-12 .g-col-sm-4}
 
@@ -34,4 +35,5 @@ I'm proficient with Python, Julia, Rust, and Javascript, and am well versed in s
 
 # Contact
 
-You can contact me through my [email](mailto:me@kdheepak.com), [GitHub](https://github.com/kdheepak) or [LinkedIn](https://www.linkedin.com/in/dheepak-krishnamurthy/).
+You can contact me through my [email](mailto:me@kdheepak.com), [GitHub](https://github.com/kdheepak)
+or [LinkedIn](https://www.linkedin.com/in/dheepak-krishnamurthy/).
