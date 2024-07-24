@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.45">
+<meta name="generator" content="quarto-1.6.3">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -131,10 +131,10 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="../../_quarto/styles.css">
-<meta property="og:title" content="kdheepak - Understanding variables and mutability in Julia">
+<meta property="og:title" content="Understanding variables and mutability in Julia – kdheepak">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="kdheepak">
-<meta name="twitter:title" content="kdheepak - Understanding variables and mutability in Julia">
+<meta name="twitter:title" content="Understanding variables and mutability in Julia – kdheepak">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -235,7 +235,7 @@ div.csl-indent {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -274,7 +274,7 @@ div.csl-indent {
 </header>
 
 
-<p>I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy<span class="margin-aside">While analogies can be useful because they allow us to understand complex concepts by comparing them to something more familiar or simpler, they can also be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand any subject, I recommend using multiple different analogies to bolster your confidence and then dive deeper into the subject matter to harden your intuition.</span> involving books and bookshelves, from a complete beginner’s perspective.</p>
+<div class="page-columns page-full"><p>I would like to present a mental model for understanding the basics of variable assignment and mutability in Julia using an analogy involving books and bookshelves, from a complete beginner’s perspective.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">While analogies can be useful because they allow us to understand complex concepts by comparing them to something more familiar or simpler, they can also be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand any subject, I recommend using multiple different analogies to bolster your confidence and then dive deeper into the subject matter to harden your intuition.</span></div></div>
 <p>Imagine you are at a library full of books on bookshelves, but they are all over the place and you can’t find what you want. Also, you can’t interact directly with the books or bookshelves.</p>
 <p>Instead, you have to ask a very smart and helpful librarian, who knows where all the books are and can help you find what you need, to retrieve or modify the books for you. But in order for them to help you, you are form a pact with the librarian to speak in a very specific language with certain rules and decrees.</p>
 <p><img src="images/bookshelf-analogy.png" class="img-fluid"></p>
@@ -297,7 +297,7 @@ div.csl-indent {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here we assign the value <code>1</code> (also sometimes referred to as <q>bind the value</q>) to the label <code>x</code>, assign (or bind) the value <code>2</code> to label <code>y</code> and use the labels <code>x</code> and <code>y</code> to retrieve these values and add them together to get the result.</p>
 <p>By thinking of code in this way, you can better understand how your program interacts with memory and how the different elements of your code work together.</p>
-<section id="assignment" class="level2">
+<section id="assignment" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
 <p>In Julia, the <code>=</code> operator can be used to create a new label.</p>
 <p>Let’s look at a code example:</p>
@@ -660,7 +660,7 @@ div.csl-indent {
 </svg>
 </p>
 <p>So in our analogy, the <code>x</code> and <code>y</code> variables are two labels that you and the librarian agree point to the same <q>book</q> on the <q>bookshelf</q> (i.e.&nbsp;the same object in memory).</p>
-<p>In Julia, you can check the location by using the <code>pointer()</code><span class="margin-aside">The <code>pointer</code> function only works for mutable objects</span> function:</p>
+<div class="page-columns page-full"><p>In Julia, you can check the location by using the <code>pointer()</code> function:</p><div class="no-row-height column-margin column-container"><span class="margin-aside">The <code>pointer</code> function only works for mutable objects</span></div></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">pointer</span>(x)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Ptr</span>{<span class="dt">Float64</span>} @<span class="bn">0x0000000161c60d60</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1831,13 +1831,13 @@ div.csl-indent {
   author = {Krishnamurthy, Dheepak},
   title = {Understanding Variables and Mutability in {Julia}},
   date = {2023-02-26},
-  url = {https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia},
+  url = {https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-krishnamurthy2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 <div class="">D.
 Krishnamurthy, <span>“Understanding variables and mutability in
-Julia,”</span> Feb. 26, 2023. <a href="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia">https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia</a>.</div>
+Julia,”</span> Feb. 26, 2023. <a href="https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/">https://kdheepak.com/blog/understanding-variables-and-mutability-in-julia/</a>.</div>
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
