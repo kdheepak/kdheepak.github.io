@@ -2,6 +2,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/pandas-vs-polars-vs-ibis/index.html",
       "/blog/the-basic-building-blocks-of-ratatui-part-5/index.html",
       "/blog/the-basic-building-blocks-of-ratatui-part-4/index.html",
       "/blog/the-basic-building-blocks-of-ratatui-part-3/index.html",
@@ -56,9 +57,9 @@
       "/blog/active-reactive-and-apparent-power/index.html",
       "/blog/mac-osx-productivity-apps/index.html",
       "/blog/mac-osx-tweaks/index.html",
+      "/blog/tasker-and-google-maps/index.html",
       "/blog/robotics/index.html",
       "/blog/geektool-and-desktop-widgets-in-osx/index.html",
-      "/blog/tasker-and-google-maps/index.html",
       "/blog/tasker-projects/index.html",
       "/blog/home-monitoring-system/index.html",
       "/blog/welcome-to-my-blog/index.html"
