@@ -9,7 +9,7 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.6.6</generator>
+<generator>quarto-1.6.9</generator>
 <lastBuildDate>Sun, 25 Aug 2024 14:22:45 GMT</lastBuildDate>
 <item>
   <title>Pandas vs Polars vs ibis</title>
@@ -531,13 +531,12 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Tasker and Google Maps</title>
+  <title>Geektool and Desktop Widgets in OSX</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/tasker-and-google-maps/</link>
-  <description><![CDATA[ This is a small tutorial on how to use Python with SL4A. ]]></description>
-  <category>tasker</category>
-  <category>android</category>
-  <guid>https://kdheepak.com/blog/tasker-and-google-maps/</guid>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
+  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
+  <category>osx</category>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
@@ -551,12 +550,13 @@ Robotics and Microcontroller Projects
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Geektool and Desktop Widgets in OSX</title>
+  <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
-  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
-  <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
+  <link>https://kdheepak.com/blog/tasker-and-google-maps/</link>
+  <description><![CDATA[ This is a small tutorial on how to use Python with SL4A. ]]></description>
+  <category>tasker</category>
+  <category>android</category>
+  <guid>https://kdheepak.com/blog/tasker-and-google-maps/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
