@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is a short comparison of idiomatic <code>pandas</code>, <code>polars</code> and <code>ibis</code>, all using method chaining.</p>
-<div id="74cba5fa-f5a7-45e5-be52-77fedb3b7f94" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:32:33.261329Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:32:33.260471Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:32:33.280125Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:32:33.279284Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:32:33.261274Z&quot;}" data-execution_count="1">
+<div id="74cba5fa-f5a7-45e5-be52-77fedb3b7f94" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:39:54.957092Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:39:54.956084Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:39:54.972060Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:39:54.971410Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:39:54.957001Z&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sys.version_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -244,18 +244,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre data-code-line-numbers="nil"><code>sys.version_info(major=3, minor=12, micro=5, releaselevel='final', serial=0)</code></pre>
 </div>
 </div>
-<div id="e31fe4a9-6232-41ed-9bdb-ce77b60cb1f8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:32:33.488646Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:32:33.488098Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:32:33.679776Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:32:33.679462Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:32:33.488605Z&quot;}" data-execution_count="2">
+<div id="e31fe4a9-6232-41ed-9bdb-ce77b60cb1f8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:39:55.396037Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:39:55.395369Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:39:56.085988Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:39:56.085612Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:39:55.395999Z&quot;}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ibis</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ibis <span class="im">import</span> _</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ibis.options.interactive <span class="op">=</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="04bfebcc-d822-4840-9186-87a491fdf4f2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:32:34.071479Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:32:34.070906Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:32:34.081068Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:32:34.080330Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:32:34.071447Z&quot;}" data-execution_count="3">
+<div id="04bfebcc-d822-4840-9186-87a491fdf4f2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:39:56.086910Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:39:56.086797Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:39:56.089996Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:39:56.089734Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:39:56.086900Z&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ibis.__version__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre data-code-line-numbers="nil"><code>'9.3.0'</code></pre>
+<pre data-code-line-numbers="nil"><code>'9.4.0'</code></pre>
 </div>
 </div>
-<div id="5d8bd52f-cfac-4267-8a78-a2efc0d8dd21" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:32:40.397738Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:32:40.397421Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:32:42.123098Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:32:42.122691Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:32:40.397718Z&quot;}" data-execution_count="4">
+<div id="5d8bd52f-cfac-4267-8a78-a2efc0d8dd21" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:39:56.536559Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:39:56.535509Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:40:15.532020Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:40:15.531712Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:39:56.536506Z&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ibis.examples.starwars.fetch()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -281,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="pandas" class="level3">
 <h3 class="anchored" data-anchor-id="pandas">Pandas</h3>
-<div id="cf4d19b0-dd9e-46fc-938f-eea064387bbd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:32:42.391756Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:32:42.390979Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:32:42.453068Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:32:42.452725Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:32:42.391713Z&quot;}" data-execution_count="5">
+<div id="cf4d19b0-dd9e-46fc-938f-eea064387bbd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:40:15.532998Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:40:15.532845Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:40:15.600840Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:40:15.600537Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:40:15.532987Z&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
@@ -316,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="polars" class="level3">
 <h3 class="anchored" data-anchor-id="polars">Polars</h3>
-<div id="6a5996f1-dfd8-4ac8-8b89-6af5dbccfe66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:32:42.803381Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:32:42.802476Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:32:43.896091Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:32:43.895692Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:32:42.803337Z&quot;}" data-execution_count="6">
+<div id="6a5996f1-dfd8-4ac8-8b89-6af5dbccfe66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:40:15.601560Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:40:15.601415Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:40:17.121021Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:40:17.120529Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:40:15.601549Z&quot;}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -352,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ibis" class="level3">
 <h3 class="anchored" data-anchor-id="ibis">ibis</h3>
-<div id="c1611af7-18ae-44a1-b584-ce86887428eb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:32:43.897216Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:32:43.896990Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:32:43.931312Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:32:43.930924Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:32:43.897199Z&quot;}" data-execution_count="7">
+<div id="c1611af7-18ae-44a1-b584-ce86887428eb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T09:40:17.122628Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T09:40:17.122460Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T09:40:17.161344Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T09:40:17.160867Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T09:40:17.122614Z&quot;}" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>_df <span class="op">=</span> (</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    df</span>
