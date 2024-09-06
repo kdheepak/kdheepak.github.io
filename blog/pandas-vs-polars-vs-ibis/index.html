@@ -285,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="pandas" class="level3">
 <h3 class="anchored" data-anchor-id="pandas">Pandas</h3>
-<div id="cf4d19b0-dd9e-46fc-938f-eea064387bbd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T07:39:11.265308Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T07:39:11.264386Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T07:39:11.330386Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T07:39:11.330061Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T07:39:11.265260Z&quot;}" data-execution_count="7">
+<div id="cf4d19b0-dd9e-46fc-938f-eea064387bbd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T08:20:00.982981Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T08:20:00.982591Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T08:20:01.019533Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T08:20:01.019054Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T08:20:00.982958Z&quot;}" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
@@ -303,10 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"birth_year.notna()"</span>)</span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> ibis.pandas.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df})</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> con.table(<span class="st">'_df'</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>ibis.pandas.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df}).table(<span class="st">'_df'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height  </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
 ┡━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━┩
@@ -322,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="polars" class="level3">
 <h3 class="anchored" data-anchor-id="polars">Polars</h3>
-<div id="6a5996f1-dfd8-4ac8-8b89-6af5dbccfe66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T07:39:55.182227Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T07:39:55.181594Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T07:39:55.216347Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T07:39:55.216002Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T07:39:55.182196Z&quot;}" data-execution_count="12">
+<div id="6a5996f1-dfd8-4ac8-8b89-6af5dbccfe66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T08:19:48.721128Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T08:19:48.720416Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T08:19:48.746280Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T08:19:48.745768Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T08:19:48.721083Z&quot;}" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -341,10 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"birth_year"</span>).is_not_null())</span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> ibis.polars.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df})</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> con.table(<span class="st">'_df'</span>)</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>ibis.polars.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df}).table(<span class="st">'_df'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films  </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
 ┡━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━┩
