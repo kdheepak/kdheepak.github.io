@@ -12,6 +12,16 @@ dependencies = [
     "itables>=2.1.4",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+pandas-vs-polars-vs-ibis = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+python = "3.12.*"
+ipykernel = ">=6.29.5,<6.30"
+pixi-kernel = ">=0.4.0,<0.5"
