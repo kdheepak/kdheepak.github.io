@@ -12,4 +12,4 @@
 # pixi environments
 .pixi
 *.egg-info
-
+.virtual_documents/*
