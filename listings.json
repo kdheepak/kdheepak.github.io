@@ -2,6 +2,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
+      "/blog/ibis-power-lines/index.html",
       "/blog/pandas-vs-polars-vs-ibis/index.html",
       "/blog/the-basic-building-blocks-of-ratatui-part-5/index.html",
       "/blog/the-basic-building-blocks-of-ratatui-part-4/index.html",

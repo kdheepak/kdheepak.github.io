@@ -10,8 +10,17 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.6.32</generator>
-<lastBuildDate>Sun, 25 Aug 2024 14:22:45 GMT</lastBuildDate>
+<generator>quarto-1.7.1</generator>
+<lastBuildDate>Sun, 01 Dec 2024 00:03:04 GMT</lastBuildDate>
+<item>
+  <title>Power Lines with ibis</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/ibis-power-lines/</link>
+  <description><![CDATA[ This is a reproduction of the post on the official <a href="https://ibis-project.org/posts/ibis-overturemaps/">ibis</a> website with minor modifications. ]]></description>
+  <category>python</category>
+  <guid>https://kdheepak.com/blog/ibis-power-lines/</guid>
+  <pubDate>Sun, 01 Dec 2024 00:03:04 GMT</pubDate>
+</item>
 <item>
   <title>Pandas vs Polars vs ibis</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>

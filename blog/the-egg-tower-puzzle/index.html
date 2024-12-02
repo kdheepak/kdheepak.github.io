@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.7.1">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -93,10 +93,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-10eaa2007f4c567fade0b5098da8d8ad.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5642a6d046fcb2a4876d8b96109879e8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5e659f72b48ad0f989807c6390394a09.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5f422184c5b27d80e081db61ab4a90a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -162,10 +162,12 @@ window.Quarto = {
 <link rel="stylesheet" href="equation.css">
 <meta property="og:title" content="The egg tower puzzle – kdheepak">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/images/pascaltriangle.svg">
 <meta property="og:site_name" content="kdheepak">
 <meta name="twitter:title" content="The egg tower puzzle – kdheepak">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kdheepak.com/blog/the-egg-tower-puzzle/images/pascaltriangle.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -439,7 +441,7 @@ window.Quarto = {
 <p>Using the function <code>f</code>, we can also generate a table that explores what is the maximum number of floors that can be check for various number of drops and eggs.</p>
 <!-- prettier-ignore-start -->
 <figure class="fullwidth figure">
-<table style="width:90%;">
+<table class="table">
 <caption>Maximum number of floors that can be checked with <span class="math inline">\(x\)</span> drops and <span class="math inline">\(n\)</span> eggs</caption>
 <colgroup>
 <col style="width: 14%">
@@ -455,7 +457,7 @@ window.Quarto = {
 <col style="width: 8%">
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th style="text-align: center;"></th>
 <th>1 egg</th>
 <th>2 eggs</th>
@@ -470,7 +472,7 @@ window.Quarto = {
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>1 drop</strong></td>
 <td>1</td>
 <td>1</td>
@@ -483,7 +485,7 @@ window.Quarto = {
 <td>1</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: center;"><strong>2 drops</strong></td>
 <td>2</td>
 <td>3</td>
@@ -496,7 +498,7 @@ window.Quarto = {
 <td>3</td>
 <td>3</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>3 drops</strong></td>
 <td>3</td>
 <td>6</td>
@@ -509,7 +511,7 @@ window.Quarto = {
 <td>7</td>
 <td>7</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: center;"><strong>4 drops</strong></td>
 <td>4</td>
 <td>10</td>
@@ -522,7 +524,7 @@ window.Quarto = {
 <td>15</td>
 <td>15</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>5 drops</strong></td>
 <td>5</td>
 <td>15</td>
@@ -535,7 +537,7 @@ window.Quarto = {
 <td>31</td>
 <td>31</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: center;"><strong>6 drops</strong></td>
 <td>6</td>
 <td>21</td>
@@ -548,7 +550,7 @@ window.Quarto = {
 <td>63</td>
 <td>63</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>7 drops</strong></td>
 <td>7</td>
 <td>28</td>
@@ -561,7 +563,7 @@ window.Quarto = {
 <td>127</td>
 <td>127</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: center;"><strong>8 drops</strong></td>
 <td>8</td>
 <td>36</td>
@@ -574,7 +576,7 @@ window.Quarto = {
 <td>255</td>
 <td>255</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>9 drops</strong></td>
 <td>9</td>
 <td>45</td>
@@ -587,7 +589,7 @@ window.Quarto = {
 <td>511</td>
 <td>511</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: center;"><strong>10 drops</strong></td>
 <td>10</td>
 <td>55</td>
@@ -600,7 +602,7 @@ window.Quarto = {
 <td>1022</td>
 <td>1023</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>11 drops</strong></td>
 <td>11</td>
 <td>66</td>
@@ -613,7 +615,7 @@ window.Quarto = {
 <td>2035</td>
 <td>2046</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: center;"><strong>12 drops</strong></td>
 <td>12</td>
 <td>78</td>
@@ -626,7 +628,7 @@ window.Quarto = {
 <td>4016</td>
 <td>4082</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>13 drops</strong></td>
 <td>13</td>
 <td>91</td>
@@ -639,7 +641,7 @@ window.Quarto = {
 <td>7813</td>
 <td>8099</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: center;"><strong>14 drops</strong></td>
 <td>14</td>
 <td>105</td>
@@ -652,7 +654,7 @@ window.Quarto = {
 <td>14912</td>
 <td>15913</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: center;"><strong>15 drops</strong></td>
 <td>15</td>
 <td>120</td>
@@ -784,8 +786,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -954,7 +954,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
