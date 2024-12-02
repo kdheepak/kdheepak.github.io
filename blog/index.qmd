@@ -1,5 +1,5 @@
 ---
-title: "My personal thoughts and notes"
+title: "Blog"
 date: last-modified
 citation: false
 comments: false
