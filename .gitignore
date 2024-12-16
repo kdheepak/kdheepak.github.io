@@ -13,3 +13,7 @@
 .pixi
 *.egg-info
 .virtual_documents/*
+
+**/.venv/*
+
+**/.virtual_documents/*
