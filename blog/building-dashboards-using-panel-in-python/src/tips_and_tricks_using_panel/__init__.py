@@ -22,7 +22,6 @@ mpl.pyplot.rcParams["figure.constrained_layout.use"] = True
 pn.extension(
     "tabulator",
     sizing_mode="stretch_width",
-    notifications=True,
     throttled=True,
 )
 hv.extension("bokeh")
