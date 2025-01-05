@@ -10,7 +10,16 @@
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.7.5</generator>
-<lastBuildDate>Mon, 16 Dec 2024 02:03:04 GMT</lastBuildDate>
+<lastBuildDate>Sun, 05 Jan 2025 02:03:04 GMT</lastBuildDate>
+<item>
+  <title>Building Dashboards using Panel in Python</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/building-dashboards-using-panel-in-python/</link>
+  <description><![CDATA[ <a href="https://panel.holoviz.org/"><code>panel</code></a> is a library that allows creating interactive dashboards in pure Python. It’s a flexible library that allows interlinking matplotlib, bokeh, widgets, and more. ]]></description>
+  <category>python</category>
+  <guid>https://kdheepak.com/blog/building-dashboards-using-panel-in-python/</guid>
+  <pubDate>Sun, 05 Jan 2025 02:03:04 GMT</pubDate>
+</item>
 <item>
   <title>Jupyter prelude</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
