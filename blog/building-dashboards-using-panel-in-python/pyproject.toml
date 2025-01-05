@@ -1,5 +1,5 @@
 [project]
-name = "tips-and-tricks-using-panel"
+name = "movies-dashboard"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -8,10 +8,7 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "dask[dataframe]>=2024.12.1",
-    "datashader>=0.16.3",
     "hvplot>=0.11.2",
-    "ibis-framework[duckdb,geospatial]>=9.5.0",
     "ipykernel>=6.29.5",
     "matplotlib>=3.10.0",
     "pandas>=2.2.3",
