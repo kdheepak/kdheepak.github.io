@@ -52,7 +52,9 @@ class Movies(pm.Parameterized):
         )
         movies = title_basics.merge(title_ratings, on="tconst").dropna()
         movies["startYear"] = pd.to_numeric(movies["startYear"], downcast="integer")
-        movies["runtimeMinutes"] = pd.to_numeric(movies["runtimeMinutes"], downcast="integer")
+        movies["runtimeMinutes"] = pd.to_numeric(
+            movies["runtimeMinutes"], downcast="integer"
+        )
         movies["genres"] = movies["genres"].str.split(",")
         movies = movies.explode("genres")
         return movies
@@ -97,7 +99,11 @@ class Movies(pm.Parameterized):
         on_init=True,
     )
     def _update_table(self):
-        if self.year_range is None or self.ratings_range is None or self.runtime_range is None:
+        if (
+            self.year_range is None
+            or self.ratings_range is None
+            or self.runtime_range is None
+        ):
             return self.df
         df, year_range, ratings_range, runtime_range, genre = (
             self.df,
@@ -114,11 +120,15 @@ class Movies(pm.Parameterized):
             .query(f"averageRating <= {ratings_range[-1]}")
             .query(f"runtimeMinutes >= {runtime_range[0]}")
             .query(f"runtimeMinutes <= {runtime_range[-1]}")
-        )
+        ).sort_values("startYear")
 
     @pm.depends("filtered_df")
     def _update_plot(self):
-        plot = hv.BoxWhisker(self.filtered_df, kdims=["startYear"], vdims=["averageRating"],).opts(
+        plot = hv.BoxWhisker(
+            self.filtered_df,
+            kdims=["startYear"],
+            vdims=["averageRating"],
+        ).opts(
             width=900,
             height=400,
             title=f"IMDb Movies - {self.genre}",
