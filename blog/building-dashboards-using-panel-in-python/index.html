@@ -2243,8 +2243,8 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 <ol type="1">
 <li>Add a member function with the <code>param.depends</code> decorator.</li>
 </ol>
-<div id="96012734-ad64-4a99-8c97-6d19660f724a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:56.644479Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:56.643915Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:56.685329Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:56.684953Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:56.644437Z&quot;}" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingDepends(pm.Parameterized):</span>
+<div id="96012734-ad64-4a99-8c97-6d19660f724a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:56.644479Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:56.643915Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:56.685329Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:56.684953Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:56.644437Z&quot;}" data-source-line-numbers="10" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingDepends(pm.Parameterized):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
@@ -2262,14 +2262,14 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingDepends()</span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code>{'start': 1892, 'end': 1912}</code></pre>
+<pre data-code-line-numbers="10"><code>{'start': 1892, 'end': 1912}</code></pre>
 </div>
 </div>
 <ol start="2" type="1">
 <li>Use <code>pm.bind</code> with the <code>watch=True</code> argument.</li>
 </ol>
-<div id="1d1e7730-1eb8-4dd0-a6e9-524465769da8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:57.014482Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:57.014067Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:57.052067Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:57.051749Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:57.014459Z&quot;}" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingBind(pm.Parameterized):</span>
+<div id="1d1e7730-1eb8-4dd0-a6e9-524465769da8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:57.014482Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:57.014067Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:57.052067Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:57.051749Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:57.014459Z&quot;}" data-source-line-numbers="8" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingBind(pm.Parameterized):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
@@ -2287,14 +2287,14 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingBind()</span>
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code>{'start': 1892, 'end': 1912}</code></pre>
+<pre data-code-line-numbers="8"><code>{'start': 1892, 'end': 1912}</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
 <li>Use <code>self.param.watch</code> in the <code>__init__</code> function.</li>
 </ol>
-<div id="0aaf2709-4652-48dd-aa4b-a144e0c6abe1" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:57.396158Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:57.395431Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:57.434198Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:57.433909Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:57.396126Z&quot;}" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb20" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingWatch(pm.Parameterized):</span>
+<div id="0aaf2709-4652-48dd-aa4b-a144e0c6abe1" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:57.396158Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:57.395431Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:57.434198Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:57.433909Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:57.396126Z&quot;}" data-source-line-numbers="8" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20" data-code-line-numbers="8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingWatch(pm.Parameterized):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
@@ -2314,7 +2314,7 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 <span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingWatch()</span>
 <span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre data-code-line-numbers="nil"><code>{'start': 1892, 'end': 1912}</code></pre>
+<pre data-code-line-numbers="8"><code>{'start': 1892, 'end': 1912}</code></pre>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip">
@@ -2332,8 +2332,8 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 <section id="outputs" class="level4">
 <h4 class="anchored" data-anchor-id="outputs">Outputs</h4>
 <p>Finally, it is important to define the outputs of the component. In this case, the outputs is a derived component that represents the filtered dataframe.</p>
-<div id="5106b47b-0c76-416e-a58c-9c15774e997b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:58.188164Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:58.187490Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:58.224025Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:58.223629Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:58.188123Z&quot;}" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithOutputs(pm.Parameterized):</span>
+<div id="5106b47b-0c76-416e-a58c-9c15774e997b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:58.188164Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:58.187490Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:58.224025Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:58.223629Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:58.188123Z&quot;}" data-source-line-numbers="20-28" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="20-28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithOutputs(pm.Parameterized):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
@@ -2441,8 +2441,8 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 </div>
 <p>Storing the outputs as a function allows for easy access to the outputs for testing, debugging and for use in other components.</p>
 <p>On some occassions however, you might want to store the outputs as a property to cache outputs. This is useful when the output is expensive to compute.</p>
-<div id="0ebb084b-bd22-4b82-860b-41242036f1bb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:58.519208Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:58.518584Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:58.555986Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:58.555733Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:58.519167Z&quot;}" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithDependentOutputs(pm.Parameterized):</span>
+<div id="0ebb084b-bd22-4b82-860b-41242036f1bb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:58.519208Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:58.518584Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:58.555986Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:58.555733Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:58.519167Z&quot;}" data-source-line-numbers="28-30" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="28-30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithDependentOutputs(pm.Parameterized):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
@@ -2558,8 +2558,8 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 <h3 class="anchored" data-anchor-id="panel-view">Panel View</h3>
 <p>After setting up the state of an component, we can create a view that presents the state, derived values and the outputs.</p>
 <p>One convention is to make this part of a <code>panel()</code> or a <code>view()</code> method that returns the layout and initializes any <code>pn.widgets</code> in and only in this method.</p>
-<div id="945b4a37-e3af-4f33-9f92-47af52f2a389" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T12:11:39.504633Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T12:11:39.503867Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T12:11:39.594113Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T12:11:39.593843Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T12:11:39.504572Z&quot;}" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
+<div id="945b4a37-e3af-4f33-9f92-47af52f2a389" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T12:11:39.504633Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T12:11:39.503867Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T12:11:39.594113Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T12:11:39.593843Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T12:11:39.504572Z&quot;}" data-source-line-numbers="30-40" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb24" data-code-line-numbers="30-40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
@@ -3104,8 +3104,8 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 </div>
 </div>
 <p>Here’s an example of using the <code>@pm.depends</code> decorator to define a method that is used to update the UI:</p>
-<div id="f83ddf99-2fd0-48f4-9a09-535644a88e66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:04.726650Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:04.725892Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:04.796876Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:04.796560Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:04.726577Z&quot;}" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb42" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
+<div id="f83ddf99-2fd0-48f4-9a09-535644a88e66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:04.726650Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:04.725892Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:04.796876Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:04.796560Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:04.726577Z&quot;}" data-source-line-numbers="40-42,30-33" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb42" data-code-line-numbers="40-42,30-33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
@@ -3624,7 +3624,7 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 })(window);</script>
 </div>
 </div>
-<p>The only real disadvantage of this package based approach is that it is not straightforward to make a wasm only version of the panel dashboard, since that requires it to be all in one file</p>
+<p>The only real disadvantage of this package based approach is that it is not straightforward to make a wasm only version of the panel dashboard, since that requires it to be all in one file.</p>
 <p>This approach allows making a package, using <code>param</code> to define dependent state, create UI when required in a class based approach. In my opinion, this lends itself to better testing, documentation and maintainability in the long run. This is also the approach recommended in the intermediate sections of the <code>panel</code> tutorials. Check out these links for more information:</p>
 <ul>
 <li><a href="https://panel.holoviz.org/tutorials/intermediate/parameters.html" class="uri">https://panel.holoviz.org/tutorials/intermediate/parameters.html</a></li>
