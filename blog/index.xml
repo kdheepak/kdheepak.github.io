@@ -15,7 +15,7 @@
   <title>Building Dashboards using Panel in Python</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/building-dashboards-using-panel-in-python/</link>
-  <description><![CDATA[ <a href="https://panel.holoviz.org/"><code>panel</code></a> is a library that allows creating interactive dashboards in pure Python. It’s a flexible library that allows interlinking matplotlib, bokeh, widgets, and more. ]]></description>
+  <description><![CDATA[ The UI elements in this post are not interactive as this is a static page. To see the interactive elements, please run the notebook in a Jupyter environment. ]]></description>
   <category>python</category>
   <guid>https://kdheepak.com/blog/building-dashboards-using-panel-in-python/</guid>
   <pubDate>Sun, 05 Jan 2025 02:03:04 GMT</pubDate>
@@ -577,13 +577,12 @@ font-style: inherit;">"ibis-framework[duckdb,geospatial]"</span> ipykernel panel
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Tasker and Google Maps</title>
+  <title>Geektool and Desktop Widgets in OSX</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/tasker-and-google-maps/</link>
-  <description><![CDATA[ This is a small tutorial on how to use Python with SL4A. ]]></description>
-  <category>tasker</category>
-  <category>android</category>
-  <guid>https://kdheepak.com/blog/tasker-and-google-maps/</guid>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
+  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
+  <category>osx</category>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
@@ -597,12 +596,13 @@ Robotics and Microcontroller Projects
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Geektool and Desktop Widgets in OSX</title>
+  <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
-  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
-  <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
+  <link>https://kdheepak.com/blog/tasker-and-google-maps/</link>
+  <description><![CDATA[ This is a small tutorial on how to use Python with SL4A. ]]></description>
+  <category>tasker</category>
+  <category>android</category>
+  <guid>https://kdheepak.com/blog/tasker-and-google-maps/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
