@@ -10,7 +10,7 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.7.5</generator>
+<generator>quarto-1.7.7</generator>
 <lastBuildDate>Sun, 05 Jan 2025 02:03:04 GMT</lastBuildDate>
 <item>
   <title>Building Dashboards using Panel in Python</title>

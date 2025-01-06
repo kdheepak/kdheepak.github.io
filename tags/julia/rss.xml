@@ -9,7 +9,7 @@
 <link>https://kdheepak.com/blog/#category=julia</link>
 <atom:link href="https://kdheepak.com/blog/index-julia.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.7.5</generator>
+<generator>quarto-1.7.7</generator>
 <lastBuildDate>Sun, 21 Apr 2024 04:27:32 GMT</lastBuildDate>
 <item>
   <title>Effect of type inference on performance in Julia</title>
