@@ -3,18 +3,6 @@ local mmdc = os.getenv("MMDC") or pandoc.system.get_working_directory() .. "/nod
 local filetype = "svg"
 
 local renderer = {
-	render_dot = function(text, attrs)
-		if attrs[1] then
-			attrs = attrs[1][2]
-		end
-		local params = { "-Tsvg" }
-		for w in attrs:gmatch("%S+") do
-			table.insert(params, w)
-		end
-		local cmd = { "dot", params, text }
-		local data = pandoc.pipe(cmd[1], cmd[2], cmd[3])
-		return data
-	end,
 	render_svgbob = function(text)
 		-- io.stderr:write("svgbob found: " .. text .. "\n")
 		local params = {}
