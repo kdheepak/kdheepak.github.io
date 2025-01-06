@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#development-constraints" id="toc-development-constraints" class="nav-link active" data-scroll-target="#development-constraints">Development Constraints</a></li>
-  <li><a href="#jupyter-notebook" id="toc-jupyter-notebook" class="nav-link" data-scroll-target="#jupyter-notebook">Jupyter Notebook</a></li>
+  <li><a href="#jupyter-prelude" id="toc-jupyter-prelude" class="nav-link" data-scroll-target="#jupyter-prelude">Jupyter prelude</a></li>
   <li><a href="#panel-components" id="toc-panel-components" class="nav-link" data-scroll-target="#panel-components">Panel Components</a></li>
   <li><a href="#view" id="toc-view" class="nav-link" data-scroll-target="#view">View</a></li>
   <li><a href="#example-movies-dashboard" id="toc-example-movies-dashboard" class="nav-link" data-scroll-target="#example-movies-dashboard">Example: Movies Dashboard</a></li>
@@ -1971,20 +1971,20 @@ if (window.Jupyter !== undefined) {
 <p>There are however many ways to use <code>panel</code>, some of which are better for certain use cases. I wanted to write this post to share the way I use <code>panel</code>.</p>
 <section id="development-constraints" class="level3">
 <h3 class="anchored" data-anchor-id="development-constraints">Development Constraints</h3>
-<p>My first constraint when using <code>panel</code> was that I wanted to develop the dashboard in an interactive manner, preferably using a Jupyter notebook environment. <code>panel</code> does allow starting a server using the <code>panel serve</code> command and you can pass in the path to a file or a jupyter notebook. However, I only want to prototype individual components in a Jupyter notebook, and once I’m happy with the components, I want to combine them into a dashboard. For multi-page dashboards, I didn’t want to have to store different components in different files and run multiple servers.</p>
-<p>My second constraint was that I wanted to make the dashboard as modular as possible. I wanted to be able to reuse some components across different dashboards. For example, I might have a component that shows a line chart and I want to use that line chart in a <q>user guide page</q> as well as in the <q>main dashboard</q>.</p>
-<p>Lastly, I wanted the code to be usable in a Python script in case someone wanted to programmatically access the same features. Imagine if a user wanted to plot the line chart from the dashboard and annotate it with some custom text. I wanted to make it easy for an advanced user that wanted to do that to have the option to do so.</p>
-<p>The most natural way to do this was to make the components as classes and then instantiate them as part of the dashboard. For this post, I’m going to use the IMDb movies dataset as an example to build a dashboard.</p>
+<p>My first constraint when using <code>panel</code> was that I wanted to develop the dashboard in an interactive manner, preferably using a Jupyter notebook environment. <code>panel</code> does allow starting a server using the <code>panel serve --autoreload</code> command and you can pass in the path to a file or a jupyter notebook. However, I want to prototype individual components in a Jupyter notebook, but once I’m happy with the components, I want to combine them into a dashboard. With multiple components like this, using global variables gets unwieldy. Additionally, for multi-page dashboards, I don’t want to have to store different components in different files and run multiple servers.</p>
+<p>My second constraint was that I wanted to make the dashboard as modular as possible. I wanted to be able to reuse some components across different dashboards. For example, I might have a component that shows a line chart and I want to use that line chart in a <q>user guide page</q> as well as in the <q>home page</q>.</p>
+<p>Lastly, I wanted the code to be usable in a Python script in case someone wanted to programmatically access the same features. Imagine if a user wanted to plot the line chart from the dashboard and annotate it with some custom text. I wanted to make it easy for an advanced user that wanted to do that to have the option to do so. This also means that I wanted to make it easy to test the components in a CI/CD pipeline.</p>
+<p>The most natural way to do this was to make the components as classes and then instantiate them as part of the dashboard. This also requires the <q>state</q> and the <q>view</q> to be separate. In this post we are going to talk specifically about that approach. We’ll use the IMDb movies dataset as an example to build a dashboard.</p>
 </section>
-<section id="jupyter-notebook" class="level3">
-<h3 class="anchored" data-anchor-id="jupyter-notebook">Jupyter Notebook</h3>
-<p>When working in a Jupyter notebook, autoreloading modules is a feature that is very useful. This means you can make a python package and import the package in the notebook, prototype components in the notebook and move the code over to the package when you are happy with the component. With autoreloading, you don’t have to restart the jupyter notebook kernel every time you make a change to the source code.</p>
+<section id="jupyter-prelude" class="level3">
+<h3 class="anchored" data-anchor-id="jupyter-prelude">Jupyter prelude</h3>
+<p>When working in a Jupyter notebook, autoreloading modules is a feature that can be very useful. This means you can make a python package and import the package in the notebook, prototype components in the notebook and move the code over to the package when you are happy with the component. With autoreloading, you don’t have to restart the jupyter notebook kernel every time you make a change to the source code.</p>
 <div id="7914faa7-20e3-479f-aeca-c84ed7797f12" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:52.963558Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:52.962972Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:53.000736Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:53.000325Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:52.963511Z&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># autoreload all modules every time before executing the Python code</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext autoreload</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For this notebook, I have a package called <code>movies_dashboard</code> that has the following structure:</p>
+<p>For this example, I’ve made a package called <code>movies_dashboard</code> that has the following structure:</p>
 <div id="26e20286-29bd-47bd-847e-507f4e6af78a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:53.322201Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:53.321562Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:53.490108Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:53.489317Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:53.322123Z&quot;}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>eza <span class="op">--</span>tree src</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1995,21 +1995,39 @@ if (window.Jupyter !== undefined) {
     └── py.typed</code></pre>
 </div>
 </div>
+<div id="ca9737cf-1375-41d6-86e8-77aa6242e485" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T11:43:32.921741Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T11:43:32.920772Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T11:43:32.967707Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T11:43:32.967224Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T11:43:32.921688Z&quot;}" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> movies_dashboard <span class="im">as</span> md</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>md.__version__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[36], line 2</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">movies_dashboard</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> <span style="font-weight:bold;color:rgb(0,0,255)">md</span>
+<span class="ansi-green-fg">----&gt; 2</span> <span class="ansi-yellow-bg">md</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">__version__</span>
+
+<span class="ansi-red-fg">AttributeError</span>: module 'movies_dashboard' has no attribute '__version__'</pre>
+</div>
+</div>
+</div>
+<div id="3265cbe9-15d3-4837-8564-93d93cd6ce73" class="cell">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>md.__version__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Another setting that you can enable is <code>last_expr_or_assign</code>. This makes it such that even if the last line of a cell is an assignment, the value of the assignment is displayed.</p>
 <div id="974b6145-26a8-4d78-b869-bd3eb9904255" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:53.759025Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:53.758668Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:53.792989Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:53.792549Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:53.758996Z&quot;}" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.interactiveshell <span class="im">import</span> InteractiveShell</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># `ast_node_interactivity` is a setting that determines how the return value of the last line in a cell is displayed</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with `last_expr_or_assign`, the return value of the last expression is displayed unless it is assigned to a variable</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>InteractiveShell.ast_node_interactivity <span class="op">=</span> <span class="st">"last_expr_or_assign"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.interactiveshell <span class="im">import</span> InteractiveShell</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># `ast_node_interactivity` is a setting that determines how the return value of the last line in a cell is displayed</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with `last_expr_or_assign`, the return value of the last expression is displayed unless it is assigned to a variable</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>InteractiveShell.ast_node_interactivity <span class="op">=</span> <span class="st">"last_expr_or_assign"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With this setting, you don’t have to repeat the name of the variable at the end of every cell to see the value of the variable.</p>
 <div id="c7de8559-69ec-4607-ac8f-a30810e00c34" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:54.130433Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:54.129809Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:54.172894Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:54.172566Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:54.130368Z&quot;}" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>).head()</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># df ## this line is not required to see the value of df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>).head()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># df ## this line is not required to see the value of df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -2102,23 +2120,23 @@ if (window.Jupyter !== undefined) {
 <p><code>panel</code> is built on top of <a href="https://param.holoviz.org/"><code>param</code></a>. One useful way to think about <code>panel</code> and <code>param</code> is that <code>param</code> is a way to define state and <code>panel</code> is a way to visualize that state. And making state driven components is a great way to make interactive dashboards.</p>
 <p>With <code>param</code>, you can define the state using a class based approach:</p>
 <div id="8ff85b5d-f81a-477e-9990-d0a249b9a7a2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:54.827698Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:54.827345Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:54.863041Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:54.862686Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:54.827674Z&quot;}" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> param <span class="im">as</span> pm</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesStateExample(pm.Parameterized):</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> pm.String()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> pm.Integer()</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MoviesStateExample(name <span class="op">=</span> <span class="st">"Goodfellas"</span>, year <span class="op">=</span> <span class="dv">1990</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> param <span class="im">as</span> pm</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesStateExample(pm.Parameterized):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> pm.String()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> pm.Integer()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MoviesStateExample(name <span class="op">=</span> <span class="st">"Goodfellas"</span>, year <span class="op">=</span> <span class="dv">1990</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre data-code-line-numbers="nil"><code>MoviesStateExample(name='Goodfellas', year=1990)</code></pre>
 </div>
 </div>
 <p>And with <code>panel</code>, you can visualize the state:</p>
 <div id="535784da-2c96-4cb0-9738-ca887823161d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:55.202594Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:55.202003Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:55.248829Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:55.248490Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:55.202550Z&quot;}" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> panel <span class="im">as</span> pn</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pn.param.Param(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> panel <span class="im">as</span> pn</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>pn.param.Param(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -2206,12 +2224,12 @@ if (window.Jupyter !== undefined) {
 <h4 class="anchored" data-anchor-id="identifying-inputs">Identifying Inputs</h4>
 <p>Let’s say we want to filter based on the year, the average ratings and the runtime of movies. In this case, we would have one variable for the input dataframe; and variables for the year, ratings and runtime ranges.</p>
 <div id="539e64fd-f594-4229-a1d8-8071a20636be" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:56.085220Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:56.084314Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:56.120676Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:56.120289Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:56.085179Z&quot;}" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesStateExample(pm.Parameterized):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    input_df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    year_range <span class="op">=</span> pm.Range()</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    ratings_range <span class="op">=</span> pm.Range()</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    runtime_range <span class="op">=</span> pm.Range()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesStateExample(pm.Parameterized):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    input_df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    year_range <span class="op">=</span> pm.Range()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    ratings_range <span class="op">=</span> pm.Range()</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    runtime_range <span class="op">=</span> pm.Range()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="identifying-derived-properties" class="level4">
@@ -2222,23 +2240,23 @@ if (window.Jupyter !== undefined) {
 <li>Add a member function with the <code>param.depends</code> decorator.</li>
 </ol>
 <div id="96012734-ad64-4a99-8c97-6d19660f724a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:56.644479Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:56.643915Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:56.685329Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:56.684953Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:56.644437Z&quot;}" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingDepends(pm.Parameterized):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingDepends()</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingDepends(pm.Parameterized):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingDepends()</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>{'start': 1892, 'end': 1912}</code></pre>
 </div>
@@ -2247,23 +2265,23 @@ if (window.Jupyter !== undefined) {
 <li>Use <code>pm.bind</code> with the <code>watch=True</code> argument.</li>
 </ol>
 <div id="1d1e7730-1eb8-4dd0-a6e9-524465769da8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:57.014482Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:57.014067Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:57.052067Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:57.051749Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:57.014459Z&quot;}" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingBind(pm.Parameterized):</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        pm.bind(<span class="va">self</span>._update_bounds, <span class="va">self</span>.param.df, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>, df):</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingBind()</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingBind(pm.Parameterized):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        pm.bind(<span class="va">self</span>._update_bounds, <span class="va">self</span>.param.df, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>, df):</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingBind()</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>{'start': 1892, 'end': 1912}</code></pre>
 </div>
@@ -2272,25 +2290,25 @@ if (window.Jupyter !== undefined) {
 <li>Use <code>self.param.watch</code> in the <code>__init__</code> function.</li>
 </ol>
 <div id="0aaf2709-4652-48dd-aa4b-a144e0c6abe1" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:57.396158Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:57.395431Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:57.434198Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:57.433909Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:57.396126Z&quot;}" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingWatch(pm.Parameterized):</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param.watch(<span class="va">self</span>._update_bounds, <span class="st">"df"</span>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>, event):</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> event.name <span class="op">==</span> <span class="st">"df"</span>:</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> event.new</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingWatch()</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieUsingWatch(pm.Parameterized):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param.watch(<span class="va">self</span>._update_bounds, <span class="st">"df"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>, event):</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> event.name <span class="op">==</span> <span class="st">"df"</span>:</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> event.new</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieUsingWatch()</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(start<span class="op">=</span>m.start_year, end<span class="op">=</span>m.end_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre data-code-line-numbers="nil"><code>{'start': 1892, 'end': 1912}</code></pre>
 </div>
@@ -2311,37 +2329,37 @@ if (window.Jupyter !== undefined) {
 <h4 class="anchored" data-anchor-id="outputs">Outputs</h4>
 <p>Finally, it is important to define the outputs of the component. In this case, the outputs is a derived component that represents the filtered dataframe.</p>
 <div id="5106b47b-0c76-416e-a58c-9c15774e997b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:58.188164Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:58.187490Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:58.224025Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:58.223629Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:58.188123Z&quot;}" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithOutputs(pm.Parameterized):</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"./data/title.basics.tsv.gz"</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>            usecols<span class="op">=</span>[<span class="st">"primaryTitle"</span>, <span class="st">"startYear"</span>],</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>            nrows<span class="op">=</span><span class="dv">200</span>,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>)</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> output_df(<span class="va">self</span>):</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(<span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieWithOutputs()</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>m.output_df()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithOutputs(pm.Parameterized):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"./data/title.basics.tsv.gz"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>            sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>            usecols<span class="op">=</span>[<span class="st">"primaryTitle"</span>, <span class="st">"startYear"</span>],</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>            nrows<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> output_df(<span class="va">self</span>):</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(<span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieWithOutputs()</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>m.output_df()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
@@ -2420,41 +2438,41 @@ if (window.Jupyter !== undefined) {
 <p>Storing the outputs as a function allows for easy access to the outputs for testing, debugging and for use in other components.</p>
 <p>On some occassions however, you might want to store the outputs as a property to cache outputs. This is useful when the output is expensive to compute.</p>
 <div id="0ebb084b-bd22-4b82-860b-41242036f1bb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:58.519208Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:58.518584Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:58.555986Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:58.555733Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:58.519167Z&quot;}" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithDependentOutputs(pm.Parameterized):</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    filtered_df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"./data/title.basics.tsv.gz"</span>,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>            sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>,</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>            usecols<span class="op">=</span>[<span class="st">"primaryTitle"</span>, <span class="st">"startYear"</span>],</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>            nrows<span class="op">=</span><span class="dv">200</span>,</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _output_df(<span class="va">self</span>):</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.filtered_df <span class="op">=</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.filtered_df</span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieWithDependentOutputs()</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>m.filtered_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MovieWithDependentOutputs(pm.Parameterized):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    filtered_df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"./data/title.basics.tsv.gz"</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>            sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>            usecols<span class="op">=</span>[<span class="st">"primaryTitle"</span>, <span class="st">"startYear"</span>],</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>            nrows<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _output_df(<span class="va">self</span>):</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.filtered_df <span class="op">=</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.filtered_df</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MovieWithDependentOutputs()</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>m.filtered_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
@@ -2537,49 +2555,49 @@ if (window.Jupyter !== undefined) {
 <p>After setting up the state of an component, we can create a view that presents the state, derived values and the outputs.</p>
 <p>One convention is to make this part of a <code>panel()</code> or a <code>view()</code> method that returns the layout and initializes any <code>pn.widgets</code> in and only in this method.</p>
 <div id="945b4a37-e3af-4f33-9f92-47af52f2a389" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:59.097666Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:59.097102Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:59.250612Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:59.250334Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:59.097624Z&quot;}" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb20" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    filtered_df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        basics <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        ratings <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.ratings.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> basics.merge(ratings, on<span class="op">=</span><span class="st">"tconst"</span>).dropna()</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _output_df(<span class="va">self</span>):</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.filtered_df <span class="op">=</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.filtered_df</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> panel(<span class="va">self</span>):</span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pn.Column(</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>            pn.Row(</span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.start_year, name<span class="op">=</span><span class="st">"Start Year"</span>),</span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.end_year, name<span class="op">=</span><span class="st">"End Year"</span>),</span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>            pn.widgets.Tabulator.from_param(</span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.param.filtered_df, pagination<span class="op">=</span><span class="st">"remote"</span>, page_size<span class="op">=</span><span class="dv">5</span></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MoviesPanel()</span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>m.panel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    filtered_df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        basics <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        ratings <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.ratings.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> basics.merge(ratings, on<span class="op">=</span><span class="st">"tconst"</span>).dropna()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _output_df(<span class="va">self</span>):</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.filtered_df <span class="op">=</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.filtered_df</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> panel(<span class="va">self</span>):</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pn.Column(</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>            pn.Row(</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.start_year, name<span class="op">=</span><span class="st">"Start Year"</span>),</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.end_year, name<span class="op">=</span><span class="st">"End Year"</span>),</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>            pn.widgets.Tabulator.from_param(</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.param.filtered_df, pagination<span class="op">=</span><span class="st">"remote"</span>, page_size<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MoviesPanel()</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>m.panel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -2672,34 +2690,34 @@ if (window.Jupyter !== undefined) {
 <h4 class="anchored" data-anchor-id="a-parameter-instance">A parameter instance</h4>
 <p>It is important to understand the difference between an attribute instance and a parameter instance. An attribute instance is the value that most people typically deal with.</p>
 <div id="d363507c-a4e1-43f1-a62c-f5ac31e7d8a8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:29:59.885836Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:29:59.885505Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:29:59.921066Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:29:59.920698Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:29:59.885812Z&quot;}" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>m.start_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m.start_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre data-code-line-numbers="nil"><code>1892</code></pre>
 </div>
 </div>
 <p>A parameter instance on the other hand is a special instance created by any class that inherits from <code>param.Parameterized</code>.</p>
 <div id="f58691a5-4202-4925-bcee-2fb35b1bf9c5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:00.268224Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:00.267522Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:00.299634Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:00.299308Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:00.268183Z&quot;}" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m.param.start_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>m.param.start_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre data-code-line-numbers="nil"><code>&lt;param.parameters.Integer at 0x12a5aaa40&gt;</code></pre>
 </div>
 </div>
 <div id="fcf5ac06-ce95-4e9b-919a-47dbeaebdb36" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:00.457500Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:00.456592Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:00.491940Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:00.491465Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:00.457455Z&quot;}" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb25" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(m.param.start_year, pm.Parameter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(m.param.start_year, pm.Parameter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre data-code-line-numbers="nil"><code>True</code></pre>
 </div>
 </div>
 <p>Attribute instances are implemented using descriptors. When the Python interpreter sees <code>m.start_year</code>, it will return the value of the attribute by called the <code>__get__</code> method of the <code>param.Integer</code> descriptor. This returns the current state at the time of the invocation.</p>
 <div id="7f7ba07d-fd1a-4b5b-a636-52f0d9db941f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:00.856919Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:00.856306Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:00.890323Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:00.889886Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:00.856877Z&quot;}" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb27" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(m.start_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(m.start_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre data-code-line-numbers="nil"><code>int</code></pre>
 </div>
 </div>
 <p><code>m.param.start_year</code> on the other hand is a special value that contains a <code>pm.Parameter</code> instance that allows enabling the reactive features. This special value has to be passed into a widget to create a two way binding, and this has to be done using the <code>from_param</code> method.</p>
 <div id="0552d615-13c1-49e4-b406-63c5873d20b0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:01.231232Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:01.230903Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:01.274112Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:01.273819Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:01.231208Z&quot;}" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pn.widgets.IntInput.from_param(m.param.start_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pn.widgets.IntInput.from_param(m.param.start_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -2784,10 +2802,10 @@ if (window.Jupyter !== undefined) {
 </ol>
 <p>Widgets also can accept a method that is bound to a parameter. This is useful when you want to create a widget that is dependent on another parameter.</p>
 <div id="dd5a4747-18a3-444f-b30f-7fd237b2c644" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:02.099776Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:02.099202Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:02.152217Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:02.151927Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:02.099735Z&quot;}" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb30" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _get_dataframe(df):</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.head().drop(columns<span class="op">=</span>[<span class="st">"tconst"</span>, <span class="st">"titleType"</span>, <span class="st">"isAdult"</span>, <span class="st">"endYear"</span>, <span class="st">"genres"</span>, <span class="st">"originalTitle"</span>])</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>pn.widgets.Tabulator(pn.bind(_get_dataframe, m.param.filtered_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _get_dataframe(df):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.head().drop(columns<span class="op">=</span>[<span class="st">"tconst"</span>, <span class="st">"titleType"</span>, <span class="st">"isAdult"</span>, <span class="st">"endYear"</span>, <span class="st">"genres"</span>, <span class="st">"originalTitle"</span>])</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>pn.widgets.Tabulator(pn.bind(_get_dataframe, m.param.filtered_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -2867,16 +2885,16 @@ if (window.Jupyter !== undefined) {
 <p><code>pn.bind</code> is a way to bind a method to a parameter, and this method will be called whenever the parameter changes.</p>
 <p>Keep in mind that <code>pn.bind</code> returns a function:</p>
 <div id="d6f8d13c-af69-43f7-8582-781b3e6f180e" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:02.685022Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:02.683781Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:02.720362Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:02.720026Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:02.684979Z&quot;}" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(pn.bind(_get_dataframe, m.param.filtered_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(pn.bind(_get_dataframe, m.param.filtered_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre data-code-line-numbers="nil"><code>function</code></pre>
 </div>
 </div>
 <p>And calling that function will return the value of the parameter at that time.</p>
 <div id="8bb6f1bd-208f-41b6-b6e3-0ca0de3fb5fb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:03.087514Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:03.086869Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:03.122618Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:03.122067Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:03.087470Z&quot;}" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> pn.bind(_get_dataframe, m.param.filtered_df)<span class="op">;</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>f()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> pn.bind(_get_dataframe, m.param.filtered_df)<span class="op">;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>f()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
@@ -2941,7 +2959,7 @@ if (window.Jupyter !== undefined) {
 </div>
 <p>But in Jupyter notebooks, even displaying the function will call the function and return the value.</p>
 <div id="f0e8578b-8446-4c0f-b4db-ac50e82f828b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:03.477122Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:03.476563Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:03.520326Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:03.520064Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:03.477081Z&quot;}" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb34" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -3024,17 +3042,17 @@ if (window.Jupyter !== undefined) {
 <p>The input to a widget can also be a function or a method that is part of the class that uses the <code>@pm.depends</code> decorator. If this decorator is used, and when this method is passed to a widget, the method will be called whenever the parameter changes and the return value is used to update the UI.</p>
 <p>In this case however, displaying the method will not call the method:</p>
 <div id="9ce91f3d-03b4-4cff-a16d-15f341d9cadf" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:04.296853Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:04.296134Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:04.331999Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:04.331683Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:04.296810Z&quot;}" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="at">@pm.depends</span>(m.param.filtered_df)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _get_dataframe(filtered_df):</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.head().drop(columns<span class="op">=</span>[<span class="st">"tconst"</span>, <span class="st">"titleType"</span>, <span class="st">"isAdult"</span>, <span class="st">"endYear"</span>, <span class="st">"genres"</span>, <span class="st">"originalTitle"</span>])</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>_get_dataframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="at">@pm.depends</span>(m.param.filtered_df)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _get_dataframe(filtered_df):</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.head().drop(columns<span class="op">=</span>[<span class="st">"tconst"</span>, <span class="st">"titleType"</span>, <span class="st">"isAdult"</span>, <span class="st">"endYear"</span>, <span class="st">"genres"</span>, <span class="st">"originalTitle"</span>])</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>_get_dataframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre data-code-line-numbers="nil"><code>&lt;function __main__._get_dataframe(filtered_df)&gt;</code></pre>
 </div>
 </div>
 <div id="5b6096de-f0eb-4f23-8c46-e839f5cefd37" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:04.528491Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:04.528278Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:04.548355Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:04.548036Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:04.528471Z&quot;}" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>_get_dataframe(m.filtered_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>_get_dataframe(m.filtered_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 
@@ -3086,54 +3104,54 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 <div id="f83ddf99-2fd0-48f4-9a09-535644a88e66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:04.726650Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:04.725892Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:04.796876Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:04.796560Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:04.726577Z&quot;}" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb38" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    filtered_df <span class="op">=</span> pm.DataFrame()</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>        basics <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>        ratings <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.ratings.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> basics.merge(ratings, on<span class="op">=</span><span class="st">"tconst"</span>).dropna()</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _output_df(<span class="va">self</span>):</span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.filtered_df <span class="op">=</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.filtered_df</span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"filtered_df"</span>)</span>
-<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _get_dataframe(filtered_df):</span>
-<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df.head().drop(columns<span class="op">=</span>[<span class="st">"tconst"</span>, <span class="st">"titleType"</span>, <span class="st">"isAdult"</span>, <span class="st">"endYear"</span>, <span class="st">"genres"</span>, <span class="st">"originalTitle"</span>])</span>
-<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> panel(<span class="va">self</span>):</span>
-<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pn.Column(</span>
-<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>            pn.Row(</span>
-<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.start_year, name<span class="op">=</span><span class="st">"Start Year"</span>),</span>
-<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.end_year, name<span class="op">=</span><span class="st">"End Year"</span>),</span>
-<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>            pn.widgets.Tabulator(</span>
-<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>._get_dataframe, pagination<span class="op">=</span><span class="st">"remote"</span>, page_size<span class="op">=</span><span class="dv">5</span></span>
-<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MoviesPanel()</span>
-<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a>m.panel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(pm.Parameterized):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    end_year <span class="op">=</span> pm.Integer()</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    filtered_df <span class="op">=</span> pm.DataFrame()</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>        basics <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.basics.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>        ratings <span class="op">=</span> pd.read_csv(<span class="st">"./data/title.ratings.tsv.gz"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> basics.merge(ratings, on<span class="op">=</span><span class="st">"tconst"</span>).dropna()</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _update_bounds(<span class="va">self</span>):</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">min</span>())</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.end_year <span class="op">=</span> <span class="bu">int</span>(<span class="va">self</span>.df[<span class="st">"startYear"</span>].<span class="bu">max</span>())</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"df"</span>, <span class="st">"start_year"</span>, <span class="st">"end_year"</span>, watch<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _output_df(<span class="va">self</span>):</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>        df, start_year, end_year <span class="op">=</span> (</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.df,</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_year,</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.end_year,</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.filtered_df <span class="op">=</span> df.query(<span class="ss">f"startYear &gt;= </span><span class="sc">{</span>start_year<span class="sc">}</span><span class="ss">"</span>).query(</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"startYear &lt;= </span><span class="sc">{</span>end_year<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.filtered_df</span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">@pm.depends</span>(<span class="st">"filtered_df"</span>)</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _get_dataframe(filtered_df):</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df.head().drop(columns<span class="op">=</span>[<span class="st">"tconst"</span>, <span class="st">"titleType"</span>, <span class="st">"isAdult"</span>, <span class="st">"endYear"</span>, <span class="st">"genres"</span>, <span class="st">"originalTitle"</span>])</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> panel(<span class="va">self</span>):</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pn.Column(</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>            pn.Row(</span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.start_year, name<span class="op">=</span><span class="st">"Start Year"</span>),</span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>                pn.widgets.IntInput.from_param(<span class="va">self</span>.param.end_year, name<span class="op">=</span><span class="st">"End Year"</span>),</span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>            pn.widgets.Tabulator(</span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>._get_dataframe, pagination<span class="op">=</span><span class="st">"remote"</span>, page_size<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> MoviesPanel()</span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a>m.panel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -3239,16 +3257,16 @@ if (window.Jupyter !== undefined) {
 <div id="5ca798a9-01e2-4345-98b8-a25f96c11cce" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:05.531469Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:05.530892Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:05.561929Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:05.561394Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:05.531426Z&quot;}" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb39" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> movies_dashboard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> movies_dashboard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We can instantiate the <code>Movies</code> class.</p>
 <div id="dbb64a00-5a1c-4db5-9722-f23b6cf11d9b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:05.956916Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:05.956592Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:16.430565Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:16.430132Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:05.956894Z&quot;}" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb40" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> movies_dashboard.movies.Movies()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> movies_dashboard.movies.Movies()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And call the <code>panel()</code> method to get an interactive dashboard.</p>
 <div id="a722d4eb-6042-4a3a-b469-c90540eacbc6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:16.431310Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:16.431232Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:16.732503Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:16.732004Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:16.431301Z&quot;}" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>m.panel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>m.panel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -3332,14 +3350,14 @@ if (window.Jupyter !== undefined) {
 <div id="ab350d4e-7e8c-445f-a8ac-900561d9bcd0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-06T09:30:16.733091Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-06T09:30:16.733000Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-06T09:30:17.917605Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-06T09:30:17.917193Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-06T09:30:16.733083Z&quot;}" data-execution_count="33">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb42" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>m.genre <span class="op">=</span> <span class="st">"Documentary"</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>documentary_plot <span class="op">=</span> m._update_plot()</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>m.genre <span class="op">=</span> <span class="st">"Comedy"</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>comedy_plot <span class="op">=</span> m._update_plot()</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>m.genre <span class="op">=</span> <span class="st">"Romance"</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>(documentary_plot <span class="op">+</span> comedy_plot).cols(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>m.genre <span class="op">=</span> <span class="st">"Documentary"</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>documentary_plot <span class="op">=</span> m._update_plot()</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>m.genre <span class="op">=</span> <span class="st">"Comedy"</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>comedy_plot <span class="op">=</span> m._update_plot()</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>m.genre <span class="op">=</span> <span class="st">"Romance"</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>(documentary_plot <span class="op">+</span> comedy_plot).cols(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
