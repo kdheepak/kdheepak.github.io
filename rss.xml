@@ -13,12 +13,12 @@
 <generator>quarto-1.7.7</generator>
 <lastBuildDate>Sun, 05 Jan 2025 02:03:04 GMT</lastBuildDate>
 <item>
-  <title>Building Dashboards using Panel in Python</title>
+  <title>Building Dashboards using Param and Panel in Python</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/building-dashboards-using-panel-in-python/</link>
+  <link>https://kdheepak.com/blog/building-dashboards-using-param-and-panel-in-python/</link>
   <description><![CDATA[ The UI elements in this post are not interactive as this is a static page. To see the interactive elements, please run the notebook in a Jupyter environment. ]]></description>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/building-dashboards-using-panel-in-python/</guid>
+  <guid>https://kdheepak.com/blog/building-dashboards-using-param-and-panel-in-python/</guid>
   <pubDate>Sun, 05 Jan 2025 02:03:04 GMT</pubDate>
 </item>
 <item>

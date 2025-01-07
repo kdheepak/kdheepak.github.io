@@ -2,7 +2,7 @@
   "listing": "/404.html",
   "items": [
     "/blog/index.html",
-    "/blog/building-dashboards-using-panel-in-python/index.html",
+    "/blog/building-dashboards-using-param-and-panel-in-python/index.html",
     "/blog/jupyter-prelude/index.html",
     "/blog/ibis-power-lines/index.html",
     "/blog/pandas-vs-polars-vs-ibis/index.html",
