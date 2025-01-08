@@ -116,13 +116,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../_quarto/styles.css">
 <meta property="og:title" content="Building Dashboards using Param and Panel in Python – kdheepak">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://kdheepak.com/blog/building-dashboards-using-param-and-panel-in-python/watch-true-vs-false.png">
+<meta property="og:image" content="https://kdheepak.com/blog/building-dashboards-using-param-and-panel-in-python/images/watch-true-vs-false.png">
 <meta property="og:site_name" content="kdheepak">
 <meta property="og:image:height" content="180">
 <meta property="og:image:width" content="760">
 <meta name="twitter:title" content="Building Dashboards using Param and Panel in Python – kdheepak">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://kdheepak.com/blog/building-dashboards-using-param-and-panel-in-python/watch-true-vs-false.png">
+<meta name="twitter:image" content="https://kdheepak.com/blog/building-dashboards-using-param-and-panel-in-python/images/watch-true-vs-false.png">
 <meta name="twitter:image-height" content="180">
 <meta name="twitter:image-width" content="760">
 <meta name="twitter:card" content="summary_large_image">
@@ -4258,7 +4258,7 @@ Cell <span class="ansi-green-fg">In[5], line 2</span>
 <section id="panel-view" class="level3">
 <h3 class="anchored" data-anchor-id="panel-view">Panel View</h3>
 <p>After setting up the state of an component, we can create a view that presents the state, derived values and the outputs.</p>
-<p>One convention is to make this part of a <code>panel()</code> or a <code>view()</code> method that returns the layout and initializes any <code>pn.widgets</code> in and only in this method.</p>
+<p>One convention is to make this part of a <code>panel()</code> or a <code>view()</code> method that returns the layout and initializes any <code>pn.widgets</code> in, and only in, this method.</p>
 <div id="945b4a37-e3af-4f33-9f92-47af52f2a389" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-07T09:18:08.751435Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-07T09:18:08.751099Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-07T09:18:08.841528Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-07T09:18:08.841244Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-07T09:18:08.751414Z&quot;}" data-source-line-numbers="30-40" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb25" data-code-line-numbers="30-40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(param.Parameterized):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> param.DataFrame()</span>
@@ -4390,6 +4390,10 @@ Cell <span class="ansi-green-fg">In[5], line 2</span>
 </div>
 </div>
 <p>Every widget in panel accepts a few different types of arguments (See <a href="https://panel.holoviz.org/tutorials/intermediate/interactivity.html#declarative">this section in the official documentation</a> for more information). But the two most common types are:</p>
+<ol type="1">
+<li>A Parameter instance</li>
+<li>A method using <code>pn.bind</code> or <code>pn.depends</code> that returns a value</li>
+</ol>
 <section id="a-parameter-instance" class="level4">
 <h4 class="anchored" data-anchor-id="a-parameter-instance">1. A parameter instance</h4>
 <p>It is important to understand the difference between an attribute instance and a parameter instance. An attribute instance is the value that most people typically deal with.</p>
@@ -4501,6 +4505,11 @@ Cell <span class="ansi-green-fg">In[5], line 2</span>
 </section>
 <section id="a-method-using-pn.bind-or-pn.depends-that-returns-a-value" class="level4">
 <h4 class="anchored" data-anchor-id="a-method-using-pn.bind-or-pn.depends-that-returns-a-value">2. A method using <code>pn.bind</code> or <code>pn.depends</code> that returns a value</h4>
+<p>There are two ways to achieve a method that functions as a callback.</p>
+<ol type="a">
+<li><p>Using <code>pn.bind</code></p></li>
+<li><p>Using <code>@pn.depends</code></p></li>
+</ol>
 <p><strong>a. Using <code>pn.bind</code></strong></p>
 <p>Widgets also can accept a method that is bound to a parameter. This is useful when you want to create a widget that is dependent on another parameter.</p>
 <div id="dd5a4747-18a3-444f-b30f-7fd237b2c644" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-07T09:18:13.016250Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-07T09:18:13.016032Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-07T09:18:13.055390Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-07T09:18:13.054926Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-07T09:18:13.016237Z&quot;}" data-execution_count="55">
@@ -4748,8 +4757,8 @@ Cell <span class="ansi-green-fg">In[5], line 2</span>
 })(window);</script>
 </div>
 </div>
-<p><strong>b. Using <code>@pm.depends</code> or <code>@pn.depends</code></strong></p>
-<p>The input to a widget can also be a function or a method that is part of the class that uses the <code>@pm.depends</code> decorator. If this decorator is used, and when this method is passed to a widget, the method will be called whenever the parameter changes and the return value is used to update the UI.</p>
+<p><strong>b. Using <code>@pn.depends</code></strong></p>
+<p>The input to a widget can also be a function or a method that is part of the class that uses the <code>@pn.depends</code> decorator. If this decorator is used, and when this method is passed to a widget, the method will be called whenever the parameter changes and the return value is used to update the UI.</p>
 <p>In this case however, displaying the method will not call the method:</p>
 <div id="9ce91f3d-03b4-4cff-a16d-15f341d9cadf" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-07T09:18:39.362268Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-07T09:18:39.360318Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-07T09:18:39.397595Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-07T09:18:39.397238Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-07T09:18:39.362220Z&quot;}" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb40" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="at">@pn.depends</span>(m.param.filtered_df)</span>
@@ -4813,7 +4822,7 @@ Cell <span class="ansi-green-fg">In[5], line 2</span>
 </div>
 </div>
 </div>
-<p>When using <code>@pn.depends</code>, the method name is replaced by the <q>bound</q> method name, so you can pass the method directly to the widget.</p>
+<p>When using <code>@pn.depends</code>, the variable (e.g.&nbsp;<code>_get_dataframe</code>) that would have contained a reference to the function is replaced by a new wrapped function which is <q>reactive</q>. So in this case, you can pass the variable directly to the widget.</p>
 <div id="ac2fe6ea-2a54-4266-8eba-d81a0ece9e2f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-07T09:19:19.378769Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-07T09:19:19.377764Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-07T09:19:19.436126Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-07T09:19:19.435813Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-07T09:19:19.378714Z&quot;}" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb43" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>pn.widgets.Tabulator(_get_dataframe, disabled<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -4902,7 +4911,7 @@ Cell <span class="ansi-green-fg">In[5], line 2</span>
 </div>
 </div>
 </div>
-<p>Here’s an example of using the <code>@pm.depends</code> decorator to define a method in a class that is used to update the UI:</p>
+<p>Here’s an example of using the <code>@pn.depends</code> decorator to define a method in a class that is used to update the UI:</p>
 <div id="f83ddf99-2fd0-48f4-9a09-535644a88e66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-07T09:12:01.387183Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-07T09:12:01.386853Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-07T09:12:01.462539Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-07T09:12:01.462211Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-07T09:12:01.387162Z&quot;}" data-source-line-numbers="40-42,30-33" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb44" data-code-line-numbers="40-42,30-33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoviesPanel(param.Parameterized):</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    start_year <span class="op">=</span> param.Integer()</span>
@@ -5031,8 +5040,8 @@ Cell <span class="ansi-green-fg">In[5], line 2</span>
 </section>
 <section id="watchtrue-vs-watchfalse" class="level4">
 <h4 class="anchored" data-anchor-id="watchtrue-vs-watchfalse">watch=True vs watch=False</h4>
-<p>Notice that the <code>@pm.depends</code> decorator is used to define the method <code>_get_dataframe</code> does not use the <code>watch=True</code> argument.</p>
-<p>If the <code>@pm.depends</code> decorator uses the <code>watch=True</code> argument, the method will be called whenever the parameter changes AND the method will be called again when the widget needs to be updated.</p>
+<p>Notice that the <code>@pn.depends</code> decorator is used to define the method <code>_get_dataframe</code> does not use the <code>watch=True</code> argument.</p>
+<p>If the <code>@pn.depends</code> decorator uses the <code>watch=True</code> argument, the method will be called whenever the parameter changes AND the method will be called again when the widget needs to be updated.</p>
 <p>If you are ever confused about this, add print or log statements to the method to see when a method is called.</p>
 <div id="34a00c8a-907e-47d5-a649-1c9a18404421" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2025-01-07T09:37:35.021563Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-01-07T09:37:35.020894Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-01-07T09:37:35.071356Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-01-07T09:37:35.070952Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2025-01-07T09:37:35.021531Z&quot;}" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb45" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WatchTrueVsFalse(param.Parameterized):</span>
@@ -5135,7 +5144,7 @@ Watched</code></pre>
 })(window);</script>
 </div>
 </div>
-<p><img src="watch-true-vs-false.png" class="img-fluid"></p>
+<p><img src="images/watch-true-vs-false.png" class="img-fluid"></p>
 <p>You can see that <q>Watched</q> is printed twice:</p>
 <ol type="1">
 <li>When the input is changed</li>
