@@ -9,7 +9,7 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.7.7</generator>
+<generator>quarto-1.7.20</generator>
 <lastBuildDate>Sun, 05 Jan 2025 02:03:04 GMT</lastBuildDate>
 <item>
   <title>Building Dashboards using Param and Panel in Python</title>
@@ -577,15 +577,6 @@ font-style: inherit;">"ibis-framework[duckdb,geospatial]"</span> ipykernel panel
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Geektool and Desktop Widgets in OSX</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
-  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
-  <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Robotics</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/robotics/</link>
@@ -593,6 +584,15 @@ font-style: inherit;">"ibis-framework[duckdb,geospatial]"</span> ipykernel panel
 Robotics and Microcontroller Projects
  ]]></description>
   <guid>https://kdheepak.com/blog/robotics/</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Geektool and Desktop Widgets in OSX</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
+  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
+  <category>osx</category>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
