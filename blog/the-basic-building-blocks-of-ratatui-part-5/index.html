@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-54a0bf5acb7c45f44107ef6e9632136f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a67dbe77233d1d876d9bc8a3ba154a5e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -247,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Ratatui is a crate for building terminal user interfaces in Rust.</p>
 <p>In this post we’ll show how to build custom widgets.</p>
-<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:01:42.238666+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:01:42.238513+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:01:42.238623+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:01:55.232587+00:00&quot;}" data-execution_count="3">
+<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:01:42.238666+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:01:42.238513+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:01:42.238623+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:01:55.232587+00:00&quot;}}" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui <span class="op">=</span> <span class="st">"0.26.2"</span></span>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="buffer" class="level3">
 <h3 class="anchored" data-anchor-id="buffer">Buffer</h3>
 <p>We saw from an earlier part that <code>frame</code> has a <code>buffer_mut()</code> method:</p>
-<div id="92153cda-8adc-4789-be34-2a320fa4d090" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:03:00.203062+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:03:00.202817+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:03:00.203022+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:03:00.730688+00:00&quot;}" data-execution_count="8">
+<div id="92153cda-8adc-4789-be34-2a320fa4d090" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:03:00.203062+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:03:00.202817+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:03:00.203022+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:03:00.730688+00:00&quot;}}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> backend <span class="op">=</span> <span class="pp">ratatui::backend::TestBackend::</span>new(<span class="dv">80</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> terminal <span class="op">=</span> <span class="pp">ratatui::terminal::Terminal::</span>new(backend)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>terminal<span class="op">.</span>draw(<span class="op">|</span>frame<span class="op">|</span> <span class="op">{</span></span>
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We saw how to draw to the <code>Buffer</code> using predefined widgets.</p>
-<div id="d4be740e-fd73-4054-a6e3-89071e2ff957" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:04:41.914310+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:04:41.914174+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:04:41.914277+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:04:42.441546+00:00&quot;}" data-execution_count="12">
+<div id="d4be740e-fd73-4054-a6e3-89071e2ff957" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:04:41.914310+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:04:41.914174+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:04:41.914277+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:04:42.441546+00:00&quot;}}" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::widgets::</span>Widget<span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> backend <span class="op">=</span> <span class="pp">ratatui::backend::TestBackend::</span>new(<span class="dv">80</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
@@ -378,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>But it is also possible to draw to the <code>Buffer</code> manually:</p>
-<div id="51b3dfdb-bfba-40d0-8101-6878f263b0a0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:08:30.702111+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:08:30.701997+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:08:30.702088+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:08:31.397401+00:00&quot;}" data-execution_count="24">
+<div id="51b3dfdb-bfba-40d0-8101-6878f263b0a0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:08:30.702111+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:08:30.701997+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:08:30.702088+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:08:31.397401+00:00&quot;}}" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> backend <span class="op">=</span> <span class="pp">ratatui::backend::TestBackend::</span>new(<span class="dv">80</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> terminal <span class="op">=</span> <span class="pp">ratatui::terminal::Terminal::</span>new(backend)<span class="op">.</span>unwrap()<span class="op">;</span></span>
@@ -411,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="widget" class="level3">
 <h3 class="anchored" data-anchor-id="widget">Widget</h3>
 <p>The <code>Widget</code> trait in ratatui allows you to define what you want to draw to a <code>Buffer</code>:</p>
-<div id="f60e3fbc-c37c-47b2-9655-a42d8f690c37" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:11:16.849462+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:11:16.849313+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:11:16.849431+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:11:17.368392+00:00&quot;}" data-execution_count="29">
+<div id="f60e3fbc-c37c-47b2-9655-a42d8f690c37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:11:16.849462+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:11:16.849313+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:11:16.849431+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:11:17.368392+00:00&quot;}}" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> MyCustomWidget <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    counter<span class="op">:</span> <span class="dt">usize</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
@@ -428,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="4d04bc52-7284-4b89-ad6e-344c6879a590" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:11:39.618073+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:11:39.618007+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:11:39.618060+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:11:40.190853+00:00&quot;}" data-execution_count="31">
+<div id="4d04bc52-7284-4b89-ad6e-344c6879a590" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:11:39.618073+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:11:39.618007+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:11:39.618060+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:11:40.190853+00:00&quot;}}" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> backend <span class="op">=</span> <span class="pp">ratatui::backend::TestBackend::</span>new(<span class="dv">80</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> terminal <span class="op">=</span> <span class="pp">ratatui::terminal::Terminal::</span>new(backend)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>terminal<span class="op">.</span>draw(<span class="op">|</span>frame<span class="op">|</span> <span class="op">{</span></span>
@@ -453,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Here’s an example of filling the entire buffer with the symbol <code>▒</code>:</p>
-<div id="cf71d9bf-527b-45a3-bd00-723c8dbf10f2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:14:36.248824+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:14:36.248752+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:14:36.248811+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:14:36.539360+00:00&quot;}" data-execution_count="36">
+<div id="cf71d9bf-527b-45a3-bd00-723c8dbf10f2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:14:36.248824+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:14:36.248752+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:14:36.248811+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:14:36.539360+00:00&quot;}}" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Hatcher<span class="op">;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">impl</span> Widget <span class="cf">for</span> Hatcher <span class="op">{</span></span>
@@ -468,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s the output of a <code>Hatcher</code> being rendered:</p>
-<div id="4987f77b-ff71-405c-a389-0b74d9e2b351" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:15:41.992199+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:15:41.992087+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:15:41.992176+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:15:42.576072+00:00&quot;}" data-execution_count="40">
+<div id="4987f77b-ff71-405c-a389-0b74d9e2b351" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:15:41.992199+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:15:41.992087+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:15:41.992176+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:15:42.576072+00:00&quot;}}" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> backend <span class="op">=</span> <span class="pp">ratatui::backend::TestBackend::</span>new(<span class="dv">80</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> terminal <span class="op">=</span> <span class="pp">ratatui::terminal::Terminal::</span>new(backend)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>terminal<span class="op">.</span>draw(<span class="op">|</span>frame<span class="op">|</span> <span class="op">{</span></span>
@@ -491,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Rendering multiple widgets renders to the buffer in the order they are called, and hence latter <code>render</code> calls can overwrite earlier <code>render</code>s.</p>
-<div id="c34a2c55-c23c-44d5-b0f5-beaaf32db8ba" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:17:14.729988+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:17:14.729784+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:17:14.729939+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:17:15.299206+00:00&quot;}" data-execution_count="43">
+<div id="c34a2c55-c23c-44d5-b0f5-beaaf32db8ba" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:17:14.729988+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:17:14.729784+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:17:14.729939+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:17:15.299206+00:00&quot;}}" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> backend <span class="op">=</span> <span class="pp">ratatui::backend::TestBackend::</span>new(<span class="dv">80</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> terminal <span class="op">=</span> <span class="pp">ratatui::terminal::Terminal::</span>new(backend)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>terminal<span class="op">.</span>draw(<span class="op">|</span>frame<span class="op">|</span> <span class="op">{</span></span>
@@ -519,7 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="statefulwidget" class="level3">
 <h3 class="anchored" data-anchor-id="statefulwidget">StatefulWidget</h3>
 <p>Sometimes you want to store information that is only known during render for later use. For this, you can use a <code>StatefulWidget</code>:</p>
-<div id="767c51a3-c04c-4b64-85a5-76e705d14e4d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:23:17.057729+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:23:17.057542+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:23:17.057695+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:23:17.371707+00:00&quot;}" data-execution_count="56">
+<div id="767c51a3-c04c-4b64-85a5-76e705d14e4d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:23:17.057729+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:23:17.057542+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:23:17.057695+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:23:17.371707+00:00&quot;}}" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::widgets::</span>StatefulWidget<span class="op">;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Default</span><span class="op">,</span> <span class="bu">Debug</span><span class="at">)]</span></span>
@@ -537,7 +537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="4d0e1259-4e5e-43b8-99cb-47176ee13aaa" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:24:32.370021+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:24:32.369919+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:24:32.369998+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:24:32.925396+00:00&quot;}" data-execution_count="66">
+<div id="4d0e1259-4e5e-43b8-99cb-47176ee13aaa" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-23T05:24:32.370021+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-23T05:24:32.369919+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-23T05:24:32.369998+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-23T05:24:32.925396+00:00&quot;}}" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb13" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> backend <span class="op">=</span> <span class="pp">ratatui::backend::TestBackend::</span>new(<span class="dv">80</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> terminal <span class="op">=</span> <span class="pp">ratatui::terminal::Terminal::</span>new(backend)<span class="op">.</span>unwrap()<span class="op">;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1035,55 +1035,30 @@ Krishnamurthy, <span>“The Basic Building blocks of Ratatui - Part
     }
   });
   </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
-<script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "kdheepak/kdheepak.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
-    script.dataset.category = "Comments";
-    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
-    script.dataset.mapping = "url";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

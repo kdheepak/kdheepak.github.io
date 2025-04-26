@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-54a0bf5acb7c45f44107ef6e9632136f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a67dbe77233d1d876d9bc8a3ba154a5e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you haven’t already checked it out, go watch CGPGrey’s Rock-Paper-Scissors YouTube Game.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/PmWQmZXYd74" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>In this post, I’m going to explore what all the possible paths available are. Let’s import some packages first.</p>
-<div id="cell-3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:48.671&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:48.671&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:48.679&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:48.678&quot;}" data-execution_count="30">
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:48.671&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:48.671&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:48.679&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:48.678&quot;}}" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PyCall</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Conda</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Graphs</span></span>
@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Fortunately for us, CGPGrey was kind enough to put links to the choices in the description of (<em>almost</em>) every video. We can use Google’s YouTube API to get the video descriptions and get all the YouTube links in the description.</p>
 <p>We are going to use the <code>google-api-python-client</code> in Python from Julia.</p>
-<div id="cell-5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:49.113&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:49.112&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:49.126&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:49.126&quot;}" data-execution_count="31">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:49.113&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:49.112&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:49.126&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:49.126&quot;}}" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="cn">ENV</span>[<span class="st">"YOUTUBE_API_KEY"</span>]; <span class="co"># Get API_KEY from google console</span></span>
@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Now we can get the description of every video, extract the metadata from it into a <code>Dict</code> of <code>Dict</code>s, build a graph:</p>
-<div id="cell-7" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:22.123&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:22.123&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:22.154&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:22.154&quot;}" data-execution_count="40">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:22.123&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:22.123&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:22.154&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:22.154&quot;}}" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">youtubeid</span>(url) <span class="op">=</span> <span class="fu">string</span>(<span class="fu">first</span>(<span class="fu">split</span>(<span class="fu">replace</span>(url, <span class="st">"https://www.youtube.com/watch?v="</span> <span class="op">=&gt;</span> <span class="st">""</span>), <span class="st">"&amp;t"</span>)))</span>
@@ -383,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:22.371&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:22.371&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:22.601&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:22.600&quot;}" data-execution_count="41">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:22.371&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:22.371&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:22.601&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:22.600&quot;}}" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">cached_links</span>(<span class="st">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span>, duplicate_links<span class="op">=</span><span class="cn">true</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(; ids, titles, urls, nodes) <span class="op">=</span> <span class="fu">get_nodes</span>(data)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> <span class="fu">grapher</span>(data, ids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -391,13 +391,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre data-code-line-numbers="nil"><code>{111, 206} directed simple Int64 graph</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:22.679&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:22.679&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:22.681&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:22.681&quot;}" data-execution_count="42">
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:22.679&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:22.679&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:22.681&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:22.681&quot;}}" data-execution_count="42">
 <div class="cell-output cell-output-display cell-output-markdown">
 <p>There’s <strong>111</strong> videos in this graph with <strong>206</strong> connections between the videos.</p>
 </div>
 </div>
 <p>Here’s what that graph visualized looks like:</p>
-<div id="cell-11" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:23.593&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:23.592&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:24.202&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:24.201&quot;}" data-execution_count="43">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:23.593&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:23.592&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:24.202&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:24.201&quot;}}" data-execution_count="43">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_theme!</span>(; size<span class="op">=</span>(<span class="fl">1600</span>, <span class="fl">900</span>), fonts<span class="op">=</span>(; title<span class="op">=</span><span class="st">"CMU Serif"</span>))</span>
@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>This graph contains a lot of duplicate links to the same video. For example when losing after different number of wins, you might end up at the same video. Let’s remove those connections so we can visualize it as a tree.</p>
-<div id="cell-13" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:52.798&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:52.798&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:52.803&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:52.803&quot;}" data-execution_count="36">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:52.798&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:52.798&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:52.803&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:52.803&quot;}}" data-execution_count="36">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">cached_links</span>(<span class="st">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span>, duplicate_links<span class="op">=</span><span class="cn">false</span>)</span>
@@ -440,13 +440,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre data-code-line-numbers="nil"><code>{111, 110} directed simple Int64 graph</code></pre>
 </div>
 </div>
-<div id="cell-14" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:53.306&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:53.306&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:53.319&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:53.319&quot;}" data-execution_count="37">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:53:53.306&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:53:53.306&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:53:53.319&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:53:53.319&quot;}}" data-execution_count="37">
 <div class="cell-output cell-output-display cell-output-markdown">
 <p>There’s <strong>111</strong> videos in this graph with <strong>110</strong> connections between the videos.</p>
 </div>
 </div>
 <p>Here’s what the graph now visualized looks like:</p>
-<div id="cell-16" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:00.901&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:00.901&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:01.588&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:01.588&quot;}" data-execution_count="38">
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:54:00.901&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:54:00.901&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:54:01.588&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:54:01.588&quot;}}" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_theme!</span>(; size<span class="op">=</span>(<span class="fl">1600</span>, <span class="fl">900</span>), fonts<span class="op">=</span>(; title<span class="op">=</span><span class="st">"CMU Serif"</span>))</span>
@@ -485,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>There we have it; a flowchart of the Rock-Paper-Scissors game.</p>
 <p>Here’s a table that contains the sorted view count as of April 19th, 2024.</p>
-<div id="cell-18" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:49:48.255&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:49:48.255&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:49:50.052&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:49:50.052&quot;}" data-execution_count="11">
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:49:48.255&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:49:48.255&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:49:50.052&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:49:50.052&quot;}}" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">DataFrames</span> as DF</span>
@@ -653,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>If you liked this blog post, consider subscribing to <a href="https://www.patreon.com/cgpgrey">CGP Grey’s Patreon</a> so that they can make more awesome content like this.</p>
 <p>If you are interested in viewing all the videos, you can check them out below:</p>
-<div id="cell-20" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:49:50.124&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:49:50.052&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:49:50.237&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:49:50.237&quot;}" data-execution_count="12">
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T03:49:50.124&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T03:49:50.052&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T03:49:50.237&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T03:49:50.237&quot;}}" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">IJulia</span></span>
@@ -1928,55 +1928,30 @@ Game,”</span> Oct. 23, 2023. <a href="https://kdheepak.com/blog/graphing-cgpgr
     }
   });
   </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
-<script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "kdheepak/kdheepak.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
-    script.dataset.category = "Comments";
-    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
-    script.dataset.mapping = "url";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

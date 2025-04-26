@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-54a0bf5acb7c45f44107ef6e9632136f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a67dbe77233d1d876d9bc8a3ba154a5e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Ratatui is a crate for building terminal user interfaces in Rust.</p>
 <p>In this post we’ll show some simple widgets that come built-in with <code>ratatui</code>.</p>
-<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:29:54.245741+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:29:54.245489+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:29:54.245692+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:30:06.442168+00:00&quot;}" data-execution_count="4">
+<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:29:54.245741+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:29:54.245489+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:29:54.245692+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:30:06.442168+00:00&quot;}}" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui <span class="op">=</span> <span class="st">"0.26.2"</span></span>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="block" class="level4">
 <h4 class="anchored" data-anchor-id="block">Block</h4>
 <p>The simplest widget is the <code>Block</code> widget, which is essentially just borders.</p>
-<div id="2a0837b2-dd94-4a10-b9a2-52a0fd431cc3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:31:09.038054+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:31:09.037897+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:31:09.038016+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:31:09.643884+00:00&quot;}" data-execution_count="10">
+<div id="2a0837b2-dd94-4a10-b9a2-52a0fd431cc3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:31:09.038054+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:31:09.037897+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:31:09.038016+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:31:09.643884+00:00&quot;}}" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::widgets::</span>Widget<span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span> </span>
@@ -349,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Most widgets accept a <code>Block</code> as a fluent setter. We saw from earlier that the <code>Paragraph</code> has a <code>.block()</code> method that accepts a <code>Block</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> paragraph <span class="op">=</span> <span class="pp">Paragraph::</span>new(text)<span class="op">.</span>block(block)<span class="op">.</span>centered()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Blocks can have different kinds of borders:</p>
-<div id="1d8cdc0e-9f43-41f3-aab7-d94bcc3946da" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:31:34.597008+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:31:34.596825+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:31:34.596967+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:31:35.180101+00:00&quot;}" data-execution_count="11">
+<div id="1d8cdc0e-9f43-41f3-aab7-d94bcc3946da" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:31:34.597008+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:31:34.596825+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:31:34.596967+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:31:35.180101+00:00&quot;}}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> area <span class="op">=</span> <span class="pp">ratatui::layout::Rect::</span>new(x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height)<span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> buf <span class="op">=</span> <span class="pp">ratatui::buffer::Buffer::</span>empty(area)<span class="op">;</span></span>
@@ -375,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>And <code>Block</code> can have multiple titles in different locations:</p>
-<div id="d0218e8c-2034-4df1-8b17-7166ca8487f6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:32:36.797571+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:32:36.797317+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:32:36.797521+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:32:37.507869+00:00&quot;}" data-execution_count="16">
+<div id="d0218e8c-2034-4df1-8b17-7166ca8487f6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-05-17T16:32:36.797571+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-05-17T16:32:36.797317+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T16:32:36.797521+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T16:32:37.507869+00:00&quot;}}" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span>line<span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span> </span>
@@ -885,55 +885,30 @@ Krishnamurthy, <span>“The Basic Building blocks of Ratatui - Part
     }
   });
   </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
-<script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "kdheepak/kdheepak.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
-    script.dataset.category = "Comments";
-    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
-    script.dataset.mapping = "url";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

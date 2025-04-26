@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-54a0bf5acb7c45f44107ef6e9632136f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a67dbe77233d1d876d9bc8a3ba154a5e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -238,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is a short comparison of idiomatic <code>pandas</code>, <code>polars</code> and <code>ibis</code>, all using method chaining.</p>
-<div id="74cba5fa-f5a7-45e5-be52-77fedb3b7f94" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:00.474454Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:00.474100Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:00.480088Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:00.479543Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:00.474433Z&quot;}" data-execution_count="1">
+<div id="74cba5fa-f5a7-45e5-be52-77fedb3b7f94" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:00.474454Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:00.474100Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:00.480088Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:00.479543Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:00.474433Z&quot;}}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sys.version_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -246,18 +246,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre data-code-line-numbers="nil"><code>sys.version_info(major=3, minor=12, micro=5, releaselevel='final', serial=0)</code></pre>
 </div>
 </div>
-<div id="e31fe4a9-6232-41ed-9bdb-ce77b60cb1f8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:01.976600Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:01.975759Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:02.507318Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:02.507055Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:01.976541Z&quot;}" data-execution_count="2">
+<div id="e31fe4a9-6232-41ed-9bdb-ce77b60cb1f8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:01.976600Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:01.975759Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:02.507318Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:02.507055Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:01.976541Z&quot;}}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ibis</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ibis <span class="im">import</span> _</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ibis.options.interactive <span class="op">=</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="04bfebcc-d822-4840-9186-87a491fdf4f2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:02.508115Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:02.508020Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:02.510235Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:02.509987Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:02.508107Z&quot;}" data-execution_count="3">
+<div id="04bfebcc-d822-4840-9186-87a491fdf4f2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:02.508115Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:02.508020Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:02.510235Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:02.509987Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:02.508107Z&quot;}}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ibis.__version__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre data-code-line-numbers="nil"><code>'9.4.0'</code></pre>
 </div>
 </div>
-<div id="5d8bd52f-cfac-4267-8a78-a2efc0d8dd21" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:03.715477Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:03.714785Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:18.923529Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:18.923236Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:03.715430Z&quot;}" data-execution_count="4">
+<div id="5d8bd52f-cfac-4267-8a78-a2efc0d8dd21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:03.715477Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:03.714785Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:18.923529Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:18.923236Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:03.715430Z&quot;}}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ibis.examples.starwars.fetch()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="pandas" class="level3">
 <h3 class="anchored" data-anchor-id="pandas">Pandas</h3>
-<div id="cf4d19b0-dd9e-46fc-938f-eea064387bbd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:18.924581Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:18.924393Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:18.973087Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:18.972700Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:18.924569Z&quot;}" data-execution_count="5">
+<div id="cf4d19b0-dd9e-46fc-938f-eea064387bbd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:18.924581Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:18.924393Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:18.973087Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:18.972700Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:18.924569Z&quot;}}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
@@ -318,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="polars" class="level3">
 <h3 class="anchored" data-anchor-id="polars">Polars</h3>
-<div id="6a5996f1-dfd8-4ac8-8b89-6af5dbccfe66" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:18.973778Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:18.973672Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:20.177802Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:20.177559Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:18.973770Z&quot;}" data-execution_count="6">
+<div id="6a5996f1-dfd8-4ac8-8b89-6af5dbccfe66" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:18.973778Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:18.973672Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:20.177802Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:20.177559Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:18.973770Z&quot;}}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ibis" class="level3">
 <h3 class="anchored" data-anchor-id="ibis">ibis</h3>
-<div id="c1611af7-18ae-44a1-b584-ce86887428eb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:20.178716Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:20.178619Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:20.204789Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:20.204461Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:20.178709Z&quot;}" data-execution_count="7">
+<div id="c1611af7-18ae-44a1-b584-ce86887428eb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:20.178716Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:20.178619Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:20.204789Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:20.204461Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:20.178709Z&quot;}}" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>_df <span class="op">=</span> (</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    df</span>
@@ -855,55 +855,30 @@ Krishnamurthy, <span>“Pandas vs Polars vs ibis,”</span> Aug. 25, 2024.
     }
   });
   </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
-<script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "kdheepak/kdheepak.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
-    script.dataset.category = "Comments";
-    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
-    script.dataset.mapping = "url";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-54a0bf5acb7c45f44107ef6e9632136f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a67dbe77233d1d876d9bc8a3ba154a5e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -249,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="toy-problem" class="level2">
 <h2 class="anchored" data-anchor-id="toy-problem">Toy problem</h2>
 <p>Let’s define a toy problem to work with.</p>
-<div id="b1e5ad21-3024-4076-9b16-f5d4c4ca4663" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:38.635&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:38.635&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:38.659&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:38.659&quot;}" data-execution_count="22">
+<div id="b1e5ad21-3024-4076-9b16-f5d4c4ca4663" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:38.635&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:38.635&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:38.659&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:38.659&quot;}}" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">abstract type</span> Shape <span class="kw">end</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(<span class="op">::</span><span class="dt">Shape</span>) <span class="op">=</span> <span class="fl">0.0</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">area</span>(c<span class="op">::</span><span class="dt">Circle</span>) <span class="op">=</span> <span class="cn">π</span> <span class="op">*</span> c.radius<span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can use the builtin <code>Test</code> module to check that the code we wrote is correct.</p>
-<div id="31a5cc81-a7e4-401c-ad44-c91ab139d0f9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:38.952&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:38.952&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:39.228&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:39.228&quot;}" data-execution_count="23">
+<div id="31a5cc81-a7e4-401c-ad44-c91ab139d0f9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:38.952&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:38.952&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:39.228&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:39.228&quot;}}" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Test</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@testset</span> <span class="st">"Areas"</span> <span class="cf">begin</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@test</span> <span class="fu">area</span>(<span class="fu">Square</span>(<span class="fl">2</span>)) <span class="op">==</span> <span class="fl">4</span></span>
@@ -294,14 +294,14 @@ Areas         | <span class="ansi-green-fg">   4  </span><span class="ansi-cyan-
 </div>
 </div>
 <p>Let’s build 1 million random shapes:</p>
-<div id="89712b98-7612-43da-bc3e-f667abd7e2ee" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:39.274&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:39.274&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:39.416&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:39.415&quot;}" data-execution_count="24">
+<div id="89712b98-7612-43da-bc3e-f667abd7e2ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:39.274&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:39.274&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:39.416&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:39.415&quot;}}" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">42</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>COUNT <span class="op">=</span> <span class="fl">1_000_000</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>shapes <span class="op">=</span> [<span class="fu">rand</span>((Square,Rectangle,Triangle,Circle))() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6cb04f19-d92e-401a-a475-746266921ac0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:09.689&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:09.689&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:09.750&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:09.750&quot;}" data-execution_count="64">
+<div id="6cb04f19-d92e-401a-a475-746266921ac0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:09.689&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:09.689&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:09.750&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:09.750&quot;}}" data-execution_count="64">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Format</span></span>
@@ -320,7 +320,7 @@ Areas         | <span class="ansi-green-fg">   4  </span><span class="ansi-cyan-
 <section id="type-inference" class="level2">
 <h2 class="anchored" data-anchor-id="type-inference">Type inference</h2>
 <p>Here’s the type trees for the <code>Shape</code>:</p>
-<div id="eff7f503-59de-4eb6-9a3e-30a764b3cf4d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:40.584&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:40.583&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:40.812&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:40.812&quot;}" data-execution_count="28">
+<div id="eff7f503-59de-4eb6-9a3e-30a764b3cf4d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:40.584&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:40.583&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:40.812&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:40.812&quot;}}" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="fu">subtypes</span>(Shape)</span>
@@ -336,7 +336,7 @@ Triangle &lt;: Shape &lt;: Any</code></pre>
 </div>
 <p>By default, Julia will infer the generic type for a container as close to the bottom of the tree that fits all the data in that container.</p>
 <p>For example, if we just built a vector with the just <code>Square</code>s, Julia will infer the container to be <code>Vector{Square}</code>. But if there are different elements Julia will infer the generic type parameter as a <code>Shape</code>.</p>
-<div id="2af0824b-d7f2-4903-be70-6566c54b1221" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T00:10:10.251&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T00:10:10.251&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T00:10:10.481&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T00:10:10.481&quot;}" data-execution_count="53">
+<div id="2af0824b-d7f2-4903-be70-6566c54b1221" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-22T00:10:10.251&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T00:10:10.251&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T00:10:10.481&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T00:10:10.481&quot;}}" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>([<span class="fu">Square</span>() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT])</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>([<span class="fu">rand</span>((Square,Rectangle))() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -345,12 +345,12 @@ typeof([(rand((Square, Rectangle)))() for _ = 1:COUNT]) = Vector{Shape}</code></
 </div>
 </div>
 <p>Let’s filter out shapes of a specific kind so that each array contains data of the same type. You might think to write this function like so:</p>
-<div id="c5ef2915-b4f5-4722-aef6-203bc056c28d" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:56.307&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:56.306&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:56.312&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:56.312&quot;}" data-execution_count="66">
+<div id="c5ef2915-b4f5-4722-aef6-203bc056c28d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:56.307&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:56.306&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:56.312&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:56.312&quot;}}" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bad_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T<span class="op">&lt;:</span><span class="dt">Shape </span><span class="op">=</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, while this function works, it has a subtle issue. It returns a type of <code>Vector{Shape}</code>.</p>
 <p>Julia is a dynamic language. And it can be easy to accidentally construct a container with an abstract type for the type parameter of a generic type, even if there is only one type in container.</p>
-<div id="663e79c1-c9b6-4685-b8c7-1c5599351040" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T04:28:05.407&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T04:28:05.407&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T04:28:05.488&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T04:28:05.488&quot;}" data-execution_count="61">
+<div id="663e79c1-c9b6-4685-b8c7-1c5599351040" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-22T04:28:05.407&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T04:28:05.407&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T04:28:05.488&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T04:28:05.488&quot;}}" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>shape_arr1 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Square, shapes)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>shape_arr2 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Rectangle, shapes)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>shape_arr3 <span class="op">=</span> <span class="fu">bad_shapes_by_type</span>(Triangle, shapes)</span>
@@ -369,7 +369,7 @@ typeof(shape_arr4) = Vector{Shape}</code></pre>
 </div>
 <p>This can happen if the Julia compiler cannot infer the types at the <q>compile time</q> of the function.</p>
 <p>Here, <code>Shape</code> is an abstract type, even if <code>Vector{Shape}</code> is concrete.</p>
-<div id="19f5214a-8321-4a40-965a-87f972acd061" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:41.929&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:41.928&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:41.934&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:41.934&quot;}" data-execution_count="32">
+<div id="19f5214a-8321-4a40-965a-87f972acd061" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:41.929&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:41.928&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:41.934&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:41.934&quot;}}" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(Shape)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">isconcretetype</span>(<span class="dt">Vector</span>{Shape})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -378,11 +378,11 @@ isconcretetype(Vector{Shape}) = true</code></pre>
 </div>
 </div>
 <p>For better performance in Julia, it helps to have concrete types in the generic parameters for a container. We can do this by helping the compiler by in this case explicitly listing the generic type parameter before the brackets for constructing the array, i.e.&nbsp;<code>T[...]</code>.</p>
-<div id="a49e7bce-6944-4982-9788-63af0b6908ae" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:47.434&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:47.433&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:47.443&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:47.443&quot;}" data-execution_count="65">
+<div id="a49e7bce-6944-4982-9788-63af0b6908ae" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-23T08:17:47.434&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-23T08:17:47.433&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-23T08:17:47.443&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-23T08:17:47.443&quot;}}" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb14" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">good_shapes_by_type</span>(<span class="op">::</span><span class="dt">Type{T}</span>, shapes) <span class="kw">where</span> T<span class="op">&lt;:</span><span class="dt">Shape </span><span class="op">=</span> T[shape for shape <span class="kw">in</span> <span class="fu">filter</span>(s <span class="op">-&gt;</span> <span class="fu">isa</span>(s, T), shapes)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With this function, we get <code>Vector{Square}</code> for an array with only squares in it.</p>
-<div id="db373b50-b4fe-4392-bf9b-3124e9a722a6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T04:28:16.769&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T04:28:16.769&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T04:28:16.877&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T04:28:16.877&quot;}" data-execution_count="63">
+<div id="db373b50-b4fe-4392-bf9b-3124e9a722a6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-22T04:28:16.769&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T04:28:16.769&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T04:28:16.877&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T04:28:16.877&quot;}}" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb15" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>square_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Square, shapes)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>rectangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Rectangle, shapes)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>triangle_arr <span class="op">=</span> <span class="fu">good_shapes_by_type</span>(Triangle, shapes)</span>
@@ -404,7 +404,7 @@ typeof(circle_arr) = Vector{Circle}</code></pre>
 <section id="benchmarks" class="level2">
 <h2 class="anchored" data-anchor-id="benchmarks">Benchmarks</h2>
 <p>Let’s combine these arrays back into different vectors that have different type parameters for illustration purposes:</p>
-<div id="88bed1fb-5da1-4c41-97cf-328baa5c8a52" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:43.050&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:43.049&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:43.406&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:43.406&quot;}" data-execution_count="35">
+<div id="88bed1fb-5da1-4c41-97cf-328baa5c8a52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:43.050&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:43.049&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:43.406&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:43.406&quot;}}" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb17" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sorted_shapes_shape <span class="op">=</span> <span class="fu">vcat</span>(square_arr, rectangle_arr, triangle_arr, circle_arr);</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sorted_shapes_any <span class="op">=</span> <span class="dt">Any</span>[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>sorted_shapes_union <span class="op">=</span> <span class="dt">Union</span>{Square, Rectangle, Triangle, Circle}[s for s <span class="kw">in</span> sorted_shapes_shape];</span>
@@ -419,18 +419,18 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 <p>We can benchmark the performance of these different types using <code>BenchmarkTools</code>:</p>
-<div id="cb11a309-14c8-454d-b2e9-bc9ce4bab4ff" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:43.406&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:43.406&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:43.407&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:43.407&quot;}" data-execution_count="36">
+<div id="cb11a309-14c8-454d-b2e9-bc9ce4bab4ff" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:43.406&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:43.406&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:43.407&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:43.407&quot;}}" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb19" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s define a <code>main1</code> function that calculates the sum over all the <code>area</code>s of every element in an array.</p>
-<div id="6a4a81e2-0de1-4b4a-a573-6c8dc1a41665" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T00:20:08.050&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T00:20:08.050&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T00:20:08.071&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T00:20:08.071&quot;}" data-execution_count="58">
+<div id="6a4a81e2-0de1-4b4a-a573-6c8dc1a41665" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-22T00:20:08.050&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T00:20:08.050&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T00:20:08.071&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T00:20:08.071&quot;}}" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb20" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main1</span>(arr) <span class="op">=</span> <span class="fu">sum</span>(area, arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="58">
 <pre data-code-line-numbers="nil"><code>main1 (generic function with 1 method)</code></pre>
 </div>
 </div>
 <p>And let’s run a benchmark for <code>sorted_shapes_shape</code> and <code>sorted_shapes_any</code>.</p>
-<div id="6608a0dd-158d-45c0-9cf0-e15203e81afb" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:43.771&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:43.771&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:55.557&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:55.557&quot;}" data-execution_count="37">
+<div id="6608a0dd-158d-45c0-9cf0-e15203e81afb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:43.771&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:43.771&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:13:55.557&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:13:55.557&quot;}}" data-execution_count="37">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_shape)</span>
@@ -452,7 +452,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 </div>
-<div id="87d39970-fb7e-4951-a2ba-e2564c72f183" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:55.557&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:55.557&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:06.483&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:06.483&quot;}" data-execution_count="38">
+<div id="87d39970-fb7e-4951-a2ba-e2564c72f183" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:13:55.557&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:13:55.557&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:06.483&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:06.483&quot;}}" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_any)</span>
@@ -481,7 +481,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </blockquote>
 <p>What is interesting is that <code>Union{Circle, Rectangle, Square, Triangle}</code> can perform better than <code>Shape</code> or <code>Any</code> when used as a concrete type parameter.</p>
 <p>You can see difference show up clearly in the performance benchmark:</p>
-<div id="9fb14edb-9ea2-4de3-ac7e-784476f220c0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:06.483&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:06.483&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:17.112&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:17.112&quot;}" data-execution_count="39">
+<div id="9fb14edb-9ea2-4de3-ac7e-784476f220c0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:06.483&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:06.483&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:17.112&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:17.112&quot;}}" data-execution_count="39">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(sorted_shapes_union)</span>
@@ -503,13 +503,13 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 </div>
-<div id="b7258cd1-da7a-4c03-ae1b-9b433d877b0c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:17.112&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:17.112&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:17.177&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:17.177&quot;}" data-execution_count="40">
+<div id="b7258cd1-da7a-4c03-ae1b-9b433d877b0c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:17.112&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:17.112&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:17.177&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:17.177&quot;}}" data-execution_count="40">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="40">
 <p><code>Vector{Union{Circle, Rectangle, Square, Triangle}}</code> is faster than <code>Vector{Shape}</code> by roughly a factor of 36 times.</p>
 </div>
 </div>
 <p>It’s possible to get even better performance by calculating the <code>sum</code>s for the individual arrays and summing them up at the end.</p>
-<div id="40b0f8dc-93a5-49b3-b6a1-24267ee21b6c" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:17.177&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:17.177&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:25.693&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:25.693&quot;}" data-execution_count="41">
+<div id="40b0f8dc-93a5-49b3-b6a1-24267ee21b6c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:17.177&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:17.177&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:25.693&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:25.693&quot;}}" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb28" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">main2</span>(arrs<span class="op">...</span>) <span class="op">=</span> <span class="fu">sum</span>(main1, arrs)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(<span class="op">$</span>square_arr, <span class="op">$</span>rectangle_arr, <span class="op">$</span>triangle_arr, <span class="op">$</span>circle_arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -527,7 +527,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 <p>This performance is almost equivalent to having a uniform type (e.g.&nbsp;just <code>Square</code>s).</p>
-<div id="913b0b44-d4a9-4c4f-9b4b-a83d56fcbe23" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:25.693&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:25.693&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:33.708&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:33.708&quot;}" data-execution_count="42">
+<div id="913b0b44-d4a9-4c4f-9b4b-a83d56fcbe23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:25.693&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:25.693&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:33.708&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:33.708&quot;}}" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb29" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [<span class="fu">Square</span>() for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>COUNT]</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main1</span>(<span class="op">$</span>squares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -545,7 +545,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 </div>
 </div>
 <p>Keep in mind that we would only get this kind of performance if the type parameter is concrete. If we used <code>Vector{Shape}</code> values instead, we’d get poor performance results:</p>
-<div id="6ca87f48-2d46-4f3d-8c1d-aea971f439e6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-22T00:24:08.072&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T00:24:08.071&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T00:24:19.272&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T00:24:19.272&quot;}" data-execution_count="59">
+<div id="6ca87f48-2d46-4f3d-8c1d-aea971f439e6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-22T00:24:08.072&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-22T00:24:08.071&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-22T00:24:19.272&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-22T00:24:19.272&quot;}}" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb30" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@benchmark</span> <span class="fu">main2</span>(<span class="op">$</span>shape_arr1, <span class="op">$</span>shape_arr2, <span class="op">$</span>shape_arr3, <span class="op">$</span>shape_arr4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <div class="ansi-escaped-output">
@@ -564,7 +564,7 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 <section id="struct-with-type-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="struct-with-type-parameters">Struct with type parameters</h2>
 <p>In Julia, <code>struct</code>s can have untyped fields.</p>
-<div id="9c242846-1de6-4734-8ac8-39299d62f33e" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:33.709&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:33.709&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:33.710&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:33.710&quot;}" data-execution_count="43">
+<div id="9c242846-1de6-4734-8ac8-39299d62f33e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:14:33.709&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:14:33.709&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:14:33.710&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:14:33.710&quot;}}" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb31" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Foo</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    a</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
@@ -576,20 +576,20 @@ typeof(sorted_shapes_union) = Vector{Union{Circle, Rectangle, Square, Triangle}}
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you want performant code, you have to ensure fields are specified with concrete types, like so:</p>
-<div id="860903e9-f651-489d-bb0f-fe7dfef78a47" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:15:54.243&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:15:54.243&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:15:54.247&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:15:54.247&quot;}" data-execution_count="47">
+<div id="860903e9-f651-489d-bb0f-fe7dfef78a47" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:15:54.243&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:15:54.243&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:15:54.247&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:15:54.247&quot;}}" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb32" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> FooSpecialized</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    a<span class="op">::</span><span class="dt">Float64</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>struct</code>s can also have generic type parameters</p>
-<div id="a61fd965-3505-4886-b933-49142bbd2c33" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:15:56.173&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:15:56.172&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:15:56.181&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:15:56.181&quot;}" data-execution_count="48">
+<div id="a61fd965-3505-4886-b933-49142bbd2c33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:15:56.173&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:15:56.172&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:15:56.181&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:15:56.181&quot;}}" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb33" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Bar{T}</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    a<span class="op">::</span><span class="dt">T</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this case, when constructing the type, you want to ensure that concrete types are used to instantiate the type. e.g.&nbsp;<code>Bar{AbstractFloat}(1.0)</code> is going to perform less efficiently compared to <code>Bar{Float64}(1.0)</code>.</p>
 <p><code>Bar(x)</code> will use type inference to decide what the value of the type parameter should be.</p>
-<div id="978eeceb-2722-42ea-8629-c3898e5407d0" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:15:56.697&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:15:56.696&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:15:56.724&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:15:56.724&quot;}" data-execution_count="49">
+<div id="978eeceb-2722-42ea-8629-c3898e5407d0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-04-21T11:15:56.697&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-21T11:15:56.696&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-21T11:15:56.724&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-21T11:15:56.724&quot;}}" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb34" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(<span class="fu">Bar</span>(sorted_shapes_shape))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(<span class="fu">Bar</span>(sorted_shapes_any))</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(<span class="fu">Bar</span>(sorted_shapes_union))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1078,55 +1078,30 @@ Julia,”</span> Apr. 21, 2024. <a href="https://kdheepak.com/blog/effect-of-typ
     }
   });
   </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
-<script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "kdheepak/kdheepak.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
-    script.dataset.category = "Comments";
-    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
-    script.dataset.mapping = "url";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

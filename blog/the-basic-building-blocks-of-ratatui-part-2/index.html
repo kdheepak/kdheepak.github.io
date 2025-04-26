@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-54a0bf5acb7c45f44107ef6e9632136f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a67dbe77233d1d876d9bc8a3ba154a5e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Ratatui is a crate for building terminal user interfaces in Rust.</p>
 <p>In this post, we’ll discuss the <code>Rect</code> and <code>Layout</code> primitives of <code>ratatui</code>.</p>
-<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:19.450603+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:19.450474+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:19.450576+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:33.047432+00:00&quot;}" data-execution_count="2">
+<div id="73c1a207-8f25-467a-b3ed-2a5d6ac25461" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:19.450603+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:19.450474+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:19.450576+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:33.047432+00:00&quot;}}" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ratatui <span class="op">=</span> <span class="st">"0.26.2"</span></span>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="layout-primitives">Layout primitives</h3>
 <p>We already saw that <code>Rect</code> is one of the primitives for rendering a widget.</p>
 <p>We can create a <code>Rect</code> using <code>Rect::new(x, y, width, height)</code>:</p>
-<div id="a8c2eb81-3cef-45ac-b256-ffe606b39054" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:33.047702+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:33.047643+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:33.047691+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:34.710504+00:00&quot;}" data-execution_count="3">
+<div id="a8c2eb81-3cef-45ac-b256-ffe606b39054" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:33.047702+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:33.047643+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:33.047691+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:34.710504+00:00&quot;}}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::widgets::</span>Widget<span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span> </span>
@@ -347,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>You can create inner <code>Rect</code>s by using the <code>Rect::inner</code> method:</p>
-<div id="8c86072e-9f59-4224-9d6a-c3bc929543a2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:34.710594+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:34.710562+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:34.710587+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:35.282712+00:00&quot;}" data-execution_count="4">
+<div id="8c86072e-9f59-4224-9d6a-c3bc929543a2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:34.710594+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:34.710562+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:34.710587+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:35.282712+00:00&quot;}}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> buf <span class="op">=</span> <span class="pp">ratatui::buffer::Buffer::</span>empty(area)<span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (horizontal<span class="op">,</span> vertical) <span class="op">=</span> (<span class="dv">5</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Ratatui also has a layout solver using <a href="https://en.wikipedia.org/wiki/Cassowary_(software)?useskin=vector">the cassowary algorithm</a>.</p>
-<div id="b8981456-0f54-4aa3-bba1-f16903c32f17" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:35.282780+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:35.282761+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:35.282776+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:35.927370+00:00&quot;}" data-execution_count="5">
+<div id="b8981456-0f54-4aa3-bba1-f16903c32f17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:35.282780+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:35.282761+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:35.282776+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:35.927370+00:00&quot;}}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui::layout::</span><span class="op">{</span>Layout<span class="op">,</span> Constraint<span class="op">};</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> [first<span class="op">,</span> second] <span class="op">=</span> <span class="pp">ratatui::layout::Layout::</span>horizontal([<span class="pp">Constraint::</span>Length(<span class="dv">10</span>)<span class="op">,</span> <span class="pp">Constraint::</span>Length(<span class="dv">10</span>)])<span class="op">.</span>areas(area)<span class="op">;</span></span>
@@ -390,13 +390,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>ratatui-macros</code> has a couple of macros to make some of this boilerplate simpler.</p>
-<div id="cd606f9d-508c-40e0-9403-da9c77236bde" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:35.927480+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:35.927448+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:35.927475+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:36.447929+00:00&quot;}" data-execution_count="6">
+<div id="cd606f9d-508c-40e0-9403-da9c77236bde" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:35.927480+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:35.927448+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:35.927475+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:36.447929+00:00&quot;}}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> [first<span class="op">,</span> second] <span class="op">=</span> <span class="pp">ratatui::layout::Layout::</span>horizontal([<span class="pp">Constraint::</span>Length(<span class="dv">10</span>)<span class="op">,</span> <span class="pp">Constraint::</span>Length(<span class="dv">10</span>)])<span class="op">.</span>areas(area)<span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">// OR</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> [first<span class="op">,</span> second] <span class="op">=</span> <span class="pp">ratatui_macros::horizontal!</span>[<span class="op">==</span><span class="dv">10</span><span class="op">,</span> <span class="op">==</span><span class="dv">10</span>]<span class="op">.</span>areas(area)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s an example of combining a vertical and horizontal layout:</p>
-<div id="f62b8bd3-04e8-4c35-ae93-6d627f2594b3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:36.448280+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:36.448185+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:36.448254+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:37.077096+00:00&quot;}" data-execution_count="7">
+<div id="f62b8bd3-04e8-4c35-ae93-6d627f2594b3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:45:36.448280+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:45:36.448185+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:45:36.448254+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:45:37.077096+00:00&quot;}}" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span><span class="op">{</span>horizontal<span class="op">,</span> vertical<span class="op">};</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">;</span> </span>
@@ -437,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="center-a-block" class="level4">
 <h4 class="anchored" data-anchor-id="center-a-block">Center a block</h4>
 <p><strong>10 px wide</strong></p>
-<div id="8046127f-4c72-43a3-8889-c21c88a5ec12" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:48:59.215546+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:48:59.215290+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:48:59.215498+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:48:59.826613+00:00&quot;}" data-execution_count="9">
+<div id="8046127f-4c72-43a3-8889-c21c88a5ec12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:48:59.215546+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:48:59.215290+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:48:59.215498+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:48:59.826613+00:00&quot;}}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span><span class="op">{</span>horizontal<span class="op">,</span> vertical<span class="op">};</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">;</span> </span>
@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>50% wide</strong></p>
-<div id="af2564ac-e288-40ad-85ed-44eaefff185b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:49:34.081409+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:49:34.081227+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:49:34.081378+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:49:34.706659+00:00&quot;}" data-execution_count="11">
+<div id="af2564ac-e288-40ad-85ed-44eaefff185b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:49:34.081409+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:49:34.081227+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:49:34.081378+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:49:34.706659+00:00&quot;}}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span><span class="op">{</span>horizontal<span class="op">,</span> vertical<span class="op">};</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">;</span> </span>
@@ -490,7 +490,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sidebar" class="level4">
 <h4 class="anchored" data-anchor-id="sidebar">Sidebar</h4>
 <p><strong>MinMax(20px, 50%)</strong></p>
-<div id="98bc09dc-b915-41c9-8bef-37891330fcf2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:55:50.262024+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:55:50.261788+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:55:50.261984+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:55:51.109236+00:00&quot;}" data-execution_count="18">
+<div id="98bc09dc-b915-41c9-8bef-37891330fcf2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:55:50.262024+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:55:50.261788+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:55:50.261984+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:55:51.109236+00:00&quot;}}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span><span class="op">{</span>horizontal<span class="op">,</span> vertical<span class="op">};</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">;</span> </span>
@@ -516,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1f5a85db-fee7-4cae-8794-1ed0e5bcfba1" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:56:34.253894+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:56:34.253800+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:56:34.253856+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:56:34.939410+00:00&quot;}" data-execution_count="19">
+<div id="1f5a85db-fee7-4cae-8794-1ed0e5bcfba1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:56:34.253894+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:56:34.253800+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:56:34.253856+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:56:34.939410+00:00&quot;}}" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb10" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ratatui_macros::</span><span class="op">{</span>horizontal<span class="op">,</span> vertical<span class="op">};</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> (x<span class="op">,</span> y<span class="op">,</span> width<span class="op">,</span> height) <span class="op">=</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">;</span> </span>
@@ -543,7 +543,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>You can combine this behavior to make dynamic layouts:</p>
-<div id="7003ea5a-368f-4b22-abe5-19ad0de57272" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:59:35.211342+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:59:35.211216+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:59:35.211311+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:59:35.744462+00:00&quot;}" data-execution_count="23">
+<div id="7003ea5a-368f-4b22-abe5-19ad0de57272" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T08:59:35.211342+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T08:59:35.211216+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T08:59:35.211311+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T08:59:35.744462+00:00&quot;}}" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb11" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> [sidebar<span class="op">,</span> main] <span class="op">=</span> <span class="cf">if</span> area<span class="op">.</span>width <span class="op">&gt;</span> <span class="dv">30</span> <span class="op">{</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="pp">horizontal!</span>[<span class="op">&lt;=</span> (area<span class="op">.</span>width <span class="op">/</span> <span class="dv">2</span>)<span class="op">,</span> <span class="op">*=</span><span class="dv">1</span>]<span class="op">.</span>areas(area)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
@@ -551,7 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Or even:</p>
-<div id="9529caa0-6f98-4b79-b227-82ed7f7c4f67" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-01T09:01:17.424424+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T09:01:17.424286+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T09:01:17.424391+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T09:01:17.965705+00:00&quot;}" data-execution_count="25">
+<div id="9529caa0-6f98-4b79-b227-82ed7f7c4f67" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-06-01T09:01:17.424424+00:00&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-01T09:01:17.424286+00:00&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-01T09:01:17.424391+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-01T09:01:17.965705+00:00&quot;}}" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb12" data-code-line-numbers="nil"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> [sidebar<span class="op">,</span> main] <span class="op">=</span> <span class="pp">horizontal!</span>[<span class="op">&lt;=</span> (area<span class="op">.</span>width <span class="op">/</span> <span class="dv">2</span>)<span class="op">,</span> <span class="op">*=</span><span class="dv">1</span>]<span class="op">.</span>areas(area)<span class="op">;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> [sidebar<span class="op">,</span> main] <span class="op">=</span> <span class="cf">if</span> sidebar<span class="op">.</span>width <span class="op">&lt;</span> <span class="dv">20</span> <span class="op">{</span></span>
@@ -1038,55 +1038,30 @@ Krishnamurthy, <span>“The Basic Building blocks of Ratatui - Part
     }
   });
   </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
-<script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "kdheepak/kdheepak.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
-    script.dataset.category = "Comments";
-    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
-    script.dataset.mapping = "url";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

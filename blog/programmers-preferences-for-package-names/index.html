@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-54a0bf5acb7c45f44107ef6e9632136f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a67dbe77233d1d876d9bc8a3ba154a5e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -252,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Are there trends in choosing package names in various programming ecosystems? Do package authors choose names for their packages that are <a href="https://en.wikipedia.org/wiki/Alliteration">alliterated</a> with the name of the programming language? Let’s venture to find out.</p>
 <p>First let’s install a couple of useful packages.</p>
-<div id="cell-2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:12.715000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:12.418000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:13.213000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:13.185000-05:00&quot;}" data-execution_count="1">
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:12.715000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:12.418000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:13.213000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:13.185000-05:00&quot;}}" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
@@ -269,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We can <q>bucket</q> the package names by their starting letter and count the number of packages in each bucket, i.e.&nbsp;a frequency plot.</p>
-<div id="cell-4" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:22.314000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:22.314000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:25.965000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:25.965000-05:00&quot;}" data-execution_count="2">
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:22.314000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:22.314000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:25.965000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:25.965000-05:00&quot;}}" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
@@ -329,7 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="english" class="level3">
 <h3 class="anchored" data-anchor-id="english">English</h3>
 <p>For a reference case, let’s plot the distribution of words in the English language, per the list in <code>/usr/share/dict/words</code> on my MacOS 12.5.</p>
-<div id="cell-6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:31.646000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:31.595000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:33.625000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:33.625000-05:00&quot;}" data-execution_count="3">
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:31.646000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:31.595000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:33.625000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:33.625000-05:00&quot;}}" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> <span class="fu">open</span>(<span class="st">"/usr/share/dict/words"</span>) <span class="cf">do</span> f</span>
@@ -502,7 +502,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python" class="level3">
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <p>For Python, we can get the list of packages on PyPi using <a href="https://pypi.org/simple" class="uri">https://pypi.org/simple</a> and get the names of all packages from the links.</p>
-<div id="cell-8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:43.523000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:43.522000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:48.759000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:48.759000-05:00&quot;}" data-execution_count="4">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:43.523000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:43.522000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:48.759000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:48.759000-05:00&quot;}}" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> HTTP.<span class="fu">get</span>(<span class="st">"https://pypi.org/simple"</span>)</span>
@@ -686,7 +686,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="julia" class="level3">
 <h3 class="anchored" data-anchor-id="julia">Julia</h3>
 <p>When you install a package using Julia, it downloads a general registry into your <q>home</q> directory, and we can traverse that directory only one level deep to figure out all the names of the packages in the registry.</p>
-<div id="cell-10" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:53.470000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:53.470000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:54.660000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:54.659000-05:00&quot;}" data-execution_count="5">
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:53.470000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:53.470000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:23:54.660000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:23:54.659000-05:00&quot;}}" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>general_folder <span class="op">=</span> <span class="fu">expanduser</span>(<span class="st">"~/.julia/registries/General"</span>)</span>
@@ -871,7 +871,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="rust" class="level3">
 <h3 class="anchored" data-anchor-id="rust">Rust</h3>
 <p><a href="https://crates.io" class="uri">https://crates.io</a> conveniently has a <a href="https://crates.io/data-access">data-access</a> page that links to the latest dump which contains a <code>csv</code> file with the names of all the packages.</p>
-<div id="cell-12" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:55.827000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:55.827000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:24:16.778000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:24:16.778000-05:00&quot;}" data-execution_count="6">
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:23:55.827000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:23:55.827000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:24:16.778000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:24:16.778000-05:00&quot;}}" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
@@ -1057,7 +1057,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="r" class="level3">
 <h3 class="anchored" data-anchor-id="r">R</h3>
 <p>For R, similar to Python, we can parse the HTML from <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" class="uri">https://cran.r-project.org/web/packages/available_packages_by_name.html</a>:</p>
-<div id="cell-14" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:24:16.857000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:24:16.778000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:24:19.807000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:24:19.807000-05:00&quot;}" data-execution_count="7">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:24:16.857000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:24:16.778000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:24:19.807000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:24:19.807000-05:00&quot;}}" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> HTTP.<span class="fu">get</span>(<span class="st">"https://cran.r-project.org/web/packages/available_packages_by_name.html"</span>)</span>
@@ -1241,7 +1241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="npm" class="level3">
 <h3 class="anchored" data-anchor-id="npm">NPM</h3>
 <p>For NPM packages, <a href="https://replicate.npmjs.com/_all_docs" class="uri">https://replicate.npmjs.com/_all_docs</a> contains a 228 MB <code>json</code> that contains all the packages.</p>
-<div id="cell-16" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:28:58.212000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:28:58.211000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:29:00.388000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:29:00.387000-05:00&quot;}" data-execution_count="15">
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:28:58.212000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:28:58.211000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:29:00.388000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:29:00.387000-05:00&quot;}}" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">JSON3</span></span>
@@ -1425,7 +1425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comparison" class="level3">
 <h3 class="anchored" data-anchor-id="comparison">Comparison</h3>
 <p>Here’s a plot comparing the normalized values:</p>
-<div id="cell-18" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:29:03.212000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:29:03.211000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:29:09.274000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:29:09.274000-05:00&quot;}" data-execution_count="16">
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2023-12-19T04:29:03.212000-05:00&quot;,&quot;iopub.status.busy&quot;:&quot;2023-12-19T04:29:03.211000-05:00&quot;,&quot;iopub.status.idle&quot;:&quot;2023-12-19T04:29:09.274000-05:00&quot;,&quot;shell.execute_reply&quot;:&quot;2023-12-19T04:29:09.274000-05:00&quot;}}" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">StatsPlots</span></span>
@@ -2481,55 +2481,30 @@ names,”</span> Jul. 29, 2022. <a href="https://kdheepak.com/blog/programmers-p
     }
   });
   </script>
+<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<script type="application/javascript">
+  const giscusIframeObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (addedNode) {
+        if (addedNode.matches && addedNode.matches('div.giscus')) {
+          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
+          if(giscusIframe) {
+            giscusIframe.addEventListener("load", function() {
+              window.setTimeout(() => {
+                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
+              }, 100);
+            });
+            giscusIframeObserver.disconnect();
+          }
+        }
+      });
+    });
+  });
+  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
-<script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "kdheepak/kdheepak.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
-    script.dataset.category = "Comments";
-    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
-    script.dataset.mapping = "url";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
