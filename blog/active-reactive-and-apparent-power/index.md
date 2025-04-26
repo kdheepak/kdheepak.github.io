@@ -2,13 +2,20 @@
 title: Active, reactive and apparent power
 date: 2015-04-29T19:00:00-06:00
 categories: [analysis, math, python]
-keywords: what is active power, what is reactive power, what is real power, what is imaginary power, Active Power, Reactive Power, Apparent Power
-summary: This post covers the basics of the types of Power in power systems, specifically what is active power, reactive power and apparent power.
+keywords:
+  what is active power, what is reactive power, what is real power, what is imaginary power, Active
+  Power, Reactive Power, Apparent Power
+summary:
+  This post covers the basics of the types of Power in power systems, specifically what is active
+  power, reactive power and apparent power.
 ---
 
-# Introduction to basic concepts
+## Introduction to basic concepts
 
-$V$ and $I$ are used to indicate phasor representations of sinusoidal voltages and currents. $E$ is used to represent generated voltage or electromotive force (emf). $V$ is often used to measure a potential difference between two points. $v$ is used to represent the instantaneous voltage between two points.
+$V$ and $I$ are used to indicate phasor representations of sinusoidal voltages and currents. $E$ is
+used to represent generated voltage or electromotive force (emf). $V$ is often used to measure a
+potential difference between two points. $v$ is used to represent the instantaneous voltage between
+two points.
 
 Let voltage be defined as the following:
 
@@ -85,7 +92,7 @@ $|V| = 110 = \frac{155.5634}{\sqrt{2}}$
 
 The RMS value of $v$ is what is read by a voltmeter.
 
-# Expression for power
+## Expression for power
 
 Let voltage and current be expressed by:
 
@@ -93,8 +100,8 @@ $v_{an} = V_{max} \cos(\omega t + \theta)$
 
 $i_{an} = I_{max} \cos\omega t$
 
-Instantaneous power is calculated by $p_{a} = v_{an} \times i_{an}$.
-If we plot the above equations, assuming $\theta = -\frac{\pi}{6}$, we get the following.
+Instantaneous power is calculated by $p_{a} = v_{an} \times i_{an}$. If we plot the above equations,
+assuming $\theta = -\frac{\pi}{6}$, we get the following.
 
 <details>
 <summary>Code</summary>
@@ -178,7 +185,8 @@ $p = \frac{V_{max}I_{max}}{2}({{\cos\theta (1 + \cos 2\omega t)  - \sin 2\omega 
 
 $p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t)  - \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta$
 
-$\theta$ is the phase angle of one of the phasors. In our case, $\theta$ is the phase angle of Voltage, when the angle of Current is 0
+$\theta$ is the phase angle of one of the phasors. In our case, $\theta$ is the phase angle of
+Voltage, when the angle of Current is 0
 
 Assuming $\theta = -\theta$,
 
@@ -252,7 +260,8 @@ plt.savefig("power_16_0.png", transparent=True, dpi=300)
 
 ![](images/power_16_0.png)
 
-The blue line (active power) is always positve and has an average value of $\frac{V_{max}I_{max}}{2}\cos\theta$. If we use RMS values, we get
+The blue line (active power) is always positve and has an average value of
+$\frac{V_{max}I_{max}}{2}\cos\theta$. If we use RMS values, we get
 
 $P = \frac{V_{max}}{\sqrt{2}} \frac{I_{max}}{\sqrt{2}} \cos\theta$
 
@@ -266,7 +275,7 @@ Or,
 
 $Q = |V||I|\sin\theta$
 
-# So why is it called real power?
+## So why is it called real power?
 
 <details>
 <summary>Code</summary>
@@ -351,14 +360,15 @@ $p_{active} = v_{a} \times i_{R}$
 
 $p_{reactive} = v_{a} \times i_{X}$
 
-# Special cases
+## Special cases
 
-$P$ or active power or real power is the power that is dissipated in the resistor, in the form of heat energy. $Q$ or reactive power is the power that oscillates between the source and inductor or the capacitor.
-And $\theta$ is determined by the nature of the impedance.
+$P$ or active power or real power is the power that is dissipated in the resistor, in the form of
+heat energy. $Q$ or reactive power is the power that oscillates between the source and inductor or
+the capacitor. And $\theta$ is determined by the nature of the impedance.
 
 Let's look at three cases
 
-## Case 1 : $\theta$ is zero
+### Case 1 : $\theta$ is zero
 
 When we assume $\theta$ is zero, the load is purely resistive
 
@@ -423,7 +433,7 @@ plt.savefig("./power_26_0.png", dpi=300, transparent=True)
 
 The Instantaneous power in the phase is equal to the active power.
 
-## Case 2 : $\theta$ is 90
+### Case 2 : $\theta$ is 90
 
 When $\theta$ is 90, the load is purely inductive
 
@@ -485,9 +495,10 @@ plt.savefig("./power_30_0.png", dpi=300, transparent=True)
 
 ![](images/power_30_0.png)
 
-The Instantaneous power in the phase is equal to the reactive power. The power oscillates between the source and the inductive circuit.
+The Instantaneous power in the phase is equal to the reactive power. The power oscillates between
+the source and the inductive circuit.
 
-## Case 3 : $\theta$ is -90
+### Case 3 : $\theta$ is -90
 
 When $\theta$ is -90, the load is purely capacitive
 
@@ -549,9 +560,10 @@ plt.savefig("./power_34_0.png", dpi=300, transparent=True)
 
 ![](images/power_34_0.png)
 
-In a purely capacitive circuit, power oscillates between the source and electric field associated with the capacitor.
+In a purely capacitive circuit, power oscillates between the source and electric field associated
+with the capacitor.
 
-# Expression for complex power
+## Expression for complex power
 
 We know from Euler's identity that, for any real number x
 
