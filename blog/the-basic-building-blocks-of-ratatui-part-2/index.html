@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.11">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,14 +71,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../.././_quarto/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54e89b23e61ed5ea72ef6b7d94f77ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ec583cb4e1faf25ec88d33aa49f9d953.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-f1d98658a0f4c3e9599bebae84ee77cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-72cae0fc32dbdd63dc09fe9931005a4e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -1038,30 +1039,35 @@ Krishnamurthy, <span>“The Basic Building blocks of Ratatui - Part
     }
   });
   </script>
-<script src="https://giscus.app/client.js" data-repo="kdheepak/kdheepak.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==" data-category="Comments" data-category-id="DIC_kwDOAw1l5M4CU810" data-mapping="url" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
-</script>
-<script type="application/javascript">
-  const giscusIframeObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      mutation.addedNodes.forEach(function (addedNode) {
-        if (addedNode.matches && addedNode.matches('div.giscus')) {
-          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
-          if(giscusIframe) {
-            giscusIframe.addEventListener("load", function() {
-              window.setTimeout(() => {
-                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
-              }, 100);
-            });
-            giscusIframeObserver.disconnect();
-          }
-        }
-      });
-    });
-  });
-  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
-</script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "kdheepak/kdheepak.github.io";
+    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==";
+    script.dataset.category = "Comments";
+    script.dataset.categoryId = "DIC_kwDOAw1l5M4CU810";
+    script.dataset.mapping = "url";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
