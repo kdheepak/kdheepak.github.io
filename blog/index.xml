@@ -9,8 +9,17 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.8.11</generator>
-<lastBuildDate>Sun, 05 Jan 2025 02:03:04 GMT</lastBuildDate>
+<generator>quarto-1.8.13</generator>
+<lastBuildDate>Sat, 07 Jun 2025 18:22:45 GMT</lastBuildDate>
+<item>
+  <title>Pandas vs ibis</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/pandas-vs-ibis/</link>
+  <description><![CDATA[ There’s an excellent blog post on why Pandas feels clunky for those coming from R: ]]></description>
+  <category>python</category>
+  <guid>https://kdheepak.com/blog/pandas-vs-ibis/</guid>
+  <pubDate>Sat, 07 Jun 2025 18:22:45 GMT</pubDate>
+</item>
 <item>
   <title>Building Dashboards using Param and Panel in Python</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
