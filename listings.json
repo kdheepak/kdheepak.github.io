@@ -2,7 +2,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
-      "/blog/pandas-vs-ibis/index.html",
+      "/blog/ibis-better-pandas/index.html",
       "/blog/building-dashboards-using-param-and-panel-in-python/index.html",
       "/blog/jupyter-prelude/index.html",
       "/blog/ibis-power-lines/index.html",

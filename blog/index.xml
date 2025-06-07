@@ -12,12 +12,12 @@
 <generator>quarto-1.8.13</generator>
 <lastBuildDate>Sat, 07 Jun 2025 18:22:45 GMT</lastBuildDate>
 <item>
-  <title>Pandas vs ibis</title>
+  <title>pandas vs ibis</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/pandas-vs-ibis/</link>
+  <link>https://kdheepak.com/blog/ibis-better-pandas/</link>
   <description><![CDATA[ There’s an excellent blog post on why Pandas feels clunky for those coming from R: ]]></description>
   <category>python</category>
-  <guid>https://kdheepak.com/blog/pandas-vs-ibis/</guid>
+  <guid>https://kdheepak.com/blog/ibis-better-pandas/</guid>
   <pubDate>Sat, 07 Jun 2025 18:22:45 GMT</pubDate>
 </item>
 <item>
