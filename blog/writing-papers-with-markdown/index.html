@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.16">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -97,10 +97,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4bc9a771a0e50076a5e13ceffb8aaa98.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6793bf83915adcbcbf5ad168d20d96ea.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9133831fcee97980853db4b5912309ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a8b37a18d23ef258b6d504826fbd8bf9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -181,7 +181,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo light-content">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -191,7 +192,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -240,6 +241,10 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -403,8 +408,8 @@ window.Quarto = {
 <!-- END SLIDES -->
 <!-- BEGIN SLIDES -->
 <p>For example, take a look at the following commands.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\textbf</span>{bold}</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\textit</span>{italic}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\textbf</span>{bold}</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\textit</span>{italic}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This markup will format the words passed into these <q>functions</q> as <strong>bold</strong> and <em>italic</em> respectively.</p>
 <!-- END SLIDES -->
 <p>There are numerous similar functions for different aspects of formatting. This allows you to concentrate on writing, without worrying about the typesetting until later.</p>
@@ -414,7 +419,7 @@ window.Quarto = {
 <p>Personally, I found learning how to work with <span class="math inline">\(\LaTeX\)</span> extremely useful. It challenged me to think about the structure of a document, and how I could convey information effectively not just through the final document, but also in the source material<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I also didn’t think it was difficult. Solutions to my initial problems were only a quick Google search away. Tables were frustrating at first, but you get the hang of them over time. Equations are a joy to type in <span class="math inline">\(\LaTeX\)</span>. And the final product looks great!</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.</p></div></div><p>That said, the markup language is a bit too heavy for notetaking, and not particularly readable. For example, take a look at the syntax for a creating a section, a subsection and list of items with some bold and italic elements.</p>
 <!-- BEGIN SLIDES -->
-<div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\section</span>{Section Name}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\section</span>{Section Name}</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>This is text in the section</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\subsection</span>{Sub Section Name}</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>The following is a list in this subsection</span>
@@ -426,7 +431,7 @@ window.Quarto = {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\item</span> The second <span class="fu">\textit</span>{italicized} item</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\item</span> The third etc <span class="fu">\ldots</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!-- END SLIDES -->
 <p>With good IDEs for <span class="math inline">\(\LaTeX\)</span> this isn’t as bad as it looks, although they still hinder the writer’s flow. Over time and with experience, one can become proficient in <span class="math inline">\(\LaTeX\)</span>. And once you invest the time to learn <span class="math inline">\(\LaTeX\)</span> I can’t think of any reason why you would go back to Word. But it is likely that beginners will have a hard time getting started. So, if you cannot afford to experiment with <span class="math inline">\(\LaTeX\)</span>, are you resigned to Word? I don’t think so. Markdown to the rescue!</p>
 </section>
@@ -434,7 +439,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="markdown">Markdown</h3>
 <!-- BEGIN SLIDES -->
 <p>Markdown is a very lightweight easy-to-read easy-to-write plain text markup language. The same example as before looks like this in Markdown.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Section Name</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Section Name</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>This is text in the section</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -446,7 +451,7 @@ window.Quarto = {
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Nested item 1</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Nested item 2</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The second _italicized_ item</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The third etc ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The third etc ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!-- END SLIDES -->
 <p>Much better! It’s a lot easier to read and a lot easier to write than <span class="math inline">\(\LaTeX\)</span>. Markdown, developed by John Gruber, was principally written for the web, to avoid the heavy markup of HTML. Tools have been developed to convert Markdown to HTML, PDF and even DOCX.</p>
 <p>The main advantages of Markdown:</p>
@@ -503,7 +508,7 @@ Table&nbsp;1: Demonstration of simple table syntax.
 <!-- END SLIDES -->
 <!-- BEGIN SLIDES -->
 <p>This is what the same table looks like in <span class="math inline">\(\LaTeX\)</span>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">longtable</span>}[c]{<span class="ch">@{}</span>rlcl<span class="ch">@{}</span>}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">longtable</span>}[c]{<span class="ch">@{}</span>rlcl<span class="ch">@{}</span>}</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\caption</span>{Demonstration of simple table syntax.}</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\tabularnewline</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\toprule</span></span>
@@ -518,7 +523,7 @@ Table&nbsp;1: Demonstration of simple table syntax.
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>123 <span class="op">&amp;</span> 123 <span class="op">&amp;</span> 123 <span class="op">&amp;</span> 123<span class="fu">\tabularnewline</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>1 <span class="op">&amp;</span> 1 <span class="op">&amp;</span> 1 <span class="op">&amp;</span> 1<span class="fu">\tabularnewline</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">\bottomrule</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">longtable</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">longtable</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!-- END SLIDES -->
 <!-- BEGIN SLIDES -->
 <p>However, Markdown does not allow for the level of detailed customization that you can achieve using <span class="math inline">\(\LaTeX\)</span>. Even a moderately complex table such as the one below is not supported (currently) by any form of Markdown.</p>
@@ -619,31 +624,31 @@ Table&nbsp;1: Demonstration of simple table syntax.
 <h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
 <section id="headings" class="level4">
 <h4 class="anchored" data-anchor-id="headings"><strong><em>Headings</em></strong></h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Section</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Section</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sub Section</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sub Sub Section</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sub Sub Section</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p>I’ve not provided an example here to avoid messing with this document’s headings.</p>
 </section>
 <section id="text" class="level4">
 <h4 class="anchored" data-anchor-id="text"><strong><em>Text</em></strong></h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>This text is in _italic_.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>This text is in _italic_.</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>This text is in **bold**.</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>And this text is in **_bold-italic_**</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>And this text is in **_bold-italic_**</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p>This text is in <em>italic</em>. This text is in <strong>bold</strong>. And this text is in <strong><em>bold-italic</em></strong>.</p>
 </section>
 <section id="link" class="level4">
 <h4 class="anchored" data-anchor-id="link"><strong><em>Link</em></strong></h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Text</span><span class="co">](https://google.com)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Text</span><span class="co">](https://google.com)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p><a href="https://google.com">Text</a></p>
 </section>
 <section id="images" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="images"><strong><em>Images</em></strong></h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Caption](images/markdown.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Caption](images/markdown.png)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -654,7 +659,7 @@ Table&nbsp;1: Demonstration of simple table syntax.
 </section>
 <section id="lists" class="level4">
 <h4 class="anchored" data-anchor-id="lists"><strong><em>Lists</em></strong></h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>item</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>item</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>item</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>item</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>item</span>
@@ -662,7 +667,7 @@ Table&nbsp;1: Demonstration of simple table syntax.
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>item</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>item</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ss">   1. </span>item</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>item</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>item</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <ul>
 <li>item</li>
@@ -683,10 +688,10 @@ Table&nbsp;1: Demonstration of simple table syntax.
 </section>
 <section id="quotes" class="level4">
 <h4 class="anchored" data-anchor-id="quotes"><strong><em>Quotes</em></strong></h4>
-<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Research is what I'm doing</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Research is what I'm doing</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; when I don't know what I'm doing.</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wernher von Braun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wernher von Braun</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <blockquote class="blockquote">
 <p>Research is what I’m doing when I don’t know what I’m doing.</p>
@@ -697,10 +702,10 @@ Table&nbsp;1: Demonstration of simple table syntax.
 </section>
 <section id="code" class="level4">
 <h4 class="anchored" data-anchor-id="code"><strong><em>Code</em></strong></h4>
-<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">`inline code`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">`inline code`</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="in">    Tab space</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="in">    for code block</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="in">    for code block</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p><code>inline code</code></p>
 <pre><code>Tab space
@@ -709,13 +714,13 @@ for code block</code></pre>
 <section id="tables" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="tables"><strong><em>Tables</em></strong></h4>
 <!-- prettier-ignore-start -->
-<div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  Right     Left     Center     Default</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  Right     Left     Center     Default</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>-------     ------ ----------   -------</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">     12     12        12            12</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="in">    123     123       123          123</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="in">      1     1          1             1</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>:  Demonstration of simple table syntax. {#tbl-table}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>:  Demonstration of simple table syntax. {#tbl-table}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!-- prettier-ignore-end -->
 <p><strong>Example</strong></p>
 <div id="tbl-table" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
@@ -761,32 +766,32 @@ Table&nbsp;2: Demonstration of simple table syntax.
 
 <section id="citations" class="level4">
 <h4 class="anchored" data-anchor-id="citations"><strong><em>Citations</em></strong></h4>
-<div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>This is a very important fact <span class="co">[</span><span class="ot">@citation_example</span><span class="co">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>This is a very important fact <span class="co">[</span><span class="ot">@citation_example</span><span class="co">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p>This is a very important fact <span class="citation" data-cites="citation_example"><a href="#ref-citation_example" role="doc-biblioref">[14]</a></span></p>
 </section>
 <section id="strikethrough" class="level4">
 <h4 class="anchored" data-anchor-id="strikethrough"><strong><em>Strikethrough</em></strong></h4>
-<div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>~~Strikethrough text~~</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>~~Strikethrough text~~</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p><del>Strikethrough text</del></p>
 </section>
 <section id="mark" class="level4">
 <h4 class="anchored" data-anchor-id="mark"><strong><em>Mark</em></strong></h4>
-<div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="al">==Mark text==</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="al">==Mark text==</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p><mark>Mark text</mark></p>
 </section>
 <section id="equations" class="level4">
 <h4 class="anchored" data-anchor-id="equations"><strong><em>Equations</em></strong></h4>
-<div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Inline equations $\pi$</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Inline equations $\pi$</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Block equations</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>\pi</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>$$ {#eq-pi}</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>$$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>$$</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example</strong></p>
 <p>Inline equations <span class="math inline">\(\pi\)</span></p>
 <p>Block equations</p>
@@ -800,9 +805,9 @@ Table&nbsp;2: Demonstration of simple table syntax.
 <p>Once you have typed all the content, you can use the <code>pandoc</code> command to convert the document into the format you want. Pandoc uses the output filename extension to figure out what the output file format should be. Btw, Pandoc is a command line tool only. You will have to use the command line for any conversion.</p>
 <!-- BEGIN SLIDES -->
 <p>To generate a PDF file:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> document.md <span class="at">-o</span> document.pdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> document.md <span class="at">-o</span> document.pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It is as simple as that! To generate a HTML file:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> document.md <span class="at">-o</span> document.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> document.md <span class="at">-o</span> document.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!-- END SLIDES -->
 <p>Check out pandoc’s README <span class="citation" data-cites="noauthor_pandoc_nodate"><a href="#ref-noauthor_pandoc_nodate" role="doc-biblioref">[15]</a></span>. It has loads of examples and you might be able to find what you are looking for by straight up picking an example or by making a minor tweak to it.</p>
 <!-- BEGIN SLIDES -->
@@ -845,7 +850,7 @@ Table&nbsp;2: Demonstration of simple table syntax.
 <!-- END SLIDES -->
 <p>They allow you reference a figure, equation or table. For example, Equation {<a href="#eq-pi" class="quarto-xref">Equation&nbsp;1</a>} is an example of a block equation in Markdown.</p>
 <p>A paper may be generated using a command as shown below:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-s</span> <span class="at">-S</span> <span class="at">--latex-engine</span><span class="op">=</span>pdflatex <span class="dt">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-s</span> <span class="at">-S</span> <span class="at">--latex-engine</span><span class="op">=</span>pdflatex <span class="dt">\</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--template</span><span class="op">=</span>./templates/ieee-latex.template <span class="dt">\</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--filter</span> pandoc-fignos <span class="dt">\</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--filter</span> pandoc-eqnos <span class="dt">\</span></span>
@@ -853,7 +858,7 @@ Table&nbsp;2: Demonstration of simple table syntax.
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--filter</span> pandoc-citeproc <span class="dt">\</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--csl</span><span class="op">=</span>./styles/ieee.csl <span class="dt">\</span></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--bibliography</span><span class="op">=</span>./bib/research.bib <span class="dt">\</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> ieee-paper.pdf paper.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> ieee-paper.pdf paper.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>As you can see, there are a lot of arguments that can be passed to Pandoc. I’ve found using Makefiles for recording your past commands and documenting these instructions extremely useful. I’ve barely scratched the surface with what you can do with Pandoc. I’ll update this post with more features if I think they are relevant to writing a paper using Markdown.</p>
 <!-- BEGIN SLIDESNOHEADER -->
 </section>

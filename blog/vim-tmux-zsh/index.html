@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.16">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4bc9a771a0e50076a5e13ceffb8aaa98.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6793bf83915adcbcbf5ad168d20d96ea.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9133831fcee97980853db4b5912309ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a8b37a18d23ef258b6d504826fbd8bf9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -135,7 +135,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo light-content">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -145,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -194,6 +195,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -208,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<div class="code-copy-outer-scaffold page-columns page-full"><main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -351,10 +356,10 @@ bind M-r move-pane -h -t '.-'
 
 ### Join windows: &lt;prefix&gt; s, &lt;prefix&gt; j
 bind-key j command-prompt -p "join pane from:" "join-pane -s '%%'"
-bind-key s command-prompt -p "send pane to:" "join-pane -t '%%'"</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
+bind-key s command-prompt -p "send pane to:" "join-pane -t '%%'"</code></pre>
 <section id="zsh" class="level3">
 <h3 class="anchored" data-anchor-id="zsh">zsh</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to your oh-my-zsh installation.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to your oh-my-zsh installation.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ZSH</span><span class="op">=</span>/Users/dheepakkrishnamurthy/.oh-my-zsh</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">ZSH_THEME</span><span class="op">=</span><span class="st">"rawsyntax"</span></span>
@@ -363,9 +368,9 @@ bind-key s command-prompt -p "send pane to:" "join-pane -t '%%'"</code><button t
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">TERM</span><span class="op">=</span>xterm-256color</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="va">$ZSH</span>/oh-my-zsh.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="va">$ZSH</span>/oh-my-zsh.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="vim" class="level3">
+<div class="code-copy-outer-scaffold"><section id="vim" class="level3">
 <h3 class="anchored" data-anchor-id="vim">vim</h3>
 <pre class="sourceCode vim code-with-copy"><code>Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
@@ -381,10 +386,10 @@ Plugin 'searchcomplete'
 Plugin 'sjl/gundo.vim'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
+Plugin 'tpope/vim-surround'</code></pre>
 
 
-</section>
+</section><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{krishnamurthy2015,
   author = {Krishnamurthy, Dheepak},
@@ -397,7 +402,7 @@ Plugin 'tpope/vim-surround'</code><button title="Copy to Clipboard" class="code-
 <div class="">D.
 Krishnamurthy, <span>“Vim, tmux and zsh — the productivity trio,”</span>
 May 09, 2015. <a href="https://kdheepak.com/blog/vim-tmux-zsh/">https://kdheepak.com/blog/vim-tmux-zsh/</a>.</div>
-</div></div></section></div></main> <!-- /main -->
+</div></div></section></div></main><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

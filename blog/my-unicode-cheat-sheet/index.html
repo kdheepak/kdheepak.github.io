@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.16">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -97,10 +97,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4bc9a771a0e50076a5e13ceffb8aaa98.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6793bf83915adcbcbf5ad168d20d96ea.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9133831fcee97980853db4b5912309ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a8b37a18d23ef258b6d504826fbd8bf9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -150,7 +150,8 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo light-content">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -160,7 +161,7 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -209,6 +210,10 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -302,7 +307,7 @@ div.csl-indent {
 </ul>
 <p>Code points can be of different categories, Normal, Pictographic, Spacer, Zero Width Joiners, Controls etc.</p></li>
 <li><p>The same <q>idea</q>, i.e.&nbsp;code point can be <em>encoded</em> into different bits when it is required to be represented on a machine. The bits used to represent the idea depend on the encoding chosen. An encoding is a map or transformation of a code point into bits or bytes. For example, the code point for a 🐉 can be encoded into UTF-8, UTF16, UTF32 in Python as follows.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Python <span class="fl">3.7.6</span> (default, Jan  <span class="dv">8</span> <span class="dv">2020</span>, <span class="dv">13</span>:<span class="dv">42</span>:<span class="dv">34</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Python <span class="fl">3.7.6</span> (default, Jan  <span class="dv">8</span> <span class="dv">2020</span>, <span class="dv">13</span>:<span class="dv">42</span>:<span class="dv">34</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Type <span class="st">'copyright'</span>, <span class="st">'credits'</span> <span class="kw">or</span> <span class="st">'license'</span> <span class="cf">for</span> more information</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>IPython <span class="fl">7.16.1</span> <span class="op">--</span> An enhanced Interactive Python. Type <span class="st">'?'</span> <span class="cf">for</span> <span class="bu">help</span>.</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -318,9 +323,9 @@ div.csl-indent {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: <span class="st">b'</span><span class="ch">\xff\xfe</span><span class="st">=</span><span class="ch">\xd8\t\xdc</span><span class="st">'</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: s.encode(<span class="st">'utf-32'</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: <span class="st">b'</span><span class="ch">\xff\xfe\x00\x00\t\xf4\x01\x00</span><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">5</span>]: <span class="st">b'</span><span class="ch">\xff\xfe\x00\x00\t\xf4\x01\x00</span><span class="st">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Python prints the bytes as human readable characters if they are valid ASCII characters. ASCII defines 128 characters, half of the 256 possible bytes in an 8-bit computer system. Valid ASCII byte strings are also valid UTF-8 byte strings.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">7</span>]: s <span class="op">=</span> <span class="st">'hello world'</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">7</span>]: s <span class="op">=</span> <span class="st">'hello world'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">7</span>]: s.encode(<span class="st">'ascii'</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">7</span>]: <span class="st">b'hello world'</span></span>
@@ -329,7 +334,7 @@ div.csl-indent {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">8</span>]: <span class="st">b'hello world'</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">9</span>]: s.encode(<span class="st">'utf-16'</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">9</span>]: <span class="st">b'</span><span class="ch">\xff\xfe</span><span class="st">h</span><span class="ch">\x00</span><span class="st">e</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st"> </span><span class="ch">\x00</span><span class="st">w</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st">r</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">d</span><span class="ch">\x00</span><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">9</span>]: <span class="st">b'</span><span class="ch">\xff\xfe</span><span class="st">h</span><span class="ch">\x00</span><span class="st">e</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st"> </span><span class="ch">\x00</span><span class="st">w</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st">r</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">d</span><span class="ch">\x00</span><span class="st">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>When receiving or reading data, we <strong>must</strong> know the encoding used to interpret it correctly. A Unicode encoding is not guaranteed to contain any information about the encoding. Different encodings exist for efficiency, performance and backward compatibility. UTF-8 is a good pick for an encoding in the general case.</p></li>
 </ol>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;<a href="https://unicode.org/glossary/#code_point" class="uri">https://unicode.org/glossary/#code_point</a></p></div><div id="fn2"><p><sup>2</sup>&nbsp;<a href="https://unicode.org/glossary/#grapheme" class="uri">https://unicode.org/glossary/#grapheme</a></p></div></div><section id="vim" class="level2 page-columns page-full">
@@ -358,7 +363,7 @@ div.csl-indent {
 <li><span> ️</span>: U+FE0F VARIATION SELECTOR-16</li>
 </ul>
 <p>In Python, a string that contains just this emoji has length equal to 5.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Python <span class="fl">3.7.6</span> (default, Jan  <span class="dv">8</span> <span class="dv">2020</span>, <span class="dv">13</span>:<span class="dv">42</span>:<span class="dv">34</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Python <span class="fl">3.7.6</span> (default, Jan  <span class="dv">8</span> <span class="dv">2020</span>, <span class="dv">13</span>:<span class="dv">42</span>:<span class="dv">34</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Type <span class="st">'copyright'</span>, <span class="st">'credits'</span> <span class="kw">or</span> <span class="st">'license'</span> <span class="cf">for</span> more information</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>IPython <span class="fl">7.16.1</span> <span class="op">--</span> An enhanced Interactive Python. Type <span class="st">'?'</span> <span class="cf">for</span> <span class="bu">help</span>.</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -371,14 +376,14 @@ div.csl-indent {
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>🤦🏼‍♂️</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">4</span>]: <span class="bu">len</span>(s)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">4</span>]: <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If we want to keep a Python file pure ASCII but want to use Unicode in string literals, we can use the <code>\U</code> escape sequence.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: s <span class="op">=</span> <span class="st">'</span><span class="ch">\U0001F926\U0001F3FC\u200D\u2642\uFE0F</span><span class="st">'</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">5</span>]: s <span class="op">=</span> <span class="st">'</span><span class="ch">\U0001F926\U0001F3FC\u200D\u2642\uFE0F</span><span class="st">'</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: <span class="bu">print</span>(s)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>🤦🏼‍♂️</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>🤦🏼‍♂️</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>As mentioned earlier, indexing into a Python Unicode string gives us the code point at that location.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: s[<span class="dv">0</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">6</span>]: s[<span class="dv">0</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">6</span>]: <span class="st">'🤦'</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">7</span>]: s[<span class="dv">1</span>]</span>
@@ -405,17 +410,17 @@ div.csl-indent {
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="op">-</span><span class="dv">42</span><span class="op">-</span>b5dece75d686<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="op">----&gt;</span> <span class="dv">1</span> s[<span class="dv">5</span>]</span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="pp">IndexError</span>: string index out of <span class="bu">range</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="pp">IndexError</span>: string index out of <span class="bu">range</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Iterating over a Python string gives us the code points as well.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">14</span>]: [c <span class="cf">for</span> c <span class="kw">in</span> s]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">14</span>]: [<span class="st">'🤦'</span>, <span class="st">'🏼'</span>, <span class="st">'</span><span class="ch">\u200d</span><span class="st">'</span>, <span class="st">'♂'</span>, <span class="st">'️'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">14</span>]: [c <span class="cf">for</span> c <span class="kw">in</span> s]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">14</span>]: [<span class="st">'🤦'</span>, <span class="st">'🏼'</span>, <span class="st">'</span><span class="ch">\u200d</span><span class="st">'</span>, <span class="st">'♂'</span>, <span class="st">'️'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>However, in practice, indexing into a string may not be what we want or may not be useful. More often, we are either interested in:</p>
 <ol type="1">
 <li>indexing into the byte string representation or</li>
 <li>indexing into the graphemes.</li>
 </ol>
 <p>We can use the <code>s.encode('utf-8')</code> function to get a Python byte string representation of the Python unicode string in <code>s</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">15</span>]: s</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">15</span>]: s</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">15</span>]: <span class="st">'🤦🏼</span><span class="ch">\u200d</span><span class="st">♂️'</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">16</span>]: <span class="bu">len</span>(s)</span>
@@ -431,9 +436,9 @@ div.csl-indent {
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">19</span>]: <span class="dv">17</span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">20</span>]: <span class="bu">type</span>(s.encode(<span class="st">"utf-8"</span>))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">20</span>]: <span class="bu">bytes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">20</span>]: <span class="bu">bytes</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If we are interested in the number of graphemes, we can use the <a href="https://pypi.org/project/grapheme/"><code>grapheme</code></a> package.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">21</span>]: <span class="im">import</span> grapheme</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">21</span>]: <span class="im">import</span> grapheme</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">22</span>]: grapheme.length(s)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">22</span>]: <span class="dv">1</span></span>
@@ -444,9 +449,9 @@ div.csl-indent {
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">24</span>]: <span class="st">'🤦🏼</span><span class="ch">\u200d</span><span class="st">♂️'</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">25</span>]: grapheme.<span class="bu">slice</span>(s, <span class="dv">2</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">25</span>]: <span class="st">'Why is Unicode so complicated?'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">25</span>]: <span class="st">'Why is Unicode so complicated?'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For historical reasons, Unicode allows the same set of characters to be represented by different sequences of code points.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">26</span>]: single_char <span class="op">=</span> <span class="st">'ê'</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">26</span>]: single_char <span class="op">=</span> <span class="st">'ê'</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ...: multiple_chars <span class="op">=</span> <span class="st">'</span><span class="ch">\N{LATIN SMALL LETTER E}\N{COMBINING CIRCUMFLEX ACCENT}</span><span class="st">'</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">27</span>]: single_char</span>
@@ -459,21 +464,21 @@ div.csl-indent {
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">29</span>]: <span class="dv">1</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">30</span>]: <span class="bu">len</span>(multiple_chars)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">30</span>]: <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">30</span>]: <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We can use the built in standard library <code>unicodedata</code> to normalize <a href="https://docs.python.org/3/howto/unicode.html#comparing-strings">Python Unicode strings</a>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">31</span>]: <span class="im">import</span> unicodedata</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">31</span>]: <span class="im">import</span> unicodedata</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">32</span>]: <span class="bu">len</span>(unicodedata.normalize(<span class="st">"NFD"</span>, single_char))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">32</span>]: <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">32</span>]: <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It is best practice to add the following lines to the top of your Python file that you expect to run as scripts.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -*- coding: utf-8 -*-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -*- coding: utf-8 -*-</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If your Python files are part of a package, just adding the second line is sufficient. I recommend using <a href="./../using-precommit-hooks/">pre-commit</a> hooks to ensure that <a href="https://github.com/pre-commit/pre-commit-hooks/blob/31d41ff29115a87808277ee0ec23999b17d5b583/pre_commit_hooks/fix_encoding_pragma.py">the encoding pragma of python files are fixed</a> before making a git commit.</p>
 </section>
 <section id="julia" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="julia">Julia</h2>
 <p>Let’s take a look at how Julia handles strings. This is the version of Julia that I’m using:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>               <span class="ex">_</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>               <span class="ex">_</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>   <span class="ex">_</span>       _ _<span class="er">(</span><span class="ex">_</span><span class="kw">)</span><span class="ex">_</span>     <span class="kw">|</span>  <span class="ex">Documentation:</span> https://docs.julialang.org</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span>     <span class="kw">|</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span>    <span class="kw">|</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>   <span class="ex">_</span> _   _<span class="kw">|</span> <span class="kw">|</span><span class="ex">_</span>  __ _   <span class="kw">|</span>  <span class="ex">Type</span> <span class="st">"?"</span> for help, <span class="st">"]?"</span> for Pkg help.</span>
@@ -482,8 +487,8 @@ div.csl-indent {
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">_/</span> <span class="kw">|</span><span class="ex">\__</span><span class="st">'_|_|_|\__'</span><span class="ex">_</span><span class="kw">|</span>  <span class="kw">|</span>  <span class="ex">Official</span> https://julialang.org/ release</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">__/</span>                   <span class="kw">|</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> s <span class="op">=</span> <span class="st">"🤦🏼‍♂️"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span><span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> s <span class="op">=</span> <span class="st">"🤦🏼‍♂️"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">"🤦🏼\u200d♂️"</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">println</span>(s)</span>
@@ -496,10 +501,10 @@ div.csl-indent {
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fl">17</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">codeunit</span>(s)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="dt">UInt8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="dt">UInt8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Printing the length of the string in Julia returns <code>5</code>. As we saw earlier, this is the number of code points in the unicode string.</p>
 <p>Julia <code>String</code> literals are encoded using the UTF-8 encoding. In Python, the indexing into a string would return the code point at the string. In Julia, indexing into a string refers to code units<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, and for the default <code>String</code> this returns the byte as a <code>Char</code> type.</p>
-<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;<a href="https://unicode.org/glossary/#code_unit" class="uri">https://unicode.org/glossary/#code_unit</a></p></div></div><div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> s[<span class="fl">1</span>]</span>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;<a href="https://unicode.org/glossary/#code_unit" class="uri">https://unicode.org/glossary/#code_unit</a></p></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> s[<span class="fl">1</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ch">'🤦'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">1F926</span> (category So<span class="op">:</span> <span class="dt">Symbol</span>, other)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(s[<span class="fl">1</span>])</span>
@@ -584,26 +589,26 @@ div.csl-indent {
 <span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> <span class="dt">BoundsError</span><span class="op">:</span> attempt to access <span class="dt">String</span></span>
 <span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>  at index [<span class="fl">18</span>]</span>
 <span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>[<span class="op">...</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>[<span class="op">...</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If we want each code point in a Julia <code>String</code>, we can use <code>eachindex</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;<em>aside</em>: See the Julia manual strings documentation for more information: <a href="https://docs.julialang.org/en/v1/manual/strings/" class="uri">https://docs.julialang.org/en/v1/manual/strings/</a></p></div></div><div class="sourceCode" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> [s[i] for i <span class="kw">in</span> <span class="fu">eachindex</span>(s)]</span>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;<em>aside</em>: See the Julia manual strings documentation for more information: <a href="https://docs.julialang.org/en/v1/manual/strings/" class="uri">https://docs.julialang.org/en/v1/manual/strings/</a></p></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> [s[i] for i <span class="kw">in</span> <span class="fu">eachindex</span>(s)]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fl">5</span><span class="op">-</span>element <span class="dt">Array</span>{<span class="dt">Char</span>,<span class="fl">1</span>}<span class="op">:</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a> <span class="ch">'🤦'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">1F926</span> (category So<span class="op">:</span> <span class="dt">Symbol</span>, other)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a> <span class="ch">'🏼'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">1F3</span>FC (category Sk<span class="op">:</span> <span class="dt">Symbol</span>, modifier)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a> <span class="ch">'\u200d'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">200</span>D (category Cf<span class="op">:</span> Other, format)</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a> <span class="ch">'♂'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">2642</span> (category So<span class="op">:</span> <span class="dt">Symbol</span>, other)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a> <span class="ch">'️'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span>FE0F (category Mn<span class="op">:</span> Mark, nonspacing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a> <span class="ch">'️'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span>FE0F (category Mn<span class="op">:</span> Mark, nonspacing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>And finally, we can use the <code>Unicode</code> module that is built in to the standard library to get the number of graphemes.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="im">using</span> <span class="bu">Unicode</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">graphemes</span>(s)</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>length<span class="op">-</span><span class="fl">1</span> GraphemeIterator{<span class="dt">String</span>} <span class="cf">for</span> <span class="st">"🤦🏼‍♂️"</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">length</span>(<span class="fu">graphemes</span>(s))</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If we wish to encode a Julia string as UTF-8<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, we can use the following:</p>
-<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;<em>aside</em>: As of Julia v1.5.0, only conversion to/from UTF-8 is currently supported: <a href="https://docs.julialang.org/en/v1/base/strings/#Base.transcode" class="uri">https://docs.julialang.org/en/v1/base/strings/#Base.transcode</a></p></div></div><div class="sourceCode" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">transcode</span>(<span class="dt">UInt8</span>, s)</span>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;<em>aside</em>: As of Julia v1.5.0, only conversion to/from UTF-8 is currently supported: <a href="https://docs.julialang.org/en/v1/base/strings/#Base.transcode" class="uri">https://docs.julialang.org/en/v1/base/strings/#Base.transcode</a></p></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">transcode</span>(<span class="dt">UInt8</span>, s)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fl">17</span><span class="op">-</span>element <span class="bu">Base</span>.CodeUnits{<span class="dt">UInt8</span>,<span class="dt">String</span>}<span class="op">:</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a> <span class="bn">0xf0</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a> <span class="bn">0x9f</span></span>
@@ -621,12 +626,12 @@ div.csl-indent {
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a> <span class="bn">0x82</span></span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a> <span class="bn">0xef</span></span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a> <span class="bn">0xb8</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a> <span class="bn">0x8f</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a> <span class="bn">0x8f</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="rust" class="level2">
 <h2 class="anchored" data-anchor-id="rust">Rust</h2>
 <p>Let’s also take a look at rust. We can create a simple <code>main.rs</code> file:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.rs</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.rs</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -650,9 +655,9 @@ div.csl-indent {
 <span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">"s.chars()[{}] = {:?}"</span><span class="op">,</span> i<span class="op">,</span> c)<span class="op">;</span></span>
 <span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>And compile and run it like so:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rustc main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rustc main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">🤦🏼‍♂️</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">"🤦🏼\u{200d}♂\u{fe0f}"</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[main.rs:11]</span> s = <span class="st">"🤦🏼\u{200d}♂\u{fe0f}"</span></span>
@@ -679,10 +684,10 @@ div.csl-indent {
 <span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="fu">s.chars()</span><span class="ex">[1]</span> = <span class="st">'🏼'</span></span>
 <span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="fu">s.chars()</span><span class="ex">[2]</span> = <span class="st">'\u{200d}'</span></span>
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="fu">s.chars()</span><span class="ex">[3]</span> = <span class="st">'♂'</span></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="fu">s.chars()</span><span class="ex">[4]</span> = <span class="st">'\u{fe0f}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="fu">s.chars()</span><span class="ex">[4]</span> = <span class="st">'\u{fe0f}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>There are also additional crates such as <a href="https://github.com/unicode-rs/unicode-width/"><code>unicode-width</code></a> and <a href="https://unicode-rs.github.io/unicode-segmentation/unicode_segmentation/index.html"><code>unicode-segmentation</code></a>.</p>
 <p><code>unicode-width</code> helps determine how many column widths a grapheme will occupy based on the <a href="http://www.unicode.org/reports/tr11/">Unicode Standard Annex #11 rules</a>. For example <code>abc</code> occupies 3 columns but <code>写作业</code> occupies 6 columns but they are both 3 codepoints and 3 graphemes each. <code>unicode-segmentation</code> helps with determining the number of graphemes in a string.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.rs</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.rs</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">unicode_width::</span>UnicodeWidthStr<span class="op">;</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">unicode_segmentation::</span>UnicodeSegmentation<span class="op">;</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -708,8 +713,8 @@ div.csl-indent {
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>len())<span class="op">;</span></span>
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>width())<span class="op">;</span></span>
 <span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="pp">dbg!</span>(s<span class="op">.</span>graphemes(<span class="cn">true</span>)<span class="op">.</span>count())<span class="op">;</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rustc main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rustc main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:6]</span> s = <span class="st">"abc"</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:7]</span> s.len<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:8]</span> s.width<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
@@ -723,7 +728,7 @@ div.csl-indent {
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:22]</span> s = <span class="st">"🤦🏼‍♂️"</span></span>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:23]</span> s.len<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 17</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:24]</span> s.width<span class="er">(</span><span class="kw">)</span> <span class="ex">=</span> 5</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:25]</span> s.graphemes<span class="er">(</span><span class="fu">true</span><span class="kw">)</span><span class="fu">.count()</span> <span class="ex">=</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[src/main.rs:25]</span> s.graphemes<span class="er">(</span><span class="fu">true</span><span class="kw">)</span><span class="fu">.count()</span> <span class="ex">=</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 

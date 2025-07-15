@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.16">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -61,10 +61,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4bc9a771a0e50076a5e13ceffb8aaa98.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6793bf83915adcbcbf5ad168d20d96ea.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9133831fcee97980853db4b5912309ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a8b37a18d23ef258b6d504826fbd8bf9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -116,7 +116,8 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo light-content">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -126,7 +127,7 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -175,6 +176,10 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -295,7 +300,7 @@ div.csl-indent {
 </div>
 </section>
 </section>
-<section id="install" class="level2">
+<div class="code-copy-outer-scaffold"><section id="install" class="level2">
 <h2 class="anchored" data-anchor-id="install">Install</h2>
 <p>If you’d like to use this you will need the following:</p>
 <ol type="1">
@@ -331,12 +336,12 @@ autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
 nnoremap &lt;silent&gt; &lt;c-]&gt; &lt;cmd&gt;lua vim.lsp.buf.definition()&lt;CR&gt;
 nnoremap &lt;silent&gt; K     &lt;cmd&gt;lua vim.lsp.buf.hover()&lt;CR&gt;
 nnoremap &lt;silent&gt; gr    &lt;cmd&gt;lua vim.lsp.buf.references()&lt;CR&gt;
-nnoremap &lt;silent&gt; g0    &lt;cmd&gt;lua vim.lsp.buf.document_symbol()&lt;CR&gt;</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
+nnoremap &lt;silent&gt; g0    &lt;cmd&gt;lua vim.lsp.buf.document_symbol()&lt;CR&gt;</code></pre>
 <p>Once you have this, you should be able to open a <code>.jl</code> file and <code>LanguageServer.jl</code> will start up! It may take some time for <code>SymbolServer.jl</code> to cache the symbols the first time you run it, so be prepared to wait for a while. You can type <code>:lua print(vim.lsp.get_log_path())&lt;CR&gt;</code> in neovim to get the path to the language server log file. When you see <code>[ Info: Received new data from Julia Symbol Server.</code> you should be good to go.</p>
 
 
 
-</section>
+</section><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-nonjedieglot" class="csl-entry" role="listitem">

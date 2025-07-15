@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.16">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -75,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4bc9a771a0e50076a5e13ceffb8aaa98.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6793bf83915adcbcbf5ad168d20d96ea.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9133831fcee97980853db4b5912309ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a8b37a18d23ef258b6d504826fbd8bf9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
 <link href="https://fonts.googleapis.com/css?family=Fira+Code&amp;display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
@@ -131,7 +131,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo light-content">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -141,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -190,6 +191,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -240,27 +245,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This is a short comparison of idiomatic <code>pandas</code>, <code>polars</code> and <code>ibis</code>, all using method chaining.</p>
 <div id="74cba5fa-f5a7-45e5-be52-77fedb3b7f94" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:00.474454Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:00.474100Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:00.480088Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:00.479543Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:00.474433Z&quot;}}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sys.version_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sys.version_info</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre data-code-line-numbers="nil"><code>sys.version_info(major=3, minor=12, micro=5, releaselevel='final', serial=0)</code></pre>
 </div>
 </div>
 <div id="e31fe4a9-6232-41ed-9bdb-ce77b60cb1f8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:01.976600Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:01.975759Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:02.507318Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:02.507055Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:01.976541Z&quot;}}" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ibis</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ibis</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ibis <span class="im">import</span> _</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ibis.options.interactive <span class="op">=</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ibis.options.interactive <span class="op">=</span> <span class="va">True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="04bfebcc-d822-4840-9186-87a491fdf4f2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:02.508115Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:02.508020Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:02.510235Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:02.509987Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:02.508107Z&quot;}}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ibis.__version__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ibis.__version__</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre data-code-line-numbers="nil"><code>'9.4.0'</code></pre>
 </div>
 </div>
 <div id="5d8bd52f-cfac-4267-8a78-a2efc0d8dd21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:03.715477Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:03.714785Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:18.923529Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:18.923236Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:03.715430Z&quot;}}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ibis.examples.starwars.fetch()</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ibis.examples.starwars.fetch()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name               </span>┃<span style="font-weight: bold"> height </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color    </span>┃<span style="font-weight: bold"> skin_color  </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films  </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
@@ -285,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="pandas" class="level3">
 <h3 class="anchored" data-anchor-id="pandas">Pandas</h3>
 <div id="cf4d19b0-dd9e-46fc-938f-eea064387bbd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:18.924581Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:18.924393Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:18.973087Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:18.972700Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:18.924569Z&quot;}}" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -302,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"birth_year.notna()"</span>)</span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>ibis.pandas.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df}).table(<span class="st">'_df'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>ibis.pandas.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df}).table(<span class="st">'_df'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height  </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
@@ -320,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="polars" class="level3">
 <h3 class="anchored" data-anchor-id="polars">Polars</h3>
 <div id="6a5996f1-dfd8-4ac8-8b89-6af5dbccfe66" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:18.973778Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:18.973672Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:20.177802Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:20.177559Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:18.973770Z&quot;}}" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
@@ -338,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"birth_year"</span>).is_not_null())</span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>ibis.polars.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df}).table(<span class="st">'_df'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>ibis.polars.<span class="ex">connect</span>({<span class="st">'_df'</span>: _df}).table(<span class="st">'_df'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films  </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
@@ -356,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ibis" class="level3">
 <h3 class="anchored" data-anchor-id="ibis">ibis</h3>
 <div id="c1611af7-18ae-44a1-b584-ce86887428eb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2024-09-06T11:16:20.178716Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-09-06T11:16:20.178619Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-09-06T11:16:20.204789Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-09-06T11:16:20.204461Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-09-06T11:16:20.178709Z&quot;}}" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>_df <span class="op">=</span> (</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    df</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    .rename(<span class="st">"snake_case"</span>)</span>
@@ -369,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    .drop_null(_.birth_year)</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films  </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃

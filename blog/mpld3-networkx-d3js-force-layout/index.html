@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.16">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,10 +96,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4bc9a771a0e50076a5e13ceffb8aaa98.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6793bf83915adcbcbf5ad168d20d96ea.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9133831fcee97980853db4b5912309ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a8b37a18d23ef258b6d504826fbd8bf9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -149,7 +149,8 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo light-content">
+    <img src="../../_quarto/favicon.svg" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -159,7 +160,7 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -208,6 +209,10 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -256,7 +261,7 @@ div.csl-indent {
 
 <p><a href="https://mpld3.github.io/">mpld3</a> is a matplotlib to d3 library. It is lightweight and a pure Python / Javascript package, allowing a lot of the matplotlib interface to be accessible in the web. There are a number of <a href="https://mpld3.github.io/examples/">examples</a> on their website. Its integration with d3 allows someone familiar with Javascript to use Python and visualize using the power of d3. d3.js is a powerful low level visualization library and there are loads of examples online on the many features it brings to the table.</p>
 <p>mpld3 also has the ability to add <a href="https://mpld3.github.io/_downloads/custom_plugins.html">plugins</a> to add new functionality. I wanted to take a shot at adding a d3.js force layout plugin. The force layout is a powerful visualization tool and NetworkX has a nifty function that will convert the graph along with its attributes into a JSON graph format. I’d played around with this before and figured this would be a nice feature to have, so I’ve worked on it over the weekend and here it is - a NetworkX to d3.js force layout plugin for mpld3. I’ve shared an example below.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mpld3</span>
@@ -276,30 +281,30 @@ div.csl-indent {
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> <span class="va">None</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plugins.<span class="ex">connect</span>(fig, NetworkXD3ForceLayout(G, pos, ax))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plugins.<span class="ex">connect</span>(fig, NetworkXD3ForceLayout(G, pos, ax))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig_el6303944499107368844826201">
 
 </div>
 <p>I’ve implemented a sticky version of the force layout, since this is what I wanted. This can be turned off by passing an argument to the plugin. The reason it is called a sticky version is because dragging a node to a new position will fix it at that location. You can double click the node to release it.</p>
 <p>These blocks were used as a reference<span class="citation" data-cites="svg"><a href="#ref-svg" role="doc-biblioref">[1]</a></span>.</p>
 <p>I’ll run through an explanation of the code briefly.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This returns a figure and axes object. This plugin requires a single axes object to be passed to it. The figure and axes object, and everything that is on the axes object is converted to mpld3 plot objects. In theory, you could use NetworkX’s draw function to visualize the graph and mpld3 will render it fine. The only downside to that is that the final output will not be a force layout.</p>
 <p>Next we create a graph with the following commands</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>G<span class="op">=</span>nx.Graph()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>G.add_node(<span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>, x<span class="op">=</span><span class="fl">0.25</span>, y<span class="op">=</span><span class="fl">0.25</span>, fixed<span class="op">=</span><span class="va">True</span>, name<span class="op">=</span><span class="st">'Node1'</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>G.add_node(<span class="dv">2</span>, x<span class="op">=</span><span class="fl">0.75</span>, y<span class="op">=</span><span class="fl">0.75</span>, fixed<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="dv">1</span>,<span class="dv">2</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="dv">1</span>,<span class="dv">3</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="dv">2</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>I’ve set the <code>color</code> attribute of the first node to <code>red</code>. This is an attribute on the node object and will be used by the force layout to color the node. We can also set the <code>(x, y)</code> coordinates to values for the first and second node. Passing the <code>fixed=True</code> keyword argument assigns a attribute <code>fixed</code> with the value <code>True</code> on the NetworkX graph. When converted to a force layout, this will fix the positions of those nodes.</p>
 <p>We are almost done! This registers the plugin with mpld3.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plugins.<span class="ex">connect</span>(fig, NetworkXD3ForceLayout(G, pos, ax))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plugins.<span class="ex">connect</span>(fig, NetworkXD3ForceLayout(G, pos, ax))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>pos</code> argument passed here is <code>None</code>. I plan to set it up such that you can pass a position dictionary to the plugin and have the plugin assign <code>(x,y)</code> coordinates when available. You can generate the <code>pos</code> dictionary using any of NetworkX’s layout functions.</p>
 <p>Additional keywords arguments can be passed to the constructor of the <code>NetworkXD3ForceLayout</code> class. This allows a user to control certain force layout properties like <code>gravity</code>, <code>linkDistance</code>, <code>linkStrength</code> etc. You can also set a default node size or turn off the dragging feature. The full list of attributes that can be passed is found in the docstring. I plan to write a more detailed description in a following post.</p>
 <p>Here is another example of a NetworkX graph converted to a force layout. This is Zachary’s Karate Club. Nodes in <code>Mr Hi</code>’s club are coloured purple and the rest are coloured orange. Node size is also changed based on the number of neighbours.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
@@ -327,7 +332,7 @@ div.csl-indent {
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        charge<span class="op">=-</span><span class="dv">600</span>,</span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        friction<span class="op">=</span><span class="dv">1</span></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig_el8173445058185128276242074">
 
 </div>
@@ -927,7 +932,7 @@ if(typeof(mpld3) !== "undefined" && mpld3._mpld3IsLoaded){
 }
 </script>
 <p>See <a href="https://mpld3.github.io/examples/networkxd3forcelayout.html">mpld3 documentation</a> for more information.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mpld3</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mpld3</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NetworkXD3ForceLayout(mpld3.plugins.PluginBase):</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A NetworkX to D3 Force Layout Plugin"""</span></span>
@@ -1066,7 +1071,7 @@ if(typeof(mpld3) !== "undefined" && mpld3._mpld3IsLoaded){
 <span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"friction"</span>: friction,</span>
 <span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"link_distance"</span>: link_distance,</span>
 <span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"link_strength"</span>: link_strength,</span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"nominal_radius"</span>: node_size}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"nominal_radius"</span>: node_size}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 

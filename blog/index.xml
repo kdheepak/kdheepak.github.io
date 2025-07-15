@@ -9,7 +9,7 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.8.14</generator>
+<generator>quarto-1.8.16</generator>
 <lastBuildDate>Sat, 07 Jun 2025 18:22:45 GMT</lastBuildDate>
 <item>
   <title>ibis - a better pandas</title>
@@ -33,26 +33,7 @@
   <title>Jupyter prelude</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/jupyter-prelude/</link>
-  <description><![CDATA[ 
-
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># This will create a new Python environment in the current directory</span></span>
-<span id="cb1-2"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">uv</span> init <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">--app</span></span>
-<span id="cb1-3"></span>
-<span id="cb1-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># This will add the specified packages to the environment</span></span>
-<span id="cb1-5"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">uv</span> add <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"ibis-framework[duckdb,geospatial]"</span> ipykernel panel hvplot holoviews matplotlib pandas param lonboard folium</span></code></pre></div>
- ]]></description>
+  <description><![CDATA[ Copy the following to the top of your Jupyter Notebook to load the prelude: ]]></description>
   <category>python</category>
   <guid>https://kdheepak.com/blog/jupyter-prelude/</guid>
   <pubDate>Mon, 16 Dec 2024 02:03:04 GMT</pubDate>
