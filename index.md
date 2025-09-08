@@ -15,7 +15,7 @@ I'm a research engineer and software developer. I have experience running energy
 simulations, such as transmission production cost models and power distribution system analyses, and
 have developed bespoke models for energy system analysis. I'm proficient with Python, Julia, Rust,
 and Javascript, and am well versed in scientific data analysis and extract-transform-load workflows.
-I also enjoy working on open source projects and learning new technologies.
+I also enjoy working on open source projects and learning new things.
 
 :::
 
