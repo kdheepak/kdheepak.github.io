@@ -1,0 +1,54 @@
+---
+title: "Unicode Graphs"
+summary: Discussion on unicode graphs for terminal applications
+date: 2026-01-03T21:14:15-0500
+categories: [terminal]
+keywords: unicode, terminal, graphs
+draft: true
+---
+
+If you've used `lazygit` or `tig`, you've probably seen graphs used to represent commit history in
+the terminal. Here's an example from `tig`:
+
+```plaintext
+●─╮ build(deps): bump actions/checkout from 2 to 4 (#569)
+●─│─╮ build(deps): bump peaceiris/actions-gh-pages from 3 to 4 (#568)
+●─│─│─╮ build(deps): bump softprops/action-gh-release from 1 to 2 (#567)
+●─│─│─│─╮ build(deps): bump actions/setup-python from 1 to 5 (#566)
+●─│─│─│─│─╮ build(deps): bump nwtgck/actions-netlify from 2.0 to 3.0 (#565)
+│ ∙ │ │ │ │ build(deps): bump actions/checkout from 2 to 4
+│ │ ∙ │ │ │ build(deps): bump peaceiris/actions-gh-pages from 3 to 4
+│ │ │ ∙ │ │ build(deps): bump softprops/action-gh-release from 1 to 2
+│ │ │ │ ∙ │ build(deps): bump actions/setup-python from 1 to 5
+│ │ │ │ │ ∙ build(deps): bump nwtgck/actions-netlify from 2.0 to 3.0
+∙─┴─┴─┴─┴─╯ chore: Add dependabot.yml
+```
+
+In this post, I'll explore a few different styles of graphs that can be used in terminal
+applications.
+
+I'm going to use the convention used by graphviz to represent graphs in text form. For example, the
+following text represents a directed graph:
+
+```{dot}
+//| label: fig-simple
+//| fig-cap: "This is a simple directed graph."
+//| echo: true
+digraph G {
+  A -> B;
+  B -> { C D };
+  C -> E;
+  D -> E;
+  E;
+}
+
+```
+
+
+
+
+## Ascii Style vs Unicode Style
+
+The most basic style is the ascii style, which uses characters like `|`, `-`, `+`, and `*` to
+represent the graph. This style is simple and widely supported, however, for most fonts, it can look
+blocky and less visually appealing.

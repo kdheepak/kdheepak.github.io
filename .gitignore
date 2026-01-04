@@ -17,3 +17,5 @@
 **/.venv/*
 
 **/.virtual_documents/*
+
+**/*.quarto_ipynb
