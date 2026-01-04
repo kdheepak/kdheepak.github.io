@@ -10,7 +10,7 @@
 <link>https://kdheepak.com/blog/</link>
 <atom:link href="https://kdheepak.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.8.24</generator>
+<generator>quarto-1.9.16</generator>
 <lastBuildDate>Sat, 07 Jun 2025 18:22:45 GMT</lastBuildDate>
 <item>
   <title>ibis - a better pandas</title>
@@ -568,6 +568,15 @@
   <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Geektool and Desktop Widgets in OSX</title>
+  <dc:creator>Dheepak Krishnamurthy</dc:creator>
+  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
+  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
+  <category>osx</category>
+  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Tasker and Google Maps</title>
   <dc:creator>Dheepak Krishnamurthy</dc:creator>
   <link>https://kdheepak.com/blog/tasker-and-google-maps/</link>
@@ -575,15 +584,6 @@
   <category>tasker</category>
   <category>android</category>
   <guid>https://kdheepak.com/blog/tasker-and-google-maps/</guid>
-  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Geektool and Desktop Widgets in OSX</title>
-  <dc:creator>Dheepak Krishnamurthy</dc:creator>
-  <link>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</link>
-  <description><![CDATA[ This is a Geektool tutorial on how to customize your Mac OSX desktop homescreen. Using Geektool you can add a widget like functionality to your desktop. ]]></description>
-  <category>osx</category>
-  <guid>https://kdheepak.com/blog/geektool-and-desktop-widgets-in-osx/</guid>
   <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
 </item>
 <item>
