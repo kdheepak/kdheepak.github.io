@@ -2,6 +2,7 @@
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
+import SearchInitializer from "@/components/SearchInitializer.astro";
 import { SITE } from "@/config";
 import "@/styles/global.css";
 
@@ -268,6 +269,7 @@ const mathJaxTypesetScript = `
   </head>
   <body>
     <slot />
+    <SearchInitializer />
 
     {
       enableMathJax && (

@@ -1,0 +1,157 @@
+<script>
+  let searchResultsObserver: MutationObserver | null = null;
+
+  function decorateSearchResultDates(root: ParentNode) {
+    const results = root.querySelectorAll(".pagefind-ui__result");
+
+    for (const result of results) {
+      if (!(result instanceof HTMLElement)) continue;
+
+      const title = result.querySelector(".pagefind-ui__result-title");
+      if (!(title instanceof HTMLElement)) continue;
+      if (title.querySelector(".pagefind-ui__result-date")) continue;
+
+      const dateTag = result.querySelector(
+        '.pagefind-ui__result-tag[data-pagefind-ui-meta="date"]'
+      );
+      if (!(dateTag instanceof HTMLElement)) continue;
+
+      const rawDateText = dateTag.textContent?.trim() ?? "";
+      const dateText = rawDateText.replace(/^date:\s*/i, "").trim();
+      if (!dateText) continue;
+
+      title.classList.add("pagefind-ui__result-title-row");
+
+      const dateSpan = document.createElement("span");
+      dateSpan.className = "pagefind-ui__result-date";
+      dateSpan.textContent = dateText;
+      title.append(dateSpan);
+
+      dateTag.remove();
+      const tagsList = result.querySelector(".pagefind-ui__result-tags");
+      if (tagsList instanceof HTMLElement && tagsList.children.length === 0) {
+        tagsList.remove();
+      }
+    }
+  }
+
+  async function initSearch() {
+    const pageFindSearch: HTMLElement | null =
+      document.querySelector("#pagefind-search");
+    if (!pageFindSearch) return;
+
+    // If search form already exists, preserve it and only decorate dynamic results.
+    if (pageFindSearch.querySelector("form")) {
+      decorateSearchResultDates(pageFindSearch);
+      return;
+    }
+
+    searchResultsObserver?.disconnect();
+    searchResultsObserver = null;
+
+    const params = new URLSearchParams(window.location.search);
+    const onIdle = window.requestIdleCallback || (cb => setTimeout(cb, 1));
+
+    onIdle(async () => {
+      try {
+        // @ts-expect-error — Missing types for @pagefind/default-ui package.
+        const { PagefindUI } = await import("@pagefind/default-ui");
+
+        // Display warning in dev mode
+        if (import.meta.env.DEV) {
+          pageFindSearch.innerHTML = `
+              <div class="bg-muted/75 rounded p-4 space-y-4 mb-4">
+                <p><strong>DEV mode Warning! </strong>You need to build the project at least once to see the search results during development.</p>
+                <code class="block bg-black text-white px-2 py-1 rounded">pnpm run build</code>
+              </div>
+            `;
+        }
+
+        const search = new PagefindUI({
+          element: "#pagefind-search",
+          bundlePath: "/pagefind/",
+          showImages: false,
+          showSubResults: true,
+          processTerm: function (term: string) {
+            if (term.trim()) {
+              params.set("q", term);
+            } else {
+              params.delete("q");
+            }
+
+            const queryString = params.toString();
+            history.replaceState(
+              history.state,
+              "",
+              queryString ? `?${queryString}` : window.location.pathname
+            );
+
+            const backUrl = pageFindSearch.dataset.backurl ?? window.location.pathname;
+            const sessionBackUrl = queryString
+              ? `${backUrl}?${queryString}`
+              : backUrl;
+            sessionStorage.setItem("backUrl", sessionBackUrl);
+
+            return term;
+          },
+        });
+
+        searchResultsObserver = new MutationObserver(() => {
+          decorateSearchResultDates(pageFindSearch);
+        });
+        searchResultsObserver.observe(pageFindSearch, {
+          childList: true,
+          subtree: true,
+        });
+        decorateSearchResultDates(pageFindSearch);
+
+        const query = params.get("q");
+        if (query) {
+          search.triggerSearch(query);
+        }
+
+        const searchInput = document.querySelector(
+          ".pagefind-ui__search-input"
+        ) as HTMLInputElement | null;
+        const clearButton = document.querySelector(".pagefind-ui__search-clear");
+
+        function resetSearchParam() {
+          if (!searchInput || searchInput.value.trim() !== "") return;
+          params.delete("q");
+          history.replaceState(history.state, "", window.location.pathname);
+        }
+
+        searchInput?.addEventListener("input", resetSearchParam);
+        clearButton?.addEventListener("click", () => {
+          queueMicrotask(resetSearchParam);
+        });
+      } catch (error) {
+        console.error("Failed to initialize search", error);
+        pageFindSearch.innerHTML = `
+          <div class="bg-muted/75 rounded p-4">
+            <p><strong>Search is temporarily unavailable.</strong></p>
+          </div>
+        `;
+      }
+    });
+  }
+
+  function handlePageLoad() {
+    initSearch();
+  }
+
+  function handleBeforeSwap() {
+    searchResultsObserver?.disconnect();
+    searchResultsObserver = null;
+  }
+
+  const searchWindow = window as Window & { __kdSearchInitHooked?: boolean };
+
+  if (!searchWindow.__kdSearchInitHooked) {
+    document.addEventListener("astro:page-load", handlePageLoad);
+    document.addEventListener("astro:before-swap", handleBeforeSwap);
+    searchWindow.__kdSearchInitHooked = true;
+  }
+
+  initSearch();
+</script>
