@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: deploy-cloudflare-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -41,6 +41,13 @@ jobs:
 
       - name: Build site
         run: pnpm run build
+
+      - name: Publish to gh-pages branch
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
