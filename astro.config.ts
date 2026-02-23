@@ -176,9 +176,6 @@ const copyBlogWwwDirs = () => ({
 
 // https://astro.build/config
 export default defineConfig({
-    prefetch: {
-        prefetchAll: true
-    },
     trailingSlash: "always",
 
     site: SITE.website,
