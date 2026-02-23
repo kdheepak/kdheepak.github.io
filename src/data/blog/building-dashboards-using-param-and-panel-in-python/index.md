@@ -399,10 +399,12 @@ print(dict(start=m.start_year, end=m.end_year))
 
 <div>
 
-> **Tip**
->
-> `@param.depends` decorator with `watch=True` is the simplest because
-> it is more explicit and easier to read.
+::: callout-tip
+
+`@param.depends` decorator with `watch=True` is the simplest because
+it is more explicit and easier to read.
+
+:::
 
 </div>
 
