@@ -1266,8 +1266,20 @@ const nextPost =
   }
   attachCopyButtons();
 
-  /* Go to page start after page swap */
-  document.addEventListener("astro:after-swap", () =>
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
-  );
+  /* Go to page start after page swap unless navigating to a hash target. */
+  document.addEventListener("astro:after-swap", () => {
+    const hash = window.location.hash;
+    if (!hash || hash === "#") {
+      window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+      return;
+    }
+
+    const targetId = decodeURIComponent(hash.slice(1));
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) return;
+
+    requestAnimationFrame(() => {
+      targetElement.scrollIntoView({ block: "start", inline: "nearest" });
+    });
+  });
 </script>
