@@ -6,15 +6,32 @@ import Datetime from "./Datetime.astro";
 
 type Props = {
   variant?: "h2" | "h3";
+  dateLayout?: "right" | "below-title";
+  showDate?: boolean;
 } & CollectionEntry<"blog">;
 
-const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const {
+  variant: Heading = "h2",
+  dateLayout = "right",
+  showDate = true,
+  id,
+  data,
+  filePath,
+} = Astro.props;
 
 const { title, description, ...props } = data;
 ---
 
 <li class="my-6">
-  <div class="grid grid-cols-1 gap-y-1 sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-x-4">
+  <div
+    class:list={[
+      "grid grid-cols-1 gap-y-1",
+      {
+        "sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-x-4":
+          showDate && dateLayout === "right",
+      },
+    ]}
+  >
     <a
       href={getPath(id, filePath)}
       class:list={[
@@ -32,13 +49,27 @@ const { title, description, ...props } = data;
         {title}
       </Heading>
     </a>
-    <Datetime
-      {...props}
-      class="shrink-0 sm:justify-start"
-      style={{
-        viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
-      }}
-    />
-    <p class="mt-1 sm:col-span-2">{description}</p>
+    {showDate && (
+      <Datetime
+        {...props}
+        class:list={[
+          "shrink-0",
+          {
+            "sm:justify-start": dateLayout === "right",
+          },
+        ]}
+        style={{
+          viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
+        }}
+      />
+    )}
+    <p
+      class:list={[
+        "mt-1",
+        { "sm:col-span-2": showDate && dateLayout === "right" },
+      ]}
+    >
+      {description}
+    </p>
   </div>
 </li>
