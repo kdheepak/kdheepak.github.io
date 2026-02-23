@@ -20,35 +20,35 @@ This is a showcase of some of the capabilities of
 [Neovim's built-in Language Server Protocol (LSP) client](https://neovim.io/doc/user/lsp.html), as
 well as the instructions to install this setup.
 
-# Capabilities
+## Capabilities
 
 The `.vimrc` code corresponding to the capability is linked in the caption of each screencapture.
 
-## Completion
+### Completion
 
 ![[vim.lsp.omnifunc](https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L648)](images/autocomplete.mov.gif)
 
-## Documentation
+### Documentation
 
 ![[vim.lsp.buf.hover](https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L971)](images/documentation.mov.gif)
 
-## Jump to definition
+### Jump to definition
 
 ![[vim.lsp.buf.definition](https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L968)](images/jumptodefinition.mov.gif)
 
-## Linting
+### Linting
 
 ![[vim.lsp.util.show_line_diagnostics](https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L992)](images/linting.mov.gif)
 
-## References
+### References
 
 ![[vim.lsp.buf.references](https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L983)](images/references.mov.gif)
 
-## Document symbols
+### Document symbols
 
 ![[vim.lsp.buf.document_symbol](https://github.com/kdheepak/dotfiles/blob/9f2f76877e0b6ace32c109d95e206ee9f1851193/vimrc#L986)](images/symbols.mov.gif)
 
-# Install
+## Install
 
 If you'd like to use this you will need the following:
 

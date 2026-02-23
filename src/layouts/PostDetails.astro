@@ -284,6 +284,61 @@ const nextPost =
     }
   }
 
+  /** Ensures footnotes and bibliography sections have visible headings. */
+  function ensurePostEndMatterHeadings() {
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    const createUniqueId = baseId => {
+      if (!baseId) return "";
+      if (!document.getElementById(baseId)) return baseId;
+
+      let suffix = 2;
+      let candidate = `${baseId}-${suffix}`;
+      while (document.getElementById(candidate)) {
+        suffix += 1;
+        candidate = `${baseId}-${suffix}`;
+      }
+      return candidate;
+    };
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (footnotesSection instanceof HTMLElement) {
+      const footnotesHeading = footnotesSection.querySelector(":scope > h2");
+      if (footnotesHeading instanceof HTMLHeadingElement) {
+        footnotesHeading.classList.remove("sr-only");
+      } else {
+        const generatedFootnotesHeading = document.createElement("h2");
+        generatedFootnotesHeading.id = createUniqueId("footnotes");
+        generatedFootnotesHeading.textContent = "Footnotes";
+        footnotesSection.prepend(generatedFootnotesHeading);
+      }
+    }
+
+    const referencesSection =
+      article.querySelector("#refs.references") ??
+      article.querySelector(".references.csl-bib-body");
+
+    if (referencesSection instanceof HTMLElement) {
+      const previousHeading = referencesSection.previousElementSibling;
+      const isReferencesHeading =
+        previousHeading instanceof HTMLHeadingElement &&
+        (previousHeading.textContent?.trim().toLowerCase() ?? "") ===
+          "references";
+
+      if (isReferencesHeading) {
+        if (!previousHeading.id) {
+          previousHeading.id = createUniqueId("references");
+        }
+      } else {
+        const referencesHeading = document.createElement("h2");
+        referencesHeading.id = createUniqueId("references");
+        referencesHeading.textContent = "References";
+        referencesSection.before(referencesHeading);
+      }
+    }
+  }
+
   /**
    * Keeps TOC docked to the left on large screens.
    */
@@ -700,6 +755,7 @@ const nextPost =
       document.fonts.ready.then(handleResize).catch(() => {});
     }
   }
+  ensurePostEndMatterHeadings();
   setupDockingToc();
   addHeadingLinks();
 

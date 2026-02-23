@@ -48,6 +48,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./dist
+          force_orphan: true
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
