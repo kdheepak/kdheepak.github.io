@@ -254,87 +254,6 @@ const nextPost =
     });
   }
 
-  /** Attaches links to headings in the document,
-   *  allowing sharing of sections easily */
-  function addHeadingLinks() {
-    const article = document.getElementById("article");
-    if (!article) return;
-
-    const headings = Array.from(article.querySelectorAll("h2, h3, h4, h5, h6"));
-    for (const heading of headings) {
-      if (!(heading instanceof HTMLHeadingElement)) continue;
-      if (!heading.id || heading.id === "table-of-contents") continue;
-      if (heading.querySelector(":scope > a.heading-link")) continue;
-
-      heading.classList.add("group");
-      const link = document.createElement("a");
-      link.className =
-        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
-      link.href = "#" + heading.id;
-
-      const span = document.createElement("span");
-      span.ariaHidden = "true";
-      span.innerText = "#";
-      link.appendChild(span);
-      heading.appendChild(link);
-    }
-  }
-
-  /** Ensures footnotes and bibliography sections have visible headings. */
-  function ensurePostEndMatterHeadings() {
-    const article = document.getElementById("article");
-    if (!article) return;
-
-    const createUniqueId = baseId => {
-      if (!baseId) return "";
-      if (!document.getElementById(baseId)) return baseId;
-
-      let suffix = 2;
-      let candidate = `${baseId}-${suffix}`;
-      while (document.getElementById(candidate)) {
-        suffix += 1;
-        candidate = `${baseId}-${suffix}`;
-      }
-      return candidate;
-    };
-
-    const footnotesSection = article.querySelector("section[data-footnotes]");
-    if (footnotesSection instanceof HTMLElement) {
-      const footnotesHeading = footnotesSection.querySelector(":scope > h2");
-      if (footnotesHeading instanceof HTMLHeadingElement) {
-        footnotesHeading.classList.remove("sr-only");
-      } else {
-        const generatedFootnotesHeading = document.createElement("h2");
-        generatedFootnotesHeading.id = createUniqueId("footnotes");
-        generatedFootnotesHeading.textContent = "Footnotes";
-        footnotesSection.prepend(generatedFootnotesHeading);
-      }
-    }
-
-    const referencesSection =
-      article.querySelector("#refs.references") ??
-      article.querySelector(".references.csl-bib-body");
-
-    if (referencesSection instanceof HTMLElement) {
-      const previousHeading = referencesSection.previousElementSibling;
-      const isReferencesHeading =
-        previousHeading instanceof HTMLHeadingElement &&
-        (previousHeading.textContent?.trim().toLowerCase() ?? "") ===
-          "references";
-
-      if (isReferencesHeading) {
-        if (!previousHeading.id) {
-          previousHeading.id = createUniqueId("references");
-        }
-      } else {
-        const referencesHeading = document.createElement("h2");
-        referencesHeading.id = createUniqueId("references");
-        referencesHeading.textContent = "References";
-        referencesSection.before(referencesHeading);
-      }
-    }
-  }
-
   /**
    * Keeps TOC docked to the left on large screens.
    */
@@ -352,67 +271,15 @@ const nextPost =
     );
     if (!contentHeadings.length) return;
 
-    const buildGeneratedTocList = headings => {
-      const rootList = document.createElement("ul");
-      const listStack = [rootList];
-      let currentDepth = 2;
-
-      for (const heading of headings) {
-        let depth = Number.parseInt(heading.tagName.slice(1), 10);
-        if (!Number.isFinite(depth)) depth = 2;
-        depth = Math.max(2, Math.min(6, depth));
-
-        while (depth > currentDepth) {
-          const parentList = listStack[listStack.length - 1];
-          const parentItem = parentList.lastElementChild;
-          if (!(parentItem instanceof HTMLLIElement)) {
-            depth = currentDepth;
-            break;
-          }
-
-          const nestedList = document.createElement("ul");
-          parentItem.appendChild(nestedList);
-          listStack.push(nestedList);
-          currentDepth += 1;
-        }
-
-        while (depth < currentDepth && listStack.length > 1) {
-          listStack.pop();
-          currentDepth -= 1;
-        }
-
-        const listItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = "#" + heading.id;
-        link.textContent = heading.textContent?.trim() ?? heading.id;
-        listItem.appendChild(link);
-        listStack[listStack.length - 1].appendChild(listItem);
-      }
-
-      return rootList;
-    };
-
-    let tocHeading = article.querySelector("h2#table-of-contents");
-    let tocList = tocHeading?.nextElementSibling;
+    const tocHeading = article.querySelector("h2#table-of-contents");
+    const tocList = tocHeading?.nextElementSibling;
 
     if (
       !(tocHeading instanceof HTMLHeadingElement) ||
       !(tocList instanceof HTMLElement) ||
       !["UL", "OL"].includes(tocList.tagName)
     ) {
-      if (tocHeading instanceof HTMLElement) tocHeading.remove();
-      if (tocList instanceof HTMLElement && ["UL", "OL"].includes(tocList.tagName)) {
-        tocList.remove();
-      }
-
-      tocHeading = document.createElement("h2");
-      tocHeading.id = "table-of-contents";
-      tocHeading.textContent = "Table of contents";
-
-      tocList = buildGeneratedTocList(contentHeadings);
-      const firstContentHeading = contentHeadings[0];
-      firstContentHeading.before(tocHeading);
-      tocHeading.after(tocList);
+      return;
     }
 
     let floatingToc = tocHeading.closest(".inline-toc-floating");
@@ -1283,9 +1150,7 @@ const nextPost =
 
     createProgressBar();
     updateScrollProgress();
-    ensurePostEndMatterHeadings();
     setupDockingToc();
-    addHeadingLinks();
 
     try {
       addCitationBackLinks();

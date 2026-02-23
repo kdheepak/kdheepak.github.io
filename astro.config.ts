@@ -21,7 +21,9 @@ import { remarkImageAttributes } from "./src/utils/remark-image-attributes.js";
 import { remarkMermaidFences } from "./src/utils/remark-mermaid-fences.js";
 import { remarkNormalizeCodeFences } from "./src/utils/remark-normalize-code-fences.js";
 import { rehypeExternalLinks } from "./src/utils/rehype-external-links.js";
+import { rehypePostEnhancements } from "./src/utils/rehype-post-enhancements.js";
 import { rehypeSvgbob } from "./src/utils/rehype-svgbob.js";
+import { remarkPostToc } from "./src/utils/remark-post-toc.js";
 import { slugifyStr } from "./src/utils/slugify";
 import { SITE } from "./src/config";
 
@@ -188,6 +190,7 @@ export default defineConfig({
             remarkDirective,
             remarkDirectives,
             remarkImageAttributes,
+            remarkPostToc,
         ],
         rehypePlugins: [
             rehypeSvgbob,
@@ -203,6 +206,7 @@ export default defineConfig({
             ],
             [rehypeMermaid, {}],
             [rehypeExternalLinks, { site: SITE.website }],
+            rehypePostEnhancements,
         ],
         syntaxHighlight: {
             type: "shiki",
