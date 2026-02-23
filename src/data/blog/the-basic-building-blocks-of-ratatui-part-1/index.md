@@ -237,23 +237,25 @@ area.inner(&ratatui::layout::Margin::new(horizontal, vertical))
 
 <div>
 
-> **Note**
->
-> In `ratatui` (and terminals in general), the origin is at the top left
-> and increases horizontally left to right, and increases vertically top
-> to bottom.
->
-> ``` plain
-> "(0,0)" -------------> x "(columns)"
->
->    |
->    |
->    |
->    |
->    v
->
->    y "(rows)"
-> ```
+::: callout-note
+
+In `ratatui` (and terminals in general), the origin is at the top left
+and increases horizontally left to right, and increases vertically top
+to bottom.
+
+``` plain
+"(0,0)" -------------> x "(columns)"
+
+   |
+   |
+   |
+   |
+   v
+
+   y "(rows)"
+```
+
+:::
 
 </div>
 
