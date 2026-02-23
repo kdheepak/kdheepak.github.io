@@ -1,9 +1,7 @@
 ---
 title: Vim, tmux and zsh — the productivity trio
 date: 2015-05-08T22:58:18-06:00
-description:
-  I've not found a greater combination of tools than vim, tmux and zsh. I've detailed below some of
-  the configuration ...
+description: setup guide for Vim, tmux, and zsh working together.
 tags:
   - neovim
 keywords: vim, tmux, zsh

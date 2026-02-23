@@ -1,7 +1,7 @@
 ---
 title: Spotify and tmux
 date: 2015-09-20T09:26:15-06:00
-description: Show current spotify track in tmux
+description: tmux status integration that shows the current Spotify track.
 tags:
   - tmux
 keywords: tmux, spotify, powerline

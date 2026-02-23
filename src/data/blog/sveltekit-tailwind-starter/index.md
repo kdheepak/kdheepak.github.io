@@ -1,7 +1,7 @@
 ---
 title: Sveltekit tailwind starter
 date: 2022-02-18T22:03:31-06:00
-description: Minimal starter using sveltekit tailwind and fontawesome
+description: minimal starter template with SvelteKit, Tailwind CSS, and Font Awesome.
 tags:
   - svelte
 keywords: svelte, sveltekit, tailwind, fontawesome, layercake, starter

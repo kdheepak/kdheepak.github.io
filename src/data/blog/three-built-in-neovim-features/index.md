@@ -1,7 +1,7 @@
 ---
 title: Three built-in `neovim` features
 date: 2020-06-27T09:42:32-06:00
-description: I want to share a few neovim built-in features that can make you more productive.
+description: guide to three built-in Neovim features that improve editing workflow.
 tags:
   - neovim
 keywords:

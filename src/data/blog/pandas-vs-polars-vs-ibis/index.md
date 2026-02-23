@@ -3,7 +3,7 @@ title: "Pandas vs Polars vs ibis"
 date: 2024-08-25T10:22:45-04:00
 tags: ["python"]
 keywords: []
-description: "A short comparison of idiomatic pandas vs polars vs ibis with method chaining"
+description: comparison of idiomatic data workflows in pandas, Polars, and Ibis.
 notebookPath: "src/data/blog/pandas-vs-polars-vs-ibis/index.ipynb"
 ---
 

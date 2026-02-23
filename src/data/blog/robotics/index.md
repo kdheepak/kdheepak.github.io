@@ -1,7 +1,7 @@
 ---
 title: Robotics
 date: 2014-12-13T10:00:00-06:00
-description: Here are some videos from projects I worked on during my undergraduate degree ...
+description: collection of videos and notes from undergraduate robotics projects.
 ---
 
 <h3>Robotics and Microcontroller Projects</h3>

@@ -3,7 +3,7 @@ title: "Visualizing roads in the cities of Canada"
 date: 2023-04-29T12:38:41-04:00
 tags: ["julia", "visualization"]
 keywords: ["julia"]
-description: "Visualizing roads in the cities of Canada"
+description: data visualization walkthrough of city road networks in Canada.
 notebookPath: "src/data/blog/visualizing-roads-in-the-cities-of-canada/index.ipynb"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Change `$PATH` inside vim
 date: 2015-09-19T09:05:36-06:00
-description: How to change `$PATH` from inside vim
+description: guide to updating PATH from inside Vim.
 tags:
   - neovim
   - osx

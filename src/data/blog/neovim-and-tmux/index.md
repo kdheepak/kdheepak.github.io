@@ -1,7 +1,7 @@
 ---
 title: Neovim and Tmux
 date: 2016-02-06T00:54:00-06:00
-description: Set up neovim and tmux to work with osx.
+description: guide to configuring Neovim and tmux together on macOS.
 tags:
   - neovim
 keywords: neovim, tmux, vim, writing

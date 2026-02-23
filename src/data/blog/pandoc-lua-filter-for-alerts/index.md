@@ -1,7 +1,7 @@
 ---
 title: Pandoc lua filter for alerts
 date: 2022-03-31T02:27:44-06:00
-description: Pandoc lua filter for showing alerts
+description: pandoc Lua filter for rendering alert blocks.
 tags:
   - pandoc
 keywords: pandoc, lua, filter

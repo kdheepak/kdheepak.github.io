@@ -1,7 +1,7 @@
 ---
 title: Create Emacsclient.app using AppleScript
 date: 2015-07-18T10:00:00-06:00
-description: I've created an Emacsclient.app using AppleScript to aid with my Alfred workflow ...
+description: guide to creating an Emacsclient.app with AppleScript for launcher workflows.
 tags:
   - emacs
   - osx

@@ -1,7 +1,7 @@
 ---
 title: "Code Reuse Patterns in Python, Rust and Julia: Part 1"
 date: 2023-08-19T20:12:13-05:00
-description: Comparing inheritance, composition, and delegation patterns across Python, Rust, and Julia.
+description: comparison of inheritance, composition, and delegation across Python, Rust, and Julia.
 draft: true
 tags:
   - python

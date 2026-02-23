@@ -1,7 +1,7 @@
 ---
 title: Better git log with git ls
 date: 2015-06-01T20:45:00-06:00
-description: I've stopped using git log and have replaced it with this custom command ...
+description: guide to replacing git log with a custom git ls command.
 tags:
   - git
 keywords: Git tips and tricks

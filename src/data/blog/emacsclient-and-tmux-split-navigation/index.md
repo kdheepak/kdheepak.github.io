@@ -1,9 +1,7 @@
 ---
 title: Emacsclient and tmux split navigation
 date: 2015-07-26T22:00:00-06:00
-description:
-  I use the following set of lisps my .emacs to get seamless navigation between emacs splits and
-  tmux panes ...
+description: guide to seamless navigation between Emacs and tmux splits.
 tags:
   - emacs
   - osx

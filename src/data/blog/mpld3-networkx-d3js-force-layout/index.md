@@ -1,7 +1,7 @@
 ---
 title: mpld3 networkx d3.js force layout
 date: 2016-10-02T12:41:05-06:00
-description: Notes on mpld3 force layout
+description: guide to force-directed graph layout with mpld3, NetworkX, and D3.js.
 tags:
   - python
 keywords: python, mpld3, networkx, d3.js

@@ -1,9 +1,7 @@
 ---
 title: Installing `homebrew` in an alternative location
 date: 2022-08-03T13:47:12-06:00
-description:
-  Install `homebrew` in an alternative location to avoid globally available homebrew executables and
-  libraries
+description: guide to installing Homebrew in a custom location.
 tags:
   - osx
 keywords: homebrew, alternative, install, osx

@@ -3,7 +3,7 @@ title: "The Basic Building blocks of Ratatui - Part 1"
 date: 2024-05-14T20:03:04-04:00
 tags: ["rust"]
 keywords: ["rust, ratatui"]
-description: "Showcase of using Ratatui buffer and rect primitives"
+description: ratatui fundamentals guide to buffers and rectangles.
 notebookPath: "src/data/blog/the-basic-building-blocks-of-ratatui-part-1/index.ipynb"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Advent of Code 2020 Retrospective
 date: 2020-12-25T00:00:00-07:00
-description: Solutions to all 25 days in the Julia programming language.
+description: julia retrospective covering all 25 days of Advent of Code 2020.
 toc: true
 tags:
   - adventofcode

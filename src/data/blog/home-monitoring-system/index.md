@@ -1,7 +1,7 @@
 ---
 title: Home monitoring system
 date: 2014-12-11T13:03:31-06:00
-description: Monitoring room temperature with a Raspberry Pi setup.
+description: raspberry Pi setup for monitoring room temperature at home.
 ---
 
 Monitoring temperature using Raspberry Pi

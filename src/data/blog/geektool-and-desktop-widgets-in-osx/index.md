@@ -1,7 +1,7 @@
 ---
 title: Geektool and Desktop Widgets in OSX
 date: 2014-12-13T10:00:00-06:00
-description: This is a Geektool tutorial on customizing OSX desktop - Calvin & Hobbes themed ...
+description: geektool tutorial for building a custom macOS desktop widget setup.
 tags:
   - osx
 ---

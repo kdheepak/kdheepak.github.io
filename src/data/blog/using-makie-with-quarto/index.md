@@ -3,7 +3,7 @@ title: "Using Makie with Quarto"
 date: 2023-04-26T20:22:45-04:00
 tags: ["julia"]
 keywords: []
-description: "Use Makie with Quarto using CairoMakie"
+description: guide to using Makie with Quarto via CairoMakie.
 notebookPath: "src/data/blog/using-makie-with-quarto/index.ipynb"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Patched fonts madness
 date: 2015-07-12T19:59:22-06:00
-description: Patched fonts on MacOSX
+description: guide to using patched fonts on macOS.
 tags:
   - neovim
   - tmux

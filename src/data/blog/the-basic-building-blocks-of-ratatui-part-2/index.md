@@ -3,7 +3,7 @@ title: "The Basic Building blocks of Ratatui - Part 2"
 date: 2024-05-15T22:03:04-04:00
 tags: ["rust"]
 keywords: ["rust, ratatui"]
-description: "Showcase of using layout"
+description: ratatui fundamentals guide to layout primitives.
 notebookPath: "src/data/blog/the-basic-building-blocks-of-ratatui-part-2/index.ipynb"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Raspberry Pi powered LED lamp
 date: 2016-03-27T19:17:58-06:00
-description: Use your Raspberry Pi to control a desk lamp
+description: guide to controlling a desk lamp with a Raspberry Pi.
 tags:
   - python
 keywords: raspberry, pi, led, flask

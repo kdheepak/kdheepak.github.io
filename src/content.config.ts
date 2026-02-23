@@ -14,18 +14,29 @@ const blog = defineCollection({
         }
 
         const frontmatter = input as Record<string, unknown>;
+        let normalized = frontmatter;
 
-        if (!("pubDatetime" in frontmatter)) {
-          if ("pubDateTime" in frontmatter) {
-            return { ...frontmatter, pubDatetime: frontmatter.pubDateTime };
-          }
-
-          if ("date" in frontmatter) {
-            return { ...frontmatter, pubDatetime: frontmatter.date };
+        if (!("pubDatetime" in normalized)) {
+          if ("pubDateTime" in normalized) {
+            normalized = { ...normalized, pubDatetime: normalized.pubDateTime };
+          } else if ("date" in normalized) {
+            normalized = { ...normalized, pubDatetime: normalized.date };
           }
         }
 
-        return frontmatter;
+        // Use `description` as the single canonical summary field.
+        if (!("description" in normalized)) {
+          if ("summary" in normalized && typeof normalized.summary === "string") {
+            normalized = { ...normalized, description: normalized.summary };
+          } else if (
+            "subtitle" in normalized &&
+            typeof normalized.subtitle === "string"
+          ) {
+            normalized = { ...normalized, description: normalized.subtitle };
+          }
+        }
+
+        return normalized;
       },
       z.object({
         author: z.string().default(SITE.author),

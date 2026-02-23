@@ -3,7 +3,7 @@ title: "Using Tikz with Pandoc"
 date: 2022-02-18T20:03:31-06:00
 tags: ["pandoc"]
 keywords: ["tikz, latex, pandoc, lua, filter"]
-description: "Showcase of using integrating Tikz with Pandoc lua filters"
+description: guide to integrating TikZ diagrams with Pandoc using Lua filters.
 notebookPath: "src/data/blog/using-tikz-with-pandoc/index.ipynb"
 ---
 

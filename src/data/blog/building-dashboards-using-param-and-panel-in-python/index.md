@@ -4,7 +4,7 @@ date: 2025-01-04T21:03:04-05:00
 toc: true
 tags: ["python"]
 keywords: ["python, panel, jupyter, vscode"]
-description: "This post will show you some basics of building reusable components in dashboards using Param and Panel in Python."
+description: guide to building reusable dashboard components with Param and Panel in Python.
 notebookPath: "src/data/blog/building-dashboards-using-param-and-panel-in-python/index.ipynb"
 ---
 

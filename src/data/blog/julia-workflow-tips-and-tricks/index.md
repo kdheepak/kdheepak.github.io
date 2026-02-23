@@ -1,9 +1,7 @@
 ---
 title: Julia Workflow Tips and Tricks
 date: 2023-08-12T21:14:15-05:00
-subtitle: For a Better Developer Experience
-description:
-  In this blog post, I present some ways you can improve your developer experience using Julia
+description: practical collection of Julia workflow tips and tricks for day-to-day development.
 tags:
   - julia
 keywords: julia, tips, tricks, developer, experience, workflow

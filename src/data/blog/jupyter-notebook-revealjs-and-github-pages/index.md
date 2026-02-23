@@ -1,7 +1,7 @@
 ---
 title: Jupyter Notebook, Reveal.js and Github Pages
 date: 2015-12-05T13:03:54-06:00
-description: Use jupyter notebooks for presentations
+description: guide to publishing Jupyter Notebook presentations with reveal.js on GitHub Pages.
 tags:
   - python
 keywords:

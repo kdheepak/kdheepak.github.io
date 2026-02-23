@@ -1,7 +1,7 @@
 ---
 title: Svelte and Pandoc
 date: 2022-01-11T23:03:31-06:00
-description: Testing Svelte components inside a Pandoc preprocessed blog post.
+description: test of embedding Svelte components in a Pandoc-preprocessed post.
 draft: true
 tags:
   - svelte

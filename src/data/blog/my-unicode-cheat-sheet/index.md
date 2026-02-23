@@ -1,7 +1,7 @@
 ---
 title: My Unicode cheat sheet
 date: 2020-09-19T02:29:49-06:00
-description: References for various things associated with unicode in Vim, Python, Julia and Rust
+description: unicode reference for Vim, Python, Julia, and Rust.
 toc: true
 tags:
   - neovim

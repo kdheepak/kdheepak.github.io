@@ -1,7 +1,7 @@
 ---
 title: How to install gdb on OSX
 date: 2015-07-27T10:52:17-06:00
-description: Installing gdb and fixing the certificate issue
+description: guide to installing GDB on macOS and fixing certificate issues.
 tags:
   - osx
 ---

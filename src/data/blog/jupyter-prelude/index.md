@@ -3,7 +3,7 @@ title: "Jupyter prelude"
 date: 2024-12-15T21:03:04-05:00
 tags: ["python"]
 keywords: ["python, ibis, pandas, matplotlib, jupyter"]
-description: "This is common code I add to all jupyter notebooks"
+description: reusable setup template for Jupyter notebooks.
 notebookPath: "src/data/blog/jupyter-prelude/index.ipynb"
 ---
 

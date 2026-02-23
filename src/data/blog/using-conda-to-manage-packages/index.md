@@ -1,7 +1,7 @@
 ---
 title: Using conda to manage packages
 date: 2015-12-25T04:32:51-06:00
-description: Use conda env to manage packages
+description: guide to managing project environments and packages with Conda.
 tags:
   - python
 keywords: python, acaconda, conda, environment, pip, conda vs pip

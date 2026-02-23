@@ -3,7 +3,7 @@ title: "ibis - a better pandas"
 date: 2025-06-07T14:22:45-04:00
 tags: ["python"]
 keywords: ["pandas", "ibis", "method chaining", "data analysis"]
-description: "A short showcase of ibis with method chaining"
+description: short Ibis method-chaining showcase for dataframe workflows.
 notebookPath: "src/data/blog/ibis-better-pandas/index.ipynb"
 ---
 

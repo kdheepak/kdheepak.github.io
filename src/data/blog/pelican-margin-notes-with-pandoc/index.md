@@ -1,7 +1,7 @@
 ---
 title: Pelican margin notes with Pandoc
 date: 2016-10-09T17:42:12-06:00
-description: How to get margin notes to work with pandoc
+description: guide to implementing margin notes in Pandoc-generated posts.
 tags:
   - pandoc
   - python

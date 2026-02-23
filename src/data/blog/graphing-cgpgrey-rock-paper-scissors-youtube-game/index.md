@@ -3,7 +3,7 @@ title: "Graphing CGP Grey's Rock-Paper-Scissors YouTube Game"
 date: 2023-10-22T22:21:19-04:00
 tags: ["analysis", "python", "julia"]
 keywords: ["python, julia, cgpgrey rock paper scissors youtube game"]
-description: "Graphing CGP Grey's Rock-Paper-Scissors YouTube Game"
+description: graph analysis of CGP Grey rock-paper-scissors YouTube game dynamics.
 notebookPath: "src/data/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.ipynb"
 ---
 

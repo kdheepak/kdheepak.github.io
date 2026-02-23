@@ -3,7 +3,7 @@ title: "The egg tower puzzle"
 date: 2020-06-06T20:14:19-06:00
 tags: ["math", "julia"]
 keywords: ["math, analytical, closed form, riddle, puzzle, problem, egg, tower, building, marble, light bulb, julia,"]
-description: "Analytical solution to the two egg 100 storey tower puzzle"
+description: analytical solution to the two-egg, 100-story tower puzzle.
 notebookPath: "src/data/blog/the-egg-tower-puzzle/index.ipynb"
 mathjax: true
 ---

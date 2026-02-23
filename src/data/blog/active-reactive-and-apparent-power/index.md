@@ -1,9 +1,7 @@
 ---
 title: Active, reactive and apparent power
 date: 2015-04-29T19:00:00-06:00
-description:
-  This post covers the basics of the types of Power in power systems, specifically what is active
-  power, reactive power and apparent power.
+description: introduction to active, reactive, and apparent power concepts.
 mathjax: true
 tags:
   - analysis

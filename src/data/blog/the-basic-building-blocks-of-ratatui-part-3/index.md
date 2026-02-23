@@ -3,7 +3,7 @@ title: "The Basic Building blocks of Ratatui - Part 3"
 date: 2024-05-16T22:03:04-04:00
 tags: ["rust"]
 keywords: ["rust, ratatui"]
-description: "Showcase of using span, line, text"
+description: ratatui fundamentals guide to spans, lines, and text rendering.
 notebookPath: "src/data/blog/the-basic-building-blocks-of-ratatui-part-3/index.ipynb"
 ---
 

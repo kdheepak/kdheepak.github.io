@@ -1,9 +1,7 @@
 ---
 title: Writing technical papers with Markdown and Pandoc
 date: 2015-12-20T00:00:00-06:00
-description:
-  Recently, I’ve had several people ask me about the Markdown workflow I use to write papers. I
-  figured I'd use this post to write about my workflow and my resources on this topic.
+description: guide to writing academic papers with Markdown and Pandoc.
 tags:
   - pandoc
 toc: true

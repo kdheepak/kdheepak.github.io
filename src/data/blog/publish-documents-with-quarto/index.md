@@ -3,7 +3,7 @@ title: "Publishing documents with Quarto"
 date: 2023-11-19T23:10:00-04:00
 tags: ["pandoc", "python"]
 keywords: ["quarto, markdown, pandoc, papers, writing, academic, scholarly, technical, scientific"]
-description: "Publishing documents with Quarto"
+description: guide to publishing documents with Quarto.
 notebookPath: "src/data/blog/publish-documents-with-quarto/index.ipynb"
 ---
 

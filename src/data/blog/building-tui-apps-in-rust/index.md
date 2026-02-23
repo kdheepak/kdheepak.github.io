@@ -1,7 +1,7 @@
 ---
 title: Building TUI apps in rust
 date: 2023-05-30T22:21:30-04:00
-description: A practical Rust TUI stack centered around ratatui and supporting crates.
+description: practical Rust TUI stack built around Ratatui and supporting crates.
 draft: true
 tags:
   - rust

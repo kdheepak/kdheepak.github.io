@@ -3,7 +3,7 @@ title: "Understanding the param library in python"
 date: 2025-01-11T21:03:04-05:00
 tags: [python]
 keywords: python, param, panel, jupyter, holoviews, holoviz
-description: This post will build a tiny param library to understand how it works.
+description: hands-on introduction to the Param library in Python.
 draft: true
 ---
 

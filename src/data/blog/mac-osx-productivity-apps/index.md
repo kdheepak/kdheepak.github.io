@@ -1,9 +1,7 @@
 ---
 title: Mac OSX productivity apps
 date: 2015-04-01T19:00:00-06:00
-description:
-  A number of Mac application can improve productivity. Here I've complied my favourite useful Mac
-  applications ...
+description: curated list of productivity apps for macOS.
 tags:
   - osx
 ---

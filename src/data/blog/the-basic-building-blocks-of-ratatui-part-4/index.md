@@ -3,7 +3,7 @@ title: "The Basic Building blocks of Ratatui - Part 4"
 date: 2024-05-17T22:03:04-04:00
 tags: ["rust"]
 keywords: ["rust, ratatui"]
-description: "Showcase of using widgets"
+description: ratatui fundamentals guide to built-in widgets.
 notebookPath: "src/data/blog/the-basic-building-blocks-of-ratatui-part-4/index.ipynb"
 ---
 

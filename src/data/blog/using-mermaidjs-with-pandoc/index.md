@@ -1,7 +1,7 @@
 ---
 title: Using MermaidJS with Pandoc
 date: 2022-02-17T22:03:31-06:00
-description: Showcase of using integrating MermaidJS
+description: guide to integrating Mermaid.js diagrams in Pandoc-based posts.
 tags:
   - pandoc
 keywords: mermaid, js, pandoc, lua, filter

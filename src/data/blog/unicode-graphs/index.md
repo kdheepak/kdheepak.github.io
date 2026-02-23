@@ -1,7 +1,7 @@
 ---
 title: Unicode Graphs
 date: 2026-01-03T21:14:15-05:00
-description: Discussion on unicode graphs for terminal applications
+description: guide to building Unicode-based graphs for terminal applications.
 draft: true
 tags:
   - terminal

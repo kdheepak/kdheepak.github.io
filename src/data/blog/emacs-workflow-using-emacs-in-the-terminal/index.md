@@ -1,7 +1,7 @@
 ---
 title: Emacs workflow — Using Emacs in the terminal
 date: 2015-07-25T22:00:50-06:00
-description: A description of my emacs workflow
+description: overview of an Emacs workflow in the terminal.
 tags:
   - emacs
   - tmux

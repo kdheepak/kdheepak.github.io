@@ -3,7 +3,7 @@ title: "Programmers' preferences for package names"
 date: 2022-07-29T01:47:12-06:00
 tags: ["analysis", "python", "julia", "rust"]
 keywords: ["python, julia, rust, R"]
-description: "I was curious how package names were chosen in various language ecosystems."
+description: exploration of package-naming patterns across language ecosystems.
 notebookPath: "src/data/blog/programmers-preferences-for-package-names/index.ipynb"
 ---
 

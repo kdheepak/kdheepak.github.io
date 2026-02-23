@@ -1,7 +1,7 @@
 ---
 title: Using `pre-commit` hooks
 date: 2020-07-27T10:58:11-06:00
-description: In this post, I will summarize making your git workflow better with pre-commit hooks
+description: guide to improving a Git workflow with pre-commit hooks.
 tags:
   - git
   - python

@@ -1,9 +1,7 @@
 ---
 title: Understanding variables and mutability in Julia
 date: 2023-02-25T21:14:15-05:00
-description:
-  In this blog post, I present a mental model for understanding the basics of variable assignment
-  and mutability in Julia, using analogies to books and bookshelves to help illustrate the concepts.
+description: introduction to variables and mutability in Julia.
 toc: true
 tags:
   - julia

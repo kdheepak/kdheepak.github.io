@@ -3,7 +3,7 @@ title: "Effect of type inference on performance in Julia"
 date: 2024-04-21T00:27:32-04:00
 tags: ["julia"]
 keywords: ["julia"]
-description: "Effect of type inference on performance in Julia"
+description: analysis of how type inference affects performance in Julia.
 notebookPath: "src/data/blog/effect-of-type-inference-on-performance-in-julia/index.ipynb"
 ---
 

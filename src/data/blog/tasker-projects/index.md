@@ -1,7 +1,7 @@
 ---
 title: Tasker projects
 date: 2014-12-12T19:00:00-06:00
-description: A collection of Tasker projects I've worked on ...
+description: collection of Tasker automation projects.
 tags:
   - tasker
   - android

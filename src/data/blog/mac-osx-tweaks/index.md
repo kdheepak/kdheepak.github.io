@@ -1,8 +1,7 @@
 ---
 title: Mac OSX Tweaks
 date: 2015-03-21T19:00:00-06:00
-description:
-  OSX is more customizable than you think. Here are a bunch of tweaks that I found useful.
+description: collection of practical macOS tweaks and configuration tips.
 tags:
   - osx
 ---

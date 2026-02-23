@@ -1,7 +1,7 @@
 ---
 title: Reinstall Xcode command line developer tools
 date: 2022-02-15T16:03:31-06:00
-description: Steps to uninstall and reinstall xcode command line developer tools
+description: step-by-step guide to uninstalling and reinstalling Xcode Command Line Tools.
 tags:
   - osx
 keywords: reinstall xcode command line developer tools

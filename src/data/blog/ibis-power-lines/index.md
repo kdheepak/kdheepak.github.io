@@ -3,7 +3,7 @@ title: "Power Lines with `ibis`"
 date: 2024-11-30T18:03:04-05:00
 tags: ["python"]
 keywords: ["python, ibis, folium, geospatial, power lines, duckdb"]
-description: "Showcasing how to plot power lines with ibis and folium"
+description: walkthrough for plotting power lines with Ibis and Folium.
 notebookPath: "src/data/blog/ibis-power-lines/index.ipynb"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Python 2 vs 3
 date: 2016-12-16T15:31:07-06:00
-description: Some of my thoughts on the current state of Python 2 vs 3
+description: retrospective on the state of Python 2 and Python 3.
 tags:
   - python
 keywords: python, python2, python3

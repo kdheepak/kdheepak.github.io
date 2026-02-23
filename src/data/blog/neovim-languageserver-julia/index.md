@@ -1,7 +1,7 @@
 ---
 title: Neovim + LanguageServer.jl
 date: 2020-06-02T01:28:44-06:00
-description: Showcasing Neovim and LanguageServer.jl
+description: showcase of Neovim with LanguageServer.jl for Julia development.
 tags:
   - neovim
   - julia
