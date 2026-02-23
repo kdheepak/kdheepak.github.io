@@ -54,7 +54,7 @@ type(x)
 
 
 
-In this statement above, `x` is a "label" that points to the "memory address of an object" that contains the value `123456789` and the object that `x` points to is of type `int`. 
+In this statement above, `x` is a "label" that points to the "memory address of an object" that contains the value `123456789` and the object that `x` points to is of type `int`.
 
 ```mermaid
 graph TD
@@ -234,7 +234,7 @@ hex(id(x)) == hex(id(y))
 
 This example shows integers, because even though they are immutable and even though they are built-in types and one of most basic units of data, they are still "objects" in Python. Pretty much everything in python is an "object".
 
-Most commonly, when people say "object" in Python, they are referring to "instances of a class". 
+Most commonly, when people say "object" in Python, they are referring to "instances of a class".
 
 
 ```python
@@ -307,7 +307,7 @@ x()
     hello world
 
 
-The other key piece of background information is that in Python, when calling a function, the arguments are "passed by reference" and assigned to the variables in the arguments of function. This means that when you pass an argument to a function, you are passing the address of the object that the argument points to. 
+The other key piece of background information is that in Python, when calling a function, the arguments are "passed by reference" and assigned to the variables in the arguments of function. This means that when you pass an argument to a function, you are passing the address of the object that the argument points to.
 
 
 ```python
