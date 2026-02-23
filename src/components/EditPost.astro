@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { SITE } from "@/config";
+
+type Props = {
+  hideEditPost?: CollectionEntry<"blog">["data"]["hideEditPost"];
+  class?: string;
+  post: CollectionEntry<"blog">;
+};
+
+const { hideEditPost, post, class: className = "" } = Astro.props;
+
+const editHref = `${SITE.editPost.url}${post.filePath}`;
+const showEditPost =
+  SITE.editPost.enabled && !hideEditPost && editHref.trim() !== "";
+
+const notebookPath = post.data.notebookPath?.trim();
+const notebookHref =
+  notebookPath && SITE.notebookView.url.trim() !== ""
+    ? `${SITE.notebookView.url}${notebookPath.replace(/^\//, "")}`
+    : "";
+const showNotebookLink =
+  SITE.notebookView.enabled && !hideEditPost && notebookHref !== "";
+const showActions = showEditPost || showNotebookLink;
+
+const actionLinkClass =
+  "flex items-center opacity-80 transition-colors hover:text-accent";
+const actionIconClass = "inline-block size-6 min-w-5.5";
+---
+
+{
+  showActions && (
+    <div class:list={["flex items-center gap-3", className]}>
+      {
+        showEditPost && (
+          <a
+            href={editHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={SITE.editPost.text}
+            title={SITE.editPost.text}
+            class={actionLinkClass}
+          >
+            <Icon name="tabler:edit" class={actionIconClass} />
+          </a>
+        )
+      }
+      {
+        showNotebookLink && (
+          <a
+            href={notebookHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={SITE.notebookView.text}
+            title={SITE.notebookView.text}
+            class={actionLinkClass}
+          >
+            <Icon name="tabler:notebook" class={actionIconClass} />
+          </a>
+        )
+      }
+    </div>
+  )
+}

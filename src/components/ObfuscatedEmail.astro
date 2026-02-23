@@ -1,0 +1,50 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = {
+  email: string;
+} & HTMLAttributes<"a">;
+
+const { email, href: _href, ...attrs } = Astro.props;
+const obfuscatedEmail = Buffer.from(email).toString("base64");
+---
+
+<a href="#" data-obfuscated-email={obfuscatedEmail} {...attrs}>
+  <slot />
+</a>
+
+<script>
+  const decodeEmail = (value: string): string | null => {
+    try {
+      return window.atob(value);
+    } catch {
+      return null;
+    }
+  };
+
+  const hydrateObfuscatedEmails = (root: ParentNode = document): void => {
+    const links = root.querySelectorAll<HTMLAnchorElement>("a[data-obfuscated-email]");
+    for (const link of links) {
+      const encoded = link.dataset.obfuscatedEmail;
+      if (!encoded) continue;
+
+      const email = decodeEmail(encoded);
+      if (!email || !email.includes("@")) continue;
+      link.href = `mailto:${email}`;
+    }
+  };
+
+  const setObfuscatedEmails = (): void => {
+    hydrateObfuscatedEmails(document);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setObfuscatedEmails, {
+      once: true,
+    });
+  } else {
+    setObfuscatedEmails();
+  }
+
+  document.addEventListener("astro:page-load", setObfuscatedEmails);
+</script>

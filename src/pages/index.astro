@@ -1,0 +1,126 @@
+---
+import { Icon } from "astro-icon/components";
+import Typewriter from "astro-typewriter";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail.astro";
+import { SOCIALS } from "@/constants";
+
+const CONTACT_SOCIAL_NAMES = new Set(["Mail", "GitHub", "LinkedIn"]);
+const CONTACT_SOCIALS = SOCIALS.filter(({ name }) =>
+  CONTACT_SOCIAL_NAMES.has(name),
+);
+
+const getMailtoAddress = (href: string): string | null => {
+  if (!href.startsWith("mailto:")) return null;
+
+  const address = href.slice("mailto:".length).split("?")[0];
+  return address || null;
+};
+
+const contactLinkClass = "group inline-flex items-center gap-[0.38rem] hover:text-accent";
+const contactIconClass =
+  "inline-block size-[1.02em] fill-transparent stroke-current stroke-2 opacity-90 transition-transform group-hover:rotate-6 group-hover:fill-transparent";
+---
+
+<Layout title="Hello - kdheepak.com">
+  <Header />
+  <main id="main-content" data-layout="index" class="app-layout">
+    <section
+      id="hero"
+      class:list={[
+        "border-b border-border py-8",
+        "grid gap-6 md:grid-cols-[1fr_auto] md:items-center md:gap-10",
+      ]}
+    >
+      <picture class="order-1 block md:order-2 md:justify-self-end">
+        <img
+          src="https://avatars.githubusercontent.com/u/1813121?v=4"
+          alt="Dheepak Krishnamurthy"
+          width="160"
+          height="160"
+          loading="eager"
+          class="h-40 w-40 rounded-full border-2 border-border object-cover sm:h-44 sm:w-44"
+        />
+      </picture>
+
+      <div class="order-2 md:order-1">
+        <h1 class="text-4xl font-bold sm:text-5xl">Hello!</h1>
+
+        <p class="mt-4 text-lg leading-relaxed">
+          I'm a{" "}
+          <Typewriter
+            class="inline-block min-w-[16ch] font-semibold text-[#1481b8]"
+            messages={[
+              "research engineer.",
+              "software developer.",
+              "bicycle enthusiast.",
+              "snowboarder.",
+              "dog dad.",
+            ]}
+            writeSpeed={70}
+            deleteSpeed={36}
+            waitWritten={1500}
+            waitDeleted={420}
+          />
+        </p>
+
+        <p class="mt-4 max-w-3xl leading-relaxed">
+          I have experience running energy system models and simulations, such as
+          transmission production cost models and power distribution system analyses,
+          and have developed bespoke models for energy system analysis. I'm
+          proficient with Python, Julia, Rust, and Javascript, and am well versed in
+          scientific data analysis and extract-transform-load workflows. I also enjoy
+          working on open source projects and learning new things.
+        </p>
+      </div>
+    </section>
+
+    <section class="pt-10 pb-6">
+      <h2 class="text-2xl font-semibold tracking-wide">Contact</h2>
+      <p class="mt-2">You can contact me through:</p>
+
+      <p
+        class="mt-2 flex flex-wrap gap-x-[0.85rem] gap-y-[0.4rem] text-[0.95rem]"
+      >
+        {
+          CONTACT_SOCIALS.map(social => {
+            const emailAddress = getMailtoAddress(social.href);
+
+            return emailAddress ? (
+              <ObfuscatedEmail
+                email={emailAddress}
+                class={contactLinkClass}
+                title={social.linkTitle}
+              >
+                <Icon class={contactIconClass} name={social.icon} aria-hidden="true" />
+                Email
+              </ObfuscatedEmail>
+            ) : (
+              <a
+                class={contactLinkClass}
+                href={social.href}
+                title={social.linkTitle}
+              >
+                <Icon class={contactIconClass} name={social.icon} aria-hidden="true" />
+                {social.name}
+              </a>
+            );
+          })
+        }
+      </p>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>

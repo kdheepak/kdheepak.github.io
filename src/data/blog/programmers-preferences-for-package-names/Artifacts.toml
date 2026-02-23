@@ -1,0 +1,6 @@
+[npm]
+git-tree-sha1 = "4c08d9094bdf2cb5dc30b2ec785ceb608ef198aa"
+
+    [[npm.download]]
+    sha256 = "5656043ae37617a8e2cefc54e294ca7d9baaaa304184f705ea8f189a5d7e26bd"
+    url = "https://github.com/kdheepak/kdheepak.github.io/releases/download/artifacts/npm.tar.gz"
