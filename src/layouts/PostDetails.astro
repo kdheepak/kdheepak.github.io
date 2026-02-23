@@ -204,22 +204,6 @@ const nextPost =
         )
       }
     </div>
-    <script is:inline src="https://giscus.app/client.js"
-        data-repo="kdheepak/kdheepak.github.io"
-        data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA=="
-        data-category="Comments"
-        data-category-id="DIC_kwDOAw1l5M4CU810"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="light"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-    </script>
   </main>
   <Footer />
 </Layout>
@@ -228,8 +212,11 @@ const nextPost =
   /** Create a progress indicator
    *  at the top */
   function createProgressBar() {
+    if (document.getElementById("progress-container")) return;
+
     // Create the main container div
     const progressContainer = document.createElement("div");
+    progressContainer.id = "progress-container";
     progressContainer.className =
       "progress-container fixed top-0 z-10 h-1 w-full bg-background";
 
@@ -244,11 +231,13 @@ const nextPost =
     // Append the progress container to the document body or any other desired parent element
     document.body.appendChild(progressContainer);
   }
-  createProgressBar();
 
   /** Update the progress bar
    *  when user scrolls */
   function updateScrollProgress() {
+    if (window.__kdPostScrollProgressBound) return;
+    window.__kdPostScrollProgressBound = true;
+
     document.addEventListener("scroll", () => {
       const winScroll =
         document.body.scrollTop || document.documentElement.scrollTop;
@@ -264,14 +253,14 @@ const nextPost =
       }
     });
   }
-  updateScrollProgress();
 
   /** Attaches links to headings in the document,
    *  allowing sharing of sections easily */
   function addHeadingLinks() {
-    const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6")
-    );
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    const headings = Array.from(article.querySelectorAll("h2, h3, h4, h5, h6"));
     for (const heading of headings) {
       if (!(heading instanceof HTMLHeadingElement)) continue;
       if (!heading.id || heading.id === "table-of-contents") continue;
@@ -762,9 +751,6 @@ const nextPost =
       document.fonts.ready.then(handleResize).catch(() => {});
     }
   }
-  ensurePostEndMatterHeadings();
-  setupDockingToc();
-  addHeadingLinks();
 
   /** Adds "back to citation" links in bibliography entries. */
   function getSessionItem(key) {
@@ -844,11 +830,6 @@ const nextPost =
       backLink.textContent = "↩";
       targetContainer.appendChild(backLink);
     }
-  }
-  try {
-    addCitationBackLinks();
-  } catch {
-    // Keep the rest of post enhancements working even if citation linking fails.
   }
 
   /** Renders `_aside_:` footnotes as margin notes on wide screens. */
@@ -976,7 +957,6 @@ const nextPost =
       }
     }
   }
-  addMarginFootnotes();
 
   /** Converts ANSI escape sequences in notebook output cells to styled HTML. */
   function renderAnsiCellOutput() {
@@ -1212,7 +1192,6 @@ const nextPost =
       line.dataset.ansiParsed = "true";
     }
   }
-  renderAnsiCellOutput();
 
   /** Attaches copy buttons to code blocks in the document,
    * allowing users to copy code easily. */
@@ -1221,6 +1200,8 @@ const nextPost =
     const codeBlocks = Array.from(document.querySelectorAll("pre"));
 
     for (const codeBlock of codeBlocks) {
+      if (codeBlock.querySelector(":scope > button.copy-code")) continue;
+
       const wrapper = document.createElement("div");
       wrapper.style.position = "relative";
       wrapper.className = "group";
@@ -1264,22 +1245,77 @@ const nextPost =
       }, 700);
     }
   }
-  attachCopyButtons();
 
-  /* Go to page start after page swap unless navigating to a hash target. */
-  document.addEventListener("astro:after-swap", () => {
-    const hash = window.location.hash;
-    if (!hash || hash === "#") {
-      window.scrollTo({ left: 0, top: 0, behavior: "instant" });
-      return;
+  function setupGiscus() {
+    const giscusContainer = document.querySelector(".giscus");
+    if (!(giscusContainer instanceof HTMLElement)) return;
+    if (giscusContainer.dataset.giscusInitialized === "true") return;
+
+    const giscusScript = document.createElement("script");
+    giscusScript.src = "https://giscus.app/client.js";
+    giscusScript.setAttribute("data-repo", "kdheepak/kdheepak.github.io");
+    giscusScript.setAttribute(
+      "data-repo-id",
+      "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA=="
+    );
+    giscusScript.setAttribute("data-category", "Comments");
+    giscusScript.setAttribute("data-category-id", "DIC_kwDOAw1l5M4CU810");
+    giscusScript.setAttribute("data-mapping", "pathname");
+    giscusScript.setAttribute("data-strict", "0");
+    giscusScript.setAttribute("data-reactions-enabled", "1");
+    giscusScript.setAttribute("data-emit-metadata", "0");
+    giscusScript.setAttribute("data-input-position", "bottom");
+    giscusScript.setAttribute("data-theme", "light");
+    giscusScript.setAttribute("data-lang", "en");
+    giscusScript.setAttribute("data-loading", "lazy");
+    giscusScript.crossOrigin = "anonymous";
+    giscusScript.async = true;
+
+    giscusContainer.appendChild(giscusScript);
+    giscusContainer.dataset.giscusInitialized = "true";
+  }
+
+  function initializePostPage() {
+    createProgressBar();
+    updateScrollProgress();
+    ensurePostEndMatterHeadings();
+    setupDockingToc();
+    addHeadingLinks();
+
+    try {
+      addCitationBackLinks();
+    } catch {
+      // Keep the rest of post enhancements working even if citation linking fails.
     }
 
-    const targetId = decodeURIComponent(hash.slice(1));
-    const targetElement = document.getElementById(targetId);
-    if (!targetElement) return;
+    addMarginFootnotes();
+    renderAnsiCellOutput();
+    attachCopyButtons();
+    setupGiscus();
+  }
 
-    requestAnimationFrame(() => {
-      targetElement.scrollIntoView({ block: "start", inline: "nearest" });
+  initializePostPage();
+  document.addEventListener("astro:page-load", initializePostPage, { once: true });
+
+  /* Go to page start after page swap unless navigating to a hash target. */
+  if (!window.__kdPostAfterSwapScrollHooked) {
+    document.addEventListener("astro:after-swap", () => {
+      if (!document.getElementById("article")) return;
+
+      const hash = window.location.hash;
+      if (!hash || hash === "#") {
+        window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+        return;
+      }
+
+      const targetId = decodeURIComponent(hash.slice(1));
+      const targetElement = document.getElementById(targetId);
+      if (!targetElement) return;
+
+      requestAnimationFrame(() => {
+        targetElement.scrollIntoView({ block: "start", inline: "nearest" });
+      });
     });
-  });
+    window.__kdPostAfterSwapScrollHooked = true;
+  }
 </script>

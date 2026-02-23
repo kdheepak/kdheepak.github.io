@@ -14,8 +14,8 @@ const { class: className = "" } = Astro.props;
   SITE.showBackButton && (
     <LinkButton
       id="back-button"
-      href="/"
-      aria-label="Go back"
+      href="/blog/"
+      aria-label="Back to blog"
       class:list={[
         "focus-outline shrink-0 text-foreground/90 hover:text-foreground/70",
         className,
@@ -25,24 +25,7 @@ const { class: className = "" } = Astro.props;
         name="tabler:chevron-left"
         class="inline-block size-6 rtl:rotate-180"
       />
-      <span class="sr-only">Go back</span>
+      <span class="sr-only">Back to blog</span>
     </LinkButton>
   )
 }
-
-<script>
-  /* Update Search Praam */
-  function updateGoBackUrl() {
-    const backButton: HTMLAnchorElement | null =
-      document.querySelector("#back-button");
-
-    const backUrl = sessionStorage.getItem("backUrl");
-
-    if (backUrl && backButton) {
-      backButton.href = backUrl;
-    }
-  }
-
-  document.addEventListener("astro:page-load", updateGoBackUrl);
-  updateGoBackUrl();
-</script>
