@@ -266,6 +266,10 @@ const nextPost =
       document.querySelectorAll("h2, h3, h4, h5, h6")
     );
     for (const heading of headings) {
+      if (!(heading instanceof HTMLHeadingElement)) continue;
+      if (!heading.id || heading.id === "table-of-contents") continue;
+      if (heading.querySelector(":scope > a.heading-link")) continue;
+
       heading.classList.add("group");
       const link = document.createElement("a");
       link.className =
@@ -279,25 +283,89 @@ const nextPost =
       heading.appendChild(link);
     }
   }
-  addHeadingLinks();
 
   /**
-   * Keeps TOC inline at the top, then docks it to the left
-   * once the inline TOC has scrolled out of view.
+   * Keeps TOC docked to the left on large screens.
    */
   function setupDockingToc() {
     const article = document.getElementById("article");
     if (!article || !article.classList.contains("has-sticky-toc")) return;
 
-    const tocHeading = article.querySelector("h2#table-of-contents");
-    if (!tocHeading) return;
+    const contentHeadings = Array.from(
+      article.querySelectorAll("h2, h3, h4, h5, h6")
+    ).filter(
+      heading =>
+        heading instanceof HTMLHeadingElement &&
+        heading.id &&
+        heading.id !== "table-of-contents"
+    );
+    if (!contentHeadings.length) return;
 
-    const tocList = tocHeading.nextElementSibling;
-    if (!tocList || !["UL", "OL"].includes(tocList.tagName)) return;
+    const buildGeneratedTocList = headings => {
+      const rootList = document.createElement("ul");
+      const listStack = [rootList];
+      let currentDepth = 2;
+
+      for (const heading of headings) {
+        let depth = Number.parseInt(heading.tagName.slice(1), 10);
+        if (!Number.isFinite(depth)) depth = 2;
+        depth = Math.max(2, Math.min(6, depth));
+
+        while (depth > currentDepth) {
+          const parentList = listStack[listStack.length - 1];
+          const parentItem = parentList.lastElementChild;
+          if (!(parentItem instanceof HTMLLIElement)) {
+            depth = currentDepth;
+            break;
+          }
+
+          const nestedList = document.createElement("ul");
+          parentItem.appendChild(nestedList);
+          listStack.push(nestedList);
+          currentDepth += 1;
+        }
+
+        while (depth < currentDepth && listStack.length > 1) {
+          listStack.pop();
+          currentDepth -= 1;
+        }
+
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "#" + heading.id;
+        link.textContent = heading.textContent?.trim() ?? heading.id;
+        listItem.appendChild(link);
+        listStack[listStack.length - 1].appendChild(listItem);
+      }
+
+      return rootList;
+    };
+
+    let tocHeading = article.querySelector("h2#table-of-contents");
+    let tocList = tocHeading?.nextElementSibling;
+
+    if (
+      !(tocHeading instanceof HTMLHeadingElement) ||
+      !(tocList instanceof HTMLElement) ||
+      !["UL", "OL"].includes(tocList.tagName)
+    ) {
+      if (tocHeading instanceof HTMLElement) tocHeading.remove();
+      if (tocList instanceof HTMLElement && ["UL", "OL"].includes(tocList.tagName)) {
+        tocList.remove();
+      }
+
+      tocHeading = document.createElement("h2");
+      tocHeading.id = "table-of-contents";
+      tocHeading.textContent = "Table of contents";
+
+      tocList = buildGeneratedTocList(contentHeadings);
+      const firstContentHeading = contentHeadings[0];
+      firstContentHeading.before(tocHeading);
+      tocHeading.after(tocList);
+    }
 
     let floatingToc = tocHeading.closest(".inline-toc-floating");
     let placeholder = floatingToc?.previousElementSibling;
-    let dockMarker = floatingToc?.nextElementSibling;
 
     if (!floatingToc) {
       floatingToc = document.createElement("div");
@@ -315,21 +383,8 @@ const nextPost =
 
     if (!(placeholder instanceof HTMLElement)) return;
 
-    if (
-      !(dockMarker instanceof HTMLElement) ||
-      !dockMarker.classList.contains("inline-toc-dock-marker")
-    ) {
-      dockMarker = document.createElement("div");
-      dockMarker.className = "inline-toc-dock-marker";
-      floatingToc.after(dockMarker);
-    }
-
-    floatingToc
-      .querySelectorAll(".toc-active-indicator")
-      .forEach(node => node.remove());
-
     const tocLinks = Array.from(
-      floatingToc.querySelectorAll("a[href^='#']")
+      tocList.querySelectorAll("a[href^='#']")
     ).filter(link => link instanceof HTMLAnchorElement);
 
     const headingEntries = tocLinks
@@ -347,9 +402,138 @@ const nextPost =
         const heading = document.getElementById(headingId);
         if (!heading || !article.contains(heading)) return null;
 
-        return { link, heading };
+        link.classList.add("toc-link");
+
+        return {
+          link,
+          heading,
+          pathStart: 0,
+          pathEnd: 0,
+          isIntersecting: false,
+        };
       })
       .filter(Boolean);
+
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    let tocProgressSvg = floatingToc.querySelector(".inline-toc-progress");
+    if (!(tocProgressSvg instanceof SVGSVGElement)) {
+      tocProgressSvg = document.createElementNS(svgNamespace, "svg");
+      tocProgressSvg.setAttribute("class", "inline-toc-progress");
+      tocProgressSvg.setAttribute("aria-hidden", "true");
+      floatingToc.appendChild(tocProgressSvg);
+    } else {
+      while (tocProgressSvg.firstChild) {
+        tocProgressSvg.firstChild.remove();
+      }
+    }
+
+    const tocProgressTrack = document.createElementNS(svgNamespace, "path");
+    tocProgressTrack.setAttribute("class", "inline-toc-progress-track");
+    tocProgressSvg.appendChild(tocProgressTrack);
+
+    const tocProgressActive = document.createElementNS(svgNamespace, "path");
+    tocProgressActive.setAttribute("class", "inline-toc-progress-active");
+    tocProgressSvg.appendChild(tocProgressActive);
+
+    let tocPathLength = 0;
+
+    const rebuildTocProgressPath = () => {
+      if (!headingEntries.length) {
+        tocPathLength = 0;
+        tocProgressTrack.setAttribute("d", "");
+        tocProgressActive.setAttribute("d", "");
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      let pathData = "";
+      let previousX = 0;
+      let maxX = 0;
+      let maxY = 0;
+
+      for (let index = 0; index < headingEntries.length; index += 1) {
+        const entry = headingEntries[index];
+        const linkRect = entry.link.getBoundingClientRect();
+        const x = Math.max(6, linkRect.left - tocRect.left - 12);
+        const y = Math.max(
+          6,
+          linkRect.top - tocRect.top + floatingToc.scrollTop - 2
+        );
+        const entryHeight = Math.max(16, linkRect.height + 4);
+
+        if (index === 0) {
+          pathData += `M ${x} ${y}`;
+          entry.pathStart = 0;
+        } else {
+          pathData += ` V ${y}`;
+          if (Math.abs(previousX - x) > 0.5) {
+            pathData += ` H ${x}`;
+          }
+          tocProgressTrack.setAttribute("d", pathData);
+          entry.pathStart = tocProgressTrack.getTotalLength();
+        }
+
+        pathData += ` V ${y + entryHeight}`;
+        tocProgressTrack.setAttribute("d", pathData);
+        entry.pathEnd = tocProgressTrack.getTotalLength();
+
+        previousX = x;
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y + entryHeight);
+      }
+
+      tocProgressTrack.setAttribute("d", pathData);
+      tocProgressActive.setAttribute("d", pathData);
+
+      const svgWidth = Math.max(floatingToc.scrollWidth, maxX + 24);
+      const svgHeight = Math.max(floatingToc.scrollHeight, maxY + 12);
+      tocProgressSvg.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
+      tocProgressSvg.style.width = `${svgWidth}px`;
+      tocProgressSvg.style.height = `${svgHeight}px`;
+
+      tocPathLength = tocProgressTrack.getTotalLength();
+      if (tocPathLength > 0) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.style.strokeDashoffset = "1";
+      } else {
+        tocProgressActive.style.strokeDasharray = "";
+        tocProgressActive.style.strokeDashoffset = "";
+      }
+    };
+
+    const updateVisibleProgressPath = activeEntry => {
+      if (!tocPathLength || !headingEntries.length) {
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      let pathStart = tocPathLength;
+      let pathEnd = 0;
+
+      for (const entry of headingEntries) {
+        if (!entry.isIntersecting) continue;
+        pathStart = Math.min(pathStart, entry.pathStart);
+        pathEnd = Math.max(pathEnd, entry.pathEnd);
+      }
+
+      if (pathStart >= pathEnd && activeEntry) {
+        pathStart = activeEntry.pathStart;
+        pathEnd = activeEntry.pathEnd;
+      }
+
+      if (pathStart >= pathEnd) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const visibleLength = Math.max(1, pathEnd - pathStart);
+      tocProgressActive.style.strokeDasharray =
+        `1 ${pathStart} ${visibleLength} ${tocPathLength}`;
+      tocProgressActive.style.strokeDashoffset = "1";
+      tocProgressActive.classList.add("is-visible");
+    };
 
     let activeTocLink = null;
 
@@ -403,7 +587,8 @@ const nextPost =
     const updateActiveSection = () => {
       if (!headingEntries.length) {
         setActiveTocLink(null);
-        return;
+        updateVisibleProgressPath(null);
+        return null;
       }
 
       const activationOffset = 144;
@@ -427,34 +612,26 @@ const nextPost =
       if (activeChanged) {
         keepActiveLinkInView(activeEntry.link);
       }
+
+      updateVisibleProgressPath(activeEntry);
+      return activeEntry;
     };
 
     const media = window.matchMedia("(min-width: 1280px)");
-    const dockTopOffset = 96;
 
     const updateDockState = () => {
-      if (!media.matches) {
-        floatingToc.classList.remove("is-docked-left");
-        placeholder.hidden = true;
-        placeholder.style.height = "";
-        return;
-      }
-
-      const markerTop = dockMarker.getBoundingClientRect().top;
-      const shouldDock = markerTop <= dockTopOffset;
+      const wasDocked = floatingToc.classList.contains("is-docked-left");
+      const shouldDock = media.matches;
 
       floatingToc.classList.toggle("is-docked-left", shouldDock);
+      placeholder.hidden = true;
+      placeholder.style.height = "";
 
-      if (shouldDock) {
-        placeholder.hidden = false;
-        placeholder.style.height = `${floatingToc.offsetHeight}px`;
-      } else {
-        placeholder.hidden = true;
-        placeholder.style.height = "";
-      }
+      return wasDocked !== shouldDock;
     };
 
     updateDockState();
+    rebuildTocProgressPath();
     updateActiveSection();
 
     if (article.dataset.tocDockListenersAttached === "true") return;
@@ -465,17 +642,66 @@ const nextPost =
       if (frame) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
-        updateDockState();
+        const dockStateChanged = updateDockState();
+        if (dockStateChanged) {
+          rebuildTocProgressPath();
+        }
         updateActiveSection();
       });
     };
 
+    if ("IntersectionObserver" in window) {
+      const headingEntryById = new Map(
+        headingEntries.map(entry => [entry.heading.id, entry])
+      );
+
+      const headingObserver = new IntersectionObserver(
+        observerEntries => {
+          let hasChanges = false;
+
+          for (const observerEntry of observerEntries) {
+            if (!(observerEntry.target instanceof HTMLElement)) continue;
+
+            const linkedEntry = headingEntryById.get(observerEntry.target.id);
+            if (!linkedEntry) continue;
+
+            if (linkedEntry.isIntersecting !== observerEntry.isIntersecting) {
+              linkedEntry.isIntersecting = observerEntry.isIntersecting;
+              hasChanges = true;
+            }
+          }
+
+          if (hasChanges) {
+            updateTocOnScroll();
+          }
+        },
+        {
+          rootMargin: "-20% 0px -65% 0px",
+          threshold: [0, 1],
+        }
+      );
+
+      for (const entry of headingEntries) {
+        headingObserver.observe(entry.heading);
+      }
+    }
+
+    const handleResize = () => {
+      rebuildTocProgressPath();
+      updateTocOnScroll();
+    };
+
     window.addEventListener("scroll", updateTocOnScroll, { passive: true });
-    window.addEventListener("resize", updateTocOnScroll);
+    window.addEventListener("resize", handleResize);
     floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
-    media.addEventListener("change", updateTocOnScroll);
+    media.addEventListener("change", handleResize);
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(handleResize).catch(() => {});
+    }
   }
   setupDockingToc();
+  addHeadingLinks();
 
   /** Adds "back to citation" links in bibliography entries. */
   function getSessionItem(key) {

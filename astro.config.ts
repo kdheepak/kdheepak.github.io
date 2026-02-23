@@ -10,7 +10,6 @@ import rehypeCitation from "rehype-citation";
 import rehypeRaw from "rehype-raw";
 import rehypeMermaid from "rehype-mermaid";
 import remarkDirective from "remark-directive";
-import remarkToc from "remark-toc";
 import {
     transformerNotationDiff,
     transformerNotationHighlight,
@@ -21,7 +20,6 @@ import { remarkDirectives } from "./src/utils/remark-directives.js";
 import { remarkImageAttributes } from "./src/utils/remark-image-attributes.js";
 import { remarkMermaidFences } from "./src/utils/remark-mermaid-fences.js";
 import { remarkNormalizeCodeFences } from "./src/utils/remark-normalize-code-fences.js";
-import { remarkPostToc } from "./src/utils/remark-post-toc.js";
 import { rehypeExternalLinks } from "./src/utils/rehype-external-links.js";
 import { rehypeSvgbob } from "./src/utils/rehype-svgbob.js";
 import { SITE } from "./src/config";
@@ -66,8 +64,6 @@ export default defineConfig({
             remarkDirective,
             remarkDirectives,
             remarkImageAttributes,
-            remarkPostToc,
-            remarkToc,
         ],
         rehypePlugins: [
             rehypeSvgbob,

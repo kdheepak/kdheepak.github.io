@@ -263,28 +263,50 @@
 
     &.has-sticky-toc .inline-toc-floating {
       position: relative;
-      --toc-indicator-x: 0px;
-      --toc-indicator-y: 0px;
-      --toc-indicator-h: 1rem;
     }
 
-    &.has-sticky-toc .inline-toc-floating .toc-active-indicator {
+    &.has-sticky-toc .inline-toc-floating .inline-toc-progress {
       position: absolute;
-      width: 2px;
-      border-radius: 9999px;
-      background: var(--color-accent);
-      opacity: 0;
+      inset: 0 auto auto 0;
+      z-index: 0;
       pointer-events: none;
-      transform: translate(var(--toc-indicator-x), var(--toc-indicator-y));
-      height: var(--toc-indicator-h);
-      transition:
-        transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-        height 220ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 140ms ease-out;
+      overflow: visible;
+      opacity: 0;
+      transition: opacity 160ms ease-out;
     }
 
-    &.has-sticky-toc .inline-toc-floating .toc-active-indicator.is-visible {
-      opacity: 1;
+    &.has-sticky-toc .inline-toc-floating > h2#table-of-contents,
+    &.has-sticky-toc .inline-toc-floating a {
+      position: relative;
+      z-index: 1;
+    }
+
+    &.has-sticky-toc .inline-toc-floating .inline-toc-progress-track,
+    &.has-sticky-toc .inline-toc-floating .inline-toc-progress-active {
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    &.has-sticky-toc .inline-toc-floating .inline-toc-progress-track {
+      stroke: color-mix(in srgb, var(--color-foreground) 28%, transparent);
+      opacity: 0.45;
+    }
+
+    &.has-sticky-toc .inline-toc-floating .inline-toc-progress-active {
+      stroke: var(--color-accent);
+      opacity: 0;
+      transition:
+        stroke-dasharray 250ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 160ms ease-out;
+    }
+
+    &.has-sticky-toc
+      .inline-toc-floating
+      .inline-toc-progress-active.is-visible {
+      opacity: 0.95;
     }
 
     &.has-sticky-toc .inline-toc-floating a.is-current-section {
@@ -293,10 +315,6 @@
     }
 
     @media (min-width: 1280px) {
-      &.has-sticky-toc .inline-toc-dock-marker {
-        @apply block h-px w-full;
-      }
-
       &.has-sticky-toc .inline-toc-floating.is-docked-left {
         position: fixed;
         z-index: 30;
@@ -317,6 +335,10 @@
         );
         backdrop-filter: blur(8px);
         animation: toc-dock-left 220ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      &.has-sticky-toc .inline-toc-floating.is-docked-left .inline-toc-progress {
+        opacity: 1;
       }
 
       &.has-sticky-toc .inline-toc-floating.is-docked-left > h2#table-of-contents {
@@ -348,6 +370,7 @@
       }
 
       &.has-sticky-toc .inline-toc-floating.is-docked-left a {
+        display: block;
         text-decoration: none;
         opacity: 0.85;
       }
