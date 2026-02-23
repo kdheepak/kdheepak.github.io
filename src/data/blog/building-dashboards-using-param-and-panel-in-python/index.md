@@ -54,11 +54,13 @@ mpl.pyplot.rcParams["figure.constrained_layout.use"] = True
 
 <div>
 
-> **Note**
->
-> The UI elements in this post are not interactive as this is a static
-> page. To see the interactive elements, please run the notebook in a
-> Jupyter environment.
+::: callout-note
+
+The UI elements in this post are not interactive as this is a static
+page. To see the interactive elements, please run the notebook in a
+Jupyter environment.
+
+:::
 
 </div>
 
@@ -547,11 +549,13 @@ accessed directly.
 
 <div>
 
-> **Tip**
->
-> You can signal that a property is private by prefixing the property
-> with an underscore. This is a convention in Python to signal that a
-> property is private and should not be accessed directly.
+::: callout-tip
+
+You can signal that a property is private by prefixing the property
+with an underscore. This is a convention in Python to signal that a
+property is private and should not be accessed directly.
+
+:::
 
 </div>
 
@@ -665,11 +669,13 @@ pattern can be extended to more complex dashboards.
 
 <div>
 
-> **Note**
->
-> It is possible to also derive from `pn.viewable.Viewer` and implement
-> the `__panel__` method. Doing this will return the layout of the
-> component when the component is displayed in a notebook.
+::: callout-note
+
+It is possible to also derive from `pn.viewable.Viewer` and implement
+the `__panel__` method. Doing this will return the layout of the
+component when the component is displayed in a notebook.
+
+:::
 
 </div>
 
@@ -785,9 +791,11 @@ be called whenever the parameter changes.
 
 <div>
 
-> **Note**
->
-> `pn.bind` is just an alias for `param.bind`.
+::: callout-note
+
+`pn.bind` is just an alias for `param.bind`.
+
+:::
 
 </div>
 
@@ -894,10 +902,12 @@ pn.widgets.Tabulator(_get_dataframe, disabled=True)
 
 <div>
 
-> **Tip**
->
-> Similar to `pn.bind` and `param.bind`, `@pn.depends` is an alias for
-> `@param.depends`.
+::: callout-tip
+
+Similar to `pn.bind` and `param.bind`, `@pn.depends` is an alias for
+`@param.depends`.
+
+:::
 
 </div>
 
@@ -1030,12 +1040,14 @@ but "Unwatched" is printed only once:
 
 <div>
 
-> **Tip**
->
-> When `watch=True` is used, it is recommended to not return anything
-> from that method and simply update the state of the class instead.
-> It's easier to reason about the code and forces using `from_param` to
-> bind to a derived property instead.
+::: callout-tip
+
+When `watch=True` is used, it is recommended to not return anything
+from that method and simply update the state of the class instead.
+It's easier to reason about the code and forces using `from_param` to
+bind to a derived property instead.
+
+:::
 
 </div>
 

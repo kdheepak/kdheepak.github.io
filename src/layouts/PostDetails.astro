@@ -689,6 +689,242 @@ const nextPost =
   }
   addMarginFootnotes();
 
+  /** Converts ANSI escape sequences in notebook output cells to styled HTML. */
+  function renderAnsiCellOutput() {
+    const ANSI_16_COLORS = [
+      "#000000",
+      "#cd0000",
+      "#00cd00",
+      "#cdcd00",
+      "#0000ee",
+      "#cd00cd",
+      "#00cdcd",
+      "#e5e5e5",
+      "#7f7f7f",
+      "#ff0000",
+      "#00ff00",
+      "#ffff00",
+      "#5c5cff",
+      "#ff00ff",
+      "#00ffff",
+      "#ffffff",
+    ];
+
+    const escapeHtml = text =>
+      text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+
+    const ansi256ToCssColor = index => {
+      if (!Number.isInteger(index) || index < 0 || index > 255) return null;
+      if (index < 16) return ANSI_16_COLORS[index];
+
+      if (index >= 232) {
+        const level = 8 + (index - 232) * 10;
+        return `rgb(${level}, ${level}, ${level})`;
+      }
+
+      const colorIndex = index - 16;
+      const r = Math.floor(colorIndex / 36);
+      const g = Math.floor((colorIndex % 36) / 6);
+      const b = colorIndex % 6;
+      const toChannel = value => (value === 0 ? 0 : value * 40 + 55);
+
+      return `rgb(${toChannel(r)}, ${toChannel(g)}, ${toChannel(b)})`;
+    };
+
+    const applyAnsiCodes = (state, codeString) => {
+      const rawCodes = codeString.length > 0 ? codeString.split(";") : ["0"];
+      const codes = rawCodes.map(code => {
+        const parsedCode = Number(code);
+        return Number.isFinite(parsedCode) ? parsedCode : 0;
+      });
+
+      const resetState = () => {
+        state.fg = null;
+        state.bg = null;
+        state.bold = false;
+        state.italic = false;
+        state.underline = false;
+        state.inverse = false;
+      };
+
+      for (let index = 0; index < codes.length; index += 1) {
+        const code = codes[index];
+
+        if (code === 0) {
+          resetState();
+          continue;
+        }
+        if (code === 1) {
+          state.bold = true;
+          continue;
+        }
+        if (code === 3) {
+          state.italic = true;
+          continue;
+        }
+        if (code === 4) {
+          state.underline = true;
+          continue;
+        }
+        if (code === 7) {
+          state.inverse = true;
+          continue;
+        }
+        if (code === 22) {
+          state.bold = false;
+          continue;
+        }
+        if (code === 23) {
+          state.italic = false;
+          continue;
+        }
+        if (code === 24) {
+          state.underline = false;
+          continue;
+        }
+        if (code === 27) {
+          state.inverse = false;
+          continue;
+        }
+        if (code === 39) {
+          state.fg = null;
+          continue;
+        }
+        if (code === 49) {
+          state.bg = null;
+          continue;
+        }
+        if (code >= 30 && code <= 37) {
+          state.fg = ANSI_16_COLORS[code - 30];
+          continue;
+        }
+        if (code >= 90 && code <= 97) {
+          state.fg = ANSI_16_COLORS[code - 90 + 8];
+          continue;
+        }
+        if (code >= 40 && code <= 47) {
+          state.bg = ANSI_16_COLORS[code - 40];
+          continue;
+        }
+        if (code >= 100 && code <= 107) {
+          state.bg = ANSI_16_COLORS[code - 100 + 8];
+          continue;
+        }
+        if (code === 38 || code === 48) {
+          const isForeground = code === 38;
+          const mode = codes[index + 1];
+          if (mode === 5) {
+            const paletteIndex = codes[index + 2];
+            const color = ansi256ToCssColor(paletteIndex);
+            if (color) {
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 2;
+            continue;
+          }
+          if (mode === 2) {
+            const r = codes[index + 2];
+            const g = codes[index + 3];
+            const b = codes[index + 4];
+            if (
+              Number.isInteger(r) &&
+              Number.isInteger(g) &&
+              Number.isInteger(b) &&
+              r >= 0 &&
+              g >= 0 &&
+              b >= 0 &&
+              r <= 255 &&
+              g <= 255 &&
+              b <= 255
+            ) {
+              const color = `rgb(${r}, ${g}, ${b})`;
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 4;
+            continue;
+          }
+        }
+      }
+    };
+
+    const wrapStyledText = (text, state) => {
+      if (!text) return "";
+
+      const escapedText = escapeHtml(text);
+      let fg = state.fg;
+      let bg = state.bg;
+
+      if (state.inverse) {
+        [fg, bg] = [bg, fg];
+      }
+
+      const styles = [];
+      if (fg) styles.push(`color:${fg}`);
+      if (bg) styles.push(`background-color:${bg}`);
+      if (state.bold) styles.push("font-weight:700");
+      if (state.italic) styles.push("font-style:italic");
+      if (state.underline) styles.push("text-decoration:underline");
+
+      if (styles.length === 0) return escapedText;
+      return `<span style="${styles.join(";")}">${escapedText}</span>`;
+    };
+
+    const ansiToHtml = input => {
+      const state = {
+        fg: null,
+        bg: null,
+        bold: false,
+        italic: false,
+        underline: false,
+        inverse: false,
+      };
+
+      const ansiRegex = /\u001b\[([0-9;]*)m/g;
+      let html = "";
+      let lastIndex = 0;
+      let match = ansiRegex.exec(input);
+
+      while (match) {
+        const plainText = input.slice(lastIndex, match.index);
+        html += wrapStyledText(plainText, state);
+        applyAnsiCodes(state, match[1] ?? "");
+
+        lastIndex = ansiRegex.lastIndex;
+        match = ansiRegex.exec(input);
+      }
+
+      html += wrapStyledText(input.slice(lastIndex), state);
+      return html;
+    };
+
+    const ansiLines = document.querySelectorAll(
+      ".cell-output pre[data-language='plaintext'] code .line"
+    );
+
+    for (const line of ansiLines) {
+      if (!(line instanceof HTMLElement)) continue;
+      if (line.dataset.ansiParsed === "true") continue;
+
+      const rawText = line.textContent ?? "";
+      if (!rawText.includes("\u001b[")) continue;
+
+      line.innerHTML = ansiToHtml(rawText);
+      line.dataset.ansiParsed = "true";
+    }
+  }
+  renderAnsiCellOutput();
+
   /** Attaches copy buttons to code blocks in the document,
    * allowing users to copy code easily. */
   function attachCopyButtons() {
