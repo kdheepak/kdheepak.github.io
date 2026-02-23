@@ -1,6 +1,7 @@
 ---
 title: "Building Dashboards using Param and Panel in Python"
 date: 2025-01-04T21:03:04-05:00
+toc: true
 tags: ["python"]
 keywords: ["python, panel, jupyter, vscode"]
 description: "This post will show you some basics of building reusable components in dashboards using Param and Panel in Python."
