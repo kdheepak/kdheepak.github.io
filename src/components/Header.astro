@@ -74,7 +74,7 @@ const searchButtonClass =
       >
         <li class="flex items-center justify-center">
           <LinkButton
-            href="/blog"
+            href="/blog/"
             class:list={[
               navLinkClass,
               { [activeNavLinkClass]: isActive("/blog") },
@@ -97,7 +97,7 @@ const searchButtonClass =
         </li>
         <li class="flex items-center justify-center">
           <LinkButton
-            href="/cv"
+            href="/cv/"
             class:list={[
               navLinkClass,
               { [activeNavLinkClass]: isActive("/cv") },
@@ -120,7 +120,7 @@ const searchButtonClass =
         </li>
         <li class="flex items-center justify-center">
           <LinkButton
-            href="/tags"
+            href="/tags/"
             class:list={[
               navLinkClass,
               { [activeNavLinkClass]: isActive("/tags") },
@@ -145,7 +145,7 @@ const searchButtonClass =
     </nav>
     <div class="z-10 ms-auto flex items-center gap-1 sm:gap-2">
       <LinkButton
-        href="/search"
+        href="/search/"
         title="Search"
         aria-label="search"
         aria-current={isSearchPage ? "page" : undefined}
