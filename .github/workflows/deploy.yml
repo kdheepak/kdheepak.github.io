@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  deployments: write
 
 concurrency:
   group: deploy-cloudflare-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -51,9 +52,10 @@ jobs:
           force_orphan: true
 
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: kdheepak
-          directory: dist
+          command: pages deploy dist --project-name=kdheepak
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
