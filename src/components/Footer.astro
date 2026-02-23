@@ -2,8 +2,37 @@
 import type { HTMLAttributes } from "astro/types";
 import Socials from "./Socials.astro";
 import { SITE } from "@/config";
+import { getRepositoryHeadCommitHash } from "@/utils/getLatestCommitHash";
 
 const currentYear = new Date().getFullYear();
+const latestCommitHash = SITE.sourceCommit.enabled
+  ? getRepositoryHeadCommitHash()
+  : undefined;
+
+const toCommitBaseUrl = (sourceUrl: string): string => {
+  const trimmedUrl = sourceUrl.trim();
+  if (trimmedUrl === "") return "";
+  if (trimmedUrl.includes("/blob/")) {
+    return trimmedUrl.replace(/\/blob\/?$/, "/commit/");
+  }
+  if (trimmedUrl.includes("/tree/")) {
+    return trimmedUrl.replace(/\/tree\/?$/, "/commit/");
+  }
+  return trimmedUrl.endsWith("/")
+    ? `${trimmedUrl}commit/`
+    : `${trimmedUrl}/commit/`;
+};
+
+const latestCommitHref =
+  SITE.sourceCommit.enabled &&
+  latestCommitHash &&
+  SITE.sourceCommit.url.trim() !== ""
+    ? `${toCommitBaseUrl(SITE.sourceCommit.url)}${latestCommitHash}`
+    : undefined;
+
+const latestCommitTitle = latestCommitHash
+  ? `View latest commit: ${latestCommitHash.slice(0, 7)}`
+  : undefined;
 
 type Props = {
   noMarginTop?: boolean;
@@ -25,7 +54,24 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   >
     <Socials />
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>&#169; {currentYear}</span>
+      <span>
+        &#169;{" "}
+        {
+          latestCommitHref ? (
+            <a
+              href={latestCommitHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={latestCommitTitle}
+              class="underline decoration-dashed underline-offset-4 hover:text-accent"
+            >
+              {currentYear}
+            </a>
+          ) : (
+            currentYear
+          )
+        }
+      </span>
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>
         <a
