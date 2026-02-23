@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+import LinkButton from "./LinkButton.astro";
+import { SITE } from "@/config";
+
+type Props = {
+  class?: string;
+};
+
+const { class: className = "" } = Astro.props;
+---
+
+{
+  SITE.showBackButton && (
+    <LinkButton
+      id="back-button"
+      href="/"
+      aria-label="Go back"
+      class:list={[
+        "focus-outline shrink-0 text-foreground/90 hover:text-foreground/70",
+        className,
+      ]}
+    >
+      <Icon
+        name="tabler:chevron-left"
+        class="inline-block size-6 rtl:rotate-180"
+      />
+      <span class="sr-only">Go back</span>
+    </LinkButton>
+  )
+}
+
+<script>
+  /* Update Search Praam */
+  function updateGoBackUrl() {
+    const backButton: HTMLAnchorElement | null =
+      document.querySelector("#back-button");
+
+    const backUrl = sessionStorage.getItem("backUrl");
+
+    if (backUrl && backButton) {
+      backButton.href = backUrl;
+    }
+  }
+
+  document.addEventListener("astro:page-load", updateGoBackUrl);
+  updateGoBackUrl();
+</script>

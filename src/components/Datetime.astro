@@ -1,0 +1,82 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { Icon } from "astro-icon/components";
+import { SITE } from "@/config";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+type Props = {
+  class?: string;
+  size?: "sm" | "lg";
+  pubDatetime: string | Date;
+  timezone?: string;
+  modDatetime?: string | Date | null;
+  style?: Record<string, string>;
+  href?: string;
+  linkTitle?: string;
+};
+
+const {
+  pubDatetime,
+  modDatetime,
+  size = "sm",
+  class: className = "",
+  timezone: postTimezone,
+  style = {},
+  href,
+  linkTitle,
+} = Astro.props;
+
+/* ========== Formatted Datetime ========== */
+const isModified = modDatetime && modDatetime > pubDatetime;
+
+const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
+  postTimezone || SITE.timezone
+);
+
+const date = datetime.format("D MMM, YYYY"); // e.g., '22 Mar, 2025'
+---
+
+<div
+  class:list={["flex items-center gap-x-2 opacity-80", className]}
+  style={style}
+>
+  <Icon
+    name="tabler:calendar"
+    class:list={[
+      "inline-block size-6 min-w-5.5",
+      { "scale-90": size === "sm" },
+    ]}
+  />
+  {
+    isModified && (
+      <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
+        Updated:
+      </span>
+    )
+  }
+  {
+    href ? (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={linkTitle}
+        class="decoration-dashed underline-offset-4 hover:text-accent hover:underline"
+      >
+        <time
+          class:list={["text-sm", { "sm:text-base": size === "lg" }]}
+          datetime={datetime.toISOString()}>{date}</time
+        >
+      </a>
+    ) : (
+      <time
+        class:list={["text-sm", { "sm:text-base": size === "lg" }]}
+        datetime={datetime.toISOString()}>{date}</time
+      >
+    )
+  }
+</div>

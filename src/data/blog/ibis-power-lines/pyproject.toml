@@ -1,0 +1,14 @@
+[project]
+name = "ibis-power-lines"
+version = "0.1.0"
+description = "Power Lines with ibis"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "folium>=0.18.0",
+  "geopandas>=1.0.1",
+  "ibis-framework[duckdb,geospatial]>=9.5.0",
+  "ipykernel>=6.29.5",
+  "jupyter>=1.1.1",
+  "python-localvenv-kernel>=0.1.7",
+]

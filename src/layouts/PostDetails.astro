@@ -1,0 +1,750 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Tag from "@/components/Tag.astro";
+import Datetime from "@/components/Datetime.astro";
+import EditPost from "@/components/EditPost.astro";
+import ShareLinks from "@/components/ShareLinks.astro";
+import BackButton from "@/components/BackButton.astro";
+import BackToTopButton from "@/components/BackToTopButton.astro";
+import { Icon } from "astro-icon/components";
+import { getPath } from "@/utils/getPath";
+import { getLatestCommitHash } from "@/utils/getLatestCommitHash";
+import { slugifyStr } from "@/utils/slugify";
+import { SITE } from "@/config";
+
+type Props = {
+  post: CollectionEntry<"blog">;
+  posts: CollectionEntry<"blog">[];
+};
+
+const { post, posts } = Astro.props;
+
+const {
+  title,
+  author,
+  description,
+  ogImage: initOgImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  timezone,
+  tags,
+  hideEditPost,
+  toc = false,
+  notebookPath,
+  mathjax = false,
+} = post.data;
+
+const { Content } = await render(post);
+
+let ogImageUrl: string | undefined;
+
+// Determine OG image source
+if (typeof initOgImage === "string") {
+  ogImageUrl = initOgImage; // Remote OG image (absolute URL)
+} else if (initOgImage?.src) {
+  ogImageUrl = initOgImage.src; // Local asset
+}
+
+// Resolve OG image URL from frontmatter only.
+const ogImage = ogImageUrl
+  ? new URL(ogImageUrl, Astro.url.origin).href
+  : undefined;
+
+const sourcePath = post.filePath;
+const sourceCommitHash = SITE.sourceCommit.enabled
+  ? getLatestCommitHash(sourcePath)
+  : undefined;
+const sourceRef = sourceCommitHash ?? "main";
+const sourceCommitHref =
+  SITE.sourceCommit.enabled && sourcePath && SITE.sourceCommit.url.trim() !== ""
+    ? `${SITE.sourceCommit.url}${sourceRef}/${sourcePath}`
+    : undefined;
+const sourceCommitTitle =
+  SITE.sourceCommit.enabled && sourcePath
+    ? sourceCommitHash
+      ? `${SITE.sourceCommit.text}: ${sourceCommitHash.slice(0, 7)}`
+      : `${SITE.sourceCommit.text}: latest`
+    : undefined;
+const showPostActions =
+  !hideEditPost &&
+  (SITE.editPost.enabled || (SITE.notebookView.enabled && !!notebookPath));
+const hasStickyToc = toc;
+
+const layoutProps = {
+  title: `${title} | ${SITE.title}`,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
+  canonicalURL,
+  ogImage,
+  scrollSmooth: true,
+  enableMathJax: mathjax,
+};
+
+/* ========== Prev/Next Posts ========== */
+
+const allPosts = posts.map(({ data: { title }, id, filePath }) => ({
+  id,
+  title,
+  filePath,
+}));
+
+const currentPostIndex = allPosts.findIndex(a => a.id === post.id);
+
+const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
+const nextPost =
+  currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
+---
+
+<Layout {...layoutProps}>
+  <Header />
+  <main id="main-content" class="app-layout pb-12" data-pagefind-body>
+    <div class="mt-8 flex items-center gap-2 sm:relative sm:block">
+      <BackButton class="sm:absolute sm:top-1/2 sm:left-0 sm:-translate-y-1/2 sm:-translate-x-[calc(100%+0.5rem)]" />
+      <h1
+        transition:name={"heading" + slugifyStr(title.replaceAll(".", "-"))}
+        class="min-w-0 text-2xl font-bold text-accent sm:text-3xl"
+      >
+        {title}
+      </h1>
+    </div>
+    <div class="my-2 flex items-center gap-2">
+      <Datetime
+        {pubDatetime}
+        {modDatetime}
+        {timezone}
+        href={sourceCommitHref}
+        linkTitle={sourceCommitTitle}
+        size="lg"
+        style={{
+          viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
+        }}
+      />
+      <div
+        class:list={[
+          "ml-auto max-sm:hidden",
+          { hidden: !showPostActions },
+        ]}
+      >
+        <EditPost {hideEditPost} {post} />
+      </div>
+    </div>
+    <article
+      id="article"
+      class:list={[
+        "app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
+        {
+          "has-sticky-toc": hasStickyToc,
+        },
+      ]}
+    >
+      <Content />
+    </article>
+
+    <hr class="my-8 border-dashed" />
+
+    <EditPost class="sm:hidden" {hideEditPost} {post} />
+
+    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+    </ul>
+
+    <BackToTopButton />
+
+    <ShareLinks />
+
+    <div class="giscus"></div>
+
+    <hr class="my-6 border-dashed" />
+
+    <!-- Previous/Next Post Buttons -->
+    <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {
+        prevPost && (
+          <a
+            href={getPath(prevPost.id, prevPost.filePath)}
+            class="flex w-full gap-1 hover:opacity-75"
+          >
+            <Icon
+              name="tabler:chevron-left"
+              class="inline-block flex-none rtl:rotate-180"
+            />
+            <div>
+              <span>Previous Post</span>
+              <div class="text-sm text-accent/85">{prevPost.title}</div>
+            </div>
+          </a>
+        )
+      }
+      {
+        nextPost && (
+          <a
+            href={getPath(nextPost.id, nextPost.filePath)}
+            class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
+          >
+            <div>
+              <span>Next Post</span>
+              <div class="text-sm text-accent/85">{nextPost.title}</div>
+            </div>
+            <Icon
+              name="tabler:chevron-right"
+              class="inline-block flex-none rtl:rotate-180"
+            />
+          </a>
+        )
+      }
+    </div>
+    <script is:inline src="https://giscus.app/client.js"
+        data-repo="kdheepak/kdheepak.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA=="
+        data-category="Comments"
+        data-category-id="DIC_kwDOAw1l5M4CU810"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /**
+   * Keeps TOC inline at the top, then docks it to the left
+   * once the inline TOC has scrolled out of view.
+   */
+  function setupDockingToc() {
+    const article = document.getElementById("article");
+    if (!article || !article.classList.contains("has-sticky-toc")) return;
+
+    const tocHeading = article.querySelector("h2#table-of-contents");
+    if (!tocHeading) return;
+
+    const tocList = tocHeading.nextElementSibling;
+    if (!tocList || !["UL", "OL"].includes(tocList.tagName)) return;
+
+    let floatingToc = tocHeading.closest(".inline-toc-floating");
+    let placeholder = floatingToc?.previousElementSibling;
+    let dockMarker = floatingToc?.nextElementSibling;
+
+    if (!floatingToc) {
+      floatingToc = document.createElement("div");
+      floatingToc.className = "inline-toc-floating";
+
+      placeholder = document.createElement("div");
+      placeholder.className = "inline-toc-placeholder";
+      placeholder.hidden = true;
+
+      tocHeading.before(placeholder);
+      tocHeading.before(floatingToc);
+      floatingToc.appendChild(tocHeading);
+      floatingToc.appendChild(tocList);
+    }
+
+    if (!(placeholder instanceof HTMLElement)) return;
+
+    if (
+      !(dockMarker instanceof HTMLElement) ||
+      !dockMarker.classList.contains("inline-toc-dock-marker")
+    ) {
+      dockMarker = document.createElement("div");
+      dockMarker.className = "inline-toc-dock-marker";
+      floatingToc.after(dockMarker);
+    }
+
+    floatingToc
+      .querySelectorAll(".toc-active-indicator")
+      .forEach(node => node.remove());
+
+    const tocLinks = Array.from(
+      floatingToc.querySelectorAll("a[href^='#']")
+    ).filter(link => link instanceof HTMLAnchorElement);
+
+    const headingEntries = tocLinks
+      .map(link => {
+        const hash = link.getAttribute("href");
+        if (!hash || hash === "#") return null;
+
+        let headingId = hash.slice(1);
+        try {
+          headingId = decodeURIComponent(headingId);
+        } catch {
+          // Keep original hash if decoding fails.
+        }
+
+        const heading = document.getElementById(headingId);
+        if (!heading || !article.contains(heading)) return null;
+
+        return { link, heading };
+      })
+      .filter(Boolean);
+
+    let activeTocLink = null;
+
+    const setActiveTocLink = link => {
+      if (activeTocLink === link) return false;
+
+      if (activeTocLink) {
+        activeTocLink.classList.remove("is-current-section");
+      }
+
+      activeTocLink = link;
+
+      if (activeTocLink) {
+        activeTocLink.classList.add("is-current-section");
+      }
+
+      return true;
+    };
+
+    const keepActiveLinkInView = link => {
+      if (!(link instanceof HTMLElement)) return;
+      if (floatingToc.scrollHeight <= floatingToc.clientHeight + 1) return;
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      const linkTop =
+        linkRect.top - tocRect.top + floatingToc.scrollTop;
+      const linkBottom = linkTop + linkRect.height;
+      const viewportTop = floatingToc.scrollTop;
+      const viewportBottom = viewportTop + floatingToc.clientHeight;
+      const margin = 18;
+
+      const isAbove = linkTop < viewportTop + margin;
+      const isBelow = linkBottom > viewportBottom - margin;
+      if (!isAbove && !isBelow) return;
+
+      const centeredTop = Math.max(
+        0,
+        Math.min(
+          linkTop - (floatingToc.clientHeight - linkRect.height) / 2,
+          floatingToc.scrollHeight - floatingToc.clientHeight
+        )
+      );
+
+      floatingToc.scrollTo({
+        top: centeredTop,
+        behavior: "smooth",
+      });
+    };
+
+    const updateActiveSection = () => {
+      if (!headingEntries.length) {
+        setActiveTocLink(null);
+        return;
+      }
+
+      const activationOffset = 144;
+      let activeEntry = headingEntries[0];
+
+      for (const entry of headingEntries) {
+        if (entry.heading.getBoundingClientRect().top <= activationOffset) {
+          activeEntry = entry;
+        } else {
+          break;
+        }
+      }
+
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const pageBottom = document.documentElement.scrollHeight - 8;
+      if (scrollBottom >= pageBottom) {
+        activeEntry = headingEntries[headingEntries.length - 1];
+      }
+
+      const activeChanged = setActiveTocLink(activeEntry.link);
+      if (activeChanged) {
+        keepActiveLinkInView(activeEntry.link);
+      }
+    };
+
+    const media = window.matchMedia("(min-width: 1280px)");
+    const dockTopOffset = 96;
+
+    const updateDockState = () => {
+      if (!media.matches) {
+        floatingToc.classList.remove("is-docked-left");
+        placeholder.hidden = true;
+        placeholder.style.height = "";
+        return;
+      }
+
+      const markerTop = dockMarker.getBoundingClientRect().top;
+      const shouldDock = markerTop <= dockTopOffset;
+
+      floatingToc.classList.toggle("is-docked-left", shouldDock);
+
+      if (shouldDock) {
+        placeholder.hidden = false;
+        placeholder.style.height = `${floatingToc.offsetHeight}px`;
+      } else {
+        placeholder.hidden = true;
+        placeholder.style.height = "";
+      }
+    };
+
+    updateDockState();
+    updateActiveSection();
+
+    if (article.dataset.tocDockListenersAttached === "true") return;
+    article.dataset.tocDockListenersAttached = "true";
+
+    let frame = 0;
+    const updateTocOnScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        updateDockState();
+        updateActiveSection();
+      });
+    };
+
+    window.addEventListener("scroll", updateTocOnScroll, { passive: true });
+    window.addEventListener("resize", updateTocOnScroll);
+    floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
+    media.addEventListener("change", updateTocOnScroll);
+  }
+  setupDockingToc();
+
+  /** Adds "back to citation" links in bibliography entries. */
+  function getSessionItem(key) {
+    try {
+      return window.sessionStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function setSessionItem(key, value) {
+    try {
+      window.sessionStorage.setItem(key, value);
+    } catch {
+      // Ignore storage failures (privacy mode / disabled storage).
+    }
+  }
+
+  function addCitationBackLinks() {
+    const citationSpans = Array.from(
+      document.querySelectorAll("span[id^='citation--']")
+    );
+    if (!citationSpans.length) return;
+
+    const bibToCitationIds = new Map();
+
+    for (const citationSpan of citationSpans) {
+      const citationId = citationSpan.getAttribute("id");
+      if (!citationId) continue;
+
+      const bibLinks = Array.from(
+        citationSpan.querySelectorAll("a[href^='#bib-']")
+      );
+
+      for (const bibLink of bibLinks) {
+        const bibHref = bibLink.getAttribute("href");
+        const bibId = bibHref?.slice(1);
+        if (!bibId) continue;
+
+        const citationIds = bibToCitationIds.get(bibId) ?? [];
+        if (!citationIds.includes(citationId)) {
+          citationIds.push(citationId);
+          bibToCitationIds.set(bibId, citationIds);
+        }
+
+        if (!bibLink.dataset.returnHooked) {
+          bibLink.dataset.returnHooked = "true";
+          bibLink.addEventListener("click", () => {
+            setSessionItem(`citation-return:${bibId}`, citationId);
+            const backLink = document
+              .getElementById(bibId)
+              ?.querySelector(".citation-back-link");
+            if (backLink) backLink.setAttribute("href", `#${citationId}`);
+          });
+        }
+      }
+    }
+
+    for (const [bibId, citationIds] of bibToCitationIds.entries()) {
+      const bibEntry = document.getElementById(bibId);
+      if (!bibEntry || !citationIds.length) continue;
+
+      const targetContainer =
+        bibEntry.querySelector(".csl-right-inline") || bibEntry;
+      targetContainer.querySelector(".citation-back-link")?.remove();
+
+      const storedCitationId = getSessionItem(`citation-return:${bibId}`);
+      const returnCitationId =
+        storedCitationId && citationIds.includes(storedCitationId)
+          ? storedCitationId
+          : citationIds[0];
+
+      const backLink = document.createElement("a");
+      backLink.className = "citation-back-link";
+      backLink.href = `#${returnCitationId}`;
+      backLink.setAttribute("aria-label", "Back to citation");
+      backLink.textContent = "↩";
+      targetContainer.appendChild(backLink);
+    }
+  }
+  try {
+    addCitationBackLinks();
+  } catch {
+    // Keep the rest of post enhancements working even if citation linking fails.
+  }
+
+  /** Renders `_aside_:` footnotes as margin notes on wide screens. */
+  function addMarginFootnotes() {
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    // Make reruns idempotent during client-side navigations.
+    article.querySelectorAll(".margin-footnote").forEach(note => note.remove());
+    article.classList.remove("has-margin-footnotes", "all-footnotes-as-margin");
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (!footnotesSection) return;
+
+    footnotesSection
+      .querySelectorAll("li.is-margin-footnote-source")
+      .forEach(node => node.classList.remove("is-margin-footnote-source"));
+
+    const footnotesById = new Map();
+    for (const footnote of Array.from(
+      footnotesSection.querySelectorAll("li[id]")
+    )) {
+      footnotesById.set(footnote.id, footnote);
+    }
+
+    let marginNotesAdded = 0;
+    const marginSourceIds = new Set();
+    const references = Array.from(
+      article.querySelectorAll("a[data-footnote-ref][href^='#']")
+    );
+
+    for (const reference of references) {
+      const footnoteId = reference.getAttribute("href")?.slice(1);
+      if (!footnoteId) continue;
+
+      const sourceFootnote = footnotesById.get(footnoteId);
+      if (!sourceFootnote) continue;
+
+      // Margin-note eligibility: definition starts with `_aside_:`.
+      const firstParagraph = sourceFootnote.querySelector("p");
+      const firstParagraphText =
+        firstParagraph?.textContent?.trim().toLowerCase() ?? "";
+      const isAsideFootnote = /^aside\s*:/.test(firstParagraphText);
+      if (!isAsideFootnote) continue;
+
+      sourceFootnote.classList.add("is-margin-footnote-source");
+      marginSourceIds.add(footnoteId);
+
+      const marginNote = document.createElement("aside");
+      marginNote.className = "margin-footnote";
+      marginNote.id = `margin-note-${footnoteId}-${marginNotesAdded + 1}`;
+
+      // Clone source content and strip navigation-only back links.
+      const contentClone = sourceFootnote.cloneNode(true);
+      contentClone
+        .querySelectorAll("a[data-footnote-backref]")
+        .forEach(backRef => backRef.remove());
+      contentClone
+        .querySelectorAll("[id]")
+        .forEach(node => node.removeAttribute("id"));
+
+      // Remove the leading `_aside_:` label in rendered margin notes.
+      const clonedFirstParagraph = contentClone.querySelector("p");
+      if (clonedFirstParagraph) {
+        const leadingElement = clonedFirstParagraph.firstElementChild;
+        if (
+          leadingElement?.tagName.toLowerCase() === "em" &&
+          leadingElement.textContent?.trim().toLowerCase() === "aside"
+        ) {
+          leadingElement.remove();
+        }
+
+        const firstTextNode = Array.from(clonedFirstParagraph.childNodes).find(
+          node => node.nodeType === Node.TEXT_NODE
+        );
+        if (firstTextNode) {
+          firstTextNode.textContent = (
+            firstTextNode.textContent ?? ""
+          ).replace(/^\s*aside\s*:\s*/i, "").replace(/^\s*:\s*/, "");
+          if (firstTextNode.textContent.trim() === "") {
+            firstTextNode.remove();
+          }
+        }
+      }
+
+      while (contentClone.firstChild) {
+        marginNote.appendChild(contentClone.firstChild);
+      }
+
+      const insertionPoint = reference.closest("sup") ?? reference;
+      insertionPoint.classList.add("is-margin-footnote-ref");
+      reference.classList.add("is-margin-footnote-ref-link");
+      reference.textContent = "^";
+      insertionPoint.insertAdjacentElement("afterend", marginNote);
+      reference.dataset.marginNoteId = marginNote.id;
+
+      if (!reference.dataset.marginNoteHooked) {
+        reference.dataset.marginNoteHooked = "true";
+        reference.addEventListener("click", event => {
+          if (!window.matchMedia("(min-width: 900px)").matches) return;
+
+          const marginNoteId = reference.dataset.marginNoteId;
+          if (!marginNoteId) return;
+
+          const linkedNote = article.querySelector(`#${marginNoteId}`);
+          if (!linkedNote) return;
+
+          event.preventDefault();
+          linkedNote.classList.add("margin-footnote-active");
+          linkedNote.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          window.setTimeout(
+            () => linkedNote.classList.remove("margin-footnote-active"),
+            800
+          );
+        });
+      }
+
+      marginNotesAdded += 1;
+    }
+
+    if (marginNotesAdded > 0) {
+      article.classList.add("has-margin-footnotes");
+      if (marginSourceIds.size === footnotesById.size) {
+        article.classList.add("all-footnotes-as-margin");
+      }
+    }
+  }
+  addMarginFootnotes();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+      wrapper.className = "group";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

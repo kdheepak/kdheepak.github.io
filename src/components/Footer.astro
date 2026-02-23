@@ -1,0 +1,47 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Socials from "./Socials.astro";
+import { SITE } from "@/config";
+
+const currentYear = new Date().getFullYear();
+
+type Props = {
+  noMarginTop?: boolean;
+} & HTMLAttributes<"footer">;
+
+const { noMarginTop = false, class: className, ...attrs } = Astro.props;
+---
+
+<footer
+  class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
+  {...attrs}
+>
+  <div
+    class:list={[
+      "py-6 sm:py-4",
+      "border-t border-border",
+      "flex flex-col items-center justify-between sm:flex-row-reverse",
+    ]}
+  >
+    <Socials />
+    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
+      <span>&#169; {currentYear}</span>
+      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
+      <span>
+        <a
+          href={SITE.license.url}
+          rel="license noopener noreferrer"
+          target="_blank"
+          data-external-link
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+        >
+          {SITE.license.name}
+        </a>
+      </span>
+    </div>
+  </div>
+  <p class="mx-auto mb-8 max-w-3xl text-center text-xs leading-relaxed text-foreground/60">
+    All views or opinions expressed here are solely mine and are not represented,
+    shared, supported, or endorsed by any employer or entity in any manner.
+  </p>
+</footer>

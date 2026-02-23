@@ -1,0 +1,184 @@
+---
+import { Icon } from "astro-icon/components";
+import LinkButton from "./LinkButton.astro";
+import { SITE } from "@/config";
+
+const { pathname } = Astro.url;
+
+// Remove trailing slash from current pathname if exists
+const currentPath =
+  pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+
+const isActive = (path: string) => {
+  const currentPathArray = currentPath.split("/").filter(p => p.trim());
+  const pathArray = path.split("/").filter(p => p.trim());
+
+  return currentPath === path || currentPathArray[0] === pathArray[0];
+};
+
+const isHomePage = currentPath === "/";
+const isSearchPage = isActive("/search");
+const navLinkClass =
+  "focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base";
+const activeNavLinkClass = "text-accent";
+const activeUnderlineClass =
+  "absolute right-0 -bottom-0.5 left-0 h-0.5 rounded-full bg-accent";
+const searchButtonClass =
+  "focus-outline relative flex size-12 items-center justify-center text-foreground/80 transition-colors hover:text-accent sm:size-8";
+---
+
+<a
+  id="skip-to-content"
+  href="#main-content"
+  class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4"
+>
+  Skip to content
+</a>
+
+<header class="app-layout">
+  <div
+    id="top-nav-wrap"
+    class:list={[
+      "py-4 sm:py-6",
+      "border-b border-border",
+      "w-full bg-background",
+      "relative flex items-center gap-2",
+    ]}
+  >
+    <a
+      href="/"
+      class:list={[
+        "relative z-10 py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl sm:leading-none",
+        { [activeNavLinkClass]: isHomePage },
+      ]}
+      aria-current={isHomePage ? "page" : undefined}
+    >
+      {SITE.title}
+      {
+        isHomePage && (
+          <span
+            aria-hidden="true"
+            transition:name="active-nav-underline"
+            class={activeUnderlineClass}
+          />
+        )
+      }
+    </a>
+    <nav
+      id="nav-menu"
+      class="pointer-events-auto absolute left-1/2 -translate-x-1/2"
+    >
+      <ul
+        id="menu-items"
+        class="flex items-center gap-2 sm:gap-3"
+      >
+        <li class="flex items-center justify-center">
+          <LinkButton
+            href="/blog"
+            class:list={[
+              navLinkClass,
+              { [activeNavLinkClass]: isActive("/blog") },
+            ]}
+            title="/blog"
+            aria-label="blog"
+            aria-current={isActive("/blog") ? "page" : undefined}
+          >
+            <span>/blog</span>
+            {
+              isActive("/blog") && (
+                <span
+                  aria-hidden="true"
+                  transition:name="active-nav-underline"
+                  class={activeUnderlineClass}
+                />
+              )
+            }
+          </LinkButton>
+        </li>
+        <li class="flex items-center justify-center">
+          <LinkButton
+            href="/cv"
+            class:list={[
+              navLinkClass,
+              { [activeNavLinkClass]: isActive("/cv") },
+            ]}
+            title="/cv"
+            aria-label="cv"
+            aria-current={isActive("/cv") ? "page" : undefined}
+          >
+            <span>/cv</span>
+            {
+              isActive("/cv") && (
+                <span
+                  aria-hidden="true"
+                  transition:name="active-nav-underline"
+                  class={activeUnderlineClass}
+                />
+              )
+            }
+          </LinkButton>
+        </li>
+        <li class="flex items-center justify-center">
+          <LinkButton
+            href="/tags"
+            class:list={[
+              navLinkClass,
+              { [activeNavLinkClass]: isActive("/tags") },
+            ]}
+            title="/tags"
+            aria-label="tags"
+            aria-current={isActive("/tags") ? "page" : undefined}
+          >
+            <span>/tags</span>
+            {
+              isActive("/tags") && (
+                <span
+                  aria-hidden="true"
+                  transition:name="active-nav-underline"
+                  class={activeUnderlineClass}
+                />
+              )
+            }
+          </LinkButton>
+        </li>
+      </ul>
+    </nav>
+    <div class="z-10 ms-auto flex items-center gap-1 sm:gap-2">
+      <LinkButton
+        href="/search"
+        title="Search"
+        aria-label="search"
+        aria-current={isSearchPage ? "page" : undefined}
+        class:list={[
+          searchButtonClass,
+          { [activeNavLinkClass]: isSearchPage },
+        ]}
+      >
+        <Icon
+          name="tabler:search"
+          class="inline-block size-5 fill-transparent stroke-current stroke-2"
+        />
+      </LinkButton>
+      {
+        SITE.lightAndDarkMode && (
+          <button
+            id="theme-btn"
+            class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent"
+            title="Toggles light & dark"
+            aria-label="auto"
+            aria-live="polite"
+          >
+            <Icon
+              name="tabler:moon"
+              class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+            />
+            <Icon
+              name="tabler:sun-high"
+              class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+            />
+          </button>
+        )
+      }
+    </div>
+  </div>
+</header>

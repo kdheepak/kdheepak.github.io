@@ -1,73 +1,46 @@
-name: deploy
+name: Deploy
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: deploy-cloudflare-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  publish:
-    name: website
+  deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: julia-actions/setup-julia@v1
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          version: 1.10.2
-          arch: x64
-      - uses: julia-actions/julia-buildpkg@v1
+          persist-credentials: false
 
-      - uses: actions/setup-python@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4
         with:
-          python-version: "3.x"
-      - run: pip install jupyter jupyter-client jupyter-cache
+          version: 10
+          run_install: false
 
-      - name: Install IJulia Conda
-        run: julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.add("Conda"); Pkg.instantiate(); Pkg.build()'
-
-      - name: Run apt update and install
-        run: |
-          sudo apt-get update
-          sudo apt install texlive-latex-extra texlive-base texlive-fonts-extra texlive-luatex pdf2svg imagemagick ghostscript
-
-      - uses: actions-rs/toolchain@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          toolchain: stable
-      - name: Cache cargo installs
-        uses: actions/cache@v3
-        id: cache-cargo
-        with:
-          path: |
-            ~/.cargo/
-          key: ${{ runner.os }}-cargo
-      - name: Cargo install
-        run: |
-          cargo install svgbob_cli --force
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-        if: steps.cache-cargo.outputs.cache-hit != 'true'
+          node-version: 25
 
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          version: pre-release
-          tinytex: true
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Check Quarto install
-        run: quarto check install
+      - name: Install Playwright
+        run: pnpm exec playwright install
 
-      - name: Check Quarto kernels
-        run: quarto check jupyter
-
-      - name: Publish to GitHub Pages
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build site
+        run: pnpm run build
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
@@ -75,4 +48,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: kdheepak
-          directory: _site
+          directory: dist

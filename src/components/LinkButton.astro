@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = { disabled?: boolean; reload?: boolean } & HTMLAttributes<"a">;
+
+const { disabled, reload = false, class: className, ...attrs } = Astro.props;
+---
+
+{
+  disabled ? (
+    <span
+      aria-disabled
+      class:list={[
+        "group inline-flex items-center gap-1",
+        className,
+      ]}
+    >
+      <slot />
+    </span>
+  ) : (
+    <a
+      data-astro-reload={reload ? "" : undefined}
+      class:list={[
+        "group inline-flex items-center gap-1",
+        "hover:text-accent",
+        className,
+      ]}
+      {...attrs}
+    >
+      <slot />
+    </a>
+  )
+}

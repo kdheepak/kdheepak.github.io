@@ -1,0 +1,47 @@
+---
+import { SOCIALS } from "@/constants";
+import { Icon } from "astro-icon/components";
+import LinkButton from "./LinkButton.astro";
+import ObfuscatedEmail from "./ObfuscatedEmail.astro";
+
+const getMailtoAddress = (href: string): string | null => {
+  if (!href.startsWith("mailto:")) return null;
+
+  const address = href.slice("mailto:".length).split("?")[0];
+  return address || null;
+};
+---
+
+<div class="flex flex-wrap items-center gap-1">
+  {
+    SOCIALS.map(social => {
+      const emailAddress = getMailtoAddress(social.href);
+
+      return emailAddress ? (
+        <ObfuscatedEmail
+          email={emailAddress}
+          class="group inline-flex items-center gap-1 p-2 hover:rotate-6 hover:text-accent sm:p-1"
+          title={social.linkTitle}
+        >
+          <Icon
+            name={social.icon}
+            class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"
+          />
+          <span class="sr-only">{social.linkTitle}</span>
+        </ObfuscatedEmail>
+      ) : (
+        <LinkButton
+          href={social.href}
+          class="p-2 hover:rotate-6 sm:p-1"
+          title={social.linkTitle}
+        >
+          <Icon
+            name={social.icon}
+            class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"
+          />
+          <span class="sr-only">{social.linkTitle}</span>
+        </LinkButton>
+      );
+    })
+  }
+</div>

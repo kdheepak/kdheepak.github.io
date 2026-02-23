@@ -1,0 +1,6 @@
+[roadnetwork]
+git-tree-sha1 = "3ce22dfe0948a5451d21d829416fcb9f3c70ee7a"
+
+    [[roadnetwork.download]]
+    sha256 = "71dd1ae86f522a99b99081cc0f1dfc069b8f4c5bf701494fcd22259ac61e66d7"
+    url = "https://github.com/kdheepak/kdheepak.github.io/releases/download/artifacts/roadnetworkfiles-statscan.tar.gz"

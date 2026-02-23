@@ -1,21 +1,28 @@
-/.quarto/*
-/_site/*
-/_book/
-**/.jupyter_cache/
-.vdoc.jl
-/site_libs/*
-**/*_files/*
-/.quarto/
-/.luarc.json
-/node_modules
-.sverto
-# pixi environments
-.pixi
-*.egg-info
-.virtual_documents/*
+# build output
+dist/
 
-**/.venv/*
+# generated types
+.astro/
 
-**/.virtual_documents/*
+# dependencies
+node_modules/
 
-**/*.quarto_ipynb
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# pagefind
+
+public/pagefind
