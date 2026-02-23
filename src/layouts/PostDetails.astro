@@ -73,6 +73,12 @@ const showPostActions =
   !hideEditPost &&
   (SITE.editPost.enabled || (SITE.notebookView.enabled && !!notebookPath));
 const hasStickyToc = toc;
+const pagefindDate = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: timezone || SITE.timezone,
+}).format(new Date(pubDatetime));
 
 const layoutProps = {
   title: `${title}`,
@@ -104,6 +110,7 @@ const nextPost =
 <Layout {...layoutProps}>
   <Header />
   <main id="main-content" class="app-layout pb-12" data-pagefind-body>
+    <span class="sr-only" data-pagefind-meta="date">{pagefindDate}</span>
     <div class="mt-8 flex items-center gap-2 sm:relative sm:block">
       <BackButton class="sm:absolute sm:top-1/2 sm:left-0 sm:-translate-y-1/2 sm:-translate-x-[calc(100%+0.5rem)]" />
       <h1

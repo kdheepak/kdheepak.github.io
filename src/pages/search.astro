@@ -18,11 +18,50 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
 </Layout>
 
 <script>
+  let searchResultsObserver: MutationObserver | null = null;
+
+  function decorateSearchResultDates(root: ParentNode) {
+    const results = root.querySelectorAll(".pagefind-ui__result");
+
+    for (const result of results) {
+      if (!(result instanceof HTMLElement)) continue;
+
+      const title = result.querySelector(".pagefind-ui__result-title");
+      if (!(title instanceof HTMLElement)) continue;
+      if (title.querySelector(".pagefind-ui__result-date")) continue;
+
+      const dateTag = result.querySelector(
+        '.pagefind-ui__result-tag[data-pagefind-ui-meta="date"]'
+      );
+      if (!(dateTag instanceof HTMLElement)) continue;
+
+      const rawDateText = dateTag.textContent?.trim() ?? "";
+      const dateText = rawDateText.replace(/^date:\s*/i, "").trim();
+      if (!dateText) continue;
+
+      title.classList.add("pagefind-ui__result-title-row");
+
+      const dateSpan = document.createElement("span");
+      dateSpan.className = "pagefind-ui__result-date";
+      dateSpan.textContent = dateText;
+      title.append(dateSpan);
+
+      dateTag.remove();
+      const tagsList = result.querySelector(".pagefind-ui__result-tags");
+      if (tagsList instanceof HTMLElement && tagsList.children.length === 0) {
+        tagsList.remove();
+      }
+    }
+  }
+
   function initSearch() {
     const pageFindSearch: HTMLElement | null =
       document.querySelector("#pagefind-search");
 
     if (!pageFindSearch) return;
+
+    searchResultsObserver?.disconnect();
+    searchResultsObserver = null;
 
     const params = new URLSearchParams(window.location.search);
 
@@ -73,6 +112,15 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
           },
         });
 
+        searchResultsObserver = new MutationObserver(() => {
+          decorateSearchResultDates(pageFindSearch);
+        });
+        searchResultsObserver.observe(pageFindSearch, {
+          childList: true,
+          subtree: true,
+        });
+        decorateSearchResultDates(pageFindSearch);
+
         // If search param exists (eg: search?q=astro), trigger search
         const query = params.get("q");
         if (query) {
@@ -114,6 +162,10 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
     if (pagefindSearch && pagefindSearch.querySelector("form")) return;
 
     initSearch();
+  });
+  document.addEventListener("astro:before-swap", () => {
+    searchResultsObserver?.disconnect();
+    searchResultsObserver = null;
   });
   initSearch();
 </script>
@@ -159,12 +211,34 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
       outline-style: dashed;
     }
 
+    .pagefind-ui__result-title-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: baseline;
+      width: 100%;
+    }
+
+    .pagefind-ui__result-date {
+      opacity: 0.8;
+      font-size: 0.9rem;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
     .pagefind-ui__result:last-of-type {
       border-bottom: 0;
     }
 
     .pagefind-ui__result-nested .pagefind-ui__result-link:before {
       font-family: system-ui;
+    }
+
+    @media (max-width: 40rem) {
+      .pagefind-ui__result-title-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
     }
   }
 </style>
