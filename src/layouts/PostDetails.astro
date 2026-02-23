@@ -1276,6 +1276,11 @@ const nextPost =
   }
 
   function initializePostPage() {
+    const article = document.getElementById("article");
+    if (!(article instanceof HTMLElement)) return;
+    if (article.dataset.postEnhancementsInitialized === "true") return;
+    article.dataset.postEnhancementsInitialized = "true";
+
     createProgressBar();
     updateScrollProgress();
     ensurePostEndMatterHeadings();
