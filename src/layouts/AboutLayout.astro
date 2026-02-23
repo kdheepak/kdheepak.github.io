@@ -12,7 +12,7 @@ type Props = MarkdownLayoutProps<{ title: string }>;
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={`${frontmatter.title} | ${SITE.title}`}>
+<Layout title={`${frontmatter.title}`}>
   <Header />
   <main id="main-content" class="app-layout pt-8">
     <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
