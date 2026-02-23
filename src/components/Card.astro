@@ -14,27 +14,31 @@ const { title, description, ...props } = data;
 ---
 
 <li class="my-6">
-  <a
-    href={getPath(id, filePath)}
-    class:list={[
-      "inline-block text-lg font-medium text-accent",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
-  >
-    <Heading
-      style={{
-        viewTransitionName: "heading" + slugifyStr(title.replaceAll(".", "-")),
-      }}
+  <div class="grid grid-cols-1 gap-y-1 sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-x-4">
+    <a
+      href={getPath(id, filePath)}
+      class:list={[
+        "min-w-0 text-lg font-medium text-accent",
+        "decoration-dashed underline-offset-4 hover:underline",
+        "focus-visible:no-underline focus-visible:underline-offset-0",
+      ]}
     >
-      {title}
-    </Heading>
-  </a>
-  <Datetime
-    {...props}
-    style={{
-      viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
-    }}
-  />
-  <p>{description}</p>
+      <Heading
+        class="m-0 min-w-0 leading-tight"
+        style={{
+          viewTransitionName: "heading" + slugifyStr(title.replaceAll(".", "-")),
+        }}
+      >
+        {title}
+      </Heading>
+    </a>
+    <Datetime
+      {...props}
+      class="shrink-0 sm:justify-start"
+      style={{
+        viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
+      }}
+    />
+    <p class="mt-1 sm:col-span-2">{description}</p>
+  </div>
 </li>
