@@ -977,7 +977,7 @@ m.panel()
 :::
 :::::
 
-### watch=True vs watch=False
+### `watch=True` vs `watch=False`
 
 Notice that the `@pn.depends` decorator is used to define the method
 `_get_dataframe` does not use the `watch=True` argument.
