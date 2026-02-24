@@ -319,10 +319,9 @@
         position: fixed;
         z-index: 30;
         top: 5.75rem;
-        left: clamp(
+        left: max(
           0.75rem,
-          calc((100vw - min(48rem, calc(100vw - 2rem))) / 2 - 15.5rem),
-          5.5rem
+          calc((100vw - min(48rem, calc(100vw - 2rem))) / 2 - 15rem)
         );
         width: min(14rem, calc(100vw - 2rem));
         box-sizing: border-box;
