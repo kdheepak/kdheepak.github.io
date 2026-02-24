@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { formatReadingStats, getReadingStats } from "./utils/readingStats";
 import { remarkInlineMark } from "./utils/remark-inline-mark.js";
+import { remarkPostToc } from "./utils/remark-post-toc.js";
 import { rehypePostEnhancements } from "./utils/rehype-post-enhancements.js";
 import {
   rehypeProtectCodeCitations,
@@ -18,6 +19,11 @@ import { slugifyAll, slugifyStr } from "./utils/slugify";
 
 const layoutSource = readFileSync(
   resolve(process.cwd(), "src/layouts/Layout.astro"),
+  "utf8"
+);
+
+const astroConfigSource = readFileSync(
+  resolve(process.cwd(), "astro.config.ts"),
   "utf8"
 );
 
@@ -37,6 +43,24 @@ const makePost = (tags: string[], draft = false) => ({
 const applyInlineMark = (tree: Record<string, unknown>) => {
   const transform = remarkInlineMark();
   transform(tree as never);
+};
+
+const applyRemarkPostToc = (
+  tree: Record<string, unknown>,
+  {
+    path = "/tmp/project/src/data/blog/example/index.md",
+    toc = true,
+  }: { path?: string; toc?: boolean } = {}
+) => {
+  const transform = remarkPostToc();
+  transform(tree as never, {
+    path,
+    data: {
+      astro: {
+        frontmatter: { toc },
+      },
+    },
+  } as never);
 };
 
 const applyProtect = (tree: Record<string, unknown>) => {
@@ -111,42 +135,32 @@ const findElements = (
   return results;
 };
 
-describe("Layout MathJax initialization", () => {
-  it("keeps startup typesetting disabled until explicit scheduling", () => {
-    expect(layoutSource).toMatch(/startup:\s*{\s*typeset:\s*false,/);
-    expect(layoutSource).toMatch(/chtml:\s*{\s*adaptiveCSS:\s*false,/);
-    expect(layoutSource).toContain(
-      "window.MathJax.startup?.promise || Promise.resolve()"
+describe("KaTeX integration", () => {
+  it("configures markdown math rendering through remark-math + rehype-katex", () => {
+    expect(astroConfigSource).toContain('import remarkMath from "remark-math";');
+    expect(astroConfigSource).toContain(
+      'import rehypeKatex from "rehype-katex";'
     );
-    expect(layoutSource).toContain("window.MathJax.typesetPromise(roots)");
-    expect(layoutSource).toContain('new CustomEvent("kd:mathjax-typeset")');
+    expect(astroConfigSource).toContain("remarkMath,");
+    expect(astroConfigSource).toContain(
+      "[rehypeKatex, { throwOnError: false, strict: false }],"
+    );
   });
 
-  it("schedules typesetting on first load and Astro page transitions", () => {
-    expect(layoutSource).toContain(
-      'document.addEventListener("astro:after-swap", scheduleTypeset);'
-    );
-    expect(layoutSource).toContain(
-      'document.addEventListener("astro:page-load", scheduleTypeset);'
-    );
-    expect(layoutSource).toContain(
-      'window.addEventListener("pageshow", scheduleTypeset);'
-    );
-    expect(layoutSource).toContain(
-      'document.addEventListener("DOMContentLoaded", scheduleTypeset, {'
-    );
-    expect(layoutSource).toContain("window.__kdMathJaxTypesetQueue");
-    expect(layoutSource).toContain("window.__kdMathJaxTypesetInFlight");
-    expect(layoutSource).toContain("MAX_RETRY_ATTEMPTS");
+  it("loads KaTeX styles in the layout and removes MathJax runtime scripts", () => {
+    expect(layoutSource).toContain('import "katex/dist/katex.min.css";');
+    expect(layoutSource).not.toContain("window.MathJax");
+    expect(layoutSource).not.toContain("tex-mml-chtml.js");
+    expect(layoutSource).not.toContain("enableMathJax");
   });
-});
 
-describe("PostDetails MathJax TOC updates", () => {
-  it("rebuilds TOC path when MathJax finishes late typesetting", () => {
-    expect(postDetailsSource).toContain(
-      'window.addEventListener("kd:mathjax-typeset", () => {'
-    );
-    expect(postDetailsSource).toContain("requestAnimationFrame(handleResize);");
+  it("does not rely on MathJax-only TOC resize events", () => {
+    expect(postDetailsSource).not.toContain("kd:mathjax-typeset");
+  });
+
+  it("syncs TOC link markup from rendered headings so heading math appears in TOC", () => {
+    expect(postDetailsSource).toContain("const getHeadingHtml = heading =>");
+    expect(postDetailsSource).toContain("link.innerHTML = headingHtml;");
   });
 });
 
@@ -252,6 +266,43 @@ describe("remarkInlineMark", () => {
         },
       ],
     });
+  });
+});
+
+describe("remarkPostToc", () => {
+  it("preserves inline math nodes inside generated TOC links", () => {
+    const tree: Record<string, unknown> = {
+      type: "root",
+      children: [
+        {
+          type: "heading",
+          depth: 2,
+          children: [
+            { type: "text", value: "Case 1: " },
+            { type: "inlineMath", value: "\\theta" },
+            { type: "text", value: " is zero" },
+          ],
+        },
+      ],
+    };
+
+    applyRemarkPostToc(tree);
+
+    const children = tree.children as Record<string, unknown>[];
+    const tocList = children[1] as Record<string, unknown>;
+    const tocLink = (
+      ((tocList.children as Record<string, unknown>[])[0].children as Record<
+        string,
+        unknown
+      >[])[0].children as Record<string, unknown>[]
+    )[0];
+
+    const linkChildren = tocLink.children as Record<string, unknown>[];
+    expect(
+      linkChildren.some(
+        node => node.type === "inlineMath" && node.value === "\\theta"
+      )
+    ).toBe(true);
   });
 });
 

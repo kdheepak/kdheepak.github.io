@@ -5,6 +5,7 @@ import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import SearchInitializer from "@/components/SearchInitializer.astro";
 import { SITE } from "@/config";
 import "@/styles/global.css";
+import "katex/dist/katex.min.css";
 
 type Props = {
   title?: string;
@@ -16,7 +17,6 @@ type Props = {
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
-  enableMathJax?: boolean;
 };
 
 const {
@@ -29,7 +29,6 @@ const {
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
-  enableMathJax = false,
 } = Astro.props;
 
 const socialImageURL = ogImage
@@ -51,147 +50,6 @@ const structuredData = {
     },
   ],
 };
-
-const mathJaxConfigScript = `
-window.MathJax = {
-  tex: {
-    inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
-    displayMath: [["$$", "$$"], ["\\\\[", "\\\\]"]],
-    processEscapes: true,
-    processEnvironments: true,
-  },
-  chtml: {
-    adaptiveCSS: false,
-  },
-  options: {
-    skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
-  },
-  startup: {
-    typeset: false,
-  },
-};
-`;
-
-const mathJaxTypesetScript = `
-(() => {
-  const MAX_RETRY_ATTEMPTS = 240;
-  const RETRY_INTERVAL_MS = 50;
-
-  const applyDisplayMathOverflow = () => {
-    document
-      .querySelectorAll('mjx-container[jax="CHTML"][display="true"]')
-      .forEach(container => {
-        container.style.display = "block";
-        container.style.maxWidth = "100%";
-        container.style.overflowX = "auto";
-        container.style.overflowY = "hidden";
-        const math = container.querySelector(":scope > mjx-math");
-        if (math) {
-          math.style.minWidth = "max-content";
-        }
-      });
-  };
-
-  const getTypesetRoots = () => {
-    const roots = [];
-    const article = document.getElementById("article");
-    if (article) {
-      roots.push(article);
-    } else {
-      roots.push(document.body);
-    }
-    return roots;
-  };
-
-  const notifyTypesetComplete = () => {
-    window.dispatchEvent(new CustomEvent("kd:mathjax-typeset"));
-  };
-
-  const enqueueTypesetMath = () => {
-    if (!window.MathJax || !window.MathJax.typesetPromise) {
-      return Promise.resolve(false);
-    }
-
-    if (!window.__kdMathJaxTypesetQueue) {
-      window.__kdMathJaxTypesetQueue = Promise.resolve(true);
-    }
-
-    const roots = getTypesetRoots();
-
-    window.__kdMathJaxTypesetQueue = window.__kdMathJaxTypesetQueue
-      .then(() => {
-        const startupPromise =
-          window.MathJax.startup?.promise || Promise.resolve();
-        return startupPromise
-          .then(
-            () =>
-              new Promise(resolve => {
-                  requestAnimationFrame(() => resolve());
-                })
-          )
-          .then(() => window.MathJax.typesetPromise(roots))
-          .then(() => {
-            applyDisplayMathOverflow();
-            notifyTypesetComplete();
-            return true;
-          })
-          .catch(() => false);
-      })
-      .catch(() => false);
-
-    return window.__kdMathJaxTypesetQueue;
-  };
-
-  const clearRetryTimer = () => {
-    if (!window.__kdMathJaxRetryTimer) return;
-    clearInterval(window.__kdMathJaxRetryTimer);
-    window.__kdMathJaxRetryTimer = null;
-  };
-
-  const scheduleTypeset = () => {
-    let attempts = 0;
-    clearRetryTimer();
-
-    const attemptTypeset = () => {
-      if (window.__kdMathJaxTypesetInFlight) return;
-
-      attempts += 1;
-      window.__kdMathJaxTypesetInFlight = true;
-
-      enqueueTypesetMath()
-        .then(success => {
-          if (success || attempts >= MAX_RETRY_ATTEMPTS) {
-            clearRetryTimer();
-          }
-        })
-        .finally(() => {
-          window.__kdMathJaxTypesetInFlight = false;
-        });
-    };
-
-    window.__kdMathJaxRetryTimer = setInterval(
-      attemptTypeset,
-      RETRY_INTERVAL_MS
-    );
-    attemptTypeset();
-  };
-
-  if (!window.__kdMathJaxHooked) {
-    document.addEventListener("astro:after-swap", scheduleTypeset);
-    document.addEventListener("astro:page-load", scheduleTypeset);
-    window.addEventListener("pageshow", scheduleTypeset);
-    window.__kdMathJaxHooked = true;
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", scheduleTypeset, {
-      once: true,
-    });
-  } else {
-    scheduleTypeset();
-  }
-})();
-`;
 ---
 
 <!doctype html>
@@ -297,19 +155,6 @@ const mathJaxTypesetScript = `
 
     <ClientRouter />
 
-    {
-      enableMathJax && (
-        <>
-          <script is:inline set:html={mathJaxConfigScript} />
-          <script
-            is:inline
-            defer
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-          />
-        </>
-      )
-    }
-
     <!-- Minimal inline script to prevent FOUC - sets theme immediately -->
     <script is:inline>
       (function () {
@@ -343,12 +188,6 @@ const mathJaxTypesetScript = `
   <body>
     <slot />
     <SearchInitializer />
-
-    {
-      enableMathJax && (
-        <script is:inline data-astro-rerun set:html={mathJaxTypesetScript} />
-      )
-    }
 
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>

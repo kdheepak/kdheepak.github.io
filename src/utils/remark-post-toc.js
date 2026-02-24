@@ -85,6 +85,8 @@ const createBaseSlug = value => {
   return normalized || "section";
 };
 
+const cloneInlineNode = node => structuredClone(node);
+
 const createUniqueSlugger = existingIds => {
   const usedIds = new Set(existingIds);
 
@@ -116,7 +118,10 @@ const createTocListItem = entry => ({
         {
           type: "link",
           url: `#${entry.id}`,
-          children: [{ type: "text", value: entry.text }],
+          children:
+            Array.isArray(entry.children) && entry.children.length > 0
+              ? entry.children.map(cloneInlineNode)
+              : [{ type: "text", value: entry.text }],
         },
       ],
     },
@@ -210,6 +215,9 @@ const collectTocEntries = (tree, createSlug) => {
     entries.push({
       id,
       text,
+      children: Array.isArray(node.children)
+        ? node.children.map(cloneInlineNode)
+        : [],
       depth: node.depth,
     });
   });

@@ -7,9 +7,11 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import rehypeCitation from "rehype-citation";
+import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import rehypeMermaid from "rehype-mermaid";
 import remarkDirective from "remark-directive";
+import remarkMath from "remark-math";
 import {
     transformerNotationDiff,
     transformerNotationHighlight,
@@ -190,6 +192,7 @@ export default defineConfig({
 
     markdown: {
         remarkPlugins: [
+            remarkMath,
             remarkNormalizeCodeFences,
             remarkMermaidFences,
             remarkDirective,
@@ -201,6 +204,7 @@ export default defineConfig({
         rehypePlugins: [
             rehypeSvgbob,
             rehypeRaw,
+            [rehypeKatex, { throwOnError: false, strict: false }],
             rehypeProtectCodeCitations,
             [
                 rehypeCitation,

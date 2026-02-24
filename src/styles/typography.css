@@ -199,17 +199,18 @@
       @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
     }
 
-    /* Keep long display equations inside the content width via local scrolling. */
-    mjx-container[jax="CHTML"][display="true"] {
-      display: block !important;
-      max-width: 100% !important;
-      overflow-x: auto !important;
-      overflow-y: hidden !important;
+    /* Keep long KaTeX display equations inside the content width via local scrolling. */
+    .katex-display {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
     }
 
-    mjx-container[jax="CHTML"][display="true"] > mjx-math {
+    .katex-display > .katex {
       min-width: max-content;
+      white-space: nowrap;
     }
 
     /* Notebook input code blocks use Fira Code for source text. */

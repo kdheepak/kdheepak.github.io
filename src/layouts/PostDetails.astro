@@ -36,7 +36,6 @@ const {
   hideEditPost,
   toc = true,
   notebookPath,
-  mathjax = true,
 } = post.data;
 
 const { Content } = await render(post);
@@ -90,7 +89,6 @@ const layoutProps = {
   canonicalURL,
   ogImage,
   scrollSmooth: true,
-  enableMathJax: mathjax,
 };
 
 /* ========== Prev/Next Posts ========== */
@@ -305,6 +303,16 @@ const nextPost =
 
     if (!(placeholder instanceof HTMLElement)) return;
 
+    const getHeadingHtml = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.innerHTML.trim();
+    };
+
     const getHeadingLabel = heading => {
       const clone = heading.cloneNode(true);
       if (!(clone instanceof HTMLElement)) {
@@ -330,7 +338,12 @@ const nextPost =
       const item = document.createElement("li");
       const link = document.createElement("a");
       link.href = headingHash;
-      link.textContent = label;
+      const headingHtml = getHeadingHtml(heading);
+      if (headingHtml) {
+        link.innerHTML = headingHtml;
+      } else {
+        link.textContent = label;
+      }
       item.appendChild(link);
       tocList.appendChild(item);
     };
@@ -373,6 +386,11 @@ const nextPost =
 
         const heading = document.getElementById(headingId);
         if (!heading || !article.contains(heading)) return null;
+
+        const headingHtml = getHeadingHtml(heading);
+        if (headingHtml && link.innerHTML.trim() !== headingHtml) {
+          link.innerHTML = headingHtml;
+        }
 
         link.classList.add("toc-link");
 
@@ -665,9 +683,6 @@ const nextPost =
 
     window.addEventListener("scroll", updateTocOnScroll, { passive: true });
     window.addEventListener("resize", handleResize);
-    window.addEventListener("kd:mathjax-typeset", () => {
-      requestAnimationFrame(handleResize);
-    });
     floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
     media.addEventListener("change", handleResize);
 
