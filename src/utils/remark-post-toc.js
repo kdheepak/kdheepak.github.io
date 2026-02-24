@@ -133,20 +133,32 @@ const createEmptyListNode = () => ({
 const buildTocList = entries => {
   if (!entries.length) return null;
 
-  const rootList = createEmptyListNode();
-  const listStack = [rootList];
-  let currentDepth = 2;
-
-  for (const entry of entries) {
+  const parsedDepths = entries
+    .map(entry => Number.parseInt(String(entry.depth), 10))
+    .filter(Number.isFinite)
+    .map(depth => Math.max(2, Math.min(6, depth)));
+  const baseDepth = parsedDepths.length ? Math.min(...parsedDepths) : 2;
+  const normalizedDepths = entries.map(entry => {
     let depth = Number.parseInt(String(entry.depth), 10);
     if (!Number.isFinite(depth)) depth = 2;
     depth = Math.max(2, Math.min(6, depth));
+    return Math.max(2, Math.min(6, depth - baseDepth + 2));
+  });
+
+  const rootList = createEmptyListNode();
+  const listStack = [rootList];
+  let currentDepth = normalizedDepths[0] ?? 2;
+
+  for (let index = 0; index < entries.length; index += 1) {
+    const entry = entries[index];
+    const depth = normalizedDepths[index];
 
     while (depth > currentDepth) {
       const parentList = listStack[listStack.length - 1];
       const parentItem = parentList.children[parentList.children.length - 1];
       if (!parentItem || parentItem.type !== "listItem") {
-        depth = currentDepth;
+        // No parent exists yet; keep this item at root and reset depth baseline.
+        currentDepth = depth;
         break;
       }
 
@@ -159,6 +171,10 @@ const buildTocList = entries => {
     while (depth < currentDepth && listStack.length > 1) {
       listStack.pop();
       currentDepth -= 1;
+    }
+
+    if (depth < currentDepth && listStack.length === 1) {
+      currentDepth = depth;
     }
 
     listStack[listStack.length - 1].children.push(createTocListItem(entry));
