@@ -28,7 +28,8 @@ const months = [
 <Layout title="Blog">
   <Header />
   <Main pageTitle="Blog">
-    {
+    <div class="blog-timeline">
+      {
       Object.entries(
         getPostsByGroupCondition(posts, post =>
           post.data.pubDatetime.getFullYear()
@@ -36,9 +37,14 @@ const months = [
       )
         .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
         .map(([year, yearGroup]) => (
-          <div>
-            <span class="text-2xl font-bold">{year}</span>
-            <sup class="text-sm">{yearGroup.length}</sup>
+          <section class="timeline-year-group">
+            <div class="timeline-year-header">
+              <span class="timeline-year-label">
+                <span class="text-2xl font-bold">{year}</span>
+                <sup class="text-sm">{yearGroup.length}</sup>
+              </span>
+              <span class="timeline-year-marker" aria-hidden="true"></span>
+            </div>
             {Object.entries(
               getPostsByGroupCondition(
                 yearGroup,
@@ -47,13 +53,14 @@ const months = [
             )
               .sort(([monthA], [monthB]) => Number(monthB) - Number(monthA))
               .map(([month, monthGroup]) => (
-                <div class="flex flex-col sm:flex-row">
-                  <div class="mt-6 min-w-36 text-lg sm:my-6">
+                <div class="timeline-month-row flex flex-col sm:flex-row">
+                  <div class="mt-6 text-lg sm:my-6">
                     <span class="font-bold">{months[Number(month) - 1]}</span>
                     {monthGroup.length > 1 && (
                       <sup class="text-xs">{monthGroup.length}</sup>
                     )}
                   </div>
+                  <span class="timeline-month-marker" aria-hidden="true"></span>
                   <ul class="min-w-0 flex-1">
                     {monthGroup
                       .sort(
@@ -76,9 +83,86 @@ const months = [
                   </ul>
                 </div>
               ))}
-          </div>
+          </section>
         ))
-    }
+      }
+    </div>
   </Main>
   <Footer />
 </Layout>
+
+<style>
+  .timeline-year-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+
+  .timeline-year-marker,
+  .timeline-month-marker {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .timeline-year-group {
+      --timeline-label-col: 7.25rem;
+      --timeline-marker-col: 1.35rem;
+      --timeline-gap: 0.55rem;
+      position: relative;
+    }
+
+    .timeline-year-group::after {
+      content: "";
+      position: absolute;
+      left: calc(
+        var(--timeline-label-col) + var(--timeline-gap) +
+          (var(--timeline-marker-col) / 2)
+      );
+      top: 2.15rem;
+      bottom: 0.6rem;
+      transform: translateX(-50%);
+      border-left: 2px dashed var(--border);
+      pointer-events: none;
+    }
+
+    .timeline-year-header {
+      display: grid;
+      grid-template-columns: var(--timeline-label-col) var(--timeline-marker-col);
+      align-items: center;
+      column-gap: var(--timeline-gap);
+    }
+
+    .timeline-year-marker {
+      display: block;
+      z-index: 1;
+      justify-self: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 0.24rem solid var(--accent);
+      border-radius: 999px;
+      background: var(--background);
+    }
+
+    .timeline-month-row {
+      display: grid;
+      grid-template-columns: var(--timeline-label-col) var(--timeline-marker-col) minmax(
+          0,
+          1fr
+        );
+      align-items: start;
+      column-gap: var(--timeline-gap);
+    }
+
+    .timeline-month-marker {
+      display: block;
+      z-index: 1;
+      justify-self: center;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: var(--foreground);
+      opacity: 0.72;
+      margin-top: 1.95rem;
+    }
+  }
+</style>

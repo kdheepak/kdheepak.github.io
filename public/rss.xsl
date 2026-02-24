@@ -75,6 +75,12 @@
             margin-top: 1.4rem;
           }
 
+          .year-header {
+            display: flex;
+            align-items: baseline;
+            gap: 0.35rem;
+          }
+
           .year {
             font-size: 1.5rem;
             font-weight: 700;
@@ -90,6 +96,11 @@
           .month-row {
             display: flex;
             flex-direction: column;
+          }
+
+          .timeline-year-marker,
+          .timeline-month-marker {
+            display: none;
           }
 
           .month-heading {
@@ -142,13 +153,69 @@
           }
 
           @media (min-width: 640px) {
+            .year-group {
+              --timeline-label-col: 7.25rem;
+              --timeline-marker-col: 1.35rem;
+              --timeline-gap: 0.55rem;
+              position: relative;
+            }
+
+            .year-group::after {
+              content: "";
+              position: absolute;
+              left: calc(
+                var(--timeline-label-col) + var(--timeline-gap) +
+                  (var(--timeline-marker-col) / 2)
+              );
+              top: 2.1rem;
+              bottom: 0.55rem;
+              transform: translateX(-50%);
+              border-left: 2px dashed var(--border);
+              pointer-events: none;
+            }
+
+            .year-header {
+              display: grid;
+              grid-template-columns: var(--timeline-label-col) var(--timeline-marker-col);
+              align-items: center;
+              column-gap: var(--timeline-gap);
+            }
+
+            .timeline-year-marker {
+              display: block;
+              z-index: 1;
+              justify-self: center;
+              width: 1.25rem;
+              height: 1.25rem;
+              border: 0.24rem solid var(--accent);
+              border-radius: 999px;
+              background: var(--background);
+            }
+
             .month-row {
-              flex-direction: row;
+              display: grid;
+              grid-template-columns: var(--timeline-label-col) var(--timeline-marker-col) minmax(
+                  0,
+                  1fr
+                );
+              align-items: start;
+              column-gap: var(--timeline-gap);
             }
 
             .month-heading {
-              min-width: 9rem;
               margin: 1.5rem 0;
+            }
+
+            .timeline-month-marker {
+              display: block;
+              z-index: 1;
+              justify-self: center;
+              width: 0.55rem;
+              height: 0.55rem;
+              border-radius: 999px;
+              background: var(--foreground);
+              opacity: 0.72;
+              margin-top: 2.05rem;
             }
           }
         </style>
@@ -176,7 +243,10 @@
                 <xsl:variable name="year" select="substring(pubDate, 13, 4)"/>
 
                 <section class="year-group">
-                  <span class="year"><xsl:value-of select="$year"/></span>
+                  <div class="year-header">
+                    <span class="year"><xsl:value-of select="$year"/></span>
+                    <span class="timeline-year-marker"></span>
+                  </div>
 
                   <xsl:for-each
                     select="key('itemsByYear', $year)[generate-id() = generate-id(key('itemsByYearMonth', concat($year, '-', substring(pubDate, 9, 3)))[1])]"
@@ -208,6 +278,7 @@
                           </xsl:choose>
                         </span>
                       </div>
+                      <span class="timeline-month-marker"></span>
 
                       <ul class="post-list">
                         <xsl:for-each select="key('itemsByYearMonth', $monthKey)">

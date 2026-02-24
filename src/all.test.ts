@@ -47,6 +47,16 @@ const postCitationSource = readFileSync(
   "utf8"
 );
 
+const blogIndexSource = readFileSync(
+  resolve(process.cwd(), "src/pages/blog/index.astro"),
+  "utf8"
+);
+
+const rssStylesheetSource = readFileSync(
+  resolve(process.cwd(), "public/rss.xsl"),
+  "utf8"
+);
+
 const makePost = (tags: string[], draft = false) => ({
   data: {
     draft,
@@ -235,6 +245,24 @@ describe("Post citation", () => {
     expect(postCitationSource).toContain(
       'class="mt-1 block break-all text-accent decoration-dashed underline-offset-4"'
     );
+  });
+});
+
+describe("Blog timeline graphics", () => {
+  it("adds timeline marker elements to /blog without replacing card-based content", () => {
+    expect(blogIndexSource).toContain('import Card from "@/components/Card.astro";');
+    expect(blogIndexSource).toContain('class="timeline-year-header"');
+    expect(blogIndexSource).toContain('class="timeline-year-marker"');
+    expect(blogIndexSource).toContain('class="timeline-month-row');
+    expect(blogIndexSource).toContain('class="timeline-month-marker"');
+    expect(blogIndexSource).toContain(".timeline-year-group::after");
+  });
+
+  it("adds matching timeline marker elements to rss.xsl", () => {
+    expect(rssStylesheetSource).toContain('class="year-header"');
+    expect(rssStylesheetSource).toContain('class="timeline-year-marker"');
+    expect(rssStylesheetSource).toContain('class="timeline-month-marker"');
+    expect(rssStylesheetSource).toContain(".year-group::after");
   });
 });
 
