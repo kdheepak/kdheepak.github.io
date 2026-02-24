@@ -52,7 +52,7 @@ const blog = defineCollection({
         canonicalURL: z.string().optional(),
         hideEditPost: z.boolean().optional(),
         toc: z.boolean().optional().default(true),
-        mathjax: z.boolean().optional(),
+        mathjax: z.boolean().optional().default(true),
         timezone: z.string().optional(),
       })
     ),
