@@ -10,6 +10,7 @@ import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import ReadingStats from "@/components/ReadingStats.astro";
+import PostCitation from "@/components/PostCitation.astro";
 import { Icon } from "astro-icon/components";
 import { getPath } from "@/utils/getPath";
 import { getLatestCommitHash } from "@/utils/getLatestCommitHash";
@@ -79,6 +80,9 @@ const pagefindDate = new Intl.DateTimeFormat("en-GB", {
   year: "numeric",
   timeZone: timezone || SITE.timezone,
 }).format(new Date(pubDatetime));
+const postUrl = canonicalURL
+  ? new URL(canonicalURL, SITE.website).href
+  : new URL(getPath(post.id, post.filePath), SITE.website).href;
 
 const layoutProps = {
   title: `${title}`,
@@ -163,7 +167,18 @@ const nextPost =
       {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
     </ul>
 
-    <BackToTopButton />
+    <PostCitation
+      {author}
+      {title}
+      {pubDatetime}
+      url={postUrl}
+      slug={post.id}
+      timeZone={timezone || SITE.timezone}
+    />
+
+    <div class="mt-10">
+      <BackToTopButton />
+    </div>
 
     <ShareLinks />
 

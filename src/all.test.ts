@@ -1,6 +1,11 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
+import {
+  buildBibtexCitation,
+  buildHumanCitation,
+  createBibtexKey,
+} from "./utils/citation";
 import { formatReadingStats, getReadingStats } from "./utils/readingStats";
 import { remarkInlineMark } from "./utils/remark-inline-mark.js";
 import { remarkPostToc } from "./utils/remark-post-toc.js";
@@ -34,6 +39,11 @@ const postDetailsSource = readFileSync(
 
 const footerSource = readFileSync(
   resolve(process.cwd(), "src/components/Footer.astro"),
+  "utf8"
+);
+
+const postCitationSource = readFileSync(
+  resolve(process.cwd(), "src/components/PostCitation.astro"),
   "utf8"
 );
 
@@ -197,6 +207,74 @@ describe("Footer timestamp", () => {
     expect(footerSource).toContain("href={buildTreeHref}");
     expect(footerSource).toContain("&#169; {currentYear}");
     expect(footerSource).not.toContain("latestCommitHref");
+  });
+});
+
+describe("Post citation", () => {
+  it("renders citation metadata in post details", () => {
+    expect(postDetailsSource).toContain(
+      'import PostCitation from "@/components/PostCitation.astro";'
+    );
+    expect(postDetailsSource).toContain("<PostCitation");
+    expect(postDetailsSource).toContain("url={postUrl}");
+    expect(postDetailsSource).toContain('<div class="mt-10">');
+  });
+
+  it("renders a plain BibTeX block without copy controls", () => {
+    expect(postCitationSource).toContain('id="citation"');
+    expect(postCitationSource).not.toContain("BibTeX citation:");
+    expect(postCitationSource).not.toContain("data-copy-bibtex");
+    expect(postCitationSource).not.toContain("Copy BibTeX");
+  });
+});
+
+describe("citation utilities", () => {
+  it("builds a stable BibTeX key from author, year, and slug", () => {
+    const key = createBibtexKey(
+      "Dheepak Krishnamurthy",
+      new Date("2015-04-30T01:00:00.000Z"),
+      "active-reactive-and-apparent-power",
+      "America/Chicago"
+    );
+
+    expect(key).toBe("krishnamurthy2015activereactiveandapparentpower");
+  });
+
+  it("builds BibTeX text with expected fields", () => {
+    const bibtex = buildBibtexCitation({
+      author: "Nora Jones",
+      title: "Summarizing Output for {Reproducible} {Documents}",
+      pubDatetime: new Date("2018-05-04T12:00:00.000Z"),
+      url: "https://www.charlesteague.com/test-document.html",
+      slug: "test-document",
+      lang: "en",
+      timeZone: "UTC",
+    });
+
+    expect(bibtex).toContain("@online{jones2018testdocument,");
+    expect(bibtex).toContain("author = {Nora Jones}");
+    expect(bibtex).toContain(
+      "title = {Summarizing Output for \\{Reproducible\\} \\{Documents\\}}"
+    );
+    expect(bibtex).toContain("date = {2018-05-04}");
+    expect(bibtex).toContain(
+      "url = {https://www.charlesteague.com/test-document.html}"
+    );
+  });
+
+  it("builds human-readable citation text", () => {
+    const citation = buildHumanCitation({
+      author: "Nora Jones",
+      title: "Summarizing Output for Reproducible Documents",
+      pubDatetime: new Date("2018-05-04T12:00:00.000Z"),
+      url: "https://www.charlesteague.com/test-document.html",
+      lang: "en",
+      timeZone: "UTC",
+    });
+
+    expect(citation).toBe(
+      'Nora Jones. 2018. "Summarizing Output for Reproducible Documents." May 4, 2018. https://www.charlesteague.com/test-document.html.'
+    );
   });
 });
 
