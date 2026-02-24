@@ -665,6 +665,9 @@ const nextPost =
 
     window.addEventListener("scroll", updateTocOnScroll, { passive: true });
     window.addEventListener("resize", handleResize);
+    window.addEventListener("kd:mathjax-typeset", () => {
+      requestAnimationFrame(handleResize);
+    });
     floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
     media.addEventListener("change", handleResize);
 

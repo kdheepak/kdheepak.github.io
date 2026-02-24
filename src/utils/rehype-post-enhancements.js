@@ -4,6 +4,13 @@ const BLOG_PATH_FRAGMENT = "/src/data/blog/";
 const TOC_HEADING_ID = "table-of-contents";
 const FOOTNOTES_HEADING_TEXT = "Footnotes";
 const REFERENCES_HEADING_TEXT = "References";
+const URL_PATTERN = /\b(?:https?:\/\/|www\.)[^\s<>"'`]+/gi;
+const URL_LINKIFY_SKIP_TAGS = new Set(["a", "code", "pre", "script", "style"]);
+const BRACKET_PAIRS = [
+  ["(", ")"],
+  ["[", "]"],
+  ["{", "}"],
+];
 const HEADING_LINK_CLASSES = [
   "heading-link",
   "ms-2",
@@ -19,6 +26,9 @@ const isElementNode = node => node?.type === "element";
 const isBlogPostFile = filePath =>
   typeof filePath === "string" &&
   filePath.replaceAll("\\", "/").includes(BLOG_PATH_FRAGMENT);
+
+const isListNode = node =>
+  isElementNode(node) && ["ul", "ol"].includes(node.tagName);
 
 const toClassList = classNameValue => {
   if (Array.isArray(classNameValue)) {
@@ -72,6 +82,11 @@ const getNodeText = node => {
 
 const getElementId = node =>
   typeof node?.properties?.id === "string" ? node.properties.id : "";
+
+const createTextNode = value => ({
+  type: "text",
+  value,
+});
 
 const collectUsedIds = tree => {
   const usedIds = new Set();
@@ -173,6 +188,13 @@ const getPreviousElementSibling = (siblings, currentIndex) => {
   return null;
 };
 
+const getNextElementSibling = (siblings, currentIndex) => {
+  for (let index = currentIndex + 1; index < siblings.length; index += 1) {
+    if (isElementNode(siblings[index])) return siblings[index];
+  }
+  return null;
+};
+
 const normalizeHeadingText = node => getNodeText(node).trim().toLowerCase();
 
 const ensureFootnotesHeading = (section, usedIds) => {
@@ -223,6 +245,320 @@ const ensureReferencesHeadings = (node, usedIds) => {
   }
 };
 
+const countToken = (value, token) => value.split(token).length - 1;
+
+const trimTrailingPunctuation = rawUrl => {
+  let url = rawUrl;
+  let trailingText = "";
+
+  while (/[.,;:!?]/.test(url.at(-1) ?? "")) {
+    trailingText = `${url.at(-1)}${trailingText}`;
+    url = url.slice(0, -1);
+  }
+
+  for (const [opening, closing] of BRACKET_PAIRS) {
+    while (
+      url.endsWith(closing) &&
+      countToken(url, opening) < countToken(url, closing)
+    ) {
+      trailingText = `${closing}${trailingText}`;
+      url = url.slice(0, -1);
+    }
+  }
+
+  return { url, trailingText };
+};
+
+const createExternalLinkNode = urlText => ({
+  type: "element",
+  tagName: "a",
+  properties: {
+    href: urlText.toLowerCase().startsWith("www.")
+      ? `https://${urlText}`
+      : urlText,
+    target: "_blank",
+    rel: ["noopener", "noreferrer"],
+    dataExternalLink: "",
+  },
+  children: [createTextNode(urlText)],
+});
+
+const splitTextNodeByUrls = value => {
+  if (typeof value !== "string" || value.length === 0) return null;
+
+  URL_PATTERN.lastIndex = 0;
+  if (!URL_PATTERN.test(value)) return null;
+
+  URL_PATTERN.lastIndex = 0;
+  const nodes = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = URL_PATTERN.exec(value)) !== null) {
+    const matchStart = match.index;
+    const matchedUrl = match[0];
+
+    if (matchStart > lastIndex) {
+      nodes.push(createTextNode(value.slice(lastIndex, matchStart)));
+    }
+
+    const { url, trailingText } = trimTrailingPunctuation(matchedUrl);
+    if (url.length > 0) {
+      nodes.push(createExternalLinkNode(url));
+    } else {
+      nodes.push(createTextNode(matchedUrl));
+    }
+
+    if (trailingText.length > 0) {
+      nodes.push(createTextNode(trailingText));
+    }
+
+    lastIndex = matchStart + matchedUrl.length;
+  }
+
+  if (lastIndex < value.length) {
+    nodes.push(createTextNode(value.slice(lastIndex)));
+  }
+
+  return nodes;
+};
+
+const linkifyUrlsInNode = node => {
+  if (!isElementNode(node) || !Array.isArray(node.children)) return;
+
+  const nextChildren = [];
+  for (const child of node.children) {
+    if (child?.type === "text") {
+      const replacementNodes = splitTextNodeByUrls(child.value);
+      if (replacementNodes) {
+        nextChildren.push(...replacementNodes);
+      } else {
+        nextChildren.push(child);
+      }
+      continue;
+    }
+
+    if (isElementNode(child) && !URL_LINKIFY_SKIP_TAGS.has(child.tagName)) {
+      linkifyUrlsInNode(child);
+    }
+
+    nextChildren.push(child);
+  }
+
+  node.children = nextChildren;
+};
+
+const linkifyReferenceUrls = tree => {
+  visit(tree, "element", node => {
+    if (!isReferencesSection(node)) return;
+
+    const inlineContainers = [];
+    visit(node, "element", child => {
+      if (child !== node && hasClass(child, "csl-right-inline")) {
+        inlineContainers.push(child);
+      }
+    });
+
+    if (inlineContainers.length > 0) {
+      for (const container of inlineContainers) {
+        linkifyUrlsInNode(container);
+      }
+      return;
+    }
+
+    linkifyUrlsInNode(node);
+  });
+};
+
+const getHeadingLabel = heading => {
+  if (!isHeadingNode(heading) || !Array.isArray(heading.children)) return "";
+
+  return heading.children
+    .filter(
+      child =>
+        !(
+          isElementNode(child) &&
+          child.tagName === "a" &&
+          hasClass(child, "heading-link")
+        )
+    )
+    .map(getNodeText)
+    .join("")
+    .trim();
+};
+
+const getHeadingLinkHashes = tocList => {
+  const headingLinkHashes = new Set();
+  visit(tocList, "element", node => {
+    if (node.tagName !== "a") return;
+    const href =
+      typeof node?.properties?.href === "string" ? node.properties.href : "";
+    if (href.startsWith("#")) {
+      headingLinkHashes.add(href);
+    }
+  });
+  return headingLinkHashes;
+};
+
+const getHeadingLinkLabels = tocList => {
+  const headingLinkLabels = new Set();
+  visit(tocList, "element", node => {
+    if (node.tagName !== "a") return;
+    const label = getNodeText(node).trim().toLowerCase();
+    if (label) {
+      headingLinkLabels.add(label);
+    }
+  });
+  return headingLinkLabels;
+};
+
+const appendTocHeadingLink = (
+  tocList,
+  heading,
+  headingLinkHashes,
+  headingLinkLabels
+) => {
+  if (!isListNode(tocList) || !isHeadingNode(heading)) return;
+
+  const headingId = getElementId(heading);
+  if (!headingId) return;
+
+  const headingHash = `#${headingId}`;
+  const label = getHeadingLabel(heading);
+  if (!label) return;
+  const normalizedLabel = label.toLowerCase();
+
+  if (
+    headingLinkHashes.has(headingHash) ||
+    headingLinkLabels.has(normalizedLabel)
+  ) {
+    return;
+  }
+
+  if (!Array.isArray(tocList.children)) {
+    tocList.children = [];
+  }
+
+  tocList.children.push({
+    type: "element",
+    tagName: "li",
+    properties: {},
+    children: [
+      {
+        type: "element",
+        tagName: "a",
+        properties: { href: headingHash },
+        children: [createTextNode(label)],
+      },
+    ],
+  });
+
+  headingLinkHashes.add(headingHash);
+  headingLinkLabels.add(normalizedLabel);
+};
+
+const findTocList = node => {
+  if (!node || !Array.isArray(node.children)) return null;
+
+  for (let index = 0; index < node.children.length; index += 1) {
+    const child = node.children[index];
+
+    if (
+      isHeadingNode(child) &&
+      getElementId(child) === TOC_HEADING_ID
+    ) {
+      const nextElement = getNextElementSibling(node.children, index);
+      if (isListNode(nextElement)) {
+        return nextElement;
+      }
+    }
+
+    const nestedResult = findTocList(child);
+    if (nestedResult) {
+      return nestedResult;
+    }
+  }
+
+  return null;
+};
+
+const findFootnotesHeading = tree => {
+  let footnotesHeading = null;
+
+  visit(tree, "element", node => {
+    if (footnotesHeading || !isFootnotesSection(node)) return;
+    if (!Array.isArray(node.children)) return;
+
+    const heading = node.children.find(isHeadingNode);
+    if (isHeadingNode(heading)) {
+      footnotesHeading = heading;
+    }
+  });
+
+  return footnotesHeading;
+};
+
+const findReferencesHeading = node => {
+  if (!node || !Array.isArray(node.children)) return null;
+
+  for (let index = 0; index < node.children.length; index += 1) {
+    const child = node.children[index];
+    if (!isElementNode(child)) continue;
+
+    if (isReferencesSection(child)) {
+      const previousElement = getPreviousElementSibling(node.children, index);
+      if (
+        isHeadingNode(previousElement) &&
+        normalizeHeadingText(previousElement) === "references"
+      ) {
+        return previousElement;
+      }
+    }
+
+    const nestedResult = findReferencesHeading(child);
+    if (nestedResult) {
+      return nestedResult;
+    }
+  }
+
+  return null;
+};
+
+const ensureReferencesAndFootnotesInToc = tree => {
+  const tocList = findTocList(tree);
+  if (!tocList) return;
+
+  const existingHashesInTree = new Set();
+  visit(tree, "element", node => {
+    if (node.tagName !== "a") return;
+    const href =
+      typeof node?.properties?.href === "string" ? node.properties.href : "";
+    if (href.startsWith("#")) {
+      existingHashesInTree.add(href);
+    }
+  });
+
+  const headingLinkHashes = getHeadingLinkHashes(tocList);
+  const headingLinkLabels = getHeadingLinkLabels(tocList);
+  if (!existingHashesInTree.has("#footnotes")) {
+    appendTocHeadingLink(
+      tocList,
+      findFootnotesHeading(tree),
+      headingLinkHashes,
+      headingLinkLabels
+    );
+  }
+
+  if (!existingHashesInTree.has("#references")) {
+    appendTocHeadingLink(
+      tocList,
+      findReferencesHeading(tree),
+      headingLinkHashes,
+      headingLinkLabels
+    );
+  }
+};
+
 const addHeadingLinks = tree => {
   visit(tree, "element", node => {
     if (!isHeadingNode(node)) return;
@@ -250,6 +586,8 @@ export function rehypePostEnhancements() {
     });
 
     ensureReferencesHeadings(tree, usedIds);
+    linkifyReferenceUrls(tree);
+    ensureReferencesAndFootnotesInToc(tree);
     addHeadingLinks(tree);
   };
 }

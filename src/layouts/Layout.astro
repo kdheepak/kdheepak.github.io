@@ -71,6 +71,9 @@ window.MathJax = {
 
 const mathJaxTypesetScript = `
 (() => {
+  const MAX_RETRY_ATTEMPTS = 240;
+  const RETRY_INTERVAL_MS = 50;
+
   const applyDisplayMathOverflow = () => {
     document
       .querySelectorAll('mjx-container[jax="CHTML"][display="true"]')
@@ -86,13 +89,7 @@ const mathJaxTypesetScript = `
       });
   };
 
-  const tryTypesetMath = () => {
-    if (!window.MathJax || !window.MathJax.typesetPromise) return false;
-
-    if (!window.__kdMathJaxTypesetQueue) {
-      window.__kdMathJaxTypesetQueue = Promise.resolve();
-    }
-
+  const getTypesetRoots = () => {
     const roots = [];
     const article = document.getElementById("article");
     if (article) {
@@ -100,6 +97,23 @@ const mathJaxTypesetScript = `
     } else {
       roots.push(document.body);
     }
+    return roots;
+  };
+
+  const notifyTypesetComplete = () => {
+    window.dispatchEvent(new CustomEvent("kd:mathjax-typeset"));
+  };
+
+  const enqueueTypesetMath = () => {
+    if (!window.MathJax || !window.MathJax.typesetPromise) {
+      return Promise.resolve(false);
+    }
+
+    if (!window.__kdMathJaxTypesetQueue) {
+      window.__kdMathJaxTypesetQueue = Promise.resolve(true);
+    }
+
+    const roots = getTypesetRoots();
 
     window.__kdMathJaxTypesetQueue = window.__kdMathJaxTypesetQueue
       .then(() => {
@@ -109,33 +123,54 @@ const mathJaxTypesetScript = `
           .then(
             () =>
               new Promise(resolve => {
-                requestAnimationFrame(() => resolve());
-              })
+                  requestAnimationFrame(() => resolve());
+                })
           )
           .then(() => window.MathJax.typesetPromise(roots))
-          .then(() => applyDisplayMathOverflow());
+          .then(() => {
+            applyDisplayMathOverflow();
+            notifyTypesetComplete();
+            return true;
+          })
+          .catch(() => false);
       })
-      .catch(() => {});
+      .catch(() => false);
 
-    return true;
+    return window.__kdMathJaxTypesetQueue;
+  };
+
+  const clearRetryTimer = () => {
+    if (!window.__kdMathJaxRetryTimer) return;
+    clearInterval(window.__kdMathJaxRetryTimer);
+    window.__kdMathJaxRetryTimer = null;
   };
 
   const scheduleTypeset = () => {
-    if (window.__kdMathJaxRetryTimer) {
-      clearInterval(window.__kdMathJaxRetryTimer);
-      window.__kdMathJaxRetryTimer = null;
-    }
-
-    if (tryTypesetMath()) return;
-
     let attempts = 0;
-    window.__kdMathJaxRetryTimer = setInterval(() => {
+    clearRetryTimer();
+
+    const attemptTypeset = () => {
+      if (window.__kdMathJaxTypesetInFlight) return;
+
       attempts += 1;
-      if (tryTypesetMath() || attempts >= 120) {
-        clearInterval(window.__kdMathJaxRetryTimer);
-        window.__kdMathJaxRetryTimer = null;
-      }
-    }, 50);
+      window.__kdMathJaxTypesetInFlight = true;
+
+      enqueueTypesetMath()
+        .then(success => {
+          if (success || attempts >= MAX_RETRY_ATTEMPTS) {
+            clearRetryTimer();
+          }
+        })
+        .finally(() => {
+          window.__kdMathJaxTypesetInFlight = false;
+        });
+    };
+
+    window.__kdMathJaxRetryTimer = setInterval(
+      attemptTypeset,
+      RETRY_INTERVAL_MS
+    );
+    attemptTypeset();
   };
 
   if (!window.__kdMathJaxHooked) {
