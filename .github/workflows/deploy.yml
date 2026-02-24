@@ -50,6 +50,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./dist
           force_orphan: true
+          cname: kdheepak.com
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
