@@ -96,9 +96,9 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       data-build-local-time
       data-build-iso={buildIsoString}
       datetime={buildIsoString}
-      title={`Built at ${buildIsoString}`}
+      title={buildIsoString}
     >
-      Built {buildTimeFallbackLabel} UTC
+      {buildTimeFallbackLabel} UTC
     </time>
     <div class="sm:justify-self-end">
       <Socials />
@@ -127,8 +127,8 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
         timeStyle: "short",
       }).format(date);
 
-      element.textContent = `Built ${localTimeLabel}`;
-      element.title = `Built at ${date.toString()}`;
+      element.textContent = localTimeLabel;
+      element.title = date.toString();
     }
   };
 
