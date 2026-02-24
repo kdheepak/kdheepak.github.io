@@ -37,10 +37,12 @@ You can view this post in the following formats, thanks to Pandoc!
 
 <!-- END SLIDES -->
 
-I've had several people ask me about Markdown for academic writing recently. I figured I'd use this
+\begin{IEEEkeywords} Pandoc, LaTeX, Markdown \end{IEEEkeywords}
+
+I’ve had several people ask me about Markdown for academic writing recently. I figured I'd use this
 post to write about my workflow and my resources on this topic.
 
-# Why Markdown
+## Why Markdown
 
 <!-- BEGIN SLIDESNOHEADER -->
 
@@ -57,7 +59,7 @@ of tools that aid in making this process, i.e. the effective communication of id
 possible. There are currently two popular options for academics seeking to write technical papers -
 Microsoft Word or $\LaTeX$.
 
-## A word about Word
+### A word about Word
 
 Microsoft Word is ubiquitous when it comes to writing reports. The great thing about Word is that
 there is almost no barrier to _begin_ writing. You can incrementally build your skill in using this
@@ -129,7 +131,7 @@ or research workflow. To quote Raymond Hettinger:
 
 <!-- END SLIDES -->
 
-## $\LaTeX$ - lah-tekh, lah-tek or lay-tek
+### $\LaTeX$ - lah-tekh, lah-tek or lay-tek
 
 <!-- BEGIN SLIDES -->
 
@@ -233,7 +235,7 @@ time to learn $\LaTeX$ I can't think of any reason why you would go back to Word
 that beginners will have a hard time getting started. So, if you cannot afford to experiment with
 $\LaTeX$, are you resigned to Word? I don't think so. Markdown to the rescue!
 
-## Markdown
+### Markdown
 
 <!-- BEGIN SLIDES -->
 
@@ -342,7 +344,7 @@ potential limitations and how you might overcome them.
 
 <!-- BEGIN SLIDESNOHEADER -->
 
-# Pandoc - A "swiss army knife"
+## Pandoc - A "swiss army knife"
 
 Pandoc is a software tool by [John Macfarlane](https://johnmacfarlane.net/) written in Haskell that
 can convert a document from just about any format to just about any other format. And works really
@@ -444,9 +446,9 @@ figure out why each item has been added into a workflow, and if that works for y
 know what to do if (when?) it breaks, and how to fix it. Feel free to go through other people's
 Makefiles to see what they have done, and how you can improve your own.
 
-## Syntax
+### Syntax
 
-### **_Headings_**
+#### **_Headings_**
 
 ```markdown
 # Section
@@ -460,7 +462,7 @@ Makefiles to see what they have done, and how you can improve your own.
 
 I've not provided an example here to avoid messing with this document's headings.
 
-### **_Text_**
+#### **_Text_**
 
 ```markdown
 This text is in _italic_. This text is in **bold**. And this text is in **_bold-italic_**
@@ -470,7 +472,7 @@ This text is in _italic_. This text is in **bold**. And this text is in **_bold-
 
 This text is in _italic_. This text is in **bold**. And this text is in **_bold-italic_**.
 
-### **_Link_**
+#### **_Link_**
 
 ```markdown
 [Text](https://google.com)
@@ -480,7 +482,7 @@ This text is in _italic_. This text is in **bold**. And this text is in **_bold-
 
 [Text](https://google.com)
 
-### **_Images_**
+#### **_Images_**
 
 ```markdown
 ![Caption](images/markdown.png)
@@ -490,7 +492,7 @@ This text is in _italic_. This text is in **bold**. And this text is in **_bold-
 
 ![Caption](images/markdown.png){width=300}
 
-### **_Lists_**
+#### **_Lists_**
 
 ```markdown
 - item
@@ -516,7 +518,7 @@ This text is in _italic_. This text is in **bold**. And this text is in **_bold-
    1. item
 1. item
 
-### **_Quotes_**
+#### **_Quotes_**
 
 ```markdown
 > Research is what I'm doing when I don't know what I'm doing.
@@ -530,7 +532,7 @@ This text is in _italic_. This text is in **bold**. And this text is in **_bold-
 
 - Wernher von Braun
 
-### **_Code_**
+#### **_Code_**
 
 ```markdown
 `inline code`
@@ -546,7 +548,7 @@ This text is in _italic_. This text is in **bold**. And this text is in **_bold-
     Tab space
     for code block
 
-### **_Tables_**
+#### **_Tables_**
 
 <!-- prettier-ignore-start -->
 
@@ -574,7 +576,7 @@ Right Left Center Default
 
 : Demonstration of simple table syntax. {#tbl-table}
 
-### **_Footnotes_**
+#### **_Footnotes_**
 
 ```markdown
 Example of a footnote [^0]
@@ -588,7 +590,7 @@ Example of a footnote [^0]
 
 [^0]: This is the content of a footnote.
 
-### **_Citations_**
+#### **_Citations_**
 
 ```markdown
 This is a very important fact [@citation_example]
@@ -598,7 +600,7 @@ This is a very important fact [@citation_example]
 
 This is a very important fact [@citation_example]
 
-### **_Strikethrough_**
+#### **_Strikethrough_**
 
 ```markdown
 ~~Strikethrough text~~
@@ -608,7 +610,7 @@ This is a very important fact [@citation_example]
 
 ~~Strikethrough text~~
 
-### **_Mark_**
+#### **_Mark_**
 
 ```markdown
 ==Mark text==
@@ -618,7 +620,7 @@ This is a very important fact [@citation_example]
 
 ==Mark text==
 
-### **_Equations_**
+#### **_Equations_**
 
 ```markdown
 Inline equations $\pi$
@@ -640,7 +642,7 @@ $$
 \pi
 $$
 
-## Pandoc conversion
+### Pandoc conversion
 
 Once you have typed all the content, you can use the `pandoc` command to convert the document into
 the format you want. Pandoc uses the output filename extension to figure out what the output file
@@ -742,7 +744,7 @@ features if I think they are relevant to writing a paper using Markdown.
 
 <!-- BEGIN SLIDESNOHEADER -->
 
-# Downside to using Markdown?
+## Downside to using Markdown?
 
 <!-- END SLIDES -->
 
@@ -778,7 +780,7 @@ a hassle.
 
 <!-- BEGIN SLIDESNOHEADER -->
 
-# Bending Markdown to your will
+## Bending Markdown to your will
 
 Fortunately, some of the problems I mentioned in the previous section can be solved using an
 excellent feature of Pandoc - filters!
@@ -814,7 +816,7 @@ when you need them.
 
 <!-- BEGIN SLIDESNOHEADER -->
 
-# TLDR
+## TLDR
 
 <!-- END SLIDES -->
 
