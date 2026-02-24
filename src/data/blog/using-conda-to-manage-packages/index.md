@@ -13,7 +13,8 @@ references:
 
 # Why use conda
 
-The following quote is from Conda's github page [@conda/conda]
+The following quote is from Conda's github page
+[conda/conda](https://github.com/conda/conda).
 
 > Conda is a cross-platform, Python-agnostic binary package manager. It is the package manager used
 > by Anaconda installations, but it may be used for other systems as well. Conda makes environments

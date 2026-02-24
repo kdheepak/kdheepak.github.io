@@ -56,7 +56,8 @@ turned off by passing an argument to the plugin. The reason it is called a stick
 dragging a node to a new position will fix it at that location. You can double click the node to
 release it.
 
-These blocks were used as a reference[@svg].
+These blocks were used as a reference from
+[SVG Semantic Zooming](https://bl.ocks.org/mbostock/3680957).
 
 I'll run through an explanation of the code briefly.
 

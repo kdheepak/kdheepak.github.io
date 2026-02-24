@@ -392,7 +392,7 @@ puzzle.
 
 [^1]: Thanks to
     [/u/possiblywrong](https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/)
-    for pointing this out [@possiblywrong].
+    for pointing this out.
 
 [^2]: If we had a finite number of eggs, an approximation of this
     recurrence can be made. See [/u/mark_ovchain's insightful comment on

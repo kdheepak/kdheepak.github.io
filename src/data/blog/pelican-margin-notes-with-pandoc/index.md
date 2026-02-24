@@ -101,9 +101,12 @@ improve the experience for a reader, especially on the web.
 Butterick's web book. It is freely available at Practical Typography. It's challenged me to think
 critically about every aspect of a presentation. I also encourage buying his book or his fonts to
 aid Butterick in maintaining this content and producing more like this.]{.aside} is also a great
-example of effective use of margin notes. There are a few other articles [@johnjameson;@jgruber]
-that talk about this. The CSS for this page originally and the CSS for the margin notes had been
-heavily inspired by [gameprogrammingpatterns.com](https://gameprogrammingpatterns.com/).
+example of effective use of margin notes. There are a few other articles on
+[responsive footnotes](https://johndjameson.com/posts/responsive-footnotes) and
+[notes on notes](https://daringfireball.net/2005/08/notes_on_notes) that talk
+about this. The CSS for this page originally and the CSS for the margin notes
+had been heavily inspired by
+[gameprogrammingpatterns.com](https://gameprogrammingpatterns.com/).
 
 ## Implementation
 
