@@ -76,17 +76,19 @@ writing.
 
 For technical publications where you want to show results inline, I
 believe using Quarto is a no-brainer. If you are already using Jupyter
-Notebooks, using Quarto is incredibly seamless. [If you are interested
-in a static site generator written in Julia with a similar feature set,
-you should check out
-[Franklin.jl](https://github.com/tlienart/Franklin.jl).]{.column-margin
-.margin-aside} But even without using any of Quarto's computational
+Notebooks, using Quarto is incredibly seamless[^quarto-franklin-aside].
+But even without using any of Quarto's computational
 features, I think it is a compelling alternative to many static site
-generation tools (e.g. Docsaurus, mkdocs, mdbook, hugo, sphinx, etc) as
+generation tools (e.g. Docsaurus, mkdocs, mdbook, hugo, sphinx, etc) as
 a means to develop high quality technical documentation. Over the past
 year, every report, paper, presentation, and tutorial I've created has
 used Quarto in one way or another. At the time of writing this post,
 Quarto is even the backbone of my blog.
+
+[^quarto-franklin-aside]:
+    _aside_: If you are interested in a static site generator written in
+    Julia with a similar feature set, you should check out
+    [Franklin.jl](https://github.com/tlienart/Franklin.jl).
 
 Quarto isn't without its [fair share of
 issues](https://github.com/quarto-dev/quarto-cli/issues), and I do think
