@@ -217,7 +217,14 @@ describe("Post citation", () => {
     );
     expect(postDetailsSource).toContain("<PostCitation");
     expect(postDetailsSource).toContain("url={postUrl}");
-    expect(postDetailsSource).toContain('<div class="mt-10">');
+    expect(postDetailsSource).toContain(
+      'class="mt-10 mb-6 grid items-start gap-6 md:grid-cols-[1fr_auto_1fr]"'
+    );
+    expect(postDetailsSource).toContain("<ShareLinks />");
+    expect(postDetailsSource).toContain("<BackToTopButton />");
+    expect(postDetailsSource).toContain(
+      'class="flex flex-wrap items-center justify-center gap-4 self-center"'
+    );
   });
 
   it("renders a plain BibTeX block without copy controls", () => {
@@ -276,7 +283,7 @@ describe("citation utilities", () => {
     });
 
     expect(citation).toBe(
-      'Nora Jones. 2018. "Summarizing Output for Reproducible Documents." May 4, 2018. https://www.charlesteague.com/test-document.html.'
+      'Nora Jones, "Summarizing Output for Reproducible Documents", May 4, 2018 https://www.charlesteague.com/test-document.html.'
     );
   });
 });

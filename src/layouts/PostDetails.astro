@@ -163,10 +163,6 @@ const nextPost =
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
-    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
-    </ul>
-
     <PostCitation
       {author}
       {title}
@@ -176,11 +172,22 @@ const nextPost =
       timeZone={timezone || SITE.timezone}
     />
 
-    <div class="mt-10">
-      <BackToTopButton />
-    </div>
+    <div
+      class="mt-10 mb-6 grid items-start gap-6 md:grid-cols-[1fr_auto_1fr]"
+      data-pagefind-ignore
+    >
+      <div class="justify-self-center md:justify-self-start">
+        <ShareLinks />
+      </div>
 
-    <ShareLinks />
+      <ul class="flex flex-wrap items-center justify-center gap-4 self-center">
+        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+      </ul>
+
+      <div class="justify-self-center md:justify-self-end">
+        <BackToTopButton />
+      </div>
+    </div>
 
     <div class="giscus"></div>
 
