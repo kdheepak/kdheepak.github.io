@@ -9,7 +9,7 @@ notebookPath: "src/data/blog/publish-documents-with-quarto/index.ipynb"
 
 8 years ago, I made this diagram tongue-in-cheek to show my colleagues
 that it was possible to [write academic papers with Pandoc
-Markdown](../writing-papers-with-markdown/index.md).
+Markdown](https://kdheepak.com/blog/writing-papers-with-markdown).
 
 ![](https://kdheepak.com/blog/writing-papers-with-markdown/images/learningcurve.png)
 
