@@ -9,12 +9,14 @@ type Props = {
   variant?: "h2" | "h3";
   dateLayout?: "right" | "below-title";
   showDate?: boolean;
+  showReadingStats?: boolean;
 } & CollectionEntry<"blog">;
 
 const {
   variant: Heading = "h2",
   dateLayout = "right",
   showDate = true,
+  showReadingStats = true,
   id,
   data,
   filePath,
@@ -65,14 +67,16 @@ const { title, description, ...props } = data;
         }}
       />
     )}
-    <ReadingStats
-      {body}
-      class:list={[
-        "mt-1",
-        { "sm:col-span-2": showDate && dateLayout === "right" },
-      ]}
-      align="center"
-    />
+    {showReadingStats && (
+      <ReadingStats
+        {body}
+        class:list={[
+          "mt-1",
+          { "sm:col-span-2": showDate && dateLayout === "right" },
+        ]}
+        align="center"
+      />
+    )}
     <p
       class:list={[
         "mt-1",

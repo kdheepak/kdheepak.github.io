@@ -82,6 +82,34 @@
       @apply border-s-accent/80 wrap-break-word opacity-80;
     }
 
+    /*
+     * Blog post lead drop-cap effect.
+     * Scoped to `.drop-cap-lead` so only post bodies get this styling.
+     */
+    &.drop-cap-lead > p:first-of-type::first-letter {
+      float: left;
+      margin-inline-end: 0.35rem;
+      margin-top: 0.08em;
+      font-family:
+        ui-serif,
+        Georgia,
+        Cambria,
+        "Times New Roman",
+        Times,
+        serif;
+      font-size: 4.2em;
+      line-height: 0.78;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 40rem) {
+      &.drop-cap-lead > p:first-of-type::first-letter {
+        font-size: 3.4em;
+        margin-inline-end: 0.3rem;
+      }
+    }
+
     .callout {
       @apply relative my-6 rounded-md border border-border border-l-4 bg-sky-50 px-4 py-3 dark:bg-slate-900/65;
     }
