@@ -305,6 +305,56 @@ const nextPost =
 
     if (!(placeholder instanceof HTMLElement)) return;
 
+    const getHeadingLabel = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return heading.textContent?.trim() ?? "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.textContent?.trim() ?? "";
+    };
+
+    const ensureTocHeadingLink = heading => {
+      if (!(heading instanceof HTMLHeadingElement) || !heading.id) return;
+      const headingHash = `#${heading.id}`;
+
+      const hasLink = Array.from(
+        tocList.querySelectorAll("a[href^='#']")
+      ).some(link => link.getAttribute("href") === headingHash);
+      if (hasLink) return;
+
+      const label = getHeadingLabel(heading);
+      if (!label) return;
+
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = headingHash;
+      link.textContent = label;
+      item.appendChild(link);
+      tocList.appendChild(item);
+    };
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (footnotesSection instanceof HTMLElement) {
+      const footnotesHeading = footnotesSection.querySelector(
+        "h2[id], h3[id], h4[id], h5[id], h6[id]"
+      );
+      ensureTocHeadingLink(footnotesHeading);
+    }
+
+    const referencesRoot = article.querySelector("#refs");
+    if (referencesRoot instanceof HTMLElement) {
+      let referencesHeading = referencesRoot.previousElementSibling;
+      while (
+        referencesHeading &&
+        !(referencesHeading instanceof HTMLHeadingElement)
+      ) {
+        referencesHeading = referencesHeading.previousElementSibling;
+      }
+      ensureTocHeadingLink(referencesHeading);
+    }
+
     const tocLinks = Array.from(
       tocList.querySelectorAll("a[href^='#']")
     ).filter(link => link instanceof HTMLAnchorElement);
