@@ -20,7 +20,9 @@ You can run scripts before creating a commit in a git repo, i.e. `pre-commit` ho
 the files you are checking in meet a predefined standard. [`pre-commit`](https://pre-commit.com/) is
 a Python package that let's you manage and run `pre-commit` hooks in any git repository.
 
-![Pre-commit pipeline with `black` and `flake8` [@ljvmiranda921]](images/precommit_pipeline.png)
+![Pre-commit pipeline with `black` and `flake8`](images/precommit_pipeline.png)
+
+Source: [@ljvmiranda921]
 
 Using `pre-commit` requires adding a `.pre-commit-config.yaml` file to the git repository, and
 running `pre-commit install`.

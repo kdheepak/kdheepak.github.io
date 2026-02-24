@@ -324,7 +324,9 @@ However, Markdown does not allow for the level of detailed customization that yo
 $\LaTeX$. Even a moderately complex table such as the one below is not supported (currently) by any
 form of Markdown.
 
-![Tabular $\LaTeX$ example [@noauthor_wikibooks_nodate]](images/table.png)
+![Tabular $\LaTeX$ example](images/table.png)
+
+Source: [@noauthor_wikibooks_nodate]
 
 <!-- END SLIDES -->
 
