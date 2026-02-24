@@ -5,6 +5,12 @@ import { SITE } from "@/config";
 import { getRepositoryHeadCommitHash } from "@/utils/getLatestCommitHash";
 
 const currentYear = new Date().getFullYear();
+const buildDate = new Date();
+const buildTimeLabel = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: SITE.timezone,
+}).format(buildDate);
 const latestCommitHash = SITE.sourceCommit.enabled
   ? getRepositoryHeadCommitHash()
   : undefined;
@@ -49,11 +55,10 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     class:list={[
       "py-6 sm:py-4",
       "border-t border-border",
-      "flex flex-col items-center justify-between sm:flex-row-reverse",
+      "flex flex-col items-center gap-2 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center",
     ]}
   >
-    <Socials />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
+    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:justify-self-start sm:flex-row">
       <span>
         &#169;{" "}
         {
@@ -84,6 +89,16 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
           {SITE.license.name}
         </a>
       </span>
+    </div>
+    <time
+      class="text-[0.7rem] uppercase tracking-[0.08em] text-foreground/45 sm:justify-self-center"
+      datetime={buildDate.toISOString()}
+      title={`Built at ${buildDate.toISOString()}`}
+    >
+      Built {buildTimeLabel}
+    </time>
+    <div class="sm:justify-self-end">
+      <Socials />
     </div>
   </div>
   <p class="mx-auto mb-8 max-w-3xl text-center text-xs leading-relaxed text-foreground/60">
