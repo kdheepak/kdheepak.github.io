@@ -35,14 +35,14 @@ describe("slugify utilities", () => {
 describe("getPostsByGroupCondition", () => {
   it("groups posts by the provided grouping function", () => {
     const posts = [
-      { id: "post-1", data: { category: "astro" } },
-      { id: "post-2", data: { category: "rust" } },
-      { id: "post-3", data: { category: "astro" } },
+      { id: "post-1", data: { tags: ["astro"] } },
+      { id: "post-2", data: { tags: ["rust"] } },
+      { id: "post-3", data: { tags: ["astro"] } },
     ];
 
     const grouped = getPostsByGroupCondition(
       posts as never,
-      post => post.data.category
+      post => post.data.tags[0] ?? "untagged"
     );
 
     expect(Object.keys(grouped)).toEqual(["astro", "rust"]);
