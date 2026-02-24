@@ -7,11 +7,7 @@ import { getRepositoryHeadCommitHash } from "@/utils/getLatestCommitHash";
 const currentYear = new Date().getFullYear();
 const buildDate = new Date();
 const buildIsoString = buildDate.toISOString();
-const buildTimeFallbackLabel = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "medium",
-  timeStyle: "short",
-  timeZone: "UTC",
-}).format(buildDate);
+const buildTimestampLabel = buildIsoString.replace(/\.\d{3}Z$/, "Z");
 const latestCommitHash = SITE.sourceCommit.enabled
   ? getRepositoryHeadCommitHash()
   : undefined;
@@ -92,13 +88,13 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       </span>
     </div>
     <time
-      class="text-[0.7rem] uppercase tracking-[0.08em] text-foreground/45 sm:justify-self-center"
+      class="text-[0.7rem] tracking-[0.08em] text-foreground/45 sm:justify-self-center"
       data-build-local-time
       data-build-iso={buildIsoString}
       datetime={buildIsoString}
       title={buildIsoString}
     >
-      {buildTimeFallbackLabel} UTC
+      {buildTimestampLabel}
     </time>
     <div class="sm:justify-self-end">
       <Socials />
@@ -111,6 +107,28 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 </footer>
 
 <script>
+  const pad2 = (value: number): string => String(value).padStart(2, "0");
+
+  const formatOffset = (offsetMinutes: number): string => {
+    const sign = offsetMinutes <= 0 ? "+" : "-";
+    const absoluteMinutes = Math.abs(offsetMinutes);
+    const hours = pad2(Math.floor(absoluteMinutes / 60));
+    const minutes = pad2(absoluteMinutes % 60);
+    return `${sign}${hours}:${minutes}`;
+  };
+
+  const formatLocalTimestamp = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = pad2(date.getMonth() + 1);
+    const day = pad2(date.getDate());
+    const hours = pad2(date.getHours());
+    const minutes = pad2(date.getMinutes());
+    const seconds = pad2(date.getSeconds());
+    const offset = formatOffset(date.getTimezoneOffset());
+
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${offset}`;
+  };
+
   const hydrateBuildTimestamp = (root: ParentNode = document): void => {
     const elements =
       root.querySelectorAll<HTMLElement>("time[data-build-local-time]");
@@ -122,13 +140,8 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       const date = new Date(isoString);
       if (Number.isNaN(date.getTime())) continue;
 
-      const localTimeLabel = new Intl.DateTimeFormat(undefined, {
-        dateStyle: "medium",
-        timeStyle: "short",
-      }).format(date);
-
-      element.textContent = localTimeLabel;
-      element.title = date.toString();
+      element.textContent = formatLocalTimestamp(date);
+      element.title = isoString;
     }
   };
 

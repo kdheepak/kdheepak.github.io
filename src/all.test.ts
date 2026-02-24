@@ -32,6 +32,11 @@ const postDetailsSource = readFileSync(
   "utf8"
 );
 
+const footerSource = readFileSync(
+  resolve(process.cwd(), "src/components/Footer.astro"),
+  "utf8"
+);
+
 const makePost = (tags: string[], draft = false) => ({
   data: {
     draft,
@@ -161,6 +166,28 @@ describe("KaTeX integration", () => {
   it("syncs TOC link markup from rendered headings so heading math appears in TOC", () => {
     expect(postDetailsSource).toContain("const getHeadingHtml = heading =>");
     expect(postDetailsSource).toContain("link.innerHTML = headingHtml;");
+  });
+});
+
+describe("Footer timestamp", () => {
+  it("keeps machine-readable ISO while rendering a standardized local timestamp", () => {
+    expect(footerSource).toContain(
+      'const buildTimestampLabel = buildIsoString.replace(/\\.\\d{3}Z$/, "Z");'
+    );
+    expect(footerSource).toContain("data-build-local-time");
+    expect(footerSource).toContain("data-build-iso={buildIsoString}");
+    expect(footerSource).toContain("datetime={buildIsoString}");
+    expect(footerSource).toContain("{buildTimestampLabel}");
+    expect(footerSource).toContain("const formatLocalTimestamp = (date: Date)");
+    expect(footerSource).toContain(
+      "return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${offset}`;"
+    );
+    expect(footerSource).not.toContain(
+      "Intl.DateTimeFormat().resolvedOptions().timeZone"
+    );
+    expect(footerSource).toContain(
+      'document.addEventListener("astro:page-load", setBuildTimestamp);'
+    );
   });
 });
 
