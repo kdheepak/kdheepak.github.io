@@ -11,7 +11,7 @@ notebookPath: "src/data/blog/publish-documents-with-quarto/index.ipynb"
 that it was possible to [write academic papers with Pandoc
 Markdown](https://kdheepak.com/blog/writing-papers-with-markdown).
 
-![](https://kdheepak.com/blog/writing-papers-with-markdown/images/learningcurve.png)
+![](../writing-papers-with-markdown/images/learningcurve.png)
 
 Since then, there's been a lot of improvements to the Pandoc Markdown
 workflow for writing papers. Pandoc went from 1.15.2 to 3.1.9, [adding
