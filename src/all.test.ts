@@ -669,7 +669,7 @@ describe("rehypePostEnhancements", () => {
     expect(tocLinks).not.toContain("#footnote-label");
   });
 
-  it("syncs TOC link content with rendered heading markup", () => {
+  it("syncs TOC link text from rendered heading content", () => {
     const tree: any = {
       type: "root",
       children: [
@@ -709,7 +709,20 @@ describe("rehypePostEnhancements", () => {
               type: "element",
               tagName: "span",
               properties: { className: ["katex"] },
-              children: [{ type: "text", value: "θ" }],
+              children: [
+                {
+                  type: "element",
+                  tagName: "span",
+                  properties: { className: ["katex-mathml"] },
+                  children: [{ type: "text", value: "\\theta" }],
+                },
+                {
+                  type: "element",
+                  tagName: "span",
+                  properties: { className: ["katex-html"] },
+                  children: [{ type: "text", value: "θ" }],
+                },
+              ],
             },
             { type: "text", value: " is zero" },
           ],
@@ -726,16 +739,8 @@ describe("rehypePostEnhancements", () => {
     )[0];
 
     expect(tocLink).toBeDefined();
-    expect(
-      (tocLink.children as any[]).some(
-        child =>
-          child.type === "element" &&
-          child.tagName === "span" &&
-          hasClass(child, "katex")
-      )
-    ).toBe(true);
-    expect(getNodeText(tocLink)).toContain("Case 1 :");
-    expect(getNodeText(tocLink)).toContain("is zero");
+    expect(getNodeText(tocLink)).toBe("Case 1 : θ is zero");
+    expect(getNodeText(tocLink)).not.toContain("\\theta");
   });
 });
 

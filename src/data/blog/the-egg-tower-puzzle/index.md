@@ -30,11 +30,13 @@ Here is a fun puzzle:
 
 <div>
 
-> **Warning**
->
-> **Spoiler warning!** If you have not seen this problem before I urge
-> you to give it a go before continuing further. I'm going to post the
-> solution to this below, so this is your spoiler warning.
+::: callout-warning
+
+**Spoiler warning!** If you have not seen this problem before I urge
+you to give it a go before continuing further. I'm going to post the
+solution to this below, so this is your spoiler warning.
+
+:::
 
 </div>
 

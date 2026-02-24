@@ -457,7 +457,20 @@ const appendTocHeadingLink = (
   headingLinkLabels.add(normalizedLabel);
 };
 
-const cloneNode = node => structuredClone(node);
+const normalizeWhitespace = value => value.replace(/\s+/g, " ").trim();
+
+const getTocLabelTextFromNode = node => {
+  if (!node || typeof node !== "object") return "";
+  if (node.type === "text" && typeof node.value === "string") {
+    return node.value;
+  }
+
+  if (!isElementNode(node) || !Array.isArray(node.children)) return "";
+  if (isHeadingLinkNode(node)) return "";
+  if (hasClass(node, "katex-mathml")) return "";
+
+  return node.children.map(getTocLabelTextFromNode).join("");
+};
 
 const copyHeadingMarkupToTocLinks = tree => {
   const tocList = findTocList(tree);
@@ -482,14 +495,12 @@ const copyHeadingMarkupToTocLinks = tree => {
     if (!headingId) return;
 
     const heading = headingsById.get(headingId);
-    if (!heading || !Array.isArray(heading.children)) return;
+    if (!heading) return;
 
-    const clonedHeadingChildren = heading.children
-      .filter(child => !isHeadingLinkNode(child))
-      .map(cloneNode);
+    const label = normalizeWhitespace(getTocLabelTextFromNode(heading));
+    if (!label) return;
 
-    if (!clonedHeadingChildren.length) return;
-    node.children = clonedHeadingChildren;
+    node.children = [createTextNode(label)];
   });
 };
 
