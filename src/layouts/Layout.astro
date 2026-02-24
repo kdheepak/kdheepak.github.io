@@ -60,6 +60,9 @@ window.MathJax = {
     processEscapes: true,
     processEnvironments: true,
   },
+  chtml: {
+    adaptiveCSS: false,
+  },
   options: {
     skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
   },
@@ -174,7 +177,9 @@ const mathJaxTypesetScript = `
   };
 
   if (!window.__kdMathJaxHooked) {
+    document.addEventListener("astro:after-swap", scheduleTypeset);
     document.addEventListener("astro:page-load", scheduleTypeset);
+    window.addEventListener("pageshow", scheduleTypeset);
     window.__kdMathJaxHooked = true;
   }
 
