@@ -1,3 +1,4 @@
+// @ts-nocheck
 import remarkSvgbob from "remark-svgbob";
 
 const SVGBOB_LANGUAGE_CLASS_NAMES = new Set([

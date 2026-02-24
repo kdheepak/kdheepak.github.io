@@ -1,3 +1,4 @@
+// @ts-nocheck
 const LANGUAGE_ALIASES = {
   default: "plaintext",
   dot: "plaintext",

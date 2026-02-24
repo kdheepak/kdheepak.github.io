@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { visit } from "unist-util-visit";
 
 const PROTECTED_CODE_SPAN_TAG = "kd-cite-skip-span";

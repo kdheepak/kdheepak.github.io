@@ -18,19 +18,19 @@ import {
     transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
-import { remarkDirectives } from "./src/utils/remark-directives.js";
-import { remarkImageAttributes } from "./src/utils/remark-image-attributes.js";
-import { remarkInlineMark } from "./src/utils/remark-inline-mark.js";
-import { remarkMermaidFences } from "./src/utils/remark-mermaid-fences.js";
-import { remarkNormalizeCodeFences } from "./src/utils/remark-normalize-code-fences.js";
-import { rehypeExternalLinks } from "./src/utils/rehype-external-links.js";
-import { rehypePostEnhancements } from "./src/utils/rehype-post-enhancements.js";
+import { remarkDirectives } from "./src/utils/remark-directives";
+import { remarkImageAttributes } from "./src/utils/remark-image-attributes";
+import { remarkInlineMark } from "./src/utils/remark-inline-mark";
+import { remarkMermaidFences } from "./src/utils/remark-mermaid-fences";
+import { remarkNormalizeCodeFences } from "./src/utils/remark-normalize-code-fences";
+import { rehypeExternalLinks } from "./src/utils/rehype-external-links";
+import { rehypePostEnhancements } from "./src/utils/rehype-post-enhancements";
 import {
     rehypeProtectCodeCitations,
     rehypeRestoreCodeCitations,
-} from "./src/utils/rehype-protect-code-citations.js";
-import { rehypeSvgbob } from "./src/utils/rehype-svgbob.js";
-import { remarkPostToc } from "./src/utils/remark-post-toc.js";
+} from "./src/utils/rehype-protect-code-citations";
+import { rehypeSvgbob } from "./src/utils/rehype-svgbob";
+import { remarkPostToc } from "./src/utils/remark-post-toc";
 import { slugifyStr } from "./src/utils/slugify";
 import { SITE } from "./src/config";
 

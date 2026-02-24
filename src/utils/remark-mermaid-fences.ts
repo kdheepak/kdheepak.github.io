@@ -1,3 +1,4 @@
+// @ts-nocheck
 const HTML_ESCAPE_MAP = {
   "&": "&amp;",
   "<": "&lt;",

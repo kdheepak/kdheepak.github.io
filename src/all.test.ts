@@ -7,13 +7,13 @@ import {
   createBibtexKey,
 } from "./utils/citation";
 import { formatReadingStats, getReadingStats } from "./utils/readingStats";
-import { remarkInlineMark } from "./utils/remark-inline-mark.js";
-import { remarkPostToc } from "./utils/remark-post-toc.js";
-import { rehypePostEnhancements } from "./utils/rehype-post-enhancements.js";
+import { remarkInlineMark } from "./utils/remark-inline-mark";
+import { remarkPostToc } from "./utils/remark-post-toc";
+import { rehypePostEnhancements } from "./utils/rehype-post-enhancements";
 import {
   rehypeProtectCodeCitations,
   rehypeRestoreCodeCitations,
-} from "./utils/rehype-protect-code-citations.js";
+} from "./utils/rehype-protect-code-citations";
 import {
   getLatestCommitHash,
   getRepositoryHeadCommitHash,

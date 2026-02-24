@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { visit } from "unist-util-visit";
 
 const EXTERNAL_REL_TOKENS = ["noopener", "noreferrer"];

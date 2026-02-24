@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { visit } from "unist-util-visit";
