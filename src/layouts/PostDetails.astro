@@ -640,6 +640,139 @@ const nextPost =
     }
   }
 
+  /** Converts bare URLs in bibliography entries into clickable links. */
+  function linkifyReferenceUrls() {
+    const referencesRoot = document.getElementById("refs");
+    if (!(referencesRoot instanceof HTMLElement)) return;
+
+    const urlPattern = /\b(?:https?:\/\/|www\.)[^\s<>"'`]+/gi;
+
+    const trimTrailingPunctuation = rawUrl => {
+      let url = rawUrl;
+      let trailingText = "";
+
+      while (/[.,;:!?]/.test(url.at(-1) ?? "")) {
+        trailingText = `${url.at(-1)}${trailingText}`;
+        url = url.slice(0, -1);
+      }
+
+      const bracketPairs = [
+        ["(", ")"],
+        ["[", "]"],
+        ["{", "}"],
+      ];
+
+      for (const [opening, closing] of bracketPairs) {
+        while (
+          url.endsWith(closing) &&
+          url.split(opening).length < url.split(closing).length
+        ) {
+          trailingText = `${closing}${trailingText}`;
+          url = url.slice(0, -1);
+        }
+      }
+
+      return { url, trailingText };
+    };
+
+    const createLink = urlText => {
+      const link = document.createElement("a");
+      link.href = urlText.toLowerCase().startsWith("www.")
+        ? `https://${urlText}`
+        : urlText;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.dataset.externalLink = "";
+      link.textContent = urlText;
+      return link;
+    };
+
+    const processTextNode = textNode => {
+      const value = textNode.nodeValue ?? "";
+      urlPattern.lastIndex = 0;
+      if (!urlPattern.test(value)) return;
+
+      urlPattern.lastIndex = 0;
+      const fragment = document.createDocumentFragment();
+      let lastIndex = 0;
+      let match;
+
+      while ((match = urlPattern.exec(value)) !== null) {
+        const matchStart = match.index;
+        const matchedUrl = match[0];
+
+        if (matchStart > lastIndex) {
+          fragment.appendChild(
+            document.createTextNode(value.slice(lastIndex, matchStart))
+          );
+        }
+
+        const { url, trailingText } = trimTrailingPunctuation(matchedUrl);
+
+        if (url.length > 0) {
+          fragment.appendChild(createLink(url));
+        } else {
+          fragment.appendChild(document.createTextNode(matchedUrl));
+        }
+
+        if (trailingText.length > 0) {
+          fragment.appendChild(document.createTextNode(trailingText));
+        }
+
+        lastIndex = matchStart + matchedUrl.length;
+      }
+
+      if (lastIndex < value.length) {
+        fragment.appendChild(document.createTextNode(value.slice(lastIndex)));
+      }
+
+      textNode.replaceWith(fragment);
+    };
+
+    const containers = Array.from(
+      referencesRoot.querySelectorAll(".csl-right-inline")
+    );
+
+    if (!containers.length) {
+      containers.push(referencesRoot);
+    }
+
+    for (const container of containers) {
+      const walker = document.createTreeWalker(
+        container,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode(node) {
+            if (!(node instanceof Text)) return NodeFilter.FILTER_REJECT;
+            const value = node.nodeValue ?? "";
+            if (!value.trim()) return NodeFilter.FILTER_REJECT;
+
+            const parentElement = node.parentElement;
+            if (
+              parentElement &&
+              parentElement.closest("a, code, pre, script, style")
+            ) {
+              return NodeFilter.FILTER_REJECT;
+            }
+
+            return NodeFilter.FILTER_ACCEPT;
+          },
+        }
+      );
+
+      const textNodes = [];
+      let currentNode = walker.nextNode();
+      while (currentNode) {
+        textNodes.push(currentNode);
+        currentNode = walker.nextNode();
+      }
+
+      for (const textNode of textNodes) {
+        processTextNode(textNode);
+      }
+    }
+  }
+
   function addCitationBackLinks() {
     const citationSpans = Array.from(
       document.querySelectorAll("span[id^='citation--']")
@@ -1157,6 +1290,7 @@ const nextPost =
     setupDockingToc();
 
     try {
+      linkifyReferenceUrls();
       addCitationBackLinks();
     } catch {
       // Keep the rest of post enhancements working even if citation linking fails.
