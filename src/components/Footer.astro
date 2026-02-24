@@ -12,30 +12,36 @@ const latestCommitHash = SITE.sourceCommit.enabled
   ? getRepositoryHeadCommitHash()
   : undefined;
 
-const toCommitBaseUrl = (sourceUrl: string): string => {
+const toTreeBaseUrl = (sourceUrl: string): string => {
   const trimmedUrl = sourceUrl.trim();
   if (trimmedUrl === "") return "";
-  if (trimmedUrl.includes("/blob/")) {
-    return trimmedUrl.replace(/\/blob\/?$/, "/commit/");
-  }
+
   if (trimmedUrl.includes("/tree/")) {
-    return trimmedUrl.replace(/\/tree\/?$/, "/commit/");
+    return trimmedUrl.replace(/\/tree\/?$/, "/tree/");
   }
+
+  if (trimmedUrl.includes("/blob/")) {
+    return trimmedUrl.replace(/\/blob\/?$/, "/tree/");
+  }
+
+  if (trimmedUrl.includes("/commit/")) {
+    return trimmedUrl.replace(/\/commit\/?$/, "/tree/");
+  }
+
   return trimmedUrl.endsWith("/")
-    ? `${trimmedUrl}commit/`
-    : `${trimmedUrl}/commit/`;
+    ? `${trimmedUrl}tree/`
+    : `${trimmedUrl}/tree/`;
 };
 
-const latestCommitHref =
-  SITE.sourceCommit.enabled &&
-  latestCommitHash &&
-  SITE.sourceCommit.url.trim() !== ""
-    ? `${toCommitBaseUrl(SITE.sourceCommit.url)}${latestCommitHash}`
+const buildTreeRef = latestCommitHash ?? "main";
+const buildTreeHref =
+  SITE.sourceCommit.enabled && SITE.sourceCommit.url.trim() !== ""
+    ? `${toTreeBaseUrl(SITE.sourceCommit.url)}${buildTreeRef}`
     : undefined;
 
-const latestCommitTitle = latestCommitHash
-  ? `View latest commit: ${latestCommitHash.slice(0, 7)}`
-  : undefined;
+const buildTreeTitle = latestCommitHash
+  ? `View source tree: ${latestCommitHash.slice(0, 7)}`
+  : "View source tree";
 
 type Props = {
   noMarginTop?: boolean;
@@ -56,24 +62,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     ]}
   >
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:justify-self-start sm:flex-row">
-      <span>
-        &#169;{" "}
-        {
-          latestCommitHref ? (
-            <a
-              href={latestCommitHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={latestCommitTitle}
-              class="underline decoration-dashed underline-offset-4 hover:text-accent"
-            >
-              {currentYear}
-            </a>
-          ) : (
-            currentYear
-          )
-        }
-      </span>
+      <span>&#169; {currentYear}</span>
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>
         <a
@@ -87,15 +76,37 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
         </a>
       </span>
     </div>
-    <time
-      class="text-[0.7rem] tracking-[0.08em] text-foreground/45 sm:justify-self-center"
-      data-build-local-time
-      data-build-iso={buildIsoString}
-      datetime={buildIsoString}
-      title={buildIsoString}
-    >
-      {buildTimestampLabel}
-    </time>
+    {
+      buildTreeHref ? (
+        <a
+          href={buildTreeHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={buildTreeTitle}
+          class="sm:justify-self-center text-foreground/45 transition-colors hover:text-foreground/60"
+        >
+          <time
+            class="text-[0.7rem] tracking-[0.08em]"
+            data-build-local-time
+            data-build-iso={buildIsoString}
+            datetime={buildIsoString}
+            title={buildIsoString}
+          >
+            {buildTimestampLabel}
+          </time>
+        </a>
+      ) : (
+        <time
+          class="text-[0.7rem] tracking-[0.08em] text-foreground/45 sm:justify-self-center"
+          data-build-local-time
+          data-build-iso={buildIsoString}
+          datetime={buildIsoString}
+          title={buildIsoString}
+        >
+          {buildTimestampLabel}
+        </time>
+      )
+    }
     <div class="sm:justify-self-end">
       <Socials />
     </div>

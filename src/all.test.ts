@@ -189,6 +189,15 @@ describe("Footer timestamp", () => {
       'document.addEventListener("astro:page-load", setBuildTimestamp);'
     );
   });
+
+  it("links build timestamp to the repository tree and keeps copyright year plain", () => {
+    expect(footerSource).toContain("const toTreeBaseUrl = (sourceUrl: string)");
+    expect(footerSource).toContain('const buildTreeRef = latestCommitHash ?? "main";');
+    expect(footerSource).toContain("const buildTreeHref =");
+    expect(footerSource).toContain("href={buildTreeHref}");
+    expect(footerSource).toContain("&#169; {currentYear}");
+    expect(footerSource).not.toContain("latestCommitHref");
+  });
 });
 
 describe("remarkInlineMark", () => {
