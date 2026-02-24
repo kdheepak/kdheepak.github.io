@@ -18,6 +18,7 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import { remarkDirectives } from "./src/utils/remark-directives.js";
 import { remarkImageAttributes } from "./src/utils/remark-image-attributes.js";
+import { remarkInlineMark } from "./src/utils/remark-inline-mark.js";
 import { remarkMermaidFences } from "./src/utils/remark-mermaid-fences.js";
 import { remarkNormalizeCodeFences } from "./src/utils/remark-normalize-code-fences.js";
 import { rehypeExternalLinks } from "./src/utils/rehype-external-links.js";
@@ -192,6 +193,7 @@ export default defineConfig({
             remarkNormalizeCodeFences,
             remarkMermaidFences,
             remarkDirective,
+            remarkInlineMark,
             remarkDirectives,
             remarkImageAttributes,
             remarkPostToc,
