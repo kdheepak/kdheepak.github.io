@@ -6,10 +6,11 @@ import { getRepositoryHeadCommitHash } from "@/utils/getLatestCommitHash";
 
 const currentYear = new Date().getFullYear();
 const buildDate = new Date();
-const buildTimeLabel = new Intl.DateTimeFormat("en-US", {
+const buildIsoString = buildDate.toISOString();
+const buildTimeFallbackLabel = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",
   timeStyle: "short",
-  timeZone: SITE.timezone,
+  timeZone: "UTC",
 }).format(buildDate);
 const latestCommitHash = SITE.sourceCommit.enabled
   ? getRepositoryHeadCommitHash()
@@ -92,10 +93,12 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     </div>
     <time
       class="text-[0.7rem] uppercase tracking-[0.08em] text-foreground/45 sm:justify-self-center"
-      datetime={buildDate.toISOString()}
-      title={`Built at ${buildDate.toISOString()}`}
+      data-build-local-time
+      data-build-iso={buildIsoString}
+      datetime={buildIsoString}
+      title={`Built at ${buildIsoString}`}
     >
-      Built {buildTimeLabel}
+      Built {buildTimeFallbackLabel} UTC
     </time>
     <div class="sm:justify-self-end">
       <Socials />
@@ -106,3 +109,40 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     shared, supported, or endorsed by any employer or entity in any manner.
   </p>
 </footer>
+
+<script>
+  const hydrateBuildTimestamp = (root: ParentNode = document): void => {
+    const elements =
+      root.querySelectorAll<HTMLElement>("time[data-build-local-time]");
+
+    for (const element of elements) {
+      const isoString = element.dataset.buildIso;
+      if (!isoString) continue;
+
+      const date = new Date(isoString);
+      if (Number.isNaN(date.getTime())) continue;
+
+      const localTimeLabel = new Intl.DateTimeFormat(undefined, {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(date);
+
+      element.textContent = `Built ${localTimeLabel}`;
+      element.title = `Built at ${date.toString()}`;
+    }
+  };
+
+  const setBuildTimestamp = (): void => {
+    hydrateBuildTimestamp(document);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setBuildTimestamp, {
+      once: true,
+    });
+  } else {
+    setBuildTimestamp();
+  }
+
+  document.addEventListener("astro:page-load", setBuildTimestamp);
+</script>
