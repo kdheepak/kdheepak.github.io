@@ -800,7 +800,7 @@ filter for it.
 There is a python package called `pandocfilters` that allows you to walk the AST and parse specific
 formats or keys. It is very powerful, and can offer unique ways to expand on pandoc's functionality.
 I wrote a pandocfilter [@krishnamurthy_github_nodate] to embed a jupyter notebook using a liquid tag
-style syntax, which I currently use for this [post](../active-reactive-and-apparent-power).
+style syntax, which I currently use for this [post](../active-reactive-and-apparent-power/).
 
 <!-- END SLIDES -->
 
