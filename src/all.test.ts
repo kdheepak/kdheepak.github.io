@@ -659,6 +659,75 @@ describe("rehypePostEnhancements", () => {
     expect(tocLinks).toEqual(["#footnotes"]);
     expect(tocLinks).not.toContain("#footnote-label");
   });
+
+  it("syncs TOC link content with rendered heading markup", () => {
+    const tree: any = {
+      type: "root",
+      children: [
+        {
+          type: "element",
+          tagName: "h2",
+          properties: { id: "table-of-contents" },
+          children: [{ type: "text", value: "Table of Contents" }],
+        },
+        {
+          type: "element",
+          tagName: "ul",
+          properties: {},
+          children: [
+            {
+              type: "element",
+              tagName: "li",
+              properties: {},
+              children: [
+                {
+                  type: "element",
+                  tagName: "a",
+                  properties: { href: "#case-1-theta-is-zero" },
+                  children: [{ type: "text", value: "Case 1 : \\theta is zero" }],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "element",
+          tagName: "h3",
+          properties: { id: "case-1-theta-is-zero" },
+          children: [
+            { type: "text", value: "Case 1 : " },
+            {
+              type: "element",
+              tagName: "span",
+              properties: { className: ["katex"] },
+              children: [{ type: "text", value: "θ" }],
+            },
+            { type: "text", value: " is zero" },
+          ],
+        },
+      ],
+    };
+
+    applyEnhancements(tree, "/tmp/project/src/data/blog/example/index.md");
+
+    const tocLink = findElements(
+      tree,
+      node =>
+        node.tagName === "a" && node.properties?.href === "#case-1-theta-is-zero"
+    )[0];
+
+    expect(tocLink).toBeDefined();
+    expect(
+      (tocLink.children as any[]).some(
+        child =>
+          child.type === "element" &&
+          child.tagName === "span" &&
+          hasClass(child, "katex")
+      )
+    ).toBe(true);
+    expect(getNodeText(tocLink)).toContain("Case 1 :");
+    expect(getNodeText(tocLink)).toContain("is zero");
+  });
 });
 
 describe("getReadingStats", () => {

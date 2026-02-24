@@ -148,14 +148,14 @@ const isHeadingNode = node =>
   isElementNode(node) &&
   ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName);
 
+const isHeadingLinkNode = node =>
+  isElementNode(node) &&
+  node.tagName === "a" &&
+  hasClass(node, "heading-link");
+
 const hasHeadingLinkChild = heading =>
   Array.isArray(heading.children) &&
-  heading.children.some(
-    child =>
-      isElementNode(child) &&
-      child.tagName === "a" &&
-      hasClass(child, "heading-link")
-  );
+  heading.children.some(isHeadingLinkNode);
 
 const createHeadingLink = id => ({
   type: "element",
@@ -457,6 +457,42 @@ const appendTocHeadingLink = (
   headingLinkLabels.add(normalizedLabel);
 };
 
+const cloneNode = node => structuredClone(node);
+
+const copyHeadingMarkupToTocLinks = tree => {
+  const tocList = findTocList(tree);
+  if (!tocList) return;
+
+  const headingsById = new Map();
+  visit(tree, "element", node => {
+    if (!isHeadingNode(node)) return;
+    const headingId = getElementId(node);
+    if (!headingId || headingId === TOC_HEADING_ID) return;
+    headingsById.set(headingId, node);
+  });
+
+  visit(tocList, "element", node => {
+    if (!isElementNode(node) || node.tagName !== "a") return;
+
+    const href =
+      typeof node?.properties?.href === "string" ? node.properties.href : "";
+    if (!href.startsWith("#")) return;
+
+    const headingId = href.slice(1);
+    if (!headingId) return;
+
+    const heading = headingsById.get(headingId);
+    if (!heading || !Array.isArray(heading.children)) return;
+
+    const clonedHeadingChildren = heading.children
+      .filter(child => !isHeadingLinkNode(child))
+      .map(cloneNode);
+
+    if (!clonedHeadingChildren.length) return;
+    node.children = clonedHeadingChildren;
+  });
+};
+
 const findTocList = node => {
   if (!node || !Array.isArray(node.children)) return null;
 
@@ -588,6 +624,7 @@ export function rehypePostEnhancements() {
     ensureReferencesHeadings(tree, usedIds);
     linkifyReferenceUrls(tree);
     ensureReferencesAndFootnotesInToc(tree);
+    copyHeadingMarkupToTocLinks(tree);
     addHeadingLinks(tree);
   };
 }
