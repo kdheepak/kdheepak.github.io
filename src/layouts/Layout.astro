@@ -63,6 +63,9 @@ window.MathJax = {
   options: {
     skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
   },
+  startup: {
+    typeset: false,
+  },
 };
 `;
 
@@ -85,11 +88,35 @@ const mathJaxTypesetScript = `
 
   const tryTypesetMath = () => {
     if (!window.MathJax || !window.MathJax.typesetPromise) return false;
-    const startupPromise = window.MathJax.startup?.promise || Promise.resolve();
-    startupPromise
-      .then(() => window.MathJax.typesetPromise())
-      .then(() => applyDisplayMathOverflow())
+
+    if (!window.__kdMathJaxTypesetQueue) {
+      window.__kdMathJaxTypesetQueue = Promise.resolve();
+    }
+
+    const roots = [];
+    const article = document.getElementById("article");
+    if (article) {
+      roots.push(article);
+    } else {
+      roots.push(document.body);
+    }
+
+    window.__kdMathJaxTypesetQueue = window.__kdMathJaxTypesetQueue
+      .then(() => {
+        const startupPromise =
+          window.MathJax.startup?.promise || Promise.resolve();
+        return startupPromise
+          .then(
+            () =>
+              new Promise(resolve => {
+                requestAnimationFrame(() => resolve());
+              })
+          )
+          .then(() => window.MathJax.typesetPromise(roots))
+          .then(() => applyDisplayMathOverflow());
+      })
       .catch(() => {});
+
     return true;
   };
 
@@ -104,7 +131,7 @@ const mathJaxTypesetScript = `
     let attempts = 0;
     window.__kdMathJaxRetryTimer = setInterval(() => {
       attempts += 1;
-      if (tryTypesetMath() || attempts >= 60) {
+      if (tryTypesetMath() || attempts >= 120) {
         clearInterval(window.__kdMathJaxRetryTimer);
         window.__kdMathJaxRetryTimer = null;
       }
@@ -116,7 +143,13 @@ const mathJaxTypesetScript = `
     window.__kdMathJaxHooked = true;
   }
 
-  scheduleTypeset();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleTypeset, {
+      once: true,
+    });
+  } else {
+    scheduleTypeset();
+  }
 })();
 `;
 ---
@@ -230,7 +263,7 @@ const mathJaxTypesetScript = `
           <script is:inline set:html={mathJaxConfigScript} />
           <script
             is:inline
-            async
+            defer
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
           />
         </>
