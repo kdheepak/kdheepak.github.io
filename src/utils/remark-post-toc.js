@@ -14,7 +14,7 @@ const getNodeText = node => {
 };
 
 const isTocEnabled = file =>
-  file?.data?.astro?.frontmatter?.toc === true;
+  file?.data?.astro?.frontmatter?.toc !== false;
 
 const isBlogPostFile = filePath =>
   typeof filePath === "string" &&

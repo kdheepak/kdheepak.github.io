@@ -51,7 +51,7 @@ const blog = defineCollection({
         notebookPath: z.string().optional(),
         canonicalURL: z.string().optional(),
         hideEditPost: z.boolean().optional(),
-        toc: z.boolean().optional().default(false),
+        toc: z.boolean().optional().default(true),
         mathjax: z.boolean().optional(),
         timezone: z.string().optional(),
       })

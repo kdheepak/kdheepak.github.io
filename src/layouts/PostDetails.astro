@@ -33,7 +33,7 @@ const {
   timezone,
   tags,
   hideEditPost,
-  toc = false,
+  toc = true,
   notebookPath,
   mathjax = false,
 } = post.data;
@@ -373,7 +373,7 @@ const nextPost =
       for (let index = 0; index < headingEntries.length; index += 1) {
         const entry = headingEntries[index];
         const linkRect = entry.link.getBoundingClientRect();
-        const x = Math.max(6, linkRect.left - tocRect.left - 12);
+        const x = Math.max(4, linkRect.left - tocRect.left - 8);
         const y = Math.max(
           6,
           linkRect.top - tocRect.top + floatingToc.scrollTop - 2
@@ -404,7 +404,7 @@ const nextPost =
       tocProgressTrack.setAttribute("d", pathData);
       tocProgressActive.setAttribute("d", pathData);
 
-      const svgWidth = Math.max(floatingToc.scrollWidth, maxX + 24);
+      const svgWidth = Math.max(floatingToc.clientWidth, maxX + 16);
       const svgHeight = Math.max(floatingToc.scrollHeight, maxY + 12);
       tocProgressSvg.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
       tocProgressSvg.style.width = `${svgWidth}px`;

@@ -319,15 +319,20 @@
         position: fixed;
         z-index: 30;
         top: 5.75rem;
-        left: max(
-          1rem,
-          calc((100vw - min(48rem, calc(100vw - 2rem))) / 2 - 15.5rem)
+        left: clamp(
+          0.75rem,
+          calc((100vw - min(48rem, calc(100vw - 2rem))) / 2 - 15.5rem),
+          5.5rem
         );
         width: min(14rem, calc(100vw - 2rem));
+        box-sizing: border-box;
         margin: 0;
-        padding-inline-start: 0.75rem;
+        padding-inline-start: 0.35rem;
+        padding-inline-end: 0.7rem;
         max-height: calc(100vh - 7rem);
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-gutter: stable;
         background: color-mix(
           in srgb,
           var(--color-background) 88%,
@@ -373,6 +378,7 @@
         display: block;
         text-decoration: none;
         opacity: 0.85;
+        overflow-wrap: anywhere;
       }
 
       &.has-sticky-toc .inline-toc-floating.is-docked-left a:hover {
