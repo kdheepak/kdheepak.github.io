@@ -184,24 +184,5 @@ None #| hide_line
 I hope this brief exploration into Quarto's and Pandoc's capabilities
 has been insightful. I'm happy to any questions in the comments below.
 
-<details>
-<summary>
-Versions
-</summary>
-
-:::div{.cell}
-``` {.python .cell-code}
-import matplotlib
-import sys
-import numpy as np
-
-print("Matplotlib version:", matplotlib.__version__)
-print("NumPy version:", np.__version__)
-print("Python version:", sys.version)
-```
-:::
-
-</details>
-
 [^1]: Pour one out if you've tasked a graduate student to figure out why
     your paper isn't compiling.
