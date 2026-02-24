@@ -24,11 +24,13 @@ of data.
 
 <div>
 
-> **Important**
->
-> I am continuously amazed and deeply impressed by the remarkable feat
-> of software engineering that Pandoc represents, a sentiment echoed by
-> everyone I know who has incorporated Pandoc into their workflow.
+::: callout-note
+
+I continue to be amazed and impressed by the remarkable feat
+of software engineering that Pandoc represents, a sentiment echoed by
+everyone I know who has incorporated Pandoc into their workflow.
+
+:::
 
 </div>
 
