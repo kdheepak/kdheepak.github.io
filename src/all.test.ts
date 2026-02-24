@@ -225,6 +225,9 @@ describe("Post citation", () => {
     expect(postCitationSource).not.toContain("BibTeX citation:");
     expect(postCitationSource).not.toContain("data-copy-bibtex");
     expect(postCitationSource).not.toContain("Copy BibTeX");
+    expect(postCitationSource).toContain(
+      'class="mt-1 block break-all text-accent decoration-dashed underline-offset-4"'
+    );
   });
 });
 
