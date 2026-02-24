@@ -30,7 +30,7 @@ is interested.
 
 I've been inspired by a few other blogs to consider adding margin notes to this theme.
 
-# Introduction
+## Introduction
 
 I've been inspired by a few other blogs to consider adding margin notes to this theme. This theme is
 called [pelican-smoothie](https://github.com/kdheepak/pelican-smoothie) and is freely available on
@@ -63,7 +63,7 @@ a proof of concept and by no means a final stable version that you can deploy on
 approach worked for me, and the reason I went down this path was because I was curious to see how
 far I could push my static site generation workflow.
 
-# Setup
+## Setup
 
 Firstly, I'm not using Pelican's built in reader for Markdown files, but instead am using Pandoc. I
 wrote a pretty long post on using [Pandoc for academic writing](../writing-papers-with-markdown/); I
@@ -90,7 +90,7 @@ of margin notes employs Pandoc, filters with Pandoc using the
 
 [^pandoc-pelican-theme-note]: You will still be able to use this theme, either with Pandoc or Pelican's default readers, however as you might see later in the post, I use `aside` tag elements for side notes or margin notes and I haven't been able to find a plugin that does just that.
 
-# Inspiration
+## Inspiration
 
 A list of blogs, posts, websites, web books have inspired this implementation. Most notably are the
 following articles – [tuftle-css](https://edwardtufte.github.io/tufte-css/) and
@@ -105,12 +105,11 @@ example of effective use of margin notes. There are a few other articles [@johnj
 that talk about this. The CSS for this page originally and the CSS for the margin notes had been
 heavily inspired by [gameprogrammingpatterns.com](https://gameprogrammingpatterns.com/).
 
-# Implementation
+## Implementation
 
 At the time of writing this article, Pandoc does not support creating margin notes for HTML
 documents. Pandoc does however support [footnotes](https://pandoc.org/MANUAL.html#footnotes) in the
-form of footnotes and inline notes. Inline notes are different for traditional footnotes in the
-source document. The following is an example of footnotes in Pandoc Markdown.
+form of footnotes. The following is an example of footnotes in Pandoc Markdown.
 
 ```markdown
 Here is a footnote reference,[^1] and another.[^longnote]
@@ -129,25 +128,22 @@ Here is a footnote reference,[^1] and another.[^longnote]
 This paragraph won't be part of the note, because it isn't indented.
 ```
 
-The following is an example of inline footnotes in Pandoc Markdown.
-
-```markdown
-Here is an inline note.^[Inlines notes are easier to write, since you don't have to pick an
-identifier and move down to type the note.]
-```
-
-As described in the example, inline notes are easier to write. Pandoc also conveniently also
+Pandoc also conveniently also
 supports filters. They allow for additional functionality to be added by walking through the
 Abstract Syntax Tree, and parsing or modifying information. I chose the following syntax for
 implementing a `aside` tag when converting from a Markdown file to a HTML document.
 
 ```markdown
-> This is the syntax^[_aside_: And this is the margin note.] in Markdown.
+> This is the syntax[^footnote] in Markdown.
+
+[^footnote]: _aside_: And this is the margin note.
 ```
 
-> This is the syntax[And this is the margin note.]{.aside} in Markdown.
+> This is the syntax[^footnote] in Markdown.
 
-When run through the filter, the above will be rendered as the following html.
+[^footnote]: _aside_: And this is the margin note.
+
+When run through the lua filter, the above will be rendered as the following html.
 
 ```html
 <p>This is an example for the syntax<span id="aside-0"></span> in Markdown.</p>
@@ -183,7 +179,7 @@ positioned in. Since the `<aside>` elements are located below the actual paragra
 javascript to move them up by their height. A better implementation could use the location of the
 `<span>` elements to fix the position of the notes.
 
-# Conclusions
+## Conclusions
 
 I'm sure there are definitely better ways to do the same thing, but this is what worked for now.
 There are a few limitations in the current implementation. One noticeable flaw is that I cannot have
