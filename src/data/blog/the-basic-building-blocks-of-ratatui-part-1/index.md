@@ -595,7 +595,7 @@ buf.area.width * buf.area.height
 We will learn more about `ratatui::style::Style`s and how a widget draws
 into a `ratatui::buffer::Buffer` in a future post.
 
-## Frame primitive
+## Frame Primitive
 
 `ratatui` exposes just one function as the API for drawing to the
 terminal, the
