@@ -22,6 +22,10 @@ import { remarkMermaidFences } from "./src/utils/remark-mermaid-fences.js";
 import { remarkNormalizeCodeFences } from "./src/utils/remark-normalize-code-fences.js";
 import { rehypeExternalLinks } from "./src/utils/rehype-external-links.js";
 import { rehypePostEnhancements } from "./src/utils/rehype-post-enhancements.js";
+import {
+    rehypeProtectCodeCitations,
+    rehypeRestoreCodeCitations,
+} from "./src/utils/rehype-protect-code-citations.js";
 import { rehypeSvgbob } from "./src/utils/rehype-svgbob.js";
 import { remarkPostToc } from "./src/utils/remark-post-toc.js";
 import { slugifyStr } from "./src/utils/slugify";
@@ -195,6 +199,7 @@ export default defineConfig({
         rehypePlugins: [
             rehypeSvgbob,
             rehypeRaw,
+            rehypeProtectCodeCitations,
             [
                 rehypeCitation,
                 {
@@ -204,6 +209,7 @@ export default defineConfig({
                     linkCitations: true,
                 },
             ],
+            rehypeRestoreCodeCitations,
             [rehypeMermaid, {}],
             [rehypeExternalLinks, { site: SITE.website }],
             rehypePostEnhancements,
