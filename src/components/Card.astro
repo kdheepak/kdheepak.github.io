@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@/utils/slugify";
 import { getPath } from "@/utils/getPath";
 import Datetime from "./Datetime.astro";
+import ReadingStats from "./ReadingStats.astro";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -17,6 +18,7 @@ const {
   id,
   data,
   filePath,
+  body,
 } = Astro.props;
 
 const { title, description, ...props } = data;
@@ -63,6 +65,14 @@ const { title, description, ...props } = data;
         }}
       />
     )}
+    <ReadingStats
+      {body}
+      class:list={[
+        "mt-1",
+        { "sm:col-span-2": showDate && dateLayout === "right" },
+      ]}
+      align="center"
+    />
     <p
       class:list={[
         "mt-1",

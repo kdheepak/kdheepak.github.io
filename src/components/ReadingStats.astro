@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon/components";
+import { getReadingStats } from "@/utils/readingStats";
+
+type Props = {
+  body?: string;
+  class?: string;
+  size?: "sm" | "lg";
+  align?: "left" | "center" | "right";
+};
+
+const {
+  body,
+  class: className = "",
+  size = "sm",
+  align = "center",
+} = Astro.props;
+
+const { minutes, wordCount } = getReadingStats(body);
+const formattedWordCount = new Intl.NumberFormat("en-US").format(wordCount);
+---
+
+<div
+  class:list={[
+    "flex items-center gap-3 text-sm opacity-80",
+    {
+      "justify-end text-right": align === "right",
+      "justify-start": align === "left",
+      "justify-center text-center": align === "center",
+      "sm:text-base": size === "lg",
+    },
+    className,
+  ]}
+>
+  <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
+    <Icon
+      name="tabler:clock"
+      class:list={[
+        "inline-block min-w-4",
+        { "size-4": size === "sm", "size-5": size === "lg" },
+      ]}
+    />
+    <span>
+      {minutes} min read ({formattedWordCount} {wordCount === 1 ? "word" : "words"})
+    </span>
+  </span>
+</div>

@@ -9,6 +9,7 @@ import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
+import ReadingStats from "@/components/ReadingStats.astro";
 import { Icon } from "astro-icon/components";
 import { getPath } from "@/utils/getPath";
 import { getLatestCommitHash } from "@/utils/getLatestCommitHash";
@@ -132,13 +133,16 @@ const nextPost =
           viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
         }}
       />
-      <div
-        class:list={[
-          "ml-auto max-sm:hidden",
-          { hidden: !showPostActions },
-        ]}
-      >
-        <EditPost {hideEditPost} {post} />
+      <div class="flex flex-1 items-center gap-4">
+        <ReadingStats body={post.body} size="lg" align="center" class="flex-1" />
+        <div
+          class:list={[
+            "ml-auto max-sm:hidden",
+            { hidden: !showPostActions },
+          ]}
+        >
+          <EditPost {hideEditPost} {post} />
+        </div>
       </div>
     </div>
     <article
