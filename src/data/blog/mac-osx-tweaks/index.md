@@ -9,7 +9,7 @@ tags:
 **_Update_**: I've decided to maintain a repo
 [here](https://github.com/kdheepak/dotfiles/blob/main/osx) instead.
 
-# General UI
+## General UI
 
 ```bash
 # Disable Dashboard
@@ -29,7 +29,7 @@ defaults write -g AppleTextBreakLocale en_US_POSIX
 sudo nvram SystemAudioVolume=" "
 ```
 
-# Disks
+## Disks
 
 ```bash
 # Disks: disable Time Machine prompts
@@ -53,14 +53,14 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write com.apple.dock mru-spaces -bool false
 ```
 
-# Keyboard
+## Keyboard
 
 ```bash
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
 ```
 
-# Finder
+## Finder
 
 ```bash
 # Disable automatic termination of inactive apps
@@ -88,7 +88,7 @@ chflags nohidden ~/Library
 defaults write com.apple.finder EmptyTrashSecurely -bool true
 ```
 
-# Dock & hot corners
+## Dock & hot corners
 
 ```bash
 # Autohide the Dock
@@ -98,7 +98,7 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock magnification -bool false
 ```
 
-# Panels
+## Panels
 
 ```bash
 # Panels: expand save panel by default
@@ -114,7 +114,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 ```
 
-# Screen
+## Screen
 
 ```bash
 # Screen: save screenshots to the desktop
@@ -124,7 +124,7 @@ defaults write com.apple.screencapture location -string "$HOME/Desktop"
 defaults write com.apple.screencapture disable-shadow -bool true
 ```
 
-# Misc
+## Misc
 
 ```bash
 # Misc: only use UTF-8 in Terminal.app

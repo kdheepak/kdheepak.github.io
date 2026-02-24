@@ -47,7 +47,7 @@ We will go through this problem for the $2$ eggs and $3$ eggs variant,
 and derive the solution mathematically. Then, we will generalize the
 problem with $x$ floors and $N$ eggs.
 
-# Two eggs
+## Two eggs
 
 We have $2$ eggs to start with and a $100$ storey tower to explore.
 
@@ -137,7 +137,7 @@ $$\frac{x \times (1 + x)}{2} >= 100$$
 This tells us that with $14$ drops we can guarantee finding the breaking
 floor in a tower with up to $105$ floors.
 
-# Three eggs
+## Three eggs
 
 We have already previously established the best strategy for $1$ egg and
 $2$ eggs.
@@ -189,7 +189,7 @@ $$\frac{x^3 + 5x}{6} >= N$$
 Solving this, we get $9$ drops for $3$ eggs. With just $9$ drops, we can
 guarantee finding the breaking floor in a $129$ storey tower.
 
-# $N$ eggs
+## $N$ eggs
 
 Let's see if we can generalize this for $N$ eggs.
 
@@ -285,7 +285,7 @@ floors.
 Using this, we can say that, with $x$ drops we can guarantee checking
 $2^x - 1$ floors if we had infinite eggs[^2].
 
-# Implementation
+## Implementation
 
 Let's implement this problem.
 

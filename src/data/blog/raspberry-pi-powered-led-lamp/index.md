@@ -14,7 +14,7 @@ powered desk lamp.
 
 [^lamp-gif]: _aside_: ![Raspberry Pi Powered LED Desk Lamp](images/raspberrypilamp.gif)
 
-# Requirements
+## Requirements
 
 - Raspberry Pi
 - Memory card (greater than 4 GB recommended)
@@ -23,12 +23,12 @@ powered desk lamp.
 - Wires
 - Lamp shade
 
-# Instructions
+## Instructions
 
 Any model of the Raspberry Pi should work for this project. First we need to set up the Raspberry
 Pi.
 
-## Hardware
+### Hardware
 
 To use SPI on the Raspberry Pi, you need to connect 4 pins. Adafruit has an excellent image in their
 tutorial that shows how you can do this, which I've also linked below.
@@ -44,7 +44,7 @@ purchased them in white, since the LEDs are RGB.
 
 I purchased the LED strip from Adafruit.
 
-## Software
+### Software
 
 Download the latest Raspbian from the
 [official source](https://www.raspberrypi.com/software/operating-systems/). I used the image
@@ -118,7 +118,7 @@ I've used `sudo` for all the `pip` installations. It is definitely required for 
 not be for the others. You will need to use `sudo` to run the application, since root access is
 required to control GPIO pins on the Raspberry Pi.
 
-### BiblioPixel
+#### BiblioPixel
 
 The tutorial on Adafruit's page links to a library for their LED strip, which the author has
 deprecated in favour of the excellent BiblioPixel [@noauthor_maniacallabs/bibliopixel_nodate]. I recommend using
@@ -127,7 +127,7 @@ easy to use the same code base.
 
 At this point, you should be able to run a few examples, and see animations on your LED strip.
 
-### Flask
+#### Flask
 
 I've set up a simple Flask server and am using a Javascript library called
 [colorwheel](https://jweir.github.io/colorwheel/) to send a user selected color to the Raspberry Pi.

@@ -1831,7 +1831,7 @@ end
 
 If you've made it all this way, part 2 of day 25 should be a cinch 😉.
 
-# Final words
+## Final words
 
 Thanks to everyone in the Julia community who participated on
 [Zulip](https://julialang.zulipchat.com), [Slack](https://julialang.slack.com/) and

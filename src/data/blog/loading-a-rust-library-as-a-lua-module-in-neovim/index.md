@@ -270,7 +270,7 @@ Now in neovim, after a `PackerInstall` and `PackerCompiler` you can run
 
 Tada!
 
-# Why is this useful
+## Why is this useful
 
 Rust has well established libraries for parsing datetime, dealing with unicode, for concurrency and
 parallelism, and much much more. This can be useful in developing a lua plugin for neovim that wants

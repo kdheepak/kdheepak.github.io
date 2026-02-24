@@ -7,7 +7,7 @@ tags:
   - android
 ---
 
-# Android Projects
+## Android Projects
 
 This is a small tutorial on how to use Python with SL4A.
 

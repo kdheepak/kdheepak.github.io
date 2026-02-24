@@ -11,7 +11,7 @@ references:
     URL: https://github.com/conda/conda
 ---
 
-# Why use conda
+## Why use conda
 
 The following quote is from Conda's github page
 [conda/conda](https://github.com/conda/conda).
@@ -25,7 +25,7 @@ The main advantage of using conda to manage your packages and environment is tha
 across platforms. Conda also uses hard linking, so it is inexpensive to create multiple copies of
 the same package
 
-# How to
+## How to
 
 One simple way to start is to first specify a `environment.yml` file
 
