@@ -207,6 +207,7 @@ export default defineConfig({
                     bibliography: "src/data/bibliography/bibliography.bib",
                     csl: "src/data/blog/writing-papers-with-markdown/www/ieee.csl",
                     linkCitations: true,
+                    showTooltips: true,
                 },
             ],
             rehypeRestoreCodeCitations,
