@@ -52,7 +52,9 @@ const setClassList = (node, classList) => {
 };
 
 const hasClass = (node, className) =>
-  toClassList(node?.properties?.className).includes(className);
+  toClassList(node?.properties?.className ?? node?.properties?.class).includes(
+    className
+  );
 
 const addClass = (node, className) => {
   const classList = toClassList(node?.properties?.className);
@@ -196,7 +198,7 @@ const ensureFootnotesHeading = (section, usedIds) => {
 };
 
 const ensureReferencesHeadings = (node, usedIds) => {
-  if (!isElementNode(node) || !Array.isArray(node.children)) return;
+  if (!node || !Array.isArray(node.children)) return;
 
   for (let index = 0; index < node.children.length; index += 1) {
     const child = node.children[index];
