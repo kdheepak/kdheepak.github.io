@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="html" version="5.0" encoding="UTF-8" indent="yes"/>
   <xsl:strip-space elements="*"/>
@@ -15,7 +15,8 @@
       <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title><xsl:value-of select="rss/channel/title"/> Blog</title>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+        <title><xsl:value-of select="rss/channel/title"/> | RSS Feed</title>
         <style>
           :root {
             --background: #fdfdfd;
@@ -73,6 +74,9 @@
 
           .year-group {
             margin-top: 1.4rem;
+            --timeline-line-top: 2.1rem;
+            --timeline-line-bottom: 0.55rem;
+            --timeline-month-dot-top: 2.05rem;
           }
 
           .year-header {
@@ -167,8 +171,8 @@
                 var(--timeline-label-col) + var(--timeline-gap) +
                   (var(--timeline-marker-col) / 2)
               );
-              top: 2.1rem;
-              bottom: 0.55rem;
+              top: var(--timeline-line-top);
+              bottom: var(--timeline-line-bottom);
               transform: translateX(-50%);
               border-left: 2px dashed var(--border);
               pointer-events: none;
@@ -215,7 +219,7 @@
               border-radius: 999px;
               background: var(--foreground);
               opacity: 0.72;
-              margin-top: 2.05rem;
+              margin-top: var(--timeline-month-dot-top);
             }
           }
         </style>
@@ -312,3 +316,12 @@
     </html>
   </xsl:template>
 </xsl:stylesheet>
+`;
+
+export function GET() {
+  return new Response(rssStylesheet, {
+    headers: {
+      "Content-Type": "text/xsl; charset=utf-8",
+    },
+  });
+}

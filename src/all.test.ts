@@ -42,6 +42,11 @@ const footerSource = readFileSync(
   "utf8"
 );
 
+const globalStylesSource = readFileSync(
+  resolve(process.cwd(), "src/styles/global.css"),
+  "utf8"
+);
+
 const postCitationSource = readFileSync(
   resolve(process.cwd(), "src/components/PostCitation.astro"),
   "utf8"
@@ -53,7 +58,7 @@ const blogIndexSource = readFileSync(
 );
 
 const rssStylesheetSource = readFileSync(
-  resolve(process.cwd(), "public/rss.xsl"),
+  resolve(process.cwd(), "src/pages/rss.xsl.ts"),
   "utf8"
 );
 
@@ -251,14 +256,16 @@ describe("Post citation", () => {
 describe("Blog timeline graphics", () => {
   it("adds timeline marker elements to /blog without replacing card-based content", () => {
     expect(blogIndexSource).toContain('import Card from "@/components/Card.astro";');
+    expect(blogIndexSource).not.toContain("timeline-graphics.css");
+    expect(globalStylesSource).toContain(".timeline-year-group::after");
     expect(blogIndexSource).toContain('class="timeline-year-header"');
     expect(blogIndexSource).toContain('class="timeline-year-marker"');
     expect(blogIndexSource).toContain('class="timeline-month-row');
     expect(blogIndexSource).toContain('class="timeline-month-marker"');
-    expect(blogIndexSource).toContain(".timeline-year-group::after");
   });
 
   it("adds matching timeline marker elements to rss.xsl", () => {
+    expect(rssStylesheetSource).not.toContain("timeline-graphics.css");
     expect(rssStylesheetSource).toContain('class="year-header"');
     expect(rssStylesheetSource).toContain('class="timeline-year-marker"');
     expect(rssStylesheetSource).toContain('class="timeline-month-marker"');
