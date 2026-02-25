@@ -334,6 +334,7 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
               --timeline-line-bottom: 0.6rem;
               --timeline-month-dot-top: 1.95rem;
               position: relative;
+              isolation: isolate;
             }
 
             .year-group::after {
@@ -347,6 +348,7 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
               bottom: var(--timeline-line-bottom);
               transform: translateX(-50%);
               border-left: 2px dashed var(--border);
+              z-index: 0;
               pointer-events: none;
             }
 
@@ -392,6 +394,27 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
               background: var(--foreground);
               opacity: 0.72;
               margin-top: var(--timeline-month-dot-top);
+            }
+
+            /* Do not draw timeline tail below the earliest post marker. */
+            .year-group:last-of-type .month-row:last-of-type {
+              position: relative;
+            }
+
+            .year-group:last-of-type .month-row:last-of-type::after {
+              content: "";
+              position: absolute;
+              left: calc(
+                var(--timeline-label-col) + var(--timeline-gap) +
+                  (var(--timeline-marker-col) / 2)
+              );
+              top: calc(var(--timeline-month-dot-top) + 0.55rem);
+              bottom: 0;
+              transform: translateX(-50%);
+              width: 4px;
+              background: var(--background);
+              z-index: 2;
+              pointer-events: none;
             }
           }
         </style>
