@@ -333,6 +333,28 @@ describe("Code language badge styling", () => {
   });
 });
 
+describe("Drop-cap flow with margin notes", () => {
+  it("clears only the drop-cap side so right margin notes do not force large gaps", () => {
+    const dropCapFlowRule = getCssRuleBody(
+      typographyStylesSource,
+      "&.drop-cap-lead > p:first-of-type + *"
+    );
+
+    expect(dropCapFlowRule).toContain("clear: left;");
+    expect(dropCapFlowRule).not.toContain("clear: both;");
+  });
+
+  it("prefixes rendered margin notes with a css caret marker", () => {
+    const marginMarkerRule = getCssRuleBody(
+      typographyStylesSource,
+      ".margin-footnote > p:first-of-type::before"
+    );
+
+    expect(marginMarkerRule).toContain('content: "^ ";');
+    expect(postDetailsSource).not.toContain("marginNoteMarker");
+  });
+});
+
 describe("citation utilities", () => {
   it("builds a stable BibTeX key from author, year, and slug", () => {
     const key = createBibtexKey(

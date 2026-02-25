@@ -123,7 +123,7 @@
      * so badges/code blocks don't collide with short lead paragraphs.
      */
     &.drop-cap-lead > p:first-of-type + * {
-      clear: both;
+      clear: left;
     }
 
     @media (max-width: 40rem) {
@@ -462,8 +462,10 @@
       @apply hidden text-xs leading-relaxed break-words text-foreground/80;
     }
 
-    .margin-footnote-marker {
-      @apply me-1 font-semibold text-foreground/65;
+    .margin-footnote > p:first-of-type::before {
+      content: "^ ";
+      font-weight: 600;
+      color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
     }
 
     .margin-footnote p {
