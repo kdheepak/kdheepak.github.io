@@ -165,6 +165,16 @@ const getNodeText = (node: any): string => {
   return node.children.map((child: any) => getNodeText(child)).join("");
 };
 
+const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const getCssRuleBody = (source: string, selector: string): string => {
+  const ruleMatch = source.match(
+    new RegExp(`${escapeRegExp(selector)}\\s*\\{([\\s\\S]*?)\\n\\s*\\}`)
+  );
+  return ruleMatch?.[1] ?? "";
+};
+
 const findElements = (
   node: any,
   predicate: (candidate: any) => boolean,
@@ -294,6 +304,32 @@ describe("Blog timeline graphics", () => {
     expect(rssStylesheetSource).not.toContain('class="timeline-year-marker"');
     expect(rssStylesheetSource).toContain('class="timeline-month-marker"');
     expect(rssStylesheetSource).toContain(".year-group::after");
+  });
+});
+
+describe("Code language badge styling", () => {
+  it("keeps the language badge visually joined with the code block", () => {
+    const wrapperRule = getCssRuleBody(
+      typographyStylesSource,
+      ".has-code-language-badge"
+    );
+    const preRule = getCssRuleBody(
+      typographyStylesSource,
+      ".has-code-language-badge > pre"
+    );
+    const badgeRule = getCssRuleBody(typographyStylesSource, ".code-language-badge");
+    const badgeAfterRule = getCssRuleBody(
+      typographyStylesSource,
+      ".code-language-badge::after"
+    );
+
+    expect(wrapperRule).toContain("margin-top: 2.25rem;");
+    expect(wrapperRule).not.toContain("padding-top:");
+    expect(preRule).toContain("margin-top: 0;");
+    expect(badgeRule).toContain("transform: translateY(calc(-100% + 1px));");
+    expect(badgeRule).toContain("border-bottom: none;");
+    expect(badgeAfterRule).toContain("bottom: -1px;");
+    expect(badgeAfterRule).toContain("height: 2px;");
   });
 });
 
