@@ -691,6 +691,7 @@ const directiveContainerToElement = node => {
     const layoutStyles = [
       `--layout-ncol:${layoutNcol}`,
       "display:grid",
+      `grid-template-columns:repeat(${layoutNcol},minmax(0,1fr))`,
       "grid-template-columns:repeat(var(--layout-ncol),minmax(0,1fr))",
       "gap:1rem",
       "align-items:start",

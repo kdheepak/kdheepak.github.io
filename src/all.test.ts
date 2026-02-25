@@ -477,6 +477,9 @@ describe("remarkDirectives", () => {
     expect(directiveNode.data.hProperties.style).toContain("--layout-ncol:2");
     expect(directiveNode.data.hProperties.style).toContain("display:grid");
     expect(directiveNode.data.hProperties.style).toContain(
+      "grid-template-columns:repeat(2,minmax(0,1fr))"
+    );
+    expect(directiveNode.data.hProperties.style).toContain(
       "grid-template-columns:repeat(var(--layout-ncol),minmax(0,1fr))"
     );
     expect(directiveNode.data.hProperties["layout-ncol"]).toBeUndefined();
@@ -484,6 +487,9 @@ describe("remarkDirectives", () => {
 
   it("defines prose grid styles for layout-ncol containers", () => {
     expect(typographyStylesSource).toContain(".layout-ncol");
+    expect(typographyStylesSource).toContain(
+      "grid-template-columns: repeat(2, minmax(0, 1fr));"
+    );
     expect(typographyStylesSource).toContain(
       "grid-template-columns: repeat(var(--layout-ncol), minmax(0, 1fr));"
     );
