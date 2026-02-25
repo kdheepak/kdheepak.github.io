@@ -413,7 +413,7 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0m18 11l-6-6"/>
                 </svg>
               </a>
-              <button class="icon-button" id="theme-btn" type="button" title="Toggles light & dark" aria-label="auto">
+              <button class="icon-button" id="theme-btn" type="button" title="Toggles light &amp; dark" aria-label="auto">
                 <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"/>
                 </svg>
