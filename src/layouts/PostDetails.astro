@@ -1305,6 +1305,18 @@ const nextPost =
       wrapper.style.position = "relative";
       wrapper.className = "group";
 
+      const language = codeBlock.getAttribute("data-language")?.trim();
+      const hasFileNameLabel = Array.from(codeBlock.children).some(
+        child => child instanceof HTMLElement && child.tagName === "SPAN"
+      );
+      if (language && language !== "plaintext" && !hasFileNameLabel) {
+        const languageBadge = document.createElement("span");
+        languageBadge.className = "code-language-badge";
+        languageBadge.textContent = language;
+        wrapper.classList.add("has-code-language-badge");
+        wrapper.appendChild(languageBadge);
+      }
+
       // Check if --file-name-offset custom property exists
       const computedStyle = getComputedStyle(codeBlock);
       const hasFileNameOffset =
