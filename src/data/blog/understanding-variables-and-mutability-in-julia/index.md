@@ -543,7 +543,7 @@ julia> remaining
 
 ### Named Tuple unpacking
 
-Julia also supports `NamedTuple` and unpacking; you have to use a semicolon in the LHS in
+Julia also supports unpacking `NamedTuple`s; you have to use a semicolon in the LHS in
 the unpacking syntax:
 
 ```julia
