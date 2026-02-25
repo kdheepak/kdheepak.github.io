@@ -98,10 +98,10 @@ work with.
 :::div{layout-ncol=2}
 
 ![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png){width=50%
-align="center" clickable=true}
+align="center"}
 
 ![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png){width=51%
-align="center" clickable=true}
+align="center"}
 
 :::
 
