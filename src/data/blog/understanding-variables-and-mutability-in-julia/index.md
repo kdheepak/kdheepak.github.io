@@ -19,12 +19,14 @@ nocite: |
 ---
 
 I would like to present a mental model for understanding the basics of variable assignment and
-mutability in Julia using an analogy[While analogies can be useful because they allow us to
+mutability in Julia using an analogy[^julia-intuition] involving books and bookshelves,
+from a complete beginner's perspective.
+
+[^julia-intuition]: _aside_: While analogies can be useful because they allow us to
 understand complex concepts by comparing them to something more familiar or simpler, they can also
 be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand
 any subject, I recommend using multiple different analogies to bolster your confidence and then dive
-deeper into the subject matter to harden your intuition.]{.aside} involving books and bookshelves,
-from a complete beginner's perspective.
+deeper into the subject matter to harden your intuition.
 
 Imagine you are at a library full of books on bookshelves, but they are all over the place and you
 can't find what you want. Also, you can't interact directly with the books or bookshelves.
@@ -175,8 +177,9 @@ same object as the `x` label.
 So in our analogy, the `x` and `y` variables are two labels that you and the librarian agree point
 to the same "book" on the "bookshelf" (i.e. the same object in memory).
 
-In Julia, you can check the location by using the `pointer()`[The `pointer` function only works for
-mutable objects]{.aside} function:
+In Julia, you can check the location by using the `pointer()`[^pointer] function:
+
+[^pointer]: _aside_: The `pointer` function only works for mutable objects.
 
 ```julia
 julia> pointer(x)
