@@ -32,6 +32,11 @@ const astroConfigSource = readFileSync(
   "utf8"
 );
 
+const contentConfigSource = readFileSync(
+  resolve(process.cwd(), "src/content.config.ts"),
+  "utf8"
+);
+
 const postDetailsSource = readFileSync(
   resolve(process.cwd(), "src/layouts/PostDetails.astro"),
   "utf8"
@@ -232,6 +237,7 @@ describe("Post citation", () => {
     );
     expect(postDetailsSource).toContain("<PostCitation");
     expect(postDetailsSource).toContain("url={postUrl}");
+    expect(postDetailsSource).toContain("!hideCitation");
     expect(postDetailsSource).toContain(
       'class="mt-10 mb-6 grid items-start gap-6 md:grid-cols-[1fr_auto_1fr]"'
     );
@@ -250,6 +256,13 @@ describe("Post citation", () => {
     expect(postCitationSource).toContain(
       'class="mt-1 block break-all text-accent decoration-dashed underline-offset-4"'
     );
+  });
+
+  it("supports disabling post citation via frontmatter", () => {
+    expect(contentConfigSource).toContain(
+      "hideCitation: z.boolean().optional().default(false)"
+    );
+    expect(postDetailsSource).toContain("hideCitation = false");
   });
 });
 

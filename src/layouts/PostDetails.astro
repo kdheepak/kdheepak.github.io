@@ -35,6 +35,7 @@ const {
   timezone,
   tags,
   hideEditPost,
+  hideCitation = false,
   toc = true,
   notebookPath,
 } = post.data;
@@ -163,14 +164,18 @@ const nextPost =
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
-    <PostCitation
-      {author}
-      {title}
-      {pubDatetime}
-      url={postUrl}
-      slug={post.id}
-      timeZone={timezone || SITE.timezone}
-    />
+    {
+      !hideCitation && (
+        <PostCitation
+          {author}
+          {title}
+          {pubDatetime}
+          url={postUrl}
+          slug={post.id}
+          timeZone={timezone || SITE.timezone}
+        />
+      )
+    }
 
     <div
       class="mt-10 mb-6 grid items-start gap-6 md:grid-cols-[1fr_auto_1fr]"
