@@ -54,7 +54,6 @@ exploration.
 
 :::div{.cell}
 ``` {.python .cell-code}
-
 ibis.options.interactive = True
 ```
 :::

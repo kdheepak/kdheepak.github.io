@@ -255,14 +255,24 @@
     }
 
     /* Give notebook outputs a subtle visual offset from input cells. */
+    .cell-output {
+      border-inline-start: 3px solid
+        color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+      border-radius: 0;
+      padding: 0.6rem 0.8rem;
+    }
+
+    .cell-output > :first-child {
+      margin-top: 0;
+    }
+
+    .cell-output > :last-child {
+      margin-bottom: 0;
+    }
+
     .cell-output pre {
-      border-inline-start: 2px solid
-        color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
-      background: color-mix(
-        in srgb,
-        var(--color-accent) 4%,
-        var(--color-muted)
-      );
+      margin: 0;
+      border-radius: 0;
     }
 
     .cell-output pre code {
