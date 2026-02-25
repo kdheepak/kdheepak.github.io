@@ -583,10 +583,7 @@ a += 1; # a = a + 1
 b -= 2; # b = b - 1
 ```
 
-These are called updating operations:
-<https://docs.julialang.org/en/v1/manual/mathematical-operations/#Updating-operators>
-
-Updating operations are just a short hand for the longer assignment form.
+These are called [updating operations](https://docs.julialang.org/en/v1/manual/mathematical-operations/#Updating-operators). Updating operations are just a short hand for the longer assignment form.
 
 ### Broadcasting
 
