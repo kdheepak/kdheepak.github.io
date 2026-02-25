@@ -25,8 +25,8 @@ from a complete beginner's perspective.
 [^julia-intuition]: _aside_: While analogies can be useful because they allow us to
 understand complex concepts by comparing them to something more familiar or simpler, they can also
 be oversimplified, leading to incorrect or incomplete understanding of the topic. To best understand
-any subject, I recommend using multiple different analogies to bolster your confidence and then dive
-deeper into the subject matter to harden your intuition.
+any subject, using multiple different analogies to bolster your confidence and then diving
+deeper into the subject matter to harden your intuition is recommended.
 
 Imagine you are at a library full of books on bookshelves, but they are all over the place and you
 can't find what you want. Also, you can't interact directly with the books or bookshelves.
