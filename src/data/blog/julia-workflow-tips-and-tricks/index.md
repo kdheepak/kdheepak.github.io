@@ -79,7 +79,7 @@ With the `Startup.jl` package approach, your root environment can be empty and y
 functionality exposed by `Startup.jl`:
 
 ![Using `Startup.jl` to load `BenchmarkTools` with an empty root environment.](https://user-images.githubusercontent.com/1813121/260273629-af4095d5-81cf-4a28-aa64-f720def4a9d6.png){fig-align="center"
-width=75% clickable=true}
+width=75%}
 
 :::callout-tip
 
