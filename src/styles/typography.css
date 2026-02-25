@@ -254,6 +254,17 @@
       font-feature-settings: "liga" 0, "calt" 0;
     }
 
+    /* Give notebook outputs a subtle visual offset from input cells. */
+    .cell-output pre {
+      border-inline-start: 2px solid
+        color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+      background: color-mix(
+        in srgb,
+        var(--color-accent) 4%,
+        var(--color-muted)
+      );
+    }
+
     .cell-output pre code {
       background: transparent;
       padding: 0;
