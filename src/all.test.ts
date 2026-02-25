@@ -220,6 +220,15 @@ describe("KaTeX integration", () => {
   });
 });
 
+describe("Google site verification", () => {
+  it("includes the expected verification meta tag in the layout head", () => {
+    expect(layoutSource).toContain('name="google-site-verification"');
+    expect(layoutSource).toContain(
+      'content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U"'
+    );
+  });
+});
+
 describe("Footer timestamp", () => {
   it("keeps machine-readable ISO while rendering a standardized local timestamp", () => {
     expect(footerSource).toContain(
