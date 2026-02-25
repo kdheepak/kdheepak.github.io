@@ -9,7 +9,11 @@ keywords: reinstall xcode command line developer tools
 
 Delete existing command line tools and install them again.
 
-:::info This requires root to run. :::
+::: callout-info
+
+This requires root to run.
+
+:::
 
 ```bash
 # uninstall command line tools
