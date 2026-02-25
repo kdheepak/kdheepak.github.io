@@ -242,7 +242,6 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
             flex-direction: column;
           }
 
-          .timeline-year-marker,
           .timeline-month-marker {
             display: none;
           }
@@ -330,8 +329,11 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
               --timeline-label-col: 7.25rem;
               --timeline-marker-col: 1.35rem;
               --timeline-gap: 0.55rem;
-              --timeline-line-top: 2.15rem;
+              --timeline-year-header-height: 2rem;
+              --timeline-line-top: 1.35rem;
               --timeline-line-bottom: 0.6rem;
+              --timeline-line-bridge: 1.4rem;
+              --timeline-marker-size: 0.55rem;
               --timeline-month-dot-top: 1.95rem;
               position: relative;
               isolation: isolate;
@@ -352,22 +354,28 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
               pointer-events: none;
             }
 
+            /* Overlap adjacent year segments so the dashed rail stays continuous. */
+            .year-group:not(:last-of-type)::after {
+              bottom: calc(var(--timeline-line-bottom) - var(--timeline-line-bridge));
+            }
+
+            .year-group + .year-group::after {
+              top: calc(var(--timeline-line-top) - var(--timeline-line-bridge));
+            }
+
+            /* First timeline rail starts at the first month marker center. */
+            .year-group:first-of-type::after {
+              top: calc(
+                var(--timeline-year-header-height) + var(--timeline-month-dot-top) +
+                  (var(--timeline-marker-size) / 2)
+              );
+            }
+
             .year-header {
               display: grid;
               grid-template-columns: var(--timeline-label-col) var(--timeline-marker-col);
               align-items: center;
               column-gap: var(--timeline-gap);
-            }
-
-            .timeline-year-marker {
-              display: block;
-              z-index: 1;
-              justify-self: center;
-              width: 1.25rem;
-              height: 1.25rem;
-              border: 0.24rem solid var(--accent);
-              border-radius: 999px;
-              background: var(--background);
             }
 
             .month-row {
@@ -388,8 +396,8 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
               display: block;
               z-index: 1;
               justify-self: center;
-              width: 0.55rem;
-              height: 0.55rem;
+              width: var(--timeline-marker-size);
+              height: var(--timeline-marker-size);
               border-radius: 999px;
               background: var(--foreground);
               opacity: 0.72;
@@ -408,7 +416,7 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
                 var(--timeline-label-col) + var(--timeline-gap) +
                   (var(--timeline-marker-col) / 2)
               );
-              top: calc(var(--timeline-month-dot-top) + 0.55rem);
+              top: calc(var(--timeline-month-dot-top) + var(--timeline-marker-size));
               bottom: 0;
               transform: translateX(-50%);
               width: 4px;
@@ -416,6 +424,7 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
               z-index: 2;
               pointer-events: none;
             }
+
           }
         </style>
       </head>
@@ -468,7 +477,6 @@ const rssStylesheet = `<?xml version="1.0" encoding="UTF-8"?>
                   <section class="year-group">
                     <div class="year-header">
                       <span class="year"><xsl:value-of select="$year"/></span>
-                      <span class="timeline-year-marker"></span>
                     </div>
 
                     <xsl:for-each

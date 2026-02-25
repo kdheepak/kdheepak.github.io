@@ -267,20 +267,20 @@ describe("Post citation", () => {
 });
 
 describe("Blog timeline graphics", () => {
-  it("adds timeline marker elements to /blog without replacing card-based content", () => {
+  it("adds timeline elements to /blog without replacing card-based content", () => {
     expect(blogIndexSource).toContain('import Card from "@/components/Card.astro";');
     expect(blogIndexSource).not.toContain("timeline-graphics.css");
     expect(globalStylesSource).toContain(".timeline-year-group::after");
     expect(blogIndexSource).toContain('class="timeline-year-header"');
-    expect(blogIndexSource).toContain('class="timeline-year-marker"');
+    expect(blogIndexSource).not.toContain('class="timeline-year-marker"');
     expect(blogIndexSource).toContain('class="timeline-month-row');
     expect(blogIndexSource).toContain('class="timeline-month-marker"');
   });
 
-  it("adds matching timeline marker elements to rss.xsl", () => {
+  it("adds matching timeline elements to rss.xsl", () => {
     expect(rssStylesheetSource).not.toContain("timeline-graphics.css");
     expect(rssStylesheetSource).toContain('class="year-header"');
-    expect(rssStylesheetSource).toContain('class="timeline-year-marker"');
+    expect(rssStylesheetSource).not.toContain('class="timeline-year-marker"');
     expect(rssStylesheetSource).toContain('class="timeline-month-marker"');
     expect(rssStylesheetSource).toContain(".year-group::after");
   });
