@@ -1319,6 +1319,14 @@ const nextPost =
 
       // Check if --file-name-offset custom property exists
       const computedStyle = getComputedStyle(codeBlock);
+      const shikiLightBg = computedStyle.getPropertyValue("--shiki-light-bg").trim();
+      const shikiDarkBg = computedStyle.getPropertyValue("--shiki-dark-bg").trim();
+      if (shikiLightBg) {
+        wrapper.style.setProperty("--code-badge-light-bg", shikiLightBg);
+      }
+      if (shikiDarkBg) {
+        wrapper.style.setProperty("--code-badge-dark-bg", shikiDarkBg);
+      }
       const hasFileNameOffset =
         computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
 

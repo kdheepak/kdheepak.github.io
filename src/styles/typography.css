@@ -536,9 +536,9 @@
     inset-inline-start: 0.75rem;
     transform: translateY(calc(-100% + 1px));
     border: 1px solid var(--color-border);
-    border-bottom: 0;
+    border-bottom: none;
     border-radius: 0.375rem 0.375rem 0 0;
-    background: var(--shiki-light-bg);
+    background: var(--code-badge-light-bg, var(--shiki-light-bg));
     color: color-mix(in srgb, var(--color-foreground) 76%, transparent);
     padding: 0.14rem 0.5rem 0.1rem;
     font-size: 0.66rem;
@@ -547,11 +547,24 @@
     text-transform: uppercase;
     font-weight: 600;
     pointer-events: none;
-    z-index: 1;
+    z-index: 10;
+  }
+
+  .code-language-badge::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--code-badge-light-bg, var(--shiki-light-bg));
   }
 
   html[data-theme="dark"] .code-language-badge {
-    background: var(--shiki-dark-bg);
+    background: var(--code-badge-dark-bg, var(--shiki-dark-bg));
+  }
+
+  html[data-theme="dark"] .code-language-badge::after {
+    background: var(--code-badge-dark-bg, var(--shiki-dark-bg));
   }
 
   /* Styles for Shiki transformers */
