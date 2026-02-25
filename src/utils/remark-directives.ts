@@ -124,6 +124,13 @@ const normalizeOutputValue = value => {
   return "";
 };
 
+const parsePositiveInteger = value => {
+  if (typeof value !== "string" && typeof value !== "number") return null;
+  const parsed = Number.parseInt(String(value).trim(), 10);
+  if (!Number.isFinite(parsed) || parsed < 1) return null;
+  return parsed;
+};
+
 const parseCellSelection = (rawCells, totalCells) => {
   if (!Number.isInteger(totalCells) || totalCells <= 0) return [];
 
@@ -669,12 +676,32 @@ const directiveContainerToElement = node => {
     hName = node.name;
   }
 
-  const className =
+  let className =
     hName === "div" && node.name && node.name !== "div"
       ? dedupe([node.name, ...attrs.className])
       : dedupe(attrs.className);
 
   const hProperties = { ...attrs.properties };
+  const layoutNcol = parsePositiveInteger(
+    hProperties["layout-ncol"] ?? hProperties.layoutNcol
+  );
+  if (layoutNcol !== null) {
+    delete hProperties["layout-ncol"];
+    delete hProperties.layoutNcol;
+    const layoutStyles = [
+      `--layout-ncol:${layoutNcol}`,
+      "display:grid",
+      "grid-template-columns:repeat(var(--layout-ncol),minmax(0,1fr))",
+      "gap:1rem",
+      "align-items:start",
+    ];
+    hProperties.style = mergeStyles(
+      typeof hProperties.style === "string" ? hProperties.style : "",
+      layoutStyles.join(";")
+    );
+    className = dedupe(["layout-ncol", ...className]);
+  }
+
   if (attrs.id) hProperties.id = attrs.id;
   if (className.length > 0) hProperties.className = className;
 

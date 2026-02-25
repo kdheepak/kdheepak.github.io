@@ -8,6 +8,7 @@ import {
 } from "./utils/citation";
 import { formatReadingStats, getReadingStats } from "./utils/readingStats";
 import { remarkInlineMark } from "./utils/remark-inline-mark";
+import { remarkDirectives } from "./utils/remark-directives";
 import { remarkPostToc } from "./utils/remark-post-toc";
 import { rehypePostEnhancements } from "./utils/rehype-post-enhancements";
 import {
@@ -57,6 +58,11 @@ const postCitationSource = readFileSync(
   "utf8"
 );
 
+const typographyStylesSource = readFileSync(
+  resolve(process.cwd(), "src/styles/typography.css"),
+  "utf8"
+);
+
 const blogIndexSource = readFileSync(
   resolve(process.cwd(), "src/pages/blog/index.astro"),
   "utf8"
@@ -78,6 +84,11 @@ const makePost = (tags: string[], draft = false) => ({
 const applyInlineMark = (tree: Record<string, unknown>) => {
   const transform = remarkInlineMark();
   transform(tree as never);
+};
+
+const applyRemarkDirectives = (tree: Record<string, unknown>) => {
+  const transform = remarkDirectives();
+  transform(tree as never, {} as never);
 };
 
 const applyRemarkPostToc = (
@@ -438,6 +449,44 @@ describe("remarkInlineMark", () => {
         },
       ],
     });
+  });
+});
+
+describe("remarkDirectives", () => {
+  it("maps layout-ncol directives to a layout class and CSS variable", () => {
+    const tree: Record<string, unknown> = {
+      type: "root",
+      children: [
+        {
+          type: "containerDirective",
+          name: "div",
+          attributes: { "layout-ncol": "2" },
+          children: [
+            { type: "paragraph", children: [{ type: "text", value: "A" }] },
+            { type: "paragraph", children: [{ type: "text", value: "B" }] },
+          ],
+        },
+      ],
+    };
+
+    applyRemarkDirectives(tree);
+
+    const directiveNode = (tree.children as any[])[0];
+    expect(directiveNode.data.hName).toBe("div");
+    expect(directiveNode.data.hProperties.className).toContain("layout-ncol");
+    expect(directiveNode.data.hProperties.style).toContain("--layout-ncol:2");
+    expect(directiveNode.data.hProperties.style).toContain("display:grid");
+    expect(directiveNode.data.hProperties.style).toContain(
+      "grid-template-columns:repeat(var(--layout-ncol),minmax(0,1fr))"
+    );
+    expect(directiveNode.data.hProperties["layout-ncol"]).toBeUndefined();
+  });
+
+  it("defines prose grid styles for layout-ncol containers", () => {
+    expect(typographyStylesSource).toContain(".layout-ncol");
+    expect(typographyStylesSource).toContain(
+      "grid-template-columns: repeat(var(--layout-ncol), minmax(0, 1fr));"
+    );
   });
 });
 

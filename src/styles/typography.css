@@ -78,6 +78,20 @@
       @apply flex-[1_0_100%] bg-inherit p-0;
     }
 
+    .layout-ncol {
+      --layout-ncol: 2;
+      display: grid;
+      grid-template-columns: repeat(var(--layout-ncol), minmax(0, 1fr));
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .layout-ncol > * {
+      min-width: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
     blockquote {
       @apply border-s-accent/80 wrap-break-word opacity-80;
     }

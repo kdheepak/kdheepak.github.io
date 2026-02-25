@@ -97,11 +97,9 @@ work with.
 
 :::div{layout-ncol=2}
 
-![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png){width=50%
-align="center"}
+![](https://user-images.githubusercontent.com/1813121/260273560-ef15e720-6e45-4b16-8332-3d79d6fa1a56.png){align="center"}
 
-![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png){width=51%
-align="center"}
+![](https://user-images.githubusercontent.com/1813121/260273561-bebffa42-3331-4ce4-a3ee-81df1dfa6d8e.png){align="center"}
 
 :::
 
@@ -259,11 +257,9 @@ Here's the benchmark results with `a = 0` (left) and `a = 0.0` (right), with the
 3 times faster.
 
 :::div{layout-ncol=2}
-![](https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png){fig-alt="a
-= 0" width=50%}
+![](https://user-images.githubusercontent.com/1813121/260308638-a34e64bd-0ed4-4a5c-a9d1-51710a005699.png){fig-alt="a = 0"}
 
-![](https://user-images.githubusercontent.com/1813121/260308548-b8667f60-5caf-4974-9d5d-cfc7280a0ed2.png){fig-alt="a
-= 0.0" width=50%}
+![](https://user-images.githubusercontent.com/1813121/260308548-b8667f60-5caf-4974-9d5d-cfc7280a0ed2.png){fig-alt="a = 0.0"}
 
 :::
 
