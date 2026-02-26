@@ -8,6 +8,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    allow:
+      - dependency-type: "direct"
     groups:
       npm-dependencies:
+        applies-to: version-updates
         patterns: ["*"]
