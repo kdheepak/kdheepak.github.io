@@ -4,13 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
-    allow:
-      - dependency-type: "direct"
     groups:
       npm-dependencies:
-        applies-to: version-updates
         patterns: ["*"]
