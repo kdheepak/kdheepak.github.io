@@ -244,7 +244,8 @@
     }
 
     .cell > .expressive-code,
-    .cell > .cell-output {
+    .cell > .cell-output,
+    .cell > details > .expressive-code {
       position: relative;
       margin-inline-start: var(--notebook-prompt-col);
     }
@@ -258,12 +259,14 @@
     }
 
     .cell > .expressive-code .frame pre,
-    .cell > .cell-output .frame pre {
+    .cell > .cell-output .frame pre,
+    .cell > details > .expressive-code .frame pre {
       position: relative;
     }
 
     .cell > .expressive-code .frame pre::after,
-    .cell > .cell-output .frame pre::after {
+    .cell > .cell-output .frame pre::after,
+    .cell > details > .expressive-code .frame pre::after {
       content: "";
       position: absolute;
       inset-inline-start: calc(-1 * var(--notebook-prompt-col));
@@ -281,7 +284,8 @@
       pointer-events: none;
     }
 
-    .cell > .expressive-code .frame pre::after {
+    .cell > .expressive-code .frame pre::after,
+    .cell > details > .expressive-code .frame pre::after {
       content: "In[" counter(notebook-cell) "]:";
     }
 
