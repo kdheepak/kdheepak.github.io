@@ -4,6 +4,7 @@
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
     @apply prose;
+    counter-reset: notebook-cell;
 
     h1,
     h2,
@@ -237,6 +238,52 @@
     }
 
     /* Notebook input code blocks use Fira Code for source text. */
+    .cell {
+      --notebook-prompt-col: 4.25rem;
+      counter-increment: notebook-cell;
+    }
+
+    .cell > .expressive-code,
+    .cell > .cell-output {
+      position: relative;
+      margin-inline-start: var(--notebook-prompt-col);
+    }
+
+    .cell > .expressive-code .frame pre,
+    .cell > .cell-output .frame pre {
+      position: relative;
+    }
+
+    .cell > .expressive-code .frame pre::after,
+    .cell > .cell-output .frame pre::after {
+      content: "";
+      position: absolute;
+      inset-inline-start: calc(-1 * var(--notebook-prompt-col));
+      top: calc(var(--ec-brdWd) + var(--ec-codePadBlk));
+      width: calc(var(--notebook-prompt-col) - 0.55rem);
+      display: block;
+      text-align: right;
+      white-space: nowrap;
+      font-family: var(--ec-codeFontFml);
+      font-size: var(--ec-codeFontSize);
+      line-height: var(--ec-codeLineHt);
+      font-weight: var(--ec-codeFontWg);
+      color: color-mix(in srgb, var(--color-foreground) 78%, transparent);
+      letter-spacing: 0.01em;
+      pointer-events: none;
+    }
+
+    .cell > .expressive-code .frame pre::after {
+      content: "In[" counter(notebook-cell) "]:";
+    }
+
+    .cell > .cell-output .frame pre::after {
+      content: "Out[" counter(notebook-cell) "]:";
+      inset-inline-start: calc(
+        -1 * var(--notebook-prompt-col) - var(--notebook-output-pad-inline-start)
+      );
+    }
+
     .cell-code,
     .cell-code span {
       font-family:
@@ -279,11 +326,10 @@
 
     /* Give notebook outputs a subtle visual offset from input cells. */
     .cell-output {
-      border-inline-start: 3px solid
-        color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+      --notebook-output-pad-inline-start: 0.8rem;
       border-radius: 0;
       padding-block: 0.6rem;
-      padding-inline-start: 0.8rem;
+      padding-inline-start: var(--notebook-output-pad-inline-start);
       padding-inline-end: 0;
     }
 
