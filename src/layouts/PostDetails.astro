@@ -1276,19 +1276,27 @@ const nextPost =
       return html;
     };
 
-    const ansiLines = document.querySelectorAll(
-      ".cell-output pre[data-language='plaintext'] code .line"
+    const outputCodeBlocks = document.querySelectorAll(
+      ".cell-output pre[data-language='plaintext'] code"
     );
 
-    for (const line of ansiLines) {
-      if (!(line instanceof HTMLElement)) continue;
-      if (line.dataset.ansiParsed === "true") continue;
+    for (const codeBlock of outputCodeBlocks) {
+      if (!(codeBlock instanceof HTMLElement)) continue;
 
-      const rawText = line.textContent ?? "";
-      if (!rawText.includes("\u001b[")) continue;
+      const lineNodes = codeBlock.querySelectorAll(".line, .ec-line .code");
+      const targets =
+        lineNodes.length > 0 ? Array.from(lineNodes) : [codeBlock];
 
-      line.innerHTML = ansiToHtml(rawText);
-      line.dataset.ansiParsed = "true";
+      for (const target of targets) {
+        if (!(target instanceof HTMLElement)) continue;
+        if (target.dataset.ansiParsed === "true") continue;
+
+        const rawText = target.textContent ?? "";
+        if (!rawText.includes("\u001b[")) continue;
+
+        target.innerHTML = ansiToHtml(rawText);
+        target.dataset.ansiParsed = "true";
+      }
     }
   }
 
