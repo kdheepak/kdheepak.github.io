@@ -133,7 +133,7 @@ const nextPost =
         }
       </h1>
     </div>
-    <div class="mt-4 mb-2 flex items-center gap-2">
+    <div class="mt-4 mb-2 flex flex-wrap items-center gap-2">
       <Datetime
         {pubDatetime}
         {modDatetime}
@@ -145,8 +145,18 @@ const nextPost =
           viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
         }}
       />
-      <div class="flex flex-1 items-center gap-4">
-        <ReadingStats body={post.body} size="lg" align="center" class="flex-1" />
+      <div class="flex min-w-0 flex-1 flex-wrap items-center gap-3">
+        <ReadingStats
+          body={post.body}
+          size="lg"
+          align="center"
+          class="shrink-0"
+        />
+        <ul class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1">
+          {postTags.map(tag => (
+            <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
+          ))}
+        </ul>
         <div
           class:list={[
             "ml-auto max-sm:hidden",
@@ -187,20 +197,14 @@ const nextPost =
     }
 
     <div
-      class="mt-10 mb-6 grid items-start gap-6 md:grid-cols-[1fr_auto_1fr]"
+      class="mt-10 mb-6 grid items-start gap-6 sm:grid-cols-2"
       data-pagefind-ignore
     >
-      <div class="justify-self-center md:justify-self-start">
+      <div class="justify-self-center sm:justify-self-start">
         <ShareLinks />
       </div>
 
-      <ul class="flex flex-wrap items-center justify-center gap-4 self-center">
-        {postTags.map(tag => (
-          <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
-        ))}
-      </ul>
-
-      <div class="justify-self-center md:justify-self-end">
+      <div class="justify-self-center sm:justify-self-end">
         <BackToTopButton />
       </div>
     </div>

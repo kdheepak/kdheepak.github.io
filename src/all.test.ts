@@ -20,6 +20,8 @@ import {
   getRepositoryHeadCommitHash,
 } from "./utils/getLatestCommitHash";
 import getPostsByGroupCondition from "./utils/getPostsByGroupCondition";
+import getPostsByTag from "./utils/getPostsByTag";
+import getPostTags from "./utils/getPostTags";
 import getUniqueTags from "./utils/getUniqueTags";
 import { slugifyAll, slugifyStr } from "./utils/slugify";
 
@@ -269,12 +271,12 @@ describe("Post citation", () => {
     expect(postDetailsSource).toContain("url={postUrl}");
     expect(postDetailsSource).toContain("!hideCitation");
     expect(postDetailsSource).toContain(
-      'class="mt-10 mb-6 grid items-start gap-6 md:grid-cols-[1fr_auto_1fr]"'
+      'class="mt-10 mb-6 grid items-start gap-6 sm:grid-cols-2"'
     );
     expect(postDetailsSource).toContain("<ShareLinks />");
     expect(postDetailsSource).toContain("<BackToTopButton />");
     expect(postDetailsSource).toContain(
-      'class="flex flex-wrap items-center justify-center gap-4 self-center"'
+      'class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1"'
     );
   });
 
@@ -1093,9 +1095,43 @@ describe("getUniqueTags", () => {
     expect(getUniqueTags(posts as never)).toEqual([
       { tag: "alpha", tagName: "Alpha" },
       { tag: "beta", tagName: "beta" },
+      { tag: "draft", tagName: "draft" },
       { tag: "draft-only", tagName: "draft-only" },
       { tag: "zeta", tagName: "Zeta" },
     ]);
+  });
+});
+
+describe("getPostTags", () => {
+  it("adds draft as a derived tag for draft posts and deduplicates by slug", () => {
+    const post = makePost(["Alpha", "Draft"], true);
+    expect(getPostTags(post as never)).toEqual(["Alpha", "Draft"]);
+  });
+});
+
+describe("getPostsByTag", () => {
+  it("matches draft posts when filtering by the derived draft tag", () => {
+    const posts = [
+      {
+        id: "regular-post",
+        data: {
+          draft: false,
+          tags: ["python"],
+          pubDatetime: new Date("2024-01-01T00:00:00.000Z"),
+        },
+      },
+      {
+        id: "draft-post",
+        data: {
+          draft: true,
+          tags: ["python"],
+          pubDatetime: new Date("2024-02-01T00:00:00.000Z"),
+        },
+      },
+    ];
+
+    const draftPosts = getPostsByTag(posts as never, "draft");
+    expect(draftPosts.map(post => post.id)).toEqual(["draft-post"]);
   });
 });
 
