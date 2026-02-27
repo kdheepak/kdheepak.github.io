@@ -1292,79 +1292,6 @@ const nextPost =
     }
   }
 
-  /** Attaches copy buttons to code blocks in the document,
-   * allowing users to copy code easily. */
-  function attachCopyButtons() {
-    const copyButtonLabel = "Copy";
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
-
-    for (const codeBlock of codeBlocks) {
-      if (codeBlock.querySelector(":scope > button.copy-code")) continue;
-
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
-      wrapper.className = "group";
-
-      const language = codeBlock.getAttribute("data-language")?.trim();
-      const hasFileNameLabel = Array.from(codeBlock.children).some(
-        child => child instanceof HTMLElement && child.tagName === "SPAN"
-      );
-      if (language && language !== "plaintext" && !hasFileNameLabel) {
-        const languageBadge = document.createElement("span");
-        languageBadge.className = "code-language-badge";
-        languageBadge.textContent = language;
-        wrapper.classList.add("has-code-language-badge");
-        wrapper.appendChild(languageBadge);
-      }
-
-      // Check if --file-name-offset custom property exists
-      const computedStyle = getComputedStyle(codeBlock);
-      const shikiLightBg = computedStyle.getPropertyValue("--shiki-light-bg").trim();
-      const shikiDarkBg = computedStyle.getPropertyValue("--shiki-dark-bg").trim();
-      if (shikiLightBg) {
-        wrapper.style.setProperty("--code-badge-light-bg", shikiLightBg);
-      }
-      if (shikiDarkBg) {
-        wrapper.style.setProperty("--code-badge-dark-bg", shikiDarkBg);
-      }
-      const hasFileNameOffset =
-        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
-
-      // Determine the top positioning class
-      const topClass = hasFileNameOffset
-        ? "top-(--file-name-offset)"
-        : "-top-3";
-
-      const copyButton = document.createElement("button");
-      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto`;
-      copyButton.innerHTML = copyButtonLabel;
-      codeBlock.setAttribute("tabindex", "0");
-      codeBlock.appendChild(copyButton);
-
-      // wrap codebock with relative parent element
-      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
-      wrapper.appendChild(codeBlock);
-
-      copyButton.addEventListener("click", async () => {
-        await copyCode(codeBlock, copyButton);
-      });
-    }
-
-    async function copyCode(block, button) {
-      const code = block.querySelector("code");
-      const text = code?.innerText;
-
-      await navigator.clipboard.writeText(text ?? "");
-
-      // visual feedback that task is completed
-      button.innerText = "Copied";
-
-      setTimeout(() => {
-        button.innerText = copyButtonLabel;
-      }, 700);
-    }
-  }
-
   function setupGiscus() {
     const giscusContainer = document.querySelector(".giscus");
     if (!(giscusContainer instanceof HTMLElement)) return;
@@ -1413,7 +1340,6 @@ const nextPost =
 
     addMarginFootnotes();
     renderAnsiCellOutput();
-    attachCopyButtons();
     setupGiscus();
   }
 
