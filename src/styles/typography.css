@@ -247,7 +247,7 @@
     .cell > .cell-output,
     .cell > details > .expressive-code {
       position: relative;
-      margin-inline-start: var(--notebook-prompt-col);
+      margin-inline-start: 0;
     }
 
     .cell > .cell-output {
@@ -391,6 +391,13 @@
       border-radius: 0;
     }
 
+    /* Add a subtle frame only to raw output <pre> blocks (not expressive-code frames). */
+    .cell-output > :not(.expressive-code) pre {
+      border: 1px solid color-mix(in srgb, var(--color-foreground) 14%, transparent);
+      border-radius: 0.375rem;
+      padding: 0.6rem 0.8rem;
+    }
+
     .cell-output pre code {
       background: transparent;
       padding: 0;
@@ -487,7 +494,7 @@
         top: 5.75rem;
         left: max(
           0.75rem,
-          calc((100vw - min(48rem, calc(100vw - 2rem))) / 2 - 15rem)
+          calc((100vw - min(48rem, calc(100vw - 2rem))) / 2 - 18rem)
         );
         width: min(14rem, calc(100vw - 2rem));
         box-sizing: border-box;
@@ -498,12 +505,8 @@
         overflow-y: auto;
         overflow-x: hidden;
         scrollbar-gutter: stable;
-        background: color-mix(
-          in srgb,
-          var(--color-background) 88%,
-          transparent
-        );
-        backdrop-filter: blur(8px);
+        background: transparent;
+        backdrop-filter: none;
         animation: toc-dock-left 220ms cubic-bezier(0.22, 1, 0.36, 1);
       }
 
