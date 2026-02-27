@@ -642,7 +642,6 @@
 
   /* Keep expressive-code frames flat and add vertical breathing room. */
   .app-prose .expressive-code {
-    --ec-frm-frameBoxShdCssVal: none;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
@@ -655,7 +654,6 @@
     --ec-frm-edTabBarBrdBtmCol: var(--ec-brdCol);
     --ec-frm-trmTtbBrdBtmCol: var(--ec-brdCol);
     --ec-frm-edActTabBrdCol: var(--ec-brdCol);
-    --ec-frm-frameBoxShdCssVal: none;
   }
 
   /* Render code language labels from `pre[data-language]` without JS wrappers. */
