@@ -335,10 +335,12 @@ describe("Code language badge styling", () => {
     expect(wrapperRule).toContain("margin-top: 2.25rem;");
     expect(wrapperRule).not.toContain("padding-top:");
     expect(preRule).toContain("margin-top: 0;");
-    expect(badgeRule).toContain("transform: translateY(calc(-100% + 1px));");
+    expect(badgeRule).toContain(
+      "transform: translateY(calc(-100% + var(--ec-brdWd, 1px)));"
+    );
     expect(badgeRule).toContain("border-bottom: none;");
-    expect(badgeAfterRule).toContain("bottom: -1px;");
-    expect(badgeAfterRule).toContain("height: 2px;");
+    expect(badgeAfterRule).toContain("bottom: calc(-1 * var(--ec-brdWd, 1px));");
+    expect(badgeAfterRule).toContain("height: var(--ec-brdWd, 1px);");
   });
 });
 
