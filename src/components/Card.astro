@@ -23,7 +23,7 @@ const {
   body,
 } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, draft = false, ...props } = data;
 ---
 
 <li class="my-6">
@@ -50,7 +50,14 @@ const { title, description, ...props } = data;
           viewTransitionName: "heading" + slugifyStr(title.replaceAll(".", "-")),
         }}
       >
-        {title}
+        <span>{title}</span>
+        {
+          draft && (
+            <span class="post-status-badge post-status-badge--draft ml-2">
+              Draft
+            </span>
+          )
+        }
       </Heading>
     </a>
     {showDate && (

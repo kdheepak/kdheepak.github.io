@@ -52,6 +52,16 @@ html[data-theme="dark"] {
   }
 }
 
+@layer components {
+  .post-status-badge {
+    @apply inline-flex items-center rounded-full border px-2 py-0.5 align-middle text-[0.6rem] leading-none font-medium tracking-[0.04em];
+  }
+
+  .post-status-badge--draft {
+    @apply border-accent/25 bg-accent/10 text-foreground/65;
+  }
+}
+
 a[data-external-link]::after {
   content: "↗";
   display: inline-block;

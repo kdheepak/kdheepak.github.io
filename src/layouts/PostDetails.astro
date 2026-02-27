@@ -14,6 +14,7 @@ import PostCitation from "@/components/PostCitation.astro";
 import { Icon } from "astro-icon/components";
 import { getPath } from "@/utils/getPath";
 import { getLatestCommitHash } from "@/utils/getLatestCommitHash";
+import getPostTags from "@/utils/getPostTags";
 import { slugifyStr } from "@/utils/slugify";
 import { SITE } from "@/config";
 
@@ -33,11 +34,11 @@ const {
   pubDatetime,
   modDatetime,
   timezone,
-  tags,
   hideEditPost,
   hideCitation = false,
   toc = true,
   notebookPath,
+  draft = false,
 } = post.data;
 
 const { Content } = await render(post);
@@ -84,6 +85,7 @@ const pagefindDate = new Intl.DateTimeFormat("en-GB", {
 const postUrl = canonicalURL
   ? new URL(canonicalURL, SITE.website).href
   : new URL(getPath(post.id, post.filePath), SITE.website).href;
+const postTags = getPostTags(post);
 
 const layoutProps = {
   title: `${title}`,
@@ -121,7 +123,14 @@ const nextPost =
         transition:name={"heading" + slugifyStr(title.replaceAll(".", "-"))}
         class="min-w-0 text-2xl font-bold text-accent sm:text-3xl"
       >
-        {title}
+        <span>{title}</span>
+        {
+          draft && (
+            <span class="post-status-badge post-status-badge--draft ml-2">
+              Draft
+            </span>
+          )
+        }
       </h1>
     </div>
     <div class="mt-4 mb-2 flex items-center gap-2">
@@ -186,7 +195,9 @@ const nextPost =
       </div>
 
       <ul class="flex flex-wrap items-center justify-center gap-4 self-center">
-        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+        {postTags.map(tag => (
+          <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
+        ))}
       </ul>
 
       <div class="justify-self-center md:justify-self-end">
