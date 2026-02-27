@@ -292,6 +292,36 @@
       );
     }
 
+    /* Fallback prompt for non-code outputs (e.g. tables, images, rich HTML). */
+    .cell > .cell-output:not(:has(.frame pre))::after {
+      content: "Out[" counter(notebook-cell) "]:";
+      position: absolute;
+      inset-inline-start: calc(-1 * var(--notebook-prompt-col));
+      top: 0.6rem;
+      width: calc(var(--notebook-prompt-col) - 0.35rem);
+      display: block;
+      text-align: left;
+      white-space: nowrap;
+      font-family: var(
+        --ec-codeFontFml,
+        Menlo,
+        Monaco,
+        "Cascadia Mono",
+        "Segoe UI Mono",
+        "DejaVu Sans Mono",
+        Consolas,
+        "Liberation Mono",
+        "Courier New",
+        monospace
+      );
+      font-size: var(--ec-codeFontSize, 0.82rem);
+      line-height: var(--ec-codeLineHt, 1.2);
+      font-weight: var(--ec-codeFontWg, 400);
+      color: color-mix(in srgb, var(--color-foreground) 78%, transparent);
+      letter-spacing: 0.01em;
+      pointer-events: none;
+    }
+
     .cell-code,
     .cell-code span {
       font-family:
