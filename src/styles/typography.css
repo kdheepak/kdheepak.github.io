@@ -282,7 +282,9 @@
       border-inline-start: 3px solid
         color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
       border-radius: 0;
-      padding: 0.6rem 0.8rem;
+      padding-block: 0.6rem;
+      padding-inline-start: 0.8rem;
+      padding-inline-end: 0;
     }
 
     .cell .cell-output-display {
