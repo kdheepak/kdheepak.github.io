@@ -1,5 +1,6 @@
 // @ts-nocheck
 import remarkSvgbob from "remark-svgbob";
+import { fromHtml } from "hast-util-from-html";
 
 const SVGBOB_LANGUAGE_CLASS_NAMES = new Set([
   "language-render_svgbob",
@@ -63,6 +64,11 @@ const renderSvgbob = async (ascii, transformWithSvgbob) => {
   return renderedNode.value;
 };
 
+const parseSvgFragment = svgMarkup => {
+  const fragment = fromHtml(svgMarkup, { fragment: true });
+  return Array.isArray(fragment?.children) ? fragment.children : [];
+};
+
 const transformChildren = async (parent, transformWithSvgbob) => {
   if (!parent || !Array.isArray(parent.children)) return;
 
@@ -80,7 +86,11 @@ const transformChildren = async (parent, transformWithSvgbob) => {
         const ascii = extractText(codeNode);
         const renderedSvg = await renderSvgbob(ascii, transformWithSvgbob);
         if (renderedSvg) {
-          parent.children[index] = { type: "raw", value: renderedSvg };
+          const svgNodes = parseSvgFragment(renderedSvg);
+          if (svgNodes.length > 0) {
+            parent.children.splice(index, 1, ...svgNodes);
+            index += svgNodes.length - 1;
+          }
         }
         continue;
       }
