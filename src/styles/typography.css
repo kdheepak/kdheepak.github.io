@@ -249,6 +249,14 @@
       margin-inline-start: var(--notebook-prompt-col);
     }
 
+    .cell > .cell-output {
+      margin-top: 0.2rem;
+    }
+
+    .cell + .cell {
+      margin-top: 2.5rem;
+    }
+
     .cell > .expressive-code .frame pre,
     .cell > .cell-output .frame pre {
       position: relative;
@@ -328,13 +336,12 @@
     .cell-output {
       --notebook-output-pad-inline-start: 0.8rem;
       border-radius: 0;
-      padding-block: 0.6rem;
       padding-inline-start: var(--notebook-output-pad-inline-start);
       padding-inline-end: 0;
     }
 
     .cell .cell-output-display {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0;
     }
 
     .cell-output > :first-child {
