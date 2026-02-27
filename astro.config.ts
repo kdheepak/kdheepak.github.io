@@ -34,6 +34,8 @@ import { remarkPostToc } from "./src/utils/remark-post-toc";
 import { slugifyStr } from "./src/utils/slugify";
 import { SITE } from "./src/config";
 
+import expressiveCode from "astro-expressive-code";
+
 const BLOG_PATH = "src/data/blog";
 
 const sitemapAlias = () => ({
@@ -188,7 +190,7 @@ export default defineConfig({
     trailingSlash: "always",
 
     site: SITE.website,
-    integrations: [mdx(), icon(), sitemap(), sitemapAlias(), copyBlogWwwDirs()],
+    integrations: [expressiveCode(), mdx(), icon(), sitemap(), sitemapAlias(), copyBlogWwwDirs()],
 
     markdown: {
         remarkPlugins: [
