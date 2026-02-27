@@ -83,7 +83,7 @@ hv.extension("bokeh")
 </details>
 :::
 
-[`panel`](https://panel.holoviz.org/) is a library that allows creating
+The [`panel`](https://panel.holoviz.org/) library allows creating
 interactive dashboards in pure Python. It's a flexible library that
 allows interlinking matplotlib, bokeh, widgets, and more.
 
