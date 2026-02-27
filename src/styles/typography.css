@@ -670,12 +670,12 @@
     position: absolute;
     top: 0;
     inset-inline-start: 0.75rem;
-    transform: translateY(calc(-100% + 1px));
-    border: 1px solid var(--ec-brdCol, var(--color-border));
+    transform: translateY(calc(-100% + var(--ec-brdWd, 1px)));
+    border: var(--ec-brdWd, 1px) solid var(--ec-brdCol, var(--color-border));
     border-bottom: none;
     border-radius: 0.375rem 0.375rem 0 0;
     background: var(--code-badge-light-bg, var(--shiki-light-bg));
-    box-shadow: 0 2px 0 0 var(--code-badge-light-bg, var(--shiki-light-bg));
+    box-shadow: 0 var(--ec-brdWd, 1px) 0 0 var(--code-badge-light-bg, var(--shiki-light-bg));
     z-index: 10;
     padding: 0.24rem 0.5rem 0.1rem;
     font-size: 0.66rem;
@@ -689,7 +689,7 @@
 
   html[data-theme="dark"] .expressive-code .frame pre[data-language]:not([data-language="plaintext"])::before {
     background: var(--code-badge-dark-bg, var(--shiki-dark-bg));
-    box-shadow: 0 2px 0 0 var(--code-badge-dark-bg, var(--shiki-dark-bg));
+    box-shadow: 0 var(--ec-brdWd, 1px) 0 0 var(--code-badge-dark-bg, var(--shiki-dark-bg));
   }
 
   .has-code-language-badge {
@@ -710,8 +710,8 @@
     position: absolute;
     top: 0;
     inset-inline-start: 0.75rem;
-    transform: translateY(calc(-100% + 1px));
-    border: 1px solid var(--ec-brdCol, var(--color-border));
+    transform: translateY(calc(-100% + var(--ec-brdWd, 1px)));
+    border: var(--ec-brdWd, 1px) solid var(--ec-brdCol, var(--color-border));
     border-bottom: none;
     border-radius: 0.375rem 0.375rem 0 0;
     background: var(--code-badge-light-bg, var(--shiki-light-bg));
@@ -730,8 +730,8 @@
     content: "";
     position: absolute;
     inset-inline: 0;
-    bottom: -1px;
-    height: 2px;
+    bottom: calc(-1 * var(--ec-brdWd, 1px));
+    height: var(--ec-brdWd, 1px);
     background: var(--code-badge-light-bg, var(--shiki-light-bg));
   }
 
