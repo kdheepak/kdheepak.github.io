@@ -47,7 +47,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/tabler": "^1.2.27",
     "@pagefind/default-ui": "^1.4.0",
-    "@shikijs/transformers": "^3.20.0",
+    "@shikijs/transformers": "^4.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/lodash.kebabcase": "^4.1.9",
     "@typescript-eslint/parser": "^8.51.0",
