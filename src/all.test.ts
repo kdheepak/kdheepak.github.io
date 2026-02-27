@@ -1083,7 +1083,7 @@ describe("getPostsByGroupCondition", () => {
 });
 
 describe("getUniqueTags", () => {
-  it("filters draft posts, deduplicates tags by slug, and sorts them", () => {
+  it("includes drafts in dev, deduplicates tags by slug, and sorts them", () => {
     const posts = [
       makePost(["Zeta", "Alpha"]),
       makePost(["alpha", "beta"]),
@@ -1093,6 +1093,7 @@ describe("getUniqueTags", () => {
     expect(getUniqueTags(posts as never)).toEqual([
       { tag: "alpha", tagName: "Alpha" },
       { tag: "beta", tagName: "beta" },
+      { tag: "draft-only", tagName: "draft-only" },
       { tag: "zeta", tagName: "Zeta" },
     ]);
   });
