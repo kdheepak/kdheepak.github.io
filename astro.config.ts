@@ -38,7 +38,18 @@ export default defineConfig({
     trailingSlash: "always",
 
     site: SITE.website,
-    integrations: [expressiveCode(), mdx(), icon(), sitemap(), sitemapAlias(), copyBlogWwwDirs()],
+    integrations: [
+        expressiveCode({
+            themes: ["github-light", "github-dark"],
+            useDarkModeMediaQuery: false,
+            themeCssSelector: theme => `[data-theme='${theme.type}']`,
+        }),
+        mdx(),
+        icon(),
+        sitemap(),
+        sitemapAlias(),
+        copyBlogWwwDirs(),
+    ],
 
     markdown: {
         remarkPlugins: [
@@ -77,7 +88,7 @@ export default defineConfig({
         },
         shikiConfig: {
             // For more themes, visit https://shiki.style/themes
-            themes: { light: "min-light", dark: "night-owl" },
+            themes: { light: "github-light", dark: "github-dark" },
             defaultColor: false,
             wrap: false,
             transformers: [
