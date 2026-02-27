@@ -647,6 +647,17 @@
     padding-bottom: 0.75rem;
   }
 
+  /* Use a softer frame treatment in dark mode to avoid heavy borders & shadows. */
+  html[data-theme="dark"] .app-prose .expressive-code {
+    --ec-brdWd: 1px;
+    --ec-brdCol: color-mix(in srgb, var(--color-foreground) 22%, transparent);
+    --ec-frm-edTabBarBrdCol: var(--ec-brdCol);
+    --ec-frm-edTabBarBrdBtmCol: var(--ec-brdCol);
+    --ec-frm-trmTtbBrdBtmCol: var(--ec-brdCol);
+    --ec-frm-edActTabBrdCol: var(--ec-brdCol);
+    --ec-frm-frameBoxShdCssVal: none;
+  }
+
   /* Render code language labels from `pre[data-language]` without JS wrappers. */
   .expressive-code .frame pre[data-language]:not([data-language="plaintext"]) {
     position: relative;
@@ -660,7 +671,7 @@
     top: 0;
     inset-inline-start: 0.75rem;
     transform: translateY(calc(-100% + 1px));
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--ec-brdCol, var(--color-border));
     border-bottom: none;
     border-radius: 0.375rem 0.375rem 0 0;
     background: var(--code-badge-light-bg, var(--shiki-light-bg));
@@ -700,7 +711,7 @@
     top: 0;
     inset-inline-start: 0.75rem;
     transform: translateY(calc(-100% + 1px));
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--ec-brdCol, var(--color-border));
     border-bottom: none;
     border-radius: 0.375rem 0.375rem 0 0;
     background: var(--code-badge-light-bg, var(--shiki-light-bg));
