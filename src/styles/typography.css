@@ -285,6 +285,10 @@
       padding: 0.6rem 0.8rem;
     }
 
+    .cell .cell-output-display {
+      margin-bottom: 1.5rem;
+    }
+
     .cell-output > :first-child {
       margin-top: 0;
     }
@@ -549,6 +553,47 @@
 
   html[data-theme="dark"] .astro-code {
     @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+  }
+
+  /* Keep expressive-code frames flat and add vertical breathing room. */
+  .app-prose .expressive-code {
+    --ec-frm-frameBoxShdCssVal: none;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  /* Render code language labels from `pre[data-language]` without JS wrappers. */
+  .expressive-code .frame pre[data-language]:not([data-language="plaintext"]) {
+    position: relative;
+    --code-badge-light-bg: var(--ec-codeBg);
+    --code-badge-dark-bg: var(--ec-codeBg);
+  }
+
+  .expressive-code .frame pre[data-language]:not([data-language="plaintext"])::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0.75rem;
+    transform: translateY(calc(-100% + 1px));
+    border: 1px solid var(--color-border);
+    border-bottom: none;
+    border-radius: 0.375rem 0.375rem 0 0;
+    background: var(--code-badge-light-bg, var(--shiki-light-bg));
+    box-shadow: 0 2px 0 0 var(--code-badge-light-bg, var(--shiki-light-bg));
+    z-index: 10;
+    padding: 0.24rem 0.5rem 0.1rem;
+    font-size: 0.66rem;
+    line-height: 1.05;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: color-mix(in srgb, var(--color-foreground) 76%, transparent);
+    pointer-events: none;
+  }
+
+  html[data-theme="dark"] .expressive-code .frame pre[data-language]:not([data-language="plaintext"])::before {
+    background: var(--code-badge-dark-bg, var(--shiki-dark-bg));
+    box-shadow: 0 2px 0 0 var(--code-badge-dark-bg, var(--shiki-dark-bg));
   }
 
   .has-code-language-badge {
