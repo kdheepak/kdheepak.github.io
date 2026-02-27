@@ -592,6 +592,11 @@
         overflow: visible;
       }
 
+      /* Keep large blocks from partially wrapping around floated margin notes. */
+      &.has-margin-footnotes > :is(.cell, .expressive-code, details.code-fold) {
+        clear: right;
+      }
+
       &.has-margin-footnotes section[data-footnotes] li.is-margin-footnote-source {
         @apply hidden;
       }
