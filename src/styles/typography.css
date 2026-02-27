@@ -260,9 +260,9 @@
       position: absolute;
       inset-inline-start: calc(-1 * var(--notebook-prompt-col));
       top: calc(var(--ec-brdWd) + var(--ec-codePadBlk));
-      width: calc(var(--notebook-prompt-col) - 0.55rem);
+      width: calc(var(--notebook-prompt-col) - 0.35rem);
       display: block;
-      text-align: right;
+      text-align: left;
       white-space: nowrap;
       font-family: var(--ec-codeFontFml);
       font-size: var(--ec-codeFontSize);
