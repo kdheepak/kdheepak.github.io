@@ -276,7 +276,7 @@ describe("Post citation", () => {
     expect(postDetailsSource).toContain("<ShareLinks />");
     expect(postDetailsSource).toContain("<BackToTopButton />");
     expect(postDetailsSource).toContain(
-      'class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1"'
+      'class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center"'
     );
   });
 

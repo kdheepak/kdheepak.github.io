@@ -133,11 +133,12 @@ const nextPost =
         }
       </h1>
     </div>
-    <div class="mt-4 mb-2 flex flex-wrap items-center gap-2">
+    <div class="mt-4 mb-2 flex flex-wrap items-center gap-x-4 gap-y-2">
       <Datetime
         {pubDatetime}
         {modDatetime}
         {timezone}
+        class="shrink-0 sm:min-w-0 sm:flex-1"
         href={sourceCommitHref}
         linkTitle={sourceCommitTitle}
         size="lg"
@@ -145,27 +146,25 @@ const nextPost =
           viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
         }}
       />
-      <div class="flex min-w-0 flex-1 flex-wrap items-center gap-3">
         <ReadingStats
           body={post.body}
           size="lg"
           align="center"
-          class="shrink-0"
+          class="shrink-0 sm:min-w-0 sm:flex-1"
         />
-        <ul class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1">
+        <ul class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center">
           {postTags.map(tag => (
             <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
           ))}
         </ul>
         <div
           class:list={[
-            "ml-auto max-sm:hidden",
+            "max-sm:hidden shrink-0",
             { hidden: !showPostActions },
           ]}
         >
           <EditPost {hideEditPost} {post} />
         </div>
-      </div>
     </div>
     <article
       id="article"
