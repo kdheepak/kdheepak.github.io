@@ -1,0 +1,1989 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap"><link rel="canonical" href="https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/"><meta name="generator" content="Astro v5.18.0"><!-- Load Font --><style>@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:300;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:700;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:300;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:700;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}:root{--font-google-sans-code:"Google Sans Code-de078a87b11e4a86","Google Sans Code-de078a87b11e4a86 fallback: Courier New",monospace;}</style><!-- General Meta Tags --><title>Graphing CGP Grey&#39;s Rock-Paper-Scissors YouTube Game</title><meta name="title" content="Graphing CGP Grey's Rock-Paper-Scissors YouTube Game"><meta name="description" content="graph analysis of CGP Grey rock-paper-scissors YouTube game dynamics."><meta name="author" content="Dheepak Krishnamurthy"><link rel="sitemap" href="/sitemap-index.xml"><link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><!-- Open Graph / Facebook --><meta property="og:title" content="Graphing CGP Grey's Rock-Paper-Scissors YouTube Game"><meta property="og:description" content="graph analysis of CGP Grey rock-paper-scissors YouTube game dynamics."><meta property="og:url" content="https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/"><!-- Article Published/Modified time --><meta property="article:published_time" content="2023-10-23T02:21:19.000Z"><!-- Twitter --><meta property="twitter:card" content="summary"><meta property="twitter:url" content="https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/"><meta property="twitter:title" content="Graphing CGP Grey's Rock-Paper-Scissors YouTube Game"><meta property="twitter:description" content="graph analysis of CGP Grey rock-paper-scissors YouTube game dynamics."><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Graphing CGP Grey's Rock-Paper-Scissors YouTube Game","datePublished":"2023-10-23T02:21:19.000Z","author":[{"@type":"Person","name":"Dheepak Krishnamurthy","url":"https://kdheepak.com/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="kd" href="https://kdheepak.com/rss.xml"><meta name="theme-color" content=""><meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Minimal inline script to prevent FOUC - sets theme immediately --><script>
+      (function () {
+        const initialColorScheme = ""; // "light" | "dark"
+        const currentTheme = localStorage.getItem("theme");
+
+        function getPreferTheme() {
+          if (currentTheme) return currentTheme;
+          if (initialColorScheme) return initialColorScheme;
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+
+        const themeValue = getPreferTheme();
+
+        // Set theme immediately to prevent flash
+        document.firstElementChild?.setAttribute("data-theme", themeValue);
+
+        // Export minimal API for external script
+        window.theme = {
+          themeValue: themeValue,
+          getTheme: () => window.theme.themeValue,
+          setTheme: val => {
+            window.theme.themeValue = val;
+          },
+        };
+      })();
+    </script><link rel="stylesheet" href="/_astro/index.BRLZkoem.css">
+<style>:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-qyrnxog5-1"] { view-transition-name: headinggraphing-cgp-grey_27s-rock-paper-scissors-youtube-game; }@layer astro { ::view-transition-old(headinggraphing-cgp-grey_27s-rock-paper-scissors-youtube-game) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(headinggraphing-cgp-grey_27s-rock-paper-scissors-youtube-game) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(headinggraphing-cgp-grey_27s-rock-paper-scissors-youtube-game) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(headinggraphing-cgp-grey_27s-rock-paper-scissors-youtube-game) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-uwf3heon-2"] { view-transition-name: active-nav-underline; }@layer astro { ::view-transition-old(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: analysis; }@layer astro { ::view-transition-old(analysis) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(analysis) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(analysis) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(analysis) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-4"] { view-transition-name: python; }@layer astro { ::view-transition-old(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-5"] { view-transition-name: julia; }@layer astro { ::view-transition-old(julia) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(julia) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(julia) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(julia) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body>  <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <header class="app-layout"> <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border w-full bg-background relative flex items-center gap-2"> <a href="/" class="relative z-10 py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl sm:leading-none"> kd  </a> <nav id="nav-menu" class="pointer-events-auto absolute left-1/2 -translate-x-1/2"> <ul id="menu-items" class="flex items-center gap-2 sm:gap-3"> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base text-accent" href="/blog/" title="/blog" aria-label="blog" aria-current="page"> <span>/blog</span> <span aria-hidden="true" class="absolute right-0 -bottom-0.5 left-0 h-0.5 rounded-full bg-accent" data-astro-transition-scope="astro-uwf3heon-2"></span></a> </li> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base" href="/cv/" title="/cv" aria-label="cv"> <span>/cv</span> </a> </li> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base" href="/tags/" title="/tags" aria-label="tags"> <span>/tags</span> </a> </li> </ul> </nav> <div class="z-10 ms-auto flex items-center gap-1 sm:gap-2"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative flex size-12 items-center justify-center text-foreground/80 transition-colors hover:text-accent sm:size-8" href="/search/" title="Search" aria-label="search"> <svg width="1em" height="1em" class="inline-block size-5 fill-transparent stroke-current stroke-2" data-icon="tabler:search">   <symbol id="ai:tabler:search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0m18 11l-6-6"/></symbol><use href="#ai:tabler:search"></use>  </svg> </a> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="1em" height="1em" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" data-icon="tabler:moon">   <symbol id="ai:tabler:moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"/></symbol><use href="#ai:tabler:moon"></use>  </svg> <svg width="1em" height="1em" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" data-icon="tabler:sun-high">   <symbol id="ai:tabler:sun-high" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 1 0-5.656-5.656a4 4 0 0 0 5.656 5.656m-8.485 2.829l-1.414 1.414M6.343 6.343L4.929 4.929m12.728 1.414l1.414-1.414m-1.414 12.728l1.414 1.414M4 12H2m10-8V2m8 10h2m-10 8v2"/></symbol><use href="#ai:tabler:sun-high"></use>  </svg> </button> </div> </div> </header> <main id="main-content" class="app-layout pb-12" data-pagefind-body> <span class="sr-only" data-pagefind-meta="date">22 Oct 2023</span> <div class="mt-8 flex items-center gap-2 sm:relative sm:block"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline shrink-0 text-foreground/90 hover:text-foreground/70 sm:absolute sm:top-1/2 sm:left-0 sm:-translate-y-1/2 sm:-translate-x-[calc(100%+0.5rem)]" id="back-button" href="/blog/" aria-label="Back to blog"><svg width="1em" height="1em" class="inline-block size-6 rtl:rotate-180" data-icon="tabler:chevron-left">   <symbol id="ai:tabler:chevron-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 6l-6 6l6 6"/></symbol><use href="#ai:tabler:chevron-left"></use>  </svg><span class="sr-only">Back to blog</span></a> <h1 class="min-w-0 text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-qyrnxog5-1"> <span>Graphing CGP Grey&#39;s Rock-Paper-Scissors YouTube Game</span>  </h1> </div> <div class="mt-4 mb-2 flex flex-wrap items-center gap-x-4 gap-y-2"> <div class="flex items-center gap-x-2 opacity-80 shrink-0 sm:min-w-0 sm:flex-1" style="view-transition-name:dategraphing-cgp-grey's-rock-paper-scissors-youtube-game"> <svg width="1em" height="1em" class="inline-block size-6 min-w-5.5" data-icon="tabler:calendar">   <symbol id="ai:tabler:calendar" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm12-4v4M8 3v4m-4 4h16m-9 4h1m0 0v3"/></symbol><use href="#ai:tabler:calendar"></use>  </svg>  <a href="https://github.com/kdheepak/kdheepak.github.io/blob/52156ff39054fbeb69b2484b4d912cd9958ec6d5/src/data/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.md" target="_blank" rel="noopener noreferrer" title="View source at commit: 52156ff" class="decoration-dashed underline-offset-4 hover:text-accent hover:underline"> <time class="text-sm sm:text-base" datetime="2023-10-23T02:21:19.000Z">22 Oct, 2023</time> </a> </div> <div class="flex items-center gap-3 text-sm opacity-80 justify-center text-center sm:text-base shrink-0 sm:min-w-0 sm:flex-1"> <span class="inline-flex items-center gap-1.5 whitespace-nowrap"> <svg width="1em" height="1em" class="inline-block min-w-4 size-5" data-icon="tabler:clock">   <symbol id="ai:tabler:clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0-18 0"/><path d="M12 7v5l3 3"/></g></symbol><use href="#ai:tabler:clock"></use>  </svg> <span> 5 min read (904 words)
+</span> </span> </div> <ul class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center"> <li> <a href="/tags/analysis/" class="flex items-center gap-0.5 border-b-2 border-dashed border-foreground hover:-mt-0.5 hover:border-accent hover:text-accent focus-visible:border-none focus-visible:text-accent text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="1em" height="1em" class="opacity-80 size-4" data-icon="tabler:hash">   <symbol id="ai:tabler:hash" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9h14M5 15h14M11 4L7 20M17 4l-4 16"/></symbol><use href="#ai:tabler:hash"></use>  </svg> analysis </a> </li><li> <a href="/tags/python/" class="flex items-center gap-0.5 border-b-2 border-dashed border-foreground hover:-mt-0.5 hover:border-accent hover:text-accent focus-visible:border-none focus-visible:text-accent text-sm" data-astro-transition-scope="astro-36ssibgs-4"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="opacity-80 size-4" data-icon="tabler:hash">   <use href="#ai:tabler:hash"></use>  </svg> python </a> </li><li> <a href="/tags/julia/" class="flex items-center gap-0.5 border-b-2 border-dashed border-foreground hover:-mt-0.5 hover:border-accent hover:text-accent focus-visible:border-none focus-visible:text-accent text-sm" data-astro-transition-scope="astro-36ssibgs-5"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="opacity-80 size-4" data-icon="tabler:hash">   <use href="#ai:tabler:hash"></use>  </svg> julia </a> </li> </ul> <div class="max-sm:hidden shrink-0"> <div class="flex items-center gap-3"><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/src/data/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.md" target="_blank" rel="noopener noreferrer" aria-label="Edit page" title="Edit page" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" class="inline-block size-6 min-w-5.5" data-icon="tabler:edit">   <symbol id="ai:tabler:edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"/><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3zM16 5l3 3"/></g></symbol><use href="#ai:tabler:edit"></use>  </svg></a><a href="https://nbviewer.org/github/kdheepak/kdheepak.github.io/blob/main/src/data/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.ipynb" target="_blank" rel="noopener noreferrer" aria-label="View notebook" title="View notebook" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" class="inline-block size-6 min-w-5.5" data-icon="tabler:notebook">   <symbol id="ai:tabler:notebook" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1m3 0v18m4-14h2m-2 4h2"/></symbol><use href="#ai:tabler:notebook"></use>  </svg></a></div> </div> </div> <article id="article" class="app-prose drop-cap-lead mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg) has-sticky-toc"> <p>If you haven't already checked it out, go watch CGPGrey's
+Rock-Paper-Scissors YouTube Game.</p>
+<p><a href="https://www.youtube.com/watch?v=PmWQmZXYd74" target="_blank" rel="noopener noreferrer" data-external-link="">https://www.youtube.com/watch?v=PmWQmZXYd74</a></p>
+<p>In this post, I'm going to explore what all the possible paths available
+are. Let's import some packages first.</p>
+<div class="cell"><div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.5o2s3.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> PyCall</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> Conda</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> Graphs</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> WGLMakie</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> CairoMakie</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> GraphMakie</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> GraphMakie</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">NetworkLayout</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> JSON3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> JSServe, Markdown</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> ColorSchemes</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">Page</span><span style="--0:#24292E;--1:#E1E4E8">(exportable</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">true</span><span style="--0:#24292E;--1:#E1E4E8">, offline</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">true</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">CairoMakie</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">activate!</span><span style="--0:#24292E;--1:#E1E4E8">()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">Makie</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">inline!</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">true</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="using PyCallusing Condausing Graphsusing WGLMakieusing CairoMakieusing GraphMakieusing GraphMakie.NetworkLayoutusing JSON3using JSServe, Markdownusing ColorSchemesPage(exportable=true, offline=true)CairoMakie.activate!()Makie.inline!(true)"><div></div></button></div></figure></div></div>
+<p>Fortunately for us, CGPGrey was kind enough to put links to the choices
+in the description of (<em>almost</em>) every video. We can use Google's
+YouTube API to get the video descriptions and get all the YouTube links
+in the description.</p>
+<p>We are going to use the <code>google-api-python-client</code> in Python from Julia.</p>
+<div class="cell"><details class="code-fold">
+<summary>Code</summary><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">API_KEY </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">ENV</span><span style="--0:#24292E;--1:#E1E4E8">[</span><span style="--0:#032F62;--1:#9ECBFF">"YOUTUBE_API_KEY"</span><span style="--0:#24292E;--1:#E1E4E8">]; </span><span style="--0:#616972;--1:#99A0A6"># Get API_KEY from google console</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">build </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">pyimport</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#032F62;--1:#9ECBFF">"googleapiclient.discovery"</span><span style="--0:#24292E;--1:#E1E4E8">)</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">build </span><span style="--0:#616972;--1:#99A0A6"># from googleapiclient.discovery import build</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">youtube </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">build</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#032F62;--1:#9ECBFF">"youtube"</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#032F62;--1:#9ECBFF">"v3"</span><span style="--0:#24292E;--1:#E1E4E8">, developerKey</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">API_KEY) </span><span style="--0:#616972;--1:#99A0A6"># call build function in Python</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="API_KEY = ENV[&#x22;YOUTUBE_API_KEY&#x22;]; # Get API_KEY from google consolebuild = pyimport(&#x22;googleapiclient.discovery&#x22;).build # from googleapiclient.discovery import buildyoutube = build(&#x22;youtube&#x22;, &#x22;v3&#x22;, developerKey=API_KEY) # call build function in Python"><div></div></button></div></figure></div></details></div>
+<p>Now we can get the description of every video, extract the metadata from
+it into a <code>Dict</code> of <code>Dict</code>s, build a graph:</p>
+<div class="cell"><details class="code-fold">
+<summary>Code</summary><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#6F42C1;--1:#B392F0">youtubeid</span><span style="--0:#24292E;--1:#E1E4E8">(url) </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">string</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">first</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">split</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">replace</span><span style="--0:#24292E;--1:#E1E4E8">(url, </span><span style="--0:#032F62;--1:#9ECBFF">"https://www.youtube.com/watch?v="</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">""</span><span style="--0:#24292E;--1:#E1E4E8">), </span><span style="--0:#032F62;--1:#9ECBFF">"&#x26;t"</span><span style="--0:#24292E;--1:#E1E4E8">)))</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">metadata</span><span style="--0:#24292E;--1:#E1E4E8">(url)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">id </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">youtubeid</span><span style="--0:#24292E;--1:#E1E4E8">(url)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">request </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> youtube</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">videos</span><span style="--0:#24292E;--1:#E1E4E8">()</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">list</span><span style="--0:#24292E;--1:#E1E4E8">(part</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">[</span><span style="--0:#032F62;--1:#9ECBFF">"snippet"</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#032F62;--1:#9ECBFF">"statistics"</span><span style="--0:#24292E;--1:#E1E4E8">], id</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">id)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">response </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> request</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">execute</span><span style="--0:#24292E;--1:#E1E4E8">()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">description </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> response[</span><span style="--0:#032F62;--1:#9ECBFF">"items"</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#032F62;--1:#9ECBFF">"snippet"</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#032F62;--1:#9ECBFF">"description"</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">title </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> response[</span><span style="--0:#032F62;--1:#9ECBFF">"items"</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#032F62;--1:#9ECBFF">"snippet"</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#032F62;--1:#9ECBFF">"title"</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">views </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">parse</span><span style="--0:#24292E;--1:#E1E4E8">(Int, response[</span><span style="--0:#032F62;--1:#9ECBFF">"items"</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#032F62;--1:#9ECBFF">"statistics"</span><span style="--0:#24292E;--1:#E1E4E8">][</span><span style="--0:#032F62;--1:#9ECBFF">"viewCount"</span><span style="--0:#24292E;--1:#E1E4E8">])</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> url </span><span style="--0:#BF3441;--1:#F97583">==</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">"https://www.youtube.com/watch?v=CPb168NUwGc"</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#616972;--1:#99A0A6"># Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is not standard)</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">return</span><span style="--0:#24292E;--1:#E1E4E8"> (; description</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">"""</span></div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">WIN: https://www.youtube.com/watch?v=RVLUX6BUEJI</span></div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">LOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">🌐 Website: https://www.cgpgrey.com</span></div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">💖 Patreon: https://www.patreon.com/cgpgrey</span></div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">📒 Cortex: http://www.cortexbrand.com</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">⛔️ Ah01F ✅</span></div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">"""</span><span style="--0:#24292E;--1:#E1E4E8">, title</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">"🔴"</span><span style="--0:#24292E;--1:#E1E4E8">, views)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">(; description, title, views)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">links</span><span style="--0:#24292E;--1:#E1E4E8">(url; visited</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">Dict</span><span style="--0:#24292E;--1:#E1E4E8">(), duplicate_links</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">false</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">m </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">metadata</span><span style="--0:#24292E;--1:#E1E4E8">(url)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">r </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">Dict</span><span style="--0:#24292E;--1:#E1E4E8">(</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">:id</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">youtubeid</span><span style="--0:#24292E;--1:#E1E4E8">(url),</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">:code</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">last</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">split</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">strip</span><span style="--0:#24292E;--1:#E1E4E8">(m</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">description), </span><span style="--0:#032F62;--1:#9ECBFF">"</span><span style="--0:#005CC5;--1:#79B8FF">\n</span><span style="--0:#032F62;--1:#9ECBFF">"</span><span style="--0:#24292E;--1:#E1E4E8">)), </span><span style="--0:#616972;--1:#99A0A6"># last line is a special code</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">:url</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> url,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">:links</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> [],</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">:children</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> [],</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">:title</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> m</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">title,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">:views</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> m</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">views,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> line </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">split</span><span style="--0:#24292E;--1:#E1E4E8">(m</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">description, </span><span style="--0:#032F62;--1:#9ECBFF">"</span><span style="--0:#005CC5;--1:#79B8FF">\n</span><span style="--0:#032F62;--1:#9ECBFF">"</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">occursin</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#032F62;--1:#9ECBFF">"https://www.youtube.com/watch?v="</span><span style="--0:#24292E;--1:#E1E4E8">, line)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">_status, video </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">split</span><span style="--0:#24292E;--1:#E1E4E8">(line, </span><span style="--0:#032F62;--1:#9ECBFF">":"</span><span style="--0:#24292E;--1:#E1E4E8">, limit</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">video </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">strip</span><span style="--0:#24292E;--1:#E1E4E8">(video)</span></div></div><div class="ec-line"><div class="code"><span class="indent">      </span><span style="--0:#005CC5;--1:#79B8FF">push!</span><span style="--0:#24292E;--1:#E1E4E8">(r[</span><span style="--0:#005CC5;--1:#79B8FF">:links</span><span style="--0:#24292E;--1:#E1E4E8">], </span><span style="--0:#005CC5;--1:#79B8FF">Dict</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">:status</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">string</span><span style="--0:#24292E;--1:#E1E4E8">(_status), </span><span style="--0:#005CC5;--1:#79B8FF">:url</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=></span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">string</span><span style="--0:#24292E;--1:#E1E4E8">(video)))</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> link </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> r[</span><span style="--0:#005CC5;--1:#79B8FF">:links</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">url </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> link[</span><span style="--0:#005CC5;--1:#79B8FF">:url</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">!</span><span style="--0:#24292E;--1:#E1E4E8">(url </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">keys</span><span style="--0:#24292E;--1:#E1E4E8">(visited))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">visited[url] </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">Dict</span><span style="--0:#24292E;--1:#E1E4E8">()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">s </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">links</span><span style="--0:#24292E;--1:#E1E4E8">(url; visited, duplicate_links)</span></div></div><div class="ec-line"><div class="code"><span class="indent">      </span><span style="--0:#005CC5;--1:#79B8FF">push!</span><span style="--0:#24292E;--1:#E1E4E8">(r[</span><span style="--0:#005CC5;--1:#79B8FF">:children</span><span style="--0:#24292E;--1:#E1E4E8">], s)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">visited[url] </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> s</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">else</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">      </span></span><span style="--0:#24292E;--1:#E1E4E8">duplicate_links </span><span style="--0:#BF3441;--1:#F97583">&#x26;&#x26;</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">push!</span><span style="--0:#24292E;--1:#E1E4E8">(r[</span><span style="--0:#005CC5;--1:#79B8FF">:children</span><span style="--0:#24292E;--1:#E1E4E8">], visited[url])</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">return</span><span style="--0:#24292E;--1:#E1E4E8"> r</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">cached_links</span><span style="--0:#24292E;--1:#E1E4E8">(url; duplicate_links)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">bfile </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">"""</span><span style="--0:#005CC5;--1:#79B8FF">$(youtubeid(url))</span><span style="--0:#032F62;--1:#9ECBFF">-</span><span style="--0:#005CC5;--1:#79B8FF">$(duplicate_links </span><span style="--0:#BF3441;--1:#F97583">?</span><span style="--0:#005CC5;--1:#79B8FF"> </span><span style="--0:#032F62;--1:#9ECBFF">"dup-links"</span><span style="--0:#005CC5;--1:#79B8FF"> </span><span style="--0:#BF3441;--1:#F97583">:</span><span style="--0:#005CC5;--1:#79B8FF"> </span><span style="--0:#032F62;--1:#9ECBFF">"no-dup-links"</span><span style="--0:#005CC5;--1:#79B8FF">)</span><span style="--0:#032F62;--1:#9ECBFF">.json"""</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">isfile</span><span style="--0:#24292E;--1:#E1E4E8">(bfile)</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">return</span><span style="--0:#24292E;--1:#E1E4E8"> JSON3</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">read</span><span style="--0:#24292E;--1:#E1E4E8">(bfile)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">r </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">links</span><span style="--0:#24292E;--1:#E1E4E8">(url; duplicate_links)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#005CC5;--1:#79B8FF">open</span><span style="--0:#24292E;--1:#E1E4E8">(bfile, </span><span style="--0:#032F62;--1:#9ECBFF">"w"</span><span style="--0:#24292E;--1:#E1E4E8">) </span><span style="--0:#BF3441;--1:#F97583">do</span><span style="--0:#24292E;--1:#E1E4E8"> f</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">JSON3</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">write</span><span style="--0:#24292E;--1:#E1E4E8">(f, r)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">r</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">_clean_titles</span><span style="--0:#24292E;--1:#E1E4E8">(str)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">t </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">join</span><span style="--0:#24292E;--1:#E1E4E8">([c </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> c </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> str </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">isascii</span><span style="--0:#24292E;--1:#E1E4E8">(c)])</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">t </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">strip</span><span style="--0:#24292E;--1:#E1E4E8">(t)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">occursin</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#032F62;--1:#9ECBFF">"Cortex"</span><span style="--0:#24292E;--1:#E1E4E8">, t)</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">return</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">""</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#005CC5;--1:#79B8FF">string</span><span style="--0:#24292E;--1:#E1E4E8">(t)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">_node_builder</span><span style="--0:#24292E;--1:#E1E4E8">(nodes, d)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> c </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> d[</span><span style="--0:#005CC5;--1:#79B8FF">:children</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">push!</span><span style="--0:#24292E;--1:#E1E4E8">(nodes, (; id</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">c[</span><span style="--0:#005CC5;--1:#79B8FF">:id</span><span style="--0:#24292E;--1:#E1E4E8">], title</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">_clean_titles</span><span style="--0:#24292E;--1:#E1E4E8">(c[</span><span style="--0:#005CC5;--1:#79B8FF">:code</span><span style="--0:#24292E;--1:#E1E4E8">]), url</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">c[</span><span style="--0:#005CC5;--1:#79B8FF">:url</span><span style="--0:#24292E;--1:#E1E4E8">], views</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">c[</span><span style="--0:#005CC5;--1:#79B8FF">:views</span><span style="--0:#24292E;--1:#E1E4E8">]))</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">_node_builder</span><span style="--0:#24292E;--1:#E1E4E8">(nodes, c)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">_graph_builder</span><span style="--0:#24292E;--1:#E1E4E8">(G, d, ids)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">from </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> d[</span><span style="--0:#005CC5;--1:#79B8FF">:id</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> c </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> d[</span><span style="--0:#005CC5;--1:#79B8FF">:children</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">to </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> c[</span><span style="--0:#005CC5;--1:#79B8FF">:id</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">add_edge!</span><span style="--0:#24292E;--1:#E1E4E8">(G, </span><span style="--0:#005CC5;--1:#79B8FF">findfirst</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">isequal</span><span style="--0:#24292E;--1:#E1E4E8">(from), ids), </span><span style="--0:#005CC5;--1:#79B8FF">findfirst</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">isequal</span><span style="--0:#24292E;--1:#E1E4E8">(to), ids))</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">_graph_builder</span><span style="--0:#24292E;--1:#E1E4E8">(G, c, ids)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">get_nodes</span><span style="--0:#24292E;--1:#E1E4E8">(data)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">nodes </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [(; id</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">data[</span><span style="--0:#005CC5;--1:#79B8FF">:id</span><span style="--0:#24292E;--1:#E1E4E8">], title</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">_clean_titles</span><span style="--0:#24292E;--1:#E1E4E8">(data[</span><span style="--0:#005CC5;--1:#79B8FF">:title</span><span style="--0:#24292E;--1:#E1E4E8">]), url</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">data[</span><span style="--0:#005CC5;--1:#79B8FF">:url</span><span style="--0:#24292E;--1:#E1E4E8">], views</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">data[</span><span style="--0:#005CC5;--1:#79B8FF">:views</span><span style="--0:#24292E;--1:#E1E4E8">])]</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#005CC5;--1:#79B8FF">_node_builder</span><span style="--0:#24292E;--1:#E1E4E8">(nodes, data)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">nodes </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">unique</span><span style="--0:#24292E;--1:#E1E4E8">(nodes)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">ids </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [n</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">id </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> n </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> nodes]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">titles </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [n</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">title </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> n </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> nodes]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">urls </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [n</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">url </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> n </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> nodes]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">(; ids, titles, urls, nodes)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">grapher</span><span style="--0:#24292E;--1:#E1E4E8">(data, ids)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">G </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">SimpleDiGraph</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">length</span><span style="--0:#24292E;--1:#E1E4E8">(ids))</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#005CC5;--1:#79B8FF">_graph_builder</span><span style="--0:#24292E;--1:#E1E4E8">(G, data, ids)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">G</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="youtubeid(url) = string(first(split(replace(url, &#x22;https://www.youtube.com/watch?v=&#x22; => &#x22;&#x22;), &#x22;&#x26;t&#x22;)))function metadata(url)  id = youtubeid(url)  request = youtube.videos().list(part=[&#x22;snippet&#x22;, &#x22;statistics&#x22;], id=id)  response = request.execute()  description = response[&#x22;items&#x22;][1][&#x22;snippet&#x22;][&#x22;description&#x22;]  title = response[&#x22;items&#x22;][1][&#x22;snippet&#x22;][&#x22;title&#x22;]  views = parse(Int, response[&#x22;items&#x22;][1][&#x22;statistics&#x22;][&#x22;viewCount&#x22;])  if url == &#x22;https://www.youtube.com/watch?v=CPb168NUwGc&#x22;    # Special case for https://www.youtube.com/watch?v=CPb168NUwGc (description for this is not standard)    return (; description=&#x22;&#x22;&#x22;WIN: https://www.youtube.com/watch?v=RVLUX6BUEJILOSE / DRAW: https://www.youtube.com/watch?v=jDQqv3zkbIQ🌐 Website: https://www.cgpgrey.com💖 Patreon: https://www.patreon.com/cgpgrey📒 Cortex: http://www.cortexbrand.com⛔️ Ah01F ✅&#x22;&#x22;&#x22;, title=&#x22;🔴&#x22;, views)  end  (; description, title, views)endfunction links(url; visited=Dict(), duplicate_links=false)  m = metadata(url)  r = Dict(    :id => youtubeid(url),    :code => last(split(strip(m.description), &#x22;\n&#x22;)), # last line is a special code    :url => url,    :links => [],    :children => [],    :title => m.title,    :views => m.views,  )  for line in split(m.description, &#x22;\n&#x22;)    if occursin(&#x22;https://www.youtube.com/watch?v=&#x22;, line)      _status, video = split(line, &#x22;:&#x22;, limit=2)      video = strip(video)      push!(r[:links], Dict(:status => string(_status), :url => string(video)))    end  end  for link in r[:links]    url = link[:url]    if !(url in keys(visited))      visited[url] = Dict()      s = links(url; visited, duplicate_links)      push!(r[:children], s)      visited[url] = s    else      duplicate_links &#x26;&#x26; push!(r[:children], visited[url])    end  end  return rendfunction cached_links(url; duplicate_links)  bfile = &#x22;&#x22;&#x22;$(youtubeid(url))-$(duplicate_links ? &#x22;dup-links&#x22; : &#x22;no-dup-links&#x22;).json&#x22;&#x22;&#x22;  if isfile(bfile)    return JSON3.read(bfile)  end  r = links(url; duplicate_links)  open(bfile, &#x22;w&#x22;) do f    JSON3.write(f, r)  end  rendfunction _clean_titles(str)  t = join([c for c in str if isascii(c)])  t = strip(t)  if occursin(&#x22;Cortex&#x22;, t)    return &#x22;&#x22;  end  string(t)endfunction _node_builder(nodes, d)  for c in d[:children]    push!(nodes, (; id=c[:id], title=_clean_titles(c[:code]), url=c[:url], views=c[:views]))    _node_builder(nodes, c)  endendfunction _graph_builder(G, d, ids)  from = d[:id]  for c in d[:children]    to = c[:id]    add_edge!(G, findfirst(isequal(from), ids), findfirst(isequal(to), ids))    _graph_builder(G, c, ids)  endendfunction get_nodes(data)  nodes = [(; id=data[:id], title=_clean_titles(data[:title]), url=data[:url], views=data[:views])]  _node_builder(nodes, data)  nodes = unique(nodes)  ids = [n.id for n in nodes]  titles = [n.title for n in nodes]  urls = [n.url for n in nodes]  (; ids, titles, urls, nodes)endfunction grapher(data, ids)  G = SimpleDiGraph(length(ids))  _graph_builder(G, data, ids)  Gend"><div></div></button></div></figure></div></details></div>
+<div class="cell"><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">data </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">cached_links</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#032F62;--1:#9ECBFF">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span><span style="--0:#24292E;--1:#E1E4E8">, duplicate_links</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">true</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">(; ids, titles, urls, nodes) </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">get_nodes</span><span style="--0:#24292E;--1:#E1E4E8">(data)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">grapher</span><span style="--0:#24292E;--1:#E1E4E8">(data, ids)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="data = cached_links(&#x22;https://www.youtube.com/watch?v=PmWQmZXYd74&#x22;, duplicate_links=true)(; ids, titles, urls, nodes) = get_nodes(data)G = grapher(data, ids)"><div></div></button></div></figure></div><div class="cell-output cell-output-display"><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#24292e;--1:#e1e4e8">{111, 206} directed simple Int64 graph</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="{111, 206} directed simple Int64 graph"><div></div></button></div></figure></div></div></div>
+<div class="cell"><div class="cell-output cell-output-display"><p>There's <strong>111</strong> videos in this graph with <strong>206</strong> connections between
+the videos.</p></div></div>
+<p>Here's what that graph visualized looks like:</p>
+<div class="cell"><details class="code-fold">
+<summary>Code</summary><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">set_theme!</span><span style="--0:#24292E;--1:#E1E4E8">(; size</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">1600</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">900</span><span style="--0:#24292E;--1:#E1E4E8">), fonts</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">(; title</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">"CMU Serif"</span><span style="--0:#24292E;--1:#E1E4E8">))</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">views </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [node[</span><span style="--0:#005CC5;--1:#79B8FF">:views</span><span style="--0:#24292E;--1:#E1E4E8">] </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> node </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> nodes]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">min_val, max_val </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">extrema</span><span style="--0:#24292E;--1:#E1E4E8">(views[</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#BF3441;--1:#F97583">:</span><span style="--0:#005CC5;--1:#79B8FF">end</span><span style="--0:#24292E;--1:#E1E4E8">])</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">normed_views </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> (views </span><span style="--0:#BF3441;--1:#F97583">.-</span><span style="--0:#24292E;--1:#E1E4E8"> min_val) </span><span style="--0:#BF3441;--1:#F97583">./</span><span style="--0:#24292E;--1:#E1E4E8"> (max_val </span><span style="--0:#BF3441;--1:#F97583">-</span><span style="--0:#24292E;--1:#E1E4E8"> min_val)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">colors </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">cgrad</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">:viridis</span><span style="--0:#24292E;--1:#E1E4E8">, scale</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">log)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">node_colors </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> ColorSchemes</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">get</span><span style="--0:#24292E;--1:#E1E4E8">.(</span><span style="--0:#005CC5;--1:#79B8FF">Ref</span><span style="--0:#24292E;--1:#E1E4E8">(colors), normed_views)</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">f, ax, p </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">graphplot</span><span style="--0:#24292E;--1:#E1E4E8">(G;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">nlabels</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">titles,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">nlabels_fontsize</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">10</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">node_color</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">node_colors,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">node_size</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">20</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">arrow_size</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">8</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">layout</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">Stress</span><span style="--0:#24292E;--1:#E1E4E8">(dim</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">3</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">Colorbar</span><span style="--0:#24292E;--1:#E1E4E8">(f[</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">], limits</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">extrema</span><span style="--0:#24292E;--1:#E1E4E8">(views), colormap</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">colors, label</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">"YouTube Views"</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># hidedecorations!(ax); hidespines!(ax);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># offsets = [Point2f(0.1, -0.5) for _ in p[:node_pos][]]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># offsets[1] = Point2f(0.1, 0.5)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># p.nlabels_offset[] = offsets</span></div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># autolimits!(ax)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># ax.title = "CGP Grey's Rock-Paper-Scissors YouTube Game"</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">f</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="set_theme!(; size=(1600, 900), fonts=(; title=&#x22;CMU Serif&#x22;))views = [node[:views] for node in nodes]min_val, max_val = extrema(views[2:end])normed_views = (views .- min_val) ./ (max_val - min_val)colors = cgrad(:viridis, scale=log)node_colors = ColorSchemes.get.(Ref(colors), normed_views)f, ax, p = graphplot(G;  nlabels=titles,  nlabels_fontsize=10,  node_color=node_colors,  node_size=20,  arrow_size=8,  layout=Stress(dim=3))Colorbar(f[1, 2], limits=extrema(views), colormap=colors, label=&#x22;YouTube Views&#x22;)# hidedecorations!(ax); hidespines!(ax);# offsets = [Point2f(0.1, -0.5) for _ in p[:node_pos][]]# offsets[1] = Point2f(0.1, 0.5)# p.nlabels_offset[] = offsets# autolimits!(ax)# ax.title = &#x22;CGP Grey&#x27;s Rock-Paper-Scissors YouTube Game&#x22;f"><div></div></button></div></figure></div></details><div class="cell-output cell-output-display"><p><img  loading="lazy" decoding="async" fetchpriority="auto" sizes="(min-width: 3200px) 3200px, 100vw"  data-astro-image="constrained" width="3200" height="1800" src="/_astro/cell-8-output-1.Cq9SUJPP_Z1T0ive.webp" srcset="/_astro/cell-8-output-1.Cq9SUJPP_Zs3lhH.webp 640w, /_astro/cell-8-output-1.Cq9SUJPP_MtFLQ.webp 750w, /_astro/cell-8-output-1.Cq9SUJPP_Z1U21G1.webp 828w, /_astro/cell-8-output-1.Cq9SUJPP_mnXJ3.webp 1080w, /_astro/cell-8-output-1.Cq9SUJPP_2wMBLD.webp 1280w, /_astro/cell-8-output-1.Cq9SUJPP_2ilPJL.webp 1668w, /_astro/cell-8-output-1.Cq9SUJPP_UayNF.webp 2048w, /_astro/cell-8-output-1.Cq9SUJPP_WWx3P.webp 2560w, /_astro/cell-8-output-1.Cq9SUJPP_Z1T0ive.webp 3200w"></p></div></div>
+<p>This graph contains a lot of duplicate links to the same video. For
+example when losing after different number of wins, you might end up at
+the same video. Let's remove those connections so we can visualize it as
+a tree.</p>
+<div class="cell"><details class="code-fold">
+<summary>Code</summary><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">data </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">cached_links</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#032F62;--1:#9ECBFF">"https://www.youtube.com/watch?v=PmWQmZXYd74"</span><span style="--0:#24292E;--1:#E1E4E8">, duplicate_links</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">false</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">(; ids, titles, urls, nodes) </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">get_nodes</span><span style="--0:#24292E;--1:#E1E4E8">(data)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">grapher</span><span style="--0:#24292E;--1:#E1E4E8">(data, ids)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="data = cached_links(&#x22;https://www.youtube.com/watch?v=PmWQmZXYd74&#x22;, duplicate_links=false)(; ids, titles, urls, nodes) = get_nodes(data)G = grapher(data, ids)"><div></div></button></div></figure></div></details><div class="cell-output cell-output-display"><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#24292e;--1:#e1e4e8">{111, 110} directed simple Int64 graph</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="{111, 110} directed simple Int64 graph"><div></div></button></div></figure></div></div></div>
+<div class="cell"><div class="cell-output cell-output-display"><p>There's <strong>111</strong> videos in this graph with <strong>110</strong> connections between
+the videos.</p></div></div>
+<p>Here's what the graph now visualized looks like:</p>
+<div class="cell"><details class="code-fold">
+<summary>Code</summary><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">set_theme!</span><span style="--0:#24292E;--1:#E1E4E8">(; size</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">1600</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">900</span><span style="--0:#24292E;--1:#E1E4E8">), fonts</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">(; title</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">"CMU Serif"</span><span style="--0:#24292E;--1:#E1E4E8">))</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">views </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [node[</span><span style="--0:#005CC5;--1:#79B8FF">:views</span><span style="--0:#24292E;--1:#E1E4E8">] </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> node </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> nodes]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">min_val, max_val </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">extrema</span><span style="--0:#24292E;--1:#E1E4E8">(views[</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#BF3441;--1:#F97583">:</span><span style="--0:#005CC5;--1:#79B8FF">end</span><span style="--0:#24292E;--1:#E1E4E8">])</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">normed_views </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> (views </span><span style="--0:#BF3441;--1:#F97583">.-</span><span style="--0:#24292E;--1:#E1E4E8"> min_val) </span><span style="--0:#BF3441;--1:#F97583">./</span><span style="--0:#24292E;--1:#E1E4E8"> (max_val </span><span style="--0:#BF3441;--1:#F97583">-</span><span style="--0:#24292E;--1:#E1E4E8"> min_val)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">colors </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">cgrad</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">:viridis</span><span style="--0:#24292E;--1:#E1E4E8">, scale</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">log)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">node_colors </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> ColorSchemes</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">get</span><span style="--0:#24292E;--1:#E1E4E8">.(</span><span style="--0:#005CC5;--1:#79B8FF">Ref</span><span style="--0:#24292E;--1:#E1E4E8">(colors), normed_views)</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># If there's a space it is probably a unique name</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">node_size </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [</span><span style="--0:#005CC5;--1:#79B8FF">length</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">split</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">strip</span><span style="--0:#24292E;--1:#E1E4E8">(t))) </span><span style="--0:#BF3441;--1:#F97583">></span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">?</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">25</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">:</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">15</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> t </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> titles]</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">f, ax, p </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">graphplot</span><span style="--0:#24292E;--1:#E1E4E8">(G;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">nlabels</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">titles,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">nlabels_fontsize</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">15</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">node_color</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">node_colors,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">node_size,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">arrow_size</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">8</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">arrow_shift</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">:end</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">layout</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">Buchheim</span><span style="--0:#24292E;--1:#E1E4E8">()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">hidedecorations!</span><span style="--0:#24292E;--1:#E1E4E8">(ax);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">hidespines!</span><span style="--0:#24292E;--1:#E1E4E8">(ax);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">offsets </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> [</span><span style="--0:#005CC5;--1:#79B8FF">Point2f</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">0.1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#BF3441;--1:#F97583">-</span><span style="--0:#005CC5;--1:#79B8FF">1.5</span><span style="--0:#24292E;--1:#E1E4E8">) </span><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> _ </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> p[</span><span style="--0:#005CC5;--1:#79B8FF">:node_pos</span><span style="--0:#24292E;--1:#E1E4E8">][]]</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">offsets[</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">] </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">Point2f</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">0.1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">0.5</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">p</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">nlabels_offset[] </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> offsets</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">autolimits!</span><span style="--0:#24292E;--1:#E1E4E8">(ax)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">ax</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">title </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">"CGP Grey's Rock-Paper-Scissors YouTube Game"</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">Colorbar</span><span style="--0:#24292E;--1:#E1E4E8">(f[</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">], limits</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">extrema</span><span style="--0:#24292E;--1:#E1E4E8">(views), colormap</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">colors, label</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">"YouTube Views"</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">f</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="set_theme!(; size=(1600, 900), fonts=(; title=&#x22;CMU Serif&#x22;))views = [node[:views] for node in nodes]min_val, max_val = extrema(views[2:end])normed_views = (views .- min_val) ./ (max_val - min_val)colors = cgrad(:viridis, scale=log)node_colors = ColorSchemes.get.(Ref(colors), normed_views)# If there&#x27;s a space it is probably a unique namenode_size = [length(split(strip(t))) > 1 ? 25 : 15 for t in titles]f, ax, p = graphplot(G;  nlabels=titles,  nlabels_fontsize=15,  node_color=node_colors,  node_size,  arrow_size=8,  arrow_shift=:end,  layout=Buchheim())hidedecorations!(ax);hidespines!(ax);offsets = [Point2f(0.1, -1.5) for _ in p[:node_pos][]]offsets[1] = Point2f(0.1, 0.5)p.nlabels_offset[] = offsetsautolimits!(ax)ax.title = &#x22;CGP Grey&#x27;s Rock-Paper-Scissors YouTube Game&#x22;Colorbar(f[1, 2], limits=extrema(views), colormap=colors, label=&#x22;YouTube Views&#x22;)f"><div></div></button></div></figure></div></details><div class="cell-output cell-output-display"><p><img  loading="lazy" decoding="async" fetchpriority="auto" sizes="(min-width: 3200px) 3200px, 100vw"  data-astro-image="constrained" width="3200" height="1800" src="/_astro/cell-11-output-1.xqdvnj1G_537YY.webp" srcset="/_astro/cell-11-output-1.xqdvnj1G_ZPOnK4.webp 640w, /_astro/cell-11-output-1.xqdvnj1G_pKygM.webp 750w, /_astro/cell-11-output-1.xqdvnj1G_ZxQb21.webp 828w, /_astro/cell-11-output-1.xqdvnj1G_Z2k2GG.webp 1080w, /_astro/cell-11-output-1.xqdvnj1G_ZRVrIE.webp 1280w, /_astro/cell-11-output-1.xqdvnj1G_Zkbu2x.webp 1668w, /_astro/cell-11-output-1.xqdvnj1G_ZhB3PI.webp 2048w, /_astro/cell-11-output-1.xqdvnj1G_ZBW3uT.webp 2560w, /_astro/cell-11-output-1.xqdvnj1G_537YY.webp 3200w"></p></div></div>
+<p>There we have it; a flowchart of the Rock-Paper-Scissors game.</p>
+<p>Here's a table that contains the sorted view count as of April 19th,
+2024.</p>
+<div class="cell"><details class="code-fold">
+<summary>Code</summary><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> DataFrames </span><span style="--0:#BF3441;--1:#F97583">as</span><span style="--0:#24292E;--1:#E1E4E8"> DF</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># Create an empty DataFrame</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">df </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> DF</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#005CC5;--1:#79B8FF">DataFrame</span><span style="--0:#24292E;--1:#E1E4E8">(Title</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">String[], Views</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">Int[])</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> idx </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">sortperm</span><span style="--0:#24292E;--1:#E1E4E8">(views, rev</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">true</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#005CC5;--1:#79B8FF">push!</span><span style="--0:#24292E;--1:#E1E4E8">(df, (; Title</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">titles[idx], Views</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">views[idx]))</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># Display the DataFrame</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">display</span><span style="--0:#24292E;--1:#E1E4E8">(df)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import DataFrames as DF# Create an empty DataFramedf = DF.DataFrame(Title=String[], Views=Int[])for idx in sortperm(views, rev=true)  push!(df, (; Title=titles[idx], Views=views[idx]))end# Display the DataFramedisplay(df)"><div></div></button></div></figure></div></details><div class="cell-output cell-output-display">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Title</th><th>Views</th></tr></thead><tbody><tr><td>1</td><td>One-in-a-Million YouTube Game: Can YOU Win?</td><td>1073774</td></tr><tr><td>2</td><td>R1h01W</td><td>420943</td></tr><tr><td>3</td><td>Really Over</td><td>386865</td></tr><tr><td>4</td><td>R2xF</td><td>354432</td></tr><tr><td>5</td><td>Post Game</td><td>306757</td></tr><tr><td>6</td><td>R2h01W</td><td>299879</td></tr><tr><td>7</td><td></td><td>285998</td></tr><tr><td>8</td><td>R1h03W</td><td>234144</td></tr><tr><td>9</td><td>R1h04W</td><td>228726</td></tr><tr><td>10</td><td>Ah01F</td><td>218414</td></tr><tr><td>11</td><td>R3h01W</td><td>195832</td></tr><tr><td>12</td><td>R1h12W</td><td>158979</td></tr><tr><td>13</td><td>R1h05W</td><td>148637</td></tr><tr><td>14</td><td>R1h06W</td><td>136197</td></tr><tr><td>15</td><td>R1h07W</td><td>127503</td></tr><tr><td>16</td><td>R2h02W</td><td>121754</td></tr><tr><td>17</td><td>R1hXF</td><td>121434</td></tr><tr><td>18</td><td>R1h08</td><td>120358</td></tr><tr><td>19</td><td>R1h09W</td><td>117182</td></tr><tr><td>20</td><td>R1h11W</td><td>116414</td></tr><tr><td>21</td><td>R1h10W</td><td>115443</td></tr><tr><td>22</td><td>Ah02F</td><td>114839</td></tr><tr><td>23</td><td>Billion or Bust</td><td>111327</td></tr><tr><td>24</td><td>R1h02F</td><td>106864</td></tr><tr><td>25</td><td>R1h13W    One Million Rock</td><td>106053</td></tr><tr><td>26</td><td>R3h02W</td><td>103728</td></tr><tr><td>27</td><td>RTh14W</td><td>99236</td></tr><tr><td>28</td><td>RTh19W</td><td>98928</td></tr><tr><td>29</td><td>RTh15W</td><td>92640</td></tr><tr><td>30</td><td>RTh18W</td><td>89046</td></tr><tr><td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>…</mo></mrow><annotation encoding="application/x-tex">\dots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.123em;"></span><span class="minner">…</span></span></span></span></td><td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>…</mo></mrow><annotation encoding="application/x-tex">\dots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.123em;"></span><span class="minner">…</span></span></span></span></td><td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>…</mo></mrow><annotation encoding="application/x-tex">\dots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.123em;"></span><span class="minner">…</span></span></span></span></td></tr></tbody></table></div></div>
+<p>If you liked this blog post, consider subscribing to <a href="https://www.patreon.com/cgpgrey" target="_blank" rel="noopener noreferrer" data-external-link="">CGP Grey's
+Patreon</a> so that they can make more
+awesome content like this.</p>
+<p>If you are interested in viewing all the videos, you can check them out
+below:</p>
+<div class="cell"><details class="code-fold">
+<summary>Code</summary><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="julia"><code><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">using</span><span style="--0:#24292E;--1:#E1E4E8"> IJulia</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">function</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">display_youtube_video</span><span style="--0:#24292E;--1:#E1E4E8">(node)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">video_id </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">split</span><span style="--0:#24292E;--1:#E1E4E8">(node</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">url, </span><span style="--0:#032F62;--1:#9ECBFF">"="</span><span style="--0:#24292E;--1:#E1E4E8">)[</span><span style="--0:#005CC5;--1:#79B8FF">end</span><span style="--0:#24292E;--1:#E1E4E8">]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">title </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> node</span><span style="--0:#BF3441;--1:#F97583">.</span><span style="--0:#24292E;--1:#E1E4E8">title</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">isempty</span><span style="--0:#24292E;--1:#E1E4E8">(title)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">title </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">"---no special code---"</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">  </span></span><span style="--0:#24292E;--1:#E1E4E8">html_code </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">"""</span></div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">&#x3C;details></span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">  </span></span><span style="--0:#032F62;--1:#9ECBFF">&#x3C;summary></span><span style="--0:#005CC5;--1:#79B8FF">$(title)</span><span style="--0:#032F62;--1:#9ECBFF">&#x3C;/summary></span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">  </span></span><span style="--0:#032F62;--1:#9ECBFF">&#x3C;iframe width="560" height="315" src="https://www.youtube.com/embed/</span><span style="--0:#005CC5;--1:#79B8FF">$video_id</span><span style="--0:#032F62;--1:#9ECBFF">" frameborder="0" allowfullscreen>&#x3C;/iframe></span></div></div><div class="ec-line"><div class="code"><span style="--0:#032F62;--1:#9ECBFF">&#x3C;/details></span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">  </span></span><span style="--0:#032F62;--1:#9ECBFF">"""</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#005CC5;--1:#79B8FF">display</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#032F62;--1:#9ECBFF">"text/html"</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">HTML</span><span style="--0:#24292E;--1:#E1E4E8">(html_code))</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">end</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">@assert</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">unique</span><span style="--0:#24292E;--1:#E1E4E8">(nodes) </span><span style="--0:#BF3441;--1:#F97583">==</span><span style="--0:#24292E;--1:#E1E4E8"> nodes</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">display_youtube_video</span><span style="--0:#24292E;--1:#E1E4E8">.(nodes);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="using IJuliafunction display_youtube_video(node)  video_id = split(node.url, &#x22;=&#x22;)[end]  title = node.title  if isempty(title)    title = &#x22;---no special code---&#x22;  end  html_code = &#x22;&#x22;&#x22;<details>  <summary>$(title)</summary>  <iframe width=&#x22;560&#x22; height=&#x22;315&#x22; src=&#x22;https://www.youtube.com/embed/$video_id&#x22; frameborder=&#x22;0&#x22; allowfullscreen></iframe></details>  &#x22;&#x22;&#x22;  display(&#x22;text/html&#x22;, HTML(html_code))end@assert unique(nodes) == nodesdisplay_youtube_video.(nodes);"><div></div></button></div></figure></div></details><div class="cell-output cell-output-display"><details>
+  <summary>One-in-a-Million YouTube Game: Can YOU Win?</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PmWQmZXYd74" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h01W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Ul8r0Thgx44" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>---no special code---</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_mrAeT9kpPM" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h03W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/hoaLwPc571E" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h04W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/z8zjvT8Qx8U" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h05W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/uHoYnV9JX4w" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h06W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/jRDLtKUsq8U" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h07W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/RXy0Kc1Cl9s" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h08</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/v3oXQrWu-PA" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h09W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/bN5M3caw6b8" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h10W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/DDmnplXv6pY" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h11W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/6auFOPOuHuE" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h12W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/0M39bd9euEI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h13W    One Million Rock</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/E3pdr5hNBe4" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Post Game Blue</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/s3rUNS68AKs" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Billion or Bust</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/K1kVsxsnYyc" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh14W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/wf6sqW38AmM" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh15W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/j92TH0iaCrE" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh16W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/r8LgYG67bCA" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh17W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/DZLnWKM90nQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh18W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/aSjsXUdaIgQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh19W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/HunlKDzXNv0" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh19 5W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/gv7_NTC_Rgs" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh20W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/sbgMHxUkfFI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh21W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/4Nk29OAqZTw" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh22W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/OjHzloSmLZg" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh23W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/I32ZGazBqWY" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh24W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/-bGMZAWuL1o" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh25W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/7GEmEWf1KgY" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>RTh26W    Trillion End</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/4wUukNXczpM" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Over a Billion, Under a Trillion</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/d0R5Csv7ogU" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Over a Million, Under a Billion</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/AgHpWh77STQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h13F    Paper</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/YohvsF9mF3g" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h01W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/RVLUX6BUEJI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h02W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/KHtDsZvsoMw" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h03W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/t0hJIw19ChI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h04W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/e6zLBO0vez8" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h05W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/WR7AbrjBZNI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h06W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fMyFx3bFW-s" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h07W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/hi4166mPpmA" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h08W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/SxWZDOgaIog" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h09W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/-D_g1k0IzTQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h10W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/AnsaswKGPHk" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h11W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/8UKflLZq61E" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h12W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tAcIxmJOA9o" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h12F - Rock</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/QxC-EQAsTuM" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h01W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/b41_jrE8jFw" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h02W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/oOufgnObuhQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h03W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/N7UCPssq-X8" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h04W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FlwMxN9-mec" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h05W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ghJAsm9W3k0" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h06W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/55nbeaYL7hQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h07W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dB8-XaRclhk" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h08W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ddWvzSxz4AA" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h09W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/0xFOAtGBdUg" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h10W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/HSdwcDFDyQY" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h11W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Q5kgEN3rb_c" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3h12W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/pteggMrRnk4" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3 Rock</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/D8iP2qINaSE" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Post Game</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dU22iL1ZsWQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R3 Paper</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/hhDh6_RD7tU" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h13W    One Million Scissors</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/87zN8iWo5pU" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Really Over</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/LvcxrEP2U-o" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h13W    One Million Paper</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yQKjsA90kpc" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2h12F    Scissors</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_WKzx6tClQw" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2xF PretFar</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/7VmxQumJAL4" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R2xF</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/0odtRIBvjes" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h13F    Scissors</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/AGL2OMZzn2g" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1hPretFarF</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yCwdjfzxI4I" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1hXF</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/qYaLoO40kjM" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h03F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/r9-jSTCiHd0" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>R1h02F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fWOtjGJvlGI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah01F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/CPb168NUwGc" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah02F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/jDQqv3zkbIQ" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah03F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/HXtheRKAkIw" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah04F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/3qoxLsQ9464" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah05F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/xjo-L59q8K4" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah06F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dzK444eg53c" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Most Anti Lucky</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/LLZJ-U1UB5M" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah07F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/83hQScodfDA" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>AntiEnd Under 1k</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/j-jqX7AdQT8" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah08F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/TFlsl2ZkBlI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah09F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/4ojQK570hDA" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah10F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/WQ9wBn2Qk14" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah11F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/hT-25A8LFAE" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah12F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/e8zbuI-qJX4" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah13F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/xCb7UVssqlY" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah14F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/54ZevZGGXZw" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah15F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/d84UbmiyBOs" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah16F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/X9jKHujmt1M" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah17F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/SeX6WzVRZ4Y" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah18F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/j8fHcBHeKwk" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>AntiEnd Over 1k</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/b6_QOYNf73g" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah19F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/VtWv7m270kY" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah20F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/LSHMwceP0X8" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah21F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/BvL-kq_LLsI" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah22F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/KIcQP_OL0-0" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah23F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ei5WZihztGk" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah24F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/74E6BTyhv_c" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah25F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/YnACGEG1tTc" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah26F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/7Jp8Xp_9v90" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah27F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ILrJDLjx6sA" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah28F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/sJXuw8QM0W4" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah29F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Gh_preEUg74" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah30F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/YVJh73INvXk" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah31F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/9HDYmP-l_oM" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah32F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ugkWE2cy370" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah33F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/F-j5y5dyPDo" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah34F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tlTOyDEZGUU" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah35W</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/wUjs_vVwh68" frameborder="0" allowfullscreen></iframe>
+</details></div><div class="cell-output cell-output-display"><details>
+  <summary>Ah35F</summary>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/GG6AZGhLCS4" frameborder="0" allowfullscreen></iframe>
+</details></div></div> </article> <hr class="my-8 border-dashed"> <div class="flex items-center gap-3 sm:hidden"><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/src/data/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.md" target="_blank" rel="noopener noreferrer" aria-label="Edit page" title="Edit page" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 min-w-5.5" data-icon="tabler:edit">   <use href="#ai:tabler:edit"></use>  </svg></a><a href="https://nbviewer.org/github/kdheepak/kdheepak.github.io/blob/main/src/data/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/index.ipynb" target="_blank" rel="noopener noreferrer" aria-label="View notebook" title="View notebook" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 min-w-5.5" data-icon="tabler:notebook">   <use href="#ai:tabler:notebook"></use>  </svg></a></div> <section id="citation" class="post-citation mt-10 rounded-lg border border-border bg-muted/20 p-4 sm:p-5" data-pagefind-ignore> <h2 class="text-lg font-semibold text-foreground">Citation</h2> <div class="mt-3 rounded-md border border-border bg-background"> <pre class="overflow-x-auto p-4 text-xs leading-relaxed sm:text-sm"><code>@online{krishnamurthy2023graphingcgpgreyrockpaperscissorsyoutubegame,
+  author = {Dheepak Krishnamurthy},
+  title = {Graphing CGP Grey&#39;s Rock-Paper-Scissors YouTube Game},
+  year = {2023},
+  date = {2023-10-22},
+  url = {https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/},
+  langid = {en},
+}</code></pre> </div> <p class="mt-4 text-sm text-foreground/70">
+For attribution, please cite this work as:
+</p> <p class="mt-2 rounded-md border border-border bg-background px-3 py-2 text-sm leading-relaxed text-foreground/90"> Dheepak Krishnamurthy, &quot;Graphing CGP Grey&#39;s Rock-Paper-Scissors YouTube Game&quot;, October 22, 2023 <a href="https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" target="_blank" rel="noopener noreferrer" data-external-link class="mt-1 block break-all text-accent decoration-dashed underline-offset-4">https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/</a> </p> </section> <div class="mt-10 mb-6 grid items-start gap-6 sm:grid-cols-2" data-pagefind-ignore> <div class="justify-self-center sm:justify-self-start"> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://wa.me/?text=https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" title="Share this post via WhatsApp"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-whatsapp">   <symbol id="ai:tabler:brand-whatsapp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m3 21l1.65-3.8a9 9 0 1 1 3.4 2.9z"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0za5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></g></symbol><use href="#ai:tabler:brand-whatsapp"></use>  </svg><span class="sr-only">Share this post via WhatsApp</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://www.facebook.com/sharer.php?u=https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" title="Share this post on Facebook"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-facebook">   <symbol id="ai:tabler:brand-facebook" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2z"/></symbol><use href="#ai:tabler:brand-facebook"></use>  </svg><span class="sr-only">Share this post on Facebook</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://x.com/intent/post?url=https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" title="Share this post on X"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-x">   <symbol id="ai:tabler:brand-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4l11.733 16H20L8.267 4zm0 16l6.768-6.768m2.46-2.46L20 4"/></symbol><use href="#ai:tabler:brand-x"></use>  </svg><span class="sr-only">Share this post on X</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://bsky.app/intent/compose?text=https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" title="Share this post on Bluesky"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-bluesky">   <symbol id="ai:tabler:brand-bluesky" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.335 5.144C4.681 3.945 2 3.017 2 5.97c0 .59.35 4.953.556 5.661C3.269 14.094 5.686 14.381 8 14c-4.045.665-4.889 3.208-2.667 5.41C6.363 20.428 7.246 21 8 21c2 0 3.134-2.769 3.5-3.5q.5-1 .5-1.5q0 .5.5 1.5c.366.731 1.5 3.5 3.5 3.5c.754 0 1.637-.571 2.667-1.59C20.889 17.207 20.045 14.664 16 14c2.314.38 4.73.094 5.444-2.369c.206-.708.556-5.072.556-5.661c0-2.953-2.68-2.025-4.335-.826C15.372 6.806 12.905 10.192 12 12c-.905-1.808-3.372-5.194-5.665-6.856"/></symbol><use href="#ai:tabler:brand-bluesky"></use>  </svg><span class="sr-only">Share this post on Bluesky</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://t.me/share/url?url=https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" title="Share this post via Telegram"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-telegram">   <symbol id="ai:tabler:brand-telegram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></symbol><use href="#ai:tabler:brand-telegram"></use>  </svg><span class="sr-only">Share this post via Telegram</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://pinterest.com/pin/create/button/?url=https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" title="Share this post on Pinterest"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-pinterest">   <symbol id="ai:tabler:brand-pinterest" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m8 20l4-9m-1.3 3c.437 1.263 1.43 2 2.55 2c2.071 0 3.75-1.554 3.75-4a5 5 0 1 0-9.7 1.7"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0"/></g></symbol><use href="#ai:tabler:brand-pinterest"></use>  </svg><span class="sr-only">Share this post on Pinterest</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="mailto:?subject=See%20this%20post&#38;body=https://kdheepak.com/blog/graphing-cgpgrey-rock-paper-scissors-youtube-game/" title="Share this post via email"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:mail">   <symbol id="ai:tabler:mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></symbol><use href="#ai:tabler:mail"></use>  </svg><span class="sr-only">Share this post via email</span></a></div></div> </div> <div class="justify-self-center sm:justify-self-end"> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="1em" height="1em" class="inline-block md:hidden" data-icon="tabler:chevron-up">   <symbol id="ai:tabler:chevron-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 15l6-6l6 6"/></symbol><use href="#ai:tabler:chevron-up"></use>  </svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="1em" height="1em" class="inline-block size-4" data-icon="tabler:arrow-narrow-up">   <symbol id="ai:tabler:arrow-narrow-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m4-10l-4-4M8 9l4-4"/></symbol><use href="#ai:tabler:arrow-narrow-up"></use>  </svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent =
+        scrollTotal > 0 ? Math.floor((scrollTop / scrollTotal) * 100) : 0;
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const visibleByPixels = scrollTop >= 220;
+      const visibleByRatio = scrollTotal > 0 && scrollTop / scrollTotal >= 0.08;
+      const isVisible = visibleByPixels || visibleByRatio;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Sync visibility immediately (e.g. deep links and client-side transitions).
+    handleScroll();
+  }
+  backToTop();
+</script> </div> </div> <div class="giscus"></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/blog/publish-documents-with-quarto/" class="flex w-full items-center gap-2 hover:opacity-75"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 flex-none self-center rtl:rotate-180" data-icon="tabler:chevron-left">   <use href="#ai:tabler:chevron-left"></use>  </svg> <div> <div class="text-sm text-accent/85">Publishing documents with Quarto</div> </div> </a> <a href="/blog/julia-workflow-tips-and-tricks/" class="flex w-full items-center justify-end gap-2 text-end hover:opacity-75 sm:col-start-2"> <div> <div class="text-sm text-accent/85">Julia Workflow Tips and Tricks</div> </div> <svg width="1em" height="1em" class="inline-block size-6 flex-none self-center rtl:rotate-180" data-icon="tabler:chevron-right">   <symbol id="ai:tabler:chevron-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 6l6 6l-6 6"/></symbol><use href="#ai:tabler:chevron-right"></use>  </svg> </a> </div> </main> <footer class="app-layout mt-auto"> <div class="py-6 sm:py-4 border-t border-border flex flex-col items-center gap-2 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center"> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:justify-self-start sm:flex-row"> <span>&#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span> <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener noreferrer" target="_blank" data-external-link class="underline decoration-dashed underline-offset-4 hover:text-accent"> CC BY-SA 4.0 </a> </span> </div> <a href="https://github.com/kdheepak/kdheepak.github.io/tree/52156ff39054fbeb69b2484b4d912cd9958ec6d5" target="_blank" rel="noopener noreferrer" title="View source tree: 52156ff" class="sm:justify-self-center text-foreground/45 transition-colors hover:text-foreground/60"> <time class="text-[0.7rem] tracking-[0.08em]" data-build-local-time data-build-iso="2026-03-07T04:14:52.855Z" datetime="2026-03-07T04:14:52.855Z" title="2026-03-07T04:14:52.855Z"> 2026-03-07T04:14:52Z </time> </a> <div class="sm:justify-self-end"> <div class="flex flex-wrap items-center gap-1"> <a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="https://github.com/kdheepak/" title="kd on GitHub"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-github">   <symbol id="ai:tabler:brand-github" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2c2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2a4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6c-.6.6-.6 1.2-.5 2V21"/></symbol><use href="#ai:tabler:brand-github"></use>  </svg> <span class="sr-only">kd on GitHub</span> </a><a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="https://www.linkedin.com/in/dheepak-krishnamurthy/" title="kd on LinkedIn"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-linkedin">   <symbol id="ai:tabler:brand-linkedin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 11v5m0-8v.01M12 16v-5m4 5v-3a2 2 0 1 0-4 0"/><path d="M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></g></symbol><use href="#ai:tabler:brand-linkedin"></use>  </svg> <span class="sr-only">kd on LinkedIn</span> </a><a href="#" data-obfuscated-email="bWVAa2RoZWVwYWsuY29t" class="group inline-flex items-center gap-1 p-2 hover:rotate-6 hover:text-accent sm:p-1" title="Send an email to kd">  <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:mail">   <use href="#ai:tabler:mail"></use>  </svg> <span class="sr-only">Send an email to kd</span>  </a> <script type="module">const c=e=>{try{return window.atob(e)}catch{return null}},s=(e=document)=>{const d=e.querySelectorAll("a[data-obfuscated-email]");for(const o of d){const a=o.dataset.obfuscatedEmail;if(!a)continue;const t=c(a);!t||!t.includes("@")||(o.href=`mailto:${t}`)}},n=()=>{s(document)};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",n,{once:!0}):n();document.addEventListener("astro:page-load",n);</script><a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="/rss.xml" title="kd RSS feed"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:rss">   <symbol id="ai:tabler:rss" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19a1 1 0 1 0 2 0a1 1 0 1 0-2 0M4 4a16 16 0 0 1 16 16M4 11a9 9 0 0 1 9 9"/></symbol><use href="#ai:tabler:rss"></use>  </svg> <span class="sr-only">kd RSS feed</span> </a> </div> </div> </div> <p class="mx-auto mb-8 max-w-3xl text-center text-xs leading-relaxed text-foreground/60">
+All views or opinions expressed here are solely mine and are not represented,
+    shared, supported, or endorsed by any employer or entity in any manner.
+</p> </footer> <script type="module">const o=t=>String(t).padStart(2,"0"),m=t=>{const c=t<=0?"+":"-",e=Math.abs(t),n=o(Math.floor(e/60)),s=o(e%60);return`${c}${n}:${s}`},d=t=>{const c=t.getFullYear(),e=o(t.getMonth()+1),n=o(t.getDate()),s=o(t.getHours()),i=o(t.getMinutes()),r=o(t.getSeconds()),u=m(t.getTimezoneOffset());return`${c}-${e}-${n}T${s}:${i}:${r}${u}`},l=(t=document)=>{const c=t.querySelectorAll("time[data-build-local-time]");for(const e of c){const n=e.dataset.buildIso;if(!n)continue;const s=new Date(n);Number.isNaN(s.getTime())||(e.textContent=d(s),e.title=n)}},a=()=>{l(document)};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",a,{once:!0}):a();document.addEventListener("astro:page-load",a);</script>  <script type="module" src="/_astro/SearchInitializer.astro_astro_type_script_index_0_lang.DN4QOb-R.js"></script> <!-- Load full theme logic --> <script type="module">const d="theme",r="light",m="dark";function i(){const e=localStorage.getItem(d);return e||(window.matchMedia("(prefers-color-scheme: dark)").matches?m:r)}let t=window.theme?.themeValue??i();function c(){localStorage.setItem(d,t),o()}function o(){document.firstElementChild?.setAttribute("data-theme",t),document.querySelector("#theme-btn")?.setAttribute("aria-label",t);const e=document.body;if(e){const n=window.getComputedStyle(e).backgroundColor;document.querySelector("meta[name='theme-color']")?.setAttribute("content",n)}}window.theme?(window.theme.setPreference=c,window.theme.reflectPreference=o):window.theme={themeValue:t,setPreference:c,reflectPreference:o,getTheme:()=>t,setTheme:e=>{t=e}};o();function s(){o(),document.querySelector("#theme-btn")?.addEventListener("click",()=>{t=t===r?m:r,window.theme?.setTheme(t),c()})}s();document.addEventListener("astro:after-swap",s);document.addEventListener("astro:before-swap",e=>{const a=e,n=document.querySelector("meta[name='theme-color']")?.getAttribute("content");n&&a.newDocument.querySelector("meta[name='theme-color']")?.setAttribute("content",n)});window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",({matches:e})=>{t=e?m:r,window.theme?.setTheme(t),c()});</script> </body> </html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    if (document.getElementById("progress-container")) return;
+
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.id = "progress-container";
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    if (window.__kdPostScrollProgressBound) return;
+    window.__kdPostScrollProgressBound = true;
+
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+
+  /**
+   * Keeps TOC docked to the left on large screens.
+   */
+  function setupDockingToc() {
+    const article = document.getElementById("article");
+    if (!article || !article.classList.contains("has-sticky-toc")) return;
+
+    const contentHeadings = Array.from(
+      article.querySelectorAll("h2, h3, h4, h5, h6")
+    ).filter(
+      heading =>
+        heading instanceof HTMLHeadingElement &&
+        heading.id &&
+        heading.id !== "table-of-contents"
+    );
+    if (!contentHeadings.length) return;
+
+    const tocHeading = article.querySelector("h2#table-of-contents");
+    const tocList = tocHeading?.nextElementSibling;
+
+    if (
+      !(tocHeading instanceof HTMLHeadingElement) ||
+      !(tocList instanceof HTMLElement) ||
+      !["UL", "OL"].includes(tocList.tagName)
+    ) {
+      return;
+    }
+
+    let floatingToc = tocHeading.closest(".inline-toc-floating");
+    let placeholder = floatingToc?.previousElementSibling;
+
+    if (!floatingToc) {
+      floatingToc = document.createElement("div");
+      floatingToc.className = "inline-toc-floating";
+
+      placeholder = document.createElement("div");
+      placeholder.className = "inline-toc-placeholder";
+      placeholder.hidden = true;
+
+      tocHeading.before(placeholder);
+      tocHeading.before(floatingToc);
+      floatingToc.appendChild(tocHeading);
+      floatingToc.appendChild(tocList);
+    }
+
+    if (!(placeholder instanceof HTMLElement)) return;
+
+    const getHeadingHtml = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.innerHTML.trim();
+    };
+
+    const getHeadingLabel = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return heading.textContent?.trim() ?? "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.textContent?.trim() ?? "";
+    };
+
+    const ensureTocHeadingLink = heading => {
+      if (!(heading instanceof HTMLHeadingElement) || !heading.id) return;
+      const headingHash = `#${heading.id}`;
+
+      const hasLink = Array.from(
+        tocList.querySelectorAll("a[href^='#']")
+      ).some(link => link.getAttribute("href") === headingHash);
+      if (hasLink) return;
+
+      const label = getHeadingLabel(heading);
+      if (!label) return;
+
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = headingHash;
+      const headingHtml = getHeadingHtml(heading);
+      if (headingHtml) {
+        link.innerHTML = headingHtml;
+      } else {
+        link.textContent = label;
+      }
+      item.appendChild(link);
+      tocList.appendChild(item);
+    };
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (footnotesSection instanceof HTMLElement) {
+      const footnotesHeading = footnotesSection.querySelector(
+        "h2[id], h3[id], h4[id], h5[id], h6[id]"
+      );
+      ensureTocHeadingLink(footnotesHeading);
+    }
+
+    const referencesRoot = article.querySelector("#refs");
+    if (referencesRoot instanceof HTMLElement) {
+      let referencesHeading = referencesRoot.previousElementSibling;
+      while (
+        referencesHeading &&
+        !(referencesHeading instanceof HTMLHeadingElement)
+      ) {
+        referencesHeading = referencesHeading.previousElementSibling;
+      }
+      ensureTocHeadingLink(referencesHeading);
+    }
+
+    const tocLinks = Array.from(
+      tocList.querySelectorAll("a[href^='#']")
+    ).filter(link => link instanceof HTMLAnchorElement);
+
+    const headingEntries = tocLinks
+      .map(link => {
+        const hash = link.getAttribute("href");
+        if (!hash || hash === "#") return null;
+
+        let headingId = hash.slice(1);
+        try {
+          headingId = decodeURIComponent(headingId);
+        } catch {
+          // Keep original hash if decoding fails.
+        }
+
+        const heading = document.getElementById(headingId);
+        if (!heading || !article.contains(heading)) return null;
+
+        const headingHtml = getHeadingHtml(heading);
+        if (headingHtml && link.innerHTML.trim() !== headingHtml) {
+          link.innerHTML = headingHtml;
+        }
+
+        link.classList.add("toc-link");
+
+        return {
+          link,
+          heading,
+          pathStart: 0,
+          pathEnd: 0,
+          isIntersecting: false,
+        };
+      })
+      .filter(Boolean);
+
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    let tocProgressSvg = floatingToc.querySelector(".inline-toc-progress");
+    if (!(tocProgressSvg instanceof SVGSVGElement)) {
+      tocProgressSvg = document.createElementNS(svgNamespace, "svg");
+      tocProgressSvg.setAttribute("class", "inline-toc-progress");
+      tocProgressSvg.setAttribute("aria-hidden", "true");
+      floatingToc.appendChild(tocProgressSvg);
+    } else {
+      while (tocProgressSvg.firstChild) {
+        tocProgressSvg.firstChild.remove();
+      }
+    }
+
+    const tocProgressTrack = document.createElementNS(svgNamespace, "path");
+    tocProgressTrack.setAttribute("class", "inline-toc-progress-track");
+    tocProgressSvg.appendChild(tocProgressTrack);
+
+    const tocProgressActive = document.createElementNS(svgNamespace, "path");
+    tocProgressActive.setAttribute("class", "inline-toc-progress-active");
+    tocProgressSvg.appendChild(tocProgressActive);
+
+    let tocPathLength = 0;
+
+    const rebuildTocProgressPath = () => {
+      if (!headingEntries.length) {
+        tocPathLength = 0;
+        tocProgressTrack.setAttribute("d", "");
+        tocProgressActive.setAttribute("d", "");
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      let pathData = "";
+      let previousX = 0;
+      let maxX = 0;
+      let maxY = 0;
+
+      for (let index = 0; index < headingEntries.length; index += 1) {
+        const entry = headingEntries[index];
+        const linkRect = entry.link.getBoundingClientRect();
+        const x = Math.max(4, linkRect.left - tocRect.left - 8);
+        const y = Math.max(
+          6,
+          linkRect.top - tocRect.top + floatingToc.scrollTop - 2
+        );
+        const entryHeight = Math.max(16, linkRect.height + 4);
+
+        if (index === 0) {
+          pathData += `M ${x} ${y}`;
+          entry.pathStart = 0;
+        } else {
+          pathData += ` V ${y}`;
+          if (Math.abs(previousX - x) > 0.5) {
+            pathData += ` H ${x}`;
+          }
+          tocProgressTrack.setAttribute("d", pathData);
+          entry.pathStart = tocProgressTrack.getTotalLength();
+        }
+
+        pathData += ` V ${y + entryHeight}`;
+        tocProgressTrack.setAttribute("d", pathData);
+        entry.pathEnd = tocProgressTrack.getTotalLength();
+
+        previousX = x;
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y + entryHeight);
+      }
+
+      tocProgressTrack.setAttribute("d", pathData);
+      tocProgressActive.setAttribute("d", pathData);
+
+      const svgWidth = Math.max(floatingToc.clientWidth, maxX + 16);
+      const svgHeight = Math.max(floatingToc.scrollHeight, maxY + 12);
+      tocProgressSvg.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
+      tocProgressSvg.style.width = `${svgWidth}px`;
+      tocProgressSvg.style.height = `${svgHeight}px`;
+
+      tocPathLength = tocProgressTrack.getTotalLength();
+      if (tocPathLength > 0) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.style.strokeDashoffset = "1";
+      } else {
+        tocProgressActive.style.strokeDasharray = "";
+        tocProgressActive.style.strokeDashoffset = "";
+      }
+    };
+
+    const updateVisibleProgressPath = activeEntry => {
+      if (!tocPathLength || !headingEntries.length) {
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      let pathStart = tocPathLength;
+      let pathEnd = 0;
+
+      for (const entry of headingEntries) {
+        if (!entry.isIntersecting) continue;
+        pathStart = Math.min(pathStart, entry.pathStart);
+        pathEnd = Math.max(pathEnd, entry.pathEnd);
+      }
+
+      if (pathStart >= pathEnd && activeEntry) {
+        pathStart = activeEntry.pathStart;
+        pathEnd = activeEntry.pathEnd;
+      }
+
+      if (pathStart >= pathEnd) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const visibleLength = Math.max(1, pathEnd - pathStart);
+      tocProgressActive.style.strokeDasharray =
+        `1 ${pathStart} ${visibleLength} ${tocPathLength}`;
+      tocProgressActive.style.strokeDashoffset = "1";
+      tocProgressActive.classList.add("is-visible");
+    };
+
+    let activeTocLink = null;
+
+    const setActiveTocLink = link => {
+      if (activeTocLink === link) return false;
+
+      if (activeTocLink) {
+        activeTocLink.classList.remove("is-current-section");
+      }
+
+      activeTocLink = link;
+
+      if (activeTocLink) {
+        activeTocLink.classList.add("is-current-section");
+      }
+
+      return true;
+    };
+
+    const keepActiveLinkInView = link => {
+      if (!(link instanceof HTMLElement)) return;
+      if (floatingToc.scrollHeight <= floatingToc.clientHeight + 1) return;
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      const linkTop =
+        linkRect.top - tocRect.top + floatingToc.scrollTop;
+      const linkBottom = linkTop + linkRect.height;
+      const viewportTop = floatingToc.scrollTop;
+      const viewportBottom = viewportTop + floatingToc.clientHeight;
+      const margin = 18;
+
+      const isAbove = linkTop < viewportTop + margin;
+      const isBelow = linkBottom > viewportBottom - margin;
+      if (!isAbove && !isBelow) return;
+
+      const centeredTop = Math.max(
+        0,
+        Math.min(
+          linkTop - (floatingToc.clientHeight - linkRect.height) / 2,
+          floatingToc.scrollHeight - floatingToc.clientHeight
+        )
+      );
+
+      floatingToc.scrollTo({
+        top: centeredTop,
+        behavior: "smooth",
+      });
+    };
+
+    const updateActiveSection = () => {
+      if (!headingEntries.length) {
+        setActiveTocLink(null);
+        updateVisibleProgressPath(null);
+        return null;
+      }
+
+      const activationOffset = 144;
+      let activeEntry = headingEntries[0];
+
+      for (const entry of headingEntries) {
+        if (entry.heading.getBoundingClientRect().top <= activationOffset) {
+          activeEntry = entry;
+        } else {
+          break;
+        }
+      }
+
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const pageBottom = document.documentElement.scrollHeight - 8;
+      if (scrollBottom >= pageBottom) {
+        activeEntry = headingEntries[headingEntries.length - 1];
+      }
+
+      const activeChanged = setActiveTocLink(activeEntry.link);
+      if (activeChanged) {
+        keepActiveLinkInView(activeEntry.link);
+      }
+
+      updateVisibleProgressPath(activeEntry);
+      return activeEntry;
+    };
+
+    const media = window.matchMedia("(min-width: 1280px)");
+
+    const updateDockState = () => {
+      const wasDocked = floatingToc.classList.contains("is-docked-left");
+      const shouldDock = media.matches;
+
+      floatingToc.classList.toggle("is-docked-left", shouldDock);
+      placeholder.hidden = true;
+      placeholder.style.height = "";
+
+      return wasDocked !== shouldDock;
+    };
+
+    updateDockState();
+    rebuildTocProgressPath();
+    updateActiveSection();
+
+    if (article.dataset.tocDockListenersAttached === "true") return;
+    article.dataset.tocDockListenersAttached = "true";
+
+    let frame = 0;
+    const updateTocOnScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const dockStateChanged = updateDockState();
+        if (dockStateChanged) {
+          rebuildTocProgressPath();
+        }
+        updateActiveSection();
+      });
+    };
+
+    if ("IntersectionObserver" in window) {
+      const headingEntryById = new Map(
+        headingEntries.map(entry => [entry.heading.id, entry])
+      );
+
+      const headingObserver = new IntersectionObserver(
+        observerEntries => {
+          let hasChanges = false;
+
+          for (const observerEntry of observerEntries) {
+            if (!(observerEntry.target instanceof HTMLElement)) continue;
+
+            const linkedEntry = headingEntryById.get(observerEntry.target.id);
+            if (!linkedEntry) continue;
+
+            if (linkedEntry.isIntersecting !== observerEntry.isIntersecting) {
+              linkedEntry.isIntersecting = observerEntry.isIntersecting;
+              hasChanges = true;
+            }
+          }
+
+          if (hasChanges) {
+            updateTocOnScroll();
+          }
+        },
+        {
+          rootMargin: "-20% 0px -65% 0px",
+          threshold: [0, 1],
+        }
+      );
+
+      for (const entry of headingEntries) {
+        headingObserver.observe(entry.heading);
+      }
+    }
+
+    const handleResize = () => {
+      rebuildTocProgressPath();
+      updateTocOnScroll();
+    };
+
+    window.addEventListener("scroll", updateTocOnScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+    floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
+    media.addEventListener("change", handleResize);
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(handleResize).catch(() => {});
+    }
+  }
+
+  /** Adds "back to citation" links in bibliography entries. */
+  function getSessionItem(key) {
+    try {
+      return window.sessionStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function setSessionItem(key, value) {
+    try {
+      window.sessionStorage.setItem(key, value);
+    } catch {
+      // Ignore storage failures (privacy mode / disabled storage).
+    }
+  }
+
+  /** Converts bare URLs in bibliography entries into clickable links. */
+  function linkifyReferenceUrls() {
+    const referencesRoot = document.getElementById("refs");
+    if (!(referencesRoot instanceof HTMLElement)) return;
+
+    const urlPattern = /\b(?:https?:\/\/|www\.)[^\s<>"'`]+/gi;
+
+    const trimTrailingPunctuation = rawUrl => {
+      let url = rawUrl;
+      let trailingText = "";
+
+      while (/[.,;:!?]/.test(url.at(-1) ?? "")) {
+        trailingText = `${url.at(-1)}${trailingText}`;
+        url = url.slice(0, -1);
+      }
+
+      const bracketPairs = [
+        ["(", ")"],
+        ["[", "]"],
+        ["{", "}"],
+      ];
+
+      for (const [opening, closing] of bracketPairs) {
+        while (
+          url.endsWith(closing) &&
+          url.split(opening).length < url.split(closing).length
+        ) {
+          trailingText = `${closing}${trailingText}`;
+          url = url.slice(0, -1);
+        }
+      }
+
+      return { url, trailingText };
+    };
+
+    const createLink = urlText => {
+      const link = document.createElement("a");
+      link.href = urlText.toLowerCase().startsWith("www.")
+        ? `https://${urlText}`
+        : urlText;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.dataset.externalLink = "";
+      link.textContent = urlText;
+      return link;
+    };
+
+    const processTextNode = textNode => {
+      const value = textNode.nodeValue ?? "";
+      urlPattern.lastIndex = 0;
+      if (!urlPattern.test(value)) return;
+
+      urlPattern.lastIndex = 0;
+      const fragment = document.createDocumentFragment();
+      let lastIndex = 0;
+      let match;
+
+      while ((match = urlPattern.exec(value)) !== null) {
+        const matchStart = match.index;
+        const matchedUrl = match[0];
+
+        if (matchStart > lastIndex) {
+          fragment.appendChild(
+            document.createTextNode(value.slice(lastIndex, matchStart))
+          );
+        }
+
+        const { url, trailingText } = trimTrailingPunctuation(matchedUrl);
+
+        if (url.length > 0) {
+          fragment.appendChild(createLink(url));
+        } else {
+          fragment.appendChild(document.createTextNode(matchedUrl));
+        }
+
+        if (trailingText.length > 0) {
+          fragment.appendChild(document.createTextNode(trailingText));
+        }
+
+        lastIndex = matchStart + matchedUrl.length;
+      }
+
+      if (lastIndex < value.length) {
+        fragment.appendChild(document.createTextNode(value.slice(lastIndex)));
+      }
+
+      textNode.replaceWith(fragment);
+    };
+
+    const containers = Array.from(
+      referencesRoot.querySelectorAll(".csl-right-inline")
+    );
+
+    if (!containers.length) {
+      containers.push(referencesRoot);
+    }
+
+    for (const container of containers) {
+      const walker = document.createTreeWalker(
+        container,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode(node) {
+            if (!(node instanceof Text)) return NodeFilter.FILTER_REJECT;
+            const value = node.nodeValue ?? "";
+            if (!value.trim()) return NodeFilter.FILTER_REJECT;
+
+            const parentElement = node.parentElement;
+            if (
+              parentElement &&
+              parentElement.closest("a, code, pre, script, style")
+            ) {
+              return NodeFilter.FILTER_REJECT;
+            }
+
+            return NodeFilter.FILTER_ACCEPT;
+          },
+        }
+      );
+
+      const textNodes = [];
+      let currentNode = walker.nextNode();
+      while (currentNode) {
+        textNodes.push(currentNode);
+        currentNode = walker.nextNode();
+      }
+
+      for (const textNode of textNodes) {
+        processTextNode(textNode);
+      }
+    }
+  }
+
+  function addCitationBackLinks() {
+    const citationSpans = Array.from(
+      document.querySelectorAll("span[id^='citation--']")
+    );
+    if (!citationSpans.length) return;
+
+    const bibToCitationIds = new Map();
+
+    for (const citationSpan of citationSpans) {
+      const citationId = citationSpan.getAttribute("id");
+      if (!citationId) continue;
+
+      const bibLinks = Array.from(
+        citationSpan.querySelectorAll("a[href^='#bib-']")
+      );
+
+      for (const bibLink of bibLinks) {
+        const bibHref = bibLink.getAttribute("href");
+        const bibId = bibHref?.slice(1);
+        if (!bibId) continue;
+
+        const citationIds = bibToCitationIds.get(bibId) ?? [];
+        if (!citationIds.includes(citationId)) {
+          citationIds.push(citationId);
+          bibToCitationIds.set(bibId, citationIds);
+        }
+
+        if (!bibLink.dataset.returnHooked) {
+          bibLink.dataset.returnHooked = "true";
+          bibLink.addEventListener("click", () => {
+            setSessionItem(`citation-return:${bibId}`, citationId);
+            const backLink = document
+              .getElementById(bibId)
+              ?.querySelector(".citation-back-link");
+            if (backLink) backLink.setAttribute("href", `#${citationId}`);
+          });
+        }
+      }
+    }
+
+    for (const [bibId, citationIds] of bibToCitationIds.entries()) {
+      const bibEntry = document.getElementById(bibId);
+      if (!bibEntry || !citationIds.length) continue;
+
+      const targetContainer =
+        bibEntry.querySelector(".csl-right-inline") || bibEntry;
+      targetContainer.querySelector(".citation-back-link")?.remove();
+
+      const storedCitationId = getSessionItem(`citation-return:${bibId}`);
+      const returnCitationId =
+        storedCitationId && citationIds.includes(storedCitationId)
+          ? storedCitationId
+          : citationIds[0];
+
+      const backLink = document.createElement("a");
+      backLink.className = "citation-back-link";
+      backLink.href = `#${returnCitationId}`;
+      backLink.setAttribute("aria-label", "Back to citation");
+      backLink.textContent = "↩";
+      targetContainer.appendChild(backLink);
+    }
+  }
+
+  /** Renders `_aside_:` footnotes as margin notes on wide screens. */
+  function addMarginFootnotes() {
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    // Make reruns idempotent during client-side navigations.
+    article.querySelectorAll(".margin-footnote").forEach(note => note.remove());
+    article.classList.remove("has-margin-footnotes", "all-footnotes-as-margin");
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (!footnotesSection) return;
+
+    footnotesSection
+      .querySelectorAll("li.is-margin-footnote-source")
+      .forEach(node => node.classList.remove("is-margin-footnote-source"));
+
+    const footnotesById = new Map();
+    for (const footnote of Array.from(
+      footnotesSection.querySelectorAll("li[id]")
+    )) {
+      footnotesById.set(footnote.id, footnote);
+    }
+
+    let marginNotesAdded = 0;
+    const marginSourceIds = new Set();
+    const references = Array.from(
+      article.querySelectorAll("a[data-footnote-ref][href^='#']")
+    );
+
+    for (const reference of references) {
+      const footnoteId = reference.getAttribute("href")?.slice(1);
+      if (!footnoteId) continue;
+
+      const sourceFootnote = footnotesById.get(footnoteId);
+      if (!sourceFootnote) continue;
+
+      // Margin-note eligibility: definition starts with `_aside_:`.
+      const firstParagraph = sourceFootnote.querySelector("p");
+      const firstParagraphText =
+        firstParagraph?.textContent?.trim().toLowerCase() ?? "";
+      const isAsideFootnote = /^aside\s*:/.test(firstParagraphText);
+      if (!isAsideFootnote) continue;
+
+      sourceFootnote.classList.add("is-margin-footnote-source");
+      marginSourceIds.add(footnoteId);
+
+      const marginNote = document.createElement("aside");
+      marginNote.className = "margin-footnote";
+      marginNote.id = `margin-note-${footnoteId}-${marginNotesAdded + 1}`;
+
+      // Clone source content and strip navigation-only back links.
+      const contentClone = sourceFootnote.cloneNode(true);
+      contentClone
+        .querySelectorAll("a[data-footnote-backref]")
+        .forEach(backRef => backRef.remove());
+      contentClone
+        .querySelectorAll("[id]")
+        .forEach(node => node.removeAttribute("id"));
+
+      // Remove the leading `_aside_:` label in rendered margin notes.
+      const clonedFirstParagraph = contentClone.querySelector("p");
+      if (clonedFirstParagraph) {
+        const leadingElement = clonedFirstParagraph.firstElementChild;
+        if (
+          leadingElement?.tagName.toLowerCase() === "em" &&
+          leadingElement.textContent?.trim().toLowerCase() === "aside"
+        ) {
+          leadingElement.remove();
+        }
+
+        const firstTextNode = Array.from(clonedFirstParagraph.childNodes).find(
+          node => node.nodeType === Node.TEXT_NODE
+        );
+        if (firstTextNode) {
+          firstTextNode.textContent = (
+            firstTextNode.textContent ?? ""
+          ).replace(/^\s*aside\s*:\s*/i, "").replace(/^\s*:\s*/, "");
+          if (firstTextNode.textContent.trim() === "") {
+            firstTextNode.remove();
+          }
+        }
+      }
+
+      while (contentClone.firstChild) {
+        marginNote.appendChild(contentClone.firstChild);
+      }
+
+      const insertionPoint = reference.closest("sup") ?? reference;
+      insertionPoint.classList.add("is-margin-footnote-ref");
+      reference.classList.add("is-margin-footnote-ref-link");
+      reference.textContent = "^";
+      insertionPoint.insertAdjacentElement("afterend", marginNote);
+      reference.dataset.marginNoteId = marginNote.id;
+
+      if (!reference.dataset.marginNoteHooked) {
+        reference.dataset.marginNoteHooked = "true";
+        reference.addEventListener("click", event => {
+          if (!window.matchMedia("(min-width: 900px)").matches) return;
+
+          const marginNoteId = reference.dataset.marginNoteId;
+          if (!marginNoteId) return;
+
+          const linkedNote = article.querySelector(`#${marginNoteId}`);
+          if (!linkedNote) return;
+
+          event.preventDefault();
+          linkedNote.classList.add("margin-footnote-active");
+          linkedNote.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          window.setTimeout(
+            () => linkedNote.classList.remove("margin-footnote-active"),
+            800
+          );
+        });
+      }
+
+      marginNotesAdded += 1;
+    }
+
+    if (marginNotesAdded > 0) {
+      article.classList.add("has-margin-footnotes");
+      if (marginSourceIds.size === footnotesById.size) {
+        article.classList.add("all-footnotes-as-margin");
+      }
+    }
+  }
+
+  /** Converts ANSI escape sequences in notebook output cells to styled HTML. */
+  function renderAnsiCellOutput() {
+    const ANSI_16_COLORS = [
+      "#000000",
+      "#cd0000",
+      "#00cd00",
+      "#cdcd00",
+      "#0000ee",
+      "#cd00cd",
+      "#00cdcd",
+      "#e5e5e5",
+      "#7f7f7f",
+      "#ff0000",
+      "#00ff00",
+      "#ffff00",
+      "#5c5cff",
+      "#ff00ff",
+      "#00ffff",
+      "#ffffff",
+    ];
+
+    const escapeHtml = text =>
+      text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+
+    const ansi256ToCssColor = index => {
+      if (!Number.isInteger(index) || index < 0 || index > 255) return null;
+      if (index < 16) return ANSI_16_COLORS[index];
+
+      if (index >= 232) {
+        const level = 8 + (index - 232) * 10;
+        return `rgb(${level}, ${level}, ${level})`;
+      }
+
+      const colorIndex = index - 16;
+      const r = Math.floor(colorIndex / 36);
+      const g = Math.floor((colorIndex % 36) / 6);
+      const b = colorIndex % 6;
+      const toChannel = value => (value === 0 ? 0 : value * 40 + 55);
+
+      return `rgb(${toChannel(r)}, ${toChannel(g)}, ${toChannel(b)})`;
+    };
+
+    const applyAnsiCodes = (state, codeString) => {
+      const rawCodes = codeString.length > 0 ? codeString.split(";") : ["0"];
+      const codes = rawCodes.map(code => {
+        const parsedCode = Number(code);
+        return Number.isFinite(parsedCode) ? parsedCode : 0;
+      });
+
+      const resetState = () => {
+        state.fg = null;
+        state.bg = null;
+        state.bold = false;
+        state.italic = false;
+        state.underline = false;
+        state.inverse = false;
+      };
+
+      for (let index = 0; index < codes.length; index += 1) {
+        const code = codes[index];
+
+        if (code === 0) {
+          resetState();
+          continue;
+        }
+        if (code === 1) {
+          state.bold = true;
+          continue;
+        }
+        if (code === 3) {
+          state.italic = true;
+          continue;
+        }
+        if (code === 4) {
+          state.underline = true;
+          continue;
+        }
+        if (code === 7) {
+          state.inverse = true;
+          continue;
+        }
+        if (code === 22) {
+          state.bold = false;
+          continue;
+        }
+        if (code === 23) {
+          state.italic = false;
+          continue;
+        }
+        if (code === 24) {
+          state.underline = false;
+          continue;
+        }
+        if (code === 27) {
+          state.inverse = false;
+          continue;
+        }
+        if (code === 39) {
+          state.fg = null;
+          continue;
+        }
+        if (code === 49) {
+          state.bg = null;
+          continue;
+        }
+        if (code >= 30 && code <= 37) {
+          state.fg = ANSI_16_COLORS[code - 30];
+          continue;
+        }
+        if (code >= 90 && code <= 97) {
+          state.fg = ANSI_16_COLORS[code - 90 + 8];
+          continue;
+        }
+        if (code >= 40 && code <= 47) {
+          state.bg = ANSI_16_COLORS[code - 40];
+          continue;
+        }
+        if (code >= 100 && code <= 107) {
+          state.bg = ANSI_16_COLORS[code - 100 + 8];
+          continue;
+        }
+        if (code === 38 || code === 48) {
+          const isForeground = code === 38;
+          const mode = codes[index + 1];
+          if (mode === 5) {
+            const paletteIndex = codes[index + 2];
+            const color = ansi256ToCssColor(paletteIndex);
+            if (color) {
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 2;
+            continue;
+          }
+          if (mode === 2) {
+            const r = codes[index + 2];
+            const g = codes[index + 3];
+            const b = codes[index + 4];
+            if (
+              Number.isInteger(r) &&
+              Number.isInteger(g) &&
+              Number.isInteger(b) &&
+              r >= 0 &&
+              g >= 0 &&
+              b >= 0 &&
+              r <= 255 &&
+              g <= 255 &&
+              b <= 255
+            ) {
+              const color = `rgb(${r}, ${g}, ${b})`;
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 4;
+            continue;
+          }
+        }
+      }
+    };
+
+    const wrapStyledText = (text, state) => {
+      if (!text) return "";
+
+      const escapedText = escapeHtml(text);
+      let fg = state.fg;
+      let bg = state.bg;
+
+      if (state.inverse) {
+        [fg, bg] = [bg, fg];
+      }
+
+      const styles = [];
+      if (fg) styles.push(`color:${fg}`);
+      if (bg) styles.push(`background-color:${bg}`);
+      if (state.bold) styles.push("font-weight:700");
+      if (state.italic) styles.push("font-style:italic");
+      if (state.underline) styles.push("text-decoration:underline");
+
+      if (styles.length === 0) return escapedText;
+      return `<span style="${styles.join(";")}">${escapedText}</span>`;
+    };
+
+    const ansiToHtml = input => {
+      const state = {
+        fg: null,
+        bg: null,
+        bold: false,
+        italic: false,
+        underline: false,
+        inverse: false,
+      };
+
+      const ansiRegex = /\u001b\[([0-9;]*)m/g;
+      let html = "";
+      let lastIndex = 0;
+      let match = ansiRegex.exec(input);
+
+      while (match) {
+        const plainText = input.slice(lastIndex, match.index);
+        html += wrapStyledText(plainText, state);
+        applyAnsiCodes(state, match[1] ?? "");
+
+        lastIndex = ansiRegex.lastIndex;
+        match = ansiRegex.exec(input);
+      }
+
+      html += wrapStyledText(input.slice(lastIndex), state);
+      return html;
+    };
+
+    const outputCodeBlocks = document.querySelectorAll(
+      ".cell-output pre[data-language='plaintext'] code"
+    );
+
+    for (const codeBlock of outputCodeBlocks) {
+      if (!(codeBlock instanceof HTMLElement)) continue;
+
+      const lineNodes = codeBlock.querySelectorAll(".line, .ec-line .code");
+      const targets =
+        lineNodes.length > 0 ? Array.from(lineNodes) : [codeBlock];
+
+      for (const target of targets) {
+        if (!(target instanceof HTMLElement)) continue;
+        if (target.dataset.ansiParsed === "true") continue;
+
+        const rawText = target.textContent ?? "";
+        if (!rawText.includes("\u001b[")) continue;
+
+        target.innerHTML = ansiToHtml(rawText);
+        target.dataset.ansiParsed = "true";
+      }
+    }
+  }
+
+  function setupGiscus() {
+    const giscusContainer = document.querySelector(".giscus");
+    if (!(giscusContainer instanceof HTMLElement)) return;
+    if (giscusContainer.dataset.giscusInitialized === "true") return;
+
+    const giscusScript = document.createElement("script");
+    giscusScript.src = "https://giscus.app/client.js";
+    giscusScript.setAttribute("data-repo", "kdheepak/kdheepak.github.io");
+    giscusScript.setAttribute(
+      "data-repo-id",
+      "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA=="
+    );
+    giscusScript.setAttribute("data-category", "Comments");
+    giscusScript.setAttribute("data-category-id", "DIC_kwDOAw1l5M4CU810");
+    giscusScript.setAttribute("data-mapping", "pathname");
+    giscusScript.setAttribute("data-strict", "0");
+    giscusScript.setAttribute("data-reactions-enabled", "1");
+    giscusScript.setAttribute("data-emit-metadata", "0");
+    giscusScript.setAttribute("data-input-position", "bottom");
+    giscusScript.setAttribute("data-theme", "light");
+    giscusScript.setAttribute("data-lang", "en");
+    giscusScript.setAttribute("data-loading", "lazy");
+    giscusScript.crossOrigin = "anonymous";
+    giscusScript.async = true;
+
+    giscusContainer.appendChild(giscusScript);
+    giscusContainer.dataset.giscusInitialized = "true";
+  }
+
+  function initializePostPage() {
+    const article = document.getElementById("article");
+    if (!(article instanceof HTMLElement)) return;
+    if (article.dataset.postEnhancementsInitialized === "true") return;
+    article.dataset.postEnhancementsInitialized = "true";
+
+    createProgressBar();
+    updateScrollProgress();
+    setupDockingToc();
+
+    try {
+      linkifyReferenceUrls();
+      addCitationBackLinks();
+    } catch {
+      // Keep the rest of post enhancements working even if citation linking fails.
+    }
+
+    addMarginFootnotes();
+    renderAnsiCellOutput();
+    setupGiscus();
+  }
+
+  initializePostPage();
+  document.addEventListener("astro:page-load", initializePostPage, { once: true });
+
+  /* Go to page start after page swap unless navigating to a hash target. */
+  if (!window.__kdPostAfterSwapScrollHooked) {
+    document.addEventListener("astro:after-swap", () => {
+      if (!document.getElementById("article")) return;
+
+      const hash = window.location.hash;
+      if (!hash || hash === "#") {
+        window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+        return;
+      }
+
+      const targetId = decodeURIComponent(hash.slice(1));
+      const targetElement = document.getElementById(targetId);
+      if (!targetElement) return;
+
+      requestAnimationFrame(() => {
+        targetElement.scrollIntoView({ block: "start", inline: "nearest" });
+      });
+    });
+    window.__kdPostAfterSwapScrollHooked = true;
+  }
+</script>

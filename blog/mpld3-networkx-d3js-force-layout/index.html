@@ -1,0 +1,2011 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap"><link rel="canonical" href="https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/"><meta name="generator" content="Astro v5.18.0"><!-- Load Font --><style>@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:300;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:700;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:300;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:700;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}:root{--font-google-sans-code:"Google Sans Code-de078a87b11e4a86","Google Sans Code-de078a87b11e4a86 fallback: Courier New",monospace;}</style><!-- General Meta Tags --><title>mpld3 networkx d3.js force layout</title><meta name="title" content="mpld3 networkx d3.js force layout"><meta name="description" content="guide to force-directed graph layout with mpld3, NetworkX, and D3.js."><meta name="author" content="Dheepak Krishnamurthy"><link rel="sitemap" href="/sitemap-index.xml"><link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><!-- Open Graph / Facebook --><meta property="og:title" content="mpld3 networkx d3.js force layout"><meta property="og:description" content="guide to force-directed graph layout with mpld3, NetworkX, and D3.js."><meta property="og:url" content="https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/"><!-- Article Published/Modified time --><meta property="article:published_time" content="2016-10-02T18:41:05.000Z"><!-- Twitter --><meta property="twitter:card" content="summary"><meta property="twitter:url" content="https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/"><meta property="twitter:title" content="mpld3 networkx d3.js force layout"><meta property="twitter:description" content="guide to force-directed graph layout with mpld3, NetworkX, and D3.js."><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"mpld3 networkx d3.js force layout","datePublished":"2016-10-02T18:41:05.000Z","author":[{"@type":"Person","name":"Dheepak Krishnamurthy","url":"https://kdheepak.com/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="kd" href="https://kdheepak.com/rss.xml"><meta name="theme-color" content=""><meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Minimal inline script to prevent FOUC - sets theme immediately --><script>
+      (function () {
+        const initialColorScheme = ""; // "light" | "dark"
+        const currentTheme = localStorage.getItem("theme");
+
+        function getPreferTheme() {
+          if (currentTheme) return currentTheme;
+          if (initialColorScheme) return initialColorScheme;
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+
+        const themeValue = getPreferTheme();
+
+        // Set theme immediately to prevent flash
+        document.firstElementChild?.setAttribute("data-theme", themeValue);
+
+        // Export minimal API for external script
+        window.theme = {
+          themeValue: themeValue,
+          getTheme: () => window.theme.themeValue,
+          setTheme: val => {
+            window.theme.themeValue = val;
+          },
+        };
+      })();
+    </script><link rel="stylesheet" href="/_astro/index.BRLZkoem.css">
+<style>:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-qyrnxog5-1"] { view-transition-name: headingmpld3-networkx-d3-js-force-layout; }@layer astro { ::view-transition-old(headingmpld3-networkx-d3-js-force-layout) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(headingmpld3-networkx-d3-js-force-layout) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(headingmpld3-networkx-d3-js-force-layout) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(headingmpld3-networkx-d3-js-force-layout) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-uwf3heon-2"] { view-transition-name: active-nav-underline; }@layer astro { ::view-transition-old(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: python; }@layer astro { ::view-transition-old(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(python) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body>  <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <header class="app-layout"> <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border w-full bg-background relative flex items-center gap-2"> <a href="/" class="relative z-10 py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl sm:leading-none"> kd  </a> <nav id="nav-menu" class="pointer-events-auto absolute left-1/2 -translate-x-1/2"> <ul id="menu-items" class="flex items-center gap-2 sm:gap-3"> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base text-accent" href="/blog/" title="/blog" aria-label="blog" aria-current="page"> <span>/blog</span> <span aria-hidden="true" class="absolute right-0 -bottom-0.5 left-0 h-0.5 rounded-full bg-accent" data-astro-transition-scope="astro-uwf3heon-2"></span></a> </li> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base" href="/cv/" title="/cv" aria-label="cv"> <span>/cv</span> </a> </li> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base" href="/tags/" title="/tags" aria-label="tags"> <span>/tags</span> </a> </li> </ul> </nav> <div class="z-10 ms-auto flex items-center gap-1 sm:gap-2"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative flex size-12 items-center justify-center text-foreground/80 transition-colors hover:text-accent sm:size-8" href="/search/" title="Search" aria-label="search"> <svg width="1em" height="1em" class="inline-block size-5 fill-transparent stroke-current stroke-2" data-icon="tabler:search">   <symbol id="ai:tabler:search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0m18 11l-6-6"/></symbol><use href="#ai:tabler:search"></use>  </svg> </a> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="1em" height="1em" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" data-icon="tabler:moon">   <symbol id="ai:tabler:moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"/></symbol><use href="#ai:tabler:moon"></use>  </svg> <svg width="1em" height="1em" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" data-icon="tabler:sun-high">   <symbol id="ai:tabler:sun-high" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 1 0-5.656-5.656a4 4 0 0 0 5.656 5.656m-8.485 2.829l-1.414 1.414M6.343 6.343L4.929 4.929m12.728 1.414l1.414-1.414m-1.414 12.728l1.414 1.414M4 12H2m10-8V2m8 10h2m-10 8v2"/></symbol><use href="#ai:tabler:sun-high"></use>  </svg> </button> </div> </div> </header> <main id="main-content" class="app-layout pb-12" data-pagefind-body> <span class="sr-only" data-pagefind-meta="date">2 Oct 2016</span> <div class="mt-8 flex items-center gap-2 sm:relative sm:block"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline shrink-0 text-foreground/90 hover:text-foreground/70 sm:absolute sm:top-1/2 sm:left-0 sm:-translate-y-1/2 sm:-translate-x-[calc(100%+0.5rem)]" id="back-button" href="/blog/" aria-label="Back to blog"><svg width="1em" height="1em" class="inline-block size-6 rtl:rotate-180" data-icon="tabler:chevron-left">   <symbol id="ai:tabler:chevron-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 6l-6 6l6 6"/></symbol><use href="#ai:tabler:chevron-left"></use>  </svg><span class="sr-only">Back to blog</span></a> <h1 class="min-w-0 text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-qyrnxog5-1"> <span>mpld3 networkx d3.js force layout</span>  </h1> </div> <div class="mt-4 mb-2 flex flex-wrap items-center gap-x-4 gap-y-2"> <div class="flex items-center gap-x-2 opacity-80 shrink-0 sm:min-w-0 sm:flex-1" style="view-transition-name:datempld3-networkx-d3-js-force-layout"> <svg width="1em" height="1em" class="inline-block size-6 min-w-5.5" data-icon="tabler:calendar">   <symbol id="ai:tabler:calendar" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm12-4v4M8 3v4m-4 4h16m-9 4h1m0 0v3"/></symbol><use href="#ai:tabler:calendar"></use>  </svg>  <a href="https://github.com/kdheepak/kdheepak.github.io/blob/52156ff39054fbeb69b2484b4d912cd9958ec6d5/src/data/blog/mpld3-networkx-d3js-force-layout/index.md" target="_blank" rel="noopener noreferrer" title="View source at commit: 52156ff" class="decoration-dashed underline-offset-4 hover:text-accent hover:underline"> <time class="text-sm sm:text-base" datetime="2016-10-02T18:41:05.000Z">2 Oct, 2016</time> </a> </div> <div class="flex items-center gap-3 text-sm opacity-80 justify-center text-center sm:text-base shrink-0 sm:min-w-0 sm:flex-1"> <span class="inline-flex items-center gap-1.5 whitespace-nowrap"> <svg width="1em" height="1em" class="inline-block min-w-4 size-5" data-icon="tabler:clock">   <symbol id="ai:tabler:clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0-18 0"/><path d="M12 7v5l3 3"/></g></symbol><use href="#ai:tabler:clock"></use>  </svg> <span> 4 min read (728 words)
+</span> </span> </div> <ul class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center"> <li> <a href="/tags/python/" class="flex items-center gap-0.5 border-b-2 border-dashed border-foreground hover:-mt-0.5 hover:border-accent hover:text-accent focus-visible:border-none focus-visible:text-accent text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="1em" height="1em" class="opacity-80 size-4" data-icon="tabler:hash">   <symbol id="ai:tabler:hash" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9h14M5 15h14M11 4L7 20M17 4l-4 16"/></symbol><use href="#ai:tabler:hash"></use>  </svg> python </a> </li> </ul> <div class="max-sm:hidden shrink-0"> <div class="flex items-center gap-3"><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/src/data/blog/mpld3-networkx-d3js-force-layout/index.md" target="_blank" rel="noopener noreferrer" aria-label="Edit page" title="Edit page" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" class="inline-block size-6 min-w-5.5" data-icon="tabler:edit">   <symbol id="ai:tabler:edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"/><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3zM16 5l3 3"/></g></symbol><use href="#ai:tabler:edit"></use>  </svg></a></div> </div> </div> <article id="article" class="app-prose drop-cap-lead mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg) has-sticky-toc"> <p><a href="https://mpld3.github.io/" target="_blank" rel="noopener noreferrer" data-external-link="">mpld3</a> is a matplotlib to d3 library. It is lightweight and a pure Python
+/ Javascript package, allowing a lot of the matplotlib interface to be accessible in the web. There
+are a number of <a href="https://mpld3.github.io/examples/" target="_blank" rel="noopener noreferrer" data-external-link="">examples</a> on their website. Its integration with
+d3 allows someone familiar with Javascript to use Python and visualize using the power of d3. d3.js
+is a powerful low level visualization library and there are loads of examples online on the many
+features it brings to the table.</p>
+<p>mpld3 also has the ability to add <a href="https://mpld3.github.io/_downloads/custom_plugins.html" target="_blank" rel="noopener noreferrer" data-external-link="">plugins</a>
+to add new functionality. I wanted to take a shot at adding a d3.js force layout plugin. The force
+layout is a powerful visualization tool and NetworkX has a nifty function that will convert the
+graph along with its attributes into a JSON graph format. I'd played around with this before and
+figured this would be a nice feature to have, so I've worked on it over the weekend and here it is -
+a NetworkX to d3.js force layout plugin for mpld3. I've shared an example below.</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.5o2s3.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">%</span><span style="--0:#24292E;--1:#E1E4E8">matplotlib inline</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> numpy </span><span style="--0:#BF3441;--1:#F97583">as</span><span style="--0:#24292E;--1:#E1E4E8"> np</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> matplotlib.pyplot </span><span style="--0:#BF3441;--1:#F97583">as</span><span style="--0:#24292E;--1:#E1E4E8"> plt</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> mpld3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">mpld3.enable_notebook()</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">from</span><span style="--0:#24292E;--1:#E1E4E8"> mpld3 </span><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> plugins</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">fig, ax </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> plt.subplots()</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> networkx </span><span style="--0:#BF3441;--1:#F97583">as</span><span style="--0:#24292E;--1:#E1E4E8"> nx</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">nx.Graph()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_node(</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">color</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">'red'</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">x</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.25</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">y</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.25</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">fixed</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">True</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">name</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">'Node1'</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_node(</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">x</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.75</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">y</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.75</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">fixed</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">True</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_edge(</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">,</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_edge(</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">,</span><span style="--0:#005CC5;--1:#79B8FF">3</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_edge(</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">,</span><span style="--0:#005CC5;--1:#79B8FF">3</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">pos </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">None</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">plugins.connect(fig, NetworkXD3ForceLayout(G, pos, ax))</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="%matplotlib inlineimport numpy as npimport matplotlib.pyplot as pltimport mpld3mpld3.enable_notebook()from mpld3 import pluginsfig, ax = plt.subplots()import networkx as nxG=nx.Graph()G.add_node(1, color=&#x27;red&#x27;, x=0.25, y=0.25, fixed=True, name=&#x27;Node1&#x27;)G.add_node(2, x=0.75, y=0.75, fixed=True)G.add_edge(1,2)G.add_edge(1,3)G.add_edge(2,3)pos = Noneplugins.connect(fig, NetworkXD3ForceLayout(G, pos, ax))"><div></div></button></div></figure></div>
+<div id="fig_el6303944499107368844826201"></div>
+<p>I've implemented a sticky version of the force layout, since this is what I wanted. This can be
+turned off by passing an argument to the plugin. The reason it is called a sticky version is because
+dragging a node to a new position will fix it at that location. You can double click the node to
+release it.</p>
+<p>These blocks were used as a reference from
+<a href="https://bl.ocks.org/mbostock/3680957" target="_blank" rel="noopener noreferrer" data-external-link="">SVG Semantic Zooming</a>.</p>
+<p>I'll run through an explanation of the code briefly.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">fig, ax </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> plt.subplots()</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="fig, ax = plt.subplots()"><div></div></button></div></figure></div>
+<p>This returns a figure and axes object. This plugin requires a single axes object to be passed to it.
+The figure and axes object, and everything that is on the axes object is converted to mpld3 plot
+objects. In theory, you could use NetworkX's draw function to visualize the graph and mpld3 will
+render it fine. The only downside to that is that the final output will not be a force layout.</p>
+<p>Next we create a graph with the following commands</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> networkx </span><span style="--0:#BF3441;--1:#F97583">as</span><span style="--0:#24292E;--1:#E1E4E8"> nx</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">nx.Graph()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_node(</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">color</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">'red'</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">x</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.25</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">y</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.25</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">fixed</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">True</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">name</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#032F62;--1:#9ECBFF">'Node1'</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_node(</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">x</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.75</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">y</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.75</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">fixed</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">True</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_edge(</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">,</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_edge(</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">,</span><span style="--0:#005CC5;--1:#79B8FF">3</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G.add_edge(</span><span style="--0:#005CC5;--1:#79B8FF">2</span><span style="--0:#24292E;--1:#E1E4E8">,</span><span style="--0:#005CC5;--1:#79B8FF">3</span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import networkx as nxG=nx.Graph()G.add_node(1, color=&#x27;red&#x27;, x=0.25, y=0.25, fixed=True, name=&#x27;Node1&#x27;)G.add_node(2, x=0.75, y=0.75, fixed=True)G.add_edge(1,2)G.add_edge(1,3)G.add_edge(2,3)"><div></div></button></div></figure></div>
+<p>I've set the <code>color</code> attribute of the first node to <code>red</code>. This is an attribute on the node object
+and will be used by the force layout to color the node. We can also set the <code>(x, y)</code> coordinates to
+values for the first and second node. Passing the <code>fixed=True</code> keyword argument assigns a attribute
+<code>fixed</code> with the value <code>True</code> on the NetworkX graph. When converted to a force layout, this will fix
+the positions of those nodes.</p>
+<p>We are almost done! This registers the plugin with mpld3.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">plugins.connect(fig, NetworkXD3ForceLayout(G, pos, ax))</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="plugins.connect(fig, NetworkXD3ForceLayout(G, pos, ax))"><div></div></button></div></figure></div>
+<p>The <code>pos</code> argument passed here is <code>None</code>. I plan to set it up such that you can pass a position
+dictionary to the plugin and have the plugin assign <code>(x,y)</code> coordinates when available. You can
+generate the <code>pos</code> dictionary using any of NetworkX's layout functions.</p>
+<p>Additional keywords arguments can be passed to the constructor of the <code>NetworkXD3ForceLayout</code> class.
+This allows a user to control certain force layout properties like <code>gravity</code>, <code>linkDistance</code>,
+<code>linkStrength</code> etc. You can also set a default node size or turn off the dragging feature. The full
+list of attributes that can be passed is found in the docstring. I plan to write a more detailed
+description in a following post.</p>
+<p>Here is another example of a NetworkX graph converted to a force layout. This is Zachary's Karate
+Club. Nodes in <code>Mr Hi</code>'s club are coloured purple and the rest are coloured orange. Node size is
+also changed based on the number of neighbours.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> matplotlib.pyplot </span><span style="--0:#BF3441;--1:#F97583">as</span><span style="--0:#24292E;--1:#E1E4E8"> plt</span></div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> networkx </span><span style="--0:#BF3441;--1:#F97583">as</span><span style="--0:#24292E;--1:#E1E4E8"> nx</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">fig, axs </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> plt.subplots(</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#AE4B07;--1:#FFAB70">figsize</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#005CC5;--1:#79B8FF">10</span><span style="--0:#24292E;--1:#E1E4E8">, </span><span style="--0:#005CC5;--1:#79B8FF">10</span><span style="--0:#24292E;--1:#E1E4E8">))</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">ax </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> axs</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">G</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8">nx.karate_club_graph()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">pos </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">None</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> node, data </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> G.nodes(</span><span style="--0:#AE4B07;--1:#FFAB70">data</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">True</span><span style="--0:#24292E;--1:#E1E4E8">):</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">if</span><span style="--0:#24292E;--1:#E1E4E8"> data[</span><span style="--0:#032F62;--1:#9ECBFF">'club'</span><span style="--0:#24292E;--1:#E1E4E8">] </span><span style="--0:#BF3441;--1:#F97583">==</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">'Mr. Hi'</span><span style="--0:#24292E;--1:#E1E4E8">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">        </span></span><span style="--0:#24292E;--1:#E1E4E8">data[</span><span style="--0:#032F62;--1:#9ECBFF">'color'</span><span style="--0:#24292E;--1:#E1E4E8">] </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">'purple'</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">else</span><span style="--0:#24292E;--1:#E1E4E8">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">        </span></span><span style="--0:#24292E;--1:#E1E4E8">data[</span><span style="--0:#032F62;--1:#9ECBFF">'color'</span><span style="--0:#24292E;--1:#E1E4E8">] </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">'orange'</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">for</span><span style="--0:#24292E;--1:#E1E4E8"> n, data </span><span style="--0:#BF3441;--1:#F97583">in</span><span style="--0:#24292E;--1:#E1E4E8"> G.nodes(</span><span style="--0:#AE4B07;--1:#FFAB70">data</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">True</span><span style="--0:#24292E;--1:#E1E4E8">):</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">data[</span><span style="--0:#032F62;--1:#9ECBFF">'size'</span><span style="--0:#24292E;--1:#E1E4E8">] </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">len</span><span style="--0:#24292E;--1:#E1E4E8">(G.neighbors(n))</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">mpld3.plugins.connect(fig,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">NetworkXD3ForceLayout(</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">        </span></span><span style="--0:#24292E;--1:#E1E4E8">G,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">        </span></span><span style="--0:#24292E;--1:#E1E4E8">pos,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">        </span></span><span style="--0:#24292E;--1:#E1E4E8">ax,</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#AE4B07;--1:#FFAB70">gravity</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">.5</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#AE4B07;--1:#FFAB70">link_distance</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">20</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#AE4B07;--1:#FFAB70">charge</span><span style="--0:#BF3441;--1:#F97583">=-</span><span style="--0:#005CC5;--1:#79B8FF">600</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#AE4B07;--1:#FFAB70">friction</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">1</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">    </span></span><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#24292E;--1:#E1E4E8">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import matplotlib.pyplot as pltimport networkx as nxfig, axs = plt.subplots(1, 1, figsize=(10, 10))ax = axsG=nx.karate_club_graph()pos = Nonefor node, data in G.nodes(data=True):    if data[&#x27;club&#x27;] == &#x27;Mr. Hi&#x27;:        data[&#x27;color&#x27;] = &#x27;purple&#x27;    else:        data[&#x27;color&#x27;] = &#x27;orange&#x27;for n, data in G.nodes(data=True):    data[&#x27;size&#x27;] = len(G.neighbors(n))mpld3.plugins.connect(fig,    NetworkXD3ForceLayout(        G,        pos,        ax,        gravity=.5,        link_distance=20,        charge=-600,        friction=1    ))"><div></div></button></div></figure></div>
+<div id="fig_el8173445058185128276242074"></div>
+<script>
+
+function mpld3_load_lib(url, callback){
+  var s = document.createElement('script');
+  s.src = url;
+  s.async = true;
+  s.onreadystatechange = s.onload = callback;
+  s.onerror = function(){console.warn("failed to load library " + url);};
+  document.getElementsByTagName("head")[0].appendChild(s);
+}
+
+if(typeof(mpld3) !== "undefined" && mpld3._mpld3IsLoaded){
+   // already loaded: just create the figure
+   !function(mpld3){
+
+
+    mpld3.register_plugin("networkxd3forcelayout", NetworkXD3ForceLayoutPlugin);
+    NetworkXD3ForceLayoutPlugin.prototype = Object.create(mpld3.Plugin.prototype);
+    NetworkXD3ForceLayoutPlugin.prototype.constructor = NetworkXD3ForceLayoutPlugin;
+    NetworkXD3ForceLayoutPlugin.prototype.requiredProps = ["graph",
+                                                                "ax_id",];
+    NetworkXD3ForceLayoutPlugin.prototype.defaultProps = { coordinates: "data",
+                                                               draggable: true,
+                                                               gravity: 1,
+                                                               charge: -30,
+                                                               link_strength: 1,
+                                                               friction: 0.9,
+                                                               link_distance: 20,
+                                                               maximum_stroke_width: 2,
+                                                               minimum_stroke_width: 1,
+                                                               nominal_stroke_width: 1,
+                                                               maximum_radius: 10,
+                                                               minimum_radius: 1,
+                                                               nominal_radius: 5,
+                                                            };
+
+    function NetworkXD3ForceLayoutPlugin(fig, props){
+        mpld3.Plugin.call(this, fig, props);
+    };
+
+    var color = d3.scale.category20();
+
+    NetworkXD3ForceLayoutPlugin.prototype.zoomScaleProp = function (nominal_prop, minimum_prop, maximum_prop) {
+        var zoom = this.ax.zoom;
+        let scalerFunction = function() {
+            var prop = nominal_prop;
+            if (nominal_prop*zoom.scale()>maximum_prop) prop = maximum_prop/zoom.scale();
+            if (nominal_prop*zoom.scale()<minimum_prop) prop = minimum_prop/zoom.scale();
+            return prop
+        }
+        return scalerFunction;
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.setupDefaults = function () {
+
+        this.zoomScaleStroke = this.zoomScaleProp(this.props.nominal_stroke_width,
+                                                  this.props.minimum_stroke_width,
+                                                  this.props.maximum_stroke_width)
+        this.zoomScaleRadius = this.zoomScaleProp(this.props.nominal_radius,
+                                                  this.props.minimum_radius,
+                                                  this.props.maximum_radius)
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.zoomed = function() {
+            this.tick()
+        }
+
+    NetworkXD3ForceLayoutPlugin.prototype.draw = function(){
+
+        let DEFAULT_NODE_SIZE = this.props.nominal_radius;
+
+        var height = this.fig.height
+        var width = this.fig.width
+
+        var graph = this.props.graph
+        var gravity = this.props.gravity.toFixed()
+        var charge = this.props.charge.toFixed()
+        var link_distance = this.props.link_distance.toFixed()
+        var link_strength = this.props.link_strength.toFixed()
+        var friction = this.props.friction.toFixed()
+
+        this.ax = mpld3.get_element(this.props.ax_id, this.fig)
+
+        var ax = this.ax;
+
+        this.ax.elements.push(this)
+
+        let ax_obj = this.ax;
+
+        var width = d3.max(ax.x.range()) - d3.min(ax.x.range()),
+            height = d3.max(ax.y.range()) - d3.min(ax.y.range());
+
+        var color = d3.scale.category20();
+
+        this.xScale = d3.scale.linear().domain([0, 1]).range([0, width]) // ax.x;
+        this.yScale = d3.scale.linear().domain([0, 1]).range([height, 0]) // ax.y;
+
+        this.force = d3.layout.force()
+                            .size([width, height]);
+
+        this.svg = this.ax.axes.append("g");
+
+        for(var i = 0; i < graph.nodes.length; i++){
+            var node = graph.nodes[i];
+            if (node.hasOwnProperty('x')) {
+                node.x = this.ax.x(node.x);
+            }
+            if (node.hasOwnProperty('y')) {
+                node.y = this.ax.y(node.y);
+            }
+        }
+
+        this.force
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .linkStrength(link_strength)
+            .friction(friction)
+            .linkDistance(link_distance)
+            .charge(charge)
+            .gravity(gravity)
+            .start();
+
+        this.link = this.svg.selectAll(".link")
+            .data(graph.links)
+          .enter().append("line")
+            .attr("class", "link")
+            .attr("stroke", "black")
+            .style("stroke-width", function (d) { return Math.sqrt(d.value); });
+
+        this.node = this.svg.selectAll(".node")
+            .data(graph.nodes)
+          .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", function(d) {return d.size === undefined ? DEFAULT_NODE_SIZE : d.size ;})
+            .style("fill", function (d) { return d.color; });
+
+        this.node.append("title")
+            .text(function (d) { return d.name; });
+
+        this.force.on("tick", this.tick.bind(this));
+
+        this.setupDefaults()
+        this.conditional_features(this.svg);
+
+    };
+
+    NetworkXD3ForceLayoutPlugin.prototype.tick = function() {
+
+        this.link.attr("x1", function (d) { return this.ax.x(this.xScale.invert(d.source.x)); }.bind(this))
+                 .attr("y1", function (d) { return this.ax.y(this.yScale.invert(d.source.y)); }.bind(this))
+                 .attr("x2", function (d) { return this.ax.x(this.xScale.invert(d.target.x)); }.bind(this))
+                 .attr("y2", function (d) { return this.ax.y(this.yScale.invert(d.target.y)); }.bind(this));
+
+        this.node.attr("transform", function (d) {
+            return "translate(" + this.ax.x(this.xScale.invert(d.x)) + "," + this.ax.y(this.yScale.invert(d.y)) + ")";
+            }.bind(this)
+        );
+
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.conditional_features = function(svg) {
+
+        var drag = d3.behavior.drag()
+                .on("dragstart", dragstarted)
+                .on("drag", dragged.bind(this))
+                .on("dragend", dragended);
+
+        function dragstarted(d) {
+            d3.event.sourceEvent.stopPropagation();
+            d3.select(this).classed("fixed", d.fixed = true);
+            d.fixed = true;
+        }
+
+        function dblclick(d) {
+          self.force.resume();
+          d3.select(this).classed("fixed", d.fixed = false);
+        }
+
+        function dragged(d) {
+            var mouse = d3.mouse(svg.node());
+            d.x = this.xScale(this.ax.x.invert(mouse[0]));
+            d.y = this.yScale(this.ax.y.invert(mouse[1]));
+            d.px = d.x;
+            d.py = d.y;
+            d.fixed = true;
+            this.force.resume();
+        }
+
+        function dragended(d) {
+            d.fixed = true;
+            }
+
+        var self = this;
+        if (this.props.draggable === true) {
+            this.node.on("dblclick", dblclick).call(drag)
+        }
+
+    }
+
+
+
+       mpld3.draw_figure("fig_el8173445058185128276242074", {"axes": [{"xlim": [0.0, 1.0], "yscale": "linear", "axesbg": "#FFFFFF", "texts": [], "zoomable": true, "images": [], "xdomain": [0.0, 1.0], "ylim": [0.0, 1.0], "paths": [], "sharey": [], "sharex": [], "axesbgalpha": null, "axes": [{"scale": "linear", "tickformat": null, "grid": {"gridOn": false}, "fontsize": 10.0, "position": "bottom", "nticks": 6, "tickvalues": null}, {"scale": "linear", "tickformat": null, "grid": {"gridOn": false}, "fontsize": 10.0, "position": "left", "nticks": 6, "tickvalues": null}], "lines": [], "markers": [], "id": "el817344499264912", "ydomain": [0.0, 1.0], "collections": [], "xscale": "linear", "bbox": [0.125, 0.125, 0.77500000000000002, 0.77500000000000002]}], "height": 720.0, "width": 720.0, "plugins": [{"type": "reset"}, {"enabled": false, "button": true, "type": "zoom"}, {"enabled": false, "button": true, "type": "boxzoom"}, {"draggable": true, "charge": -600, "link_distance": 20, "link_strength": 1, "ax_id": "el817344499264912", "graph": {"directed": false, "graph": {"name": "Zachary's Karate Club"}, "nodes": [{"club": "Mr. Hi", "color": "purple", "id": 0, "size": 16}, {"club": "Mr. Hi", "color": "purple", "id": 1, "size": 9}, {"club": "Mr. Hi", "color": "purple", "id": 2, "size": 10}, {"club": "Mr. Hi", "color": "purple", "id": 3, "size": 6}, {"club": "Mr. Hi", "color": "purple", "id": 4, "size": 3}, {"club": "Mr. Hi", "color": "purple", "id": 5, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 6, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 7, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 8, "size": 5}, {"club": "Officer", "color": "orange", "id": 9, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 10, "size": 3}, {"club": "Mr. Hi", "color": "purple", "id": 11, "size": 1}, {"club": "Mr. Hi", "color": "purple", "id": 12, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 13, "size": 5}, {"club": "Officer", "color": "orange", "id": 14, "size": 2}, {"club": "Officer", "color": "orange", "id": 15, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 16, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 17, "size": 2}, {"club": "Officer", "color": "orange", "id": 18, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 19, "size": 3}, {"club": "Officer", "color": "orange", "id": 20, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 21, "size": 2}, {"club": "Officer", "color": "orange", "id": 22, "size": 2}, {"club": "Officer", "color": "orange", "id": 23, "size": 5}, {"club": "Officer", "color": "orange", "id": 24, "size": 3}, {"club": "Officer", "color": "orange", "id": 25, "size": 3}, {"club": "Officer", "color": "orange", "id": 26, "size": 2}, {"club": "Officer", "color": "orange", "id": 27, "size": 4}, {"club": "Officer", "color": "orange", "id": 28, "size": 3}, {"club": "Officer", "color": "orange", "id": 29, "size": 4}, {"club": "Officer", "color": "orange", "id": 30, "size": 4}, {"club": "Officer", "color": "orange", "id": 31, "size": 6}, {"club": "Officer", "color": "orange", "id": 32, "size": 12}, {"club": "Officer", "color": "orange", "id": 33, "size": 17}], "links": [{"source": 0, "target": 1}, {"source": 0, "target": 2}, {"source": 0, "target": 3}, {"source": 0, "target": 4}, {"source": 0, "target": 5}, {"source": 0, "target": 6}, {"source": 0, "target": 7}, {"source": 0, "target": 8}, {"source": 0, "target": 10}, {"source": 0, "target": 11}, {"source": 0, "target": 12}, {"source": 0, "target": 13}, {"source": 0, "target": 17}, {"source": 0, "target": 19}, {"source": 0, "target": 21}, {"source": 0, "target": 31}, {"source": 1, "target": 2}, {"source": 1, "target": 3}, {"source": 1, "target": 7}, {"source": 1, "target": 13}, {"source": 1, "target": 17}, {"source": 1, "target": 19}, {"source": 1, "target": 21}, {"source": 1, "target": 30}, {"source": 2, "target": 3}, {"source": 2, "target": 32}, {"source": 2, "target": 7}, {"source": 2, "target": 8}, {"source": 2, "target": 9}, {"source": 2, "target": 13}, {"source": 2, "target": 27}, {"source": 2, "target": 28}, {"source": 3, "target": 7}, {"source": 3, "target": 12}, {"source": 3, "target": 13}, {"source": 4, "target": 10}, {"source": 4, "target": 6}, {"source": 5, "target": 16}, {"source": 5, "target": 10}, {"source": 5, "target": 6}, {"source": 6, "target": 16}, {"source": 8, "target": 32}, {"source": 8, "target": 30}, {"source": 8, "target": 33}, {"source": 9, "target": 33}, {"source": 13, "target": 33}, {"source": 14, "target": 32}, {"source": 14, "target": 33}, {"source": 15, "target": 32}, {"source": 15, "target": 33}, {"source": 18, "target": 32}, {"source": 18, "target": 33}, {"source": 19, "target": 33}, {"source": 20, "target": 32}, {"source": 20, "target": 33}, {"source": 22, "target": 32}, {"source": 22, "target": 33}, {"source": 23, "target": 32}, {"source": 23, "target": 25}, {"source": 23, "target": 27}, {"source": 23, "target": 29}, {"source": 23, "target": 33}, {"source": 24, "target": 25}, {"source": 24, "target": 27}, {"source": 24, "target": 31}, {"source": 25, "target": 31}, {"source": 26, "target": 33}, {"source": 26, "target": 29}, {"source": 27, "target": 33}, {"source": 28, "target": 33}, {"source": 28, "target": 31}, {"source": 29, "target": 32}, {"source": 29, "target": 33}, {"source": 30, "target": 33}, {"source": 30, "target": 32}, {"source": 31, "target": 33}, {"source": 31, "target": 32}, {"source": 32, "target": 33}], "multigraph": false}, "nominal_radius": 5, "type": "networkxd3forcelayout", "gravity": 0.5, "friction": 1}], "data": {}, "id": "el817344505818512"});
+   }(mpld3);
+}else if(typeof define === "function" && define.amd){
+   // require.js is available: use it to load d3/mpld3
+   require.config({paths: {d3: "https://mpld3.github.io/js/d3.v3.min"}});
+   require(["d3"], function(d3){
+      window.d3 = d3;
+      mpld3_load_lib("https://mpld3.github.io/js/mpld3.v0.2.js", function(){
+
+
+    mpld3.register_plugin("networkxd3forcelayout", NetworkXD3ForceLayoutPlugin);
+    NetworkXD3ForceLayoutPlugin.prototype = Object.create(mpld3.Plugin.prototype);
+    NetworkXD3ForceLayoutPlugin.prototype.constructor = NetworkXD3ForceLayoutPlugin;
+    NetworkXD3ForceLayoutPlugin.prototype.requiredProps = ["graph",
+                                                                "ax_id",];
+    NetworkXD3ForceLayoutPlugin.prototype.defaultProps = { coordinates: "data",
+                                                               draggable: true,
+                                                               gravity: 1,
+                                                               charge: -30,
+                                                               link_strength: 1,
+                                                               friction: 0.9,
+                                                               link_distance: 20,
+                                                               maximum_stroke_width: 2,
+                                                               minimum_stroke_width: 1,
+                                                               nominal_stroke_width: 1,
+                                                               maximum_radius: 10,
+                                                               minimum_radius: 1,
+                                                               nominal_radius: 5,
+                                                            };
+
+    function NetworkXD3ForceLayoutPlugin(fig, props){
+        mpld3.Plugin.call(this, fig, props);
+    };
+
+    var color = d3.scale.category20();
+
+    NetworkXD3ForceLayoutPlugin.prototype.zoomScaleProp = function (nominal_prop, minimum_prop, maximum_prop) {
+        var zoom = this.ax.zoom;
+        let scalerFunction = function() {
+            var prop = nominal_prop;
+            if (nominal_prop*zoom.scale()>maximum_prop) prop = maximum_prop/zoom.scale();
+            if (nominal_prop*zoom.scale()<minimum_prop) prop = minimum_prop/zoom.scale();
+            return prop
+        }
+        return scalerFunction;
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.setupDefaults = function () {
+
+        this.zoomScaleStroke = this.zoomScaleProp(this.props.nominal_stroke_width,
+                                                  this.props.minimum_stroke_width,
+                                                  this.props.maximum_stroke_width)
+        this.zoomScaleRadius = this.zoomScaleProp(this.props.nominal_radius,
+                                                  this.props.minimum_radius,
+                                                  this.props.maximum_radius)
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.zoomed = function() {
+            this.tick()
+        }
+
+    NetworkXD3ForceLayoutPlugin.prototype.draw = function(){
+
+        let DEFAULT_NODE_SIZE = this.props.nominal_radius;
+
+        var height = this.fig.height
+        var width = this.fig.width
+
+        var graph = this.props.graph
+        var gravity = this.props.gravity.toFixed()
+        var charge = this.props.charge.toFixed()
+        var link_distance = this.props.link_distance.toFixed()
+        var link_strength = this.props.link_strength.toFixed()
+        var friction = this.props.friction.toFixed()
+
+        this.ax = mpld3.get_element(this.props.ax_id, this.fig)
+
+        var ax = this.ax;
+
+        this.ax.elements.push(this)
+
+        let ax_obj = this.ax;
+
+        var width = d3.max(ax.x.range()) - d3.min(ax.x.range()),
+            height = d3.max(ax.y.range()) - d3.min(ax.y.range());
+
+        var color = d3.scale.category20();
+
+        this.xScale = d3.scale.linear().domain([0, 1]).range([0, width]) // ax.x;
+        this.yScale = d3.scale.linear().domain([0, 1]).range([height, 0]) // ax.y;
+
+        this.force = d3.layout.force()
+                            .size([width, height]);
+
+        this.svg = this.ax.axes.append("g");
+
+        for(var i = 0; i < graph.nodes.length; i++){
+            var node = graph.nodes[i];
+            if (node.hasOwnProperty('x')) {
+                node.x = this.ax.x(node.x);
+            }
+            if (node.hasOwnProperty('y')) {
+                node.y = this.ax.y(node.y);
+            }
+        }
+
+        this.force
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .linkStrength(link_strength)
+            .friction(friction)
+            .linkDistance(link_distance)
+            .charge(charge)
+            .gravity(gravity)
+            .start();
+
+        this.link = this.svg.selectAll(".link")
+            .data(graph.links)
+          .enter().append("line")
+            .attr("class", "link")
+            .attr("stroke", "black")
+            .style("stroke-width", function (d) { return Math.sqrt(d.value); });
+
+        this.node = this.svg.selectAll(".node")
+            .data(graph.nodes)
+          .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", function(d) {return d.size === undefined ? DEFAULT_NODE_SIZE : d.size ;})
+            .style("fill", function (d) { return d.color; });
+
+        this.node.append("title")
+            .text(function (d) { return d.name; });
+
+        this.force.on("tick", this.tick.bind(this));
+
+        this.setupDefaults()
+        this.conditional_features(this.svg);
+
+    };
+
+    NetworkXD3ForceLayoutPlugin.prototype.tick = function() {
+
+        this.link.attr("x1", function (d) { return this.ax.x(this.xScale.invert(d.source.x)); }.bind(this))
+                 .attr("y1", function (d) { return this.ax.y(this.yScale.invert(d.source.y)); }.bind(this))
+                 .attr("x2", function (d) { return this.ax.x(this.xScale.invert(d.target.x)); }.bind(this))
+                 .attr("y2", function (d) { return this.ax.y(this.yScale.invert(d.target.y)); }.bind(this));
+
+        this.node.attr("transform", function (d) {
+            return "translate(" + this.ax.x(this.xScale.invert(d.x)) + "," + this.ax.y(this.yScale.invert(d.y)) + ")";
+            }.bind(this)
+        );
+
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.conditional_features = function(svg) {
+
+        var drag = d3.behavior.drag()
+                .on("dragstart", dragstarted)
+                .on("drag", dragged.bind(this))
+                .on("dragend", dragended);
+
+        function dragstarted(d) {
+            d3.event.sourceEvent.stopPropagation();
+            d3.select(this).classed("fixed", d.fixed = true);
+            d.fixed = true;
+        }
+
+        function dblclick(d) {
+          self.force.resume();
+          d3.select(this).classed("fixed", d.fixed = false);
+        }
+
+        function dragged(d) {
+            var mouse = d3.mouse(svg.node());
+            d.x = this.xScale(this.ax.x.invert(mouse[0]));
+            d.y = this.yScale(this.ax.y.invert(mouse[1]));
+            d.px = d.x;
+            d.py = d.y;
+            d.fixed = true;
+            this.force.resume();
+        }
+
+        function dragended(d) {
+            d.fixed = true;
+            }
+
+        var self = this;
+        if (this.props.draggable === true) {
+            this.node.on("dblclick", dblclick).call(drag)
+        }
+
+    }
+
+
+
+         mpld3.draw_figure("fig_el8173445058185128276242074", {"axes": [{"xlim": [0.0, 1.0], "yscale": "linear", "axesbg": "#FFFFFF", "texts": [], "zoomable": true, "images": [], "xdomain": [0.0, 1.0], "ylim": [0.0, 1.0], "paths": [], "sharey": [], "sharex": [], "axesbgalpha": null, "axes": [{"scale": "linear", "tickformat": null, "grid": {"gridOn": false}, "fontsize": 10.0, "position": "bottom", "nticks": 6, "tickvalues": null}, {"scale": "linear", "tickformat": null, "grid": {"gridOn": false}, "fontsize": 10.0, "position": "left", "nticks": 6, "tickvalues": null}], "lines": [], "markers": [], "id": "el817344499264912", "ydomain": [0.0, 1.0], "collections": [], "xscale": "linear", "bbox": [0.125, 0.125, 0.77500000000000002, 0.77500000000000002]}], "height": 720.0, "width": 720.0, "plugins": [{"type": "reset"}, {"enabled": false, "button": true, "type": "zoom"}, {"enabled": false, "button": true, "type": "boxzoom"}, {"draggable": true, "charge": -600, "link_distance": 20, "link_strength": 1, "ax_id": "el817344499264912", "graph": {"directed": false, "graph": {"name": "Zachary's Karate Club"}, "nodes": [{"club": "Mr. Hi", "color": "purple", "id": 0, "size": 16}, {"club": "Mr. Hi", "color": "purple", "id": 1, "size": 9}, {"club": "Mr. Hi", "color": "purple", "id": 2, "size": 10}, {"club": "Mr. Hi", "color": "purple", "id": 3, "size": 6}, {"club": "Mr. Hi", "color": "purple", "id": 4, "size": 3}, {"club": "Mr. Hi", "color": "purple", "id": 5, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 6, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 7, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 8, "size": 5}, {"club": "Officer", "color": "orange", "id": 9, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 10, "size": 3}, {"club": "Mr. Hi", "color": "purple", "id": 11, "size": 1}, {"club": "Mr. Hi", "color": "purple", "id": 12, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 13, "size": 5}, {"club": "Officer", "color": "orange", "id": 14, "size": 2}, {"club": "Officer", "color": "orange", "id": 15, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 16, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 17, "size": 2}, {"club": "Officer", "color": "orange", "id": 18, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 19, "size": 3}, {"club": "Officer", "color": "orange", "id": 20, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 21, "size": 2}, {"club": "Officer", "color": "orange", "id": 22, "size": 2}, {"club": "Officer", "color": "orange", "id": 23, "size": 5}, {"club": "Officer", "color": "orange", "id": 24, "size": 3}, {"club": "Officer", "color": "orange", "id": 25, "size": 3}, {"club": "Officer", "color": "orange", "id": 26, "size": 2}, {"club": "Officer", "color": "orange", "id": 27, "size": 4}, {"club": "Officer", "color": "orange", "id": 28, "size": 3}, {"club": "Officer", "color": "orange", "id": 29, "size": 4}, {"club": "Officer", "color": "orange", "id": 30, "size": 4}, {"club": "Officer", "color": "orange", "id": 31, "size": 6}, {"club": "Officer", "color": "orange", "id": 32, "size": 12}, {"club": "Officer", "color": "orange", "id": 33, "size": 17}], "links": [{"source": 0, "target": 1}, {"source": 0, "target": 2}, {"source": 0, "target": 3}, {"source": 0, "target": 4}, {"source": 0, "target": 5}, {"source": 0, "target": 6}, {"source": 0, "target": 7}, {"source": 0, "target": 8}, {"source": 0, "target": 10}, {"source": 0, "target": 11}, {"source": 0, "target": 12}, {"source": 0, "target": 13}, {"source": 0, "target": 17}, {"source": 0, "target": 19}, {"source": 0, "target": 21}, {"source": 0, "target": 31}, {"source": 1, "target": 2}, {"source": 1, "target": 3}, {"source": 1, "target": 7}, {"source": 1, "target": 13}, {"source": 1, "target": 17}, {"source": 1, "target": 19}, {"source": 1, "target": 21}, {"source": 1, "target": 30}, {"source": 2, "target": 3}, {"source": 2, "target": 32}, {"source": 2, "target": 7}, {"source": 2, "target": 8}, {"source": 2, "target": 9}, {"source": 2, "target": 13}, {"source": 2, "target": 27}, {"source": 2, "target": 28}, {"source": 3, "target": 7}, {"source": 3, "target": 12}, {"source": 3, "target": 13}, {"source": 4, "target": 10}, {"source": 4, "target": 6}, {"source": 5, "target": 16}, {"source": 5, "target": 10}, {"source": 5, "target": 6}, {"source": 6, "target": 16}, {"source": 8, "target": 32}, {"source": 8, "target": 30}, {"source": 8, "target": 33}, {"source": 9, "target": 33}, {"source": 13, "target": 33}, {"source": 14, "target": 32}, {"source": 14, "target": 33}, {"source": 15, "target": 32}, {"source": 15, "target": 33}, {"source": 18, "target": 32}, {"source": 18, "target": 33}, {"source": 19, "target": 33}, {"source": 20, "target": 32}, {"source": 20, "target": 33}, {"source": 22, "target": 32}, {"source": 22, "target": 33}, {"source": 23, "target": 32}, {"source": 23, "target": 25}, {"source": 23, "target": 27}, {"source": 23, "target": 29}, {"source": 23, "target": 33}, {"source": 24, "target": 25}, {"source": 24, "target": 27}, {"source": 24, "target": 31}, {"source": 25, "target": 31}, {"source": 26, "target": 33}, {"source": 26, "target": 29}, {"source": 27, "target": 33}, {"source": 28, "target": 33}, {"source": 28, "target": 31}, {"source": 29, "target": 32}, {"source": 29, "target": 33}, {"source": 30, "target": 33}, {"source": 30, "target": 32}, {"source": 31, "target": 33}, {"source": 31, "target": 32}, {"source": 32, "target": 33}], "multigraph": false}, "nominal_radius": 5, "type": "networkxd3forcelayout", "gravity": 0.5, "friction": 1}], "data": {}, "id": "el817344505818512"});
+      });
+    });
+}else{
+    // require.js not available: dynamically load d3 & mpld3
+    mpld3_load_lib("https://mpld3.github.io/js/d3.v3.min.js", function(){
+         mpld3_load_lib("https://mpld3.github.io/js/mpld3.v0.2.js", function(){
+
+
+    mpld3.register_plugin("networkxd3forcelayout", NetworkXD3ForceLayoutPlugin);
+    NetworkXD3ForceLayoutPlugin.prototype = Object.create(mpld3.Plugin.prototype);
+    NetworkXD3ForceLayoutPlugin.prototype.constructor = NetworkXD3ForceLayoutPlugin;
+    NetworkXD3ForceLayoutPlugin.prototype.requiredProps = ["graph",
+                                                                "ax_id",];
+    NetworkXD3ForceLayoutPlugin.prototype.defaultProps = { coordinates: "data",
+                                                               draggable: true,
+                                                               gravity: 1,
+                                                               charge: -30,
+                                                               link_strength: 1,
+                                                               friction: 0.9,
+                                                               link_distance: 20,
+                                                               maximum_stroke_width: 2,
+                                                               minimum_stroke_width: 1,
+                                                               nominal_stroke_width: 1,
+                                                               maximum_radius: 10,
+                                                               minimum_radius: 1,
+                                                               nominal_radius: 5,
+                                                            };
+
+    function NetworkXD3ForceLayoutPlugin(fig, props){
+        mpld3.Plugin.call(this, fig, props);
+    };
+
+    var color = d3.scale.category20();
+
+    NetworkXD3ForceLayoutPlugin.prototype.zoomScaleProp = function (nominal_prop, minimum_prop, maximum_prop) {
+        var zoom = this.ax.zoom;
+        let scalerFunction = function() {
+            var prop = nominal_prop;
+            if (nominal_prop*zoom.scale()>maximum_prop) prop = maximum_prop/zoom.scale();
+            if (nominal_prop*zoom.scale()<minimum_prop) prop = minimum_prop/zoom.scale();
+            return prop
+        }
+        return scalerFunction;
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.setupDefaults = function () {
+
+        this.zoomScaleStroke = this.zoomScaleProp(this.props.nominal_stroke_width,
+                                                  this.props.minimum_stroke_width,
+                                                  this.props.maximum_stroke_width)
+        this.zoomScaleRadius = this.zoomScaleProp(this.props.nominal_radius,
+                                                  this.props.minimum_radius,
+                                                  this.props.maximum_radius)
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.zoomed = function() {
+            this.tick()
+        }
+
+    NetworkXD3ForceLayoutPlugin.prototype.draw = function(){
+
+        let DEFAULT_NODE_SIZE = this.props.nominal_radius;
+
+        var height = this.fig.height
+        var width = this.fig.width
+
+        var graph = this.props.graph
+        var gravity = this.props.gravity.toFixed()
+        var charge = this.props.charge.toFixed()
+        var link_distance = this.props.link_distance.toFixed()
+        var link_strength = this.props.link_strength.toFixed()
+        var friction = this.props.friction.toFixed()
+
+        this.ax = mpld3.get_element(this.props.ax_id, this.fig)
+
+        var ax = this.ax;
+
+        this.ax.elements.push(this)
+
+        let ax_obj = this.ax;
+
+        var width = d3.max(ax.x.range()) - d3.min(ax.x.range()),
+            height = d3.max(ax.y.range()) - d3.min(ax.y.range());
+
+        var color = d3.scale.category20();
+
+        this.xScale = d3.scale.linear().domain([0, 1]).range([0, width]) // ax.x;
+        this.yScale = d3.scale.linear().domain([0, 1]).range([height, 0]) // ax.y;
+
+        this.force = d3.layout.force()
+                            .size([width, height]);
+
+        this.svg = this.ax.axes.append("g");
+
+        for(var i = 0; i < graph.nodes.length; i++){
+            var node = graph.nodes[i];
+            if (node.hasOwnProperty('x')) {
+                node.x = this.ax.x(node.x);
+            }
+            if (node.hasOwnProperty('y')) {
+                node.y = this.ax.y(node.y);
+            }
+        }
+
+        this.force
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .linkStrength(link_strength)
+            .friction(friction)
+            .linkDistance(link_distance)
+            .charge(charge)
+            .gravity(gravity)
+            .start();
+
+        this.link = this.svg.selectAll(".link")
+            .data(graph.links)
+          .enter().append("line")
+            .attr("class", "link")
+            .attr("stroke", "black")
+            .style("stroke-width", function (d) { return Math.sqrt(d.value); });
+
+        this.node = this.svg.selectAll(".node")
+            .data(graph.nodes)
+          .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", function(d) {return d.size === undefined ? DEFAULT_NODE_SIZE : d.size ;})
+            .style("fill", function (d) { return d.color; });
+
+        this.node.append("title")
+            .text(function (d) { return d.name; });
+
+        this.force.on("tick", this.tick.bind(this));
+
+        this.setupDefaults()
+        this.conditional_features(this.svg);
+
+    };
+
+    NetworkXD3ForceLayoutPlugin.prototype.tick = function() {
+
+        this.link.attr("x1", function (d) { return this.ax.x(this.xScale.invert(d.source.x)); }.bind(this))
+                 .attr("y1", function (d) { return this.ax.y(this.yScale.invert(d.source.y)); }.bind(this))
+                 .attr("x2", function (d) { return this.ax.x(this.xScale.invert(d.target.x)); }.bind(this))
+                 .attr("y2", function (d) { return this.ax.y(this.yScale.invert(d.target.y)); }.bind(this));
+
+        this.node.attr("transform", function (d) {
+            return "translate(" + this.ax.x(this.xScale.invert(d.x)) + "," + this.ax.y(this.yScale.invert(d.y)) + ")";
+            }.bind(this)
+        );
+
+    }
+
+    NetworkXD3ForceLayoutPlugin.prototype.conditional_features = function(svg) {
+
+        var drag = d3.behavior.drag()
+                .on("dragstart", dragstarted)
+                .on("drag", dragged.bind(this))
+                .on("dragend", dragended);
+
+        function dragstarted(d) {
+            d3.event.sourceEvent.stopPropagation();
+            d3.select(this).classed("fixed", d.fixed = true);
+            d.fixed = true;
+        }
+
+        function dblclick(d) {
+          self.force.resume();
+          d3.select(this).classed("fixed", d.fixed = false);
+        }
+
+        function dragged(d) {
+            var mouse = d3.mouse(svg.node());
+            d.x = this.xScale(this.ax.x.invert(mouse[0]));
+            d.y = this.yScale(this.ax.y.invert(mouse[1]));
+            d.px = d.x;
+            d.py = d.y;
+            d.fixed = true;
+            this.force.resume();
+        }
+
+        function dragended(d) {
+            d.fixed = true;
+            }
+
+        var self = this;
+        if (this.props.draggable === true) {
+            this.node.on("dblclick", dblclick).call(drag)
+        }
+
+    }
+
+
+
+                 mpld3.draw_figure("fig_el8173445058185128276242074", {"axes": [{"xlim": [0.0, 1.0], "yscale": "linear", "axesbg": "#FFFFFF", "texts": [], "zoomable": true, "images": [], "xdomain": [0.0, 1.0], "ylim": [0.0, 1.0], "paths": [], "sharey": [], "sharex": [], "axesbgalpha": null, "axes": [{"scale": "linear", "tickformat": null, "grid": {"gridOn": false}, "fontsize": 10.0, "position": "bottom", "nticks": 6, "tickvalues": null}, {"scale": "linear", "tickformat": null, "grid": {"gridOn": false}, "fontsize": 10.0, "position": "left", "nticks": 6, "tickvalues": null}], "lines": [], "markers": [], "id": "el817344499264912", "ydomain": [0.0, 1.0], "collections": [], "xscale": "linear", "bbox": [0.125, 0.125, 0.77500000000000002, 0.77500000000000002]}], "height": 720.0, "width": 720.0, "plugins": [{"type": "reset"}, {"enabled": false, "button": true, "type": "zoom"}, {"enabled": false, "button": true, "type": "boxzoom"}, {"draggable": true, "charge": -600, "link_distance": 20, "link_strength": 1, "ax_id": "el817344499264912", "graph": {"directed": false, "graph": {"name": "Zachary's Karate Club"}, "nodes": [{"club": "Mr. Hi", "color": "purple", "id": 0, "size": 16}, {"club": "Mr. Hi", "color": "purple", "id": 1, "size": 9}, {"club": "Mr. Hi", "color": "purple", "id": 2, "size": 10}, {"club": "Mr. Hi", "color": "purple", "id": 3, "size": 6}, {"club": "Mr. Hi", "color": "purple", "id": 4, "size": 3}, {"club": "Mr. Hi", "color": "purple", "id": 5, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 6, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 7, "size": 4}, {"club": "Mr. Hi", "color": "purple", "id": 8, "size": 5}, {"club": "Officer", "color": "orange", "id": 9, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 10, "size": 3}, {"club": "Mr. Hi", "color": "purple", "id": 11, "size": 1}, {"club": "Mr. Hi", "color": "purple", "id": 12, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 13, "size": 5}, {"club": "Officer", "color": "orange", "id": 14, "size": 2}, {"club": "Officer", "color": "orange", "id": 15, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 16, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 17, "size": 2}, {"club": "Officer", "color": "orange", "id": 18, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 19, "size": 3}, {"club": "Officer", "color": "orange", "id": 20, "size": 2}, {"club": "Mr. Hi", "color": "purple", "id": 21, "size": 2}, {"club": "Officer", "color": "orange", "id": 22, "size": 2}, {"club": "Officer", "color": "orange", "id": 23, "size": 5}, {"club": "Officer", "color": "orange", "id": 24, "size": 3}, {"club": "Officer", "color": "orange", "id": 25, "size": 3}, {"club": "Officer", "color": "orange", "id": 26, "size": 2}, {"club": "Officer", "color": "orange", "id": 27, "size": 4}, {"club": "Officer", "color": "orange", "id": 28, "size": 3}, {"club": "Officer", "color": "orange", "id": 29, "size": 4}, {"club": "Officer", "color": "orange", "id": 30, "size": 4}, {"club": "Officer", "color": "orange", "id": 31, "size": 6}, {"club": "Officer", "color": "orange", "id": 32, "size": 12}, {"club": "Officer", "color": "orange", "id": 33, "size": 17}], "links": [{"source": 0, "target": 1}, {"source": 0, "target": 2}, {"source": 0, "target": 3}, {"source": 0, "target": 4}, {"source": 0, "target": 5}, {"source": 0, "target": 6}, {"source": 0, "target": 7}, {"source": 0, "target": 8}, {"source": 0, "target": 10}, {"source": 0, "target": 11}, {"source": 0, "target": 12}, {"source": 0, "target": 13}, {"source": 0, "target": 17}, {"source": 0, "target": 19}, {"source": 0, "target": 21}, {"source": 0, "target": 31}, {"source": 1, "target": 2}, {"source": 1, "target": 3}, {"source": 1, "target": 7}, {"source": 1, "target": 13}, {"source": 1, "target": 17}, {"source": 1, "target": 19}, {"source": 1, "target": 21}, {"source": 1, "target": 30}, {"source": 2, "target": 3}, {"source": 2, "target": 32}, {"source": 2, "target": 7}, {"source": 2, "target": 8}, {"source": 2, "target": 9}, {"source": 2, "target": 13}, {"source": 2, "target": 27}, {"source": 2, "target": 28}, {"source": 3, "target": 7}, {"source": 3, "target": 12}, {"source": 3, "target": 13}, {"source": 4, "target": 10}, {"source": 4, "target": 6}, {"source": 5, "target": 16}, {"source": 5, "target": 10}, {"source": 5, "target": 6}, {"source": 6, "target": 16}, {"source": 8, "target": 32}, {"source": 8, "target": 30}, {"source": 8, "target": 33}, {"source": 9, "target": 33}, {"source": 13, "target": 33}, {"source": 14, "target": 32}, {"source": 14, "target": 33}, {"source": 15, "target": 32}, {"source": 15, "target": 33}, {"source": 18, "target": 32}, {"source": 18, "target": 33}, {"source": 19, "target": 33}, {"source": 20, "target": 32}, {"source": 20, "target": 33}, {"source": 22, "target": 32}, {"source": 22, "target": 33}, {"source": 23, "target": 32}, {"source": 23, "target": 25}, {"source": 23, "target": 27}, {"source": 23, "target": 29}, {"source": 23, "target": 33}, {"source": 24, "target": 25}, {"source": 24, "target": 27}, {"source": 24, "target": 31}, {"source": 25, "target": 31}, {"source": 26, "target": 33}, {"source": 26, "target": 29}, {"source": 27, "target": 33}, {"source": 28, "target": 33}, {"source": 28, "target": 31}, {"source": 29, "target": 32}, {"source": 29, "target": 33}, {"source": 30, "target": 33}, {"source": 30, "target": 32}, {"source": 31, "target": 33}, {"source": 31, "target": 32}, {"source": 32, "target": 33}], "multigraph": false}, "nominal_radius": 5, "type": "networkxd3forcelayout", "gravity": 0.5, "friction": 1}], "data": {}, "id": "el817344505818512"});
+            })
+         });
+}
+</script>
+<p>See <a href="https://mpld3.github.io/examples/networkxd3forcelayout.html" target="_blank" rel="noopener noreferrer" data-external-link="">mpld3 documentation</a> for more
+information.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">import</span><span style="--0:#24292E;--1:#E1E4E8"> mpld3</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#BF3441;--1:#F97583">class</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#6F42C1;--1:#B392F0">NetworkXD3ForceLayout</span><span style="--0:#24292E;--1:#E1E4E8">(</span><span style="--0:#6F42C1;--1:#B392F0">mpld3</span><span style="--0:#24292E;--1:#E1E4E8">.</span><span style="--0:#6F42C1;--1:#B392F0">plugins</span><span style="--0:#24292E;--1:#E1E4E8">.</span><span style="--0:#6F42C1;--1:#B392F0">PluginBase</span><span style="--0:#24292E;--1:#E1E4E8">):</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#032F62;--1:#9ECBFF">"""A NetworkX to D3 Force Layout Plugin"""</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#005CC5;--1:#79B8FF">JAVASCRIPT</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">"""</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">mpld3.register_plugin("networkxd3forcelayout", NetworkXD3ForceLayoutPlugin);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype = Object.create(mpld3.Plugin.prototype);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.constructor = NetworkXD3ForceLayoutPlugin;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.requiredProps = ["graph",</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                                </span></span><span style="--0:#032F62;--1:#9ECBFF">"ax_id",];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.defaultProps = { coordinates: "data",</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">gravity: 1,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">charge: -30,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">link_strength: 1,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">friction: 0.9,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">link_distance: 20,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">maximum_stroke_width: 2,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">minimum_stroke_width: 1,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">nominal_stroke_width: 1,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">maximum_radius: 10,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">minimum_radius: 1,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                               </span></span><span style="--0:#032F62;--1:#9ECBFF">nominal_radius: 5,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                            </span></span><span style="--0:#032F62;--1:#9ECBFF">};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">function NetworkXD3ForceLayoutPlugin(fig, props){</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">mpld3.Plugin.call(this, fig, props);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">var color = d3.scaleOrdinal(d3.schemeCategory10);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.zoomScaleProp = function (nominal_prop, minimum_prop, maximum_prop) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var zoom = this.ax.zoom;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">scalerFunction = function() {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">var prop = nominal_prop;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">if (nominal_prop*zoom.scale()>maximum_prop) prop = maximum_prop/zoom.scale();</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">if (nominal_prop*zoom.scale()&#x3C;minimum_prop) prop = minimum_prop/zoom.scale();</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">return prop</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">return scalerFunction;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.setupDefaults = function () {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.zoomScaleStroke = this.zoomScaleProp(this.props.nominal_stroke_width,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                  </span></span><span style="--0:#032F62;--1:#9ECBFF">this.props.minimum_stroke_width,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                  </span></span><span style="--0:#032F62;--1:#9ECBFF">this.props.maximum_stroke_width)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.zoomScaleRadius = this.zoomScaleProp(this.props.nominal_radius,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                  </span></span><span style="--0:#032F62;--1:#9ECBFF">this.props.minimum_radius,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                                                  </span></span><span style="--0:#032F62;--1:#9ECBFF">this.props.maximum_radius)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.zoomed = function() {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.tick()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.draw = function(){</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">plugin = this</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">DEFAULT_NODE_SIZE = this.props.nominal_radius;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var height = this.fig.height</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var width = this.fig.width</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var graph = this.props.graph</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var gravity = this.props.gravity.toFixed()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var charge = this.props.charge.toFixed()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var link_distance = this.props.link_distance.toFixed()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var link_strength = this.props.link_strength.toFixed()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var friction = this.props.friction.toFixed()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.ax = mpld3.get_element(this.props.ax_id, this.fig)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var ax = this.ax;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.ax.elements.push(this)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">ax_obj = this.ax;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var width = d3.max(ax.x.range()) - d3.min(ax.x.range()),</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">height = d3.max(ax.y.range()) - d3.min(ax.y.range());</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">var color = d3.scaleOrdinal(d3.schemeCategory10);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.xScale = d3.scaleLinear().domain([0, 1]).range([0, width]) // ax.x;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]) // ax.y;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.force = d3.forceSimulation();</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.svg = this.ax.axes.append("g");</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">for(var i = 0; i &#x3C; graph.nodes.length; i++){</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">var node = graph.nodes[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">if (node.hasOwnProperty('x')) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                </span></span><span style="--0:#032F62;--1:#9ECBFF">node.x = this.ax.x(node.x);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">if (node.hasOwnProperty('y')) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                </span></span><span style="--0:#032F62;--1:#9ECBFF">node.y = this.ax.y(node.y);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.force</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.force("link",</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                </span></span><span style="--0:#032F62;--1:#9ECBFF">d3.forceLink()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                    </span></span><span style="--0:#032F62;--1:#9ECBFF">.id(function(d) { return d.index })</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                    </span></span><span style="--0:#032F62;--1:#9ECBFF">.strength(link_strength)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                    </span></span><span style="--0:#032F62;--1:#9ECBFF">.distance(link_distance)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.force("collide", d3.forceCollide(function(d){return d.r + 8 }).iterations(16))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.force("charge", d3.forceManyBody().strength(charge))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.force("center", d3.forceCenter(width / 2, height / 2))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.force("y", d3.forceY(0))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.force("x", d3.forceX(0));</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.force.nodes(graph.nodes);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.force.force("link").links(graph.links);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.link = this.svg.selectAll(".link")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.data(graph.links)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">          </span></span><span style="--0:#032F62;--1:#9ECBFF">.enter().append("line")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.attr("class", "link")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.attr("stroke", "black")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.style("stroke-width", function (d) { return Math.sqrt(d.value); });</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.node = this.svg.selectAll(".node")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.data(graph.nodes)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">          </span></span><span style="--0:#032F62;--1:#9ECBFF">.enter().append("circle")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.attr("class", "node")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.attr("r", function(d) {return d.size === undefined ? DEFAULT_NODE_SIZE : d.size ;})</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.style("fill", function (d) { return color(d); });</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.node.append("title")</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">.text(function (d) { return d.name; });</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.force.on("tick", this.tick.bind(this));</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.setupDefaults()</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">NetworkXD3ForceLayoutPlugin.prototype.tick = function() {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.link.attr("x1", function (d) { return this.ax.x(this.xScale.invert(d.source.x)); }.bind(this))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                 </span></span><span style="--0:#032F62;--1:#9ECBFF">.attr("y1", function (d) { return this.ax.y(this.yScale.invert(d.source.y)); }.bind(this))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                 </span></span><span style="--0:#032F62;--1:#9ECBFF">.attr("x2", function (d) { return this.ax.x(this.xScale.invert(d.target.x)); }.bind(this))</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">                 </span></span><span style="--0:#032F62;--1:#9ECBFF">.attr("y2", function (d) { return this.ax.y(this.yScale.invert(d.target.y)); }.bind(this));</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">this.node.attr("transform", function (d) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">return "translate(" + this.ax.x(this.xScale.invert(d.x)) + "," + this.ax.y(this.yScale.invert(d.y)) + ")";</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">            </span></span><span style="--0:#032F62;--1:#9ECBFF">}.bind(this)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">        </span></span><span style="--0:#032F62;--1:#9ECBFF">);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#032F62;--1:#9ECBFF">    </span></span><span style="--0:#032F62;--1:#9ECBFF">"""</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#BF3441;--1:#F97583">def</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#005CC5;--1:#79B8FF">__init__</span><span style="--0:#24292E;--1:#E1E4E8">(self, graph, ax,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">                 </span></span><span style="--0:#24292E;--1:#E1E4E8">gravity</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">                 </span></span><span style="--0:#24292E;--1:#E1E4E8">link_distance</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">20</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">                 </span></span><span style="--0:#24292E;--1:#E1E4E8">charge</span><span style="--0:#BF3441;--1:#F97583">=-</span><span style="--0:#005CC5;--1:#79B8FF">30</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">                 </span></span><span style="--0:#24292E;--1:#E1E4E8">node_size</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">5</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">                 </span></span><span style="--0:#24292E;--1:#E1E4E8">link_strength</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">1</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#24292E;--1:#E1E4E8">                 </span></span><span style="--0:#24292E;--1:#E1E4E8">friction</span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#005CC5;--1:#79B8FF">0.9</span><span style="--0:#24292E;--1:#E1E4E8">):</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#005CC5;--1:#79B8FF">self</span><span style="--0:#24292E;--1:#E1E4E8">.dict_ </span><span style="--0:#BF3441;--1:#F97583">=</span><span style="--0:#24292E;--1:#E1E4E8"> {</span><span style="--0:#032F62;--1:#9ECBFF">"type"</span><span style="--0:#24292E;--1:#E1E4E8">: </span><span style="--0:#032F62;--1:#9ECBFF">"networkxd3forcelayout"</span><span style="--0:#24292E;--1:#E1E4E8">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"graph"</span><span style="--0:#24292E;--1:#E1E4E8">: graph,</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"ax_id"</span><span style="--0:#24292E;--1:#E1E4E8">: mpld3.utils.get_id(ax),</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"gravity"</span><span style="--0:#24292E;--1:#E1E4E8">: gravity,</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"charge"</span><span style="--0:#24292E;--1:#E1E4E8">: charge,</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"friction"</span><span style="--0:#24292E;--1:#E1E4E8">: friction,</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"link_distance"</span><span style="--0:#24292E;--1:#E1E4E8">: link_distance,</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"link_strength"</span><span style="--0:#24292E;--1:#E1E4E8">: link_strength,</span></div></div><div class="ec-line"><div class="code"><span class="indent">                      </span><span style="--0:#032F62;--1:#9ECBFF">"nominal_radius"</span><span style="--0:#24292E;--1:#E1E4E8">: node_size}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import mpld3class NetworkXD3ForceLayout(mpld3.plugins.PluginBase):    &#x22;&#x22;&#x22;A NetworkX to D3 Force Layout Plugin&#x22;&#x22;&#x22;    JAVASCRIPT = &#x22;&#x22;&#x22;    mpld3.register_plugin(&#x22;networkxd3forcelayout&#x22;, NetworkXD3ForceLayoutPlugin);    NetworkXD3ForceLayoutPlugin.prototype = Object.create(mpld3.Plugin.prototype);    NetworkXD3ForceLayoutPlugin.prototype.constructor = NetworkXD3ForceLayoutPlugin;    NetworkXD3ForceLayoutPlugin.prototype.requiredProps = [&#x22;graph&#x22;,                                                                &#x22;ax_id&#x22;,];    NetworkXD3ForceLayoutPlugin.prototype.defaultProps = { coordinates: &#x22;data&#x22;,                                                               gravity: 1,                                                               charge: -30,                                                               link_strength: 1,                                                               friction: 0.9,                                                               link_distance: 20,                                                               maximum_stroke_width: 2,                                                               minimum_stroke_width: 1,                                                               nominal_stroke_width: 1,                                                               maximum_radius: 10,                                                               minimum_radius: 1,                                                               nominal_radius: 5,                                                            };    function NetworkXD3ForceLayoutPlugin(fig, props){        mpld3.Plugin.call(this, fig, props);    };    var color = d3.scaleOrdinal(d3.schemeCategory10);    NetworkXD3ForceLayoutPlugin.prototype.zoomScaleProp = function (nominal_prop, minimum_prop, maximum_prop) {        var zoom = this.ax.zoom;        scalerFunction = function() {            var prop = nominal_prop;            if (nominal_prop*zoom.scale()>maximum_prop) prop = maximum_prop/zoom.scale();            if (nominal_prop*zoom.scale()<minimum_prop) prop = minimum_prop/zoom.scale();            return prop        }        return scalerFunction;    }    NetworkXD3ForceLayoutPlugin.prototype.setupDefaults = function () {        this.zoomScaleStroke = this.zoomScaleProp(this.props.nominal_stroke_width,                                                  this.props.minimum_stroke_width,                                                  this.props.maximum_stroke_width)        this.zoomScaleRadius = this.zoomScaleProp(this.props.nominal_radius,                                                  this.props.minimum_radius,                                                  this.props.maximum_radius)    }    NetworkXD3ForceLayoutPlugin.prototype.zoomed = function() {        this.tick()    }    NetworkXD3ForceLayoutPlugin.prototype.draw = function(){        plugin = this        DEFAULT_NODE_SIZE = this.props.nominal_radius;        var height = this.fig.height        var width = this.fig.width        var graph = this.props.graph        var gravity = this.props.gravity.toFixed()        var charge = this.props.charge.toFixed()        var link_distance = this.props.link_distance.toFixed()        var link_strength = this.props.link_strength.toFixed()        var friction = this.props.friction.toFixed()        this.ax = mpld3.get_element(this.props.ax_id, this.fig)        var ax = this.ax;        this.ax.elements.push(this)        ax_obj = this.ax;        var width = d3.max(ax.x.range()) - d3.min(ax.x.range()),            height = d3.max(ax.y.range()) - d3.min(ax.y.range());        var color = d3.scaleOrdinal(d3.schemeCategory10);        this.xScale = d3.scaleLinear().domain([0, 1]).range([0, width]) // ax.x;        this.yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]) // ax.y;        this.force = d3.forceSimulation();        this.svg = this.ax.axes.append(&#x22;g&#x22;);        for(var i = 0; i < graph.nodes.length; i++){            var node = graph.nodes[i];            if (node.hasOwnProperty(&#x27;x&#x27;)) {                node.x = this.ax.x(node.x);            }            if (node.hasOwnProperty(&#x27;y&#x27;)) {                node.y = this.ax.y(node.y);            }        }        this.force            .force(&#x22;link&#x22;,                d3.forceLink()                    .id(function(d) { return d.index })                    .strength(link_strength)                    .distance(link_distance)            )            .force(&#x22;collide&#x22;, d3.forceCollide(function(d){return d.r + 8 }).iterations(16))            .force(&#x22;charge&#x22;, d3.forceManyBody().strength(charge))            .force(&#x22;center&#x22;, d3.forceCenter(width / 2, height / 2))            .force(&#x22;y&#x22;, d3.forceY(0))            .force(&#x22;x&#x22;, d3.forceX(0));        this.force.nodes(graph.nodes);        this.force.force(&#x22;link&#x22;).links(graph.links);        this.link = this.svg.selectAll(&#x22;.link&#x22;)            .data(graph.links)          .enter().append(&#x22;line&#x22;)            .attr(&#x22;class&#x22;, &#x22;link&#x22;)            .attr(&#x22;stroke&#x22;, &#x22;black&#x22;)            .style(&#x22;stroke-width&#x22;, function (d) { return Math.sqrt(d.value); });        this.node = this.svg.selectAll(&#x22;.node&#x22;)            .data(graph.nodes)          .enter().append(&#x22;circle&#x22;)            .attr(&#x22;class&#x22;, &#x22;node&#x22;)            .attr(&#x22;r&#x22;, function(d) {return d.size === undefined ? DEFAULT_NODE_SIZE : d.size ;})            .style(&#x22;fill&#x22;, function (d) { return color(d); });        this.node.append(&#x22;title&#x22;)            .text(function (d) { return d.name; });        this.force.on(&#x22;tick&#x22;, this.tick.bind(this));        this.setupDefaults()    };    NetworkXD3ForceLayoutPlugin.prototype.tick = function() {        this.link.attr(&#x22;x1&#x22;, function (d) { return this.ax.x(this.xScale.invert(d.source.x)); }.bind(this))                 .attr(&#x22;y1&#x22;, function (d) { return this.ax.y(this.yScale.invert(d.source.y)); }.bind(this))                 .attr(&#x22;x2&#x22;, function (d) { return this.ax.x(this.xScale.invert(d.target.x)); }.bind(this))                 .attr(&#x22;y2&#x22;, function (d) { return this.ax.y(this.yScale.invert(d.target.y)); }.bind(this));        this.node.attr(&#x22;transform&#x22;, function (d) {            return &#x22;translate(&#x22; + this.ax.x(this.xScale.invert(d.x)) + &#x22;,&#x22; + this.ax.y(this.yScale.invert(d.y)) + &#x22;)&#x22;;            }.bind(this)        );    }    &#x22;&#x22;&#x22;    def __init__(self, graph, ax,                 gravity=1,                 link_distance=20,                 charge=-30,                 node_size=5,                 link_strength=1,                 friction=0.9):        self.dict_ = {&#x22;type&#x22;: &#x22;networkxd3forcelayout&#x22;,                      &#x22;graph&#x22;: graph,                      &#x22;ax_id&#x22;: mpld3.utils.get_id(ax),                      &#x22;gravity&#x22;: gravity,                      &#x22;charge&#x22;: charge,                      &#x22;friction&#x22;: friction,                      &#x22;link_distance&#x22;: link_distance,                      &#x22;link_strength&#x22;: link_strength,                      &#x22;nominal_radius&#x22;: node_size}"><div></div></button></div></figure></div> </article> <hr class="my-8 border-dashed"> <div class="flex items-center gap-3 sm:hidden"><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/src/data/blog/mpld3-networkx-d3js-force-layout/index.md" target="_blank" rel="noopener noreferrer" aria-label="Edit page" title="Edit page" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 min-w-5.5" data-icon="tabler:edit">   <use href="#ai:tabler:edit"></use>  </svg></a></div> <section id="citation" class="post-citation mt-10 rounded-lg border border-border bg-muted/20 p-4 sm:p-5" data-pagefind-ignore> <h2 class="text-lg font-semibold text-foreground">Citation</h2> <div class="mt-3 rounded-md border border-border bg-background"> <pre class="overflow-x-auto p-4 text-xs leading-relaxed sm:text-sm"><code>@online{krishnamurthy2016mpld3networkxd3jsforcelayout,
+  author = {Dheepak Krishnamurthy},
+  title = {mpld3 networkx d3.js force layout},
+  year = {2016},
+  date = {2016-10-02},
+  url = {https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/},
+  langid = {en},
+}</code></pre> </div> <p class="mt-4 text-sm text-foreground/70">
+For attribution, please cite this work as:
+</p> <p class="mt-2 rounded-md border border-border bg-background px-3 py-2 text-sm leading-relaxed text-foreground/90"> Dheepak Krishnamurthy, &quot;mpld3 networkx d3.js force layout&quot;, October 2, 2016 <a href="https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" target="_blank" rel="noopener noreferrer" data-external-link class="mt-1 block break-all text-accent decoration-dashed underline-offset-4">https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/</a> </p> </section> <div class="mt-10 mb-6 grid items-start gap-6 sm:grid-cols-2" data-pagefind-ignore> <div class="justify-self-center sm:justify-self-start"> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://wa.me/?text=https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" title="Share this post via WhatsApp"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-whatsapp">   <symbol id="ai:tabler:brand-whatsapp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m3 21l1.65-3.8a9 9 0 1 1 3.4 2.9z"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0za5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></g></symbol><use href="#ai:tabler:brand-whatsapp"></use>  </svg><span class="sr-only">Share this post via WhatsApp</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://www.facebook.com/sharer.php?u=https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" title="Share this post on Facebook"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-facebook">   <symbol id="ai:tabler:brand-facebook" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2z"/></symbol><use href="#ai:tabler:brand-facebook"></use>  </svg><span class="sr-only">Share this post on Facebook</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://x.com/intent/post?url=https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" title="Share this post on X"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-x">   <symbol id="ai:tabler:brand-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4l11.733 16H20L8.267 4zm0 16l6.768-6.768m2.46-2.46L20 4"/></symbol><use href="#ai:tabler:brand-x"></use>  </svg><span class="sr-only">Share this post on X</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://bsky.app/intent/compose?text=https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" title="Share this post on Bluesky"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-bluesky">   <symbol id="ai:tabler:brand-bluesky" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.335 5.144C4.681 3.945 2 3.017 2 5.97c0 .59.35 4.953.556 5.661C3.269 14.094 5.686 14.381 8 14c-4.045.665-4.889 3.208-2.667 5.41C6.363 20.428 7.246 21 8 21c2 0 3.134-2.769 3.5-3.5q.5-1 .5-1.5q0 .5.5 1.5c.366.731 1.5 3.5 3.5 3.5c.754 0 1.637-.571 2.667-1.59C20.889 17.207 20.045 14.664 16 14c2.314.38 4.73.094 5.444-2.369c.206-.708.556-5.072.556-5.661c0-2.953-2.68-2.025-4.335-.826C15.372 6.806 12.905 10.192 12 12c-.905-1.808-3.372-5.194-5.665-6.856"/></symbol><use href="#ai:tabler:brand-bluesky"></use>  </svg><span class="sr-only">Share this post on Bluesky</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://t.me/share/url?url=https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" title="Share this post via Telegram"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-telegram">   <symbol id="ai:tabler:brand-telegram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></symbol><use href="#ai:tabler:brand-telegram"></use>  </svg><span class="sr-only">Share this post via Telegram</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://pinterest.com/pin/create/button/?url=https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" title="Share this post on Pinterest"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-pinterest">   <symbol id="ai:tabler:brand-pinterest" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m8 20l4-9m-1.3 3c.437 1.263 1.43 2 2.55 2c2.071 0 3.75-1.554 3.75-4a5 5 0 1 0-9.7 1.7"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0"/></g></symbol><use href="#ai:tabler:brand-pinterest"></use>  </svg><span class="sr-only">Share this post on Pinterest</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="mailto:?subject=See%20this%20post&#38;body=https://kdheepak.com/blog/mpld3-networkx-d3js-force-layout/" title="Share this post via email"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:mail">   <symbol id="ai:tabler:mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></symbol><use href="#ai:tabler:mail"></use>  </svg><span class="sr-only">Share this post via email</span></a></div></div> </div> <div class="justify-self-center sm:justify-self-end"> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="1em" height="1em" class="inline-block md:hidden" data-icon="tabler:chevron-up">   <symbol id="ai:tabler:chevron-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 15l6-6l6 6"/></symbol><use href="#ai:tabler:chevron-up"></use>  </svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="1em" height="1em" class="inline-block size-4" data-icon="tabler:arrow-narrow-up">   <symbol id="ai:tabler:arrow-narrow-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m4-10l-4-4M8 9l4-4"/></symbol><use href="#ai:tabler:arrow-narrow-up"></use>  </svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent =
+        scrollTotal > 0 ? Math.floor((scrollTop / scrollTotal) * 100) : 0;
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const visibleByPixels = scrollTop >= 220;
+      const visibleByRatio = scrollTotal > 0 && scrollTop / scrollTotal >= 0.08;
+      const isVisible = visibleByPixels || visibleByRatio;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Sync visibility immediately (e.g. deep links and client-side transitions).
+    handleScroll();
+  }
+  backToTop();
+</script> </div> </div> <div class="giscus"></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/blog/pelican-margin-notes-with-pandoc/" class="flex w-full items-center gap-2 hover:opacity-75"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 flex-none self-center rtl:rotate-180" data-icon="tabler:chevron-left">   <use href="#ai:tabler:chevron-left"></use>  </svg> <div> <div class="text-sm text-accent/85">Pelican margin notes with Pandoc</div> </div> </a> <a href="/blog/raspberry-pi-powered-led-lamp/" class="flex w-full items-center justify-end gap-2 text-end hover:opacity-75 sm:col-start-2"> <div> <div class="text-sm text-accent/85">Raspberry Pi powered LED lamp</div> </div> <svg width="1em" height="1em" class="inline-block size-6 flex-none self-center rtl:rotate-180" data-icon="tabler:chevron-right">   <symbol id="ai:tabler:chevron-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 6l6 6l-6 6"/></symbol><use href="#ai:tabler:chevron-right"></use>  </svg> </a> </div> </main> <footer class="app-layout mt-auto"> <div class="py-6 sm:py-4 border-t border-border flex flex-col items-center gap-2 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center"> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:justify-self-start sm:flex-row"> <span>&#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span> <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener noreferrer" target="_blank" data-external-link class="underline decoration-dashed underline-offset-4 hover:text-accent"> CC BY-SA 4.0 </a> </span> </div> <a href="https://github.com/kdheepak/kdheepak.github.io/tree/52156ff39054fbeb69b2484b4d912cd9958ec6d5" target="_blank" rel="noopener noreferrer" title="View source tree: 52156ff" class="sm:justify-self-center text-foreground/45 transition-colors hover:text-foreground/60"> <time class="text-[0.7rem] tracking-[0.08em]" data-build-local-time data-build-iso="2026-03-07T04:14:53.039Z" datetime="2026-03-07T04:14:53.039Z" title="2026-03-07T04:14:53.039Z"> 2026-03-07T04:14:53Z </time> </a> <div class="sm:justify-self-end"> <div class="flex flex-wrap items-center gap-1"> <a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="https://github.com/kdheepak/" title="kd on GitHub"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-github">   <symbol id="ai:tabler:brand-github" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2c2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2a4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6c-.6.6-.6 1.2-.5 2V21"/></symbol><use href="#ai:tabler:brand-github"></use>  </svg> <span class="sr-only">kd on GitHub</span> </a><a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="https://www.linkedin.com/in/dheepak-krishnamurthy/" title="kd on LinkedIn"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-linkedin">   <symbol id="ai:tabler:brand-linkedin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 11v5m0-8v.01M12 16v-5m4 5v-3a2 2 0 1 0-4 0"/><path d="M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></g></symbol><use href="#ai:tabler:brand-linkedin"></use>  </svg> <span class="sr-only">kd on LinkedIn</span> </a><a href="#" data-obfuscated-email="bWVAa2RoZWVwYWsuY29t" class="group inline-flex items-center gap-1 p-2 hover:rotate-6 hover:text-accent sm:p-1" title="Send an email to kd">  <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:mail">   <use href="#ai:tabler:mail"></use>  </svg> <span class="sr-only">Send an email to kd</span>  </a> <script type="module">const c=e=>{try{return window.atob(e)}catch{return null}},s=(e=document)=>{const d=e.querySelectorAll("a[data-obfuscated-email]");for(const o of d){const a=o.dataset.obfuscatedEmail;if(!a)continue;const t=c(a);!t||!t.includes("@")||(o.href=`mailto:${t}`)}},n=()=>{s(document)};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",n,{once:!0}):n();document.addEventListener("astro:page-load",n);</script><a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="/rss.xml" title="kd RSS feed"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:rss">   <symbol id="ai:tabler:rss" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19a1 1 0 1 0 2 0a1 1 0 1 0-2 0M4 4a16 16 0 0 1 16 16M4 11a9 9 0 0 1 9 9"/></symbol><use href="#ai:tabler:rss"></use>  </svg> <span class="sr-only">kd RSS feed</span> </a> </div> </div> </div> <p class="mx-auto mb-8 max-w-3xl text-center text-xs leading-relaxed text-foreground/60">
+All views or opinions expressed here are solely mine and are not represented,
+    shared, supported, or endorsed by any employer or entity in any manner.
+</p> </footer> <script type="module">const o=t=>String(t).padStart(2,"0"),m=t=>{const c=t<=0?"+":"-",e=Math.abs(t),n=o(Math.floor(e/60)),s=o(e%60);return`${c}${n}:${s}`},d=t=>{const c=t.getFullYear(),e=o(t.getMonth()+1),n=o(t.getDate()),s=o(t.getHours()),i=o(t.getMinutes()),r=o(t.getSeconds()),u=m(t.getTimezoneOffset());return`${c}-${e}-${n}T${s}:${i}:${r}${u}`},l=(t=document)=>{const c=t.querySelectorAll("time[data-build-local-time]");for(const e of c){const n=e.dataset.buildIso;if(!n)continue;const s=new Date(n);Number.isNaN(s.getTime())||(e.textContent=d(s),e.title=n)}},a=()=>{l(document)};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",a,{once:!0}):a();document.addEventListener("astro:page-load",a);</script>  <script type="module" src="/_astro/SearchInitializer.astro_astro_type_script_index_0_lang.DN4QOb-R.js"></script> <!-- Load full theme logic --> <script type="module">const d="theme",r="light",m="dark";function i(){const e=localStorage.getItem(d);return e||(window.matchMedia("(prefers-color-scheme: dark)").matches?m:r)}let t=window.theme?.themeValue??i();function c(){localStorage.setItem(d,t),o()}function o(){document.firstElementChild?.setAttribute("data-theme",t),document.querySelector("#theme-btn")?.setAttribute("aria-label",t);const e=document.body;if(e){const n=window.getComputedStyle(e).backgroundColor;document.querySelector("meta[name='theme-color']")?.setAttribute("content",n)}}window.theme?(window.theme.setPreference=c,window.theme.reflectPreference=o):window.theme={themeValue:t,setPreference:c,reflectPreference:o,getTheme:()=>t,setTheme:e=>{t=e}};o();function s(){o(),document.querySelector("#theme-btn")?.addEventListener("click",()=>{t=t===r?m:r,window.theme?.setTheme(t),c()})}s();document.addEventListener("astro:after-swap",s);document.addEventListener("astro:before-swap",e=>{const a=e,n=document.querySelector("meta[name='theme-color']")?.getAttribute("content");n&&a.newDocument.querySelector("meta[name='theme-color']")?.setAttribute("content",n)});window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",({matches:e})=>{t=e?m:r,window.theme?.setTheme(t),c()});</script> </body> </html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    if (document.getElementById("progress-container")) return;
+
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.id = "progress-container";
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    if (window.__kdPostScrollProgressBound) return;
+    window.__kdPostScrollProgressBound = true;
+
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+
+  /**
+   * Keeps TOC docked to the left on large screens.
+   */
+  function setupDockingToc() {
+    const article = document.getElementById("article");
+    if (!article || !article.classList.contains("has-sticky-toc")) return;
+
+    const contentHeadings = Array.from(
+      article.querySelectorAll("h2, h3, h4, h5, h6")
+    ).filter(
+      heading =>
+        heading instanceof HTMLHeadingElement &&
+        heading.id &&
+        heading.id !== "table-of-contents"
+    );
+    if (!contentHeadings.length) return;
+
+    const tocHeading = article.querySelector("h2#table-of-contents");
+    const tocList = tocHeading?.nextElementSibling;
+
+    if (
+      !(tocHeading instanceof HTMLHeadingElement) ||
+      !(tocList instanceof HTMLElement) ||
+      !["UL", "OL"].includes(tocList.tagName)
+    ) {
+      return;
+    }
+
+    let floatingToc = tocHeading.closest(".inline-toc-floating");
+    let placeholder = floatingToc?.previousElementSibling;
+
+    if (!floatingToc) {
+      floatingToc = document.createElement("div");
+      floatingToc.className = "inline-toc-floating";
+
+      placeholder = document.createElement("div");
+      placeholder.className = "inline-toc-placeholder";
+      placeholder.hidden = true;
+
+      tocHeading.before(placeholder);
+      tocHeading.before(floatingToc);
+      floatingToc.appendChild(tocHeading);
+      floatingToc.appendChild(tocList);
+    }
+
+    if (!(placeholder instanceof HTMLElement)) return;
+
+    const getHeadingHtml = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.innerHTML.trim();
+    };
+
+    const getHeadingLabel = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return heading.textContent?.trim() ?? "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.textContent?.trim() ?? "";
+    };
+
+    const ensureTocHeadingLink = heading => {
+      if (!(heading instanceof HTMLHeadingElement) || !heading.id) return;
+      const headingHash = `#${heading.id}`;
+
+      const hasLink = Array.from(
+        tocList.querySelectorAll("a[href^='#']")
+      ).some(link => link.getAttribute("href") === headingHash);
+      if (hasLink) return;
+
+      const label = getHeadingLabel(heading);
+      if (!label) return;
+
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = headingHash;
+      const headingHtml = getHeadingHtml(heading);
+      if (headingHtml) {
+        link.innerHTML = headingHtml;
+      } else {
+        link.textContent = label;
+      }
+      item.appendChild(link);
+      tocList.appendChild(item);
+    };
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (footnotesSection instanceof HTMLElement) {
+      const footnotesHeading = footnotesSection.querySelector(
+        "h2[id], h3[id], h4[id], h5[id], h6[id]"
+      );
+      ensureTocHeadingLink(footnotesHeading);
+    }
+
+    const referencesRoot = article.querySelector("#refs");
+    if (referencesRoot instanceof HTMLElement) {
+      let referencesHeading = referencesRoot.previousElementSibling;
+      while (
+        referencesHeading &&
+        !(referencesHeading instanceof HTMLHeadingElement)
+      ) {
+        referencesHeading = referencesHeading.previousElementSibling;
+      }
+      ensureTocHeadingLink(referencesHeading);
+    }
+
+    const tocLinks = Array.from(
+      tocList.querySelectorAll("a[href^='#']")
+    ).filter(link => link instanceof HTMLAnchorElement);
+
+    const headingEntries = tocLinks
+      .map(link => {
+        const hash = link.getAttribute("href");
+        if (!hash || hash === "#") return null;
+
+        let headingId = hash.slice(1);
+        try {
+          headingId = decodeURIComponent(headingId);
+        } catch {
+          // Keep original hash if decoding fails.
+        }
+
+        const heading = document.getElementById(headingId);
+        if (!heading || !article.contains(heading)) return null;
+
+        const headingHtml = getHeadingHtml(heading);
+        if (headingHtml && link.innerHTML.trim() !== headingHtml) {
+          link.innerHTML = headingHtml;
+        }
+
+        link.classList.add("toc-link");
+
+        return {
+          link,
+          heading,
+          pathStart: 0,
+          pathEnd: 0,
+          isIntersecting: false,
+        };
+      })
+      .filter(Boolean);
+
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    let tocProgressSvg = floatingToc.querySelector(".inline-toc-progress");
+    if (!(tocProgressSvg instanceof SVGSVGElement)) {
+      tocProgressSvg = document.createElementNS(svgNamespace, "svg");
+      tocProgressSvg.setAttribute("class", "inline-toc-progress");
+      tocProgressSvg.setAttribute("aria-hidden", "true");
+      floatingToc.appendChild(tocProgressSvg);
+    } else {
+      while (tocProgressSvg.firstChild) {
+        tocProgressSvg.firstChild.remove();
+      }
+    }
+
+    const tocProgressTrack = document.createElementNS(svgNamespace, "path");
+    tocProgressTrack.setAttribute("class", "inline-toc-progress-track");
+    tocProgressSvg.appendChild(tocProgressTrack);
+
+    const tocProgressActive = document.createElementNS(svgNamespace, "path");
+    tocProgressActive.setAttribute("class", "inline-toc-progress-active");
+    tocProgressSvg.appendChild(tocProgressActive);
+
+    let tocPathLength = 0;
+
+    const rebuildTocProgressPath = () => {
+      if (!headingEntries.length) {
+        tocPathLength = 0;
+        tocProgressTrack.setAttribute("d", "");
+        tocProgressActive.setAttribute("d", "");
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      let pathData = "";
+      let previousX = 0;
+      let maxX = 0;
+      let maxY = 0;
+
+      for (let index = 0; index < headingEntries.length; index += 1) {
+        const entry = headingEntries[index];
+        const linkRect = entry.link.getBoundingClientRect();
+        const x = Math.max(4, linkRect.left - tocRect.left - 8);
+        const y = Math.max(
+          6,
+          linkRect.top - tocRect.top + floatingToc.scrollTop - 2
+        );
+        const entryHeight = Math.max(16, linkRect.height + 4);
+
+        if (index === 0) {
+          pathData += `M ${x} ${y}`;
+          entry.pathStart = 0;
+        } else {
+          pathData += ` V ${y}`;
+          if (Math.abs(previousX - x) > 0.5) {
+            pathData += ` H ${x}`;
+          }
+          tocProgressTrack.setAttribute("d", pathData);
+          entry.pathStart = tocProgressTrack.getTotalLength();
+        }
+
+        pathData += ` V ${y + entryHeight}`;
+        tocProgressTrack.setAttribute("d", pathData);
+        entry.pathEnd = tocProgressTrack.getTotalLength();
+
+        previousX = x;
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y + entryHeight);
+      }
+
+      tocProgressTrack.setAttribute("d", pathData);
+      tocProgressActive.setAttribute("d", pathData);
+
+      const svgWidth = Math.max(floatingToc.clientWidth, maxX + 16);
+      const svgHeight = Math.max(floatingToc.scrollHeight, maxY + 12);
+      tocProgressSvg.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
+      tocProgressSvg.style.width = `${svgWidth}px`;
+      tocProgressSvg.style.height = `${svgHeight}px`;
+
+      tocPathLength = tocProgressTrack.getTotalLength();
+      if (tocPathLength > 0) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.style.strokeDashoffset = "1";
+      } else {
+        tocProgressActive.style.strokeDasharray = "";
+        tocProgressActive.style.strokeDashoffset = "";
+      }
+    };
+
+    const updateVisibleProgressPath = activeEntry => {
+      if (!tocPathLength || !headingEntries.length) {
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      let pathStart = tocPathLength;
+      let pathEnd = 0;
+
+      for (const entry of headingEntries) {
+        if (!entry.isIntersecting) continue;
+        pathStart = Math.min(pathStart, entry.pathStart);
+        pathEnd = Math.max(pathEnd, entry.pathEnd);
+      }
+
+      if (pathStart >= pathEnd && activeEntry) {
+        pathStart = activeEntry.pathStart;
+        pathEnd = activeEntry.pathEnd;
+      }
+
+      if (pathStart >= pathEnd) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const visibleLength = Math.max(1, pathEnd - pathStart);
+      tocProgressActive.style.strokeDasharray =
+        `1 ${pathStart} ${visibleLength} ${tocPathLength}`;
+      tocProgressActive.style.strokeDashoffset = "1";
+      tocProgressActive.classList.add("is-visible");
+    };
+
+    let activeTocLink = null;
+
+    const setActiveTocLink = link => {
+      if (activeTocLink === link) return false;
+
+      if (activeTocLink) {
+        activeTocLink.classList.remove("is-current-section");
+      }
+
+      activeTocLink = link;
+
+      if (activeTocLink) {
+        activeTocLink.classList.add("is-current-section");
+      }
+
+      return true;
+    };
+
+    const keepActiveLinkInView = link => {
+      if (!(link instanceof HTMLElement)) return;
+      if (floatingToc.scrollHeight <= floatingToc.clientHeight + 1) return;
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      const linkTop =
+        linkRect.top - tocRect.top + floatingToc.scrollTop;
+      const linkBottom = linkTop + linkRect.height;
+      const viewportTop = floatingToc.scrollTop;
+      const viewportBottom = viewportTop + floatingToc.clientHeight;
+      const margin = 18;
+
+      const isAbove = linkTop < viewportTop + margin;
+      const isBelow = linkBottom > viewportBottom - margin;
+      if (!isAbove && !isBelow) return;
+
+      const centeredTop = Math.max(
+        0,
+        Math.min(
+          linkTop - (floatingToc.clientHeight - linkRect.height) / 2,
+          floatingToc.scrollHeight - floatingToc.clientHeight
+        )
+      );
+
+      floatingToc.scrollTo({
+        top: centeredTop,
+        behavior: "smooth",
+      });
+    };
+
+    const updateActiveSection = () => {
+      if (!headingEntries.length) {
+        setActiveTocLink(null);
+        updateVisibleProgressPath(null);
+        return null;
+      }
+
+      const activationOffset = 144;
+      let activeEntry = headingEntries[0];
+
+      for (const entry of headingEntries) {
+        if (entry.heading.getBoundingClientRect().top <= activationOffset) {
+          activeEntry = entry;
+        } else {
+          break;
+        }
+      }
+
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const pageBottom = document.documentElement.scrollHeight - 8;
+      if (scrollBottom >= pageBottom) {
+        activeEntry = headingEntries[headingEntries.length - 1];
+      }
+
+      const activeChanged = setActiveTocLink(activeEntry.link);
+      if (activeChanged) {
+        keepActiveLinkInView(activeEntry.link);
+      }
+
+      updateVisibleProgressPath(activeEntry);
+      return activeEntry;
+    };
+
+    const media = window.matchMedia("(min-width: 1280px)");
+
+    const updateDockState = () => {
+      const wasDocked = floatingToc.classList.contains("is-docked-left");
+      const shouldDock = media.matches;
+
+      floatingToc.classList.toggle("is-docked-left", shouldDock);
+      placeholder.hidden = true;
+      placeholder.style.height = "";
+
+      return wasDocked !== shouldDock;
+    };
+
+    updateDockState();
+    rebuildTocProgressPath();
+    updateActiveSection();
+
+    if (article.dataset.tocDockListenersAttached === "true") return;
+    article.dataset.tocDockListenersAttached = "true";
+
+    let frame = 0;
+    const updateTocOnScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const dockStateChanged = updateDockState();
+        if (dockStateChanged) {
+          rebuildTocProgressPath();
+        }
+        updateActiveSection();
+      });
+    };
+
+    if ("IntersectionObserver" in window) {
+      const headingEntryById = new Map(
+        headingEntries.map(entry => [entry.heading.id, entry])
+      );
+
+      const headingObserver = new IntersectionObserver(
+        observerEntries => {
+          let hasChanges = false;
+
+          for (const observerEntry of observerEntries) {
+            if (!(observerEntry.target instanceof HTMLElement)) continue;
+
+            const linkedEntry = headingEntryById.get(observerEntry.target.id);
+            if (!linkedEntry) continue;
+
+            if (linkedEntry.isIntersecting !== observerEntry.isIntersecting) {
+              linkedEntry.isIntersecting = observerEntry.isIntersecting;
+              hasChanges = true;
+            }
+          }
+
+          if (hasChanges) {
+            updateTocOnScroll();
+          }
+        },
+        {
+          rootMargin: "-20% 0px -65% 0px",
+          threshold: [0, 1],
+        }
+      );
+
+      for (const entry of headingEntries) {
+        headingObserver.observe(entry.heading);
+      }
+    }
+
+    const handleResize = () => {
+      rebuildTocProgressPath();
+      updateTocOnScroll();
+    };
+
+    window.addEventListener("scroll", updateTocOnScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+    floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
+    media.addEventListener("change", handleResize);
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(handleResize).catch(() => {});
+    }
+  }
+
+  /** Adds "back to citation" links in bibliography entries. */
+  function getSessionItem(key) {
+    try {
+      return window.sessionStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function setSessionItem(key, value) {
+    try {
+      window.sessionStorage.setItem(key, value);
+    } catch {
+      // Ignore storage failures (privacy mode / disabled storage).
+    }
+  }
+
+  /** Converts bare URLs in bibliography entries into clickable links. */
+  function linkifyReferenceUrls() {
+    const referencesRoot = document.getElementById("refs");
+    if (!(referencesRoot instanceof HTMLElement)) return;
+
+    const urlPattern = /\b(?:https?:\/\/|www\.)[^\s<>"'`]+/gi;
+
+    const trimTrailingPunctuation = rawUrl => {
+      let url = rawUrl;
+      let trailingText = "";
+
+      while (/[.,;:!?]/.test(url.at(-1) ?? "")) {
+        trailingText = `${url.at(-1)}${trailingText}`;
+        url = url.slice(0, -1);
+      }
+
+      const bracketPairs = [
+        ["(", ")"],
+        ["[", "]"],
+        ["{", "}"],
+      ];
+
+      for (const [opening, closing] of bracketPairs) {
+        while (
+          url.endsWith(closing) &&
+          url.split(opening).length < url.split(closing).length
+        ) {
+          trailingText = `${closing}${trailingText}`;
+          url = url.slice(0, -1);
+        }
+      }
+
+      return { url, trailingText };
+    };
+
+    const createLink = urlText => {
+      const link = document.createElement("a");
+      link.href = urlText.toLowerCase().startsWith("www.")
+        ? `https://${urlText}`
+        : urlText;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.dataset.externalLink = "";
+      link.textContent = urlText;
+      return link;
+    };
+
+    const processTextNode = textNode => {
+      const value = textNode.nodeValue ?? "";
+      urlPattern.lastIndex = 0;
+      if (!urlPattern.test(value)) return;
+
+      urlPattern.lastIndex = 0;
+      const fragment = document.createDocumentFragment();
+      let lastIndex = 0;
+      let match;
+
+      while ((match = urlPattern.exec(value)) !== null) {
+        const matchStart = match.index;
+        const matchedUrl = match[0];
+
+        if (matchStart > lastIndex) {
+          fragment.appendChild(
+            document.createTextNode(value.slice(lastIndex, matchStart))
+          );
+        }
+
+        const { url, trailingText } = trimTrailingPunctuation(matchedUrl);
+
+        if (url.length > 0) {
+          fragment.appendChild(createLink(url));
+        } else {
+          fragment.appendChild(document.createTextNode(matchedUrl));
+        }
+
+        if (trailingText.length > 0) {
+          fragment.appendChild(document.createTextNode(trailingText));
+        }
+
+        lastIndex = matchStart + matchedUrl.length;
+      }
+
+      if (lastIndex < value.length) {
+        fragment.appendChild(document.createTextNode(value.slice(lastIndex)));
+      }
+
+      textNode.replaceWith(fragment);
+    };
+
+    const containers = Array.from(
+      referencesRoot.querySelectorAll(".csl-right-inline")
+    );
+
+    if (!containers.length) {
+      containers.push(referencesRoot);
+    }
+
+    for (const container of containers) {
+      const walker = document.createTreeWalker(
+        container,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode(node) {
+            if (!(node instanceof Text)) return NodeFilter.FILTER_REJECT;
+            const value = node.nodeValue ?? "";
+            if (!value.trim()) return NodeFilter.FILTER_REJECT;
+
+            const parentElement = node.parentElement;
+            if (
+              parentElement &&
+              parentElement.closest("a, code, pre, script, style")
+            ) {
+              return NodeFilter.FILTER_REJECT;
+            }
+
+            return NodeFilter.FILTER_ACCEPT;
+          },
+        }
+      );
+
+      const textNodes = [];
+      let currentNode = walker.nextNode();
+      while (currentNode) {
+        textNodes.push(currentNode);
+        currentNode = walker.nextNode();
+      }
+
+      for (const textNode of textNodes) {
+        processTextNode(textNode);
+      }
+    }
+  }
+
+  function addCitationBackLinks() {
+    const citationSpans = Array.from(
+      document.querySelectorAll("span[id^='citation--']")
+    );
+    if (!citationSpans.length) return;
+
+    const bibToCitationIds = new Map();
+
+    for (const citationSpan of citationSpans) {
+      const citationId = citationSpan.getAttribute("id");
+      if (!citationId) continue;
+
+      const bibLinks = Array.from(
+        citationSpan.querySelectorAll("a[href^='#bib-']")
+      );
+
+      for (const bibLink of bibLinks) {
+        const bibHref = bibLink.getAttribute("href");
+        const bibId = bibHref?.slice(1);
+        if (!bibId) continue;
+
+        const citationIds = bibToCitationIds.get(bibId) ?? [];
+        if (!citationIds.includes(citationId)) {
+          citationIds.push(citationId);
+          bibToCitationIds.set(bibId, citationIds);
+        }
+
+        if (!bibLink.dataset.returnHooked) {
+          bibLink.dataset.returnHooked = "true";
+          bibLink.addEventListener("click", () => {
+            setSessionItem(`citation-return:${bibId}`, citationId);
+            const backLink = document
+              .getElementById(bibId)
+              ?.querySelector(".citation-back-link");
+            if (backLink) backLink.setAttribute("href", `#${citationId}`);
+          });
+        }
+      }
+    }
+
+    for (const [bibId, citationIds] of bibToCitationIds.entries()) {
+      const bibEntry = document.getElementById(bibId);
+      if (!bibEntry || !citationIds.length) continue;
+
+      const targetContainer =
+        bibEntry.querySelector(".csl-right-inline") || bibEntry;
+      targetContainer.querySelector(".citation-back-link")?.remove();
+
+      const storedCitationId = getSessionItem(`citation-return:${bibId}`);
+      const returnCitationId =
+        storedCitationId && citationIds.includes(storedCitationId)
+          ? storedCitationId
+          : citationIds[0];
+
+      const backLink = document.createElement("a");
+      backLink.className = "citation-back-link";
+      backLink.href = `#${returnCitationId}`;
+      backLink.setAttribute("aria-label", "Back to citation");
+      backLink.textContent = "↩";
+      targetContainer.appendChild(backLink);
+    }
+  }
+
+  /** Renders `_aside_:` footnotes as margin notes on wide screens. */
+  function addMarginFootnotes() {
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    // Make reruns idempotent during client-side navigations.
+    article.querySelectorAll(".margin-footnote").forEach(note => note.remove());
+    article.classList.remove("has-margin-footnotes", "all-footnotes-as-margin");
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (!footnotesSection) return;
+
+    footnotesSection
+      .querySelectorAll("li.is-margin-footnote-source")
+      .forEach(node => node.classList.remove("is-margin-footnote-source"));
+
+    const footnotesById = new Map();
+    for (const footnote of Array.from(
+      footnotesSection.querySelectorAll("li[id]")
+    )) {
+      footnotesById.set(footnote.id, footnote);
+    }
+
+    let marginNotesAdded = 0;
+    const marginSourceIds = new Set();
+    const references = Array.from(
+      article.querySelectorAll("a[data-footnote-ref][href^='#']")
+    );
+
+    for (const reference of references) {
+      const footnoteId = reference.getAttribute("href")?.slice(1);
+      if (!footnoteId) continue;
+
+      const sourceFootnote = footnotesById.get(footnoteId);
+      if (!sourceFootnote) continue;
+
+      // Margin-note eligibility: definition starts with `_aside_:`.
+      const firstParagraph = sourceFootnote.querySelector("p");
+      const firstParagraphText =
+        firstParagraph?.textContent?.trim().toLowerCase() ?? "";
+      const isAsideFootnote = /^aside\s*:/.test(firstParagraphText);
+      if (!isAsideFootnote) continue;
+
+      sourceFootnote.classList.add("is-margin-footnote-source");
+      marginSourceIds.add(footnoteId);
+
+      const marginNote = document.createElement("aside");
+      marginNote.className = "margin-footnote";
+      marginNote.id = `margin-note-${footnoteId}-${marginNotesAdded + 1}`;
+
+      // Clone source content and strip navigation-only back links.
+      const contentClone = sourceFootnote.cloneNode(true);
+      contentClone
+        .querySelectorAll("a[data-footnote-backref]")
+        .forEach(backRef => backRef.remove());
+      contentClone
+        .querySelectorAll("[id]")
+        .forEach(node => node.removeAttribute("id"));
+
+      // Remove the leading `_aside_:` label in rendered margin notes.
+      const clonedFirstParagraph = contentClone.querySelector("p");
+      if (clonedFirstParagraph) {
+        const leadingElement = clonedFirstParagraph.firstElementChild;
+        if (
+          leadingElement?.tagName.toLowerCase() === "em" &&
+          leadingElement.textContent?.trim().toLowerCase() === "aside"
+        ) {
+          leadingElement.remove();
+        }
+
+        const firstTextNode = Array.from(clonedFirstParagraph.childNodes).find(
+          node => node.nodeType === Node.TEXT_NODE
+        );
+        if (firstTextNode) {
+          firstTextNode.textContent = (
+            firstTextNode.textContent ?? ""
+          ).replace(/^\s*aside\s*:\s*/i, "").replace(/^\s*:\s*/, "");
+          if (firstTextNode.textContent.trim() === "") {
+            firstTextNode.remove();
+          }
+        }
+      }
+
+      while (contentClone.firstChild) {
+        marginNote.appendChild(contentClone.firstChild);
+      }
+
+      const insertionPoint = reference.closest("sup") ?? reference;
+      insertionPoint.classList.add("is-margin-footnote-ref");
+      reference.classList.add("is-margin-footnote-ref-link");
+      reference.textContent = "^";
+      insertionPoint.insertAdjacentElement("afterend", marginNote);
+      reference.dataset.marginNoteId = marginNote.id;
+
+      if (!reference.dataset.marginNoteHooked) {
+        reference.dataset.marginNoteHooked = "true";
+        reference.addEventListener("click", event => {
+          if (!window.matchMedia("(min-width: 900px)").matches) return;
+
+          const marginNoteId = reference.dataset.marginNoteId;
+          if (!marginNoteId) return;
+
+          const linkedNote = article.querySelector(`#${marginNoteId}`);
+          if (!linkedNote) return;
+
+          event.preventDefault();
+          linkedNote.classList.add("margin-footnote-active");
+          linkedNote.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          window.setTimeout(
+            () => linkedNote.classList.remove("margin-footnote-active"),
+            800
+          );
+        });
+      }
+
+      marginNotesAdded += 1;
+    }
+
+    if (marginNotesAdded > 0) {
+      article.classList.add("has-margin-footnotes");
+      if (marginSourceIds.size === footnotesById.size) {
+        article.classList.add("all-footnotes-as-margin");
+      }
+    }
+  }
+
+  /** Converts ANSI escape sequences in notebook output cells to styled HTML. */
+  function renderAnsiCellOutput() {
+    const ANSI_16_COLORS = [
+      "#000000",
+      "#cd0000",
+      "#00cd00",
+      "#cdcd00",
+      "#0000ee",
+      "#cd00cd",
+      "#00cdcd",
+      "#e5e5e5",
+      "#7f7f7f",
+      "#ff0000",
+      "#00ff00",
+      "#ffff00",
+      "#5c5cff",
+      "#ff00ff",
+      "#00ffff",
+      "#ffffff",
+    ];
+
+    const escapeHtml = text =>
+      text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+
+    const ansi256ToCssColor = index => {
+      if (!Number.isInteger(index) || index < 0 || index > 255) return null;
+      if (index < 16) return ANSI_16_COLORS[index];
+
+      if (index >= 232) {
+        const level = 8 + (index - 232) * 10;
+        return `rgb(${level}, ${level}, ${level})`;
+      }
+
+      const colorIndex = index - 16;
+      const r = Math.floor(colorIndex / 36);
+      const g = Math.floor((colorIndex % 36) / 6);
+      const b = colorIndex % 6;
+      const toChannel = value => (value === 0 ? 0 : value * 40 + 55);
+
+      return `rgb(${toChannel(r)}, ${toChannel(g)}, ${toChannel(b)})`;
+    };
+
+    const applyAnsiCodes = (state, codeString) => {
+      const rawCodes = codeString.length > 0 ? codeString.split(";") : ["0"];
+      const codes = rawCodes.map(code => {
+        const parsedCode = Number(code);
+        return Number.isFinite(parsedCode) ? parsedCode : 0;
+      });
+
+      const resetState = () => {
+        state.fg = null;
+        state.bg = null;
+        state.bold = false;
+        state.italic = false;
+        state.underline = false;
+        state.inverse = false;
+      };
+
+      for (let index = 0; index < codes.length; index += 1) {
+        const code = codes[index];
+
+        if (code === 0) {
+          resetState();
+          continue;
+        }
+        if (code === 1) {
+          state.bold = true;
+          continue;
+        }
+        if (code === 3) {
+          state.italic = true;
+          continue;
+        }
+        if (code === 4) {
+          state.underline = true;
+          continue;
+        }
+        if (code === 7) {
+          state.inverse = true;
+          continue;
+        }
+        if (code === 22) {
+          state.bold = false;
+          continue;
+        }
+        if (code === 23) {
+          state.italic = false;
+          continue;
+        }
+        if (code === 24) {
+          state.underline = false;
+          continue;
+        }
+        if (code === 27) {
+          state.inverse = false;
+          continue;
+        }
+        if (code === 39) {
+          state.fg = null;
+          continue;
+        }
+        if (code === 49) {
+          state.bg = null;
+          continue;
+        }
+        if (code >= 30 && code <= 37) {
+          state.fg = ANSI_16_COLORS[code - 30];
+          continue;
+        }
+        if (code >= 90 && code <= 97) {
+          state.fg = ANSI_16_COLORS[code - 90 + 8];
+          continue;
+        }
+        if (code >= 40 && code <= 47) {
+          state.bg = ANSI_16_COLORS[code - 40];
+          continue;
+        }
+        if (code >= 100 && code <= 107) {
+          state.bg = ANSI_16_COLORS[code - 100 + 8];
+          continue;
+        }
+        if (code === 38 || code === 48) {
+          const isForeground = code === 38;
+          const mode = codes[index + 1];
+          if (mode === 5) {
+            const paletteIndex = codes[index + 2];
+            const color = ansi256ToCssColor(paletteIndex);
+            if (color) {
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 2;
+            continue;
+          }
+          if (mode === 2) {
+            const r = codes[index + 2];
+            const g = codes[index + 3];
+            const b = codes[index + 4];
+            if (
+              Number.isInteger(r) &&
+              Number.isInteger(g) &&
+              Number.isInteger(b) &&
+              r >= 0 &&
+              g >= 0 &&
+              b >= 0 &&
+              r <= 255 &&
+              g <= 255 &&
+              b <= 255
+            ) {
+              const color = `rgb(${r}, ${g}, ${b})`;
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 4;
+            continue;
+          }
+        }
+      }
+    };
+
+    const wrapStyledText = (text, state) => {
+      if (!text) return "";
+
+      const escapedText = escapeHtml(text);
+      let fg = state.fg;
+      let bg = state.bg;
+
+      if (state.inverse) {
+        [fg, bg] = [bg, fg];
+      }
+
+      const styles = [];
+      if (fg) styles.push(`color:${fg}`);
+      if (bg) styles.push(`background-color:${bg}`);
+      if (state.bold) styles.push("font-weight:700");
+      if (state.italic) styles.push("font-style:italic");
+      if (state.underline) styles.push("text-decoration:underline");
+
+      if (styles.length === 0) return escapedText;
+      return `<span style="${styles.join(";")}">${escapedText}</span>`;
+    };
+
+    const ansiToHtml = input => {
+      const state = {
+        fg: null,
+        bg: null,
+        bold: false,
+        italic: false,
+        underline: false,
+        inverse: false,
+      };
+
+      const ansiRegex = /\u001b\[([0-9;]*)m/g;
+      let html = "";
+      let lastIndex = 0;
+      let match = ansiRegex.exec(input);
+
+      while (match) {
+        const plainText = input.slice(lastIndex, match.index);
+        html += wrapStyledText(plainText, state);
+        applyAnsiCodes(state, match[1] ?? "");
+
+        lastIndex = ansiRegex.lastIndex;
+        match = ansiRegex.exec(input);
+      }
+
+      html += wrapStyledText(input.slice(lastIndex), state);
+      return html;
+    };
+
+    const outputCodeBlocks = document.querySelectorAll(
+      ".cell-output pre[data-language='plaintext'] code"
+    );
+
+    for (const codeBlock of outputCodeBlocks) {
+      if (!(codeBlock instanceof HTMLElement)) continue;
+
+      const lineNodes = codeBlock.querySelectorAll(".line, .ec-line .code");
+      const targets =
+        lineNodes.length > 0 ? Array.from(lineNodes) : [codeBlock];
+
+      for (const target of targets) {
+        if (!(target instanceof HTMLElement)) continue;
+        if (target.dataset.ansiParsed === "true") continue;
+
+        const rawText = target.textContent ?? "";
+        if (!rawText.includes("\u001b[")) continue;
+
+        target.innerHTML = ansiToHtml(rawText);
+        target.dataset.ansiParsed = "true";
+      }
+    }
+  }
+
+  function setupGiscus() {
+    const giscusContainer = document.querySelector(".giscus");
+    if (!(giscusContainer instanceof HTMLElement)) return;
+    if (giscusContainer.dataset.giscusInitialized === "true") return;
+
+    const giscusScript = document.createElement("script");
+    giscusScript.src = "https://giscus.app/client.js";
+    giscusScript.setAttribute("data-repo", "kdheepak/kdheepak.github.io");
+    giscusScript.setAttribute(
+      "data-repo-id",
+      "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA=="
+    );
+    giscusScript.setAttribute("data-category", "Comments");
+    giscusScript.setAttribute("data-category-id", "DIC_kwDOAw1l5M4CU810");
+    giscusScript.setAttribute("data-mapping", "pathname");
+    giscusScript.setAttribute("data-strict", "0");
+    giscusScript.setAttribute("data-reactions-enabled", "1");
+    giscusScript.setAttribute("data-emit-metadata", "0");
+    giscusScript.setAttribute("data-input-position", "bottom");
+    giscusScript.setAttribute("data-theme", "light");
+    giscusScript.setAttribute("data-lang", "en");
+    giscusScript.setAttribute("data-loading", "lazy");
+    giscusScript.crossOrigin = "anonymous";
+    giscusScript.async = true;
+
+    giscusContainer.appendChild(giscusScript);
+    giscusContainer.dataset.giscusInitialized = "true";
+  }
+
+  function initializePostPage() {
+    const article = document.getElementById("article");
+    if (!(article instanceof HTMLElement)) return;
+    if (article.dataset.postEnhancementsInitialized === "true") return;
+    article.dataset.postEnhancementsInitialized = "true";
+
+    createProgressBar();
+    updateScrollProgress();
+    setupDockingToc();
+
+    try {
+      linkifyReferenceUrls();
+      addCitationBackLinks();
+    } catch {
+      // Keep the rest of post enhancements working even if citation linking fails.
+    }
+
+    addMarginFootnotes();
+    renderAnsiCellOutput();
+    setupGiscus();
+  }
+
+  initializePostPage();
+  document.addEventListener("astro:page-load", initializePostPage, { once: true });
+
+  /* Go to page start after page swap unless navigating to a hash target. */
+  if (!window.__kdPostAfterSwapScrollHooked) {
+    document.addEventListener("astro:after-swap", () => {
+      if (!document.getElementById("article")) return;
+
+      const hash = window.location.hash;
+      if (!hash || hash === "#") {
+        window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+        return;
+      }
+
+      const targetId = decodeURIComponent(hash.slice(1));
+      const targetElement = document.getElementById(targetId);
+      if (!targetElement) return;
+
+      requestAnimationFrame(() => {
+        targetElement.scrollIntoView({ block: "start", inline: "nearest" });
+      });
+    });
+    window.__kdPostAfterSwapScrollHooked = true;
+  }
+</script>
