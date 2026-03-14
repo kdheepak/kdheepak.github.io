@@ -1,0 +1,1393 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap"><link rel="canonical" href="https://kdheepak.com/blog/patched-fonts-madness/"><meta name="generator" content="Astro v5.18.0"><!-- Load Font --><style>@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:300;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/9617ee3bc3ad47fd.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:700;font-style:italic;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:300;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86";src:url("/_astro/fonts/616354e20c7baae2.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:700;font-style:normal;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-de078a87b11e4a86 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}:root{--font-google-sans-code:"Google Sans Code-de078a87b11e4a86","Google Sans Code-de078a87b11e4a86 fallback: Courier New",monospace;}</style><!-- General Meta Tags --><title>Patched fonts madness</title><meta name="title" content="Patched fonts madness"><meta name="description" content="guide to using patched fonts on macOS."><meta name="author" content="Dheepak Krishnamurthy"><link rel="sitemap" href="/sitemap-index.xml"><link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><!-- Open Graph / Facebook --><meta property="og:title" content="Patched fonts madness"><meta property="og:description" content="guide to using patched fonts on macOS."><meta property="og:url" content="https://kdheepak.com/blog/patched-fonts-madness/"><!-- Article Published/Modified time --><meta property="article:published_time" content="2015-07-13T01:59:22.000Z"><!-- Twitter --><meta property="twitter:card" content="summary"><meta property="twitter:url" content="https://kdheepak.com/blog/patched-fonts-madness/"><meta property="twitter:title" content="Patched fonts madness"><meta property="twitter:description" content="guide to using patched fonts on macOS."><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Patched fonts madness","datePublished":"2015-07-13T01:59:22.000Z","author":[{"@type":"Person","name":"Dheepak Krishnamurthy","url":"https://kdheepak.com/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="kd" href="https://kdheepak.com/rss.xml"><meta name="theme-color" content=""><meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- Minimal inline script to prevent FOUC - sets theme immediately --><script>
+      (function () {
+        const initialColorScheme = ""; // "light" | "dark"
+        const currentTheme = localStorage.getItem("theme");
+
+        function getPreferTheme() {
+          if (currentTheme) return currentTheme;
+          if (initialColorScheme) return initialColorScheme;
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+
+        const themeValue = getPreferTheme();
+
+        // Set theme immediately to prevent flash
+        document.firstElementChild?.setAttribute("data-theme", themeValue);
+
+        // Export minimal API for external script
+        window.theme = {
+          themeValue: themeValue,
+          getTheme: () => window.theme.themeValue,
+          setTheme: val => {
+            window.theme.themeValue = val;
+          },
+        };
+      })();
+    </script><link rel="stylesheet" href="/_astro/index.BRLZkoem.css">
+<style>:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-qyrnxog5-1"] { view-transition-name: headingpatched-fonts-madness; }@layer astro { ::view-transition-old(headingpatched-fonts-madness) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(headingpatched-fonts-madness) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(headingpatched-fonts-madness) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(headingpatched-fonts-madness) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-qyrnxog5-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-qyrnxog5-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-uwf3heon-2"] { view-transition-name: active-nav-underline; }@layer astro { ::view-transition-old(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(active-nav-underline) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uwf3heon-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uwf3heon-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: neovim; }@layer astro { ::view-transition-old(neovim) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(neovim) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(neovim) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(neovim) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-4"] { view-transition-name: tmux; }@layer astro { ::view-transition-old(tmux) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(tmux) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(tmux) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(tmux) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body>  <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <header class="app-layout"> <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border w-full bg-background relative flex items-center gap-2"> <a href="/" class="relative z-10 py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl sm:leading-none"> kd  </a> <nav id="nav-menu" class="pointer-events-auto absolute left-1/2 -translate-x-1/2"> <ul id="menu-items" class="flex items-center gap-2 sm:gap-3"> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base text-accent" href="/blog/" title="/blog" aria-label="blog" aria-current="page"> <span>/blog</span> <span aria-hidden="true" class="absolute right-0 -bottom-0.5 left-0 h-0.5 rounded-full bg-accent" data-astro-transition-scope="astro-uwf3heon-2"></span></a> </li> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base" href="/cv/" title="/cv" aria-label="cv"> <span>/cv</span> </a> </li> <li class="flex items-center justify-center"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative px-1 py-1 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-accent sm:text-base" href="/tags/" title="/tags" aria-label="tags"> <span>/tags</span> </a> </li> </ul> </nav> <div class="z-10 ms-auto flex items-center gap-1 sm:gap-2"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative flex size-12 items-center justify-center text-foreground/80 transition-colors hover:text-accent sm:size-8" href="/search/" title="Search" aria-label="search"> <svg width="1em" height="1em" class="inline-block size-5 fill-transparent stroke-current stroke-2" data-icon="tabler:search">   <symbol id="ai:tabler:search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0m18 11l-6-6"/></symbol><use href="#ai:tabler:search"></use>  </svg> </a> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="1em" height="1em" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" data-icon="tabler:moon">   <symbol id="ai:tabler:moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"/></symbol><use href="#ai:tabler:moon"></use>  </svg> <svg width="1em" height="1em" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" data-icon="tabler:sun-high">   <symbol id="ai:tabler:sun-high" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 1 0-5.656-5.656a4 4 0 0 0 5.656 5.656m-8.485 2.829l-1.414 1.414M6.343 6.343L4.929 4.929m12.728 1.414l1.414-1.414m-1.414 12.728l1.414 1.414M4 12H2m10-8V2m8 10h2m-10 8v2"/></symbol><use href="#ai:tabler:sun-high"></use>  </svg> </button> </div> </div> </header> <main id="main-content" class="app-layout pb-12" data-pagefind-body> <span class="sr-only" data-pagefind-meta="date">12 Jul 2015</span> <div class="mt-8 flex items-center gap-2 sm:relative sm:block"> <a class="group inline-flex items-center gap-1 hover:text-accent focus-outline shrink-0 text-foreground/90 hover:text-foreground/70 sm:absolute sm:top-1/2 sm:left-0 sm:-translate-y-1/2 sm:-translate-x-[calc(100%+0.5rem)]" id="back-button" href="/blog/" aria-label="Back to blog"><svg width="1em" height="1em" class="inline-block size-6 rtl:rotate-180" data-icon="tabler:chevron-left">   <symbol id="ai:tabler:chevron-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 6l-6 6l6 6"/></symbol><use href="#ai:tabler:chevron-left"></use>  </svg><span class="sr-only">Back to blog</span></a> <h1 class="min-w-0 text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-qyrnxog5-1"> <span>Patched fonts madness</span>  </h1> </div> <div class="mt-4 mb-2 flex flex-wrap items-center gap-x-4 gap-y-2"> <div class="flex items-center gap-x-2 opacity-80 shrink-0 sm:min-w-0 sm:flex-1" style="view-transition-name:datepatched-fonts-madness"> <svg width="1em" height="1em" class="inline-block size-6 min-w-5.5" data-icon="tabler:calendar">   <symbol id="ai:tabler:calendar" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm12-4v4M8 3v4m-4 4h16m-9 4h1m0 0v3"/></symbol><use href="#ai:tabler:calendar"></use>  </svg>  <a href="https://github.com/kdheepak/kdheepak.github.io/blob/0ab156cd439ab273e6ad97c1beb0d7555b132faa/src/data/blog/patched-fonts-madness/index.md" target="_blank" rel="noopener noreferrer" title="View source at commit: 0ab156c" class="decoration-dashed underline-offset-4 hover:text-accent hover:underline"> <time class="text-sm sm:text-base" datetime="2015-07-13T01:59:22.000Z">12 Jul, 2015</time> </a> </div> <div class="flex items-center gap-3 text-sm opacity-80 justify-center text-center sm:text-base shrink-0 sm:min-w-0 sm:flex-1"> <span class="inline-flex items-center gap-1.5 whitespace-nowrap"> <svg width="1em" height="1em" class="inline-block min-w-4 size-5" data-icon="tabler:clock">   <symbol id="ai:tabler:clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0-18 0"/><path d="M12 7v5l3 3"/></g></symbol><use href="#ai:tabler:clock"></use>  </svg> <span> 1 min read (57 words)
+</span> </span> </div> <ul class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center"> <li> <a href="/tags/neovim/" class="flex items-center gap-0.5 border-b-2 border-dashed border-foreground hover:-mt-0.5 hover:border-accent hover:text-accent focus-visible:border-none focus-visible:text-accent text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="1em" height="1em" class="opacity-80 size-4" data-icon="tabler:hash">   <symbol id="ai:tabler:hash" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9h14M5 15h14M11 4L7 20M17 4l-4 16"/></symbol><use href="#ai:tabler:hash"></use>  </svg> neovim </a> </li><li> <a href="/tags/tmux/" class="flex items-center gap-0.5 border-b-2 border-dashed border-foreground hover:-mt-0.5 hover:border-accent hover:text-accent focus-visible:border-none focus-visible:text-accent text-sm" data-astro-transition-scope="astro-36ssibgs-4"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="opacity-80 size-4" data-icon="tabler:hash">   <use href="#ai:tabler:hash"></use>  </svg> tmux </a> </li> </ul> <div class="max-sm:hidden shrink-0"> <div class="flex items-center gap-3"><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/src/data/blog/patched-fonts-madness/index.md" target="_blank" rel="noopener noreferrer" aria-label="Edit page" title="Edit page" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" class="inline-block size-6 min-w-5.5" data-icon="tabler:edit">   <symbol id="ai:tabler:edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"/><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3zM16 5l3 3"/></g></symbol><use href="#ai:tabler:edit"></use>  </svg></a></div> </div> </div> <article id="article" class="app-prose drop-cap-lead mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg) has-sticky-toc"> <p>Getting patched fonts for a powerline in the terminal can be quite an adventure, especially when you
+are using vim and tmux. I almost gave up on it, but now that I've figured it out it seems extremely
+obvious.</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.5o2s3.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># pip install --user powerline-status</span></div></div><div class="ec-line"><div class="code"><span style="--0:#616972;--1:#99A0A6"># brew install fontforge --with-python</span></div></div><div class="ec-line"><div class="code"><span style="--0:#6F42C1;--1:#B392F0">git</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">clone</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">https://github.com/powerline/fonts.git</span></div></div><div class="ec-line"><div class="code"><span style="--0:#005CC5;--1:#79B8FF">cd</span><span style="--0:#24292E;--1:#E1E4E8"> </span><span style="--0:#032F62;--1:#9ECBFF">fonts</span></div></div><div class="ec-line"><div class="code"><span style="--0:#6F42C1;--1:#B392F0">./install.sh</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="git clone https://github.com/powerline/fonts.gitcd fonts./install.sh"><div></div></button></div></figure></div>
+<p>Most importantly, select the font with the word <code>powerline</code> in the name in the preferences option of
+your terminal.</p> </article> <hr class="my-8 border-dashed"> <div class="flex items-center gap-3 sm:hidden"><a href="https://github.com/kdheepak/kdheepak.github.io/edit/main/src/data/blog/patched-fonts-madness/index.md" target="_blank" rel="noopener noreferrer" aria-label="Edit page" title="Edit page" class="flex items-center opacity-80 transition-colors hover:text-accent"><svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 min-w-5.5" data-icon="tabler:edit">   <use href="#ai:tabler:edit"></use>  </svg></a></div> <section id="citation" class="post-citation mt-10 rounded-lg border border-border bg-muted/20 p-4 sm:p-5" data-pagefind-ignore> <h2 class="text-lg font-semibold text-foreground">Citation</h2> <div class="mt-3 rounded-md border border-border bg-background"> <pre class="overflow-x-auto p-4 text-xs leading-relaxed sm:text-sm"><code>@online{krishnamurthy2015patchedfontsmadness,
+  author = {Dheepak Krishnamurthy},
+  title = {Patched fonts madness},
+  year = {2015},
+  date = {2015-07-12},
+  url = {https://kdheepak.com/blog/patched-fonts-madness/},
+  langid = {en},
+}</code></pre> </div> <p class="mt-4 text-sm text-foreground/70">
+For attribution, please cite this work as:
+</p> <p class="mt-2 rounded-md border border-border bg-background px-3 py-2 text-sm leading-relaxed text-foreground/90"> Dheepak Krishnamurthy, &quot;Patched fonts madness&quot;, July 12, 2015 <a href="https://kdheepak.com/blog/patched-fonts-madness/" target="_blank" rel="noopener noreferrer" data-external-link class="mt-1 block break-all text-accent decoration-dashed underline-offset-4">https://kdheepak.com/blog/patched-fonts-madness/</a> </p> </section> <div class="mt-10 mb-6 grid items-start gap-6 sm:grid-cols-2" data-pagefind-ignore> <div class="justify-self-center sm:justify-self-start"> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://wa.me/?text=https://kdheepak.com/blog/patched-fonts-madness/" title="Share this post via WhatsApp"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-whatsapp">   <symbol id="ai:tabler:brand-whatsapp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m3 21l1.65-3.8a9 9 0 1 1 3.4 2.9z"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0za5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></g></symbol><use href="#ai:tabler:brand-whatsapp"></use>  </svg><span class="sr-only">Share this post via WhatsApp</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://www.facebook.com/sharer.php?u=https://kdheepak.com/blog/patched-fonts-madness/" title="Share this post on Facebook"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-facebook">   <symbol id="ai:tabler:brand-facebook" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2z"/></symbol><use href="#ai:tabler:brand-facebook"></use>  </svg><span class="sr-only">Share this post on Facebook</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://x.com/intent/post?url=https://kdheepak.com/blog/patched-fonts-madness/" title="Share this post on X"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-x">   <symbol id="ai:tabler:brand-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4l11.733 16H20L8.267 4zm0 16l6.768-6.768m2.46-2.46L20 4"/></symbol><use href="#ai:tabler:brand-x"></use>  </svg><span class="sr-only">Share this post on X</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://bsky.app/intent/compose?text=https://kdheepak.com/blog/patched-fonts-madness/" title="Share this post on Bluesky"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-bluesky">   <symbol id="ai:tabler:brand-bluesky" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.335 5.144C4.681 3.945 2 3.017 2 5.97c0 .59.35 4.953.556 5.661C3.269 14.094 5.686 14.381 8 14c-4.045.665-4.889 3.208-2.667 5.41C6.363 20.428 7.246 21 8 21c2 0 3.134-2.769 3.5-3.5q.5-1 .5-1.5q0 .5.5 1.5c.366.731 1.5 3.5 3.5 3.5c.754 0 1.637-.571 2.667-1.59C20.889 17.207 20.045 14.664 16 14c2.314.38 4.73.094 5.444-2.369c.206-.708.556-5.072.556-5.661c0-2.953-2.68-2.025-4.335-.826C15.372 6.806 12.905 10.192 12 12c-.905-1.808-3.372-5.194-5.665-6.856"/></symbol><use href="#ai:tabler:brand-bluesky"></use>  </svg><span class="sr-only">Share this post on Bluesky</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://t.me/share/url?url=https://kdheepak.com/blog/patched-fonts-madness/" title="Share this post via Telegram"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-telegram">   <symbol id="ai:tabler:brand-telegram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></symbol><use href="#ai:tabler:brand-telegram"></use>  </svg><span class="sr-only">Share this post via Telegram</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="https://pinterest.com/pin/create/button/?url=https://kdheepak.com/blog/patched-fonts-madness/" title="Share this post on Pinterest"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-pinterest">   <symbol id="ai:tabler:brand-pinterest" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m8 20l4-9m-1.3 3c.437 1.263 1.43 2 2.55 2c2.071 0 3.75-1.554 3.75-4a5 5 0 1 0-9.7 1.7"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0"/></g></symbol><use href="#ai:tabler:brand-pinterest"></use>  </svg><span class="sr-only">Share this post on Pinterest</span></a><a class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" href="mailto:?subject=See%20this%20post&#38;body=https://kdheepak.com/blog/patched-fonts-madness/" title="Share this post via email"><svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:mail">   <symbol id="ai:tabler:mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></symbol><use href="#ai:tabler:mail"></use>  </svg><span class="sr-only">Share this post via email</span></a></div></div> </div> <div class="justify-self-center sm:justify-self-end"> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="1em" height="1em" class="inline-block md:hidden" data-icon="tabler:chevron-up">   <symbol id="ai:tabler:chevron-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 15l6-6l6 6"/></symbol><use href="#ai:tabler:chevron-up"></use>  </svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="1em" height="1em" class="inline-block size-4" data-icon="tabler:arrow-narrow-up">   <symbol id="ai:tabler:arrow-narrow-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m4-10l-4-4M8 9l4-4"/></symbol><use href="#ai:tabler:arrow-narrow-up"></use>  </svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent =
+        scrollTotal > 0 ? Math.floor((scrollTop / scrollTotal) * 100) : 0;
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const visibleByPixels = scrollTop >= 220;
+      const visibleByRatio = scrollTotal > 0 && scrollTop / scrollTotal >= 0.08;
+      const isVisible = visibleByPixels || visibleByRatio;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Sync visibility immediately (e.g. deep links and client-side transitions).
+    handleScroll();
+  }
+  backToTop();
+</script> </div> </div> <div class="giscus"></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/blog/create-emacsclientapp-using-applescript/" class="flex w-full items-center gap-2 hover:opacity-75"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 flex-none self-center rtl:rotate-180" data-icon="tabler:chevron-left">   <use href="#ai:tabler:chevron-left"></use>  </svg> <div> <div class="text-sm text-accent/85">Create Emacsclient.app using AppleScript</div> </div> </a> <a href="/blog/better-git-log-with-git-ls/" class="flex w-full items-center justify-end gap-2 text-end hover:opacity-75 sm:col-start-2"> <div> <div class="text-sm text-accent/85">Better git log with git ls</div> </div> <svg width="1em" height="1em" class="inline-block size-6 flex-none self-center rtl:rotate-180" data-icon="tabler:chevron-right">   <symbol id="ai:tabler:chevron-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 6l6 6l-6 6"/></symbol><use href="#ai:tabler:chevron-right"></use>  </svg> </a> </div> </main> <footer class="app-layout mt-auto"> <div class="py-6 sm:py-4 border-t border-border flex flex-col items-center gap-2 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center"> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:justify-self-start sm:flex-row"> <span>&#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span> <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener noreferrer" target="_blank" data-external-link class="underline decoration-dashed underline-offset-4 hover:text-accent"> CC BY-SA 4.0 </a> </span> </div> <a href="https://github.com/kdheepak/kdheepak.github.io/tree/0ab156cd439ab273e6ad97c1beb0d7555b132faa" target="_blank" rel="noopener noreferrer" title="View source tree: 0ab156c" class="sm:justify-self-center text-foreground/45 transition-colors hover:text-foreground/60"> <time class="text-[0.7rem] tracking-[0.08em]" data-build-local-time data-build-iso="2026-03-14T01:28:23.074Z" datetime="2026-03-14T01:28:23.074Z" title="2026-03-14T01:28:23.074Z"> 2026-03-14T01:28:23Z </time> </a> <div class="sm:justify-self-end"> <div class="flex flex-wrap items-center gap-1"> <a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="https://github.com/kdheepak/" title="kd on GitHub"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-github">   <symbol id="ai:tabler:brand-github" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2c2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2a4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6c-.6.6-.6 1.2-.5 2V21"/></symbol><use href="#ai:tabler:brand-github"></use>  </svg> <span class="sr-only">kd on GitHub</span> </a><a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="https://www.linkedin.com/in/dheepak-krishnamurthy/" title="kd on LinkedIn"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:brand-linkedin">   <symbol id="ai:tabler:brand-linkedin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 11v5m0-8v.01M12 16v-5m4 5v-3a2 2 0 1 0-4 0"/><path d="M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></g></symbol><use href="#ai:tabler:brand-linkedin"></use>  </svg> <span class="sr-only">kd on LinkedIn</span> </a><a href="#" data-obfuscated-email="bWVAa2RoZWVwYWsuY29t" class="group inline-flex items-center gap-1 p-2 hover:rotate-6 hover:text-accent sm:p-1" title="Send an email to kd">  <svg width="1em" height="1em" viewBox="0 0 24 24" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:mail">   <use href="#ai:tabler:mail"></use>  </svg> <span class="sr-only">Send an email to kd</span>  </a> <script type="module">const c=e=>{try{return window.atob(e)}catch{return null}},s=(e=document)=>{const d=e.querySelectorAll("a[data-obfuscated-email]");for(const o of d){const a=o.dataset.obfuscatedEmail;if(!a)continue;const t=c(a);!t||!t.includes("@")||(o.href=`mailto:${t}`)}},n=()=>{s(document)};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",n,{once:!0}):n();document.addEventListener("astro:page-load",n);</script><a class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1" href="/rss.xml" title="kd RSS feed"> <svg width="1em" height="1em" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" data-icon="tabler:rss">   <symbol id="ai:tabler:rss" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19a1 1 0 1 0 2 0a1 1 0 1 0-2 0M4 4a16 16 0 0 1 16 16M4 11a9 9 0 0 1 9 9"/></symbol><use href="#ai:tabler:rss"></use>  </svg> <span class="sr-only">kd RSS feed</span> </a> </div> </div> </div> <p class="mx-auto mb-8 max-w-3xl text-center text-xs leading-relaxed text-foreground/60">
+All views or opinions expressed here are solely mine and are not represented,
+    shared, supported, or endorsed by any employer or entity in any manner.
+</p> </footer> <script type="module">const o=t=>String(t).padStart(2,"0"),m=t=>{const c=t<=0?"+":"-",e=Math.abs(t),n=o(Math.floor(e/60)),s=o(e%60);return`${c}${n}:${s}`},d=t=>{const c=t.getFullYear(),e=o(t.getMonth()+1),n=o(t.getDate()),s=o(t.getHours()),i=o(t.getMinutes()),r=o(t.getSeconds()),u=m(t.getTimezoneOffset());return`${c}-${e}-${n}T${s}:${i}:${r}${u}`},l=(t=document)=>{const c=t.querySelectorAll("time[data-build-local-time]");for(const e of c){const n=e.dataset.buildIso;if(!n)continue;const s=new Date(n);Number.isNaN(s.getTime())||(e.textContent=d(s),e.title=n)}},a=()=>{l(document)};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",a,{once:!0}):a();document.addEventListener("astro:page-load",a);</script>  <script type="module" src="/_astro/SearchInitializer.astro_astro_type_script_index_0_lang.DN4QOb-R.js"></script> <!-- Load full theme logic --> <script type="module">const d="theme",r="light",m="dark";function i(){const e=localStorage.getItem(d);return e||(window.matchMedia("(prefers-color-scheme: dark)").matches?m:r)}let t=window.theme?.themeValue??i();function c(){localStorage.setItem(d,t),o()}function o(){document.firstElementChild?.setAttribute("data-theme",t),document.querySelector("#theme-btn")?.setAttribute("aria-label",t);const e=document.body;if(e){const n=window.getComputedStyle(e).backgroundColor;document.querySelector("meta[name='theme-color']")?.setAttribute("content",n)}}window.theme?(window.theme.setPreference=c,window.theme.reflectPreference=o):window.theme={themeValue:t,setPreference:c,reflectPreference:o,getTheme:()=>t,setTheme:e=>{t=e}};o();function s(){o(),document.querySelector("#theme-btn")?.addEventListener("click",()=>{t=t===r?m:r,window.theme?.setTheme(t),c()})}s();document.addEventListener("astro:after-swap",s);document.addEventListener("astro:before-swap",e=>{const a=e,n=document.querySelector("meta[name='theme-color']")?.getAttribute("content");n&&a.newDocument.querySelector("meta[name='theme-color']")?.setAttribute("content",n)});window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",({matches:e})=>{t=e?m:r,window.theme?.setTheme(t),c()});</script> </body> </html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    if (document.getElementById("progress-container")) return;
+
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.id = "progress-container";
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    if (window.__kdPostScrollProgressBound) return;
+    window.__kdPostScrollProgressBound = true;
+
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+
+  /**
+   * Keeps TOC docked to the left on large screens.
+   */
+  function setupDockingToc() {
+    const article = document.getElementById("article");
+    if (!article || !article.classList.contains("has-sticky-toc")) return;
+
+    const contentHeadings = Array.from(
+      article.querySelectorAll("h2, h3, h4, h5, h6")
+    ).filter(
+      heading =>
+        heading instanceof HTMLHeadingElement &&
+        heading.id &&
+        heading.id !== "table-of-contents"
+    );
+    if (!contentHeadings.length) return;
+
+    const tocHeading = article.querySelector("h2#table-of-contents");
+    const tocList = tocHeading?.nextElementSibling;
+
+    if (
+      !(tocHeading instanceof HTMLHeadingElement) ||
+      !(tocList instanceof HTMLElement) ||
+      !["UL", "OL"].includes(tocList.tagName)
+    ) {
+      return;
+    }
+
+    let floatingToc = tocHeading.closest(".inline-toc-floating");
+    let placeholder = floatingToc?.previousElementSibling;
+
+    if (!floatingToc) {
+      floatingToc = document.createElement("div");
+      floatingToc.className = "inline-toc-floating";
+
+      placeholder = document.createElement("div");
+      placeholder.className = "inline-toc-placeholder";
+      placeholder.hidden = true;
+
+      tocHeading.before(placeholder);
+      tocHeading.before(floatingToc);
+      floatingToc.appendChild(tocHeading);
+      floatingToc.appendChild(tocList);
+    }
+
+    if (!(placeholder instanceof HTMLElement)) return;
+
+    const getHeadingHtml = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.innerHTML.trim();
+    };
+
+    const getHeadingLabel = heading => {
+      const clone = heading.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) {
+        return heading.textContent?.trim() ?? "";
+      }
+
+      clone.querySelectorAll(".heading-link").forEach(link => link.remove());
+      return clone.textContent?.trim() ?? "";
+    };
+
+    const ensureTocHeadingLink = heading => {
+      if (!(heading instanceof HTMLHeadingElement) || !heading.id) return;
+      const headingHash = `#${heading.id}`;
+
+      const hasLink = Array.from(
+        tocList.querySelectorAll("a[href^='#']")
+      ).some(link => link.getAttribute("href") === headingHash);
+      if (hasLink) return;
+
+      const label = getHeadingLabel(heading);
+      if (!label) return;
+
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = headingHash;
+      const headingHtml = getHeadingHtml(heading);
+      if (headingHtml) {
+        link.innerHTML = headingHtml;
+      } else {
+        link.textContent = label;
+      }
+      item.appendChild(link);
+      tocList.appendChild(item);
+    };
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (footnotesSection instanceof HTMLElement) {
+      const footnotesHeading = footnotesSection.querySelector(
+        "h2[id], h3[id], h4[id], h5[id], h6[id]"
+      );
+      ensureTocHeadingLink(footnotesHeading);
+    }
+
+    const referencesRoot = article.querySelector("#refs");
+    if (referencesRoot instanceof HTMLElement) {
+      let referencesHeading = referencesRoot.previousElementSibling;
+      while (
+        referencesHeading &&
+        !(referencesHeading instanceof HTMLHeadingElement)
+      ) {
+        referencesHeading = referencesHeading.previousElementSibling;
+      }
+      ensureTocHeadingLink(referencesHeading);
+    }
+
+    const tocLinks = Array.from(
+      tocList.querySelectorAll("a[href^='#']")
+    ).filter(link => link instanceof HTMLAnchorElement);
+
+    const headingEntries = tocLinks
+      .map(link => {
+        const hash = link.getAttribute("href");
+        if (!hash || hash === "#") return null;
+
+        let headingId = hash.slice(1);
+        try {
+          headingId = decodeURIComponent(headingId);
+        } catch {
+          // Keep original hash if decoding fails.
+        }
+
+        const heading = document.getElementById(headingId);
+        if (!heading || !article.contains(heading)) return null;
+
+        const headingHtml = getHeadingHtml(heading);
+        if (headingHtml && link.innerHTML.trim() !== headingHtml) {
+          link.innerHTML = headingHtml;
+        }
+
+        link.classList.add("toc-link");
+
+        return {
+          link,
+          heading,
+          pathStart: 0,
+          pathEnd: 0,
+          isIntersecting: false,
+        };
+      })
+      .filter(Boolean);
+
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    let tocProgressSvg = floatingToc.querySelector(".inline-toc-progress");
+    if (!(tocProgressSvg instanceof SVGSVGElement)) {
+      tocProgressSvg = document.createElementNS(svgNamespace, "svg");
+      tocProgressSvg.setAttribute("class", "inline-toc-progress");
+      tocProgressSvg.setAttribute("aria-hidden", "true");
+      floatingToc.appendChild(tocProgressSvg);
+    } else {
+      while (tocProgressSvg.firstChild) {
+        tocProgressSvg.firstChild.remove();
+      }
+    }
+
+    const tocProgressTrack = document.createElementNS(svgNamespace, "path");
+    tocProgressTrack.setAttribute("class", "inline-toc-progress-track");
+    tocProgressSvg.appendChild(tocProgressTrack);
+
+    const tocProgressActive = document.createElementNS(svgNamespace, "path");
+    tocProgressActive.setAttribute("class", "inline-toc-progress-active");
+    tocProgressSvg.appendChild(tocProgressActive);
+
+    let tocPathLength = 0;
+
+    const rebuildTocProgressPath = () => {
+      if (!headingEntries.length) {
+        tocPathLength = 0;
+        tocProgressTrack.setAttribute("d", "");
+        tocProgressActive.setAttribute("d", "");
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      let pathData = "";
+      let previousX = 0;
+      let maxX = 0;
+      let maxY = 0;
+
+      for (let index = 0; index < headingEntries.length; index += 1) {
+        const entry = headingEntries[index];
+        const linkRect = entry.link.getBoundingClientRect();
+        const x = Math.max(4, linkRect.left - tocRect.left - 8);
+        const y = Math.max(
+          6,
+          linkRect.top - tocRect.top + floatingToc.scrollTop - 2
+        );
+        const entryHeight = Math.max(16, linkRect.height + 4);
+
+        if (index === 0) {
+          pathData += `M ${x} ${y}`;
+          entry.pathStart = 0;
+        } else {
+          pathData += ` V ${y}`;
+          if (Math.abs(previousX - x) > 0.5) {
+            pathData += ` H ${x}`;
+          }
+          tocProgressTrack.setAttribute("d", pathData);
+          entry.pathStart = tocProgressTrack.getTotalLength();
+        }
+
+        pathData += ` V ${y + entryHeight}`;
+        tocProgressTrack.setAttribute("d", pathData);
+        entry.pathEnd = tocProgressTrack.getTotalLength();
+
+        previousX = x;
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y + entryHeight);
+      }
+
+      tocProgressTrack.setAttribute("d", pathData);
+      tocProgressActive.setAttribute("d", pathData);
+
+      const svgWidth = Math.max(floatingToc.clientWidth, maxX + 16);
+      const svgHeight = Math.max(floatingToc.scrollHeight, maxY + 12);
+      tocProgressSvg.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
+      tocProgressSvg.style.width = `${svgWidth}px`;
+      tocProgressSvg.style.height = `${svgHeight}px`;
+
+      tocPathLength = tocProgressTrack.getTotalLength();
+      if (tocPathLength > 0) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.style.strokeDashoffset = "1";
+      } else {
+        tocProgressActive.style.strokeDasharray = "";
+        tocProgressActive.style.strokeDashoffset = "";
+      }
+    };
+
+    const updateVisibleProgressPath = activeEntry => {
+      if (!tocPathLength || !headingEntries.length) {
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      let pathStart = tocPathLength;
+      let pathEnd = 0;
+
+      for (const entry of headingEntries) {
+        if (!entry.isIntersecting) continue;
+        pathStart = Math.min(pathStart, entry.pathStart);
+        pathEnd = Math.max(pathEnd, entry.pathEnd);
+      }
+
+      if (pathStart >= pathEnd && activeEntry) {
+        pathStart = activeEntry.pathStart;
+        pathEnd = activeEntry.pathEnd;
+      }
+
+      if (pathStart >= pathEnd) {
+        tocProgressActive.style.strokeDasharray = `1 ${tocPathLength}`;
+        tocProgressActive.classList.remove("is-visible");
+        return;
+      }
+
+      const visibleLength = Math.max(1, pathEnd - pathStart);
+      tocProgressActive.style.strokeDasharray =
+        `1 ${pathStart} ${visibleLength} ${tocPathLength}`;
+      tocProgressActive.style.strokeDashoffset = "1";
+      tocProgressActive.classList.add("is-visible");
+    };
+
+    let activeTocLink = null;
+
+    const setActiveTocLink = link => {
+      if (activeTocLink === link) return false;
+
+      if (activeTocLink) {
+        activeTocLink.classList.remove("is-current-section");
+      }
+
+      activeTocLink = link;
+
+      if (activeTocLink) {
+        activeTocLink.classList.add("is-current-section");
+      }
+
+      return true;
+    };
+
+    const keepActiveLinkInView = link => {
+      if (!(link instanceof HTMLElement)) return;
+      if (floatingToc.scrollHeight <= floatingToc.clientHeight + 1) return;
+
+      const tocRect = floatingToc.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      const linkTop =
+        linkRect.top - tocRect.top + floatingToc.scrollTop;
+      const linkBottom = linkTop + linkRect.height;
+      const viewportTop = floatingToc.scrollTop;
+      const viewportBottom = viewportTop + floatingToc.clientHeight;
+      const margin = 18;
+
+      const isAbove = linkTop < viewportTop + margin;
+      const isBelow = linkBottom > viewportBottom - margin;
+      if (!isAbove && !isBelow) return;
+
+      const centeredTop = Math.max(
+        0,
+        Math.min(
+          linkTop - (floatingToc.clientHeight - linkRect.height) / 2,
+          floatingToc.scrollHeight - floatingToc.clientHeight
+        )
+      );
+
+      floatingToc.scrollTo({
+        top: centeredTop,
+        behavior: "smooth",
+      });
+    };
+
+    const updateActiveSection = () => {
+      if (!headingEntries.length) {
+        setActiveTocLink(null);
+        updateVisibleProgressPath(null);
+        return null;
+      }
+
+      const activationOffset = 144;
+      let activeEntry = headingEntries[0];
+
+      for (const entry of headingEntries) {
+        if (entry.heading.getBoundingClientRect().top <= activationOffset) {
+          activeEntry = entry;
+        } else {
+          break;
+        }
+      }
+
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const pageBottom = document.documentElement.scrollHeight - 8;
+      if (scrollBottom >= pageBottom) {
+        activeEntry = headingEntries[headingEntries.length - 1];
+      }
+
+      const activeChanged = setActiveTocLink(activeEntry.link);
+      if (activeChanged) {
+        keepActiveLinkInView(activeEntry.link);
+      }
+
+      updateVisibleProgressPath(activeEntry);
+      return activeEntry;
+    };
+
+    const media = window.matchMedia("(min-width: 1280px)");
+
+    const updateDockState = () => {
+      const wasDocked = floatingToc.classList.contains("is-docked-left");
+      const shouldDock = media.matches;
+
+      floatingToc.classList.toggle("is-docked-left", shouldDock);
+      placeholder.hidden = true;
+      placeholder.style.height = "";
+
+      return wasDocked !== shouldDock;
+    };
+
+    updateDockState();
+    rebuildTocProgressPath();
+    updateActiveSection();
+
+    if (article.dataset.tocDockListenersAttached === "true") return;
+    article.dataset.tocDockListenersAttached = "true";
+
+    let frame = 0;
+    const updateTocOnScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const dockStateChanged = updateDockState();
+        if (dockStateChanged) {
+          rebuildTocProgressPath();
+        }
+        updateActiveSection();
+      });
+    };
+
+    if ("IntersectionObserver" in window) {
+      const headingEntryById = new Map(
+        headingEntries.map(entry => [entry.heading.id, entry])
+      );
+
+      const headingObserver = new IntersectionObserver(
+        observerEntries => {
+          let hasChanges = false;
+
+          for (const observerEntry of observerEntries) {
+            if (!(observerEntry.target instanceof HTMLElement)) continue;
+
+            const linkedEntry = headingEntryById.get(observerEntry.target.id);
+            if (!linkedEntry) continue;
+
+            if (linkedEntry.isIntersecting !== observerEntry.isIntersecting) {
+              linkedEntry.isIntersecting = observerEntry.isIntersecting;
+              hasChanges = true;
+            }
+          }
+
+          if (hasChanges) {
+            updateTocOnScroll();
+          }
+        },
+        {
+          rootMargin: "-20% 0px -65% 0px",
+          threshold: [0, 1],
+        }
+      );
+
+      for (const entry of headingEntries) {
+        headingObserver.observe(entry.heading);
+      }
+    }
+
+    const handleResize = () => {
+      rebuildTocProgressPath();
+      updateTocOnScroll();
+    };
+
+    window.addEventListener("scroll", updateTocOnScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+    floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
+    media.addEventListener("change", handleResize);
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(handleResize).catch(() => {});
+    }
+  }
+
+  /** Adds "back to citation" links in bibliography entries. */
+  function getSessionItem(key) {
+    try {
+      return window.sessionStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function setSessionItem(key, value) {
+    try {
+      window.sessionStorage.setItem(key, value);
+    } catch {
+      // Ignore storage failures (privacy mode / disabled storage).
+    }
+  }
+
+  /** Converts bare URLs in bibliography entries into clickable links. */
+  function linkifyReferenceUrls() {
+    const referencesRoot = document.getElementById("refs");
+    if (!(referencesRoot instanceof HTMLElement)) return;
+
+    const urlPattern = /\b(?:https?:\/\/|www\.)[^\s<>"'`]+/gi;
+
+    const trimTrailingPunctuation = rawUrl => {
+      let url = rawUrl;
+      let trailingText = "";
+
+      while (/[.,;:!?]/.test(url.at(-1) ?? "")) {
+        trailingText = `${url.at(-1)}${trailingText}`;
+        url = url.slice(0, -1);
+      }
+
+      const bracketPairs = [
+        ["(", ")"],
+        ["[", "]"],
+        ["{", "}"],
+      ];
+
+      for (const [opening, closing] of bracketPairs) {
+        while (
+          url.endsWith(closing) &&
+          url.split(opening).length < url.split(closing).length
+        ) {
+          trailingText = `${closing}${trailingText}`;
+          url = url.slice(0, -1);
+        }
+      }
+
+      return { url, trailingText };
+    };
+
+    const createLink = urlText => {
+      const link = document.createElement("a");
+      link.href = urlText.toLowerCase().startsWith("www.")
+        ? `https://${urlText}`
+        : urlText;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.dataset.externalLink = "";
+      link.textContent = urlText;
+      return link;
+    };
+
+    const processTextNode = textNode => {
+      const value = textNode.nodeValue ?? "";
+      urlPattern.lastIndex = 0;
+      if (!urlPattern.test(value)) return;
+
+      urlPattern.lastIndex = 0;
+      const fragment = document.createDocumentFragment();
+      let lastIndex = 0;
+      let match;
+
+      while ((match = urlPattern.exec(value)) !== null) {
+        const matchStart = match.index;
+        const matchedUrl = match[0];
+
+        if (matchStart > lastIndex) {
+          fragment.appendChild(
+            document.createTextNode(value.slice(lastIndex, matchStart))
+          );
+        }
+
+        const { url, trailingText } = trimTrailingPunctuation(matchedUrl);
+
+        if (url.length > 0) {
+          fragment.appendChild(createLink(url));
+        } else {
+          fragment.appendChild(document.createTextNode(matchedUrl));
+        }
+
+        if (trailingText.length > 0) {
+          fragment.appendChild(document.createTextNode(trailingText));
+        }
+
+        lastIndex = matchStart + matchedUrl.length;
+      }
+
+      if (lastIndex < value.length) {
+        fragment.appendChild(document.createTextNode(value.slice(lastIndex)));
+      }
+
+      textNode.replaceWith(fragment);
+    };
+
+    const containers = Array.from(
+      referencesRoot.querySelectorAll(".csl-right-inline")
+    );
+
+    if (!containers.length) {
+      containers.push(referencesRoot);
+    }
+
+    for (const container of containers) {
+      const walker = document.createTreeWalker(
+        container,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode(node) {
+            if (!(node instanceof Text)) return NodeFilter.FILTER_REJECT;
+            const value = node.nodeValue ?? "";
+            if (!value.trim()) return NodeFilter.FILTER_REJECT;
+
+            const parentElement = node.parentElement;
+            if (
+              parentElement &&
+              parentElement.closest("a, code, pre, script, style")
+            ) {
+              return NodeFilter.FILTER_REJECT;
+            }
+
+            return NodeFilter.FILTER_ACCEPT;
+          },
+        }
+      );
+
+      const textNodes = [];
+      let currentNode = walker.nextNode();
+      while (currentNode) {
+        textNodes.push(currentNode);
+        currentNode = walker.nextNode();
+      }
+
+      for (const textNode of textNodes) {
+        processTextNode(textNode);
+      }
+    }
+  }
+
+  function addCitationBackLinks() {
+    const citationSpans = Array.from(
+      document.querySelectorAll("span[id^='citation--']")
+    );
+    if (!citationSpans.length) return;
+
+    const bibToCitationIds = new Map();
+
+    for (const citationSpan of citationSpans) {
+      const citationId = citationSpan.getAttribute("id");
+      if (!citationId) continue;
+
+      const bibLinks = Array.from(
+        citationSpan.querySelectorAll("a[href^='#bib-']")
+      );
+
+      for (const bibLink of bibLinks) {
+        const bibHref = bibLink.getAttribute("href");
+        const bibId = bibHref?.slice(1);
+        if (!bibId) continue;
+
+        const citationIds = bibToCitationIds.get(bibId) ?? [];
+        if (!citationIds.includes(citationId)) {
+          citationIds.push(citationId);
+          bibToCitationIds.set(bibId, citationIds);
+        }
+
+        if (!bibLink.dataset.returnHooked) {
+          bibLink.dataset.returnHooked = "true";
+          bibLink.addEventListener("click", () => {
+            setSessionItem(`citation-return:${bibId}`, citationId);
+            const backLink = document
+              .getElementById(bibId)
+              ?.querySelector(".citation-back-link");
+            if (backLink) backLink.setAttribute("href", `#${citationId}`);
+          });
+        }
+      }
+    }
+
+    for (const [bibId, citationIds] of bibToCitationIds.entries()) {
+      const bibEntry = document.getElementById(bibId);
+      if (!bibEntry || !citationIds.length) continue;
+
+      const targetContainer =
+        bibEntry.querySelector(".csl-right-inline") || bibEntry;
+      targetContainer.querySelector(".citation-back-link")?.remove();
+
+      const storedCitationId = getSessionItem(`citation-return:${bibId}`);
+      const returnCitationId =
+        storedCitationId && citationIds.includes(storedCitationId)
+          ? storedCitationId
+          : citationIds[0];
+
+      const backLink = document.createElement("a");
+      backLink.className = "citation-back-link";
+      backLink.href = `#${returnCitationId}`;
+      backLink.setAttribute("aria-label", "Back to citation");
+      backLink.textContent = "↩";
+      targetContainer.appendChild(backLink);
+    }
+  }
+
+  /** Renders `_aside_:` footnotes as margin notes on wide screens. */
+  function addMarginFootnotes() {
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    // Make reruns idempotent during client-side navigations.
+    article.querySelectorAll(".margin-footnote").forEach(note => note.remove());
+    article.classList.remove("has-margin-footnotes", "all-footnotes-as-margin");
+
+    const footnotesSection = article.querySelector("section[data-footnotes]");
+    if (!footnotesSection) return;
+
+    footnotesSection
+      .querySelectorAll("li.is-margin-footnote-source")
+      .forEach(node => node.classList.remove("is-margin-footnote-source"));
+
+    const footnotesById = new Map();
+    for (const footnote of Array.from(
+      footnotesSection.querySelectorAll("li[id]")
+    )) {
+      footnotesById.set(footnote.id, footnote);
+    }
+
+    let marginNotesAdded = 0;
+    const marginSourceIds = new Set();
+    const references = Array.from(
+      article.querySelectorAll("a[data-footnote-ref][href^='#']")
+    );
+
+    for (const reference of references) {
+      const footnoteId = reference.getAttribute("href")?.slice(1);
+      if (!footnoteId) continue;
+
+      const sourceFootnote = footnotesById.get(footnoteId);
+      if (!sourceFootnote) continue;
+
+      // Margin-note eligibility: definition starts with `_aside_:`.
+      const firstParagraph = sourceFootnote.querySelector("p");
+      const firstParagraphText =
+        firstParagraph?.textContent?.trim().toLowerCase() ?? "";
+      const isAsideFootnote = /^aside\s*:/.test(firstParagraphText);
+      if (!isAsideFootnote) continue;
+
+      sourceFootnote.classList.add("is-margin-footnote-source");
+      marginSourceIds.add(footnoteId);
+
+      const marginNote = document.createElement("aside");
+      marginNote.className = "margin-footnote";
+      marginNote.id = `margin-note-${footnoteId}-${marginNotesAdded + 1}`;
+
+      // Clone source content and strip navigation-only back links.
+      const contentClone = sourceFootnote.cloneNode(true);
+      contentClone
+        .querySelectorAll("a[data-footnote-backref]")
+        .forEach(backRef => backRef.remove());
+      contentClone
+        .querySelectorAll("[id]")
+        .forEach(node => node.removeAttribute("id"));
+
+      // Remove the leading `_aside_:` label in rendered margin notes.
+      const clonedFirstParagraph = contentClone.querySelector("p");
+      if (clonedFirstParagraph) {
+        const leadingElement = clonedFirstParagraph.firstElementChild;
+        if (
+          leadingElement?.tagName.toLowerCase() === "em" &&
+          leadingElement.textContent?.trim().toLowerCase() === "aside"
+        ) {
+          leadingElement.remove();
+        }
+
+        const firstTextNode = Array.from(clonedFirstParagraph.childNodes).find(
+          node => node.nodeType === Node.TEXT_NODE
+        );
+        if (firstTextNode) {
+          firstTextNode.textContent = (
+            firstTextNode.textContent ?? ""
+          ).replace(/^\s*aside\s*:\s*/i, "").replace(/^\s*:\s*/, "");
+          if (firstTextNode.textContent.trim() === "") {
+            firstTextNode.remove();
+          }
+        }
+      }
+
+      while (contentClone.firstChild) {
+        marginNote.appendChild(contentClone.firstChild);
+      }
+
+      const insertionPoint = reference.closest("sup") ?? reference;
+      insertionPoint.classList.add("is-margin-footnote-ref");
+      reference.classList.add("is-margin-footnote-ref-link");
+      reference.textContent = "^";
+      insertionPoint.insertAdjacentElement("afterend", marginNote);
+      reference.dataset.marginNoteId = marginNote.id;
+
+      if (!reference.dataset.marginNoteHooked) {
+        reference.dataset.marginNoteHooked = "true";
+        reference.addEventListener("click", event => {
+          if (!window.matchMedia("(min-width: 900px)").matches) return;
+
+          const marginNoteId = reference.dataset.marginNoteId;
+          if (!marginNoteId) return;
+
+          const linkedNote = article.querySelector(`#${marginNoteId}`);
+          if (!linkedNote) return;
+
+          event.preventDefault();
+          linkedNote.classList.add("margin-footnote-active");
+          linkedNote.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          window.setTimeout(
+            () => linkedNote.classList.remove("margin-footnote-active"),
+            800
+          );
+        });
+      }
+
+      marginNotesAdded += 1;
+    }
+
+    if (marginNotesAdded > 0) {
+      article.classList.add("has-margin-footnotes");
+      if (marginSourceIds.size === footnotesById.size) {
+        article.classList.add("all-footnotes-as-margin");
+      }
+    }
+  }
+
+  /** Converts ANSI escape sequences in notebook output cells to styled HTML. */
+  function renderAnsiCellOutput() {
+    const ANSI_16_COLORS = [
+      "#000000",
+      "#cd0000",
+      "#00cd00",
+      "#cdcd00",
+      "#0000ee",
+      "#cd00cd",
+      "#00cdcd",
+      "#e5e5e5",
+      "#7f7f7f",
+      "#ff0000",
+      "#00ff00",
+      "#ffff00",
+      "#5c5cff",
+      "#ff00ff",
+      "#00ffff",
+      "#ffffff",
+    ];
+
+    const escapeHtml = text =>
+      text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+
+    const ansi256ToCssColor = index => {
+      if (!Number.isInteger(index) || index < 0 || index > 255) return null;
+      if (index < 16) return ANSI_16_COLORS[index];
+
+      if (index >= 232) {
+        const level = 8 + (index - 232) * 10;
+        return `rgb(${level}, ${level}, ${level})`;
+      }
+
+      const colorIndex = index - 16;
+      const r = Math.floor(colorIndex / 36);
+      const g = Math.floor((colorIndex % 36) / 6);
+      const b = colorIndex % 6;
+      const toChannel = value => (value === 0 ? 0 : value * 40 + 55);
+
+      return `rgb(${toChannel(r)}, ${toChannel(g)}, ${toChannel(b)})`;
+    };
+
+    const applyAnsiCodes = (state, codeString) => {
+      const rawCodes = codeString.length > 0 ? codeString.split(";") : ["0"];
+      const codes = rawCodes.map(code => {
+        const parsedCode = Number(code);
+        return Number.isFinite(parsedCode) ? parsedCode : 0;
+      });
+
+      const resetState = () => {
+        state.fg = null;
+        state.bg = null;
+        state.bold = false;
+        state.italic = false;
+        state.underline = false;
+        state.inverse = false;
+      };
+
+      for (let index = 0; index < codes.length; index += 1) {
+        const code = codes[index];
+
+        if (code === 0) {
+          resetState();
+          continue;
+        }
+        if (code === 1) {
+          state.bold = true;
+          continue;
+        }
+        if (code === 3) {
+          state.italic = true;
+          continue;
+        }
+        if (code === 4) {
+          state.underline = true;
+          continue;
+        }
+        if (code === 7) {
+          state.inverse = true;
+          continue;
+        }
+        if (code === 22) {
+          state.bold = false;
+          continue;
+        }
+        if (code === 23) {
+          state.italic = false;
+          continue;
+        }
+        if (code === 24) {
+          state.underline = false;
+          continue;
+        }
+        if (code === 27) {
+          state.inverse = false;
+          continue;
+        }
+        if (code === 39) {
+          state.fg = null;
+          continue;
+        }
+        if (code === 49) {
+          state.bg = null;
+          continue;
+        }
+        if (code >= 30 && code <= 37) {
+          state.fg = ANSI_16_COLORS[code - 30];
+          continue;
+        }
+        if (code >= 90 && code <= 97) {
+          state.fg = ANSI_16_COLORS[code - 90 + 8];
+          continue;
+        }
+        if (code >= 40 && code <= 47) {
+          state.bg = ANSI_16_COLORS[code - 40];
+          continue;
+        }
+        if (code >= 100 && code <= 107) {
+          state.bg = ANSI_16_COLORS[code - 100 + 8];
+          continue;
+        }
+        if (code === 38 || code === 48) {
+          const isForeground = code === 38;
+          const mode = codes[index + 1];
+          if (mode === 5) {
+            const paletteIndex = codes[index + 2];
+            const color = ansi256ToCssColor(paletteIndex);
+            if (color) {
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 2;
+            continue;
+          }
+          if (mode === 2) {
+            const r = codes[index + 2];
+            const g = codes[index + 3];
+            const b = codes[index + 4];
+            if (
+              Number.isInteger(r) &&
+              Number.isInteger(g) &&
+              Number.isInteger(b) &&
+              r >= 0 &&
+              g >= 0 &&
+              b >= 0 &&
+              r <= 255 &&
+              g <= 255 &&
+              b <= 255
+            ) {
+              const color = `rgb(${r}, ${g}, ${b})`;
+              if (isForeground) {
+                state.fg = color;
+              } else {
+                state.bg = color;
+              }
+            }
+            index += 4;
+            continue;
+          }
+        }
+      }
+    };
+
+    const wrapStyledText = (text, state) => {
+      if (!text) return "";
+
+      const escapedText = escapeHtml(text);
+      let fg = state.fg;
+      let bg = state.bg;
+
+      if (state.inverse) {
+        [fg, bg] = [bg, fg];
+      }
+
+      const styles = [];
+      if (fg) styles.push(`color:${fg}`);
+      if (bg) styles.push(`background-color:${bg}`);
+      if (state.bold) styles.push("font-weight:700");
+      if (state.italic) styles.push("font-style:italic");
+      if (state.underline) styles.push("text-decoration:underline");
+
+      if (styles.length === 0) return escapedText;
+      return `<span style="${styles.join(";")}">${escapedText}</span>`;
+    };
+
+    const ansiToHtml = input => {
+      const state = {
+        fg: null,
+        bg: null,
+        bold: false,
+        italic: false,
+        underline: false,
+        inverse: false,
+      };
+
+      const ansiRegex = /\u001b\[([0-9;]*)m/g;
+      let html = "";
+      let lastIndex = 0;
+      let match = ansiRegex.exec(input);
+
+      while (match) {
+        const plainText = input.slice(lastIndex, match.index);
+        html += wrapStyledText(plainText, state);
+        applyAnsiCodes(state, match[1] ?? "");
+
+        lastIndex = ansiRegex.lastIndex;
+        match = ansiRegex.exec(input);
+      }
+
+      html += wrapStyledText(input.slice(lastIndex), state);
+      return html;
+    };
+
+    const outputCodeBlocks = document.querySelectorAll(
+      ".cell-output pre[data-language='plaintext'] code"
+    );
+
+    for (const codeBlock of outputCodeBlocks) {
+      if (!(codeBlock instanceof HTMLElement)) continue;
+
+      const lineNodes = codeBlock.querySelectorAll(".line, .ec-line .code");
+      const targets =
+        lineNodes.length > 0 ? Array.from(lineNodes) : [codeBlock];
+
+      for (const target of targets) {
+        if (!(target instanceof HTMLElement)) continue;
+        if (target.dataset.ansiParsed === "true") continue;
+
+        const rawText = target.textContent ?? "";
+        if (!rawText.includes("\u001b[")) continue;
+
+        target.innerHTML = ansiToHtml(rawText);
+        target.dataset.ansiParsed = "true";
+      }
+    }
+  }
+
+  function setupGiscus() {
+    const giscusContainer = document.querySelector(".giscus");
+    if (!(giscusContainer instanceof HTMLElement)) return;
+    if (giscusContainer.dataset.giscusInitialized === "true") return;
+
+    const giscusScript = document.createElement("script");
+    giscusScript.src = "https://giscus.app/client.js";
+    giscusScript.setAttribute("data-repo", "kdheepak/kdheepak.github.io");
+    giscusScript.setAttribute(
+      "data-repo-id",
+      "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA=="
+    );
+    giscusScript.setAttribute("data-category", "Comments");
+    giscusScript.setAttribute("data-category-id", "DIC_kwDOAw1l5M4CU810");
+    giscusScript.setAttribute("data-mapping", "pathname");
+    giscusScript.setAttribute("data-strict", "0");
+    giscusScript.setAttribute("data-reactions-enabled", "1");
+    giscusScript.setAttribute("data-emit-metadata", "0");
+    giscusScript.setAttribute("data-input-position", "bottom");
+    giscusScript.setAttribute("data-theme", "light");
+    giscusScript.setAttribute("data-lang", "en");
+    giscusScript.setAttribute("data-loading", "lazy");
+    giscusScript.crossOrigin = "anonymous";
+    giscusScript.async = true;
+
+    giscusContainer.appendChild(giscusScript);
+    giscusContainer.dataset.giscusInitialized = "true";
+  }
+
+  function initializePostPage() {
+    const article = document.getElementById("article");
+    if (!(article instanceof HTMLElement)) return;
+    if (article.dataset.postEnhancementsInitialized === "true") return;
+    article.dataset.postEnhancementsInitialized = "true";
+
+    createProgressBar();
+    updateScrollProgress();
+    setupDockingToc();
+
+    try {
+      linkifyReferenceUrls();
+      addCitationBackLinks();
+    } catch {
+      // Keep the rest of post enhancements working even if citation linking fails.
+    }
+
+    addMarginFootnotes();
+    renderAnsiCellOutput();
+    setupGiscus();
+  }
+
+  initializePostPage();
+  document.addEventListener("astro:page-load", initializePostPage, { once: true });
+
+  /* Go to page start after page swap unless navigating to a hash target. */
+  if (!window.__kdPostAfterSwapScrollHooked) {
+    document.addEventListener("astro:after-swap", () => {
+      if (!document.getElementById("article")) return;
+
+      const hash = window.location.hash;
+      if (!hash || hash === "#") {
+        window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+        return;
+      }
+
+      const targetId = decodeURIComponent(hash.slice(1));
+      const targetElement = document.getElementById(targetId);
+      if (!targetElement) return;
+
+      requestAnimationFrame(() => {
+        targetElement.scrollIntoView({ block: "start", inline: "nearest" });
+      });
+    });
+    window.__kdPostAfterSwapScrollHooked = true;
+  }
+</script>
