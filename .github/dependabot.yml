@@ -4,10 +4,29 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - "*"
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
     groups:
       npm-dependencies:
-        patterns: ["*"]
+        patterns:
+          - "*"
+  - package-ecosystem: "uv"
+    directories:
+      - "/src/data/blog/building-dashboards-using-param-and-panel-in-python"
+      - "/src/data/blog/ibis-better-pandas"
+      - "/src/data/blog/ibis-power-lines"
+      - "/src/data/blog/jupyter-prelude"
+      - "/src/data/blog/pandas-vs-polars-vs-ibis"
+      - "/src/data/blog/understanding-the-param-library-in-python"
+    schedule:
+      interval: "weekly"
+    groups:
+      uv-dependencies:
+        patterns:
+          - "*"
