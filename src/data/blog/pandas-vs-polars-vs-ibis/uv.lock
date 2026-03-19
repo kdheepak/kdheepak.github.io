@@ -695,7 +695,7 @@ wheels = [
 
 [[package]]
 name = "ipydatagrid"
-version = "1.3.2"
+version = "1.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "bqplot" },
@@ -703,14 +703,14 @@ dependencies = [
     { name = "pandas" },
     { name = "py2vega" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6b/0d/3d5a8237948b996c54f213a8e7994daed6b2e5b8715610363cb85a3d0235/ipydatagrid-1.3.2.tar.gz", hash = "sha256:a6c10d420f46b7ba696c1cfccb690c77b81c28b37a13df8c6c03547c4cbef29a", size = 7093414, upload-time = "2024-05-22T11:24:07.28Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/91/38/9e8e4dafba7d3f63c2fbee2d0d661420d354ce5962ebbcfd02e54f987ee6/ipydatagrid-1.4.0.tar.gz", hash = "sha256:210fc57e595a618d76c0cb28d34b1ef9716e10c64c9c5955e07e6d10aaaa12ee", size = 7110381, upload-time = "2024-12-17T07:41:07.369Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/36/de3566f8a2140d403e66cd2d96dbbd6b425157473166a7ab295a0d217764/ipydatagrid-1.3.2-py3-none-any.whl", hash = "sha256:d557e1f037d6d46f2d4df899b57de8045aa1e1950e150e9e0146a8add90e6c2f", size = 1926874, upload-time = "2024-05-22T11:24:04.802Z" },
+    { url = "https://files.pythonhosted.org/packages/ac/21/8b81f5368120ff44b11dcdf2517fc0c2cbefda61893c4f9049c2ee838c98/ipydatagrid-1.4.0-py3-none-any.whl", hash = "sha256:1d1d1804df8ca6f07dea8e8f5e0fd9f0010af1d91f1705778f19f4d94c110fcf", size = 1938788, upload-time = "2024-12-17T07:41:04.827Z" },
 ]
 
 [[package]]
 name = "ipykernel"
-version = "6.29.5"
+version = "7.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "appnope", marker = "sys_platform == 'darwin'" },
@@ -727,9 +727,9 @@ dependencies = [
     { name = "tornado" },
     { name = "traitlets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e9/5c/67594cb0c7055dc50814b21731c22a601101ea3b1b50a9a1b090e11f5d0f/ipykernel-6.29.5.tar.gz", hash = "sha256:f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215", size = 163367, upload-time = "2024-07-01T14:07:22.543Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ca/8d/b68b728e2d06b9e0051019640a40a9eb7a88fcd82c2e1b5ce70bef5ff044/ipykernel-7.2.0.tar.gz", hash = "sha256:18ed160b6dee2cbb16e5f3575858bc19d8f1fe6046a9a680c708494ce31d909e", size = 176046, upload-time = "2026-02-06T16:43:27.403Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/5c/368ae6c01c7628438358e6d337c19b05425727fbb221d2a3c4303c372f42/ipykernel-6.29.5-py3-none-any.whl", hash = "sha256:afdb66ba5aa354b09b91379bac28ae4afebbb30e8b39510c9690afb7a10421b5", size = 117173, upload-time = "2024-07-01T14:07:19.603Z" },
+    { url = "https://files.pythonhosted.org/packages/82/b9/e73d5d9f405cba7706c539aa8b311b49d4c2f3d698d9c12f815231169c71/ipykernel-7.2.0-py3-none-any.whl", hash = "sha256:3bbd4420d2b3cc105cbdf3756bfc04500b1e52f090a90716851f3916c62e1661", size = 118788, upload-time = "2026-02-06T16:43:25.149Z" },
 ]
 
 [[package]]
@@ -782,16 +782,11 @@ wheels = [
 
 [[package]]
 name = "itables"
-version = "2.1.4"
+version = "2.7.1"
 source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "ipython" },
-    { name = "numpy" },
-    { name = "pandas" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/7a/6a/a823fffceb98cc1ab251cea977078e76ab569c73e7e90637a35e3e63aa9e/itables-2.1.4.tar.gz", hash = "sha256:60f4246f85bf6f849fd7778a11ae10f04566c877d72433c22724e5c2316b2af6", size = 2214617, upload-time = "2024-07-03T22:31:06.498Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/53/ef/fcdf0560e9a740c730d5164ded0fed7a76cd4cacf736c8e9c17a1b171207/itables-2.7.1.tar.gz", hash = "sha256:67f375e773ddf748da2ec2250fd21a242aaa63835b4ebe816840be01bcfa98e8", size = 2427429, upload-time = "2026-03-08T12:13:50.739Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/06/07/dc00f79a1f09165abf5fea16ff58b235f480d53d1c1a9024e3b03357b70a/itables-2.1.4-py3-none-any.whl", hash = "sha256:b95fa578a657a09545e51d220ef6d9fc75c8533f516f75576665df94cd981238", size = 1193699, upload-time = "2024-07-03T22:31:01.996Z" },
+    { url = "https://files.pythonhosted.org/packages/2c/d6/e716e105fa915f25d156bcfdd4213f503290d4183afa507dc0c76570eeca/itables-2.7.1-py3-none-any.whl", hash = "sha256:4537c185bf2e2d08d5841a956bc8875d86721852a086edfbe94bf7550521c21f", size = 2462135, upload-time = "2026-03-08T12:13:48.548Z" },
 ]
 
 [[package]]
@@ -903,7 +898,7 @@ wheels = [
 
 [[package]]
 name = "jupyter-client"
-version = "8.6.2"
+version = "8.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jupyter-core" },
@@ -912,9 +907,9 @@ dependencies = [
     { name = "tornado" },
     { name = "traitlets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ff/61/3cd51dea7878691919adc34ff6ad180f13bfe25fb8c7662a9ee6dc64e643/jupyter_client-8.6.2.tar.gz", hash = "sha256:2bda14d55ee5ba58552a8c53ae43d215ad9868853489213f37da060ced54d8df", size = 341102, upload-time = "2024-05-23T01:28:04.312Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/05/e4/ba649102a3bc3fbca54e7239fb924fd434c766f855693d86de0b1f2bec81/jupyter_client-8.8.0.tar.gz", hash = "sha256:d556811419a4f2d96c869af34e854e3f059b7cc2d6d01a9cd9c85c267691be3e", size = 348020, upload-time = "2026-01-08T13:55:47.938Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cf/d3/c4bb02580bc0db807edb9a29b2d0c56031be1ef0d804336deb2699a470f6/jupyter_client-8.6.2-py3-none-any.whl", hash = "sha256:50cbc5c66fd1b8f65ecb66bc490ab73217993632809b6e505687de18e9dea39f", size = 105901, upload-time = "2024-05-23T01:28:00.817Z" },
+    { url = "https://files.pythonhosted.org/packages/2d/0b/ceb7694d864abc0a047649aec263878acb9f792e1fec3e676f22dc9015e3/jupyter_client-8.8.0-py3-none-any.whl", hash = "sha256:f93a5b99c5e23a507b773d3a1136bd6e16c67883ccdbd9a829b0bbdb98cd7d7a", size = 107371, upload-time = "2026-01-08T13:55:45.562Z" },
 ]
 
 [[package]]
