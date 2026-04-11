@@ -664,38 +664,37 @@ wheels = [
 
 [[package]]
 name = "ibis-framework"
-version = "9.4.0"
+version = "12.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "atpublic" },
     { name = "parsy" },
     { name = "python-dateutil" },
-    { name = "pytz" },
     { name = "sqlglot" },
     { name = "toolz" },
     { name = "typing-extensions" },
+    { name = "tzdata" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/cf/38/30a65a278094aa40ec97484d28c9778b01cb80e9c0bef14ebda406207ad7/ibis_framework-9.4.0.tar.gz", hash = "sha256:ed679c4360613c69cb3cdc269d889e3e89095aede80efb1c5bd9657f02224e14", size = 1262213, upload-time = "2024-09-03T20:05:00.835Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f2/8e/2e7ad9bdeaf45350da7beeb67a0d4317d400dac882825eb7c3bd4d3c6ae1/ibis_framework-12.0.0.tar.gz", hash = "sha256:238624f2c14fdab8382ca2f4f667c3cdb81e29844cd5f8db8a325d0743767c61", size = 1351369, upload-time = "2026-02-07T14:31:13.171Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c2/27/625b85750662d764024f5faa23e5b2b0ef3eb1fde745bf3dbe34c1181861/ibis_framework-9.4.0-py3-none-any.whl", hash = "sha256:0de6f5246c25d38873ef5bcd0cc6879ba0f6ac6696103036be7d988b400107be", size = 1949351, upload-time = "2024-09-03T20:04:58.987Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/b3/11d406849715b47c9d69bb22f50874f80caee96bd1cbe7b61abbebbf5a05/ibis_framework-12.0.0-py3-none-any.whl", hash = "sha256:0bbd790f268da9cb87926d5eaad2b827a573927113c4ed3be5095efa89b9e512", size = 2079219, upload-time = "2026-02-07T14:31:10.646Z" },
 ]
 
 [package.optional-dependencies]
 duckdb = [
     { name = "duckdb" },
     { name = "numpy" },
+    { name = "packaging" },
     { name = "pandas" },
     { name = "pyarrow" },
     { name = "pyarrow-hotfix" },
     { name = "rich" },
 ]
 examples = [
-    { name = "fsspec" },
     { name = "pins", extra = ["gcs"] },
 ]
 polars = [
     { name = "numpy" },
-    { name = "packaging" },
     { name = "pandas" },
     { name = "polars" },
     { name = "pyarrow" },
@@ -1393,7 +1392,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ibis-framework", extras = ["duckdb", "examples", "polars"], specifier = ">=9.3.0" },
+    { name = "ibis-framework", extras = ["duckdb", "examples", "polars"], specifier = ">=12.0.0" },
     { name = "ipydatagrid", specifier = ">=1.3.2" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "itables", specifier = ">=2.1.4" },

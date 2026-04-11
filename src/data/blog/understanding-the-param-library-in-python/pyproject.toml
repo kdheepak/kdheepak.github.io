@@ -6,5 +6,5 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "ipykernel>=6.29.5",
-    "param>=2.2.0",
+    "param>=2.3.3",
 ]

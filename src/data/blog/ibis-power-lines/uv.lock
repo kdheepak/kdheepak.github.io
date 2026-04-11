@@ -420,20 +420,20 @@ wheels = [
 
 [[package]]
 name = "ibis-framework"
-version = "9.5.0"
+version = "12.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "atpublic" },
     { name = "parsy" },
     { name = "python-dateutil" },
-    { name = "pytz" },
     { name = "sqlglot" },
     { name = "toolz" },
     { name = "typing-extensions" },
+    { name = "tzdata" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/32/86/31c9a61eb2c9c7ffe8959ff8c3e4a5d2e15d8e896e7562ba7796abeb5af9/ibis_framework-9.5.0.tar.gz", hash = "sha256:1c8a29277e63ee0dfc289bc8f550164b5e3bdaec1b76b62436c37d331bb4ef84", size = 1270088, upload-time = "2024-09-11T20:57:51.338Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f2/8e/2e7ad9bdeaf45350da7beeb67a0d4317d400dac882825eb7c3bd4d3c6ae1/ibis_framework-12.0.0.tar.gz", hash = "sha256:238624f2c14fdab8382ca2f4f667c3cdb81e29844cd5f8db8a325d0743767c61", size = 1351369, upload-time = "2026-02-07T14:31:13.171Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dd/a9/899888a3b49ee07856a0bab673652a82ea89999451a51fba4d99e65868f7/ibis_framework-9.5.0-py3-none-any.whl", hash = "sha256:145fe30d94f111cff332580c275ce77725c5ff7086eede93af0b371649d009c0", size = 1964985, upload-time = "2024-09-11T20:57:49.513Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/b3/11d406849715b47c9d69bb22f50874f80caee96bd1cbe7b61abbebbf5a05/ibis_framework-12.0.0-py3-none-any.whl", hash = "sha256:0bbd790f268da9cb87926d5eaad2b827a573927113c4ed3be5095efa89b9e512", size = 2079219, upload-time = "2026-02-07T14:31:10.646Z" },
 ]
 
 [package.optional-dependencies]
@@ -470,7 +470,7 @@ dependencies = [
 requires-dist = [
     { name = "folium", specifier = ">=0.18.0" },
     { name = "geopandas", specifier = ">=1.0.1" },
-    { name = "ibis-framework", extras = ["duckdb", "geospatial"], specifier = ">=9.5.0" },
+    { name = "ibis-framework", extras = ["duckdb", "geospatial"], specifier = ">=12.0.0" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "python-localvenv-kernel", specifier = ">=0.1.7" },
