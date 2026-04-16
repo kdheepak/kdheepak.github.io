@@ -59,7 +59,7 @@ mpl.use("agg")
 
 # `constrained_layout` helps avoid overlapping elements
 # Refer to https://matplotlib.org/stable/tutorials/intermediate/constrainedlayout_guide.html
-mpl.pyplot.rcParams['figure.constrained_layout.use'] = True
+mpl.rcParams["figure.constrained_layout.use"] = True
 
 # helper function to create a grid layout for subplots
 def make_grid(labels=None, ncols=None, nrows=None, placeholder="."):
