@@ -9,5 +9,5 @@ dependencies = [
     "jupyter>=1.0.0",
     "ipykernel>=6.29.5",
     "ipydatagrid>=1.3.2",
-    "itables>=2.1.4",
+    "itables>=2.8.0",
 ]
