@@ -9,16 +9,16 @@ keywords: mermaid, js, pandoc, lua, filter
 
 :::callout-note
 
-Quarto supports native MermaidJS integration, so I've decided to use that instead.
-You can use the filter from here:
+Quarto supports native MermaidJS integration, so I've decided to use that
+instead. You can use the filter from here:
 <https://github.com/kdheepak/blog/blob/61d1186313f3eb73ac51968a4bd5d051d822da37/pandoc/render.lua>.
 
 :::
 
 GitHub recently announced
-[support for MermaidJS](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/). I
-thought it would be nice to integrate it as part of my blog using Pandoc lua filters. So the
-following:
+[support for MermaidJS](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/).
+I thought it would be nice to integrate it as part of my blog using Pandoc lua
+filters. So the following:
 
 ````
 ```mermaid

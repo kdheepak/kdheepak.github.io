@@ -68,10 +68,7 @@ const searchButtonClass =
       id="nav-menu"
       class="pointer-events-auto absolute left-1/2 -translate-x-1/2"
     >
-      <ul
-        id="menu-items"
-        class="flex items-center gap-2 sm:gap-3"
-      >
+      <ul id="menu-items" class="flex items-center gap-2 sm:gap-3">
         <li class="flex items-center justify-center">
           <LinkButton
             href="/blog/"
@@ -149,10 +146,7 @@ const searchButtonClass =
         title="Search"
         aria-label="search"
         aria-current={isSearchPage ? "page" : undefined}
-        class:list={[
-          searchButtonClass,
-          { [activeNavLinkClass]: isSearchPage },
-        ]}
+        class:list={[searchButtonClass, { [activeNavLinkClass]: isSearchPage }]}
       >
         <Icon
           name="tabler:search"

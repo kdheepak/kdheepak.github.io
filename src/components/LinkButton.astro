@@ -10,10 +10,7 @@ const { disabled, reload = false, class: className, ...attrs } = Astro.props;
   disabled ? (
     <span
       aria-disabled
-      class:list={[
-        "group inline-flex items-center gap-1",
-        className,
-      ]}
+      class:list={["group inline-flex items-center gap-1", className]}
     >
       <slot />
     </span>

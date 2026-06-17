@@ -20,10 +20,7 @@ const getClassNames = node => {
   }
 
   if (typeof className === "string") {
-    return className
-      .split(/\s+/)
-      .map(normalizeClassName)
-      .filter(Boolean);
+    return className.split(/\s+/).map(normalizeClassName).filter(Boolean);
   }
 
   return [];
@@ -31,7 +28,7 @@ const getClassNames = node => {
 
 const hasSvgbobLanguage = node =>
   getClassNames(node).some(className =>
-    SVGBOB_LANGUAGE_CLASS_NAMES.has(className)
+    SVGBOB_LANGUAGE_CLASS_NAMES.has(className),
   );
 
 const extractText = node => {
@@ -79,7 +76,7 @@ const transformChildren = async (parent, transformWithSvgbob) => {
       const codeNode =
         Array.isArray(child.children) &&
         child.children.find(
-          node => node?.type === "element" && node.tagName === "code"
+          node => node?.type === "element" && node.tagName === "code",
         );
 
       if (codeNode && hasSvgbobLanguage(codeNode)) {

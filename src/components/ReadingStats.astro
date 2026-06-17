@@ -41,7 +41,8 @@ const formattedWordCount = new Intl.NumberFormat("en-US").format(wordCount);
       ]}
     />
     <span>
-      {minutes} min read ({formattedWordCount} {wordCount === 1 ? "word" : "words"})
+      {minutes} min read ({formattedWordCount}
+      {wordCount === 1 ? "word" : "words"})
     </span>
   </span>
 </div>

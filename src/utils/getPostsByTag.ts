@@ -5,7 +5,7 @@ import getPostTags from "./getPostTags";
 
 const getPostsByTag = (posts: CollectionEntry<"blog">[], tag: string) =>
   getSortedPosts(
-    posts.filter(post => slugifyAll(getPostTags(post)).includes(tag))
+    posts.filter(post => slugifyAll(getPostTags(post)).includes(tag)),
   );
 
 export default getPostsByTag;

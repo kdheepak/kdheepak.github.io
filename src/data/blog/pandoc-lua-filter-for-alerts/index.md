@@ -7,8 +7,8 @@ tags:
 keywords: pandoc, lua, filter
 ---
 
-This is the example output of the markdown containing alert divs in pandoc. The unicode icons are
-inserted into the HTML using a pandoc lua filter.
+This is the example output of the markdown containing alert divs in pandoc. The
+unicode icons are inserted into the HTML using a pandoc lua filter.
 
 ::: callout
 

@@ -1,34 +1,61 @@
 {
   "links": [
-    { "url": "https://www.youtube.com/watch?v=Ul8r0Thgx44", "status": "You Won" },
-    { "url": "https://www.youtube.com/watch?v=CPb168NUwGc", "status": "You Drew / Lost" }
+    {
+      "url": "https://www.youtube.com/watch?v=Ul8r0Thgx44",
+      "status": "You Won"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=CPb168NUwGc",
+      "status": "You Drew / Lost"
+    }
   ],
   "url": "https://www.youtube.com/watch?v=PmWQmZXYd74",
   "children": [
     {
       "links": [
-        { "url": "https://www.youtube.com/watch?v=_mrAeT9kpPM", "status": "WIN" },
-        { "url": "https://www.youtube.com/watch?v=fWOtjGJvlGI", "status": "LOSE / DRAW" }
+        {
+          "url": "https://www.youtube.com/watch?v=_mrAeT9kpPM",
+          "status": "WIN"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=fWOtjGJvlGI",
+          "status": "LOSE / DRAW"
+        }
       ],
       "url": "https://www.youtube.com/watch?v=Ul8r0Thgx44",
       "children": [
         {
           "links": [
-            { "url": "https://www.youtube.com/watch?v=hoaLwPc571E", "status": "WIN" },
-            { "url": "https://www.youtube.com/watch?v=r9-jSTCiHd0", "status": "LOSE / DRAW" }
+            {
+              "url": "https://www.youtube.com/watch?v=hoaLwPc571E",
+              "status": "WIN"
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=r9-jSTCiHd0",
+              "status": "LOSE / DRAW"
+            }
           ],
           "url": "https://www.youtube.com/watch?v=_mrAeT9kpPM",
           "children": [
             {
               "links": [
-                { "url": "https://www.youtube.com/watch?v=z8zjvT8Qx8U", "status": "WIN" },
-                { "url": "https://www.youtube.com/watch?v=qYaLoO40kjM", "status": "LOSE / DRAW" }
+                {
+                  "url": "https://www.youtube.com/watch?v=z8zjvT8Qx8U",
+                  "status": "WIN"
+                },
+                {
+                  "url": "https://www.youtube.com/watch?v=qYaLoO40kjM",
+                  "status": "LOSE / DRAW"
+                }
               ],
               "url": "https://www.youtube.com/watch?v=hoaLwPc571E",
               "children": [
                 {
                   "links": [
-                    { "url": "https://www.youtube.com/watch?v=uHoYnV9JX4w", "status": "WIN" },
+                    {
+                      "url": "https://www.youtube.com/watch?v=uHoYnV9JX4w",
+                      "status": "WIN"
+                    },
                     {
                       "url": "https://www.youtube.com/watch?v=qYaLoO40kjM",
                       "status": "LOSE / DRAW"
@@ -38,7 +65,10 @@
                   "children": [
                     {
                       "links": [
-                        { "url": "https://www.youtube.com/watch?v=jRDLtKUsq8U", "status": "WIN" },
+                        {
+                          "url": "https://www.youtube.com/watch?v=jRDLtKUsq8U",
+                          "status": "WIN"
+                        },
                         {
                           "url": "https://www.youtube.com/watch?v=qYaLoO40kjM",
                           "status": "LOSE / DRAW"
@@ -1222,8 +1252,14 @@
             },
             {
               "links": [
-                { "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI", "status": "WIN" },
-                { "url": "https://www.youtube.com/watch?v=0odtRIBvjes", "status": "LOSE / DRAW" }
+                {
+                  "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI",
+                  "status": "WIN"
+                },
+                {
+                  "url": "https://www.youtube.com/watch?v=0odtRIBvjes",
+                  "status": "LOSE / DRAW"
+                }
               ],
               "url": "https://www.youtube.com/watch?v=r9-jSTCiHd0",
               "children": [],
@@ -1240,8 +1276,14 @@
         },
         {
           "links": [
-            { "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI", "status": "WIN" },
-            { "url": "https://www.youtube.com/watch?v=0odtRIBvjes", "status": "LOSE / DRAW" }
+            {
+              "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI",
+              "status": "WIN"
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=0odtRIBvjes",
+              "status": "LOSE / DRAW"
+            }
           ],
           "url": "https://www.youtube.com/watch?v=fWOtjGJvlGI",
           "children": [],
@@ -1258,28 +1300,49 @@
     },
     {
       "links": [
-        { "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI", "status": "WIN" },
-        { "url": "https://www.youtube.com/watch?v=jDQqv3zkbIQ", "status": "LOSE / DRAW" }
+        {
+          "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI",
+          "status": "WIN"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=jDQqv3zkbIQ",
+          "status": "LOSE / DRAW"
+        }
       ],
       "url": "https://www.youtube.com/watch?v=CPb168NUwGc",
       "children": [
         {
           "links": [
-            { "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI", "status": "WIN" },
-            { "url": "https://www.youtube.com/watch?v=HXtheRKAkIw", "status": "LOSE / DRAW" }
+            {
+              "url": "https://www.youtube.com/watch?v=RVLUX6BUEJI",
+              "status": "WIN"
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=HXtheRKAkIw",
+              "status": "LOSE / DRAW"
+            }
           ],
           "url": "https://www.youtube.com/watch?v=jDQqv3zkbIQ",
           "children": [
             {
               "links": [
-                { "url": "https://www.youtube.com/watch?v=b41_jrE8jFw", "status": "WIN" },
-                { "url": "https://www.youtube.com/watch?v=3qoxLsQ9464", "status": "LOSE / DRAW" }
+                {
+                  "url": "https://www.youtube.com/watch?v=b41_jrE8jFw",
+                  "status": "WIN"
+                },
+                {
+                  "url": "https://www.youtube.com/watch?v=3qoxLsQ9464",
+                  "status": "LOSE / DRAW"
+                }
               ],
               "url": "https://www.youtube.com/watch?v=HXtheRKAkIw",
               "children": [
                 {
                   "links": [
-                    { "url": "https://www.youtube.com/watch?v=b41_jrE8jFw", "status": "WIN" },
+                    {
+                      "url": "https://www.youtube.com/watch?v=b41_jrE8jFw",
+                      "status": "WIN"
+                    },
                     {
                       "url": "https://www.youtube.com/watch?v=xjo-L59q8K4",
                       "status": "LOSE / DRAW"
@@ -1289,7 +1352,10 @@
                   "children": [
                     {
                       "links": [
-                        { "url": "https://www.youtube.com/watch?v=b41_jrE8jFw", "status": "WIN" },
+                        {
+                          "url": "https://www.youtube.com/watch?v=b41_jrE8jFw",
+                          "status": "WIN"
+                        },
                         {
                           "url": "https://www.youtube.com/watch?v=dzK444eg53c",
                           "status": "LOSE / DRAW"

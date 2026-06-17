@@ -35,7 +35,9 @@ const contactIconClass =
         "grid gap-5 sm:gap-6 md:grid-cols-[1fr_auto] md:items-center md:gap-10",
       ]}
     >
-      <picture class="order-1 mx-auto block md:order-2 md:mx-0 md:justify-self-end">
+      <picture
+        class="order-1 mx-auto block md:order-2 md:mx-0 md:justify-self-end"
+      >
         <img
           src="https://avatars.githubusercontent.com/u/1813121?v=4"
           alt="Dheepak Krishnamurthy"
@@ -66,12 +68,13 @@ const contactIconClass =
         </p>
 
         <p class="mt-4 max-w-prose leading-relaxed text-pretty">
-          I have experience running energy system models and simulations, such as
-          transmission production cost models and power distribution system analyses,
-          and have developed bespoke models for energy system analysis. I'm
-          proficient with Python, Julia, Rust, and Javascript, and am well versed in
-          scientific data analysis and extract-transform-load workflows. I also enjoy
-          working on open source projects and learning new things.
+          I have experience running energy system models and simulations, such
+          as transmission production cost models and power distribution system
+          analyses, and have developed bespoke models for energy system
+          analysis. I'm proficient with Python, Julia, Rust, and Javascript, and
+          am well versed in scientific data analysis and extract-transform-load
+          workflows. I also enjoy working on open source projects and learning
+          new things.
         </p>
       </div>
     </section>
@@ -95,7 +98,11 @@ const contactIconClass =
                   class={contactLinkClass}
                   title={social.linkTitle}
                 >
-                  <Icon class={contactIconClass} name={social.icon} aria-hidden="true" />
+                  <Icon
+                    class={contactIconClass}
+                    name={social.icon}
+                    aria-hidden="true"
+                  />
                   Email
                 </ObfuscatedEmail>
               </li>
@@ -106,7 +113,11 @@ const contactIconClass =
                   href={social.href}
                   title={social.linkTitle}
                 >
-                  <Icon class={contactIconClass} name={social.icon} aria-hidden="true" />
+                  <Icon
+                    class={contactIconClass}
+                    name={social.icon}
+                    aria-hidden="true"
+                  />
                   {social.name}
                 </a>
               </li>

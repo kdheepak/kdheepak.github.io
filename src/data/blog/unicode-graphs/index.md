@@ -8,8 +8,8 @@ tags:
 keywords: unicode, terminal, graphs
 ---
 
-If you've used `lazygit` or `tig`, you've probably seen graphs used to represent commit history in
-the terminal. Here's an example from `tig`:
+If you've used `lazygit` or `tig`, you've probably seen graphs used to represent
+commit history in the terminal. Here's an example from `tig`:
 
 ```plaintext
 ●─╮ build(deps): bump actions/checkout from 2 to 4 (#569)
@@ -25,11 +25,11 @@ the terminal. Here's an example from `tig`:
 ∙─┴─┴─┴─┴─╯ chore: Add dependabot.yml
 ```
 
-In this post, I'll explore a few different styles of graphs that can be used in terminal
-applications.
+In this post, I'll explore a few different styles of graphs that can be used in
+terminal applications.
 
-I'm going to use the convention used by graphviz to represent graphs in text form. For example, the
-following text represents a directed graph:
+I'm going to use the convention used by graphviz to represent graphs in text
+form. For example, the following text represents a directed graph:
 
 ```{dot}
 //| label: fig-simple
@@ -47,6 +47,6 @@ digraph G {
 
 ## Ascii Style vs Unicode Style
 
-The most basic style is the ascii style, which uses characters like `|`, `-`, `+`, and `*` to
-represent the graph. This style is simple and widely supported, however, for most fonts, it can look
-blocky and less visually appealing.
+The most basic style is the ascii style, which uses characters like `|`, `-`,
+`+`, and `*` to represent the graph. This style is simple and widely supported,
+however, for most fonts, it can look blocky and less visually appealing.

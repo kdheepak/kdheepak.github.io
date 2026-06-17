@@ -9,7 +9,7 @@ notebookPath: "src/data/blog/using-tikz-with-pandoc/index.ipynb"
 
 This is a demo of integrating Tikz as part of the blog.
 
-``` tikz
+```tikz
 \begin{tikzpicture}
 
 \def \n {5}
@@ -26,10 +26,11 @@ This is a demo of integrating Tikz as part of the blog.
 ```
 
 :::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 using Markdown
 using TikzPictures
 tp = TikzPicture(L"""
@@ -50,14 +51,10 @@ md"""![](./test.svg)"""
 
 </details>
 
-:::div{.cell-output .cell-output-display}
-    [ Info: Precompiling TikzPictures [37f6aa50-8035-52d0-81c2-5a1d08754b2d]
-    [ Info: Precompiling Poppler_jll [9c32591e-4766-534b-9725-b71a8799265b]
-    ┌ Warning: test.svg already exists, overwriting!
-    └ @ TikzPictures ~/.julia/packages/TikzPictures/9WzZq/src/TikzPictures.jl:432
-:::
+:::div{.cell-output .cell-output-display} [ Info: Precompiling TikzPictures
+[37f6aa50-8035-52d0-81c2-5a1d08754b2d] [ Info: Precompiling Poppler_jll
+[9c32591e-4766-534b-9725-b71a8799265b] ┌ Warning: test.svg already exists,
+overwriting! └ @ TikzPictures
+~/.julia/packages/TikzPictures/9WzZq/src/TikzPictures.jl:432 :::
 
-:::div{.cell-output .cell-output-display}
-![](./test.svg)
-:::
-:::::
+:::div{.cell-output .cell-output-display} ![](./test.svg) ::: :::::

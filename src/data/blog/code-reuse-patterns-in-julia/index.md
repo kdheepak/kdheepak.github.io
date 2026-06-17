@@ -1,7 +1,9 @@
 ---
 title: "Code Reuse Patterns in Python, Rust and Julia: Part 1"
 date: 2023-08-19T20:12:13-05:00
-description: comparison of inheritance, composition, and delegation across Python, Rust, and Julia.
+description:
+  comparison of inheritance, composition, and delegation across Python, Rust,
+  and Julia.
 draft: true
 tags:
   - python
@@ -40,8 +42,9 @@ In Julia, we can use a `struct` and the `@kwdef` macro
 
 :::
 
-One of the most common ways to make data re-usable in Python is by using classes and inheritance.
-However, Julia doesn't support inheritance and requires the use of composition and delegation.
+One of the most common ways to make data re-usable in Python is by using classes
+and inheritance. However, Julia doesn't support inheritance and requires the use
+of composition and delegation.
 
 :::div{.panel-tabset group="language"}
 
@@ -77,9 +80,9 @@ end
 
 :::
 
-The `BlinkingTrafficLight` struct in Julia is using composition by containing a `TrafficLight`
-within it and is using delegation by forwarding requests for the color property to its internal
-`TrafficLight` object.
+The `BlinkingTrafficLight` struct in Julia is using composition by containing a
+`TrafficLight` within it and is using delegation by forwarding requests for the
+color property to its internal `TrafficLight` object.
 
 :::div{.panel-tabset group="language"}
 

@@ -59,7 +59,7 @@ import { Icon } from "astro-icon/components";
 
       progressIndicator.style.setProperty(
         "background-image",
-        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`,
       );
 
       const visibleByPixels = scrollTop >= 220;

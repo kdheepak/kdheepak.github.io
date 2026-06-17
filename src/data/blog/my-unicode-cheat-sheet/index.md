@@ -12,8 +12,8 @@ keywords: python, julia, vim, rust, unicode
 references:
   - id: joelonsoftware
     title:
-      The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode
-      and Character Sets (No Excuses!)
+      The Absolute Minimum Every Software Developer Absolutely, Positively Must
+      Know About Unicode and Character Sets (No Excuses!)
     URL: https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/
   - id: hsivonen
     title: It’s Not Wrong that "🤦🏼‍♂️".length == 7
@@ -43,24 +43,26 @@ noCite:
   - "@blist"
 ---
 
-I wanted to make a cheat sheet for myself containing a reference of things I use when it comes to
-Unicode and when using Unicode in Vim, Python, Julia and Rust.
+I wanted to make a cheat sheet for myself containing a reference of things I use
+when it comes to Unicode and when using Unicode in Vim, Python, Julia and Rust.
 
 First some basics:
 
-1. Unicode Code Points[^unicode-code-point] are unique mappings from
-   hexadecimal integers to an abstract character, concept or graphical representation. These
-   graphical representations may look visually similar but can represent different "ideas". For
-   example: A, Α, А, Ａ are all different Unicode code points.
+1. Unicode Code Points[^unicode-code-point] are unique mappings from hexadecimal
+   integers to an abstract character, concept or graphical representation. These
+   graphical representations may look visually similar but can represent
+   different "ideas". For example: A, Α, А, Ａ are all different Unicode code
+   points.
    - A : U+0041 LATIN CAPITAL LETTER A
    - Α : U+0391 GREEK CAPITAL LETTER ALPHA
    - А : U+0410 CYRILLIC CAPITAL LETTER A
    - Ａ : U+FF21 FULLWIDTH LATIN CAPITAL LETTER A
 
    The Unicode consortium defines a Grapheme[^unicode-grapheme] as a "What a
-   user thinks of as a character". Multiple code points may be used to represent a grapheme. For
-   example, my name in Devangari and Tamil can be written as 3 graphemes, but it consists of 4 and 5
-   code points respectively in these languages:
+   user thinks of as a character". Multiple code points may be used to represent
+   a grapheme. For example, my name in Devangari and Tamil can be written as 3
+   graphemes, but it consists of 4 and 5 code points respectively in these
+   languages:
    - DEVANGARI: दीपक
      - <span>द</span> : U+0926 DEVANAGARI LETTER DA
      - <span> ी</span> : U+0940 DEVANAGARI VOWEL SIGN II
@@ -73,21 +75,24 @@ First some basics:
      - <span>க</span> : U+0B95 TAMIL LETTER KA
      - <span> ்</span> : U+0BCD TAMIL SIGN VIRAMA
 
-   Additionally, multiple "ideas" may be defined as a single code point. For example, the following
-   grapheme ﷺ translates to "peace be upon him" and is defined as the code point at U+FDFA:
+   Additionally, multiple "ideas" may be defined as a single code point. For
+   example, the following grapheme ﷺ translates to "peace be upon him" and is
+   defined as the code point at U+FDFA:
    - ﷺ : U+FDFA ARABIC LIGATURE SALLALLAHOU ALAYHE WASALLAM
 
-   And to make matters more complicated, graphemes and visual representations of code points may not
-   be a single column width wide, even in monospaced fonts. See the code point at U+FDFD:
+   And to make matters more complicated, graphemes and visual representations of
+   code points may not be a single column width wide, even in monospaced fonts.
+   See the code point at U+FDFD:
    - ﷽ : U+FDFD ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM
 
-   Code points can be of different categories, Normal, Pictographic, Spacer, Zero Width Joiners,
-   Controls etc.
+   Code points can be of different categories, Normal, Pictographic, Spacer,
+   Zero Width Joiners, Controls etc.
 
-1. The same "idea", i.e. code point can be _encoded_ into different bits when it is required to be
-   represented on a machine. The bits used to represent the idea depend on the encoding chosen. An
-   encoding is a map or transformation of a code point into bits or bytes. For example, the code
-   point for a 🐉 can be encoded into UTF-8, UTF16, UTF32 in Python as follows.
+1. The same "idea", i.e. code point can be _encoded_ into different bits when it
+   is required to be represented on a machine. The bits used to represent the
+   idea depend on the encoding chosen. An encoding is a map or transformation of
+   a code point into bits or bytes. For example, the code point for a 🐉 can be
+   encoded into UTF-8, UTF16, UTF32 in Python as follows.
 
    ```python
    Python 3.7.6 (default, Jan  8 2020, 13:42:34)
@@ -109,9 +114,10 @@ First some basics:
    Out[5]: b'\xff\xfe\x00\x00\t\xf4\x01\x00'
    ```
 
-   Python prints the bytes as human readable characters if they are valid ASCII characters. ASCII
-   defines 128 characters, half of the 256 possible bytes in an 8-bit computer system. Valid ASCII
-   byte strings are also valid UTF-8 byte strings.
+   Python prints the bytes as human readable characters if they are valid ASCII
+   characters. ASCII defines 128 characters, half of the 256 possible bytes in
+   an 8-bit computer system. Valid ASCII byte strings are also valid UTF-8 byte
+   strings.
 
    ```python
    In [7]: s = 'hello world'
@@ -126,12 +132,14 @@ First some basics:
    Out[9]: b'\xff\xfeh\x00e\x00l\x00l\x00o\x00 \x00w\x00o\x00r\x00l\x00d\x00'
    ```
 
-1. When receiving or reading data, we **must** know the encoding used to interpret it correctly. A
-   Unicode encoding is not guaranteed to contain any information about the encoding. Different
-   encodings exist for efficiency, performance and backward compatibility. UTF-8 is a good pick for
-   an encoding in the general case.
+1. When receiving or reading data, we **must** know the encoding used to
+   interpret it correctly. A Unicode encoding is not guaranteed to contain any
+   information about the encoding. Different encodings exist for efficiency,
+   performance and backward compatibility. UTF-8 is a good pick for an encoding
+   in the general case.
 
 [^unicode-code-point]: <https://unicode.org/glossary/#code_point>
+
 [^unicode-grapheme]: <https://unicode.org/glossary/#grapheme>
 
 ## Vim
@@ -143,33 +151,40 @@ In vim in insert mode, we can type `Ctrl+V`[^vim-ctrl-v] followed by either:
 - a decimal number [0-255]. `Ctrl-v255` will insert `ÿ`.
 - the letter `o` and then an octal number [0-377]. `Ctrl-vo377` will insert `ÿ`.
 - the letter `x` and then a hex number [00-ff]. `Ctrl-vxff` will insert `ÿ`.
-- the letter `u` and then a 4-hexchar Unicode sequence. `Ctrl-vu03C0` will insert `π`.
-- the letter `U` and then an 8-hexchar Unicode sequence. `Ctrl-vU0001F409` will insert `🐉`.
+- the letter `u` and then a 4-hexchar Unicode sequence. `Ctrl-vu03C0` will
+  insert `π`.
+- the letter `U` and then an 8-hexchar Unicode sequence. `Ctrl-vU0001F409` will
+  insert `🐉`.
 
-Using [`unicode.vim`](https://github.com/chrisbra/unicode.vim), we can use `:UnicodeName` to get the
-Unicode number of the code point under the cursor. With `unicode.vim` and `fzf` installed, you can
-even fuzzy find Unicode symbols.
+Using [`unicode.vim`](https://github.com/chrisbra/unicode.vim), we can use
+`:UnicodeName` to get the Unicode number of the code point under the cursor.
+With `unicode.vim` and `fzf` installed, you can even fuzzy find Unicode symbols.
 
 ## Python
 
 Since Python >=3.3, the Unicode string type supports a
-["flexible string representation"](https://peps.python.org/pep-0393/). This means that any one of
-multiple internal representations may be used depending on the largest Unicode ordinal (1, 2, or 4
-bytes) in a Unicode string.
+["flexible string representation"](https://peps.python.org/pep-0393/). This
+means that any one of multiple internal representations may be used depending on
+the largest Unicode ordinal (1, 2, or 4 bytes) in a Unicode string.
 
-For the common case, a string used in the English speaking world may only use ASCII characters
-thereby using a Latin-1 encoding to store the data. If non Basic Multilingual Plane characters are
-used in a Python Unicode string, the internal representation may be stored as UCS2 or UCS4.
+For the common case, a string used in the English speaking world may only use
+ASCII characters thereby using a Latin-1 encoding to store the data. If non
+Basic Multilingual Plane characters are used in a Python Unicode string, the
+internal representation may be stored as UCS2 or UCS4.
 
-In each of these cases, the internal representation uses the same number of bytes for each code
-point. This allows efficient indexing into a Python Unicode string, but indexing into a Python
-Unicode string will only return a valid code point and not a grapheme. The `length` of a Unicode
-string is defined as the number of code points in the string.
+In each of these cases, the internal representation uses the same number of
+bytes for each code point. This allows efficient indexing into a Python Unicode
+string, but indexing into a Python Unicode string will only return a valid code
+point and not a grapheme. The `length` of a Unicode string is defined as the
+number of code points in the string.
 
-As an example, let's take this emoji: 🤦🏼‍♂️ [@hsivonen]. This emoji actually consists of 5 code
-points[^uniview]:
+As an example, let's take this emoji: 🤦🏼‍♂️ [@hsivonen]. This emoji actually
+consists of 5 code points[^uniview]:
 
-[^uniview]: _aside_: We can view this breakdown using [uniview](https://r12a.github.io/uniview/?charlist=%F0%9F%A4%A6%F0%9F%8F%BC%E2%80%8D%E2%99%82%EF%B8%8F). In `vim`, we can use `:UnicodeName`.
+[^uniview]:
+    _aside_: We can view this breakdown using
+    [uniview](https://r12a.github.io/uniview/?charlist=%F0%9F%A4%A6%F0%9F%8F%BC%E2%80%8D%E2%99%82%EF%B8%8F).
+    In `vim`, we can use `:UnicodeName`.
 
 - 🤦 : U+1F926 FACE PALM
 - <span>🏼</span> : U+1F3FC EMOJI MODIFIER FITZPATRICK TYPE-3
@@ -196,8 +211,8 @@ In [4]: len(s)
 Out[4]: 5
 ```
 
-If we want to keep a Python file pure ASCII but want to use Unicode in string literals, we can use
-the `\U` escape sequence.
+If we want to keep a Python file pure ASCII but want to use Unicode in string
+literals, we can use the `\U` escape sequence.
 
 ```python
 In [5]: s = '\U0001F926\U0001F3FC\u200D\u2642\uFE0F'
@@ -206,8 +221,8 @@ In [6]: print(s)
 🤦🏼‍♂️
 ```
 
-As mentioned earlier, indexing into a Python Unicode string gives us the code point at that
-location.
+As mentioned earlier, indexing into a Python Unicode string gives us the code
+point at that location.
 
 ```python
 In [6]: s[0]
@@ -247,14 +262,14 @@ In [14]: [c for c in s]
 Out[14]: ['🤦', '🏼', '\u200d', '♂', '️']
 ```
 
-However, in practice, indexing into a string may not be what we want or may not be useful. More
-often, we are either interested in:
+However, in practice, indexing into a string may not be what we want or may not
+be useful. More often, we are either interested in:
 
 1. indexing into the byte string representation or
 2. indexing into the graphemes.
 
-We can use the `s.encode('utf-8')` function to get a Python byte string representation of the Python
-unicode string in `s`.
+We can use the `s.encode('utf-8')` function to get a Python byte string
+representation of the Python unicode string in `s`.
 
 ```python
 In [15]: s
@@ -294,8 +309,8 @@ In [25]: grapheme.slice(s, 2)
 Out[25]: 'Why is Unicode so complicated?'
 ```
 
-For historical reasons, Unicode allows the same set of characters to be represented by different
-sequences of code points.
+For historical reasons, Unicode allows the same set of characters to be
+represented by different sequences of code points.
 
 ```python
 In [26]: single_char = 'ê'
@@ -324,22 +339,24 @@ In [32]: len(unicodedata.normalize("NFD", single_char))
 Out[32]: 2
 ```
 
-It is best practice to add the following lines to the top of your Python file that you expect to run
-as scripts.
+It is best practice to add the following lines to the top of your Python file
+that you expect to run as scripts.
 
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 ```
 
-If your Python files are part of a package, just adding the second line is sufficient. I recommend
-using [pre-commit](./../using-precommit-hooks/) hooks to ensure that
+If your Python files are part of a package, just adding the second line is
+sufficient. I recommend using [pre-commit](./../using-precommit-hooks/) hooks to
+ensure that
 [the encoding pragma of python files are fixed](https://github.com/pre-commit/pre-commit-hooks/blob/31d41ff29115a87808277ee0ec23999b17d5b583/pre_commit_hooks/fix_encoding_pragma.py)
 before making a git commit.
 
 ## Julia
 
-Let's take a look at how Julia handles strings. This is the version of Julia that I'm using:
+Let's take a look at how Julia handles strings. This is the version of Julia
+that I'm using:
 
 ```bash
                _
@@ -371,13 +388,13 @@ julia> codeunit(s)
 UInt8
 ```
 
-Printing the length of the string in Julia returns `5`. As we saw earlier, this is the number of
-code points in the unicode string.
+Printing the length of the string in Julia returns `5`. As we saw earlier, this
+is the number of code points in the unicode string.
 
-Julia `String` literals are encoded using the UTF-8 encoding. In Python, the indexing into a string
-would return the code point at the string. In Julia, indexing into a string refers to code
-units[^unicode-code-unit], and for the default `String` this returns the
-byte as a `Char` type.
+Julia `String` literals are encoded using the UTF-8 encoding. In Python, the
+indexing into a string would return the code point at the string. In Julia,
+indexing into a string refers to code units[^unicode-code-unit], and for the
+default `String` this returns the byte as a `Char` type.
 
 [^unicode-code-unit]: <https://unicode.org/glossary/#code_unit>
 
@@ -472,7 +489,9 @@ Stacktrace:
 
 If we want each code point in a Julia `String`, we can use `eachindex`[^julia].
 
-[^julia]: _aside_: See the Julia manual strings documentation for more information: <https://docs.julialang.org/en/v1/manual/strings/>
+[^julia]:
+    _aside_: See the Julia manual strings documentation for more information:
+    <https://docs.julialang.org/en/v1/manual/strings/>
 
 ```julia
 julia> [s[i] for i in eachindex(s)]
@@ -484,8 +503,8 @@ julia> [s[i] for i in eachindex(s)]
  '️': Unicode U+FE0F (category Mn: Mark, nonspacing)
 ```
 
-And finally, we can use the `Unicode` module that is built in to the standard library to get the
-number of graphemes.
+And finally, we can use the `Unicode` module that is built in to the standard
+library to get the number of graphemes.
 
 ```julia
 julia> using Unicode
@@ -497,10 +516,12 @@ julia> length(graphemes(s))
 1
 ```
 
-If we wish to encode a Julia string as UTF-8[^julia-transcode], we
-can use the following:
+If we wish to encode a Julia string as UTF-8[^julia-transcode], we can use the
+following:
 
-[^julia-transcode]: _aside_: As of Julia v1.5.0, only conversion to/from UTF-8 is currently supported: <https://docs.julialang.org/en/v1/base/strings/#Base.transcode>
+[^julia-transcode]:
+    _aside_: As of Julia v1.5.0, only conversion to/from UTF-8 is currently
+    supported: <https://docs.julialang.org/en/v1/base/strings/#Base.transcode>
 
 ```julia
 julia> transcode(UInt8, s)
@@ -593,10 +614,12 @@ There are also additional crates such as
 [`unicode-width`](https://github.com/unicode-rs/unicode-width/) and
 [`unicode-segmentation`](https://unicode-rs.github.io/unicode-segmentation/unicode_segmentation/index.html).
 
-`unicode-width` helps determine how many column widths a grapheme will occupy based on the
-[Unicode Standard Annex #11 rules](http://www.unicode.org/reports/tr11/). For example `abc` occupies
-3 columns but `写作业` occupies 6 columns but they are both 3 codepoints and 3 graphemes each.
-`unicode-segmentation` helps with determining the number of graphemes in a string.
+`unicode-width` helps determine how many column widths a grapheme will occupy
+based on the
+[Unicode Standard Annex #11 rules](http://www.unicode.org/reports/tr11/). For
+example `abc` occupies 3 columns but `写作业` occupies 6 columns but they are
+both 3 codepoints and 3 graphemes each. `unicode-segmentation` helps with
+determining the number of graphemes in a string.
 
 ```rust
 // main.rs

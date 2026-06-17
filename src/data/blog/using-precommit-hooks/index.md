@@ -16,19 +16,20 @@ references:
 
 ## Setting up `pre-commit` for a git repo
 
-You can run scripts before creating a commit in a git repo, i.e. `pre-commit` hooks, to verify that
-the files you are checking in meet a predefined standard. [`pre-commit`](https://pre-commit.com/) is
-a Python package that let's you manage and run `pre-commit` hooks in any git repository.
+You can run scripts before creating a commit in a git repo, i.e. `pre-commit`
+hooks, to verify that the files you are checking in meet a predefined standard.
+[`pre-commit`](https://pre-commit.com/) is a Python package that let's you
+manage and run `pre-commit` hooks in any git repository.
 
 ![Pre-commit pipeline with `black` and `flake8`](images/precommit_pipeline.png)
 
 Source: [@ljvmiranda921]
 
-Using `pre-commit` requires adding a `.pre-commit-config.yaml` file to the git repository, and
-running `pre-commit install`.
+Using `pre-commit` requires adding a `.pre-commit-config.yaml` file to the git
+repository, and running `pre-commit install`.
 
-1. Add a file called `.pre-commit-config.yaml` to the root of your git repository, and add the hooks
-   you want in that file. This is an example of a
+1. Add a file called `.pre-commit-config.yaml` to the root of your git
+   repository, and add the hooks you want in that file. This is an example of a
    [`.pre-commit-config.yaml`](https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/.pre-commit-config.yaml)
    file:
    ```yaml
@@ -74,10 +75,11 @@ running `pre-commit install`.
 
 ## Using `setup.py` to install `pre-commit` hooks
 
-You can have `setup.py` automatically run `precommit install` when setting up a developer
-environment.
+You can have `setup.py` automatically run `precommit install` when setting up a
+developer environment.
 
-To do this, add a `PostDevelopCommand` hook to `setup.py`. Here's a minimal example:
+To do this, add a `PostDevelopCommand` hook to `setup.py`. Here's a minimal
+example:
 
 ```python
 import os
@@ -116,40 +118,44 @@ setup(
 )
 ```
 
-Then, during the first time you want to start working on the project you can run the following to
-setup your development environment:
+Then, during the first time you want to start working on the project you can run
+the following to setup your development environment:
 
 ```bash
 pip install -e ".[dev]"
 ```
 
-This will install `install_requires`, `test_requires`, `extra_requires` and `dev_requires`
-dependencies. This will also run `pre-commit install` in the git repository, which will add the
-hooks from the `.pre-commit-config.yaml` file.
+This will install `install_requires`, `test_requires`, `extra_requires` and
+`dev_requires` dependencies. This will also run `pre-commit install` in the git
+repository, which will add the hooks from the `.pre-commit-config.yaml` file.
 
 If you don't want to automatically run `pre-commit install`, remove the
-`cmdclass={"develop": PostDevelopCommand}` line in the `setup(...)` function arguments.
+`cmdclass={"develop": PostDevelopCommand}` line in the `setup(...)` function
+arguments.
 
 ## Using `pre-commit-hooks` for all git repos
 
-If you want to use `pre-commit-hooks` for all git repositories on your machine, you can set up a
-`git-templates` folder that is used as a `templatedir` when you run `git init`.
+If you want to use `pre-commit-hooks` for all git repositories on your machine,
+you can set up a `git-templates` folder that is used as a `templatedir` when you
+run `git init`.
 
 Add the following to your
 [`~/.gitconfig`](https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/gitconfig#L176-L177)
 file [^gitconfig].
 
 [^gitconfig]:
-    On Windows, the file is located at `C:\Users\USERNAME\.gitconfig`. Also, `git` will not create
-    this file unless you ask for it. You can create it by running `git config --global --edit`.
+    On Windows, the file is located at `C:\Users\USERNAME\.gitconfig`. Also,
+    `git` will not create this file unless you ask for it. You can create it by
+    running `git config --global --edit`.
 
 ```toml
 [init]
   templatedir = ~/gitrepos/git-templates
 ```
 
-Now create a `~/gitrepos/dotfiles/git-templates` folder with a single folder inside it called
-`hooks`, and with a single executable file inside the `hooks` folder called `pre-commit`.
+Now create a `~/gitrepos/dotfiles/git-templates` folder with a single folder
+inside it called `hooks`, and with a single executable file inside the `hooks`
+folder called `pre-commit`.
 
 ```bash
 tree git-templates
@@ -162,10 +168,12 @@ git-templates
    └── pre-commit
 ```
 
-You can create a text file and make it executable by running `chmod +x pre-commit`. In that file,
-you can make `pre-commit` point to a `.pre-commit-config.yaml` file of your choosing.
+You can create a text file and make it executable by running
+`chmod +x pre-commit`. In that file, you can make `pre-commit` point to a
+`.pre-commit-config.yaml` file of your choosing.
 
-This will make `git init` use the `templatedir` as a template when you create a new git repository.
+This will make `git init` use the `templatedir` as a template when you create a
+new git repository.
 
 Here is what my
 [`git-templates/hooks/pre-commit`](https://github.com/kdheepak/dotfiles/blob/48567f59c346c00318a670269e3e52172d469f75/git-templates/hooks/pre-commit)
@@ -177,14 +185,15 @@ pre-commit run --config ~/gitrepos/dotfiles/.pre-commit-config.yaml
 ```
 
 You can place the `.pre-commit-config.yaml` wherever you like. I have mine in my
-[`~/gitrepos/dotfiles`](https://github.com/kdheepak/dotfiles/) repository. If you have set it up
-correctly, the next time you run `git init` the pre-commit hooks will be set up in your git
-repository based on the `.pre-commit-config.yaml` file you set up.
+[`~/gitrepos/dotfiles`](https://github.com/kdheepak/dotfiles/) repository. If
+you have set it up correctly, the next time you run `git init` the pre-commit
+hooks will be set up in your git repository based on the
+`.pre-commit-config.yaml` file you set up.
 
 ## `git commit --no-verify`
 
-Finally, if you want to bypass the `pre-commit` hooks in special circumstances, you can add the
-`--no-verify` flag to your `git commit` command.
+Finally, if you want to bypass the `pre-commit` hooks in special circumstances,
+you can add the `--no-verify` flag to your `git commit` command.
 
 ```bash
 git commit --no-verify
@@ -194,10 +203,11 @@ This will run `git commit` without any `pre-commit` hooks.
 
 ## Troubleshooting
 
-You can update the `.git/hooks/pre-commit` file if something goes wrong, to suit your configuration.
-For example, you may have to configure it to point to a specific version of Python on your machine
-if it doesn't point to the correct version by default.
+You can update the `.git/hooks/pre-commit` file if something goes wrong, to suit
+your configuration. For example, you may have to configure it to point to a
+specific version of Python on your machine if it doesn't point to the correct
+version by default.
 
-You also can change the `flake8` errors and warnings that you'd like to ignore by changing the
-arguments to `flake8`. You can read about all the different `flake8` errors and warning over here:
-<https://www.flake8rules.com/>.
+You also can change the `flake8` errors and warnings that you'd like to ignore
+by changing the arguments to `flake8`. You can read about all the different
+`flake8` errors and warning over here: <https://www.flake8rules.com/>.

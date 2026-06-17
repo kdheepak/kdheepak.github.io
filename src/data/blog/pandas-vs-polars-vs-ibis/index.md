@@ -7,46 +7,47 @@ description: comparison of idiomatic data workflows in pandas, Polars, and Ibis.
 notebookPath: "src/data/blog/pandas-vs-polars-vs-ibis/index.ipynb"
 ---
 
-This is a short comparison of idiomatic `pandas`, `polars` and `ibis`,
-all using method chaining.
+This is a short comparison of idiomatic `pandas`, `polars` and `ibis`, all using
+method chaining.
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import sys
 
 sys.version_info
 ```
 
-:::div{.cell-output .cell-output-display}
-    sys.version_info(major=3, minor=12, micro=5, releaselevel='final', serial=0)
-:::
-::::
+:::div{.cell-output .cell-output-display} sys.version_info(major=3, minor=12,
+micro=5, releaselevel='final', serial=0) ::: ::::
 
 :::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import ibis
 from ibis import _
 ibis.options.interactive = True
 ```
+
 :::
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 ibis.__version__
 ```
 
-:::div{.cell-output .cell-output-display}
-    '9.4.0'
-:::
-::::
+:::div{.cell-output .cell-output-display} '9.4.0' ::: ::::
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 df = ibis.examples.starwars.fetch()
 df
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name               </span>┃<span style="font-weight: bold"> height </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color    </span>┃<span style="font-weight: bold"> skin_color  </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films  </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━┩
@@ -65,13 +66,14 @@ df
 │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                  │      <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span> │       <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span> │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>             │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>           │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>         │          <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span> │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>      │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>         │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>         │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>       │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>      │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>        │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>         │
 └────────────────────┴────────┴─────────┴───────────────┴─────────────┴───────────┴────────────┴────────┴───────────┴───────────┴─────────┴────────┴──────────┴───────────┘
 </pre>
-:::
-::::
+
+::: ::::
 
 ## Pandas
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import re
 
 M = 100
@@ -93,6 +95,7 @@ ibis.pandas.connect({'_df': _df}).table('_df')
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height  </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
 ┡━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━┩
@@ -103,13 +106,14 @@ ibis.pandas.connect({'_df': _df}).table('_df')
 │ <span style="color: #008000; text-decoration-color: #008000">Chewbacca</span> │   <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">228.0</span> │   <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">112.0</span> │ <span style="color: #008000; text-decoration-color: #008000">brown     </span> │ <span style="color: #008000; text-decoration-color: #008000">unknown   </span> │ <span style="color: #008000; text-decoration-color: #008000">blue     </span> │      <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">200.0</span> │ <span style="color: #008000; text-decoration-color: #008000">male  </span> │ <span style="color: #008000; text-decoration-color: #008000">masculine</span> │ <span style="color: #008000; text-decoration-color: #008000">Kashyyyk </span> │ <span style="color: #008000; text-decoration-color: #008000">Wookiee</span> │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>  │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>     │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>      │
 └───────────┴─────────┴─────────┴────────────┴────────────┴───────────┴────────────┴────────┴───────────┴───────────┴─────────┴───────┴──────────┴───────────┘
 </pre>
-:::
-::::
+
+::: ::::
 
 ## Polars
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import re
 import polars as pl
 
@@ -132,6 +136,7 @@ ibis.polars.connect({'_df': _df}).table('_df')
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films  </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
 ┡━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━┩
@@ -142,13 +147,14 @@ ibis.polars.connect({'_df': _df}).table('_df')
 │ <span style="color: #008000; text-decoration-color: #008000">Chewbacca</span> │    <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">228</span> │   <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">112.0</span> │ <span style="color: #008000; text-decoration-color: #008000">brown     </span> │ <span style="color: #008000; text-decoration-color: #008000">unknown   </span> │ <span style="color: #008000; text-decoration-color: #008000">blue     </span> │      <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">200.0</span> │ <span style="color: #008000; text-decoration-color: #008000">male  </span> │ <span style="color: #008000; text-decoration-color: #008000">masculine</span> │ <span style="color: #008000; text-decoration-color: #008000">Kashyyyk </span> │ <span style="color: #008000; text-decoration-color: #008000">Wookiee</span> │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>   │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>     │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>      │
 └───────────┴────────┴─────────┴────────────┴────────────┴───────────┴────────────┴────────┴───────────┴───────────┴─────────┴────────┴──────────┴───────────┘
 </pre>
-:::
-::::
+
+::: ::::
 
 ## ibis
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 M = 100
 _df = (
     df
@@ -166,6 +172,7 @@ _df
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> name      </span>┃<span style="font-weight: bold"> height </span>┃<span style="font-weight: bold"> mass    </span>┃<span style="font-weight: bold"> hair_color </span>┃<span style="font-weight: bold"> skin_color </span>┃<span style="font-weight: bold"> eye_color </span>┃<span style="font-weight: bold"> birth_year </span>┃<span style="font-weight: bold"> sex    </span>┃<span style="font-weight: bold"> gender    </span>┃<span style="font-weight: bold"> homeworld </span>┃<span style="font-weight: bold"> species </span>┃<span style="font-weight: bold"> films  </span>┃<span style="font-weight: bold"> vehicles </span>┃<span style="font-weight: bold"> starships </span>┃
 ┡━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━┩
@@ -176,5 +183,5 @@ _df
 │ <span style="color: #008000; text-decoration-color: #008000">Chewbacca</span> │    <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">228</span> │   <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">112.0</span> │ <span style="color: #008000; text-decoration-color: #008000">brown     </span> │ <span style="color: #008000; text-decoration-color: #008000">unknown   </span> │ <span style="color: #008000; text-decoration-color: #008000">blue     </span> │      <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">200.0</span> │ <span style="color: #008000; text-decoration-color: #008000">male  </span> │ <span style="color: #008000; text-decoration-color: #008000">masculine</span> │ <span style="color: #008000; text-decoration-color: #008000">Kashyyyk </span> │ <span style="color: #008000; text-decoration-color: #008000">Wookiee</span> │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>   │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>     │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">NULL</span>      │
 └───────────┴────────┴─────────┴────────────┴────────────┴───────────┴────────────┴────────┴───────────┴───────────┴─────────┴────────┴──────────┴───────────┘
 </pre>
-:::
-::::
+
+::: ::::

@@ -1,7 +1,8 @@
 ---
 title: Building TUI apps in rust
 date: 2023-05-30T22:21:30-04:00
-description: practical Rust TUI stack built around Ratatui and supporting crates.
+description:
+  practical Rust TUI stack built around Ratatui and supporting crates.
 draft: true
 tags:
   - rust
@@ -9,7 +10,8 @@ tags:
 keywords: TUI Rust
 ---
 
-My favourite way to build TUI apps is using [ratatui](https://github.com/tui-rs-revival/ratatui).
+My favourite way to build TUI apps is using
+[ratatui](https://github.com/tui-rs-revival/ratatui).
 
 Here's a number of crates I typically end up depending on:
 

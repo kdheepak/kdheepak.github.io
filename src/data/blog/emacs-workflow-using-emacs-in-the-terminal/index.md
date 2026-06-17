@@ -8,14 +8,16 @@ tags:
 keywords: emacs, workflow, emacs daemon, terminal, tmux
 ---
 
-I use the command line a lot, frequently editing files locally or remotely. Up until now, I've been
-using [vim with tmux and zsh](./../vim-tmux-zsh/). I've recently been experimenting with emacs and
-have been trying to get it to work well inplace of vim. I personally think the author of
-[this post](https://mjwall.com/blog/2013/10/04/how-i-use-emacs/) nailed it regarding emacs workflow.
-I've only made minor modifications to get it to suit my requirements.
+I use the command line a lot, frequently editing files locally or remotely. Up
+until now, I've been using [vim with tmux and zsh](./../vim-tmux-zsh/). I've
+recently been experimenting with emacs and have been trying to get it to work
+well inplace of vim. I personally think the author of
+[this post](https://mjwall.com/blog/2013/10/04/how-i-use-emacs/) nailed it
+regarding emacs workflow. I've only made minor modifications to get it to suit
+my requirements.
 
-I've created a separate script called ess (emacsserverstart) added a `&` at the end of the emacs
-script to get it to run in the background.
+I've created a separate script called ess (emacsserverstart) added a `&` at the
+end of the emacs script to get it to run in the background.
 
 `/usr/local/bin/ess`:
 
@@ -31,14 +33,15 @@ script to get it to run in the background.
 /Applications/Emacs.app/Contents/MacOS/Emacs "$@"
 ```
 
-I've found that when using emacsclient connecting to `emacs --daemon` renders certain things
-differently, as compared to opening emacs, starting a server and connecting to that instead. I also
-have `(server-start)` in my .emacs file.
+I've found that when using emacsclient connecting to `emacs --daemon` renders
+certain things differently, as compared to opening emacs, starting a server and
+connecting to that instead. I also have `(server-start)` in my .emacs file.
 
-The following script connects a emacsclient to an already existing emacs server. If a server does
-not exist, it starts a daemon and then connects to it. This is done using the `-a ""` flag, which
-allows you to set an alternate editor. If no editor it set it defaults to running a daemon. It also
-shifts focus to the emacsclient after it opens.
+The following script connects a emacsclient to an already existing emacs server.
+If a server does not exist, it starts a daemon and then connects to it. This is
+done using the `-a ""` flag, which allows you to set an alternate editor. If no
+editor it set it defaults to running a daemon. It also shifts focus to the
+emacsclient after it opens.
 
 `/usr/local/bin/ec`:
 
@@ -92,8 +95,8 @@ else # there is already a visible frame besides the daemon, so
 fi
 ```
 
-This script opens an emacsclient in the terminal and connects it to a running server. The `-t` flag
-opens it in the terminal.
+This script opens an emacsclient in the terminal and connects it to a running
+server. The `-t` flag opens it in the terminal.
 
 `/usr/local/bin/et`:
 

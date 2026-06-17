@@ -1,7 +1,8 @@
 ---
 title: Create Emacsclient.app using AppleScript
 date: 2015-07-18T10:00:00-06:00
-description: guide to creating an Emacsclient.app with AppleScript for launcher workflows.
+description:
+  guide to creating an Emacsclient.app with AppleScript for launcher workflows.
 tags:
   - emacs
   - osx
@@ -43,8 +44,8 @@ on run {input}
 end run
 ```
 
-Save the application in `/Applications` or `/Users/$USER/Applications`. Now you can quickly open
-emacsclient from Alfred.
+Save the application in `/Applications` or `/Users/$USER/Applications`. Now you
+can quickly open emacsclient from Alfred.
 
 Also check out Alfred workflows in the link below
 

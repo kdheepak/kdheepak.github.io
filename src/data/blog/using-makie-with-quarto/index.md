@@ -10,10 +10,11 @@ notebookPath: "src/data/blog/using-makie-with-quarto/index.ipynb"
 Here's an example of a static image generated using `CairoMakie`:
 
 ::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 using CairoMakie, Random
 
 Random.seed!(123)
@@ -42,6 +43,4 @@ current_figure()
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-3-output-1.png)
-:::
-::::
+![](index_files/figure-markdown/cell-3-output-1.png) ::: ::::

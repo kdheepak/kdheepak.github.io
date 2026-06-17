@@ -47,7 +47,8 @@ const { title, description, draft = false, ...props } = data;
       <Heading
         class="m-0 min-w-0 leading-tight"
         style={{
-          viewTransitionName: "heading" + slugifyStr(title.replaceAll(".", "-")),
+          viewTransitionName:
+            "heading" + slugifyStr(title.replaceAll(".", "-")),
         }}
       >
         <span>{title}</span>
@@ -60,30 +61,34 @@ const { title, description, draft = false, ...props } = data;
         }
       </Heading>
     </a>
-    {showDate && (
-      <Datetime
-        {...props}
-        class:list={[
-          "shrink-0",
-          {
-            "sm:justify-start": dateLayout === "right",
-          },
-        ]}
-        style={{
-          viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
-        }}
-      />
-    )}
-    {showReadingStats && (
-      <ReadingStats
-        {body}
-        class:list={[
-          "mt-1",
-          { "sm:col-span-2": showDate && dateLayout === "right" },
-        ]}
-        align="center"
-      />
-    )}
+    {
+      showDate && (
+        <Datetime
+          {...props}
+          class:list={[
+            "shrink-0",
+            {
+              "sm:justify-start": dateLayout === "right",
+            },
+          ]}
+          style={{
+            viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
+          }}
+        />
+      )
+    }
+    {
+      showReadingStats && (
+        <ReadingStats
+          {body}
+          class:list={[
+            "mt-1",
+            { "sm:col-span-2": showDate && dateLayout === "right" },
+          ]}
+          align="center"
+        />
+      )
+    }
     <p
       class:list={[
         "mt-1",

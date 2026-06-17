@@ -27,52 +27,52 @@ import { slugifyAll, slugifyStr } from "./utils/slugify";
 
 const layoutSource = readFileSync(
   resolve(process.cwd(), "src/layouts/Layout.astro"),
-  "utf8"
+  "utf8",
 );
 
 const astroConfigSource = readFileSync(
   resolve(process.cwd(), "astro.config.ts"),
-  "utf8"
+  "utf8",
 );
 
 const contentConfigSource = readFileSync(
   resolve(process.cwd(), "src/content.config.ts"),
-  "utf8"
+  "utf8",
 );
 
 const postDetailsSource = readFileSync(
   resolve(process.cwd(), "src/layouts/PostDetails.astro"),
-  "utf8"
+  "utf8",
 );
 
 const footerSource = readFileSync(
   resolve(process.cwd(), "src/components/Footer.astro"),
-  "utf8"
+  "utf8",
 );
 
 const globalStylesSource = readFileSync(
   resolve(process.cwd(), "src/styles/global.css"),
-  "utf8"
+  "utf8",
 );
 
 const postCitationSource = readFileSync(
   resolve(process.cwd(), "src/components/PostCitation.astro"),
-  "utf8"
+  "utf8",
 );
 
 const typographyStylesSource = readFileSync(
   resolve(process.cwd(), "src/styles/typography.css"),
-  "utf8"
+  "utf8",
 );
 
 const blogIndexSource = readFileSync(
   resolve(process.cwd(), "src/pages/blog/index.astro"),
-  "utf8"
+  "utf8",
 );
 
 const rssStylesheetSource = readFileSync(
   resolve(process.cwd(), "src/pages/rss.xsl.ts"),
-  "utf8"
+  "utf8",
 );
 
 const makePost = (tags: string[], draft = false) => ({
@@ -98,17 +98,20 @@ const applyRemarkPostToc = (
   {
     path = "/tmp/project/src/data/blog/example/index.md",
     toc = true,
-  }: { path?: string; toc?: boolean } = {}
+  }: { path?: string; toc?: boolean } = {},
 ) => {
   const transform = remarkPostToc();
-  transform(tree as never, {
-    path,
-    data: {
-      astro: {
-        frontmatter: { toc },
+  transform(
+    tree as never,
+    {
+      path,
+      data: {
+        astro: {
+          frontmatter: { toc },
+        },
       },
-    },
-  } as never);
+    } as never,
+  );
 };
 
 const applyProtect = (tree: Record<string, unknown>) => {
@@ -123,7 +126,7 @@ const applyRestore = (tree: Record<string, unknown>) => {
 
 const findFirstElement = (
   node: Record<string, unknown>,
-  predicate: (candidate: Record<string, unknown>) => boolean
+  predicate: (candidate: Record<string, unknown>) => boolean,
 ): Record<string, unknown> | null => {
   if (node.type === "element" && predicate(node)) {
     return node;
@@ -172,7 +175,7 @@ const escapeRegExp = (value: string) =>
 
 const getCssRuleBody = (source: string, selector: string): string => {
   const ruleMatch = source.match(
-    new RegExp(`${escapeRegExp(selector)}\\s*\\{([\\s\\S]*?)\\n\\s*\\}`)
+    new RegExp(`${escapeRegExp(selector)}\\s*\\{([\\s\\S]*?)\\n\\s*\\}`),
   );
   return ruleMatch?.[1] ?? "";
 };
@@ -180,7 +183,7 @@ const getCssRuleBody = (source: string, selector: string): string => {
 const findElements = (
   node: any,
   predicate: (candidate: any) => boolean,
-  results: any[] = []
+  results: any[] = [],
 ): any[] => {
   if (node?.type === "element" && predicate(node)) {
     results.push(node);
@@ -195,13 +198,15 @@ const findElements = (
 
 describe("KaTeX integration", () => {
   it("configures markdown math rendering through remark-math + rehype-katex", () => {
-    expect(astroConfigSource).toContain('import remarkMath from "remark-math";');
     expect(astroConfigSource).toContain(
-      'import rehypeKatex from "rehype-katex";'
+      'import remarkMath from "remark-math";',
+    );
+    expect(astroConfigSource).toContain(
+      'import rehypeKatex from "rehype-katex";',
     );
     expect(astroConfigSource).toContain("remarkMath,");
     expect(astroConfigSource).toContain(
-      "[rehypeKatex, { throwOnError: false, strict: false }],"
+      "[rehypeKatex, { throwOnError: false, strict: false }],",
     );
   });
 
@@ -226,7 +231,7 @@ describe("Google site verification", () => {
   it("includes the expected verification meta tag in the layout head", () => {
     expect(layoutSource).toContain('name="google-site-verification"');
     expect(layoutSource).toContain(
-      'content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U"'
+      'content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U"',
     );
   });
 });
@@ -234,7 +239,7 @@ describe("Google site verification", () => {
 describe("Footer timestamp", () => {
   it("keeps machine-readable ISO while rendering a standardized local timestamp", () => {
     expect(footerSource).toContain(
-      'const buildTimestampLabel = buildIsoString.replace(/\\.\\d{3}Z$/, "Z");'
+      'const buildTimestampLabel = buildIsoString.replace(/\\.\\d{3}Z$/, "Z");',
     );
     expect(footerSource).toContain("data-build-local-time");
     expect(footerSource).toContain("data-build-iso={buildIsoString}");
@@ -242,19 +247,21 @@ describe("Footer timestamp", () => {
     expect(footerSource).toContain("{buildTimestampLabel}");
     expect(footerSource).toContain("const formatLocalTimestamp = (date: Date)");
     expect(footerSource).toContain(
-      "return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${offset}`;"
+      "return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${offset}`;",
     );
     expect(footerSource).not.toContain(
-      "Intl.DateTimeFormat().resolvedOptions().timeZone"
+      "Intl.DateTimeFormat().resolvedOptions().timeZone",
     );
     expect(footerSource).toContain(
-      'document.addEventListener("astro:page-load", setBuildTimestamp);'
+      'document.addEventListener("astro:page-load", setBuildTimestamp);',
     );
   });
 
   it("links build timestamp to the repository tree and keeps copyright year plain", () => {
     expect(footerSource).toContain("const toTreeBaseUrl = (sourceUrl: string)");
-    expect(footerSource).toContain('const buildTreeRef = latestCommitHash ?? "main";');
+    expect(footerSource).toContain(
+      'const buildTreeRef = latestCommitHash ?? "main";',
+    );
     expect(footerSource).toContain("const buildTreeHref =");
     expect(footerSource).toContain("href={buildTreeHref}");
     expect(footerSource).toContain("&#169; {currentYear}");
@@ -265,18 +272,18 @@ describe("Footer timestamp", () => {
 describe("Post citation", () => {
   it("renders citation metadata in post details", () => {
     expect(postDetailsSource).toContain(
-      'import PostCitation from "@/components/PostCitation.astro";'
+      'import PostCitation from "@/components/PostCitation.astro";',
     );
     expect(postDetailsSource).toContain("<PostCitation");
     expect(postDetailsSource).toContain("url={postUrl}");
     expect(postDetailsSource).toContain("!hideCitation");
     expect(postDetailsSource).toContain(
-      'class="mt-10 mb-6 grid items-start gap-6 sm:grid-cols-2"'
+      'class="mt-10 mb-6 grid items-start gap-6 sm:grid-cols-2"',
     );
     expect(postDetailsSource).toContain("<ShareLinks />");
     expect(postDetailsSource).toContain("<BackToTopButton />");
     expect(postDetailsSource).toContain(
-      'class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center"'
+      'class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center"',
     );
   });
 
@@ -286,13 +293,13 @@ describe("Post citation", () => {
     expect(postCitationSource).not.toContain("data-copy-bibtex");
     expect(postCitationSource).not.toContain("Copy BibTeX");
     expect(postCitationSource).toContain(
-      'class="mt-1 block break-all text-accent decoration-dashed underline-offset-4"'
+      'class="mt-1 block break-all text-accent decoration-dashed underline-offset-4"',
     );
   });
 
   it("supports disabling post citation via frontmatter", () => {
     expect(contentConfigSource).toContain(
-      "hideCitation: z.boolean().optional().default(false)"
+      "hideCitation: z.boolean().optional().default(false)",
     );
     expect(postDetailsSource).toContain("hideCitation = false");
   });
@@ -300,7 +307,9 @@ describe("Post citation", () => {
 
 describe("Blog timeline graphics", () => {
   it("adds timeline elements to /blog without replacing card-based content", () => {
-    expect(blogIndexSource).toContain('import Card from "@/components/Card.astro";');
+    expect(blogIndexSource).toContain(
+      'import Card from "@/components/Card.astro";',
+    );
     expect(blogIndexSource).not.toContain("timeline-graphics.css");
     expect(globalStylesSource).toContain(".timeline-year-group::after");
     expect(blogIndexSource).toContain('class="timeline-year-header"');
@@ -322,26 +331,31 @@ describe("Code language badge styling", () => {
   it("keeps the language badge visually joined with the code block", () => {
     const wrapperRule = getCssRuleBody(
       typographyStylesSource,
-      ".has-code-language-badge"
+      ".has-code-language-badge",
     );
     const preRule = getCssRuleBody(
       typographyStylesSource,
-      ".has-code-language-badge > pre"
+      ".has-code-language-badge > pre",
     );
-    const badgeRule = getCssRuleBody(typographyStylesSource, ".code-language-badge");
+    const badgeRule = getCssRuleBody(
+      typographyStylesSource,
+      ".code-language-badge",
+    );
     const badgeAfterRule = getCssRuleBody(
       typographyStylesSource,
-      ".code-language-badge::after"
+      ".code-language-badge::after",
     );
 
     expect(wrapperRule).toContain("margin-top: 2.25rem;");
     expect(wrapperRule).not.toContain("padding-top:");
     expect(preRule).toContain("margin-top: 0;");
     expect(badgeRule).toContain(
-      "transform: translateY(calc(-100% + var(--ec-brdWd, 1px)));"
+      "transform: translateY(calc(-100% + var(--ec-brdWd, 1px)));",
     );
     expect(badgeRule).toContain("border-bottom: none;");
-    expect(badgeAfterRule).toContain("bottom: calc(-1 * var(--ec-brdWd, 1px));");
+    expect(badgeAfterRule).toContain(
+      "bottom: calc(-1 * var(--ec-brdWd, 1px));",
+    );
     expect(badgeAfterRule).toContain("height: var(--ec-brdWd, 1px);");
   });
 });
@@ -350,7 +364,7 @@ describe("Drop-cap flow with margin notes", () => {
   it("clears only the drop-cap side so right margin notes do not force large gaps", () => {
     const dropCapFlowRule = getCssRuleBody(
       typographyStylesSource,
-      "&.drop-cap-lead > p:first-of-type + *"
+      "&.drop-cap-lead > p:first-of-type + *",
     );
 
     expect(dropCapFlowRule).toContain("clear: left;");
@@ -360,7 +374,7 @@ describe("Drop-cap flow with margin notes", () => {
   it("prefixes rendered margin notes with a css caret marker", () => {
     const marginMarkerRule = getCssRuleBody(
       typographyStylesSource,
-      ".margin-footnote > p:first-of-type::before"
+      ".margin-footnote > p:first-of-type::before",
     );
 
     expect(marginMarkerRule).toContain('content: "^ ";');
@@ -374,7 +388,7 @@ describe("citation utilities", () => {
       "Dheepak Krishnamurthy",
       new Date("2015-04-30T01:00:00.000Z"),
       "active-reactive-and-apparent-power",
-      "America/Chicago"
+      "America/Chicago",
     );
 
     expect(key).toBe("krishnamurthy2015activereactiveandapparentpower");
@@ -394,11 +408,11 @@ describe("citation utilities", () => {
     expect(bibtex).toContain("@online{jones2018testdocument,");
     expect(bibtex).toContain("author = {Nora Jones}");
     expect(bibtex).toContain(
-      "title = {Summarizing Output for \\{Reproducible\\} \\{Documents\\}}"
+      "title = {Summarizing Output for \\{Reproducible\\} \\{Documents\\}}",
     );
     expect(bibtex).toContain("date = {2018-05-04}");
     expect(bibtex).toContain(
-      "url = {https://www.charlesteague.com/test-document.html}"
+      "url = {https://www.charlesteague.com/test-document.html}",
     );
   });
 
@@ -413,7 +427,7 @@ describe("citation utilities", () => {
     });
 
     expect(citation).toBe(
-      'Nora Jones, "Summarizing Output for Reproducible Documents", May 4, 2018 https://www.charlesteague.com/test-document.html.'
+      'Nora Jones, "Summarizing Output for Reproducible Documents", May 4, 2018 https://www.charlesteague.com/test-document.html.',
     );
   });
 });
@@ -548,10 +562,10 @@ describe("remarkDirectives", () => {
     expect(directiveNode.data.hProperties.style).toContain("--layout-ncol:2");
     expect(directiveNode.data.hProperties.style).toContain("display:grid");
     expect(directiveNode.data.hProperties.style).toContain(
-      "grid-template-columns:repeat(2,minmax(0,1fr))"
+      "grid-template-columns:repeat(2,minmax(0,1fr))",
     );
     expect(directiveNode.data.hProperties.style).toContain(
-      "grid-template-columns:repeat(var(--layout-ncol),minmax(0,1fr))"
+      "grid-template-columns:repeat(var(--layout-ncol),minmax(0,1fr))",
     );
     expect(directiveNode.data.hProperties["layout-ncol"]).toBeUndefined();
   });
@@ -559,10 +573,10 @@ describe("remarkDirectives", () => {
   it("defines prose grid styles for layout-ncol containers", () => {
     expect(typographyStylesSource).toContain(".layout-ncol");
     expect(typographyStylesSource).toContain(
-      "grid-template-columns: repeat(2, minmax(0, 1fr));"
+      "grid-template-columns: repeat(2, minmax(0, 1fr));",
     );
     expect(typographyStylesSource).toContain(
-      "grid-template-columns: repeat(var(--layout-ncol), minmax(0, 1fr));"
+      "grid-template-columns: repeat(var(--layout-ncol), minmax(0, 1fr));",
     );
   });
 });
@@ -589,17 +603,19 @@ describe("remarkPostToc", () => {
     const children = tree.children as Record<string, unknown>[];
     const tocList = children[1] as Record<string, unknown>;
     const tocLink = (
-      ((tocList.children as Record<string, unknown>[])[0].children as Record<
-        string,
-        unknown
-      >[])[0].children as Record<string, unknown>[]
+      (
+        (tocList.children as Record<string, unknown>[])[0].children as Record<
+          string,
+          unknown
+        >[]
+      )[0].children as Record<string, unknown>[]
     )[0];
 
     const linkChildren = tocLink.children as Record<string, unknown>[];
     expect(
       linkChildren.some(
-        node => node.type === "inlineMath" && node.value === "\\theta"
-      )
+        node => node.type === "inlineMath" && node.value === "\\theta",
+      ),
     ).toBe(true);
   });
 });
@@ -649,7 +665,7 @@ describe("rehypeProtectCodeCitations / rehypeRestoreCodeCitations", () => {
 
     const protectedSpan = findFirstElement(
       tree,
-      node => node.tagName === "kd-cite-skip-span"
+      node => node.tagName === "kd-cite-skip-span",
     );
     expect(protectedSpan).not.toBeNull();
     expect(protectedSpan?.properties).toMatchObject({
@@ -662,7 +678,7 @@ describe("rehypeProtectCodeCitations / rehypeRestoreCodeCitations", () => {
       node =>
         node.tagName === "span" &&
         Array.isArray(node.children) &&
-        (node.children[0] as Record<string, unknown>)?.value === "plain span"
+        (node.children[0] as Record<string, unknown>)?.value === "plain span",
     );
     expect(paragraphSpan).not.toBeNull();
 
@@ -673,14 +689,14 @@ describe("rehypeProtectCodeCitations / rehypeRestoreCodeCitations", () => {
       node =>
         node.tagName === "span" &&
         Array.isArray(node.children) &&
-        (node.children[0] as Record<string, unknown>)?.value === "[@citation]"
+        (node.children[0] as Record<string, unknown>)?.value === "[@citation]",
     );
     expect(restoredSpan).not.toBeNull();
     expect(restoredSpan?.properties).toMatchObject({ className: ["token"] });
     expect(
       (restoredSpan?.properties as Record<string, unknown>)[
         "data-kd-cite-protected"
-      ]
+      ],
     ).toBeUndefined();
   });
 });
@@ -767,7 +783,8 @@ describe("rehypePostEnhancements", () => {
           children: [
             {
               type: "text",
-              value: "Outside URL should stay plain: https://outside.example.dev.",
+              value:
+                "Outside URL should stay plain: https://outside.example.dev.",
             },
           ],
         },
@@ -778,40 +795,41 @@ describe("rehypePostEnhancements", () => {
 
     const tocHeading = findElements(
       tree,
-      node => node.tagName === "h2" && node.properties?.id === "table-of-contents"
+      node =>
+        node.tagName === "h2" && node.properties?.id === "table-of-contents",
     )[0];
     const tocList = tree.children[tree.children.indexOf(tocHeading) + 1];
     const tocLinks = findElements(tocList, node => node.tagName === "a").map(
-      node => node.properties?.href
+      node => node.properties?.href,
     );
 
     expect(tocLinks).toEqual(
-      expect.arrayContaining(["#intro", "#footnotes", "#references"])
+      expect.arrayContaining(["#intro", "#footnotes", "#references"]),
     );
 
     const footnotesHeading = findElements(
       tree,
-      node => node.tagName === "h2" && node.properties?.id === "footnotes"
+      node => node.tagName === "h2" && node.properties?.id === "footnotes",
     )[0];
     expect(footnotesHeading).toBeDefined();
     expect(getNodeText(footnotesHeading)).toContain("Footnotes");
 
     const referencesHeading = findElements(
       tree,
-      node => node.tagName === "h2" && node.properties?.id === "references"
+      node => node.tagName === "h2" && node.properties?.id === "references",
     )[0];
     expect(referencesHeading).toBeDefined();
     expect(getNodeText(referencesHeading)).toContain("References");
 
     const cslInlineContainer = findElements(
       tree,
-      node => node.tagName === "div" && hasClass(node, "csl-right-inline")
+      node => node.tagName === "div" && hasClass(node, "csl-right-inline"),
     )[0];
     const linkedReference = findElements(
       cslInlineContainer,
       node =>
         node.tagName === "a" &&
-        node.properties?.href === "https://example.com/article"
+        node.properties?.href === "https://example.com/article",
     )[0];
 
     expect(linkedReference).toBeDefined();
@@ -826,7 +844,10 @@ describe("rehypePostEnhancements", () => {
     expect(textFragments).toContain("Available: ");
     expect(textFragments).toContain(").");
 
-    const outsideParagraph = findElements(tree, node => node.tagName === "p")[0];
+    const outsideParagraph = findElements(
+      tree,
+      node => node.tagName === "p",
+    )[0];
     expect(outsideParagraph.children[0]).toEqual({
       type: "text",
       value: "Outside URL should stay plain: https://outside.example.dev.",
@@ -834,17 +855,17 @@ describe("rehypePostEnhancements", () => {
 
     const introHeading = findElements(
       tree,
-      node => node.tagName === "h2" && node.properties?.id === "intro"
+      node => node.tagName === "h2" && node.properties?.id === "intro",
     )[0];
     const introHeadingLink = findElements(
       introHeading,
-      node => node.tagName === "a" && hasClass(node, "heading-link")
+      node => node.tagName === "a" && hasClass(node, "heading-link"),
     );
     expect(introHeadingLink).toHaveLength(1);
 
     const tocHeadingLink = findElements(
       tocHeading,
-      node => node.tagName === "a" && hasClass(node, "heading-link")
+      node => node.tagName === "a" && hasClass(node, "heading-link"),
     );
     expect(tocHeadingLink).toHaveLength(0);
   });
@@ -924,7 +945,7 @@ describe("rehypePostEnhancements", () => {
 
     const tocList = tree.children[1];
     const tocLinks = findElements(tocList, node => node.tagName === "a").map(
-      node => node.properties?.href
+      node => node.properties?.href,
     );
 
     expect(tocLinks).toEqual(["#footnotes"]);
@@ -955,7 +976,9 @@ describe("rehypePostEnhancements", () => {
                   type: "element",
                   tagName: "a",
                   properties: { href: "#case-1-theta-is-zero" },
-                  children: [{ type: "text", value: "Case 1 : \\theta is zero" }],
+                  children: [
+                    { type: "text", value: "Case 1 : \\theta is zero" },
+                  ],
                 },
               ],
             },
@@ -997,7 +1020,8 @@ describe("rehypePostEnhancements", () => {
     const tocLink = findElements(
       tree,
       node =>
-        node.tagName === "a" && node.properties?.href === "#case-1-theta-is-zero"
+        node.tagName === "a" &&
+        node.properties?.href === "#case-1-theta-is-zero",
     )[0];
 
     expect(tocLink).toBeDefined();
@@ -1009,7 +1033,7 @@ describe("rehypePostEnhancements", () => {
 describe("getReadingStats", () => {
   it("calculates reading time with 200 words per minute", () => {
     const body = Array.from({ length: 880 }, (_, index) => `word${index}`).join(
-      " "
+      " ",
     );
 
     expect(getReadingStats(body)).toEqual({
@@ -1037,13 +1061,13 @@ gamma \`delta\`
 describe("formatReadingStats", () => {
   it("formats the expected label", () => {
     expect(formatReadingStats({ wordCount: 880, minutes: 5 })).toBe(
-      "5 min read (880 words)"
+      "5 min read (880 words)",
     );
   });
 
   it("formats singular word count correctly", () => {
     expect(formatReadingStats({ wordCount: 1, minutes: 1 })).toBe(
-      "1 min read (1 word)"
+      "1 min read (1 word)",
     );
   });
 });
@@ -1075,7 +1099,7 @@ describe("getPostsByGroupCondition", () => {
 
     const grouped = getPostsByGroupCondition(
       posts as never,
-      post => post.data.tags[0] ?? "untagged"
+      post => post.data.tags[0] ?? "untagged",
     );
 
     expect(Object.keys(grouped)).toEqual(["astro", "rust"]);

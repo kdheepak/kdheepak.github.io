@@ -1,14 +1,15 @@
 ---
 title: Compiling firmware for the Moonlander keyboard with QMK
 date: 2022-03-19T20:40:31-06:00
-description: step-by-step guide to compiling Moonlander keyboard firmware with QMK.
+description:
+  step-by-step guide to compiling Moonlander keyboard firmware with QMK.
 tags:
   - keyboards
 keywords: moonlander, qmk, keyboard, compile, firmware
 ---
 
-First, clone the `qmk_firmware` GitHub repo, and make a fork to maintain your custom keyboard
-firmware. This is what my remotes look like:
+First, clone the `qmk_firmware` GitHub repo, and make a fork to maintain your
+custom keyboard firmware. This is what my remotes look like:
 
 ```bash
 cd qmk_firmware

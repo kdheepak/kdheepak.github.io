@@ -261,7 +261,9 @@ export function remarkImageAttributes() {
         const clickable = applyAttrsToImage(child, attrs);
 
         const replacement =
-          parsed.remainder.length > 0 ? [{ type: "text", value: parsed.remainder }] : [];
+          parsed.remainder.length > 0
+            ? [{ type: "text", value: parsed.remainder }]
+            : [];
         node.children.splice(attrStart, end - attrStart, ...replacement);
 
         if (clickable && node.type !== "link") {

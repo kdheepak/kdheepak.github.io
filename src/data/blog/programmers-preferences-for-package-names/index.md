@@ -7,18 +7,19 @@ description: exploration of package-naming patterns across language ecosystems.
 notebookPath: "src/data/blog/programmers-preferences-for-package-names/index.ipynb"
 ---
 
-Are there trends in choosing package names in various programming
-ecosystems? Do package authors choose names for their packages that are
-[alliterated](https://en.wikipedia.org/wiki/Alliteration) with the name
-of the programming language? Let's venture to find out.
+Are there trends in choosing package names in various programming ecosystems? Do
+package authors choose names for their packages that are
+[alliterated](https://en.wikipedia.org/wiki/Alliteration) with the name of the
+programming language? Let's venture to find out.
 
 First let's install a couple of useful packages.
 
 :::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 using Pkg
 Pkg.activate(@__DIR__)
 # Pkg.add("Plots")
@@ -35,14 +36,15 @@ Pkg.activate(@__DIR__)
 </details>
 :::
 
-We can "bucket" the package names by their starting letter and count the
-number of packages in each bucket, i.e. a frequency plot.
+We can "bucket" the package names by their starting letter and count the number
+of packages in each bucket, i.e. a frequency plot.
 
 ::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 using Plots
 using DataStructures
 using HTTP
@@ -93,22 +95,20 @@ nothing
 
 </details>
 
-:::div{.cell-output .cell-output-display}
-    [ Info: Precompiling IJuliaExt [2f4121a4-3b3a-5ce6-9c5e-1f2673ce168a]
-:::
-::::
+:::div{.cell-output .cell-output-display} [ Info: Precompiling IJuliaExt
+[2f4121a4-3b3a-5ce6-9c5e-1f2673ce168a] ::: ::::
 
 ## English
 
-For a reference case, let's plot the distribution of words in the
-English language, per the list in `/usr/share/dict/words` on my MacOS
-12.5.
+For a reference case, let's plot the distribution of words in the English
+language, per the list in `/usr/share/dict/words` on my MacOS 12.5.
 
 ::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 words = open("/usr/share/dict/words") do f
   readlines(f)
 end
@@ -120,21 +120,19 @@ display(ax)
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-4-output-1.svg)
-:::
-::::
+![](index_files/figure-markdown/cell-4-output-1.svg) ::: ::::
 
 ## Python
 
 For Python, we can get the list of packages on PyPi using
-<https://pypi.org/simple> and get the names of all packages from the
-links.
+<https://pypi.org/simple> and get the names of all packages from the links.
 
 :::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 r = HTTP.get("https://pypi.org/simple")
 data = String(r.body)
 lines = strip.(split(data, "\n"));
@@ -151,28 +149,26 @@ display("text/markdown", summary)
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-5-output-1.svg)
-:::
+![](index_files/figure-markdown/cell-5-output-1.svg) :::
 
-:::div{.cell-output .cell-output-display}
-The difference in percent of names of Python packages starting with "p"
-and words in the English language starting with "p" is +3.1%.
-:::
-:::::
+:::div{.cell-output .cell-output-display} The difference in percent of names of
+Python packages starting with "p" and words in the English language starting
+with "p" is +3.1%. ::: :::::
 
 Personally, I'm surprised this difference isn't higher.
 
 ## Julia
 
-When you install a package using Julia, it downloads a general registry
-into your "home" directory, and we can traverse that directory only one
-level deep to figure out all the names of the packages in the registry.
+When you install a package using Julia, it downloads a general registry into
+your "home" directory, and we can traverse that directory only one level deep to
+figure out all the names of the packages in the registry.
 
 :::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 general_folder = expanduser("~/.julia/registries/General")
 for (root, folders, files) in walkdir(general_folder)
   for folder in folders
@@ -191,27 +187,24 @@ display("text/markdown", summary)
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-6-output-1.svg)
-:::
+![](index_files/figure-markdown/cell-6-output-1.svg) :::
 
-:::div{.cell-output .cell-output-display}
-The difference in percent of names of Julia packages starting with "j"
-and words in the English language starting with "j" is +0.9%.
-:::
-:::::
+:::div{.cell-output .cell-output-display} The difference in percent of names of
+Julia packages starting with "j" and words in the English language starting with
+"j" is +0.9%. ::: :::::
 
 ## Rust
 
 <https://crates.io> conveniently has a
-[data-access](https://crates.io/data-access) page that links to the
-latest dump which contains a `csv` file with the names of all the
-packages.
+[data-access](https://crates.io/data-access) page that links to the latest dump
+which contains a `csv` file with the names of all the packages.
 
 :::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 using DataFrames
 using CSV
 using Tar
@@ -233,14 +226,11 @@ display("text/markdown", summary)
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-7-output-1.svg)
-:::
+![](index_files/figure-markdown/cell-7-output-1.svg) :::
 
-:::div{.cell-output .cell-output-display}
-The difference in percent of names of Rust packages starting with "r"
-and words in the English language starting with "r" is +3.6%.
-:::
-:::::
+:::div{.cell-output .cell-output-display} The difference in percent of names of
+Rust packages starting with "r" and words in the English language starting with
+"r" is +3.6%. ::: :::::
 
 ## R
 
@@ -248,10 +238,11 @@ For R, similar to Python, we can parse the HTML from
 <https://cran.r-project.org/web/packages/available_packages_by_name.html>:
 
 :::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 r = HTTP.get("https://cran.r-project.org/web/packages/available_packages_by_name.html")
 data = String(r.body)
 lines = split(data, "\n")
@@ -268,27 +259,25 @@ display("text/markdown", summary)
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-8-output-1.svg)
-:::
+![](index_files/figure-markdown/cell-8-output-1.svg) :::
 
-:::div{.cell-output .cell-output-display}
-The difference in percent of names of R packages starting with "r" and
-words in the English language starting with "r" is --0.6%.
-:::
-:::::
+:::div{.cell-output .cell-output-display} The difference in percent of names of
+R packages starting with "r" and words in the English language starting with "r"
+is --0.6%. ::: :::::
 
 This is also a rather surprising result.
 
 ## NPM
 
-For NPM packages, <https://replicate.npmjs.com/_all_docs> contains a 228
-MB `json` that contains all the packages.
+For NPM packages, <https://replicate.npmjs.com/_all_docs> contains a 228 MB
+`json` that contains all the packages.
 
 :::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 using JSON3
 artifact_npm = Pkg.Artifacts.ensure_artifact_installed("npm", joinpath(@__DIR__, "Artifacts.toml"))
 data = open(joinpath(artifact_npm, "_all_docs")) do f
@@ -308,24 +297,22 @@ display("text/markdown", summary)
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-9-output-1.svg)
-:::
+![](index_files/figure-markdown/cell-9-output-1.svg) :::
 
-:::div{.cell-output .cell-output-display}
-The difference in percent of names of NPM packages starting with "n" and
-words in the English language starting with "n" is +2.3%.
-:::
-:::::
+:::div{.cell-output .cell-output-display} The difference in percent of names of
+NPM packages starting with "n" and words in the English language starting with
+"n" is +2.3%. ::: :::::
 
 ## Comparison
 
 Here's a plot comparing the normalized values:
 
 ::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.julia .cell-code}
+```{.julia .cell-code}
 using StatsPlots
 
 groupedbar(repeat('a':'z', inner=6), hcat([
@@ -341,13 +328,11 @@ groupedbar(repeat('a':'z', inner=6), hcat([
 </details>
 
 :::div{.cell-output .cell-output-display}
-![](index_files/figure-markdown/cell-10-output-1.svg)
-:::
-::::
+![](index_files/figure-markdown/cell-10-output-1.svg) ::: ::::
 
 ## Conclusion
 
-Even though there is a greater percentage of packages whose name starts
-with the same letter as the name of the programming language compared to
-the average distribution of words in the English language, it is not by
-as big a margin as I was expecting.
+Even though there is a greater percentage of packages whose name starts with the
+same letter as the name of the programming language compared to the average
+distribution of words in the English language, it is not by as big a margin as I
+was expecting.

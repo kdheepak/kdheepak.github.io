@@ -64,7 +64,7 @@ const setClassList = (node, classList) => {
 
 const hasClass = (node, className) =>
   toClassList(node?.properties?.className ?? node?.properties?.class).includes(
-    className
+    className,
   );
 
 const addClass = (node, className) => {
@@ -146,17 +146,13 @@ const isReferencesSection = node => {
 };
 
 const isHeadingNode = node =>
-  isElementNode(node) &&
-  ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName);
+  isElementNode(node) && ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName);
 
 const isHeadingLinkNode = node =>
-  isElementNode(node) &&
-  node.tagName === "a" &&
-  hasClass(node, "heading-link");
+  isElementNode(node) && node.tagName === "a" && hasClass(node, "heading-link");
 
 const hasHeadingLinkChild = heading =>
-  Array.isArray(heading.children) &&
-  heading.children.some(isHeadingLinkNode);
+  Array.isArray(heading.children) && heading.children.some(isHeadingLinkNode);
 
 const createHeadingLink = id => ({
   type: "element",
@@ -202,7 +198,7 @@ const ensureFootnotesHeading = (section, usedIds) => {
   if (!Array.isArray(section.children)) return;
 
   const headingIndex = section.children.findIndex(
-    node => isElementNode(node) && node.tagName === "h2"
+    node => isElementNode(node) && node.tagName === "h2",
   );
 
   if (headingIndex >= 0) {
@@ -210,7 +206,7 @@ const ensureFootnotesHeading = (section, usedIds) => {
     ensureElementId(heading, "footnotes", usedIds);
 
     const classes = toClassList(heading.properties?.className).filter(
-      className => className !== "sr-only"
+      className => className !== "sr-only",
     );
     setClassList(heading, classes);
     return;
@@ -237,7 +233,11 @@ const ensureReferencesHeadings = (node, usedIds) => {
         ensureElementId(previousElement, "references", usedIds);
       } else {
         const headingId = createUniqueId("references", usedIds);
-        node.children.splice(index, 0, createHeading(REFERENCES_HEADING_TEXT, headingId));
+        node.children.splice(
+          index,
+          0,
+          createHeading(REFERENCES_HEADING_TEXT, headingId),
+        );
         index += 1;
       }
     }
@@ -381,7 +381,7 @@ const getHeadingLabel = heading => {
           isElementNode(child) &&
           child.tagName === "a" &&
           hasClass(child, "heading-link")
-        )
+        ),
     )
     .map(getNodeText)
     .join("")
@@ -417,7 +417,7 @@ const appendTocHeadingLink = (
   tocList,
   heading,
   headingLinkHashes,
-  headingLinkLabels
+  headingLinkLabels,
 ) => {
   if (!isListNode(tocList) || !isHeadingNode(heading)) return;
 
@@ -511,10 +511,7 @@ const findTocList = node => {
   for (let index = 0; index < node.children.length; index += 1) {
     const child = node.children[index];
 
-    if (
-      isHeadingNode(child) &&
-      getElementId(child) === TOC_HEADING_ID
-    ) {
+    if (isHeadingNode(child) && getElementId(child) === TOC_HEADING_ID) {
       const nextElement = getNextElementSibling(node.children, index);
       if (isListNode(nextElement)) {
         return nextElement;
@@ -593,7 +590,7 @@ const ensureReferencesAndFootnotesInToc = tree => {
       tocList,
       findFootnotesHeading(tree),
       headingLinkHashes,
-      headingLinkLabels
+      headingLinkLabels,
     );
   }
 
@@ -602,7 +599,7 @@ const ensureReferencesAndFootnotesInToc = tree => {
       tocList,
       findReferencesHeading(tree),
       headingLinkHashes,
-      headingLinkLabels
+      headingLinkLabels,
     );
   }
 };

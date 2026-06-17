@@ -8,9 +8,9 @@ tags:
 keywords: fonts, osx, vim, neovim, tmux
 ---
 
-Getting patched fonts for a powerline in the terminal can be quite an adventure, especially when you
-are using vim and tmux. I almost gave up on it, but now that I've figured it out it seems extremely
-obvious.
+Getting patched fonts for a powerline in the terminal can be quite an adventure,
+especially when you are using vim and tmux. I almost gave up on it, but now that
+I've figured it out it seems extremely obvious.
 
 ```bash
 # pip install --user powerline-status
@@ -20,5 +20,5 @@ cd fonts
 ./install.sh
 ```
 
-Most importantly, select the font with the word `powerline` in the name in the preferences option of
-your terminal.
+Most importantly, select the font with the word `powerline` in the name in the
+preferences option of your terminal.

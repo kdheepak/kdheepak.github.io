@@ -1,14 +1,16 @@
 ---
 title: Sveltekit tailwind starter
 date: 2022-02-18T22:03:31-06:00
-description: minimal starter template with SvelteKit, Tailwind CSS, and Font Awesome.
+description:
+  minimal starter template with SvelteKit, Tailwind CSS, and Font Awesome.
 tags:
   - svelte
 keywords: svelte, sveltekit, tailwind, fontawesome, layercake, starter
 ---
 
-The following is minimal instructions for getting started with the SvelteKit skeleton app, with
-tailwind and font awesome support. Run the following and follow prompts:
+The following is minimal instructions for getting started with the SvelteKit
+skeleton app, with tailwind and font awesome support. Run the following and
+follow prompts:
 
 ```bash
 npm init svelte@next
@@ -56,11 +58,15 @@ prettier . --write --ignore-path .gitignore
 
 ### `tailwind-elements`
 
-If you want to add `tailwind-elements`, change `tailwind.config.js` to the following:
+If you want to add `tailwind-elements`, change `tailwind.config.js` to the
+following:
 
 ```javascript
 const config = {
-  content: ["./src/**/*.{html,js,svelte,ts}", "./node_modules/tw-elements/dist/js/**/*.js"],
+  content: [
+    "./src/**/*.{html,js,svelte,ts}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
+  ],
 
   theme: {
     extend: {},

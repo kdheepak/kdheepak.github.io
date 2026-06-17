@@ -26,7 +26,10 @@ const blog = defineCollection({
 
         // Use `description` as the single canonical summary field.
         if (!("description" in normalized)) {
-          if ("summary" in normalized && typeof normalized.summary === "string") {
+          if (
+            "summary" in normalized &&
+            typeof normalized.summary === "string"
+          ) {
             normalized = { ...normalized, description: normalized.summary };
           } else if (
             "subtitle" in normalized &&
@@ -55,7 +58,7 @@ const blog = defineCollection({
         toc: z.boolean().optional().default(true),
         mathjax: z.boolean().optional().default(true),
         timezone: z.string().optional(),
-      })
+      }),
     ),
 });
 

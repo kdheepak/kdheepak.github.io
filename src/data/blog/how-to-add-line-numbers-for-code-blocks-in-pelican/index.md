@@ -9,15 +9,18 @@ keywords: How to add line numbers for code blocks in Pelican
 
 ::: callout-warning
 
-I've removed line numbers because it is selected along with the code if someone wants
-to copy.
+I've removed line numbers because it is selected along with the code if someone
+wants to copy.
 
-Also, I've since moved away from Pelican. If you want line numbers, you can use the CSS below but it is up to you for maintaining the plugin that adds the line numbers.
+Also, I've since moved away from Pelican. If you want line numbers, you can use
+the CSS below but it is up to you for maintaining the plugin that adds the line
+numbers.
 
 :::
 
-I've found that line numbering with word wrap could only be achieved in Pelican by a certain set of
-steps. I've listed the CSS and the Plugin I've used to get that to work.
+I've found that line numbering with word wrap could only be achieved in Pelican
+by a certain set of steps. I've listed the CSS and the Plugin I've used to get
+that to work.
 
 Add the following lines in your theme.css:
 
@@ -60,7 +63,8 @@ use CSS to add line numbers to all spans that have the class 'code-line' */
 }
 ````
 
-Then, we turn off the default linenums in codehilite. Also add the following pelican-plugin.
+Then, we turn off the default linenums in codehilite. Also add the following
+pelican-plugin.
 
 ```python
 MD_EXTENSIONS = ['fenced_code', 'codehilite(css_class=highlight, linenums=False)', ]

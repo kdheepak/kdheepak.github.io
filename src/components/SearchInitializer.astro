@@ -12,7 +12,7 @@
       if (title.querySelector(".pagefind-ui__result-date")) continue;
 
       const dateTag = result.querySelector(
-        '.pagefind-ui__result-tag[data-pagefind-ui-meta="date"]'
+        '.pagefind-ui__result-tag[data-pagefind-ui-meta="date"]',
       );
       if (!(dateTag instanceof HTMLElement)) continue;
 
@@ -83,10 +83,11 @@
             history.replaceState(
               history.state,
               "",
-              queryString ? `?${queryString}` : window.location.pathname
+              queryString ? `?${queryString}` : window.location.pathname,
             );
 
-            const backUrl = pageFindSearch.dataset.backurl ?? window.location.pathname;
+            const backUrl =
+              pageFindSearch.dataset.backurl ?? window.location.pathname;
             const sessionBackUrl = queryString
               ? `${backUrl}?${queryString}`
               : backUrl;
@@ -111,9 +112,11 @@
         }
 
         const searchInput = document.querySelector(
-          ".pagefind-ui__search-input"
+          ".pagefind-ui__search-input",
         ) as HTMLInputElement | null;
-        const clearButton = document.querySelector(".pagefind-ui__search-clear");
+        const clearButton = document.querySelector(
+          ".pagefind-ui__search-clear",
+        );
 
         function resetSearchParam() {
           if (!searchInput || searchInput.value.trim() !== "") return;

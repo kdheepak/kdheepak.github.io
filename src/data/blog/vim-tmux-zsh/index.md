@@ -7,8 +7,8 @@ tags:
 keywords: vim, tmux, zsh
 ---
 
-I've not found a greater combination of tools than vim, tmux and zsh. I've detailed below some of
-the configuration to get it working the way I want it to.
+I've not found a greater combination of tools than vim, tmux and zsh. I've
+detailed below some of the configuration to get it working the way I want it to.
 
 ![vim-tmux-zsh](images/vim-tmux-zsh.png)
 

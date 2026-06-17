@@ -168,12 +168,12 @@ const parseCellSelection = (rawCells, totalCells) => {
 
   if (selected.length === 0) return [];
 
-  const indices = usesZeroBased
-    ? selected
-    : selected.map(index => index - 1);
+  const indices = usesZeroBased ? selected : selected.map(index => index - 1);
 
   return dedupe(
-    indices.filter(index => Number.isInteger(index) && index >= 0 && index < totalCells),
+    indices.filter(
+      index => Number.isInteger(index) && index >= 0 && index < totalCells,
+    ),
   );
 };
 
@@ -187,13 +187,17 @@ const parseNotebookDataFromDirective = (node, filePath, notebookFile) => {
     return null;
   }
 
-  const baseDir = typeof filePath === "string" ? dirname(filePath) : process.cwd();
+  const baseDir =
+    typeof filePath === "string" ? dirname(filePath) : process.cwd();
   const notebookPath = resolve(baseDir, notebookFile);
   return JSON.parse(readFileSync(notebookPath, "utf-8"));
 };
 
 const notebookDirectiveToNodes = (node, file) => {
-  if (!node || (node.type !== "containerDirective" && node.type !== "leafDirective")) {
+  if (
+    !node ||
+    (node.type !== "containerDirective" && node.type !== "leafDirective")
+  ) {
     return null;
   }
 
@@ -205,7 +209,11 @@ const notebookDirectiveToNodes = (node, file) => {
 
   let notebookData;
   try {
-    notebookData = parseNotebookDataFromDirective(node, file?.path, notebookFile);
+    notebookData = parseNotebookDataFromDirective(
+      node,
+      file?.path,
+      notebookFile,
+    );
   } catch (error) {
     return [
       {
@@ -243,12 +251,16 @@ const notebookDirectiveToNodes = (node, file) => {
         ? attrs.properties.cell
         : "";
 
-  const selectedCellIndices = parseCellSelection(cellSpec, notebookData.cells.length);
+  const selectedCellIndices = parseCellSelection(
+    cellSpec,
+    notebookData.cells.length,
+  );
   const cellOutputs = [];
 
   for (const cellIndex of selectedCellIndices) {
     const cell = notebookData.cells[cellIndex];
-    if (!cell || cell.cell_type !== "code" || !Array.isArray(cell.outputs)) continue;
+    if (!cell || cell.cell_type !== "code" || !Array.isArray(cell.outputs))
+      continue;
 
     for (const output of cell.outputs) {
       const data = output?.data;
@@ -263,7 +275,9 @@ const notebookDirectiveToNodes = (node, file) => {
         normalizeOutputValue(data["application/javascript"]) ||
         normalizeOutputValue(data["application/vnd.holoviews_load.v0+json"]);
       if (jsOutput) {
-        cellOutputs.push(`<script type="application/javascript">\n${jsOutput}\n</script>`);
+        cellOutputs.push(
+          `<script type="application/javascript">\n${jsOutput}\n</script>`,
+        );
       }
     }
   }
@@ -275,7 +289,8 @@ const notebookDirectiveToNodes = (node, file) => {
         children: [
           {
             type: "text",
-            value: "No HTML/JavaScript output found for the selected notebook cell(s).",
+            value:
+              "No HTML/JavaScript output found for the selected notebook cell(s).",
           },
         ],
       },
@@ -352,16 +367,19 @@ const parseRawCalloutOpen = text => {
 const hasClassName = (node, className) => {
   const values = node?.data?.hProperties?.className;
   if (Array.isArray(values)) return values.includes(className);
-  if (typeof values === "string") return values.split(/\s+/).includes(className);
+  if (typeof values === "string")
+    return values.split(/\s+/).includes(className);
   return false;
 };
 
 const prependIconToFirstParagraph = (children, icon) => {
-  if (!icon || !Array.isArray(children) || children.length === 0) return children;
+  if (!icon || !Array.isArray(children) || children.length === 0)
+    return children;
 
   const nextChildren = [...children];
   const paragraph = nextChildren.find(
-    child => child && child.type === "paragraph" && Array.isArray(child.children),
+    child =>
+      child && child.type === "paragraph" && Array.isArray(child.children),
   );
 
   if (!paragraph) {
@@ -381,7 +399,10 @@ const prependIconToFirstParagraph = (children, icon) => {
     return nextChildren;
   }
 
-  paragraph.children = [{ type: "text", value: `${icon} ` }, ...paragraph.children];
+  paragraph.children = [
+    { type: "text", value: `${icon} ` },
+    ...paragraph.children,
+  ];
   return nextChildren;
 };
 
@@ -434,13 +455,18 @@ const stripRawCalloutFenceFromParagraph = node => {
   const rawCalloutOpen = parseRawCalloutOpen(firstTextNode.value);
   if (!rawCalloutOpen) return null;
 
-  firstTextNode.value = firstTextNode.value.slice(rawCalloutOpen.matchedText.length);
+  firstTextNode.value = firstTextNode.value.slice(
+    rawCalloutOpen.matchedText.length,
+  );
   firstTextNode.value = firstTextNode.value.replace(/^\r?\n/, "");
 
   const lastTextNode = children[lastTextIndex];
   if (!lastTextNode || typeof lastTextNode.value !== "string") return null;
 
-  const withoutCloseFence = lastTextNode.value.replace(/(?:\r?\n)?\s*:::\s*$/, "");
+  const withoutCloseFence = lastTextNode.value.replace(
+    /(?:\r?\n)?\s*:::\s*$/,
+    "",
+  );
   if (withoutCloseFence === lastTextNode.value) return null;
   lastTextNode.value = withoutCloseFence;
 
@@ -462,7 +488,8 @@ const stripRawCalloutFenceFromParagraph = node => {
     children.pop();
   }
 
-  const bodyChildren = children.length > 0 ? children : [{ type: "text", value: "" }];
+  const bodyChildren =
+    children.length > 0 ? children : [{ type: "text", value: "" }];
 
   const directiveNode = {
     type: "containerDirective",
@@ -497,7 +524,9 @@ const stripRawCalloutOpenFromParagraph = node => {
   const rawCalloutOpen = parseRawCalloutOpen(firstTextNode.value);
   if (!rawCalloutOpen) return null;
 
-  firstTextNode.value = firstTextNode.value.slice(rawCalloutOpen.matchedText.length);
+  firstTextNode.value = firstTextNode.value.slice(
+    rawCalloutOpen.matchedText.length,
+  );
   firstTextNode.value = firstTextNode.value.replace(/^\r?\n/, "");
 
   while (
@@ -532,7 +561,11 @@ const paragraphHasVisibleContent = node =>
 
 const unwrapLegacyCalloutChildren = tree => {
   visit(tree, node => {
-    if (!node || !Array.isArray(node.children) || !hasClassName(node, "callout")) {
+    if (
+      !node ||
+      !Array.isArray(node.children) ||
+      !hasClassName(node, "callout")
+    ) {
       return;
     }
 
@@ -619,13 +652,15 @@ const directiveContainerToElement = node => {
 
       const hProperties = { ...attrs.properties };
       if (attrs.id) hProperties.id = attrs.id;
-      if (attrs.className.length > 0) hProperties.className = dedupe(attrs.className);
+      if (attrs.className.length > 0)
+        hProperties.className = dedupe(attrs.className);
 
       toHastData(node, "div", hProperties);
       return;
     }
 
-    const styledCalloutType = CALLOUT_STYLE_OVERRIDES[calloutType] ?? calloutType;
+    const styledCalloutType =
+      CALLOUT_STYLE_OVERRIDES[calloutType] ?? calloutType;
     const className = dedupe([
       "callout",
       `callout-${styledCalloutType}`,
@@ -683,7 +718,7 @@ const directiveContainerToElement = node => {
 
   const hProperties = { ...attrs.properties };
   const layoutNcol = parsePositiveInteger(
-    hProperties["layout-ncol"] ?? hProperties.layoutNcol
+    hProperties["layout-ncol"] ?? hProperties.layoutNcol,
   );
   if (layoutNcol !== null) {
     delete hProperties["layout-ncol"];
@@ -698,7 +733,7 @@ const directiveContainerToElement = node => {
     ];
     hProperties.style = mergeStyles(
       typeof hProperties.style === "string" ? hProperties.style : "",
-      layoutStyles.join(";")
+      layoutStyles.join(";"),
     );
     className = dedupe(["layout-ncol", ...className]);
   }
@@ -819,7 +854,8 @@ export function remarkDirectives() {
           const previous = parent.children[index - 1];
           const previousIsCallout =
             (previous?.type === "containerDirective" &&
-              (previous.name === "callout" || Boolean(parseCalloutDirective(previous.name)))) ||
+              (previous.name === "callout" ||
+                Boolean(parseCalloutDirective(previous.name)))) ||
             hasClassName(previous, "callout");
           if (previousIsCallout) {
             parent.children.splice(index, 1);
@@ -831,7 +867,8 @@ export function remarkDirectives() {
           const next = parent.children[index + 1];
           const nextIsCallout =
             (next?.type === "containerDirective" &&
-              (next.name === "callout" || Boolean(parseCalloutDirective(next.name)))) ||
+              (next.name === "callout" ||
+                Boolean(parseCalloutDirective(next.name)))) ||
             hasClassName(next, "callout");
           if (nextIsCallout) {
             parent.children.splice(index, 1);
@@ -841,7 +878,8 @@ export function remarkDirectives() {
 
         const fallbackDirective = stripRawCalloutFenceFromParagraph(node);
         if (fallbackDirective) {
-          const legacyBlocks = legacyCalloutDirectiveToBlocks(fallbackDirective);
+          const legacyBlocks =
+            legacyCalloutDirectiveToBlocks(fallbackDirective);
           if (legacyBlocks) {
             parent.children.splice(index, 1, ...legacyBlocks);
             return index;
@@ -897,12 +935,21 @@ export function remarkDirectives() {
           children:
             bodyChildren.length > 0
               ? bodyChildren
-              : [{ type: "paragraph", children: [{ type: "text", value: "" }] }],
+              : [
+                  {
+                    type: "paragraph",
+                    children: [{ type: "text", value: "" }],
+                  },
+                ],
         };
 
         const legacyBlocks = legacyCalloutDirectiveToBlocks(directiveNode);
         if (legacyBlocks) {
-          parent.children.splice(index, closeIndex - index + 1, ...legacyBlocks);
+          parent.children.splice(
+            index,
+            closeIndex - index + 1,
+            ...legacyBlocks,
+          );
           return index;
         }
 

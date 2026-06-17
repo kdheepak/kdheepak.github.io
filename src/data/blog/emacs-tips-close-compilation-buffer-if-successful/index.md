@@ -1,19 +1,23 @@
 ---
 title: Emacs tips — Close compilation buffer
 date: 2015-07-19T12:43:56-06:00
-description: emacs tip for closing the compilation buffer automatically after successful builds.
+description:
+  emacs tip for closing the compilation buffer automatically after successful
+  builds.
 tags:
   - emacs
 keywords: tips and tricks, compilation buffer, auto close
 mathjax: true
 ---
 
-When I work with markdown, $\LaTeX$ or code that requires compiling, I like to check often if
-everything looks okay. Emacs has a good description of everything you can do with the
+When I work with markdown, $\LaTeX$ or code that requires compiling, I like to
+check often if everything looks okay. Emacs has a good description of everything
+you can do with the
 [CompileCommand](https://emacswiki.org/emacs/CompileCommand).
 
-However, it does not have a description for auto-closing the buffer if the compilation was
-successful. [StackOverflow](https://emacs.stackexchange.com/a/336) to the rescue!
+However, it does not have a description for auto-closing the buffer if the
+compilation was successful.
+[StackOverflow](https://emacs.stackexchange.com/a/336) to the rescue!
 
 ```lisp
 #!lisp
@@ -29,5 +33,5 @@ successful. [StackOverflow](https://emacs.stackexchange.com/a/336) to the rescue
         (message "No Compilation Errors!")))))
 ```
 
-Insert the above code into your `.emacs` file. You can change the time you wish the buffer to be
-available by changing the "1 sec" in the above code
+Insert the above code into your `.emacs` file. You can change the time you wish
+the buffer to be available by changing the "1 sec" in the above code

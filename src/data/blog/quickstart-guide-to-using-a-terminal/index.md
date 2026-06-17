@@ -7,11 +7,13 @@ tags:
 keywords: terminal, bash, zsh, shell
 ---
 
-If you are typically used to GUI applications, you may feel lost when you are getting started with a
-terminal. In this post, I'll share a number of basic things that I think you should know that will
-help you get familiar with a terminal based workflow.
+If you are typically used to GUI applications, you may feel lost when you are
+getting started with a terminal. In this post, I'll share a number of basic
+things that I think you should know that will help you get familiar with a
+terminal based workflow.
 
-Typically, when you open a terminal on a linux or a mac, you may see something like this:
+Typically, when you open a terminal on a linux or a mac, you may see something
+like this:
 
 ```bash
 $
@@ -23,16 +25,17 @@ Or
 bash-5.1$
 ```
 
-This is your terminal prompt. In the examples below, I will elide the prompt characters and show
-only the command you would type or the output of the command.
+This is your terminal prompt. In the examples below, I will elide the prompt
+characters and show only the command you would type or the output of the
+command.
 
 ## Movement
 
-One of the first things you should know is that you can't use your mouse to move your cursor, and
-almost everything you do needs to be done using your keyboard.
+One of the first things you should know is that you can't use your mouse to move
+your cursor, and almost everything you do needs to be done using your keyboard.
 
-For starters, you can use <kbd>Ctrl + a</kbd> to move to the beginning of the line and <kbd>Ctrl +
-e</kbd> to move to the end of the line.
+For starters, you can use <kbd>Ctrl + a</kbd> to move to the beginning of the
+line and <kbd>Ctrl + e</kbd> to move to the end of the line.
 
 | Keyboard shortcut   | Action                          |
 | ------------------- | ------------------------------- |
@@ -44,7 +47,8 @@ e</kbd> to move to the end of the line.
 | <kbd>Ctrl + f</kbd> | Move forward one character      |
 | <kbd>Ctrl + b</kbd> | Move backward one character     |
 
-These are `readline` keybindings and we'll talk more about this in a future post.
+These are `readline` keybindings and we'll talk more about this in a future
+post.
 
 ## Useful built-in terminal utilties
 
@@ -70,8 +74,8 @@ ls $HOME
 
 `ls` lists the files and folders in a particular directory.
 
-Now try running `ls -al $HOME`. Notice the `-al` flags. The `-a` flag is for "all" files or folders
-and `-l` is for printing it out in a "list" form.
+Now try running `ls -al $HOME`. Notice the `-al` flags. The `-a` flag is for
+"all" files or folders and `-l` is for printing it out in a "list" form.
 
 ```bash
 ls -al $HOME
@@ -109,16 +113,20 @@ drwxr-xr-x     - 28 Jan  2020  Public/
 ```
 
 :::tip Learning how to read "permissions" for files and folders when you use
-`ls -al path/to/file-or-folder` is crucial to debugging issues with permissions. :::
+`ls -al path/to/file-or-folder` is crucial to debugging issues with permissions.
+:::
 
 A couple of things to note about flags.
 
-- You can typically use them in any order, i.e. `ls -al` is equivalent to `ls -la`
+- You can typically use them in any order, i.e. `ls -al` is equivalent to
+  `ls -la`
 - You can see the full list of options available by using `man ls`.
-- Other command line tools might have a `-h/--help` flag that prints out all available flags.
+- Other command line tools might have a `-h/--help` flag that prints out all
+  available flags.
 
-I personally always want to see the output of `ls` in a list form. If you add the following "alias"
-to your `.bashrc` or `.bash_profile`, you can use `ls` to invoke `ls -al`.
+I personally always want to see the output of `ls` in a list form. If you add
+the following "alias" to your `.bashrc` or `.bash_profile`, you can use `ls` to
+invoke `ls -al`.
 
 ```bash
 alias ls="ls -al"
@@ -126,16 +134,16 @@ alias ls="ls -al"
 
 3. `pwd`
 
-Type `pwd` in your terminal. It should print the full path to the "present working directory" folder
-in your terminal. This can be useful to figure out in which directory your prompt is currently is
-"in". Typically, any script or command you run will use the `pwd` as the current directory in the
-script.
+Type `pwd` in your terminal. It should print the full path to the "present
+working directory" folder in your terminal. This can be useful to figure out in
+which directory your prompt is currently is "in". Typically, any script or
+command you run will use the `pwd` as the current directory in the script.
 
 4. `cd`
 
-You can use `cd` to "change directory". Use `cd` or `cd ~` to change to your home directory, and use
-`cd -` to go back to the last directory that you were in. Run the following line by line in your
-terminal:
+You can use `cd` to "change directory". Use `cd` or `cd ~` to change to your
+home directory, and use `cd -` to go back to the last directory that you were
+in. Run the following line by line in your terminal:
 
 ```bash
 pwd
@@ -147,16 +155,17 @@ pwd
 
 5. `cp`
 
-You can use `cp /path/to/source /path/to/destination` to "copy" a file from a source location to a
-destination location. If you want to copy a folder, you'll need to use `cp -r` for "recursively
-copy".
+You can use `cp /path/to/source /path/to/destination` to "copy" a file from a
+source location to a destination location. If you want to copy a folder, you'll
+need to use `cp -r` for "recursively copy".
 
 6. `mv`
 
-You can use `mv /path/to/source /path/to/destination` to "move" a file or folder from a source
-location to a destination location. If you want to rename a file or folder, you will have to
-`mv oldname newname`. You want to ensure that the destination does not exist or there is no folder
-by that name, otherwise you may end up overwriting or moving it to an unintended location.
+You can use `mv /path/to/source /path/to/destination` to "move" a file or folder
+from a source location to a destination location. If you want to rename a file
+or folder, you will have to `mv oldname newname`. You want to ensure that the
+destination does not exist or there is no folder by that name, otherwise you may
+end up overwriting or moving it to an unintended location.
 
 `mv` has the following flags:
 
@@ -176,20 +185,22 @@ You can use `rm` to remove files. You can use `rm -r` to remove folders.
 
 8. `mkdir`
 
-You can use `mkdir /path/to/dir` to "make a directory" if `/path/to/` already exists. If you wish to
-create nested directories, you can use the `-p` flag, i.e. `mkdir /path/to/nested/dir`.
+You can use `mkdir /path/to/dir` to "make a directory" if `/path/to/` already
+exists. If you wish to create nested directories, you can use the `-p` flag,
+i.e. `mkdir /path/to/nested/dir`.
 
 9. `cat`
 
-`cat` concatenates and prints files to the terminal standard out. This is useful for seeing the
-contents of a text file without opening it.
+`cat` concatenates and prints files to the terminal standard out. This is useful
+for seeing the contents of a text file without opening it.
 
-There are two additional commands that are useful for seeing the first or last `n` lines in a file,
-i.e. `head` and `tail`.
+There are two additional commands that are useful for seeing the first or last
+`n` lines in a file, i.e. `head` and `tail`.
 
 10. `find`
 
-`find` is extremely useful in finding if a file of a certain name or type exists.
+`find` is extremely useful in finding if a file of a certain name or type
+exists.
 
 ```bash
 find . -name *.md
@@ -199,8 +210,8 @@ You can use regular expressions to widen your search criteria.
 
 11. `grep`
 
-`grep` is handy in finding text within files. I like to use `-ri` for recursively searching for a
-case insensitive match in a particular folder.
+`grep` is handy in finding text within files. I like to use `-ri` for
+recursively searching for a case insensitive match in a particular folder.
 
 ```bash
 grep -ri "when I first" src/posts
@@ -213,10 +224,10 @@ src/posts/10-fast-track-to-being-productive-with-vim.md:When I first started usi
 
 12. `vi` or `vim` or `nano` or `emacs`
 
-Finally, learning how to use a text editor can go a long way in getting you comfortable with a
-terminal. Check out
-[my post on how to get started with vim](../fast-track-to-being-productive-in-vim) for more
-information.
+Finally, learning how to use a text editor can go a long way in getting you
+comfortable with a terminal. Check out
+[my post on how to get started with vim](../fast-track-to-being-productive-in-vim)
+for more information.
 
 ## Environment Variables
 
@@ -232,37 +243,43 @@ you should see something like this being printed in your terminal:
 /Users/USERNAME
 ```
 
-`$HOME` is an environment variable that contains the value of your user's "home" directory.
+`$HOME` is an environment variable that contains the value of your user's "home"
+directory.
 
-Type `echo $PATH` in your command line. On unix, the `$PATH` environment variable contains `:`
-separated paths to folders. Your shell looks through these in order when searching for binaries to
-execute.
+Type `echo $PATH` in your command line. On unix, the `$PATH` environment
+variable contains `:` separated paths to folders. Your shell looks through these
+in order when searching for binaries to execute.
 
 ## `.bashrc` and `.bash_profile`
 
-The `bash` shell, when invoked, can read and execute commands from a set of start up files.
+The `bash` shell, when invoked, can read and execute commands from a set of
+start up files.
 
-When invoked as an interactive login shell, `bash` looks for `/etc/profile`, then `~/.bash_profile`,
-then `~/.bash_login` and then `~/.profile`.
+When invoked as an interactive login shell, `bash` looks for `/etc/profile`,
+then `~/.bash_profile`, then `~/.bash_login` and then `~/.profile`.
 
-When invoked as an interactive non-login shell, `bash` reads and executes from `~/.bashrc`.
+When invoked as an interactive non-login shell, `bash` reads and executes from
+`~/.bashrc`.
 
-`~/.profile` or `~/.bash_profile` should contain modifications to `$PATH` whereas `~/.bashrc` can
-contain modifications to your prompt or aliases or other customizations. `~/.profile` is typically
-run just once, but `~/.bashrc` is run everytime you run a new shell.
+`~/.profile` or `~/.bash_profile` should contain modifications to `$PATH`
+whereas `~/.bashrc` can contain modifications to your prompt or aliases or other
+customizations. `~/.profile` is typically run just once, but `~/.bashrc` is run
+everytime you run a new shell.
 
 ## <kbd>Ctrl + c</kbd>
 
-For long running processes, you can use <kbd>Ctrl + c</kbd> to kill the process. You can use
-<kbd>Ctrl + z</kbd> to background a currently running process and type `fg` to foreground the last
-backgrounded process.
+For long running processes, you can use <kbd>Ctrl + c</kbd> to kill the process.
+You can use <kbd>Ctrl + z</kbd> to background a currently running process and
+type `fg` to foreground the last backgrounded process.
 
 ## Piping
 
-One of the advantages of working from the terminal is that once you have some basics down, you can
-chain together commands really easily. You can do this using the pipe operator, i.e. `|`.
+One of the advantages of working from the terminal is that once you have some
+basics down, you can chain together commands really easily. You can do this
+using the pipe operator, i.e. `|`.
 
-Let's say I wanted to show the last 3 lines or the `README.md` in my current folder:
+Let's say I wanted to show the last 3 lines or the `README.md` in my current
+folder:
 
 ```bash
 bat README.md | tail -n3
@@ -296,4 +313,5 @@ rg --files | rg vim
 189:src/posts/images/vim-tmux-zsh.png
 ```
 
-The `|` operator takes the `stdout` of one command and feeds it as input to the next.
+The `|` operator takes the `stdout` of one command and feeds it as input to the
+next.

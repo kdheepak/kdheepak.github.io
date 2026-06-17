@@ -23,7 +23,9 @@ const obfuscatedEmail = Buffer.from(email).toString("base64");
   };
 
   const hydrateObfuscatedEmails = (root: ParentNode = document): void => {
-    const links = root.querySelectorAll<HTMLAnchorElement>("a[data-obfuscated-email]");
+    const links = root.querySelectorAll<HTMLAnchorElement>(
+      "a[data-obfuscated-email]",
+    );
     for (const link of links) {
       const encoded = link.dataset.obfuscatedEmail;
       if (!encoded) continue;

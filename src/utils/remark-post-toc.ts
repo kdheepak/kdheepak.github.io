@@ -14,8 +14,7 @@ const getNodeText = node => {
   return node.children.map(getNodeText).join("");
 };
 
-const isTocEnabled = file =>
-  file?.data?.astro?.frontmatter?.toc !== false;
+const isTocEnabled = file => file?.data?.astro?.frontmatter?.toc !== false;
 
 const isBlogPostFile = filePath =>
   typeof filePath === "string" &&
@@ -24,8 +23,7 @@ const isBlogPostFile = filePath =>
 const isHeadingNode = node => node?.type === "heading";
 
 const isTocHeadingNode = node =>
-  isHeadingNode(node) &&
-  TOC_HEADING_PATTERN.test(getNodeText(node).trim());
+  isHeadingNode(node) && TOC_HEADING_PATTERN.test(getNodeText(node).trim());
 
 const getInsertionIndex = nodes => {
   let index = 0;

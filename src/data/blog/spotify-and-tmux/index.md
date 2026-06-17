@@ -9,8 +9,9 @@ keywords: tmux, spotify, powerline
 
 ![](images/tmux-spotify.png)
 
-Create a file named tmux-spotify-info and place it in a directory that in your `$PATH`. Add the
-following snippet of code into the file and make sure it is executable.
+Create a file named tmux-spotify-info and place it in a directory that in your
+`$PATH`. Add the following snippet of code into the file and make sure it is
+executable.
 
 ```bash
 #!/usr/bin/env osascript
@@ -55,5 +56,5 @@ set -g window-status-format "#[fg=white,bg=colour234] #I #W "
 set -g window-status-current-format "#[fg=colour234,bg=colour39]#[fg=colour16,bg=colour39,noreverse,bold] #I ❭ #W #[fg=colour39,bg=colour234,nobold]"
 ```
 
-And your favourite song will be listed in your tmux powerline! You can change the colours by playing
-the values above.
+And your favourite song will be listed in your tmux powerline! You can change
+the colours by playing the values above.

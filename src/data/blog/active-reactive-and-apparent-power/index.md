@@ -8,16 +8,16 @@ tags:
   - math
   - python
 keywords:
-  what is active power, what is reactive power, what is real power, what is imaginary power, Active
-  Power, Reactive Power, Apparent Power
+  what is active power, what is reactive power, what is real power, what is
+  imaginary power, Active Power, Reactive Power, Apparent Power
 ---
 
 ## Introduction to basic concepts
 
-$V$ and $I$ are used to indicate phasor representations of sinusoidal voltages and currents. $E$ is
-used to represent generated voltage or electromotive force (emf). $V$ is often used to measure a
-potential difference between two points. $v$ is used to represent the instantaneous voltage between
-two points.
+$V$ and $I$ are used to indicate phasor representations of sinusoidal voltages
+and currents. $E$ is used to represent generated voltage or electromotive force
+(emf). $V$ is often used to measure a potential difference between two points.
+$v$ is used to represent the instantaneous voltage between two points.
 
 Let voltage be defined as the following:
 
@@ -102,8 +102,8 @@ $v_{an} = V_{max} \cos(\omega t + \theta)$
 
 $i_{an} = I_{max} \cos\omega t$
 
-Instantaneous power is calculated by $p_{a} = v_{an} \times i_{an}$. If we plot the above equations,
-assuming $\theta = -\frac{\pi}{6}$, we get the following.
+Instantaneous power is calculated by $p_{a} = v_{an} \times i_{an}$. If we plot
+the above equations, assuming $\theta = -\frac{\pi}{6}$, we get the following.
 
 <details>
 <summary>Code</summary>
@@ -187,8 +187,8 @@ $p = \frac{V_{max}I_{max}}{2}({{\cos\theta (1 + \cos 2\omega t)  - \sin 2\omega 
 
 $p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t)  - \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta$
 
-$\theta$ is the phase angle of one of the phasors. In our case, $\theta$ is the phase angle of
-Voltage, when the angle of Current is 0
+$\theta$ is the phase angle of one of the phasors. In our case, $\theta$ is the
+phase angle of Voltage, when the angle of Current is 0
 
 Assuming $\theta = -\theta$,
 
@@ -200,7 +200,8 @@ Hence,
 
 $p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t) + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta$
 
-We see that the sign of the first term remains unaffected by the sign of $\theta$
+We see that the sign of the first term remains unaffected by the sign of
+$\theta$
 
 Let us plot the two parts of this equation.
 
@@ -271,7 +272,8 @@ $P = |V||I|\cos\theta$
 
 The average value of the red line (reactive power) is equal to zero.
 
-The maximum value of the instantaneous reactive power is $\frac{V_{max}I_{max}}{2} \sin \theta$
+The maximum value of the instantaneous reactive power is
+$\frac{V_{max}I_{max}}{2} \sin \theta$
 
 Or,
 
@@ -364,9 +366,10 @@ $p_{reactive} = v_{a} \times i_{X}$
 
 ## Special cases
 
-$P$ or active power or real power is the power that is dissipated in the resistor, in the form of
-heat energy. $Q$ or reactive power is the power that oscillates between the source and inductor or
-the capacitor. And $\theta$ is determined by the nature of the impedance.
+$P$ or active power or real power is the power that is dissipated in the
+resistor, in the form of heat energy. $Q$ or reactive power is the power that
+oscillates between the source and inductor or the capacitor. And $\theta$ is
+determined by the nature of the impedance.
 
 Let's look at three cases
 
@@ -497,8 +500,8 @@ plt.savefig("./power_30_0.png", dpi=300, transparent=True)
 
 ![](images/power_30_0.png)
 
-The Instantaneous power in the phase is equal to the reactive power. The power oscillates between
-the source and the inductive circuit.
+The Instantaneous power in the phase is equal to the reactive power. The power
+oscillates between the source and the inductive circuit.
 
 ### Case 3 : $\theta$ is -90
 
@@ -562,8 +565,8 @@ plt.savefig("./power_34_0.png", dpi=300, transparent=True)
 
 ![](images/power_34_0.png)
 
-In a purely capacitive circuit, power oscillates between the source and electric field associated
-with the capacitor.
+In a purely capacitive circuit, power oscillates between the source and electric
+field associated with the capacitor.
 
 ## Expression for complex power
 

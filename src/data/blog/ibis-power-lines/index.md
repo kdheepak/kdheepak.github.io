@@ -8,13 +8,14 @@ notebookPath: "src/data/blog/ibis-power-lines/index.ipynb"
 ---
 
 This is a reproduction of the post on the official
-[ibis](https://ibis-project.org/posts/ibis-overturemaps/) website with
-minor modifications.
+[ibis](https://ibis-project.org/posts/ibis-overturemaps/) website with minor
+modifications.
 
 I like to add the following to the top of all my notebooks.
 
 :::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 %reload_ext autoreload
 %autoreload 2
 
@@ -22,52 +23,57 @@ from IPython.core.interactiveshell import InteractiveShell
 
 InteractiveShell.ast_node_interactivity = "last_expr_or_assign"
 ```
+
 :::
 
 ## Install
 
-The packages can be installed with `uv sync` command if you use the lock
-file in the source directory.
+The packages can be installed with `uv sync` command if you use the lock file in
+the source directory.
 
-``` bash
+```bash
 uv sync
 ```
 
 Alternatively, you can install the packages with the following commands.
 
-``` bash
+```bash
 uv add 'ibis-framework[duckdb,geospatial]' folium geopandas
 ```
 
 ## Imports
 
 :::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import ibis
 from ibis import _
 ```
+
 :::
 
 :::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 ibis.options.interactive = True
 ```
+
 :::
 
 ## Download the data
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 con = ibis.duckdb.connect(extensions=["spatial"])
 ```
 
-:::div{.cell-output .cell-output-display}
-    <ibis.backends.duckdb.Backend at 0x115da1700>
-:::
-::::
+:::div{.cell-output .cell-output-display} <ibis.backends.duckdb.Backend at
+0x115da1700> ::: ::::
 
 :::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import os
 
 if not os.path.exists("power-infra-usa.geoparquet"):
@@ -88,6 +94,7 @@ if not os.path.exists("power-infra-usa.geoparquet"):
 
 None
 ```
+
 :::
 
 ## Filter and destructure
@@ -95,11 +102,13 @@ None
 With `ibis` we can read the power infrastructure data.
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 usa_power_infra = con.read_parquet("power-infra-usa.geoparquet")
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> names </span>┃<span style="font-weight: bold"> geometry                                                                         </span>┃<span style="font-weight: bold"> bbox                                                               </span>┃<span style="font-weight: bold"> class       </span>┃<span style="font-weight: bold"> sources                                                                          </span>┃<span style="font-weight: bold"> source_tags                                  </span>┃
 ┡━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -118,16 +127,17 @@ usa_power_infra = con.read_parquet("power-infra-usa.geoparquet")
 │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>     │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                                │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                  │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>           │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                                │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                            │
 └───────┴──────────────────────────────────────────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────┴─────────────┴──────────────────────────────────────────────────────────────────────────────────┴──────────────────────────────────────────────┘
 </pre>
-:::
-::::
+
+::: ::::
 
 Here's all the types of infrastructure in the data:
 
 ::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.python .cell-code}
+```{.python .cell-code}
 import rich
 table = rich.table.Table(title="Infrastructure Types")
 
@@ -150,6 +160,7 @@ rich.print(table)
 </details>
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic"> Infrastructure Types </span>
 ┏━━━━━━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> Type               </span>┃
@@ -172,13 +183,14 @@ rich.print(table)
 │<span style="color: #008080; text-decoration-color: #008080"> connection         </span>│
 └────────────────────┘
 </pre>
-:::
-::::
+
+::: ::::
 
 We can get all the power lines using this filter:
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 (
     usa_power_infra
     .filter(_["class"] == "power_line")
@@ -186,6 +198,7 @@ We can get all the power lines using this filter:
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> names </span>┃<span style="font-weight: bold"> geometry                                                                         </span>┃<span style="font-weight: bold"> bbox                                                               </span>┃<span style="font-weight: bold"> class      </span>┃<span style="font-weight: bold"> sources                                                                          </span>┃<span style="font-weight: bold"> source_tags                              </span>┃
 ┡━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -204,17 +217,18 @@ We can get all the power lines using this filter:
 │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>     │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                                │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                  │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>          │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                                │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                        │
 └───────┴──────────────────────────────────────────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────┴────────────┴──────────────────────────────────────────────────────────────────────────────────┴──────────────────────────────────────────┘
 </pre>
-:::
-::::
 
-This is what ibis does under the hood using sql and duckdb to extract
-data from the parquet file:
+::: ::::
+
+This is what ibis does under the hood using sql and duckdb to extract data from
+the parquet file:
 
 ::::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.python .cell-code}
+```{.python .cell-code}
 ibis.to_sql(
     usa_power_infra.filter(_["class"] == "power_line")
 )
@@ -223,7 +237,8 @@ ibis.to_sql(
 </details>
 
 :::div{.cell-output .cell-output-display}
-``` sql
+
+```sql
 SELECT
   *
   REPLACE (ST_ASWKB("geometry") AS "geometry")
@@ -235,13 +250,14 @@ FROM (
     "t0"."class" = 'power_line'
 )
 ```
-:::
-::::
+
+::: ::::
 
 The `source_tags` column contains voltage information for some lines:
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 (
     usa_power_infra
     .filter(_["class"] == "power_line")
@@ -251,6 +267,7 @@ The `source_tags` column contains voltage information for some lines:
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> source_tags                                                                  </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -269,15 +286,16 @@ The `source_tags` column contains voltage information for some lines:
 │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                            │
 └──────────────────────────────────────────────────────────────────────────────┘
 </pre>
-:::
-::::
 
-You can see that `source_tags` is a map (or record or dictionary) that
-contains voltage information. Let's extract just the first voltage value
-we can find into new column called voltage:
+::: ::::
+
+You can see that `source_tags` is a map (or record or dictionary) that contains
+voltage information. Let's extract just the first voltage value we can find into
+new column called voltage:
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 power_lines = (
     usa_power_infra.filter(_["class"] == "power_line")
     .filter(_.source_tags["voltage"] != ibis.null())
@@ -299,6 +317,7 @@ power_lines = (
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┓
 ┃<span style="font-weight: bold"> names </span>┃<span style="font-weight: bold"> geometry                                                                         </span>┃<span style="font-weight: bold"> bbox                                                               </span>┃<span style="font-weight: bold"> class      </span>┃<span style="font-weight: bold"> sources                                                                          </span>┃<span style="font-weight: bold"> source_tags                              </span>┃<span style="font-weight: bold"> voltage </span>┃
 ┡━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━┩
@@ -317,14 +336,15 @@ power_lines = (
 │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>     │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                                │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                  │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>          │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                                │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                        │       <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span> │
 └───────┴──────────────────────────────────────────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────┴────────────┴──────────────────────────────────────────────────────────────────────────────────┴──────────────────────────────────────────┴─────────┘
 </pre>
-:::
-::::
 
-And then finally we can filter only the power lines with a voltage
-greater than 230 kV:
+::: ::::
+
+And then finally we can filter only the power lines with a voltage greater than
+230 kV:
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 power_lines_subset = (
     power_lines
     .filter(_.voltage > 230e3)
@@ -334,6 +354,7 @@ power_lines_subset = (
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> voltage </span>┃<span style="font-weight: bold"> geometry                                                                         </span>┃
 ┡━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -352,24 +373,27 @@ power_lines_subset = (
 │       <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span> │ <span style="color: #7f7f7f; text-decoration-color: #7f7f7f">…</span>                                                                                │
 └─────────┴──────────────────────────────────────────────────────────────────────────────────┘
 </pre>
-:::
-::::
+
+::: ::::
 
 ## Visualize
 
 We can read the data into a geopandas dataframe:
 
 :::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import geopandas as gpd
 gdf = gpd.GeoDataFrame(power_lines_subset.execute());
 ```
+
 :::
 
 And we can visualize it using `folium`:
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 import folium
 
 m = folium.Map(location=[41.5435959, -99.8396373], zoom_start=5)
@@ -380,24 +404,27 @@ m
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <!-- Large HTML output removed to keep this post lightweight. -->
 <!-- Re-render from the notebook to restore this output. -->
-:::
-::::
+
+::: ::::
 
 ## Raw SQL
 
 Here's the raw SQL ibis generates:
 
 ::::div{.cell}
-``` {.python .cell-code}
+
+```{.python .cell-code}
 ibis.to_sql(
     power_lines_subset
 )
 ```
 
 :::div{.cell-output .cell-output-display}
-``` sql
+
+```sql
 SELECT
   *
   REPLACE (ST_ASWKB("geometry") AS "geometry")
@@ -489,5 +516,5 @@ FROM (
     "t1"."voltage" ASC
 )
 ```
-:::
-::::
+
+::: ::::

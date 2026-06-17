@@ -2,9 +2,9 @@
 title: matplotlib cheatsheet
 date: 2026-04-19 10:22:45-04:00
 tags:
-- python
+  - python
 keywords:
-- matplotlib
+  - matplotlib
 description: >-
   cheatsheet for matplotlib
 draft: true
@@ -31,7 +31,8 @@ import matplotlib as mpl
 Some global settings are preferable:
 
 - Call `mpl.use("Agg")` before creating figures when generating static images.
-- Set `mpl.rcParams["figure.constrained_layout.use"] = True` before figure creation to avoid needing to use tight layout
+- Set `mpl.rcParams["figure.constrained_layout.use"] = True` before figure
+  creation to avoid needing to use tight layout
 
 ```python {.marimo}
 mpl.use("Agg")

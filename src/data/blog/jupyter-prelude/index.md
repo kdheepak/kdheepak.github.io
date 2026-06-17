@@ -9,7 +9,7 @@ notebookPath: "src/data/blog/jupyter-prelude/index.ipynb"
 
 ### uv
 
-``` bash
+```bash
 # This will create a new Python environment in the current directory
 uv init --app
 
@@ -19,10 +19,9 @@ uv add "ibis-framework[duckdb,geospatial]" ipykernel panel hvplot holoviews matp
 
 ### prelude
 
-Copy the following to the top of your Jupyter Notebook to load the
-prelude:
+Copy the following to the top of your Jupyter Notebook to load the prelude:
 
-``` python
+```python
 
 ################################################################################
 

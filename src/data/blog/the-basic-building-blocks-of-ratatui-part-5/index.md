@@ -12,10 +12,11 @@ Ratatui is a crate for building terminal user interfaces in Rust.
 In this post we'll show how to build custom widgets.
 
 :::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.rust .cell-code}
+```{.rust .cell-code}
 :dep ratatui = "0.26.2"
 :dep ratatui-macros = "0.4.0"
 
@@ -97,7 +98,8 @@ EVCXR_END_CONTENT"#, content);
 We saw from an earlier part that `frame` has a `buffer_mut()` method:
 
 ::::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 let backend = ratatui::backend::TestBackend::new(80, 5);
 let mut terminal = ratatui::terminal::Terminal::new(backend).unwrap();
 terminal.draw(|frame| {
@@ -106,27 +108,16 @@ terminal.draw(|frame| {
 });
 ```
 
-:::div{.cell-output .cell-output-display}
-    [src/lib.rs:169:5] buffer = Buffer {
-        area: Rect { x: 0, y: 0, width: 80, height: 5 },
-        content: [
-            "                                                                                ",
-            "                                                                                ",
-            "                                                                                ",
-            "                                                                                ",
-            "                                                                                ",
-        ],
-        styles: [
-            x: 0, y: 0, fg: Reset, bg: Reset, underline: Reset, modifier: NONE,
-        ]
-    }
-:::
-::::
+:::div{.cell-output .cell-output-display} [src/lib.rs:169:5] buffer = Buffer {
+area: Rect { x: 0, y: 0, width: 80, height: 5 }, content: [ " ", " ", " ", " ",
+" ", ], styles: [ x: 0, y: 0, fg: Reset, bg: Reset, underline: Reset, modifier:
+NONE, ] } ::: ::::
 
 We saw how to draw to the `Buffer` using predefined widgets.
 
 ::::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 use ratatui::widgets::Widget;
 
 let backend = ratatui::backend::TestBackend::new(80, 5);
@@ -139,27 +130,19 @@ terminal.draw(|frame| {
 });
 ```
 
-:::div{.cell-output .cell-output-display}
-    [src/lib.rs:172:5] buffer = Buffer {
-        area: Rect { x: 0, y: 0, width: 80, height: 5 },
-        content: [
-            "┌──────────────────────────────────────────────────────────────────────────────┐",
-            "│                                                                              │",
-            "│                                                                              │",
-            "│                                                                              │",
-            "└──────────────────────────────────────────────────────────────────────────────┘",
-        ],
-        styles: [
-            x: 0, y: 0, fg: Reset, bg: Reset, underline: Reset, modifier: NONE,
-        ]
-    }
-:::
-::::
+:::div{.cell-output .cell-output-display} [src/lib.rs:172:5] buffer = Buffer {
+area: Rect { x: 0, y: 0, width: 80, height: 5 }, content: [
+"┌──────────────────────────────────────────────────────────────────────────────┐",
+"│ │", "│ │", "│ │",
+"└──────────────────────────────────────────────────────────────────────────────┘",
+], styles: [ x: 0, y: 0, fg: Reset, bg: Reset, underline: Reset, modifier: NONE,
+] } ::: ::::
 
 But it is also possible to draw to the `Buffer` manually:
 
 ::::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 
 let backend = ratatui::backend::TestBackend::new(80, 5);
 let mut terminal = ratatui::terminal::Terminal::new(backend).unwrap();
@@ -180,6 +163,7 @@ terminal.draw(|frame| {
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
 <pre><code><span style="color: Reset;background-color: Reset;">┌</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">┐</span>
 <span style="color: Reset;background-color: Reset;">│</span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;">│</span>
@@ -193,11 +177,12 @@ terminal.draw(|frame| {
 
 ## Widget
 
-The `Widget` trait in ratatui allows you to define what you want to draw
-to a `Buffer`:
+The `Widget` trait in ratatui allows you to define what you want to draw to a
+`Buffer`:
 
 :::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 struct MyCustomWidget {
     counter: usize
 }
@@ -214,10 +199,12 @@ impl Widget for MyCustomWidget {
 
 }
 ```
+
 :::
 
 ::::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 let backend = ratatui::backend::TestBackend::new(80, 5);
 let mut terminal = ratatui::terminal::Terminal::new(backend).unwrap();
 terminal.draw(|frame| {
@@ -233,6 +220,7 @@ terminal.draw(|frame| {
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
 <pre><code><span style="color: Reset;background-color: Reset;">┌</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">─</span><span style="color: Reset;background-color: Reset;">┐</span>
 <span style="color: Reset;background-color: Reset;">│</span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;"> </span><span style="color: Reset;background-color: Reset;">│</span>
@@ -247,7 +235,8 @@ terminal.draw(|frame| {
 Here's an example of filling the entire buffer with the symbol `▒`:
 
 :::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 struct Hatcher;
 
 impl Widget for Hatcher {
@@ -261,12 +250,14 @@ impl Widget for Hatcher {
 
 }
 ```
+
 :::
 
 Here's the output of a `Hatcher` being rendered:
 
 ::::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 let backend = ratatui::backend::TestBackend::new(80, 5);
 let mut terminal = ratatui::terminal::Terminal::new(backend).unwrap();
 terminal.draw(|frame| {
@@ -280,6 +271,7 @@ terminal.draw(|frame| {
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
 <pre><code><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span>
 <span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span>
@@ -291,11 +283,12 @@ terminal.draw(|frame| {
 :::
 ::::
 
-Rendering multiple widgets renders to the buffer in the order they are
-called, and hence latter `render` calls can overwrite earlier `render`s.
+Rendering multiple widgets renders to the buffer in the order they are called,
+and hence latter `render` calls can overwrite earlier `render`s.
 
 ::::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 let backend = ratatui::backend::TestBackend::new(80, 5);
 let mut terminal = ratatui::terminal::Terminal::new(backend).unwrap();
 terminal.draw(|frame| {
@@ -311,6 +304,7 @@ terminal.draw(|frame| {
 ```
 
 :::div{.cell-output .cell-output-display}
+
 <div style="display: flex; justify-content:start; gap: 1em; margin: 1em">
 <pre><code><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span>
 <span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span><span style="color: Reset;background-color: Reset;">▒</span>
@@ -324,11 +318,12 @@ terminal.draw(|frame| {
 
 ## StatefulWidget
 
-Sometimes you want to store information that is only known during render
-for later use. For this, you can use a `StatefulWidget`:
+Sometimes you want to store information that is only known during render for
+later use. For this, you can use a `StatefulWidget`:
 
 :::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 use ratatui::widgets::StatefulWidget;
 
 #[derive(Default, Debug)]
@@ -346,10 +341,12 @@ impl StatefulWidget for MyCustomWidgetWithState {
     }
 }
 ```
+
 :::
 
 ::::div{.cell}
-``` {.rust .cell-code}
+
+```{.rust .cell-code}
 let backend = ratatui::backend::TestBackend::new(80, 5);
 let mut terminal = ratatui::terminal::Terminal::new(backend).unwrap();
 
@@ -367,14 +364,10 @@ terminal.draw(|frame| {
 println!("after: {:?}", &data);
 ```
 
-:::div{.cell-output .cell-output-display}
-    before: Data { area: (0, 0) }
-    after: Data { area: (80, 5) }
-:::
-::::
+:::div{.cell-output .cell-output-display} before: Data { area: (0, 0) } after:
+Data { area: (80, 5) } ::: ::::
 
 ## Conclusion
 
-In these series of posts, we examined how Ratatui works under the hood.
-For more information, check out the official tutorials and
-documentation.
+In these series of posts, we examined how Ratatui works under the hood. For more
+information, check out the official tutorials and documentation.

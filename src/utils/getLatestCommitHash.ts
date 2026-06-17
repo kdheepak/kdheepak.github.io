@@ -4,7 +4,7 @@ const commitCache = new Map<string, string | undefined>();
 let headCommitHash: string | undefined | null = null;
 
 export const getLatestCommitHash = (
-  filePath: string | undefined
+  filePath: string | undefined,
 ): string | undefined => {
   const normalizedPath = filePath?.trim() ?? "";
   if (normalizedPath === "") return undefined;
@@ -20,7 +20,7 @@ export const getLatestCommitHash = (
       {
         encoding: "utf8",
         stdio: ["ignore", "pipe", "ignore"],
-      }
+      },
     ).trim();
 
     const value = commitHash === "" ? undefined : commitHash;

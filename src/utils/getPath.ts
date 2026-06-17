@@ -11,7 +11,7 @@ import { slugifyStr } from "./slugify";
 export function getPath(
   id: string,
   filePath: string | undefined,
-  includeBase = true
+  includeBase = true,
 ) {
   const pathSegments = filePath
     ?.replace(BLOG_PATH, "")
@@ -43,7 +43,9 @@ export function getPath(
     return includeBase ? `/${path}/` : path;
   }
 
-  const routeSegments = [...baseSegments, ...pathSegments, slug].filter(Boolean);
+  const routeSegments = [...baseSegments, ...pathSegments, slug].filter(
+    Boolean,
+  );
   const path = routeSegments.join("/");
   return includeBase ? `/${path}/` : path;
 }

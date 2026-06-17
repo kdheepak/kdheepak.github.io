@@ -118,7 +118,9 @@ const nextPost =
   <main id="main-content" class="app-layout pb-12" data-pagefind-body>
     <span class="sr-only" data-pagefind-meta="date">{pagefindDate}</span>
     <div class="mt-8 flex items-center gap-2 sm:relative sm:block">
-      <BackButton class="sm:absolute sm:top-1/2 sm:left-0 sm:-translate-y-1/2 sm:-translate-x-[calc(100%+0.5rem)]" />
+      <BackButton
+        class="sm:absolute sm:top-1/2 sm:left-0 sm:-translate-x-[calc(100%+0.5rem)] sm:-translate-y-1/2"
+      />
       <h1
         transition:name={"heading" + slugifyStr(title.replaceAll(".", "-"))}
         class="min-w-0 text-2xl font-bold text-accent sm:text-3xl"
@@ -146,25 +148,26 @@ const nextPost =
           viewTransitionName: "date" + slugifyStr(title.replaceAll(".", "-")),
         }}
       />
-        <ReadingStats
-          body={post.body}
-          size="lg"
-          align="center"
-          class="shrink-0 sm:min-w-0 sm:flex-1"
-        />
-        <ul class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center">
-          {postTags.map(tag => (
+      <ReadingStats
+        body={post.body}
+        size="lg"
+        align="center"
+        class="shrink-0 sm:min-w-0 sm:flex-1"
+      />
+      <ul
+        class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 sm:justify-center"
+      >
+        {
+          postTags.map(tag => (
             <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
-          ))}
-        </ul>
-        <div
-          class:list={[
-            "max-sm:hidden shrink-0",
-            { hidden: !showPostActions },
-          ]}
-        >
-          <EditPost {hideEditPost} {post} />
-        </div>
+          ))
+        }
+      </ul>
+      <div
+        class:list={["shrink-0 max-sm:hidden", { hidden: !showPostActions }]}
+      >
+        <EditPost {hideEditPost} {post} />
+      </div>
     </div>
     <article
       id="article"
@@ -305,12 +308,12 @@ const nextPost =
     if (!article || !article.classList.contains("has-sticky-toc")) return;
 
     const contentHeadings = Array.from(
-      article.querySelectorAll("h2, h3, h4, h5, h6")
+      article.querySelectorAll("h2, h3, h4, h5, h6"),
     ).filter(
       heading =>
         heading instanceof HTMLHeadingElement &&
         heading.id &&
-        heading.id !== "table-of-contents"
+        heading.id !== "table-of-contents",
     );
     if (!contentHeadings.length) return;
 
@@ -368,9 +371,9 @@ const nextPost =
       if (!(heading instanceof HTMLHeadingElement) || !heading.id) return;
       const headingHash = `#${heading.id}`;
 
-      const hasLink = Array.from(
-        tocList.querySelectorAll("a[href^='#']")
-      ).some(link => link.getAttribute("href") === headingHash);
+      const hasLink = Array.from(tocList.querySelectorAll("a[href^='#']")).some(
+        link => link.getAttribute("href") === headingHash,
+      );
       if (hasLink) return;
 
       const label = getHeadingLabel(heading);
@@ -392,7 +395,7 @@ const nextPost =
     const footnotesSection = article.querySelector("section[data-footnotes]");
     if (footnotesSection instanceof HTMLElement) {
       const footnotesHeading = footnotesSection.querySelector(
-        "h2[id], h3[id], h4[id], h5[id], h6[id]"
+        "h2[id], h3[id], h4[id], h5[id], h6[id]",
       );
       ensureTocHeadingLink(footnotesHeading);
     }
@@ -410,7 +413,7 @@ const nextPost =
     }
 
     const tocLinks = Array.from(
-      tocList.querySelectorAll("a[href^='#']")
+      tocList.querySelectorAll("a[href^='#']"),
     ).filter(link => link instanceof HTMLAnchorElement);
 
     const headingEntries = tocLinks
@@ -489,7 +492,7 @@ const nextPost =
         const x = Math.max(4, linkRect.left - tocRect.left - 8);
         const y = Math.max(
           6,
-          linkRect.top - tocRect.top + floatingToc.scrollTop - 2
+          linkRect.top - tocRect.top + floatingToc.scrollTop - 2,
         );
         const entryHeight = Math.max(16, linkRect.height + 4);
 
@@ -560,8 +563,7 @@ const nextPost =
       }
 
       const visibleLength = Math.max(1, pathEnd - pathStart);
-      tocProgressActive.style.strokeDasharray =
-        `1 ${pathStart} ${visibleLength} ${tocPathLength}`;
+      tocProgressActive.style.strokeDasharray = `1 ${pathStart} ${visibleLength} ${tocPathLength}`;
       tocProgressActive.style.strokeDashoffset = "1";
       tocProgressActive.classList.add("is-visible");
     };
@@ -590,8 +592,7 @@ const nextPost =
 
       const tocRect = floatingToc.getBoundingClientRect();
       const linkRect = link.getBoundingClientRect();
-      const linkTop =
-        linkRect.top - tocRect.top + floatingToc.scrollTop;
+      const linkTop = linkRect.top - tocRect.top + floatingToc.scrollTop;
       const linkBottom = linkTop + linkRect.height;
       const viewportTop = floatingToc.scrollTop;
       const viewportBottom = viewportTop + floatingToc.clientHeight;
@@ -605,8 +606,8 @@ const nextPost =
         0,
         Math.min(
           linkTop - (floatingToc.clientHeight - linkRect.height) / 2,
-          floatingToc.scrollHeight - floatingToc.clientHeight
-        )
+          floatingToc.scrollHeight - floatingToc.clientHeight,
+        ),
       );
 
       floatingToc.scrollTo({
@@ -683,7 +684,7 @@ const nextPost =
 
     if ("IntersectionObserver" in window) {
       const headingEntryById = new Map(
-        headingEntries.map(entry => [entry.heading.id, entry])
+        headingEntries.map(entry => [entry.heading.id, entry]),
       );
 
       const headingObserver = new IntersectionObserver(
@@ -709,7 +710,7 @@ const nextPost =
         {
           rootMargin: "-20% 0px -65% 0px",
           threshold: [0, 1],
-        }
+        },
       );
 
       for (const entry of headingEntries) {
@@ -724,7 +725,9 @@ const nextPost =
 
     window.addEventListener("scroll", updateTocOnScroll, { passive: true });
     window.addEventListener("resize", handleResize);
-    floatingToc.addEventListener("scroll", updateActiveSection, { passive: true });
+    floatingToc.addEventListener("scroll", updateActiveSection, {
+      passive: true,
+    });
     media.addEventListener("change", handleResize);
 
     if (document.fonts?.ready) {
@@ -812,7 +815,7 @@ const nextPost =
 
         if (matchStart > lastIndex) {
           fragment.appendChild(
-            document.createTextNode(value.slice(lastIndex, matchStart))
+            document.createTextNode(value.slice(lastIndex, matchStart)),
           );
         }
 
@@ -839,7 +842,7 @@ const nextPost =
     };
 
     const containers = Array.from(
-      referencesRoot.querySelectorAll(".csl-right-inline")
+      referencesRoot.querySelectorAll(".csl-right-inline"),
     );
 
     if (!containers.length) {
@@ -866,7 +869,7 @@ const nextPost =
 
             return NodeFilter.FILTER_ACCEPT;
           },
-        }
+        },
       );
 
       const textNodes = [];
@@ -884,7 +887,7 @@ const nextPost =
 
   function addCitationBackLinks() {
     const citationSpans = Array.from(
-      document.querySelectorAll("span[id^='citation--']")
+      document.querySelectorAll("span[id^='citation--']"),
     );
     if (!citationSpans.length) return;
 
@@ -895,7 +898,7 @@ const nextPost =
       if (!citationId) continue;
 
       const bibLinks = Array.from(
-        citationSpan.querySelectorAll("a[href^='#bib-']")
+        citationSpan.querySelectorAll("a[href^='#bib-']"),
       );
 
       for (const bibLink of bibLinks) {
@@ -963,7 +966,7 @@ const nextPost =
 
     const footnotesById = new Map();
     for (const footnote of Array.from(
-      footnotesSection.querySelectorAll("li[id]")
+      footnotesSection.querySelectorAll("li[id]"),
     )) {
       footnotesById.set(footnote.id, footnote);
     }
@@ -971,7 +974,7 @@ const nextPost =
     let marginNotesAdded = 0;
     const marginSourceIds = new Set();
     const references = Array.from(
-      article.querySelectorAll("a[data-footnote-ref][href^='#']")
+      article.querySelectorAll("a[data-footnote-ref][href^='#']"),
     );
 
     for (const reference of references) {
@@ -1016,12 +1019,12 @@ const nextPost =
         }
 
         const firstTextNode = Array.from(clonedFirstParagraph.childNodes).find(
-          node => node.nodeType === Node.TEXT_NODE
+          node => node.nodeType === Node.TEXT_NODE,
         );
         if (firstTextNode) {
-          firstTextNode.textContent = (
-            firstTextNode.textContent ?? ""
-          ).replace(/^\s*aside\s*:\s*/i, "").replace(/^\s*:\s*/, "");
+          firstTextNode.textContent = (firstTextNode.textContent ?? "")
+            .replace(/^\s*aside\s*:\s*/i, "")
+            .replace(/^\s*:\s*/, "");
           if (firstTextNode.textContent.trim() === "") {
             firstTextNode.remove();
           }
@@ -1055,7 +1058,7 @@ const nextPost =
           linkedNote.scrollIntoView({ behavior: "smooth", block: "nearest" });
           window.setTimeout(
             () => linkedNote.classList.remove("margin-footnote-active"),
-            800
+            800,
           );
         });
       }
@@ -1291,7 +1294,7 @@ const nextPost =
     };
 
     const outputCodeBlocks = document.querySelectorAll(
-      ".cell-output pre[data-language='plaintext'] code"
+      ".cell-output pre[data-language='plaintext'] code",
     );
 
     for (const codeBlock of outputCodeBlocks) {
@@ -1324,7 +1327,7 @@ const nextPost =
     giscusScript.setAttribute("data-repo", "kdheepak/kdheepak.github.io");
     giscusScript.setAttribute(
       "data-repo-id",
-      "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA=="
+      "MDEwOlJlcG9zaXRvcnk1MTIwOTcwMA==",
     );
     giscusScript.setAttribute("data-category", "Comments");
     giscusScript.setAttribute("data-category-id", "DIC_kwDOAw1l5M4CU810");
@@ -1366,7 +1369,9 @@ const nextPost =
   }
 
   initializePostPage();
-  document.addEventListener("astro:page-load", initializePostPage, { once: true });
+  document.addEventListener("astro:page-load", initializePostPage, {
+    once: true,
+  });
 
   /* Go to page start after page swap unless navigating to a hash target. */
   if (!window.__kdPostAfterSwapScrollHooked) {

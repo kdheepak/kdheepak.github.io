@@ -9,74 +9,87 @@ tags:
 keywords: adventofcode, 2020, julia
 ---
 
-It is Christmas night, and it is the first time this month that I haven't had to plan my schedule
-for the evening around a programming puzzle contest. For the last 25 days this month, I participated
-in [Advent of Code 2020](https://adventofcode.com/2020/), and I managed to collect all 50 stars!
+It is Christmas night, and it is the first time this month that I haven't had to
+plan my schedule for the evening around a programming puzzle contest. For the
+last 25 days this month, I participated in
+[Advent of Code 2020](https://adventofcode.com/2020/), and I managed to collect
+all 50 stars!
 
 ![](images/advent-of-code-2020-stars.png)
 
-I solved all the puzzles in the [Julia](https://julialang.org/) programming language, and my
-solutions are available [here](https://github.com/kdheepak/adventofcode/tree/master/2020/julia/src).
+I solved all the puzzles in the [Julia](https://julialang.org/) programming
+language, and my solutions are available
+[here](https://github.com/kdheepak/adventofcode/tree/master/2020/julia/src).
 
-In this post, I wanted to share why I think you should do Advent of Code and idiomatic solutions to
-all 25 days in the Julia programming language.
+In this post, I wanted to share why I think you should do Advent of Code and
+idiomatic solutions to all 25 days in the Julia programming language.
 
 ## Why Advent of Code
 
-Advent of Code is a lot of fun. I think there's a few reasons I find it quite enjoyable.
+Advent of Code is a lot of fun. I think there's a few reasons I find it quite
+enjoyable.
 
 Firstly, there's the competitive aspect of it.
 
-A single puzzle unlocks every night at midnight Eastern Time, and the time when you submit a
-solution is recorded. There's a global leaderboard that highlights the top 100 fastest times but you
-also have the ability to make a private leaderboard that you can share with anyone you like, and you
-can use that to track your time and challenge your friends or peers.
+A single puzzle unlocks every night at midnight Eastern Time, and the time when
+you submit a solution is recorded. There's a global leaderboard that highlights
+the top 100 fastest times but you also have the ability to make a private
+leaderboard that you can share with anyone you like, and you can use that to
+track your time and challenge your friends or peers.
 
-For straightforward puzzles, it is a lot of fun to see who can read, grok and type out a bug-free
-working program the fastest. A bunch of people also upload recordings of their attempts, and it is
-humbling to see how fast they can whip out a correct solution to a problem.
+For straightforward puzzles, it is a lot of fun to see who can read, grok and
+type out a bug-free working program the fastest. A bunch of people also upload
+recordings of their attempts, and it is humbling to see how fast they can whip
+out a correct solution to a problem.
 
-Secondly, unlike most other competitive programming challenges, the puzzles are mainly designed to
-be a teaching / learning experience.
+Secondly, unlike most other competitive programming challenges, the puzzles are
+mainly designed to be a teaching / learning experience.
 
-Every puzzle has two parts, where the first part introduces a prompt, and requires you to solve it
-before viewing the second part. The first part tends to set up an idea or check that you are on the
-right track, and the second part tends to extend the idea or subvert an obvious decision you made in
-the first part.
+Every puzzle has two parts, where the first part introduces a prompt, and
+requires you to solve it before viewing the second part. The first part tends to
+set up an idea or check that you are on the right track, and the second part
+tends to extend the idea or subvert an obvious decision you made in the first
+part.
 
-Almost all the problems require parsing text input of various formats. In some of the latter
-puzzles, the puzzle inputs may be designed to hedge against certain naive solutions. Some puzzle
-inputs will only work with certain data structures or certain algorithms. There are a lot of "ah ha"
-moments when you figure what you should use and when, which makes for a very satisfying solve.
+Almost all the problems require parsing text input of various formats. In some
+of the latter puzzles, the puzzle inputs may be designed to hedge against
+certain naive solutions. Some puzzle inputs will only work with certain data
+structures or certain algorithms. There are a lot of "ah ha" moments when you
+figure what you should use and when, which makes for a very satisfying solve.
 
-Most problems are based on standard computer science programming concepts, but are never presented
-as such. Some problems have a mathematics tilt to it, which can make finding those solutions quite
-rewarding. But also, every problem is designed such that even if you don't know the "theory" behind
-it you'll be able to stumble your way into solving it if you persevere. Reading other people's one
+Most problems are based on standard computer science programming concepts, but
+are never presented as such. Some problems have a mathematics tilt to it, which
+can make finding those solutions quite rewarding. But also, every problem is
+designed such that even if you don't know the "theory" behind it you'll be able
+to stumble your way into solving it if you persevere. Reading other people's one
 liners after you hacked it together is quite enlightening.
 
-And since various programming language communities discuss their solutions in dedicated forums,
-there tends to be a lot of discussion about the tips and tricks you can use in your favourite
-programming language to express the problem more elegantly. Even after having used Python and Julia
-for years now, I still learn new things when I read other people's solutions.
+And since various programming language communities discuss their solutions in
+dedicated forums, there tends to be a lot of discussion about the tips and
+tricks you can use in your favourite programming language to express the problem
+more elegantly. Even after having used Python and Julia for years now, I still
+learn new things when I read other people's solutions.
 
 And finally, that brings me to the community.
 
 The [/r/adventofcode](https://reddit.com/r/adventofcode) subreddit and the Julia
-[Zulip](https://julialang.zulipchat.com) and [Slack](https://julialang.slack.com/) channel have been
-a joy to visit every day after solving the puzzles. I've particularly enjoyed seeing all the neat
+[Zulip](https://julialang.zulipchat.com) and
+[Slack](https://julialang.slack.com/) channel have been a joy to visit every day
+after solving the puzzles. I've particularly enjoyed seeing all the neat
 visualizations that come out of Advent of Code by the community.
 
-That's the really neat thing about Advent of Code. The problems are short enough to be solved in
-less than an hour, the solutions are small enough to be written in just one file, puzzles tend to
-tackle just one concept or idea, and there is a large enough community around it. Consequently, a
-lot of people tend to share their solutions, and you get to see a lot of discussion around each
-puzzle, including a number of different ways to approach the same problem.
+That's the really neat thing about Advent of Code. The problems are short enough
+to be solved in less than an hour, the solutions are small enough to be written
+in just one file, puzzles tend to tackle just one concept or idea, and there is
+a large enough community around it. Consequently, a lot of people tend to share
+their solutions, and you get to see a lot of discussion around each puzzle,
+including a number of different ways to approach the same problem.
 
-If you've never heard of Advent of Code, I highly recommend you try it out. Below I'll be discussing
-solutions in Julia that were shared on [Zulip](https://julialang.zulipchat.com),
-[Slack](https://julialang.slack.com/) and [Reddit](https://reddit.com/r/adventofcode). This will
-contain spoilers for all days in Advent of Code 2020.
+If you've never heard of Advent of Code, I highly recommend you try it out.
+Below I'll be discussing solutions in Julia that were shared on
+[Zulip](https://julialang.zulipchat.com), [Slack](https://julialang.slack.com/)
+and [Reddit](https://reddit.com/r/adventofcode). This will contain spoilers for
+all days in Advent of Code 2020.
 
 ## Solutions
 
@@ -108,11 +121,12 @@ contain spoilers for all days in Advent of Code 2020.
 
 ### [Day 1: Report Repair](https://adventofcode.com/2020/day/1)
 
-Day 1 of advent of code is basically intended to check that you have a programming language
-installed, and you know how to use simple features it in (e.g. `for` loops).
+Day 1 of advent of code is basically intended to check that you have a
+programming language installed, and you know how to use simple features it in
+(e.g. `for` loops).
 
-You can solve the first day with just multiple `for` loops. However, a more idiomatic solution can
-be expressed using the `combinations` function from the
+You can solve the first day with just multiple `for` loops. However, a more
+idiomatic solution can be expressed using the `combinations` function from the
 [Combinatorics.jl](https://github.com/JuliaMath/Combinatorics.jl)[^python]:
 
 [^python]:
@@ -130,8 +144,8 @@ part1(data = readInput()) = expense_report(data, 2)
 part2(data = readInput()) = expense_report(data, 3)
 ```
 
-In Julia, small functions are usually made into their single line form. Here's how you would write
-it if you would like to do it in the multi-line form.
+In Julia, small functions are usually made into their single line form. Here's
+how you would write it if you would like to do it in the multi-line form.
 
 ```julia
 function part1(data = readInput())
@@ -139,15 +153,16 @@ function part1(data = readInput())
 end
 ```
 
-Functions also implicitly return the last expression evaluated as part of the function body, if an
-explicit `return` is not present.
+Functions also implicitly return the last expression evaluated as part of the
+function body, if an explicit `return` is not present.
 
 ### [Day 2: Password Philosophy](https://adventofcode.com/2020/day/2)
 
-Day 2 is a simple case of parsing, counting characters in a string and knowing that "exactly one"
-can be expressed using the `xor` operation.
+Day 2 is a simple case of parsing, counting characters in a string and knowing
+that "exactly one" can be expressed using the `xor` operation.
 
-The solution below is based on [Sukera's](https://github.com/Seelengrab/AdventOfCode).
+The solution below is based on
+[Sukera's](https://github.com/Seelengrab/AdventOfCode).
 
 ```julia
 readInput() = split(strip(read(joinpath(@__DIR__, "./input.txt"), String)), '\n')
@@ -176,9 +191,10 @@ end
 
 Julia supports an infix operator for `xor`: `⊻`.
 
-If a function `f` takes another function as the first argument, you can use the `f(c) do ... end`
-block syntax to map over every element in the collection `c` and apply the anonymous function
-defined by the `do ... end` block, the result of which is processed by the function `f`.
+If a function `f` takes another function as the first argument, you can use the
+`f(c) do ... end` block syntax to map over every element in the collection `c`
+and apply the anonymous function defined by the `do ... end` block, the result
+of which is processed by the function `f`.
 
 For example, if you would like to do the following:
 
@@ -198,15 +214,16 @@ end
 1
 ```
 
-Alternatively, you can pass in an anonymous function as the first argument by using the thin arrow
-`->`:
+Alternatively, you can pass in an anonymous function as the first argument by
+using the thin arrow `->`:
 
 ```julia
 julia> count(letter -> letter == "a", ["a", "b", "c"])
 1
 ```
 
-In Julia, you can use the `only` function to get the one and only element in a collection.
+In Julia, you can use the `only` function to get the one and only element in a
+collection.
 
 ```julia
 julia> only("h")
@@ -215,8 +232,8 @@ julia> only("h")
 
 ### [Day 3: Toboggan Trajectory](https://adventofcode.com/2020/day/3)
 
-A lot of advent of code problems have the puzzle input as text that represents a grid. Day 3 is our
-first introduction to a grid of trees.
+A lot of advent of code problems have the puzzle input as text that represents a
+grid. Day 3 is our first introduction to a grid of trees.
 
 Having a one liner to convert the text input to a `Matrix` can be very useful.
 
@@ -295,8 +312,8 @@ part1(data = readInput()) = solve(data, (x = 3, y = 1))
 part2(data = readInput()) = prod(solve.(Ref(data), [(x=1,y=1),(x=5,y=1),(x=3,y=1),(x=7,y=1),(x=1,y=2)]))
 ```
 
-In Julia, you `==(e)` returns a "fixed" function which partially applies over the value of `e` and
-accepts one argument which you can use to test equality.
+In Julia, you `==(e)` returns a "fixed" function which partially applies over
+the value of `e` and accepts one argument which you can use to test equality.
 
 ```julia
 julia> ==('#')('#')
@@ -306,12 +323,14 @@ julia> ==('#')('.')
 false
 ```
 
-Julia has `mod1` for 1 based mod, which is useful for indexing in these type of situations. Julia
-also has ceiling division (`cld`) and floor division (`fld`) which happen to be handy here.
+Julia has `mod1` for 1 based mod, which is useful for indexing in these type of
+situations. Julia also has ceiling division (`cld`) and floor division (`fld`)
+which happen to be handy here.
 
-Julia has support for broadcasting using the `f.(c)` syntax, which allows for the element by element
-application of the method `f` on every element in the collection `c`, i.e. `f(e) for e in c`. This
-tends to be very handy in Advent of Code.
+Julia has support for broadcasting using the `f.(c)` syntax, which allows for
+the element by element application of the method `f` on every element in the
+collection `c`, i.e. `f(e) for e in c`. This tends to be very handy in Advent of
+Code.
 
 ```julia
 julia> c = [1, 2, 3, 4, 5];
@@ -322,13 +341,14 @@ julia> println(f.(c))
 [2, 3, 4, 5, 6]
 ```
 
-Additionally, you can use `Ref(data)` to tell Julia that it is a singleton that shouldn't be
-broadcast over. Alternatively, you can use `(data,)` to get the same behavior.
+Additionally, you can use `Ref(data)` to tell Julia that it is a singleton that
+shouldn't be broadcast over. Alternatively, you can use `(data,)` to get the
+same behavior.
 
 ### [Day 4: Passport Processing](https://adventofcode.com/2020/day/4)
 
-Since the input has passports separated by an empty line, you can split on `"\n\n"` to get each
-passport into an element of a `Vector`.
+Since the input has passports separated by an empty line, you can split on
+`"\n\n"` to get each passport into an element of a `Vector`.
 
 ```julia
 readInput() = split(read(joinpath(@__DIR__, "./input.txt"), String), "\n\n")
@@ -346,8 +366,8 @@ julia> readInput() |> x -> first(x, 3)
 
 Julia allows piping the results of one function into another using `|>`.
 
-Learning how to use regex well in your programming language of choice can make solutions concise and
-terse. Check out this solution by
+Learning how to use regex well in your programming language of choice can make
+solutions concise and terse. Check out this solution by
 [Pablo Zubieta](https://github.com/pabloferz/AoC/blob/e64841e31d9dc9391be73b041a2e01795dafa1b6/2020/04/Day4.jl):
 
 ```julia
@@ -366,13 +386,14 @@ part1(data = readInput()) = count(p -> all(t -> contains(p, t), fields1), data)
 part2(data = readInput()) = count(p -> all(t -> contains(p, t), fields2), data)
 ```
 
-There were a lot of puzzles this year where I would have been able to parse the input more easily by
-knowing just a little bit more regex.
+There were a lot of puzzles this year where I would have been able to parse the
+input more easily by knowing just a little bit more regex.
 
 ### [Day 5: Binary Boarding](https://adventofcode.com/2020/day/5)
 
-Sometimes having a little insight into what the problem is asking can go a long way. For example, in
-this puzzle, the seat ID is just a binary representation of the input.
+Sometimes having a little insight into what the problem is asking can go a long
+way. For example, in this puzzle, the seat ID is just a binary representation of
+the input.
 
 ```render_svgbob
 FBFBBFFRLR
@@ -388,8 +409,8 @@ FBFBBFFRLR
    357
 ```
 
-So you can calculate the seat ID using binary shifting or by converting the input to `1`s and `0`s
-and parsing the input as a binary number directly.
+So you can calculate the seat ID using binary shifting or by converting the
+input to `1`s and `0`s and parsing the input as a binary number directly.
 
 This solution is based on
 [Andrey Oskin's](https://github.com/Arkoniak/advent_of_code/blob/c692bc20147362cfb373e1483cf73588489a597b/2020/05/day05.jl):
@@ -411,12 +432,13 @@ function part2()
 end
 ```
 
-The `eachline` function is an alternative to `readlines`. It iteratively reads from a stream or IO.
+The `eachline` function is an alternative to `readlines`. It iteratively reads
+from a stream or IO.
 
 ### [Day 6: Custom Customs](https://adventofcode.com/2020/day/6)
 
-Day 6 introduces set operations with the prompt asking you to identify "any" and "every" question,
-which can be expressed using `union` and `intersect`.
+Day 6 introduces set operations with the prompt asking you to identify "any" and
+"every" question, which can be expressed using `union` and `intersect`.
 
 ```julia
 readInput() = split.(split(read(joinpath(@__DIR__, "./input.txt"), String), "\n\n"))
@@ -425,9 +447,10 @@ part1(data = readInput()) = sum(q -> length(∪(Set.(q)...)), data)
 part2(data = readInput()) = sum(q -> length(∩(Set.(q)...)), data)
 ```
 
-In Julia, you can use the unicode symbols of mathematical operations for `union` and `intersect` of
-sets, namely `∪` and `∩` respectively. In the Julia REPL or text editors with Julia plugins, you can
-use the \LaTeX name and tab complete to get the unicode symbol.
+In Julia, you can use the unicode symbols of mathematical operations for `union`
+and `intersect` of sets, namely `∪` and `∩` respectively. In the Julia REPL or
+text editors with Julia plugins, you can use the \LaTeX name and tab complete to
+get the unicode symbol.
 
 ```julia
 julia> \cup<TAB>
@@ -441,10 +464,11 @@ julia> ∩
 intersect (generic function with 19 methods)
 ```
 
-Also, julia has methods on functions like `sum` that accept a function as the first argument, which
-is useful for mapping over every element in a collection.
+Also, julia has methods on functions like `sum` that accept a function as the
+first argument, which is useful for mapping over every element in a collection.
 
-The `...` operator can be used to splat elements from a collection into arguments of a function.
+The `...` operator can be used to splat elements from a collection into
+arguments of a function.
 
 ```julia
 julia> f(a, b, c) = @show a, b, c;
@@ -457,8 +481,9 @@ julia> f(x...);
 
 ### [Day 7: Handy Haversacks](https://adventofcode.com/2020/day/7)
 
-Day 7 is the first introduction to graphs this year. While it is possible to find solutions to both
-parts of this puzzle using recursion, the problem can be well represented as a graph.
+Day 7 is the first introduction to graphs this year. While it is possible to
+find solutions to both parts of this puzzle using recursion, the problem can be
+well represented as a graph.
 
 This code is based on [Ali Hamed Moosavian's](https://github.com/CNOT) and
 [Andrey Oskin's](https://github.com/Arkoniak/advent_of_code/blob/c692bc20147362cfb373e1483cf73588489a597b/2020/07/day07.jl)
@@ -493,7 +518,8 @@ function build_graph(data)
 end
 ```
 
-Now that you have built a graph, you can find the solution by just traversing the graph.
+Now that you have built a graph, you can find the solution by just traversing
+the graph.
 
 ```julia
 part1(data = readInput()) = part1(data[1], data[2])
@@ -513,9 +539,10 @@ part2(g, mapping) = total_bags(g, mapping["shiny gold bag"]) - 1
 ![part1](images/adventofcode-day07-part1.png){width=45%}
 ![part2](images/adventofcode-day07-part2.png){width=45%}
 
-Julia allows for [multiple dispatch](https://docs.julialang.org/en/v1/manual/methods/) based on the
-number of arguments and the type of each argument. This lets you define multiple methods of a
-function.
+Julia allows for
+[multiple dispatch](https://docs.julialang.org/en/v1/manual/methods/) based on
+the number of arguments and the type of each argument. This lets you define
+multiple methods of a function.
 
 ### [Day 8: Handheld Halting](https://adventofcode.com/2020/day/8)
 
@@ -564,8 +591,8 @@ function corrupt(original_instructions)
 end
 ```
 
-I believe this problem can also be represented as a graph and solved using memoized depth first
-search. I would like to re-write this solution using
+I believe this problem can also be represented as a graph and solved using
+memoized depth first search. I would like to re-write this solution using
 [`LightGraphs.jl`](https://github.com/JuliaGraphs/LightGraphs.jl).
 
 ### [Day 9: Encoding Error](https://adventofcode.com/2020/day/9)
@@ -598,8 +625,8 @@ function part2(numbers = readInput())
 end
 ```
 
-Julia has a function called `extrema` that computes the minimum and maximum element in a single
-pass.
+Julia has a function called `extrema` that computes the minimum and maximum
+element in a single pass.
 
 ```julia
 julia> extrema([1,2,3,4,5])
@@ -607,7 +634,8 @@ julia> extrema([1,2,3,4,5])
 ```
 
 [Teo ShaoWei](https://github.com/Teo-ShaoWei)'s solution using
-[Combinatorics.jl](https://github.com/JuliaMath/Combinatorics.jl) is also quite elegant.
+[Combinatorics.jl](https://github.com/JuliaMath/Combinatorics.jl) is also quite
+elegant.
 
 ```julia
 using Combinatorics
@@ -638,11 +666,11 @@ part2 = rectify(input, 25)
 
 ### [Day 10: Adapter Array](https://adventofcode.com/2020/day/10)
 
-Part 2 on this day asks to find the number of distinct ways to arrange the Jolt adapters to connect
-the charging outlet to the device.
+Part 2 on this day asks to find the number of distinct ways to arrange the Jolt
+adapters to connect the charging outlet to the device.
 
-This problem can be formulated as a dynamic programming problem. This is most straightforward to
-solve using recursion and memoization. Here's
+This problem can be formulated as a dynamic programming problem. This is most
+straightforward to solve using recursion and memoization. Here's
 [Tom Kwong's](https://github.com/tk3369/AdventOfCode2020/blob/1273e4a086832c5c159fe460f533016fedb33ab2/day10.jl)
 solution:
 
@@ -671,7 +699,8 @@ function part2(data = readInput())
 end
 ```
 
-One key insight here is that the data doesn't contain jolt adapters that are only 1 or 3 apart.
+One key insight here is that the data doesn't contain jolt adapters that are
+only 1 or 3 apart.
 
 ```julia
 julia> StatsBase.countmap(diff(readInput()))
@@ -680,9 +709,10 @@ Dict{Int64, Int64} with 2 entries:
   1 => 71
 ```
 
-Since any adapter that is 3 away can't be removed, the number of distinct ways is just the product
-of all the different ways you can choose two adapters from the set of 1 away adapters that are in
-between the 3 away adapters. Here's a solution based on
+Since any adapter that is 3 away can't be removed, the number of distinct ways
+is just the product of all the different ways you can choose two adapters from
+the set of 1 away adapters that are in between the 3 away adapters. Here's a
+solution based on
 [Jonnie Diegelman's](https://github.com/jonniedie/Advent2020/blob/dd722991120aa79cf4e0ec028612fb0c48d7d54c/scripts/Day10/code.jl)
 that takes advantage of that:
 
@@ -697,16 +727,17 @@ part1(data = readInput()) = count(==('1'), data) * count(==('3'), data)
 part2(data = readInput()) = prod(binomial.(length.(split(data, '3', keepempty=false)), 2) .+ 1)
 ```
 
-This only works however when the set of 1 away adapters is not longer than 5 elements, which is the
-case in our puzzle inputs.
+This only works however when the set of 1 away adapters is not longer than 5
+elements, which is the case in our puzzle inputs.
 
-Alternatively, because the steps needed are one, two or three, you can calculate all possible steps
-by using a tribonacci sum. The tribonacci sum gives us all ways to traverse a set of ones, i.e.
-`11111...` by hopping from `1` to `1` in steps of size 1, 2 or 3.
+Alternatively, because the steps needed are one, two or three, you can calculate
+all possible steps by using a tribonacci sum. The tribonacci sum gives us all
+ways to traverse a set of ones, i.e. `11111...` by hopping from `1` to `1` in
+steps of size 1, 2 or 3.
 
 Thanks to [Sukera](https://github.com/Seelengrab/AdventOfCode) and
-[Andrey Oskin](https://github.com/Arkoniak/advent_of_code/blob/master/2020/10/day10.jl) for their
-code and insight into solving this puzzle.
+[Andrey Oskin](https://github.com/Arkoniak/advent_of_code/blob/master/2020/10/day10.jl)
+for their code and insight into solving this puzzle.
 
 ```julia
 function readInput()
@@ -740,9 +771,10 @@ article for more information.
 ### [Day 11: Seating System](https://adventofcode.com/2020/day/11)
 
 This is the first tribute in Advent of Code 2020 to
-[John Conway](https://en.wikipedia.org/wiki/John_Horton_Conway), who passed away earlier this year.
-John Conway was an English mathematician, most notably famous for the invention of the cellular
-automation called the [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
+[John Conway](https://en.wikipedia.org/wiki/John_Horton_Conway), who passed away
+earlier this year. John Conway was an English mathematician, most notably famous
+for the invention of the cellular automation called the
+[Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
 
 ```julia
 readInput() = permutedims(reduce(hcat, collect.(split(strip(read(joinpath(@__DIR__, "./input.txt"), String)), '\n'))))
@@ -784,15 +816,17 @@ function adjacent_seats(grid, i, j, sight)
 end
 ```
 
-The key thing to remember when implementing cellular automata is to copy the grid at each tick.
+The key thing to remember when implementing cellular automata is to copy the
+grid at each tick.
 
-Julia's `CartesianIndex` makes it easier to deal with multi-dimensional indexing. Additionally, I
-found the `checkbounds` function quite handy for this problem.
+Julia's `CartesianIndex` makes it easier to deal with multi-dimensional
+indexing. Additionally, I found the `checkbounds` function quite handy for this
+problem.
 
 ### [Day 12: Rain Risk](https://adventofcode.com/2020/day/12)
 
-This was one of my better performances on the Julia leaderboard. Using complex numbers makes it
-quite straightforward to deal with problems involving rotation.
+This was one of my better performances on the Julia leaderboard. Using complex
+numbers makes it quite straightforward to deal with problems involving rotation.
 
 ```julia
 readInput() = split(strip(read(joinpath(@__DIR__, "./input.txt"), String)), '\n')
@@ -839,11 +873,11 @@ end
 
 Thanks to
 [Colin Caine](https://github.com/cmcaine/advent2020/blob/aae90d873af5a7ce870a1e0bb0355b598ee389fe/src/day12.jl)
-for suggesting using `if ... elseif ... end` for minor performance improvements. Check out his other
-solutions for more optimized takes on the problems.
+for suggesting using `if ... elseif ... end` for minor performance improvements.
+Check out his other solutions for more optimized takes on the problems.
 
-[Michael Krabbe Borregaard](https://github.com/mkborregaard) had some neat visualizations for this
-day.
+[Michael Krabbe Borregaard](https://github.com/mkborregaard) had some neat
+visualizations for this day.
 
 ![part1](images/adventofcode-day12-part1.png){width=45%}
 ![part2](images/adventofcode-day12-part2.png){width=45%}
@@ -851,12 +885,13 @@ day.
 ### [Day 13: Shuttle Search](https://adventofcode.com/2020/day/13)
 
 This was one of the harder days for me. I had never heard of
-[Chinese Remainder Theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem) (CRT) and
-apparently that's what this problem was based on.
+[Chinese Remainder Theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem)
+(CRT) and apparently that's what this problem was based on.
 
 Here's a solution by
 [Micah Halter](https://git.mehalter.com/mehalter/AOC.jl/src/commit/e65eccac7e3825d5d9706b18e1fe244958f5f1e8/2020/src/day_13.jl)
-that uses the `CRT` function from [Mods.jl](https://github.com/scheinerman/Mods.jl) package.
+that uses the `CRT` function from
+[Mods.jl](https://github.com/scheinerman/Mods.jl) package.
 
 ```julia
 using Mods
@@ -883,10 +918,11 @@ end
 
 Here's another solution from
 [Doug](https://github.com/dgkf/advent-of-code/blob/98ee142a61b453a766331c65ece372978041935e/2020/13/13.jl)
-that finds the cycles using `lcm` much more elegantly than how I ended up doing it. The key bit of
-insight here is that the `lcm(previous_bus_schedules, new_bus_schedule)` will be the cycle at which
-the pattern repeats. Using this, you can break the problem down by iteratively and calculate the
-next cycle.
+that finds the cycles using `lcm` much more elegantly than how I ended up doing
+it. The key bit of insight here is that the
+`lcm(previous_bus_schedules, new_bus_schedule)` will be the cycle at which the
+pattern repeats. Using this, you can break the problem down by iteratively and
+calculate the next cycle.
 
 ```julia
 function readInput()
@@ -1020,10 +1056,10 @@ julia> @btime part2a();
 
 ### [Day 15: Rambunctious Recitation](https://adventofcode.com/2020/day/15)
 
-This puzzle seemed to mainly focus on choosing the right data structure for the `history` of the
-memory game. Storing it as a mapping of number to list of indices works well for both parts. A
-mapping of indices to number will cause the code to be slow, and will make solving part 2
-impractical.
+This puzzle seemed to mainly focus on choosing the right data structure for the
+`history` of the memory game. Storing it as a mapping of number to list of
+indices works well for both parts. A mapping of indices to number will cause the
+code to be slow, and will make solving part 2 impractical.
 
 Here's a solution by [Sukera](https://github.com/Seelengrab/):
 
@@ -1087,9 +1123,10 @@ function part1(data = readInput())
 end
 ```
 
-I believe part 2 is better expressed as a graph where you solve the max flow problem to find the
-maximum matching. However, this is not how I solved it below. I'm hoping to re-solve this problem
-using [LightGraphs.jl](https://github.com/JuliaGraphs/LightGraphs.jl).
+I believe part 2 is better expressed as a graph where you solve the max flow
+problem to find the maximum matching. However, this is not how I solved it
+below. I'm hoping to re-solve this problem using
+[LightGraphs.jl](https://github.com/JuliaGraphs/LightGraphs.jl).
 
 ```julia
 function part2(data = readInput())
@@ -1130,8 +1167,8 @@ function part2(data = readInput())
 end
 ```
 
-My learning from this day was that in Julia you can refactor the code with multiple nested `for`
-loops:
+My learning from this day was that in Julia you can refactor the code with
+multiple nested `for` loops:
 
 ```julia
 for ticket in valid_tickets
@@ -1153,16 +1190,18 @@ for ticket in valid_tickets, (i, field) in enumerate(ticket), (j, rule) in enume
 end
 ```
 
-You can even use the variable from the outer loop as the index in the inner loop, like you'd expect.
-This can help reduce the nesting level of your inner expressions.
+You can even use the variable from the outer loop as the index in the inner
+loop, like you'd expect. This can help reduce the nesting level of your inner
+expressions.
 
 ### [Day 17: Conway Cubes](https://adventofcode.com/2020/day/17)
 
-Another homage to [John Conway](https://en.wikipedia.org/wiki/John_Horton_Conway), this time in
+Another homage to
+[John Conway](https://en.wikipedia.org/wiki/John_Horton_Conway), this time in
 multiple dimensions.
 
-Here's [Michael Krabbe Borregaard's](https://github.com/mkborregaard) succinct solution that takes
-advantage of `CartesianIndices`:
+Here's [Michael Krabbe Borregaard's](https://github.com/mkborregaard) succinct
+solution that takes advantage of `CartesianIndices`:
 
 ```julia
 function parsefield(lines, n, dims)
@@ -1191,8 +1230,9 @@ part1(data = readInput()) = startup(data, 6, 3)
 part2(data = readInput()) = startup(data, 6, 4)
 ```
 
-Cellular automata puzzles are always fun, and make for some neat visualizations. Here are a couple
-of multi dimensional visualizations by [Tom Kwong](https://github.com/tk3369/AdventOfCode2020/):
+Cellular automata puzzles are always fun, and make for some neat visualizations.
+Here are a couple of multi dimensional visualizations by
+[Tom Kwong](https://github.com/tk3369/AdventOfCode2020/):
 
 ![<https://twitter.com/tomkwong/status/1339468003608387586>](https://user-images.githubusercontent.com/1813121/103164882-1371eb00-47ce-11eb-92d7-624ebf54c0f9.gif)
 
@@ -1203,8 +1243,8 @@ of multi dimensional visualizations by [Tom Kwong](https://github.com/tk3369/Adv
 The intended way to solve such problems is by implementing the
 [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm).
 
-However, you can hack the operator precedence in your programming language of choice and take
-advantage of the built in parser.
+However, you can hack the operator precedence in your programming language of
+choice and take advantage of the built in parser.
 
 Here is
 [Doug's](https://github.com/dgkf/advent-of-code/blob/98ee142a61b453a766331c65ece372978041935e/2020/18/18.jl)
@@ -1220,16 +1260,17 @@ part1(data = readInput()) = sum(l -> eval(Meta.parse(replace(l, "*" => "⨦"))),
 part2(data = readInput()) = sum(l -> eval(Meta.parse(replace(replace(l, "*" => "⨦"), "+" => "⨱"))), data)
 ```
 
-The key is to find the right operators in your programming language that have the precedence
-required as per the prompt.
+The key is to find the right operators in your programming language that have
+the precedence required as per the prompt.
 
 ### [Day 19: Monster Messages](https://adventofcode.com/2020/day/19)
 
-This was another hard day for me. First, I tried to implement a recursive algorithm. After failing
-to figure this out, I picked it up again on the next day with a clean slate, and I tried to build a
-regex that would match various messages. This worked for part 1 but I kept running out of memory for
-part 2. Finally, after changing some of the rules hard-coding them by hand I was able to solve
-part 2.
+This was another hard day for me. First, I tried to implement a recursive
+algorithm. After failing to figure this out, I picked it up again on the next
+day with a clean slate, and I tried to build a regex that would match various
+messages. This worked for part 1 but I kept running out of memory for part 2.
+Finally, after changing some of the rules hard-coding them by hand I was able to
+solve part 2.
 
 Specifically, I hard coded rules `"8"` and `"11"` to the following.
 
@@ -1238,7 +1279,8 @@ rules["8"] = "(42)+"
 rules["11"] = "42 31 | 42 ( 42 31 | 42 ( 42 31 | 42 ( 42 31 | 42 ( 42 31 ) 31 ) 31 ) 31 ) 31"
 ```
 
-This limits the depth of rule `"11"`. One more step however and I was getting PCRE memory errors.
+This limits the depth of rule `"11"`. One more step however and I was getting
+PCRE memory errors.
 
 Here's a solution by
 [Doug](https://github.com/dgkf/advent-of-code/blob/98ee142a61b453a766331c65ece372978041935e/2020/19/19.jl)
@@ -1277,15 +1319,16 @@ end
 As noted by [/u/furiousleep](https://git.sr.ht/~quf/advent-of-code-2020/) on
 [/r/adventofcode (along with other valuable feedback)](https://reddit.com/r/adventofcode/comments/klmlx2/2020_days_125_idiomatic_solutions_in_julia_with/gh9xhrk/),
 the intended solution for this would use the
-[CYK algorithm](https://en.wikipedia.org/wiki/CYK_algorithm). I would like to rewrite my solution
-using this algorithm instead.
+[CYK algorithm](https://en.wikipedia.org/wiki/CYK_algorithm). I would like to
+rewrite my solution using this algorithm instead.
 
 ### [Day 20: Jurassic Jigsaw](https://adventofcode.com/2020/day/20)
 
-This puzzle was really fun to figure out but also tedious to type out everything that you needed to
-type out. While I was able to solve the problem, I hard-coded many things in my solution. My code
-doesn't even work for the test cases. This is just one of those puzzles that is easier to solve on
-paper than to write an actual working implementation.
+This puzzle was really fun to figure out but also tedious to type out everything
+that you needed to type out. While I was able to solve the problem, I hard-coded
+many things in my solution. My code doesn't even work for the test cases. This
+is just one of those puzzles that is easier to solve on paper than to write an
+actual working implementation.
 
 Here's a working solution by
 [Alisdair Sullivan](https://github.com/talentdeficit/aoc2020/blob/1bdc06f7428c8e8c59a2748fbd1c2fa0e04e67c5/bin/twenty/run.jl):
@@ -1520,21 +1563,23 @@ function part2(tiles = readInput())
 end
 ```
 
-The key functions I found that others were using were `rotl90`, `rotr90` and `rot180` from the Julia
-standard library, like in
+The key functions I found that others were using were `rotl90`, `rotr90` and
+`rot180` from the Julia standard library, like in
 [Pablo Zubieta's solution](https://github.com/pabloferz/AoC/blob/5475590e2ac3b08c4800aac59b5ad96e287a8c6a/2020/20/Day20.jl).
 
 [Mark Kittisopikul](https://github.com/mkitti/advent_of_code_2020/blob/27a3886fd71a40a4b745037780cbeacacc770d78/aoc_20/aoc_20.jl)
-also used `imfilter` from [ImageFiltering.jl](https://github.com/JuliaImages/ImageFiltering.jl) to
-find the monsters, which I thought was pretty neat.
+also used `imfilter` from
+[ImageFiltering.jl](https://github.com/JuliaImages/ImageFiltering.jl) to find
+the monsters, which I thought was pretty neat.
 
 ### [Day 21: Allergen Assessment](https://adventofcode.com/2020/day/21)
 
-This puzzle is another graph problem that can be solved quite elegantly using maximum flow
-algorithms to find the maximum matching. Here's the solution of the test case using
-[LightGraphs.jl](https://github.com/JuliaGraphs/LightGraphs.jl) and
-[LightGraphFlows.jl](https://github.com/JuliaGraphs/LightGraphsFlows.jl), as well as a visualization
-using [GraphRecipes.jl](https://github.com/JuliaPlots/GraphRecipes.jl) and
+This puzzle is another graph problem that can be solved quite elegantly using
+maximum flow algorithms to find the maximum matching. Here's the solution of the
+test case using [LightGraphs.jl](https://github.com/JuliaGraphs/LightGraphs.jl)
+and [LightGraphFlows.jl](https://github.com/JuliaGraphs/LightGraphsFlows.jl), as
+well as a visualization using
+[GraphRecipes.jl](https://github.com/JuliaPlots/GraphRecipes.jl) and
 [Plots.jl](https://github.com/JuliaPlots/Plots.jl):
 
 ```julia
@@ -1610,17 +1655,17 @@ function m()
 end
 ```
 
-Here are a couple of visualizations, the test data visualized as a graph is on the left and the
-maximum flow solution on the right.
+Here are a couple of visualizations, the test data visualized as a graph is on
+the left and the maximum flow solution on the right.
 
 ![Input data](images/adventofcode-day21-part1-1.png){width=45%}
 ![Maximum flow solution](images/adventofcode-day21-part1-2.png){width=45%}
 
 ### [Day 22: Crab Combat](https://adventofcode.com/2020/day/22)
 
-This puzzle was mostly straightforward too. The key here seems to be to implement the stopping
-conditions correctly, and take advantage of the stack based behavior of recursion in most
-programming languages.
+This puzzle was mostly straightforward too. The key here seems to be to
+implement the stopping conditions correctly, and take advantage of the stack
+based behavior of recursion in most programming languages.
 
 Here's a solution by
 [Henrique Ferrolho's](https://github.com/ferrolho/advent-of-code/blob/b34dbe9ee5eef7a36fbf77044c83acc75fbe54cf/2020/22/puzzle.jl).
@@ -1665,21 +1710,21 @@ part1() = day22()[1]
 part2() = day22()[2]
 ```
 
-Julia allows using unicode symbols as part of variable names which can make for some pretty looking
-code.
+Julia allows using unicode symbols as part of variable names which can make for
+some pretty looking code.
 
 ### [Day 23: Crab Cups](https://adventofcode.com/2020/day/23)
 
-This puzzle took me a while to figure out. I spent way too long looking for patterns in each state.
-Thanks to some helpful tips from fellow Julia advent-of-coders, I re-wrote it from scratch using a
-Linked List.
+This puzzle took me a while to figure out. I spent way too long looking for
+patterns in each state. Thanks to some helpful tips from fellow Julia
+advent-of-coders, I re-wrote it from scratch using a Linked List.
 
-The key idea is here to manage the ordering in a separate data structure. Using a linked list is
-just one way to handle this.
+The key idea is here to manage the ordering in a separate data structure. Using
+a linked list is just one way to handle this.
 
-Here's a solution by [Nicolas Viennot](https://github.com/nviennot) based on exchanging ideas with
-[Teo ShaoWei](https://github.com/Teo-ShaoWei) that manages to do that quite elegantly using another
-array to manage indices:
+Here's a solution by [Nicolas Viennot](https://github.com/nviennot) based on
+exchanging ideas with [Teo ShaoWei](https://github.com/Teo-ShaoWei) that manages
+to do that quite elegantly using another array to manage indices:
 
 ```julia
 readInput() = parse.(Int32, collect(strip(read(joinpath(@__DIR__, "./input.txt"), String))))
@@ -1727,13 +1772,14 @@ part2(cups = readInput()) = prod(peek(run(vcat(cups, 10:1_000_000), 10_000_000),
 
 In another tribute to John Conway, now you must model hexagon grids.
 
-Having never worked with hexagon grid before, I reached for complex numbers again, which turned out
-to be a bad idea. I was indexing a dictionary with the real and imaginary components of the complex
-number which were floating point numbers. This caused all sorts of indexing problems due to rounding
-issues.
+Having never worked with hexagon grid before, I reached for complex numbers
+again, which turned out to be a bad idea. I was indexing a dictionary with the
+real and imaginary components of the complex number which were floating point
+numbers. This caused all sorts of indexing problems due to rounding issues.
 
-I could have sorted this out by using only integer values or by using the coordinate system
-described in this resource: <https://www.redblobgames.com/grids/hexagons/#coordinates-cube>.
+I could have sorted this out by using only integer values or by using the
+coordinate system described in this resource:
+<https://www.redblobgames.com/grids/hexagons/#coordinates-cube>.
 
 ```render_svgbob
            +----+
@@ -1751,7 +1797,8 @@ described in this resource: <https://www.redblobgames.com/grids/hexagons/#coordi
            '----'
 ```
 
-Here's another elegant solution by [Nicolas Viennot](https://github.com/nviennot).
+Here's another elegant solution by
+[Nicolas Viennot](https://github.com/nviennot).
 
 ```julia
 using OffsetArrays
@@ -1803,7 +1850,8 @@ end
 part2(data = readInput()) = count(flip_tiles!(init_tiles(data), 100))
 ```
 
-And another neat visualization by [Tom Kwong](https://github.com/tk3369/AdventOfCode2020/):
+And another neat visualization by
+[Tom Kwong](https://github.com/tk3369/AdventOfCode2020/):
 
 ![<https://twitter.com/tomkwong/status/1342661344424652801>](https://user-images.githubusercontent.com/1813121/103164912-71063780-47ce-11eb-839a-c0608ca36b70.gif)
 
@@ -1814,8 +1862,9 @@ And finally, for the last day, it is a cryptography based puzzle.
 The puzzle's key idea here is based on the
 [Diffie-Hellman key exchange](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange).
 
-Julia also has a function called `powermod` in the standard library, which can be used for this.
-Here's a solution by [Nicolas Viennot](https://github.com/nviennot):
+Julia also has a function called `powermod` in the standard library, which can
+be used for this. Here's a solution by
+[Nicolas Viennot](https://github.com/nviennot):
 
 ```julia
 readInput() = parse.(Int, split(strip(read(joinpath(@__DIR__, "./input.txt"), String)), '\n'))
@@ -1834,13 +1883,14 @@ If you've made it all this way, part 2 of day 25 should be a cinch 😉.
 ## Final words
 
 Thanks to everyone in the Julia community who participated on
-[Zulip](https://julialang.zulipchat.com), [Slack](https://julialang.slack.com/) and
-[Reddit](https://reddit.com/r/adventofcode). I learnt a lot by reading your solutions and discussing
-with you all.
+[Zulip](https://julialang.zulipchat.com), [Slack](https://julialang.slack.com/)
+and [Reddit](https://reddit.com/r/adventofcode). I learnt a lot by reading your
+solutions and discussing with you all.
 
-Thanks to the mods on [/r/adventofcode](https://reddit.com/r/adventofcode) to making it such a
-vibrant community to frequent.
+Thanks to the mods on [/r/adventofcode](https://reddit.com/r/adventofcode) to
+making it such a vibrant community to frequent.
 
-And finally, thanks to [Eric Wastl](https://twitter.com/ericwastl) for making such a fun event.
+And finally, thanks to [Eric Wastl](https://twitter.com/ericwastl) for making
+such a fun event.
 
 Happy holidays everyone!

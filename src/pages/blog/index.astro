@@ -31,60 +31,60 @@ const months = [
   <Main pageTitle="Blog">
     <div class="blog-timeline">
       {
-      Object.entries(
-        getPostsByGroupCondition(posts, post =>
-          post.data.pubDatetime.getFullYear()
+        Object.entries(
+          getPostsByGroupCondition(posts, post =>
+            post.data.pubDatetime.getFullYear(),
+          ),
         )
-      )
-        .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
-        .map(([year, yearGroup]) => (
-          <section class="timeline-year-group">
-            <div class="timeline-year-header">
-              <span class="timeline-year-label">
-                <span class="text-2xl font-bold">{year}</span>
-                <sup class="text-sm">{yearGroup.length}</sup>
-              </span>
-            </div>
-            {Object.entries(
-              getPostsByGroupCondition(
-                yearGroup,
-                post => post.data.pubDatetime.getMonth() + 1
+          .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+          .map(([year, yearGroup]) => (
+            <section class="timeline-year-group">
+              <div class="timeline-year-header">
+                <span class="timeline-year-label">
+                  <span class="text-2xl font-bold">{year}</span>
+                  <sup class="text-sm">{yearGroup.length}</sup>
+                </span>
+              </div>
+              {Object.entries(
+                getPostsByGroupCondition(
+                  yearGroup,
+                  post => post.data.pubDatetime.getMonth() + 1,
+                ),
               )
-            )
-              .sort(([monthA], [monthB]) => Number(monthB) - Number(monthA))
-              .map(([month, monthGroup]) => (
-                <div class="timeline-month-row flex flex-col sm:flex-row">
-                  <div class="mt-6 text-lg sm:my-6">
-                    <span class="font-bold">{months[Number(month) - 1]}</span>
-                    {monthGroup.length > 1 && (
-                      <sup class="text-xs">{monthGroup.length}</sup>
-                    )}
+                .sort(([monthA], [monthB]) => Number(monthB) - Number(monthA))
+                .map(([month, monthGroup]) => (
+                  <div class="timeline-month-row flex flex-col sm:flex-row">
+                    <div class="mt-6 text-lg sm:my-6">
+                      <span class="font-bold">{months[Number(month) - 1]}</span>
+                      {monthGroup.length > 1 && (
+                        <sup class="text-xs">{monthGroup.length}</sup>
+                      )}
+                    </div>
+                    <span class="timeline-month-marker" aria-hidden="true" />
+                    <ul class="min-w-0 flex-1">
+                      {monthGroup
+                        .sort(
+                          (a, b) =>
+                            Math.floor(
+                              new Date(b.data.pubDatetime).getTime() / 1000,
+                            ) -
+                            Math.floor(
+                              new Date(a.data.pubDatetime).getTime() / 1000,
+                            ),
+                        )
+                        .map(data => (
+                          <Card
+                            {...data}
+                            showDate={false}
+                            showReadingStats={false}
+                            dateLayout="right"
+                          />
+                        ))}
+                    </ul>
                   </div>
-                  <span class="timeline-month-marker" aria-hidden="true"></span>
-                  <ul class="min-w-0 flex-1">
-                    {monthGroup
-                      .sort(
-                        (a, b) =>
-                          Math.floor(
-                            new Date(b.data.pubDatetime).getTime() / 1000
-                          ) -
-                          Math.floor(
-                            new Date(a.data.pubDatetime).getTime() / 1000
-                          )
-                      )
-                      .map(data => (
-                        <Card
-                          {...data}
-                          showDate={false}
-                          showReadingStats={false}
-                          dateLayout="right"
-                        />
-                      ))}
-                  </ul>
-                </div>
-              ))}
-          </section>
-        ))
+                ))}
+            </section>
+          ))
       }
     </div>
   </Main>

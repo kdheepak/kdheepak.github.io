@@ -50,16 +50,13 @@ const getPrimaryFamilyName = (author: string) => {
 };
 
 const escapeBibtexValue = (value: string) =>
-  value
-    .replaceAll("\\", "\\\\")
-    .replaceAll("{", "\\{")
-    .replaceAll("}", "\\}");
+  value.replaceAll("\\", "\\\\").replaceAll("{", "\\{").replaceAll("}", "\\}");
 
 export const createBibtexKey = (
   author: string,
   pubDatetime: Date,
   slug: string,
-  timeZone = "UTC"
+  timeZone = "UTC",
 ) => {
   const familyName = normalizeKeyPart(getPrimaryFamilyName(author), "author");
   const postSlug = normalizeKeyPart(slug, "post");
@@ -67,10 +64,7 @@ export const createBibtexKey = (
   return `${familyName}${year}${postSlug}`;
 };
 
-export const formatLongCitationDate = (
-  pubDatetime: Date,
-  timeZone = "UTC"
-) =>
+export const formatLongCitationDate = (pubDatetime: Date, timeZone = "UTC") =>
   new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",

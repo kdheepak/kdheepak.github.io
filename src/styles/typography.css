@@ -106,13 +106,7 @@
       float: left;
       margin-inline-end: 0.35rem;
       margin-top: 0.08em;
-      font-family:
-        ui-serif,
-        Georgia,
-        Cambria,
-        "Times New Roman",
-        Times,
-        serif;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
       font-size: 4.2em;
       line-height: 0.78;
       font-weight: 700;
@@ -135,7 +129,7 @@
     }
 
     .callout {
-      @apply relative my-6 rounded-md border border-border border-l-4 bg-sky-50 px-4 py-3 dark:bg-slate-900/65;
+      @apply relative my-6 rounded-md border border-l-4 border-border bg-sky-50 px-4 py-3 dark:bg-slate-900/65;
     }
 
     .callout .callout-title {
@@ -292,7 +286,8 @@
     .cell > .cell-output .frame pre::after {
       content: "Out[" counter(notebook-cell) "]:";
       inset-inline-start: calc(
-        -1 * var(--notebook-prompt-col) - var(--notebook-output-pad-inline-start)
+        -1 * var(--notebook-prompt-col) -
+          var(--notebook-output-pad-inline-start)
       );
     }
 
@@ -329,17 +324,12 @@
     .cell-code,
     .cell-code span {
       font-family:
-        "Fira Code",
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Monaco,
-        Consolas,
-        "Liberation Mono",
-        "Courier New",
-        monospace;
+        "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
       font-variant-ligatures: none;
-      font-feature-settings: "liga" 0, "calt" 0;
+      font-feature-settings:
+        "liga" 0,
+        "calt" 0;
     }
 
     /*
@@ -350,20 +340,15 @@
     .cell-output pre code,
     .cell-output pre code span {
       font-family:
-        Menlo,
-        Monaco,
-        "Cascadia Mono",
-        "Segoe UI Mono",
-        "DejaVu Sans Mono",
-        Consolas,
-        "Liberation Mono",
-        "Courier New",
-        monospace;
+        Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono",
+        Consolas, "Liberation Mono", "Courier New", monospace;
       font-weight: 400;
       line-height: 1;
       letter-spacing: 0;
       font-variant-ligatures: none;
-      font-feature-settings: "liga" 0, "calt" 0;
+      font-feature-settings:
+        "liga" 0,
+        "calt" 0;
     }
 
     /* Give notebook outputs a subtle visual offset from input cells. */
@@ -393,7 +378,8 @@
 
     /* Add a subtle frame only to raw output <pre> blocks (not expressive-code frames). */
     .cell-output > :not(.expressive-code) pre {
-      border: 1px solid color-mix(in srgb, var(--color-foreground) 14%, transparent);
+      border: 1px solid
+        color-mix(in srgb, var(--color-foreground) 14%, transparent);
       border-radius: 0.375rem;
       padding: 0.6rem 0.8rem;
     }
@@ -510,11 +496,15 @@
         animation: toc-dock-left 220ms cubic-bezier(0.22, 1, 0.36, 1);
       }
 
-      &.has-sticky-toc .inline-toc-floating.is-docked-left .inline-toc-progress {
+      &.has-sticky-toc
+        .inline-toc-floating.is-docked-left
+        .inline-toc-progress {
         opacity: 1;
       }
 
-      &.has-sticky-toc .inline-toc-floating.is-docked-left > h2#table-of-contents {
+      &.has-sticky-toc
+        .inline-toc-floating.is-docked-left
+        > h2#table-of-contents {
         margin: 0 0 0.5rem;
         font-size: 0.82rem;
         letter-spacing: 0.08em;
@@ -597,7 +587,9 @@
         clear: right;
       }
 
-      &.has-margin-footnotes section[data-footnotes] li.is-margin-footnote-source {
+      &.has-margin-footnotes
+        section[data-footnotes]
+        li.is-margin-footnote-source {
         @apply hidden;
       }
 
@@ -675,7 +667,9 @@
     --code-badge-dark-bg: var(--ec-codeBg);
   }
 
-  .expressive-code .frame pre[data-language]:not([data-language="plaintext"])::before {
+  .expressive-code
+    .frame
+    pre[data-language]:not([data-language="plaintext"])::before {
     content: attr(data-language);
     position: absolute;
     top: 0;
@@ -685,7 +679,8 @@
     border-bottom: none;
     border-radius: 0.375rem 0.375rem 0 0;
     background: var(--code-badge-light-bg, var(--shiki-light-bg));
-    box-shadow: 0 var(--ec-brdWd, 1px) 0 0 var(--code-badge-light-bg, var(--shiki-light-bg));
+    box-shadow: 0 var(--ec-brdWd, 1px) 0 0
+      var(--code-badge-light-bg, var(--shiki-light-bg));
     z-index: 10;
     padding: 0.24rem 0.5rem 0.1rem;
     font-size: 0.66rem;
@@ -697,9 +692,13 @@
     pointer-events: none;
   }
 
-  html[data-theme="dark"] .expressive-code .frame pre[data-language]:not([data-language="plaintext"])::before {
+  html[data-theme="dark"]
+    .expressive-code
+    .frame
+    pre[data-language]:not([data-language="plaintext"])::before {
     background: var(--code-badge-dark-bg, var(--shiki-dark-bg));
-    box-shadow: 0 var(--ec-brdWd, 1px) 0 0 var(--code-badge-dark-bg, var(--shiki-dark-bg));
+    box-shadow: 0 var(--ec-brdWd, 1px) 0 0
+      var(--code-badge-dark-bg, var(--shiki-dark-bg));
   }
 
   .has-code-language-badge {

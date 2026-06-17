@@ -34,7 +34,7 @@ const {
 const isModified = modDatetime && modDatetime > pubDatetime;
 
 const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
-  postTimezone || SITE.timezone
+  postTimezone || SITE.timezone,
 );
 
 const date = datetime.format("D MMM, YYYY"); // e.g., '22 Mar, 2025'
@@ -69,14 +69,18 @@ const date = datetime.format("D MMM, YYYY"); // e.g., '22 Mar, 2025'
       >
         <time
           class:list={["text-sm", { "sm:text-base": size === "lg" }]}
-          datetime={datetime.toISOString()}>{date}</time
+          datetime={datetime.toISOString()}
         >
+          {date}
+        </time>
       </a>
     ) : (
       <time
         class:list={["text-sm", { "sm:text-base": size === "lg" }]}
-        datetime={datetime.toISOString()}>{date}</time
+        datetime={datetime.toISOString()}
       >
+        {date}
+      </time>
     )
   }
 </div>

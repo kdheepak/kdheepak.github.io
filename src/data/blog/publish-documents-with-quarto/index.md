@@ -2,108 +2,110 @@
 title: "Publishing documents with Quarto"
 date: 2023-11-19T23:10:00-04:00
 tags: ["pandoc", "python"]
-keywords: ["quarto, markdown, pandoc, papers, writing, academic, scholarly, technical, scientific"]
+keywords:
+  [
+    "quarto, markdown, pandoc, papers, writing, academic, scholarly, technical,
+    scientific",
+  ]
 description: guide to publishing documents with Quarto.
 notebookPath: "src/data/blog/publish-documents-with-quarto/index.ipynb"
 ---
 
-8 years ago, I made this diagram tongue-in-cheek to show my colleagues
-that it was possible to [write academic papers with Pandoc
-Markdown](https://kdheepak.com/blog/writing-papers-with-markdown).
+8 years ago, I made this diagram tongue-in-cheek to show my colleagues that it
+was possible to
+[write academic papers with Pandoc Markdown](https://kdheepak.com/blog/writing-papers-with-markdown).
 
 ![](../writing-papers-with-markdown/images/learningcurve.png)
 
-Since then, there's been a lot of improvements to the Pandoc Markdown
-workflow for writing papers. Pandoc went from 1.15.2 to 3.1.9, [adding
-an extraordinary number of features](https://pandoc.org/releases.html).
-Of note, [panflute](https://github.com/sergiocorreia/panflute) was
-created as a better and more fun way to write Python Pandoc filters. And
-Pandoc embedded [lua filters](https://pandoc.org/lua-filters.html) to
-allow writing pandoc filters directly in lua to prevent any marshalling
-of data.
+Since then, there's been a lot of improvements to the Pandoc Markdown workflow
+for writing papers. Pandoc went from 1.15.2 to 3.1.9,
+[adding an extraordinary number of features](https://pandoc.org/releases.html).
+Of note, [panflute](https://github.com/sergiocorreia/panflute) was created as a
+better and more fun way to write Python Pandoc filters. And Pandoc embedded
+[lua filters](https://pandoc.org/lua-filters.html) to allow writing pandoc
+filters directly in lua to prevent any marshalling of data.
 
 <div>
 
 ::: callout-note
 
-I continue to be amazed and impressed by the remarkable feat
-of software engineering that Pandoc represents, a sentiment echoed by
-everyone I know who has incorporated Pandoc into their workflow.
+I continue to be amazed and impressed by the remarkable feat of software
+engineering that Pandoc represents, a sentiment echoed by everyone I know who
+has incorporated Pandoc into their workflow.
 
 :::
 
 </div>
 
-Yet, Pandoc has not achieved widespread popularity in the academic
-sphere.
+Yet, Pandoc has not achieved widespread popularity in the academic sphere.
 
-Collaborative academic writing often gravitates towards using Microsoft
-Word with OneDrive support. WYSIWYG is a powerful paradigm and provides
-immediate ease of use. Word's robust commenting and review tools are
-second to none. Outside of Word, OverLeaf or ShareLaTeX seem to have the
-most mindshare. I reckon when people choose $\LaTeX$, they tend to do so
-because it is a safe bet. As a markup language, it is older than I am.
-That means there are resources online to address pretty much any problem
-you will come across[^1] , there are templates *everywhere* for all
-kinds of publications, and text editor support is high quality.
+Collaborative academic writing often gravitates towards using Microsoft Word
+with OneDrive support. WYSIWYG is a powerful paradigm and provides immediate
+ease of use. Word's robust commenting and review tools are second to none.
+Outside of Word, OverLeaf or ShareLaTeX seem to have the most mindshare. I
+reckon when people choose $\LaTeX$, they tend to do so because it is a safe bet.
+As a markup language, it is older than I am. That means there are resources
+online to address pretty much any problem you will come across[^1] , there are
+templates _everywhere_ for all kinds of publications, and text editor support is
+high quality.
 
-I still believe Pandoc is a phenomenal piece of software for writing
-academic papers (or any technical content for that matter). Being able
-to version control through git, and to produce outputs in diverse
-formats like PDF, Word, and HTML, adds immense value for me. But is it
-really going to be easier for everyone I'm collaborating with?
+I still believe Pandoc is a phenomenal piece of software for writing academic
+papers (or any technical content for that matter). Being able to version control
+through git, and to produce outputs in diverse formats like PDF, Word, and HTML,
+adds immense value for me. But is it really going to be easier for everyone I'm
+collaborating with?
 
-Enter [Quarto](https://quarto.org/), a potential game-changer in
-persuading researchers to transition from Word or $\LaTeX$.
+Enter [Quarto](https://quarto.org/), a potential game-changer in persuading
+researchers to transition from Word or $\LaTeX$.
 
-If this is the first time you've heard of Quarto, you are probably not
-alone. Quarto is a nascent open-source publishing system from the
-creators of RMarkdown and RStudio that builds upon
-[Pandoc](https://pandoc.org/) and [Jupyter](https://jupyter.org/).
+If this is the first time you've heard of Quarto, you are probably not alone.
+Quarto is a nascent open-source publishing system from the creators of RMarkdown
+and RStudio that builds upon [Pandoc](https://pandoc.org/) and
+[Jupyter](https://jupyter.org/).
 
-Quarto can [embed Jupyter Notebook
-cells](https://quarto.org/docs/authoring/notebook-embed.html) straight
-into the publication output. This allows for seamless integration of
-research and data analysis into the publication process. As most
-scientific research increasingly relies on interactive environments like
-RStudio and Jupyter Notebooks, Quarto's ability to incorporate this work
-into publishing workflows is immensely productive. And since it builds
-on top of Pandoc, Quarto supports [extensions that are basically Lua
-filters](https://quarto.org/docs/extensions/) to enhance the output.
-Quarto's [VSCode extension](https://quarto.org/docs/tools/vscode.html)
-makes it easier for even non-technical contributors to collaborate on
-writing.
+Quarto can
+[embed Jupyter Notebook cells](https://quarto.org/docs/authoring/notebook-embed.html)
+straight into the publication output. This allows for seamless integration of
+research and data analysis into the publication process. As most scientific
+research increasingly relies on interactive environments like RStudio and
+Jupyter Notebooks, Quarto's ability to incorporate this work into publishing
+workflows is immensely productive. And since it builds on top of Pandoc, Quarto
+supports
+[extensions that are basically Lua filters](https://quarto.org/docs/extensions/)
+to enhance the output. Quarto's
+[VSCode extension](https://quarto.org/docs/tools/vscode.html) makes it easier
+for even non-technical contributors to collaborate on writing.
 
-For technical publications where you want to show results inline, I
-believe using Quarto is a no-brainer. If you are already using Jupyter
-Notebooks, using Quarto is incredibly seamless[^quarto-franklin-aside].
-But even without using any of Quarto's computational
-features, I think it is a compelling alternative to many static site
-generation tools (e.g. Docsaurus, mkdocs, mdbook, hugo, sphinx, etc) as
-a means to develop high quality technical documentation. Over the past
-year, every report, paper, presentation, and tutorial I've created has
-used Quarto in one way or another. At the time of writing this post,
-Quarto is even the backbone of my blog.
+For technical publications where you want to show results inline, I believe
+using Quarto is a no-brainer. If you are already using Jupyter Notebooks, using
+Quarto is incredibly seamless[^quarto-franklin-aside]. But even without using
+any of Quarto's computational features, I think it is a compelling alternative
+to many static site generation tools (e.g. Docsaurus, mkdocs, mdbook, hugo,
+sphinx, etc) as a means to develop high quality technical documentation. Over
+the past year, every report, paper, presentation, and tutorial I've created has
+used Quarto in one way or another. At the time of writing this post, Quarto is
+even the backbone of my blog.
 
 [^quarto-franklin-aside]:
-    _aside_: If you are interested in a static site generator written in
-    Julia with a similar feature set, you should check out
+    _aside_: If you are interested in a static site generator written in Julia
+    with a similar feature set, you should check out
     [Franklin.jl](https://github.com/tlienart/Franklin.jl).
 
-Quarto isn't without its [fair share of
-issues](https://github.com/quarto-dev/quarto-cli/issues), and I do think
-for highly custom layouts or professional typesetting, directly working
-in $\LaTeX$ is probably easier. But for such a young project, it shows
-real promise (in my humble opinion) and is worthy of giving it a shot.
+Quarto isn't without its
+[fair share of issues](https://github.com/quarto-dev/quarto-cli/issues), and I
+do think for highly custom layouts or professional typesetting, directly working
+in $\LaTeX$ is probably easier. But for such a young project, it shows real
+promise (in my humble opinion) and is worthy of giving it a shot.
 
-Given that I've been using Quarto extensively for a while, I figured it
-was appropriate to revise the earlier diagram to reflect my experience:
+Given that I've been using Quarto extensively for a while, I figured it was
+appropriate to revise the earlier diagram to reflect my experience:
 
 :::div{.cell}
+
 <details class="code-fold">
 <summary>Code</summary>
 
-``` {.python .cell-code}
+```{.python .cell-code}
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
@@ -183,8 +185,9 @@ None #| hide_line
 
 ![](./images/learningcurve.png)
 
-I hope this brief exploration into Quarto's and Pandoc's capabilities
-has been insightful. I'm happy to any questions in the comments below.
+I hope this brief exploration into Quarto's and Pandoc's capabilities has been
+insightful. I'm happy to any questions in the comments below.
 
-[^1]: Pour one out if you've tasked a graduate student to figure out why
-    your paper isn't compiling.
+[^1]:
+    Pour one out if you've tasked a graduate student to figure out why your
+    paper isn't compiling.

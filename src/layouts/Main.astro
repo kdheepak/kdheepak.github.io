@@ -18,9 +18,12 @@ const backUrl = SITE.showBackButton ? Astro.url.pathname : "/";
     <LinkButton
       href="/"
       aria-label="Back to home"
-      class="focus-outline shrink-0 text-foreground/90 hover:text-foreground/70 sm:absolute sm:top-1/2 sm:left-0 sm:-translate-y-1/2 sm:-translate-x-[calc(100%+0.5rem)]"
+      class="focus-outline shrink-0 text-foreground/90 hover:text-foreground/70 sm:absolute sm:top-1/2 sm:left-0 sm:-translate-x-[calc(100%+0.5rem)] sm:-translate-y-1/2"
     >
-      <Icon name="tabler:chevron-left" class="inline-block size-6 rtl:rotate-180" />
+      <Icon
+        name="tabler:chevron-left"
+        class="inline-block size-6 rtl:rotate-180"
+      />
       <span class="sr-only">Back to home</span>
     </LinkButton>
     {
