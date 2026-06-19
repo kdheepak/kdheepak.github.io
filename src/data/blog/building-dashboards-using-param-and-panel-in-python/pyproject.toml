@@ -12,7 +12,7 @@ dependencies = [
     "ipykernel>=6.29.5",
     "matplotlib>=3.10.9",
     "pandas>=3.0.2",
-    "panel>=1.5.5",
+    "panel>=1.9.3",
     "param>=2.3.3",
     "scipy>=1.15.0",
 ]
