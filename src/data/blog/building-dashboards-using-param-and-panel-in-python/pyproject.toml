@@ -14,7 +14,7 @@ dependencies = [
     "pandas>=3.0.2",
     "panel>=1.9.3",
     "param>=2.3.3",
-    "scipy>=1.15.0",
+    "scipy>=1.18.0",
 ]
 
 [build-system]
