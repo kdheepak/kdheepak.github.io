@@ -8,7 +8,7 @@ dependencies = [
   "folium>=0.18.0",
   "geopandas>=1.0.1",
   "ibis-framework[duckdb,geospatial]>=12.0.0",
-  "ipykernel>=6.29.5",
+  "ipykernel>=7.3.0",
   "jupyter>=1.1.1",
   "python-localvenv-kernel>=0.1.7",
 ]
