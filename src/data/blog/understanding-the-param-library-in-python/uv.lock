@@ -227,11 +227,11 @@ wheels = [
 
 [[package]]
 name = "param"
-version = "2.3.3"
+version = "2.4.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/2c/64/30f7fa7fd5ba7337ba6e746fbf7a963800229430c663ab82b09821d9a8c3/param-2.3.3.tar.gz", hash = "sha256:43c24345d287d4abda15eac65b5b15d55f178a393421f0bfca02a77dd6c0d1dd", size = 202196, upload-time = "2026-03-31T16:09:47.982Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/79/9d/33f32981c9cda89fe22abff60f7c71ef4af3e566b6af530392f8b938470d/param-2.4.1.tar.gz", hash = "sha256:364a33bd8a968b053d8a49d319af78dc31b3ccb9661ecb95c29a3ea509d7e443", size = 217776, upload-time = "2026-06-09T13:17:33.665Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ea/2b/4bc14b04ae260e68c4db7d1e5d2fdda214fb4381236fc8e2d720ed14e2d9/param-2.3.3-py3-none-any.whl", hash = "sha256:ae25afbc372c1a5e4ee72935cc76ff77b1db1c4eb092bc46715c906ef3cc2e69", size = 139996, upload-time = "2026-03-31T16:09:45.845Z" },
+    { url = "https://files.pythonhosted.org/packages/ac/37/1351bbfabbacbe92cd38774f8779ff680fab48c36b5fed9bcfe0c160009c/param-2.4.1-py3-none-any.whl", hash = "sha256:6cdc0869b3ade232fc6d01691223cf86c2bdb53a6d5ba67a33dba838d8b8cf4c", size = 151874, upload-time = "2026-06-09T13:17:31.996Z" },
 ]
 
 [[package]]
@@ -457,7 +457,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ipykernel", specifier = ">=6.29.5" },
-    { name = "param", specifier = ">=2.3.3" },
+    { name = "param", specifier = ">=2.4.1" },
 ]
 
 [[package]]
