@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import Typewriter from "astro-typewriter";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -52,19 +51,10 @@ const contactIconClass =
         <h1 class="text-3xl leading-tight font-bold sm:text-5xl">Hello!</h1>
 
         <p class="mt-3 text-base leading-relaxed sm:mt-4 sm:text-lg">
-          I'm a{" "}
-          <Typewriter
+          I'm a <span
             class="inline-block min-w-[13ch] font-semibold text-[#1481b8] sm:min-w-[16ch]"
-            messages={[
-              "research engineer.",
-              "software developer.",
-              "bicycle enthusiast.",
-            ]}
-            writeSpeed={70}
-            deleteSpeed={36}
-            waitWritten={1500}
-            waitDeleted={420}
-          />
+            >research engineer.</span
+          >
         </p>
 
         <p class="mt-4 max-w-prose leading-relaxed text-pretty">
