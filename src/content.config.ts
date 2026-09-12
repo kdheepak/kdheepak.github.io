@@ -1,11 +1,16 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
 import { SITE } from "@/config";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 export const BLOG_PATH = "src/data/blog";
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
+  loader: glob({
+    pattern: "**/[^_]*.{md,mdx}",
+    base: `./${BLOG_PATH}`,
+  }),
+
   schema: ({ image }) =>
     z.preprocess(
       input => {
@@ -18,29 +23,41 @@ const blog = defineCollection({
 
         if (!("pubDatetime" in normalized)) {
           if ("pubDateTime" in normalized) {
-            normalized = { ...normalized, pubDatetime: normalized.pubDateTime };
+            normalized = {
+              ...normalized,
+              pubDatetime: normalized.pubDateTime,
+            };
           } else if ("date" in normalized) {
-            normalized = { ...normalized, pubDatetime: normalized.date };
+            normalized = {
+              ...normalized,
+              pubDatetime: normalized.date,
+            };
           }
         }
 
-        // Use `description` as the single canonical summary field.
         if (!("description" in normalized)) {
           if (
             "summary" in normalized &&
             typeof normalized.summary === "string"
           ) {
-            normalized = { ...normalized, description: normalized.summary };
+            normalized = {
+              ...normalized,
+              description: normalized.summary,
+            };
           } else if (
             "subtitle" in normalized &&
             typeof normalized.subtitle === "string"
           ) {
-            normalized = { ...normalized, description: normalized.subtitle };
+            normalized = {
+              ...normalized,
+              description: normalized.subtitle,
+            };
           }
         }
 
         return normalized;
       },
+
       z.object({
         author: z.string().default(SITE.author),
         pubDatetime: z.date(),
