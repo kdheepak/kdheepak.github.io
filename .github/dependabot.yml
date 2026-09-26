@@ -5,6 +5,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    allow:
+      - dependency-type: "direct"
     groups:
       github-actions-dependencies:
         patterns:
@@ -19,6 +21,8 @@ updates:
       day: "monday"
       time: "08:00"
       timezone: "America/Toronto"
+    allow:
+      - dependency-type: "direct"
     groups:
       npm-dependencies:
         patterns:
@@ -32,6 +36,8 @@ updates:
       - "/src/data/blog/*"
     schedule:
       interval: "weekly"
+    allow:
+      - dependency-type: "direct"
     groups:
       uv-dependencies:
         patterns:
