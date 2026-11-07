@@ -27,6 +27,10 @@ updates:
       npm-dependencies:
         patterns:
           - "*"
+      npm-security-dependencies:
+        applies-to: security-updates
+        patterns:
+          - "*"
     cooldown:
       default-days: 7
       semver-major-days: 21
@@ -40,6 +44,10 @@ updates:
       - dependency-type: "direct"
     groups:
       uv-dependencies:
+        patterns:
+          - "*"
+      uv-security-dependencies:
+        applies-to: security-updates
         patterns:
           - "*"
     cooldown:
