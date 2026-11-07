@@ -16,12 +16,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "^7.3.4",
-    "@astrojs/mdx": "^8.1.1",
+    "@astrojs/markdown-remark": "^7.3.5",
+    "@astrojs/mdx": "^8.1.2",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.4.2",
+    "astro": "^7.4.4",
     "astro-expressive-code": "^0.44.3",
     "astro-icon": "^1.2.0",
     "dayjs": "^1.11.23",
@@ -45,7 +45,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/tabler": "^1.2.42",
+    "@iconify-json/tabler": "^1.2.43",
     "@pagefind/default-ui": "^1.5.2",
     "@shikijs/transformers": "^4.5.0",
     "@tailwindcss/typography": "^0.5.20",
