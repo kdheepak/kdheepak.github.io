@@ -288,7 +288,7 @@ wheels = [
 
 [[package]]
 name = "hvplot"
-version = "0.12.2"
+version = "0.13.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "bokeh" },
@@ -301,9 +301,9 @@ dependencies = [
     { name = "panel" },
     { name = "param" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f5/b4/ce73a568fc263efe84cab8de04673949c8f6596f6aeb1531ca2b75b80903/hvplot-0.12.2.tar.gz", hash = "sha256:9e29bbe65f94937d4eeaeccf33566540df936c8f9aeadfa12ea9f306d5237938", size = 7084556, upload-time = "2025-12-18T11:15:37.736Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/a6/e5a16e04776edfc7561990a5bc99d7e571590a123474588b7d266f7fc9c4/hvplot-0.13.0.tar.gz", hash = "sha256:e10457d215da484283e5cbf92b0d4655fde4efb04700785984de593f7e679885", size = 8048417, upload-time = "2026-11-10T10:14:35.002Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/11/cd/ec193e471780dfad60e44ded5526c123695c1354910edd537d7aa1d22094/hvplot-0.12.2-py3-none-any.whl", hash = "sha256:0687e2e4d2eeb035c437af0011922abff856054299c121914d903a02b1bb1b22", size = 180626, upload-time = "2025-12-18T11:15:35.091Z" },
+    { url = "https://files.pythonhosted.org/packages/aa/e0/a9208a596e2ddd1a9d97d0e120fba69144cbf006509732f5f18f58563cff/hvplot-0.13.0-py3-none-any.whl", hash = "sha256:32f08b55ee57459a8acdbfaab3604be8fdc4ddbf8ae88401a2d0e8316e862835", size = 251727, upload-time = "2026-11-10T10:14:32.751Z" },
 ]
 
 [[package]]
